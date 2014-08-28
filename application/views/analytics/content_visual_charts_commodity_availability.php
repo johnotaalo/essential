@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div class="medium-graph">
+   <!-- <div class="medium-graph">
         <div class="portlet-title">
             <h6><i class="fa fa-bar-chart-o"></i>Job Aids<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
         </div>
@@ -112,7 +112,7 @@
             <div class="chart" id="job_aids">
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="medium-graph">
         <div class="portlet-title">
             <h6><i class="fa fa-bar-chart-o"></i>Tools<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
@@ -485,16 +485,16 @@
 			</div>
         </div>
     </div>
-    <!--<div class="medium-graph">
+    <div class="medium-graph">
         <div class="portlet-title">
-            <h6><i class="fa fa-bar-chart-o"></i>Facility Operation<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
+            <h6><i class="fa fa-bar-chart-o"></i>Nurses Deployed<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
         </div>
         <div class="portlet-body">
 
-            <div class="chart" id="mnhOperation">
+            <div class="chart" id="mnhnursesdeployed">
 			</div>
         </div>
-    </div>-->
+    </div>
 	<div class="medium-graph">
         <div class="portlet-title">
             <h6><i class="fa fa-bar-chart-o"></i>Health Facility Management<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
@@ -505,7 +505,16 @@
 			</div>
         </div>
     </div>
-    
+    <div class="medium-graph">
+        <div class="portlet-title">
+            <h6><i class="fa fa-bar-chart-o"></i>Facility Service Operation<span class="sizer"><i class="fa fa-expand"></i><i class="fa fa-compress" style="display:none"></i></span></h6>
+        </div>
+        <div class="portlet-body">
+
+            <div class="chart" id="mnhServiceOperation">
+            </div>
+        </div>
+    </div>
 <div class="analytics_row section" data-survey='mnh' id="section-2">
     <h4>Section 2 : Facility Data And Maternal And Neotanal Service Delivery</h4>
     <div class="medium-graph">

@@ -1017,7 +1017,7 @@ ORDER BY fac_level;");
             $key = str_replace(' ', '-', $key);
             $resultArray[] = array('name' => $key, 'data' => $val);
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
     }
    /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
@@ -2985,7 +2985,7 @@ ORDER BY fac_level;");
             $resultArray[] = array('name' => $key, 'data' => $number);
         }
         
-        $category[] = 'Numbers';
+        $category[] = 'Facility Operation';
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
 	
@@ -3288,7 +3288,7 @@ ORDER BY fac_level;");
         
         // echo "<pre>";
         // print_r($results);
-        // echo "</pre>";
+        // echgetCommunityStrategyMNHo "</pre>";
         // die;
         $count = 0;
         
