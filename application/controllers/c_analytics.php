@@ -481,10 +481,10 @@ ORDER BY fac_level;");
         $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'cms', 'total');
         ksort($results);
         
-        echo "<pre>";
-        print_r($results);
-        echo "</pre>";
-        die;
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>";
+        //die;
         $count = 0;
         foreach ($results as $key => $result) {
             if ($count < 3) {
