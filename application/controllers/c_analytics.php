@@ -160,10 +160,12 @@ ORDER BY fac_level;");
      * @param  [type] $survey
      * @return [type]
      */
-    public function active_results($survey) {
+    public function active_results($survey='') {
         
         //$this -> session -> unset_userdata('survey');
-        $this->session->set_userdata('survey', $survey);
+        if($survey!=''){
+          $this->session->set_userdata('survey', $survey);  
+        }
         
         $this->getReportingCounties();
         $this->data['title'] = 'MoH::Analytics';
@@ -1132,10 +1134,10 @@ ORDER BY fac_level;");
     public function getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
-        echo "<pre>";
-        print_r($results);
-        echo "</pre>";
-        die;
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>";
+        // die;
         
         foreach ($results as $key => $result) {
             

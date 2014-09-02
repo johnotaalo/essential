@@ -2116,7 +2116,7 @@ LIMIT 0 , 1000
         }
         
         /*
-         *  Availability, Location and Functionality of Electricity and Hardware getResourcesStatistics
+         *  Availability, Location and Functionality of Electricity and Hardware Resources
         */
         public function getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             
@@ -2159,7 +2159,7 @@ LIMIT 0 , 1000
                             $data[$value['resource_name']][$value['suppliers']] = (int)$value['total_response'];
                         }
                     }
-                    //echo "<pre>";print_r($data);echo "</pre>";die;
+                    // echo "<pre>";print_r($data);echo "</pre>";die;
                     
                     /**
                      * Fix Data
@@ -2211,7 +2211,7 @@ LIMIT 0 , 1000
                 /*using CI Database Active Record*/
                 try {
                     $query = "SELECT DISTINCT(facilityCode),trackerID,lastActivity FROM assessment_tracker WHERE survey=? AND trackerSection='section-6'
-                                ORDER BY lastActivity DESC";
+ORDER BY lastActivity DESC";
                     $this->dataSet = $this->db->query($query, array($survey));
                     $this->dataSet = $this->dataSet->result_array();
                     
@@ -3983,7 +3983,7 @@ ORDER BY question_code";
                 
                 foreach ($this->dataSet as $value_) {
                     
-                   //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     $question = $this->getQuestionName($value_['question_code']);
                     
                     // $question = trim($question, 'Does this facility have an updated');

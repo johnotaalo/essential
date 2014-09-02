@@ -138,6 +138,13 @@ class M_MCH_Survey extends MY_Model
         //var_dump($this->equipmentList);die;
         return $this->equipmentList;
     }
+    public function getSpEquipmentNames($section) {
+        $this->equipmentList = $this->getSpecificEquipmentNames($section);
+
+        //var_dump($this->equipmentList);die;
+        return $this->equipmentList;
+    }
+    
 
     public function getSupplyNames() {
         $this->suppliesList = $this->getAllSupplyNames('ch');

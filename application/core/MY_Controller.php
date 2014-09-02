@@ -374,7 +374,7 @@ $this->write_counties();
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
-            $this->selectMCHOtherSuppliers.= '<span style="display:inline-block;vertical-align:top">' . $value['supplierName'] . '</span><input type="radio" value="' . $value['supplierCode'] . '" name="supplierName">';
+            $this->selectMCHOtherSuppliers.= '<option value="' . $value['supplierCode'] . '">'. $value['supplierName'] . '</option>';
         }
     }
     
@@ -417,7 +417,7 @@ $this->write_counties();
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
-            $this->selectMNHOtherSuppliers.= '<option value="' . $value['supplierName'] . '">' . $counter . '. ' . $value['supplierCode'] . '</option>' . '<br />';
+            $this->selectMNHOtherSuppliers.= '<option value="' . $value['supplierCode'] . '">' . $counter . '. ' . $value['supplierName'] . '</option>' . '<br />';
         }
     }
     
@@ -534,7 +534,7 @@ $this->write_counties();
         $survey = $this->session->userdata('survey');
         switch ($survey) {
             case 'mnh':
-                $locations = array('Delivery room', 'Pharmacy', 'Store', 'Other');
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Pharmacy', 'Other');
                 break;
 
             case 'ch':
@@ -622,7 +622,7 @@ $this->write_counties();
     </tr>';
         }
         
-        //echo $this->commodityAvailabilitySection['bun'];die;
+       // echo $this->commodityAvailabilitySection['mnh'];die;
         
         return $this->commodityAvailabilitySection;
     }
@@ -1348,6 +1348,7 @@ $this->write_counties();
         $counter = 0;
         $aspect = '';
         $mh_supplier_names = $this->selectMNHOtherSuppliers;
+        //echo $mh_supplier_names;
         foreach ($this->data_found as $value) {
             $counter++;
             $aspect_response_on_yes = '';
@@ -2906,7 +2907,7 @@ $this->write_counties();
             $current = ($base == 0) ? $section : $current;
             
             $base++;
-            if ($section != 'tst') {
+            if ($section != 'tst' && $section != 'ch' && $section != 'tes') {
                 
                 $quantity = '<td style ="text-align:center;">
             <input name="sqNumberOfUnits_' . $counter . '" type="text" size="10" class="cloned numbers"/>
@@ -2914,7 +2915,43 @@ $this->write_counties();
             } else {
                 $quantity = '';
             }
-            $data[$section][] = '<tr>
+            if($section=='mnh'){
+                 $data[$section][] = '<tr>
+            <td  style="width:200px;">' . $value['supplyName'] . '</td>
+            <td style="vertical-align: middle; margin: 0px;text-align:center;">
+            <input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/>
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" />
+            </td>
+            <td>
+            <select name="sqReason_' . $counter . '" id="sqReason_' . $counter . '" class="cloned">
+                <option value="" selected="selected">Select One</option>
+                <option value="Not Ordered">1. Not Ordered</option>
+                <option value="Ordered but not yet Received">2. Ordered but not yet Received</option>
+                <option value="Expired">3. Expired</option>
+                <option value="All Used">4. All Used</option>
+
+
+            </select>
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Delivery room" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Pharmacy" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Store" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other" />
+            </td>
+            ' . $quantity . '
+            <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
+        </tr>';
+            }else{
+                 $data[$section][] = '<tr>
             <td  style="width:200px;">' . $value['supplyName'] . '</td>
             <td style="vertical-align: middle; margin: 0px;text-align:center;">
             <input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/>
@@ -2940,6 +2977,8 @@ $this->write_counties();
             ' . $quantity . '
             <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
         </tr>';
+            }
+           
         }
         
         //var_dump( $data);die;
@@ -3100,7 +3139,7 @@ $this->write_counties();
             } else {
                 $unit = '';
             }
-            $this->commodityUsageAndOutageSection.= '<tr>
+            $this->commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
             <td style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
             <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>
@@ -3108,10 +3147,10 @@ $this->write_counties();
             <td>
             <select name="usocTimesUnavailable_' . $counter . '" id="usocTimesUnavailable_' . $counter . '" class="cloned">
                 <option value="" selected="selected">Select One</option>
-                <option value="Once">a. Once</option>
-                <option value="2-3">b. 2-3 </option>
-                <option value="5-5">c. 4-5 </option>
-                <option value="more than 5">d. more than 5 </option>
+                <option value="Once">a. 1 week</option>
+                <option value="2-3">b. 2 weeks</option>
+                <option value="5-5">c. 1 month</option>
+                <option value="more than 5">d. more than 1 month</option>
 
             </select></td>
 
@@ -3136,7 +3175,7 @@ $this->write_counties();
         </tr>';
         }
         
-        //echo $this->commodityUsageAndOutageSection;die;
+        // echo $this->commodityUsageAndOutageSection['mnh'];die;
         return $this->commodityUsageAndOutageSection;
     }
     
@@ -3577,8 +3616,10 @@ $this->write_counties();
      */
     public function createHardwareResourcesMNHSection() {
         $ch_supplier_names = $this->selectMCHOtherSuppliers;
+        // echo $ch_supplier_names;die;
         $sources = $this->hardwareSources;
-        $this->data_found = $this->m_mch_survey->getEquipmentNames('mhw');
+        // echo $souces;die;
+        $this->data_found = $this->m_mch_survey->getSpEquipmentNames('mhw');
         
         //var_dump($this->data_found);die;
         $unit = "";
@@ -3611,7 +3652,7 @@ $this->write_counties();
             <input type="hidden"  name="hweqCode_' . $counter . '" id="hweqCode_' . $counter . '" value="' . $value['eqCode'] . '" />
         </tr>';
         }
-        
+        // echo $this->hardwareMNHSection;die;
         return $this->hardwareMNHSection;
     }
     
@@ -3765,7 +3806,7 @@ $this->write_counties();
             $this->global_counter = $counter;
         }
         
-        //echo $this->commodityUsageAndOutageSection;die;
+        //print_r ($this->equipmentsSection);die;
         return $this->equipmentsSection;
     }
     

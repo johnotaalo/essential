@@ -259,7 +259,7 @@ class M_MNH_Survey extends MY_Model
             
             //check if a post was made
             
-            //die(var_dump($this->input->post()));
+            // echo '<pre>';print_r($this->input->post()); echo '</pre>';die;
             
             //Working with an object of the entity
             try {
@@ -3840,7 +3840,7 @@ class M_MNH_Survey extends MY_Model
             (isset($this->elements[$i]['mchGuideline']) && $this->elements[$i]['mchGuideline'] != '') ? $this->theForm->setGuideCode($this->elements[$i]['mchGuideline']) : $this->theForm->setGuideCode(-1);
             (isset($this->elements[$i]['mchBefore']) && $this->elements[$i]['mchBefore'] != '') ? $this->theForm->setTgBefore($this->elements[$i]['mchBefore']) : $this->theForm->setTgBefore(-1);
             (isset($this->elements[$i]['mchAfter']) && $this->elements[$i]['mchAfter'] != '') ? $this->theForm->setTgAfter($this->elements[$i]['mchAfter']) : $this->theForm->setTgAfter(-1);
-            $this->theForm->setTgCreated(new DateTime());
+            // $this->theForm->setTgCreated(new DateTime());
             $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
             
             /*timestamp option*/
