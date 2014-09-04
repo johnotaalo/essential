@@ -4847,7 +4847,12 @@ class M_MNH_Survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
             
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogIndicators();
+            $this->theForm = $this->getvalueby('models\Entities\LogIndicators', array('ssId' => $this->session->userdata('survey_status'), 'indicatorCode' => $this->elements[$i]['indicatorCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogIndicators();
+            }
             
             //create an object of the model
             

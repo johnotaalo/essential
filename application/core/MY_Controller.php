@@ -7,11 +7,11 @@ ini_set('memory_limit', '-1');
 class MY_Controller extends CI_Controller
 {
     
-    public $em, $response, $theForm, $rowsInserted, $executionTime, $data, $data_found, $facilityInDistrict, $selectReportingCounties, $selectCommodityType, $facilities, $facility, $selectCounties, $global_counter, $selectDistricts, $selectFacilityType, $selectFacilityLevel, $selectFacilityOwner, $selectProvince, $selectCommoditySuppliers, $selectMCHOtherSuppliers, $selectMNHOtherSuppliers, $selectMCHCommoditySuppliers, $selectFacility, $commodityAvailabilitySection, $mchCommodityAvailabilitySection, $mchIndicatorsSection, $signalFunctionsSection, $ortCornerAspectsSection, $mchCommunityStrategySection, $mnhWaterAspectsSection, $mnhCEOCAspectsSection, $mchGuidelineAvailabilitySection, $trainingGuidelineSection, $mchTrainingGuidelineSection, $districtFacilityListSection, $suppliesUsageAndOutageSection, $commodityUsageAndOutageSection, $suppliesSection, $suppliesMCHSection, $suppliesMNHOtherSection, $equipmentsSection, $deliveryEquipmentSection, $hardwareMCHSection, $equipmentsMCHSection, $severediatreatmentMCHSection, $hcwProfileSection, $hcwCaseManagementSection, $mchConsultationSection;
+    public $em, $response, $theForm, $rowsInserted, $executionTime, $data, $data_found, $facilityInDistrict, $selectReportingCounties, $selectCommodityType, $facilities, $facility, $selectCounties, $global_counter, $selectDistricts, $selectFacilityType, $selectFacilityLevel, $selectFacilityOwner, $selectProvince, $selectCommoditySuppliers, $selectMCHOtherSuppliers, $selectMNHOtherSuppliers, $selectMCHCommoditySuppliers, $selectFacility, $commodityAvailabilitySection, $mchCommodityAvailabilitySection, $mchIndicatorsSection, $signalFunctionsSection, $ortCornerAspectsSection, $mchCommunityStrategySection, $mnhWaterAspectsSection, $mnhCEOCAspectsSection, $mchGuidelineAvailabilitySection, $trainingGuidelineSection, $mchTrainingGuidelineSection, $districtFacilityListSection, $suppliesUsageAndOutageSection, $commodityUsageAndOutageSection, $suppliesSection, $suppliesMCHSection, $suppliesMNHOtherSection, $equipmentsSection, $deliveryEquipmentSection, $hardwareMCHSection, $equipmentsMCHSection, $severediatreatmentMCHSection, $hcwProfileSection, $hcwCaseManagementSection, $mchConsultationSection, $totalsRows;
     
     //new sections
     
-    public $sectionList, $sectionLinks, $facilitycontactinformation, $deliveriessection, $treatments, $question, $questionPDF, $hcwInterviewAspectsSectionPDF, $hcwInterviewAspectsSection, $hcwConsultingAspectsSection, $selectAccessChallenges, $beds, $mnhCommitteeAspectSection, $mnhWasteDisposalAspectsSection, $mnhNewbornCareAspectsSection, $mnhPostNatalCareAspectsSection, $nurses, $hardwareSources, $hardwareSourcesPDF, $hardwareMNHSection, $mnhJobAidsAspectsSection, $mnhGuidelinesAspectsSection, $mnhPreparednessAspectsSection, $mnhHIVTestingAspectsSection, $mchmalariaconfrimedtreatment, $mchmalarianotconfrimedtreatment, $mchmalarianotconfrimedtreatmentSection, $mchpneumoniaTreatmentSection, $mchpneumoniaTreatment, $somedehydrationdiaTreatment, $somedehydrationdiaTreatmentMCHSection, $nodehydrationdiaTreatment, $nodehydrationdiaTreatmentMCHSection, $dysentrydiaTreatment, $dysentrydiaTreatmentMCHSection, $noclassificationdiaTreatment, $noclassificationdiaTreatmentMCHSection, $othertreatmentsection, $diaresponsetreatmentsection, $fevresponsetreatmentsection, $earresponsetreatmentsection;
+    public $sectionList, $sectionLinks, $facilitycontactinformation, $deliveriessection, $treatments, $question, $questionPDF, $hcwInterviewAspectsSectionPDF, $hcwInterviewAspectsSection, $hcwConsultingAspectsSection, $selectAccessChallenges, $beds, $mnhCommitteeAspectSection, $mnhWasteDisposalAspectsSection, $mnhNewbornCareAspectsSection, $mnhPostNatalCareAspectsSection, $nurses, $hardwareSources, $hardwareSourcesPDF, $hardwareMNHSection, $mnhJobAidsAspectsSection, $mnhGuidelinesAspectsSection, $mnhPreparednessAspectsSection, $mnhHIVTestingAspectsSection, $mchmalariaconfrimedtreatment, $mchmalarianotconfrimedtreatment, $mchmalarianotconfrimedtreatmentSection, $mchpneumoniaTreatmentSection, $mchpneumoniaTreatment, $somedehydrationdiaTreatment, $somedehydrationdiaTreatmentMCHSection, $nodehydrationdiaTreatment, $nodehydrationdiaTreatmentMCHSection, $dysentrydiaTreatment, $dysentrydiaTreatmentMCHSection, $noclassificationdiaTreatment, $noclassificationdiaTreatmentMCHSection, $othertreatmentsection, $diaresponsetreatmentsection, $fevresponsetreatmentsection, $earresponsetreatmentsection, $mchassessorinfo;
     
     //pdf variables
     public $mchpneumoniasevereTreatmentSection, $mchmalariaconfrimedtreatmentSection, $hcwConsultingAspectsSectionPDF, $myCount, $mchBundling, $mchBundlingPDF, $hardwareMCHSectionPDF, $suppliesMCHSectionPDF, $ortCornerAspectsSectionPDF, $mchIndicatorsSectionPDF, $selectMCHCommoditySuppliersPDF, $mchCommodityAvailabilitySectionPDF, $servicesPDF, $mnhKangarooMotherCarePDF, $mnhKangarooMotherCare, $services, $mnhCommitteeAspectSectionPDF, $mnhWasteDisposalAspectsSectionPDF, $mnhNewbornCareAspectsSectionPDF, $mnhPostNatalCareAspectsSectionPDF, $nursesPDF, $mnhCommunityStrategySectionPDF, $selectMCHOtherSuppliersPDF, $hardwareMNHSectionPDF, $mchGuidelineAvailabilitySectionPDF, $mnhJobAidsAspectsSectionPDF, $mnhGuidelinesAspectsSectionPDF, $mnhPreparednessAspectsSectionPDF, $mnhHIVTestingAspectsSectionPDF, $suppliesUsageAndOutageSectionPDF, $suppliesMNHOtherSectionPDF, $mnhWaterAspectsSectionPDF, $selectMNHOtherSuppliersPDF, $commodityUsageAndOutageSectionPDF, $signalFunctionsSectionPDF, $mnhCEOCAspectsSectionPDF, $suppliesSectionPDF, $commodityAvailabilitySectionPDF, $selectCommoditySuppliersPDF;
@@ -188,6 +188,10 @@ class MY_Controller extends CI_Controller
 $this->write_districts();
 $this->write_counties();
 
+        //functions by Chris
+        $this->createmchassessorinformation();
+        $this->createTotalRows();
+
     }
     
     function getRepositoryByFormName($form) {
@@ -362,10 +366,18 @@ $this->write_counties();
     
     public function getAccessChallenges() {
         $this->data_found = $this->m_mch_survey->getAccessChallenges();
+        $retrieved = $this->m_mch_survey->retrieveData('log_challenges','ach_code');
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
-            $this->selectAccessChallenges.= '<tr><td><input style="margin-right:20px"value="' . $value['achCode'] . '" name="achResponse_1" id= "" type="radio">' . $value['achName'] . '</td></tr>';
+            if(array_key_exists($value['achCode'], $retrieved))
+            {
+                $this->selectAccessChallenges.= '<tr><td><input style="margin-right:20px"value="' . $value['achCode'] . '" name="achResponse_1" id= "" type="radio" checked>' . $value['achName'] . '</td></tr>';
+            }
+            else
+            {
+                $this->selectAccessChallenges.= '<tr><td><input style="margin-right:20px"value="' . $value['achCode'] . '" name="achResponse_1" id= "" type="radio">' . $value['achName'] . '</td></tr>';
+            }
         }
     }
     
@@ -444,6 +456,7 @@ $this->write_counties();
         $retrieved = $this->m_mch_survey->retrieveData('hr_information', 'facility_mfl');
 
         $fac_mfl = $this->session->userdata('facilityMFL');
+        $survey_type = $this->session->userdata('survey');
 
         // echo "<pre>";print_r($retrieved[$fac_mfl]);echo "</pre>";die;
 
@@ -520,6 +533,20 @@ $this->write_counties();
                 </td>
             </tr>';
         }
+
+        if($survey_type == 'ch')
+        {
+            $this->facilitycontactinformation .= '<tr>
+            <td colspan = "2">OPD Incharge</td><td>
+            <input type="text" id="facilityMchname" name="facilityopdname_1" class="cloned" size="40"/>
+            </td><td>
+            <input type="text" id="facilityMchmobile" name="facilityopdmobile_1" class="phone" size="40"/>
+            </td>
+            <td>
+            <input type="text" id="facilityMchemail" name="facilityopdemail_1" class="cloned mail" size="40"/>
+            </td>
+        </tr>';
+        }
         return $this->facilitycontactinformation;
     }
     
@@ -529,7 +556,7 @@ $this->write_counties();
         $this->data_found = $this->m_mnh_survey->getCommodityNames();
         $retrieved = $this->m_mch_survey->retrieveData('available_commodities', 'comm_code');
         
-        //var_dump($this->data_found);die;
+        // echo"<pre>";print_r($this->data_found);die;
         $counter = 0;
         $survey = $this->session->userdata('survey');
         switch ($survey) {
@@ -546,6 +573,7 @@ $this->write_counties();
         
         $availabilities = array('Available', 'Never Available');
         $reasons = array('Select One', '1. Not Ordered', '2. Ordered but not yet Received', '3. Expired');
+        // echo "<pre>";print_r($reasons);die;
         
         foreach ($this->data_found as $value) {
             $counter++;
@@ -1014,15 +1042,24 @@ $this->write_counties();
      * */
     public function createORTCornerAspectsSection() {
         $this->data_found = $this->m_mch_survey->getOrtAspectQuestions('ort');
-        
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+        $locations = array("MCH", "U5 Clinic", "OPD", "WARD", "OTHER" );
         //var_dump( $this->question);
+        // echo"<pre>";print_r($retrieved);die;
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $counter = 0;
         $ort_location = '';
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                // echo"<pre>";print_r($retrieved[$value['questionCode']]);
+                $questionResponse = ($retrieved[$value['questionCode']]['lq_response'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response'] : '';
+                $questionCount = ($retrieved[$value['questionCode']]['lq_response_count'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response_count'] : '';
+                $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
+                // echo $value['questionCode'] .' '. $questionResponse . ' ' . $questionCount .' '. $questionReason . '<br/>';
+            }
             if ($value['questionCode'] == 'QUC01') {
                 
                 //set follow up question if qn on designated ort location is yes
@@ -1030,42 +1067,54 @@ $this->write_counties();
                 $aspect = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select One</option>
+            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">';
+            if ($questionResponse == "Yes") {
+                $aspect .= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
+            else if ($questionResponse == "No") {
+                $aspect .= '<option value="">Select One</option>
                 <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $aspect .= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
 
-            </select>
+            $aspect .= '</select>
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                 $this->ortCornerAspectsSection.= $aspect;
             } else {
-                
                 if ($value['questionCode'] == 'QUC02b') {
+                    // echo $questionResponse;die;
+                    $retrievedTreat = explode(',', $questionResponse);
+                    foreach ($locations as $location) {
+                        if (in_array($location, $retrievedTreat)) {
+                            $data .= '<input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="'.$location.'" checked = "checked"/>
+                            <label for="" style="font-weight:normal">'.$location.'</label><br/>';
+                        }
+                        else
+                        {
+                            $data .= '<input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="'.$location.'"/>
+                            <label for="" style="font-weight:normal">'.$location.'</label><br/>';
+                        }
+
+                        if ($location == "OTHER") {
+                            $data .= '<input type="text" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="" maxlength="45" size="45" placeholder="please specify"/>
+';
+                        }
+                   } // die;
+                    // echo $questionResponse;die;
                     $ort_location = '<tr id="ort_location" style="display:true">
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="2">
-            <label>Multiple Selections Allowed</label><br/>
-            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="MCH"/>
-            <label for="" style="font-weight:normal">MCH</label><br/>
-
-            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="U5 Clinic"/>
-            <label for="" style="font-weight:normal">U5 Clinic</label><br/>
-
-            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="OPD"/>
-            <label for="" style="font-weight:normal">OPD</label><br/>
-
-
-            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="WARD"/>
-            <label for="" style="font-weight:normal">WARD</label><br/>
-
-
-            <input type="checkbox" name="ortLocationOther_' . $counter . '[]" id="ortLocationOther_' . $counter . '"  value=""/>
-            <label for="" style="font-weight:normal">Other</label><br/>
-            <input type="text" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="" maxlength="45" size="45" placeholder="please specify"/>
-
-
+            '.$data.'
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
@@ -1078,12 +1127,25 @@ $this->write_counties();
                     $this->ortCornerAspectsSection.= '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select One</option>
+            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">';
+            if ($questionResponse == "Yes") {
+                $this->ortCornerAspectsSection.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
+            else if ($questionResponse == "No") {
+                $this->ortCornerAspectsSection.=  '<option value="">Select One</option>
                 <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $this->ortCornerAspectsSection.= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
 
-            </select>
+            $this->ortCornerAspectsSection.= '</select>
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
        </tr>' . $ort_functional;
@@ -1092,22 +1154,34 @@ $this->write_counties();
                     $this->ortCornerAspectsSection.= '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select One</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned">';
+                if ($questionResponse == "Yes") {
+                $this->ortCornerAspectsSection.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+                }
+                else if ($questionResponse == "No") {
+                    $this->ortCornerAspectsSection.=  '<option value="">Select One</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="selected">No</option>';
+                }
+                else
+                {
+                    $this->ortCornerAspectsSection.= '<option value="" selected="selected">Select One</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>';
+                }
+                $this->ortCornerAspectsSection.= '</select>
+                </td>
+                <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+            </tr>
 
-            </select>
-            </td>
-            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-        </tr>
-
-        ';
+            ';
                 }
             }
         }
         
-        //echo $this->ortCornerAspectsSection;die;
+        // echo $this->ortCornerAspectsSection;die;
         return $this->ortCornerAspectsSection;
     }
     
@@ -1318,19 +1392,30 @@ $this->write_counties();
      * */
     public function createmchConsultationSection() {
         $this->data_found = $this->m_mch_survey->getmchConsultationQuestions('imci');
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+
         
         //var_dump($this->data_found);die;
         $counter = 0;
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
-            
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = ($retrieved[$value['questionCode']]['lq_response'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response'] : '';
+                $questionCount = ($retrieved[$value['questionCode']]['lq_response_count'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response_count'] : '';
+                $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
+            }
+
+
+            if ($questionResponse == 'Yes') {
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                    } else if ($questionResponse == 'No') {
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                    } else {
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                    }
             $this->mchConsultationSection.= '<tr>
-            <td colspan="1">(<strong>' . $counter . '</strong>) ' . $value['questionName'] . '</td>
-            <td colspan="1">
-            <input type="radio"  name="mchConsultationResponse_' . $counter . '" id="mchConsultationResponse_' . $counter . '" value="Yes" class="numbers cloned">Yes</input>
-            <input type="radio"  name="mchConsultationResponse_' . $counter . '" id="mchConsultationResponse_' . $counter . '" value="No" class="numbers cloned">No</input>
-            </td>
+            <td colspan="1">(<strong>' . $counter . '</strong>) ' . $value['questionName'] . '</td>'.$questionRow.'
             <input type="hidden"  name="mchConsultationQCode_' . $counter . '" id="mchConsultationQCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
@@ -2182,22 +2267,53 @@ $this->write_counties();
      * */
     public function createMCHGuidelineAvailabilitySection() {
         $this->data_found = $this->m_mch_survey->getGuidelineAvailabilityQuestions('gp');
-        
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+
         //var_dump($this->data_found);die;
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = ($retrieved[$value['questionCode']]['lq_response'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response'] : '';
+                $questionCount = ($retrieved[$value['questionCode']]['lq_response_count'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response_count'] : '';
+                $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
+            }
+
+            if ($questionResponse == 'Yes') {
+                $questionRow = '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>
+
+                </select>
+                </td>
+                <td><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "'.$questionCount.'"disabled/></td>';
+            }
+
+            else if ($questionResponse == 'No') {
+                $questionRow = '<option value="">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected="selected">No</option>
+
+                </select>
+                </td>
+                <td><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "'.$questionCount.'"disabled/></td>';
+            }
+
+            else
+            {
+                $questionRow = '<option value="">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected="selected">No</option>
+
+                </select>
+                </td>
+                <td><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "'.$questionCount.'"disabled/></td>';
+            }
             $this->mchGuidelineAvailabilitySection.= '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
             <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned is-guideline">
-                <option value="" selected="selected">Select One</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-
-            </select>
-            </td>
-            <td><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" disabled/></td>
+            '.$questionRow.'
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
@@ -2503,6 +2619,7 @@ $this->write_counties();
             } else {
                 $responseAssessorRow = '<td>Yes <input name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" type="radio">';
             }
+
             
             $base++;
             $findingRow = '';
@@ -2764,6 +2881,7 @@ $this->write_counties();
     public function createQuestionsSection() {
         $this->data_found = $this->m_mch_survey->getAllQuestions();
         $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+        // echo "<pre>";print_r($this->data_found);die;
         
         //var_dump($this->data_found);die;
         $counter = 0;
@@ -2791,13 +2909,33 @@ $this->write_counties();
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
-            } else {
+            } 
+            else if($section == 'hs')
+            {
+                $data[$section][] = '<tr>
+                    <td >' . $value['questionName'] . '</td>
+                    <td >
+                    <label for="General_OPD" style="font-weight:normal">General OPD</label>
+                    <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
+                    <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                    <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
+                    <label for="MCH" style="font-weight:normal">MCH</label>
+                    <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                    <label for="Other" style="font-weight:normal">Other</label>
+                    <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                    <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                    </td>
+                    <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+                </tr>';
+            }
+            else {
                 if ($value['questionName'] == 'Document cases seen over 3 months') {
+                    $numbers = explode(',', $questionResponse);
                     $data[$section][] = '
                             <tr>
                         <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
-                     <td>March <input name="questionResponse_' . $counter . '[]"  type="text">  April <input name="questionResponse_' . $counter . '[]"  type="text">
-                        May <input name="questionResponse_' . $counter . '[]"  type="text"></td>
+                     <td>March <input name="questionResponse_' . $counter . '['.'March'.']"  type="number" value = "'.$numbers[0].'">  April <input name="questionResponse_' . $counter . '['.'April'.']"  type="number" value = "'.$numbers[1].'">
+                        May <input name="questionResponse_' . $counter . '['.'May'.']"  type="number" value = "'.$numbers[2].'"></td>
                         <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                     </tr>';
                 } else {
@@ -2826,16 +2964,18 @@ $this->write_counties();
             }
         }
         
-        //var_dump($this->question);die;
+        // var_dump($this->question['hs']);die;
         return $this->question;
     }
     public function createSuppliesSectionPDF() {
         $this->data_found = $this->m_mch_survey->getEverySupplyName();
+        // echo "<pre>";print_r($retrieved);die;
         
         //echo '<pre>';print_r($this->data_found);echo '</pre>';die;
         $counter = 0;
         $section = '';
         
+    $availability = array('Available', 'Never Available');
         $base = 0;
         $current = "";
         foreach ($this->data_found as $value) {
@@ -2844,9 +2984,8 @@ $this->write_counties();
             $current = ($base == 0) ? $section : $current;
             $base = ($current != $section) ? 0 : $base;
             $current = ($base == 0) ? $section : $current;
-            
             $base++;
-            
+
             $data[$section][] = '<tr>
             <td  style="width:200px;">' . $value['supplyName'] . '</td>
             <td style="vertical-align: middle; margin: 0px;text-align:center;">
@@ -2891,7 +3030,9 @@ $this->write_counties();
         return $this->mchSuppliesPDF;
     }
     public function createSuppliesSection() {
-        $this->data_found = $this->m_mch_survey->getEverySupplyName();
+    $this->data_found = $this->m_mch_survey->getEverySupplyName();
+    $retrieved = $this->m_mch_survey->retrieveData('available_supplies', 'supply_code');
+    $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
         
         //echo '<pre>';print_r($this->data_found);echo '</pre>';die;
         $counter = 0;
@@ -2905,8 +3046,15 @@ $this->write_counties();
             $current = ($base == 0) ? $section : $current;
             $base = ($current != $section) ? 0 : $base;
             $current = ($base == 0) ? $section : $current;
-            
             $base++;
+
+            $supplyLocation = '';
+            $supplyAvailability = '';
+            if (array_key_exists($value['supplyCode'], $retrieved)) {
+                $supplyLocation = $retrieved[$value['supplyCode']]['as_location'];
+                $supplyAvailability = $retrieved[$value['supplyCode']]['as_availability'];
+            }
+
             if ($section != 'tst' && $section != 'ch' && $section != 'tes') {
                 
                 $quantity = '<td style ="text-align:center;">
@@ -2951,37 +3099,52 @@ $this->write_counties();
             <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
         </tr>';
             }else{
-                 $data[$section][] = '<tr>
-            <td  style="width:200px;">' . $value['supplyName'] . '</td>
-            <td style="vertical-align: middle; margin: 0px;text-align:center;">
-            <input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/>
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="OPD" class="cloned"/>
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="MCH" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="U5 Clinic" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Ward" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other" />
-            </td>
-            ' . $quantity . '
-            <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
-        </tr>';
+                $suppliesRow = '<tr><td  style="width:200px;">' . $value['supplyName'] .'</td>';
+
+            if ($supplyAvailability == 'Available') {
+                 $suppliesRow .= '<td style="vertical-align: middle; margin: 0px;text-align:center;"><input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned" checked/></td>
+                 <td style ="text-align:center;"><input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" /></td>';
             }
-           
+            else if($supplyAvailability == 'Never Available')
+            {
+                $suppliesRow .= '<td style="vertical-align: middle; margin: 0px;text-align:center;"><input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/></td>
+                 <td style ="text-align:center;"><input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" checked/></td>';
+            }
+            else
+            {
+                $suppliesRow .= '<td style="vertical-align: middle; margin: 0px;text-align:center;"><input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/></td>
+                 <td style ="text-align:center;"><input name="sqAvailability_' . $counter . '" type="radio" value="Never Available"/></td>';
+            }
+
+            $supplyLocation = explode(',', $supplyLocation);
+            // echo "<pre>";print_r($supplyLocation);
+            foreach ($locations as $locs) {
+                if (in_array($locs, $supplyLocation)) {
+                    if($locs != 'Other'){$suppliesRow .= '<td style ="text-align:center;"><input name="sqLocation_' . $counter . '[]" type="checkbox" value="'.$locs.'" class="cloned" checked/></td>';}
+                    else
+                    {
+                        $suppliesRow .= '<td style ="text-align:center;"><input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other" checked/></td>';
+                    }
+                }
+                else
+                {
+                    if($locs != 'Other'){
+                        $suppliesRow .= '<td style ="text-align:center;"><input name="sqLocation_' . $counter . '[]" type="checkbox" value="'.$locs.'" class="cloned"/></td>';
+                    }
+                    else{
+                        $suppliesRow .= '<td style ="text-align:center;"><input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other"/></td>';
+                    }
+                }
+            }
+            $suppliesRow .=  $quantity . '<input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" /></tr>';
+            $data[$section][] = $suppliesRow;
+        //     ' . $quantity . '
+        //     <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
+        // </tr>';
+            }
         }
-        
-        //var_dump( $data);die;
+        // echo"<pre>";print_r($data['ch']);
+        // var_dump( $data['ch']);die;
         
         foreach ($data as $key => $value) {
             foreach ($value as $val) {
@@ -2989,7 +3152,7 @@ $this->write_counties();
             }
         }
         
-        //var_dump($this->mchSuppliesPDF);die;
+        // var_dump($this->mchSupplies);die;
         return $this->mchSupplies;
     }
     
@@ -2999,6 +3162,8 @@ $this->write_counties();
      */
     public function createStaffTrainingGuidelinesSection() {
         $this->data_found = $this->m_mnh_survey->getTrainingGuidelines();
+        $retrieved = $this->m_mch_survey->retrieveData('training_guidelines_n', 'tg_id');
+        // echo"<pre>";print_r($retrieved);die;
         
         //var_dump( $this->data_found );die;
         
@@ -3701,8 +3866,9 @@ $this->write_counties();
     public function createEquipmentSection() {
         $this->data_found = $this->m_mnh_survey->getEquipmentNames();
         $retrieved = $this->m_mch_survey->retrieveData('available_equipments', 'eq_code');
+        // echo"<pre>";print_r($retrieved);die;
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $unit = "";
         $counter = 0;
         $survey = $this->session->userdata('survey');
@@ -3717,8 +3883,8 @@ $this->write_counties();
         }
         $availabilities = array('Available', 'Never Available');
         $reasons = array('Select One', '1. Not Ordered', '2. Ordered but not yet Received', '3. Expired');
-        
         foreach ($this->data_found as $value) {
+            // echo "<pre>";print_r($value);
             $counter++;
             $availabilityRow = $locationRow = $expiryRow = $quantityRow = $reasonUnavailableRow = '';
             if (array_key_exists($value['eqCode'], $retrieved)) {
@@ -3746,20 +3912,18 @@ $this->write_counties();
                 //Check if value retrieved is NOT NULL
                 if ($location != '') {
                     
-                    //Loop through values from database
-                    foreach ($location as $loco) {
-                        
-                        //Check if location in database (loco) is equal to value in preset Array (loc)
-                        if ($loco == $loc) {
+                    //Check whether the values from the locations array exist in the location array
+                        if (in_array($loc, $location)) {
                             $locationRowTemp[$loc] = '<td style ="text-align:center;">
-                                        <input checked="checked" name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
-                                        </td>';
-                        } else {
-                            $locationRowTemp[$loc] = '<td style ="text-align:center;">
-                                        <input name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
-                                        </td>';
+                            <input checked="checked" name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
+                            </td>';
                         }
-                    }
+                        else
+                        {
+                            $locationRowTemp[$loc] = '<td style ="text-align:center;">
+                            <input name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
+                            </td>';
+                        }
                 } else {
                     $locationRowTemp[$loc] = '<td style ="text-align:center;">
                                         <input name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
@@ -3770,24 +3934,43 @@ $this->write_counties();
                 $locationRow.= $temp;
             }
             
-            if ($fully_functioning != '') {
-                $fullyFunctioningRow = '<td style ="text-align:center;">
-                                        <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  value="' . $fully_functioning . '" size="8" class="numbers" />
-                                        </td>';
+            if($value['eqFor'] == 'hwr')
+            {
+                if ($value['eqUnit'] != null) {
+                $unit = '(' . $value['eqUnit'] . ')';
             } else {
-                $fullyFunctioningRow = '<td style ="text-align:center;">
-                                        <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                        </td>';
+                $unit = '';
             }
-            if ($non_functioning != '') {
-                $nonFunctioningRow = '<td style ="text-align:center;">
-                                        <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" value="' . $non_functioning . '" type="text"  size="8" class="numbers"/>
-                                        </td>';
-            } else {
-                $nonFunctioningRow = '<td style ="text-align:center;">
-                                        <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
-                                        </td>';
+            
+            $this->equipmentsSection[$value['eqFor']].= '<tr>
+            <td >' . $value['eqName'] . ' ' . $unit . ' </td>
+            ' . $availabilityRow . '
+            ' . $locationRow . '
+            <input type="hidden"  name="eqCode_' . $counter . '" id="eqCode_' . $counter . '" value="' . $value['eqCode'] . '" />
+        </tr>';
+            $this->global_counter = $counter;
             }
+            else
+            {
+                if ($fully_functioning != '') {
+                    $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  value="' . $fully_functioning . '" size="8" class="numbers" />
+                                            </td>';
+                } else {
+                    $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                }
+                if ($non_functioning != '') {
+                    $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" value="' . $non_functioning . '" type="text"  size="8" class="numbers"/>
+                                            </td>';
+                } else {
+                    $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                            </td>';
+                }
+            
             if ($value['eqUnit'] != null) {
                 $unit = '(' . $value['eqUnit'] . ')';
             } else {
@@ -3805,8 +3988,9 @@ $this->write_counties();
         </tr>';
             $this->global_counter = $counter;
         }
+        }
         
-        //print_r ($this->equipmentsSection);die;
+        // print_r ($this->equipmentsSection['hwr']);die;
         return $this->equipmentsSection;
     }
     
@@ -4367,6 +4551,9 @@ GROUP BY st_name,sc_name,facilityCode;";
     /**Function to create diarrhoea section**/
     public function createSevereDiarrhoeaTreatmentTSection() {
         $this->data_found = $this->m_mch_survey->getTreatmentCommodities();
+        $retrieved = $this->m_mch_survey->retrieveData('log_treatments', 'lt_classification');
+
+        // echo"<pre>";print_r($retrieved['SevereDehydration']);die;
         
         $counter = 0;
         
@@ -4387,9 +4574,8 @@ GROUP BY st_name,sc_name,facilityCode;";
         $this->severediatreatmentMCHSection.= '</div><div>';
         
         $this->data_found = $this->m_mch_survey->getTreatmentFor('dia');
-        
         $counter = 0;
-        
+        $treatments = explode(',', $retrieved['SevereDehydration']['lt_other_treatments']);
         foreach ($this->data_found as $value) {
             $counter++;
             $this->severediatreatmentMCHSection.= '<div class = "specific-treatment"><input type = "checkbox" name = "SevereDehydration" id = "severediatoggled_' . $counter . '" value = "' . $value['treatmentCode'] . '" onchange = "check(this)">' . $value['treatmentName'] . '</input><input type = "number" class = "severediatoggled_' . $counter . '" name = "mchtreatmentnumbers[SevereDehydration][]" readonly = "true"></div>';
@@ -4618,50 +4804,188 @@ GROUP BY st_name,sc_name,facilityCode;";
      * */
     public function createHealthSection() {
         $this->data_found = $this->m_mch_survey->getMchHealthQuestions('hs');
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $counter = 0;
         $data = '';
         foreach ($this->data_found as $value) {
             $counter++;
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = ($retrieved[$value['questionCode']]['lq_response'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response'] : '';
+                $questionCount = ($retrieved[$value['questionCode']]['lq_response_count'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response_count'] : '';
+                $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
+            }
             if ($value['questionCode'] == 'QUC30') {
+                if ($questionResponse == 'General OPD') {
+                        $questionRow = '<td >
+                        <label for="General_OPD" style="font-weight:normal">General OPD</label>
+                        <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned" checked/>
+                        <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                         <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    } else if ($questionResponse == 'Paediatric OPD') {
+                        $questionRow = '<td><label for="General_OPD" style="font-weight:normal">General OPD</label>
+                        <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
+                        <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                         <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned" checked/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+                    else if ($questionResponse == 'MCH') {
+                        $questionRow = '<td><label for="General_OPD" style="font-weight:normal">General OPD</label>
+                        <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
+                        <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                         <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned" checked/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+
+                    else if ($questionResponse == 'Other') {
+                        $questionRow = '<td><label for="General_OPD" style="font-weight:normal">General OPD</label>
+                        <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
+                        <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                         <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned" checked/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+                    else {
+                        $questionRow = '<td><label for="General_OPD" style="font-weight:normal">General OPD</label>
+                        <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
+                        <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
+                         <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }   
                 
                 $data = '<tr>
-            <td >' . $value['questionName'] . '</td>
-            <td >
-            <label for="General_OPD" style="font-weight:normal">General OPD</label>
-             <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
-            <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
-             <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
-            <label for="MCH" style="font-weight:normal">MCH</label>
-             <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
-            <label for="Other" style="font-weight:normal">Other</label>
-             <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
-             <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
-            </td>
-            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-        </tr>';
+            <td >' . $value['questionName'] . '</td>'.$questionRow.'
+            </tr>';
                 $this->HealthSection.= $data;
             } else {
                 
-                $this->HealthSection.= '<tr>
-            <td colspan="1">' . $value['questionName'] . '</td>
-            <td colspan="1">
 
-            <label for="LAB" style="font-weight:normal">LAB</label>
-             <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
-            <label for="MCH" style="font-weight:normal">MCH</label>
-             <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
-            <label for="Ward style="font-weight:normal">Ward</label>
-             <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
-            <label for="CCC style="font-weight:normal">CCC</label>
-             <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
-            <label for="Other" style="font-weight:normal">Other</label>
-             <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
-             <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
-            </td>
-            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-        </tr>';
+                if ($questionResponse == 'LAB') {
+                        $questionRow = '<td colspan="1">
+
+                        <label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned" checked/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    } else if ($questionResponse == 'MCH') {
+                        $questionRow = '<td colspan =  "1"><label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned" checked/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+                    else if ($questionResponse == 'Ward') {
+                        $questionRow = '<td colspan =  "1" ><label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned" checked/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+
+                    else if ($questionResponse == 'CCC') {
+                        $questionRow = '<td colspan =  "1" ><label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned" checked/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+                    else if ($questionResponse == 'Other') {
+                        $questionRow = '<td colspan =  "1"><label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned" checked/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }
+                    else {
+                        $questionRow = '<td colspan =  "1"><label for="LAB" style="font-weight:normal">LAB</label>
+                         <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_LAB' . $counter . '" class="cloned"/>
+                        <label for="MCH" style="font-weight:normal">MCH</label>
+                         <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
+                        <label for="Ward style="font-weight:normal">Ward</label>
+                         <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_Ward' . $counter . '" class="cloned"/>
+                        <label for="CCC style="font-weight:normal">CCC</label>
+                         <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_CCC' . $counter . '" class="cloned"/>
+                        <label for="Other" style="font-weight:normal">Other</label>
+                         <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
+                         <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                        </td>
+                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
+                    }   
+                $this->HealthSection.= '<tr>
+            <td colspan="1">' . $value['questionName'] . '</td>'.$questionRow.'</tr>';
             }
         }
         
@@ -4969,6 +5293,53 @@ background: #ddd;
         
         write_file('assets/data/fac_county.json', $data);
         //echo 'written!';
+    }
+
+    public function createmchassessorinformation()
+    {
+        $retrieved = $this->m_mch_survey->retrieveData('hr_information', 'facility_mfl');
+
+        $this->mchassessorinfo .= '<td>Name </td><td>
+        <input type="text" size="40" name = "assesorname_1">
+        </td><td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  size="40"/-->
+        <input type="text" size="40" name = "assesordesignation_1">
+        </td><td>Email </td>
+        <td>
+        <input type="text" size="40" name = "assesoremail_1">
+        </td>
+        </td><td>Phone Number </td>
+        <td>
+        <input type="text" size="40" name = "assesorphoneNumber_1">
+        </td>';
+
+        return $this->mchassessorinfo;
+    }
+
+
+    public function createTotalRows()
+    {
+        $totals = array('totalu5', 'diatotal', 'pnetotal', 'malariatotal', 'OtherTotal');
+        $minor_totals = array('SevereDehydration', 'SomeDehydration', 'NoDehydration', 'Dysentry', 'NoClassification', 'SeverePneumonia', 'Pneumonia', 'ConfirmedMalaria', 'NotConfirmedMalaria');
+        $alltotals = array_merge($totals, $minor_totals);
+
+        $retrieved = $this->m_mch_survey->retrieveData('log_treatments', 'lt_classification');
+        // echo"<pre>";print_r($totals);die;
+
+        foreach ($alltotals as $value) {
+            if (array_key_exists($value, $retrieved)) {
+                $treatmentTotal = ($retrieved[$value]['lt_total'] != 'n/a') ? $retrieved[$value]['lt_total'] : '';
+
+                $data[$value] = '<input type = "number" id = "'.$value.'" name = "mchtotalTreatment['.$value.']" value = "'.$treatmentTotal.'"/></td>';
+            }
+            else
+            {
+                $data[$value] = '<input type = "number" id = "'.$value.'" name = "mchtotalTreatment['.$value.']"/></td>';                
+            }
+        }
+
+        $this->totalsRows = $data;
+        // var_dump($this->totalsRows);
+        return $this->totalsRows;
     }
 }
 
