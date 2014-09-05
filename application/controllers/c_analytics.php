@@ -480,37 +480,29 @@ ORDER BY fac_level;");
      * @return [type]                  [description]
      */
     public function getCommunityStrategyCH($criteria, $value, $survey, $survey_category, $option) {
-        $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'cms', 'total');
+        $results = $this->m_analytics->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms');
         ksort($results);
-        
-        echo "<pre>";
-        print_r($results);
-        echo "</pre>";
-        die;
+          //echo "<pre>";print_r($results);echo "</pre>";die;
         $count = 0;
         foreach ($results as $key => $result) {
-            if ($count < 3) {
-                $data['trained'][$key] = $result;
-            } elseif ($count < 4) {
-                $data['referral'][$key] = $result;
-            } else {
+        	if ( $count >= 1 && $count <= 3) {
                 $data['community'][$key] = $result;
+            } elseif ($count >= 4 && $count <= 7) {
+            	$data['referral'][$key] = $result;
+            } else {
+                $data['trained'][$key] = $result;
             }
             $count++;
         }
-        
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-        // die;
-        
-        foreach ($data[$option] as $key => $value) {
-            $category[] = $key;
-            $gData[] = $value;
-        }
-        $resultArray[] = array('name' => 'Numbers', 'data' => $gData);
-        
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
+		foreach($data[$option] as $key => $value) {
+			$category[] = $key;
+			foreach($value as $val){
+				$gData[] = $val;
+			}
+			}
+		// var_dump($gData);
+		$resultArray[] = array('name' => 'Numbers', 'data' => $gData);
+		$this->populateGraph($resultArray, '',  $category, $criteria, '', 70, 'bar');
     }
     
     /*
@@ -947,8 +939,8 @@ ORDER BY fac_level;");
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category) {
-        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'location');
+    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category,$for) {
+        $this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'mnh');
     }
     public function getMNHSuppliers($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'supplier');
@@ -1035,7 +1027,7 @@ ORDER BY fac_level;");
             $count++;
         }
         
-        $resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+        $resultArray = array(array('name' => 'No', 'data' => $no));
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;
@@ -1623,6 +1615,7 @@ ORDER BY fac_level;");
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
+<<<<<<< HEAD
     /**
      * [getCommodityLocation description]
      * @param  [type] $criteria        [description]
@@ -1632,6 +1625,11 @@ ORDER BY fac_level;");
      * @param  [type] $for             [description]
      * @return [type]                  [description]
      */
+=======
+	public function getCHSuppliesLocation($criteria,$value,$survey,$survey_category,$for){
+		$this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'ch');
+	}
+>>>>>>> e76270deed7b97cc35e0354531c7dab625e77823
     public function getCommodityLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getCommodityLocation($criteria, $value, $survey, $survey_category, $for);
         
@@ -2517,7 +2515,7 @@ ORDER BY fac_level;");
     }
     
     public function getCHSuppliesSupplier($criteria, $value, $survey, $survey_category) {
-        $this->getSuppliesSupplier($criteria, $value, 'ch', $survey_category);
+        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mch', 'supplier');
     }
     
     /**
@@ -3474,6 +3472,7 @@ ORDER BY fac_level;");
      */
     public function getCommunityStrategyMNH($criteria, $value, $survey, $survey_category, $option) {
         $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'cms', 'total');
+		//print_r($results );die;
         ksort($results);
         
         // echo "<pre>";
@@ -3499,7 +3498,7 @@ ORDER BY fac_level;");
         // die;
         
         foreach ($data[$option] as $key => $value) {
-            $category[] = $key;
+        	$category[] = $key;
             $gData[] = $value;
         }
         

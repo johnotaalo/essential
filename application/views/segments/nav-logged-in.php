@@ -28,6 +28,12 @@
   <i class="icon hospital link"></i>Facilities Not Started
   <a class="detail"><span id="not-started">0</span></a>
 </div>
-
+<div class="ui label small">
+  <i class="icon hospital link"></i>Percentage Completed
+  <a class="detail"><span id="percentage_completed">0</span></a>
+</div>
+<div class="ui blue active progress" id="district_progress">
+  <div class="bar" ></div>
+</div>
 </div>
 </div>

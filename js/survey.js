@@ -1134,9 +1134,9 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#not-finished').text();
 				$('#not-started').text(obj[0].notstarted);
 				var percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
-				$('#county_progress .progress-bar').text(percentage + '%');
-				$('#county_progress .progress-bar').attr('aria-valuenow', percentage);
-				$('#county_progress .progress-bar').css('width', percentage + '%');
+				$('#percentage_completed').text(percentage + '%')
+				// $('#district_progress').attr('aria-valuenow', percentage);
+				$('#district_progress .bar').css('width', percentage + '%');
 			}
 		});
 	}
