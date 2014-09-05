@@ -1615,21 +1615,10 @@ ORDER BY fac_level;");
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
-<<<<<<< HEAD
-    /**
-     * [getCommodityLocation description]
-     * @param  [type] $criteria        [description]
-     * @param  [type] $value           [description]
-     * @param  [type] $survey          [description]
-     * @param  [type] $survey_category [description]
-     * @param  [type] $for             [description]
-     * @return [type]                  [description]
-     */
-=======
+
 	public function getCHSuppliesLocation($criteria,$value,$survey,$survey_category,$for){
 		$this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'ch');
 	}
->>>>>>> e76270deed7b97cc35e0354531c7dab625e77823
     public function getCommodityLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getCommodityLocation($criteria, $value, $survey, $survey_category, $for);
         
