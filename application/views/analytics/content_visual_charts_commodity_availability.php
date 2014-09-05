@@ -130,7 +130,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines and Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+              <!--<div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -147,7 +147,7 @@
                         <div class="chart" id="job_aids">
                         </div>
                     </div>
-                </div>
+              </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tools</span><span class="sizer">Click to Enlarge</span></h6>
@@ -375,7 +375,7 @@
                     </div>
                     <div class="portlet-body">
 
-                        <div class="chart" id="ort_nonfunctional">
+                        <div class="chart" id="ort_reason">
                         </div>
                     </div>
                 </div>

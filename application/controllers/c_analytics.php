@@ -939,8 +939,8 @@ ORDER BY fac_level;");
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category) {
-        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'location');
+    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category,$for) {
+        $this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'mnh');
     }
     public function getMNHSuppliers($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'supplier');
@@ -1027,7 +1027,7 @@ ORDER BY fac_level;");
             $count++;
         }
         
-        $resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+        $resultArray = array(array('name' => 'No', 'data' => $no));
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;

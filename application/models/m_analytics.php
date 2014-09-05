@@ -1844,7 +1844,7 @@ ORDER BY oa.question_code ASC";
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
                         } else if (array_key_exists('supply_name', $value)) {
-                            $data[$value['supply_code']][$value['supply_name']] = (int)$value['total_response'];
+                            $data[$value['supply_name']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
                      //echo "<pre>";print_r($data);echo "</pre>";die;

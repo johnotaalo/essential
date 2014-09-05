@@ -511,7 +511,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
             //Section 5 CH
             loadGraph(base_url, 'c_analytics/getORTOne/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_availability');
             loadGraph(base_url, 'c_analytics/getLocationStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_location');
-            loadGraph(base_url, 'c_analytics/getNonFunctional/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_reason');
+            loadGraph(base_url, 'c_analytics/getORTFunctionality/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_reason');
 
             //Section 6 CH
             loadGraph(base_url, 'c_analytics/getCHEquipmentFrequency/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#equipment_availability');
