@@ -4359,23 +4359,29 @@ GROUP BY st_name,sc_name,facilityCode;";
                     $linkText = 'Begin Survey';
                     $linkClass = 'action';
                     $attr = 'begin';
+                    $label = 'not started';
+                    $label_class='red';
                 } elseif ($progress == 100) {
                     $linkText = 'Review Entries';
                     $linkClass = 'action';
                     $attr = 'review';
+                    $label = 'completed';
+                    $label_class='green';
                 } else {
                     $linkText = 'Continue Survey';
                     $linkClass = 'action';
                     $attr = 'continue';
+                    $label = 'pending';
+                    $label_class='orange';
                 }
                 
-                $last_activity = ($last_activity != NULL) ? date('Y-m-d H:i:s',strtotime($last_activity)) : 'not started yet';
-                // echo $last_activity;
+                $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
+                 // echo $last_activity;die;
                 // Get Survey Information
                 
-                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div></td>';
+                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
                 
-                $link.= '<td ><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" >' . $linkText . '</a><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td>';
+                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" href="#">' . $linkText . '</a></td>';
                 
                 $this->districtFacilityListSection.= '<tr>
         <td >' . $counter . '</td>
