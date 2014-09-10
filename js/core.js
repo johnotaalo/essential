@@ -426,12 +426,12 @@ function loadMasterFacilityList(base_url, container, form) {
         success: function(data) {
             $(container.empty);
             $(container).append(data);
-            $('.dataTable').on('load', function() {
-                $('.dataTable').dataTable({
-                    "sPaginationType": "full_numbers"
-                });
+            // $('.dataTable').on('load', function() {
+            //     $('.dataTable').dataTable({
+            //         "sPaginationType": "full_numbers"
+            //     });
 
-            });
+            // });
         }
     });
 }
