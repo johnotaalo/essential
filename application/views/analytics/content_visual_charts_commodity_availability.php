@@ -560,7 +560,7 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-1">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
                     Section 1 : Facility Information <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
 
                 </a>
