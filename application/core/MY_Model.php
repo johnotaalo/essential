@@ -1571,4 +1571,16 @@ class MY_Model extends CI_Model
         }
         return $finalData;
     }
+
+    public function getFacilityInfo()
+    {
+        $results = $this->db->get_where('facilities', array('fac_mfl' => $this->session->userdata('facilityMFL')));
+        $results = $results->result_array();
+        foreach ($results as $result) {
+            $data[$result['fac_mfl']] = $result;
+        }
+        return $data;
+
+        // var_dump($this->dataSet);
+    }
 }
