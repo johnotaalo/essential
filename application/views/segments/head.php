@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2-bootstrap.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
+
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/css/semantic.css">
 <!--
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.css">
@@ -39,9 +41,12 @@
 =============================-->
 <script src="<?php echo base_url(); ?>js/js_libraries.js"></script>
 <script src="<?php echo base_url(); ?>js/js_ajax_load.js"></script>
+
+<script src="<?php echo base_url();?>assets/bower_components/moment/moment.js"></script>
 <!--<script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.js"></script>-->
 <script src="<?php echo base_url();?>assets/bower_components/select2/select2.js"></script>
 <script src="<?php echo base_url();?>js/core.js"></script>
+<!-- Bower Components -->
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.ui.touch-punch.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap-select.js"></script>
@@ -59,11 +64,13 @@
 <script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist/skrollr.menu.min.js"></script>
 
 <script src="<?php echo base_url();?>assets/bower_components/cheet.js/cheet.js"></script>
-
+<script src="<?php echo base_url();?>assets/bower_components/numeraljs/numeral.js"></script>
 <script src="<?php echo base_url()?>js/jquery.quickfit.js"></script>
-<!-- <script> Scripts for Editable and Searchable Tables </script> -->
+<!-- Semantic UI -->
+<script src="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>
+<!-- Scripts for Editable and Searchable Tables -->
 <script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script
 
 
 <!--script src="<?php echo base_url();?>assets/bower_components/"></script-->
@@ -114,12 +121,21 @@
 
         });
 
+        $(document).on('load','.activity-text',function(){
+            alert('loaded');
+        });
+
+
+
+        
+        
+        // $('.activity').text(moment($('.activity').text()).fromNow()  );
         // $('.modal-footer .btn-primary').click(function()){
             
         // }
 
 
-        var s = skrollr.init(/*other stuff*/);
+       // var s = skrollr.init(/*other stuff*/);
 
 //The options (second parameter) are all optional. The values shown are the default values.
 //skrollr.menu.init(s, {
@@ -157,9 +173,9 @@
 
 
 <!-- CODEMIRROR: Download from http://codemirror.net/codemirror.zip -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.css" />
+<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.css" />
 <script src="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.js"></script>
 
 <!-- Download from http://www.firepad.io/firepad.zip -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/firepad/firepad.css" />
-<script src="<?php echo base_url(); ?>assets/third-party/firepad/firepad.js"></script>
+<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/firepad/firepad.css" />
+<script src="<?php echo base_url(); ?>assets/third-party/firepad/firepad.js"></script-->

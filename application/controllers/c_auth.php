@@ -19,10 +19,20 @@ class C_Auth extends MY_Controller {
 
             // $this->createFacilitiesListSection();
 
-
+$assessment = $this->input->post('assessment');
+$category = $this->input->post('term');
+            if($assessment=='Child Health'){
+                $assessment='ch';
+            }
+            elseif($assessment=='Maternal and Neonatal Health'){
+                $assessment='mnh';
+            }
+            else{
+                $assessment='hcw';
+            }
             /*create session data*/
         /**/	$newdata = array('dName' => $this->m_mnh_survey->district->getDistrictName(),
-                             'dCode'=>$this->m_mnh_survey->district->getDistrictID());
+                             'dCode'=>$this->m_mnh_survey->district->getDistrictID(),'survey'=>$assessment,'survey_category'=>$category);
            //var_dump($newdata); exit;
 
            $this -> session -> set_userdata($newdata);
@@ -49,7 +59,7 @@ class C_Auth extends MY_Controller {
 
    public function doCheckFacilityCode(){/**from the session data*/
     if(!$this -> session -> userdata('dName')){
-        redirect(base_url() . $this -> session -> userdata('survey'). '/assessment', 'refresh');
+        redirect(base_url() . '/assessment', 'refresh');
         return true;
 
         }else{

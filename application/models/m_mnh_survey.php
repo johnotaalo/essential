@@ -259,7 +259,7 @@ class M_MNH_Survey extends MY_Model
             
             //check if a post was made
             
-            //die(var_dump($this->input->post()));
+            // echo '<pre>';print_r($this->input->post()); echo '</pre>';die;
             
             //Working with an object of the entity
             try {
@@ -441,7 +441,12 @@ class M_MNH_Survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
             
             //echo 'Done'.$i;
-            $this->theForm = new \models\Entities\LogDiarrhoea();
+            $this->theForm = $this->getvalueby('models\Entities\LogDiarrhoea', array('ssId' => $this->session->userdata('survey_status'), 'month' => $this->elements[$i]['monthName']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogDiarrhoea();
+            }
             
             //create an object of the model
             
@@ -779,7 +784,12 @@ class M_MNH_Survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
             
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\BemoncFunctions();
+            $this->theForm = $this->getvalueby('models\Entities\BemoncFunctions', array('ssId' => $this->session->userdata('survey_status'), 'sfCode' => $this->elements[$i]['bmsfSignalCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\BemoncFunctions();
+            }
             
             //create an object of the model
             
@@ -937,7 +947,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['mnhceocAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -1482,7 +1497,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['newbornAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -2190,7 +2210,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['kangarooAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -2537,7 +2562,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhHIVReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['mnhHIVAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -2714,7 +2744,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhPreparednessReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['mnhPreparednessAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -3840,7 +3875,7 @@ class M_MNH_Survey extends MY_Model
             (isset($this->elements[$i]['mchGuideline']) && $this->elements[$i]['mchGuideline'] != '') ? $this->theForm->setGuideCode($this->elements[$i]['mchGuideline']) : $this->theForm->setGuideCode(-1);
             (isset($this->elements[$i]['mchBefore']) && $this->elements[$i]['mchBefore'] != '') ? $this->theForm->setTgBefore($this->elements[$i]['mchBefore']) : $this->theForm->setTgBefore(-1);
             (isset($this->elements[$i]['mchAfter']) && $this->elements[$i]['mchAfter'] != '') ? $this->theForm->setTgAfter($this->elements[$i]['mchAfter']) : $this->theForm->setTgAfter(-1);
-            $this->theForm->setTgCreated(new DateTime());
+            // $this->theForm->setTgCreated(new DateTime());
             $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
             
             /*timestamp option*/
@@ -4013,7 +4048,12 @@ class M_MNH_Survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch + 1; $i++) {
             
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogCommodityStockOuts();
+            $this->theForm = $this->getvalueby('models\Entities\LogCommodityStockOuts', array('ssId' => $this->session->userdata('survey_status'), 'commId' => $this->elements[$i]['usoccommCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogCommodityStockOuts();
+            }
             
             //create an object of the model
             
@@ -4847,7 +4887,12 @@ class M_MNH_Survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
             
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogIndicators();
+            $this->theForm = $this->getvalueby('models\Entities\LogIndicators', array('ssId' => $this->session->userdata('survey_status'), 'indicatorCode' => $this->elements[$i]['indicatorCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogIndicators();
+            }
             
             //create an object of the model
             
@@ -5171,10 +5216,10 @@ class M_MNH_Survey extends MY_Model
                     
                     //insert log entry if new, else update the existing one
                     if ($this->sectionExists == false) {
-                        if ($this->addQuestionsInfo() == true && $this->addIndicatorInfo() == true
+                        if ($this->addQuestionsInfo() == true && $this->addIndicatorInfo() == true) {
                         
                         //&& $this->addGuidelinesInfo() == true
-                        ) {
+                        
                             
                             //$this->addCommodityQuantityAvailabilityInfo() == true) {
                             //defined in this model
