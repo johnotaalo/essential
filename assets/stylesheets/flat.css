@@ -9233,6 +9233,11 @@ a.disabled:hover {
   cursor: hand !important;
 }
 
+/* line 700, ../sass/flat.scss */
+.modal {
+  z-index: 2000000000000000000000000;
+}
+
 /* line 704, ../sass/flat.scss */
 .sizer, .show-collapse {
   float: right;

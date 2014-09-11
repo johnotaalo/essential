@@ -518,11 +518,11 @@
     
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-9">
         <div class="panel-heading">
-            <h6 class="panel-title">
+            <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
-                    Section 9: Community Strategy <span class="show-collapse">Click to Expand</span>
+                    Section 9 : Community Strategy <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
-            </h6>
+            </h4>
         </div>
       <div id="collapseNine" class="panel-collapse collapse">
             <div class="panel-body">
