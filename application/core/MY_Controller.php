@@ -4572,7 +4572,7 @@ GROUP BY st_name,sc_name,facilityCode;";
         $link = '';
         $surveyCompleteFlag = '';
         if (count($this->m_mnh_survey->districtFacilities) > 0) {
-<<<<<<< HEAD
+
             
             //set session data
             $this->session->set_userdata(array('fCount' => count($this->m_mnh_survey->districtFacilities)));
@@ -4627,48 +4627,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                 $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" href="#">' . $linkText . '</a></td>';
                 
                 $this->districtFacilityListSection.= '<tr>
-=======
-        //set session data
-        $this->session->set_userdata(array('fCount' => count($this->m_mnh_survey->districtFacilities)));
-        //print 'true'; die;
-        foreach ($this->m_mnh_survey->districtFacilities as $value) {
-        $counter++;
-        $fac_mfl = $value['facMfl'];
-        $survey = $this->session->userdata('survey');
-        $survey_category = $this->session->userdata('survey_category');
-        if ($survey == 'mnh') {
-        $total = 8;
-        } else if ($survey == 'ch') {
-        $total = 9;
-        } else {
-        $total = 5;
-        }
-        $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category, $fac_mfl);
-        // print_r($dataFound);die;
-        $current = trim($dataFound[0]['section'], 'section-');
-        // echo $current;
-        $last_activity = $dataFound[0]['last_activity'];
-        $progress = round(($current / $total) * 100);
-        if ($progress == 0) {
-        $linkText = 'Begin Survey';
-        $linkClass = 'action';
-        $attr = 'begin';
-        } elseif ($progress == 100) {
-        $linkText = 'Review Entries';
-        $linkClass = 'action';
-        $attr = 'review';
-        } else {
-        $linkText = 'Continue Survey';
-        $linkClass = 'action';
-        $attr = 'continue';
-        }
-        $last_activity = ($last_activity != NULL) ? date('Y-m-d H:i:s',strtotime($last_activity)) : 'not started yet';
-        // echo $last_activity;
-        // Get Survey Information
-        $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div></td>';
-        $link.= '<td ><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" >' . $linkText . '</a><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td>';
-        $this->districtFacilityListSection.= '<tr>
->>>>>>> 92748e697d12fc89acab9c07b2d64c730df52857
+
         <td >' . $counter . '</td>
         <td >' . $value['facMfl'] . '</td>
         <td >' . $value['facName'] . '</td>

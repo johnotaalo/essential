@@ -425,7 +425,12 @@ function loadMasterFacilityList(base_url, container, form) {
         },
         success: function(data) {
             $(container.empty);
+            // obj = jQuery.parseJSON(data);
+            //  $.each(obj, function(k, v) {
+
+            //  });
             $(container).append(data);
+            $(document).trigger('datatable_loaded');
             // $('.dataTable').on('load', function() {
             //     $('.dataTable').dataTable({
             //         "sPaginationType": "full_numbers"
@@ -463,11 +468,11 @@ function submitForm(base_url, function_url) {
  * @return {[type]}              [description]
  */
 function loadModalForm(base_url, function_url, modal_title, modal_width, contents) {
-    $('#universalModal .modal-title').text(modal_title);
-    $('#universalModal .modal-dialog').css('width', modal_width);
+    $('#universalModal .header').text(modal_title);
+    $('#universalModal').css('width', modal_width);
 
-    $('#universalModal .modal-body').empty();
-    $('#universalModal .modal-body').append(contents);
+    $('#universalModal .content').empty();
+    $('#universalModal .content').append(contents);
     $('#universalModal form').attr('action', base_url + function_url);
 }
 /**
@@ -482,6 +487,7 @@ function loadHelpForm(base_url) {
         '<label>Facility</label><input name=""type="text" id="facility">' +
         '<label>Question / Complaint</label><textarea rows="4" placeholder="Please Enter Query Here..."></textarea>' +
         '</form>';
+    $('#form-submit').show();
     loadModalForm(base_url, 'c_analytics/submit_help', 'Help', '60%', helpform);
 
     $('#county').select2({
@@ -594,11 +600,10 @@ function getSpecificFacilityData(district) {
  * @return {[type]}          [description]
  */
 function showMasterFacilityList(base_url, form) {
-    $('#universalModal').modal('show');
+    $('#universalModal').modal('setting', 'closable', false).modal('show');
     $('#universalModal').delay(2000, function(nxt) {
-        $('#universalModal .modal-title').text('Master Facility List');
-        loadMasterFacilityList(base_url, '#universalModal .modal-body', form);
-        $('.dataTable').dataTable();
+        $('#universalModal .header').text('Master Facility List');
+        loadMasterFacilityList(base_url, '#universalModal .content', form);
         nxt();
     });
 }
