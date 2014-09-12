@@ -4592,30 +4592,41 @@ GROUP BY st_name,sc_name,facilityCode;";
                 }
                 $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category,'facility', $fac_mfl);
                 
-                // print_r($dataFound);die;
-                $current = trim($dataFound[0]['section'], 'section-');
+//                print_r($dataFound);
+                $current = trim($dataFound[0]['max_section'], 'section-');
                 
-                // echo $current;
+//                 echo $current;
                 $last_activity = $dataFound[0]['last_activity'];
+                $label = $dataFound[0]['status'];
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
                     $linkClass = 'action';
                     $attr = 'begin';
-                    $label = 'not started';
-                    $label_class='red';
+                   
                 } elseif ($progress == 100) {
                     $linkText = 'Review Entries';
                     $linkClass = 'action';
                     $attr = 'review';
-                    $label = 'completed';
-                    $label_class='green';
+                    
                 } else {
                     $linkText = 'Continue Survey';
                     $linkClass = 'action';
                     $attr = 'continue';
-                    $label = 'pending';
-                    $label_class='orange';
+                    
+                }
+                switch ($label) {
+                	case 'complete':
+                	$label_class='green';
+                	break;
+                	
+                	case 'pending':
+                	$label_class='orange';
+                	break;
+                	default:
+                	$label = 'not started';
+                	 $label_class='red';
+                	break;
                 }
                 
                 $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
