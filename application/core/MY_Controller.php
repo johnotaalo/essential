@@ -4594,7 +4594,6 @@ GROUP BY st_name,sc_name,facilityCode;";
                 
 //                print_r($dataFound);
                 $current = trim($dataFound[0]['max_section'], 'section-');
-                
 //                 echo $current;
                 $last_activity = $dataFound[0]['last_activity'];
                 $label = $dataFound[0]['status'];
@@ -4635,7 +4634,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                 
                 $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
                 
-                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" href="#">' . $linkText . '</a></td>';
+                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
                 
                 $this->districtFacilityListSection.= '<tr>
 
