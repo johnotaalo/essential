@@ -1586,10 +1586,9 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
-            } elseif ($value['questionCode'] == 'QMNH06b' || $value['questionCode'] == 'QMNH06c') {
-                $follow_up_question = '';
-            } else {
-                $follow_up_question = '<tr id="csdone_n" style="display:none">
+            } 
+            elseif($value['questionCode'] == 'QMNH06c'){
+ $follow_up_question = '<tr id="csdone_n" style="display:none">
             <td colspan="7">Give a main reason for <strong>not</strong> conducting Caeserian Section</td>
             <td>
             <select name="mnhceocReason_' . $counter . '" id="mnhceocReason_' . $counter . '" class="cloned" >
@@ -1604,6 +1603,12 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
+}
+                else {
+                    $follow_up_question = '';
+
+                    
+               
             }
             
             $this->mnhCEOCAspectsSection.= '<tr>
