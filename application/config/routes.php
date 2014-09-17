@@ -38,9 +38,23 @@
 |
 */
 
-$route['default_controller'] = "datagrid/load_grid";
+$route['default_controller'] = "analytics";
 $route['404_override'] = '';
 
+// MNCH Routes
+$route['mnch/home']='reporting/index';
+$route['404_override'] = '';
+
+$route['mnch/takesurvey']='survey/active_survey';#active survey url
+$route['mnch/assessment']='reporting/inventory'; #active survey home page url
+$route['mnch/analytics']='analytics/active_results/';#active results url
+
+$route['mnch/session/new']='auth/go';#log in url
+$route['mnch/session/close']='auth/logout';#log out url
+
+#Admin Routes
+$route['admin']= 'c_admin/index';
+$route['firepad']= 'c_admin/firepad';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
