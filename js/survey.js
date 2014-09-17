@@ -132,6 +132,9 @@ function startSurvey(base_url, survey, survey_category, district) {
 		$('.action').live('click', function() {
 			link_id = '#' + $(this).attr('data-mfl');
 			link_id = link_id.substr(link_id.indexOf('#') + 1, link_id.length);
+			section = $(this).attr('data-section');
+			action = $(this).attr('data-action');
+			console.log(section);
 			//linkSub=$(link_id).attr('class');
 			//linkIdUrl=link_id.substr(link_id.indexOf('#')+1,(link_id.indexOf('_li')-1));
 			facilityMFL = link_id;
@@ -142,6 +145,8 @@ function startSurvey(base_url, survey, survey_category, district) {
 				async: false,
 				url: the_url,
 				beforeSend: function() {
+					$(".form-container").empty();
+            $(".form-container").append('<div class="loader" >Loading...</div>');
 
 				},
 				success: function(data) {
@@ -170,7 +175,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				renderFacilityInfo(facilityMFL);
 				break_form_to_steps(form_id);
 				select_option_changed();
-				loadSection(base_url, survey, survey_category, facilityMFL);
+				loadSection(section,action);
 
 			});
 
@@ -330,7 +335,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#transfusion_n').show();
 			}
 
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'Yes') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'Yes') {
 				//CS conduction
 				//hide follow up qn
 				$('#csdone_n').hide();
@@ -342,7 +347,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 
 			}
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'No') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'No') {
 				//show no follow up qn
 				$('#csdone_n').prop('disabled', false);
 				$('#csdone_n').show();
@@ -383,7 +388,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#label_reason_other_1').hide();
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() == 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() == 'Other') {
 				//show input field on other
 
 				$('#mnhceocReasonOther_2').prop('disabled', false);
@@ -392,7 +397,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() != 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() != 'Other') {
 
 				//hide other input field
 				$('#mnhceocReasonOther_2').prop('disabled', true);
@@ -938,7 +943,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				url: form_url,
 				dataType: 'json',
 				beforeSubmit: function(data) {
-					$("#data").html("<div class='error ui-autocomplete-loading' style='width:auto;height:25px'>Processing...</div>")
+					$("#data").html('<div class="loader" >Loading...</div>')
 				},
 				//beforeSubmit: function(data){$("#data").html("Saving the previous section's response")},
 				success: function(data) {
@@ -1134,7 +1139,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#current_survey').text(survey_type.toUpperCase() + ' SURVEY');
 				$('#targeted').text(obj[0].actual);
 				$('#finished').text(obj[0].reported);
-				$('#not-finished').text();
+				$('#not-finished').text(obj[0].pending);
 				$('#not-started').text(obj[0].notstarted);
 				var percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
 				$('#percentage_completed').text(percentage + '%')
@@ -1176,19 +1181,10 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 * @param  {[type]} facilityMFL     [description]
 	 * @return {[type]}                 [description]
 	 */
-	function loadSection(base_url, survey, survey_category, facilityMFL) {
-		action = $(this).attr('data-action');
+	function loadSection(section,action) {
 		if (action == 'continue') {
-			the_url = base_url + 'c_load/getFacilitySection/' + survey + '/' + facilityMFL + '/' + survey_category;
-			$.ajax({
-				type: 'GET',
-				url: the_url,
-				dataType: 'json',
-				beforeSend: function() {},
-				success: function(data) {
-					(data != '') ? $(form_id).formwizard('show', 'section-' + (data + 1)) : $(form_id).formwizard('show', 'section-1');
-				}
-			});
+			
+			(data != '') ? $(form_id).formwizard('show', 'section-' + (parseInt(section) + 1)) : $(form_id).formwizard('show', 'section-1');
 		}
 	}
 }

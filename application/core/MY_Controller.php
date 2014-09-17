@@ -338,7 +338,7 @@ $this->write_counties();
         // echo $owner;die;
         foreach ($this->data_found as $value) {
             if ($owner == $value['foName']) {
-                echo $value['foName'];
+                //echo $value['foName'];
             }
             $this->selectFacilityOwner.= '<option value="' . $value['foId'] . '">' . $value['foName'] . '</option>' . '<br />';
         }
@@ -1586,10 +1586,9 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
-            } elseif ($value['questionCode'] == 'QMNH06b' || $value['questionCode'] == 'QMNH06c') {
-                $follow_up_question = '';
-            } else {
-                $follow_up_question = '<tr id="csdone_n" style="display:none">
+            } 
+            elseif($value['questionCode'] == 'QMNH06c'){
+ $follow_up_question = '<tr id="csdone_n" style="display:none">
             <td colspan="7">Give a main reason for <strong>not</strong> conducting Caeserian Section</td>
             <td>
             <select name="mnhceocReason_' . $counter . '" id="mnhceocReason_' . $counter . '" class="cloned" >
@@ -1604,6 +1603,12 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
+}
+                else {
+                    $follow_up_question = '';
+
+                    
+               
             }
             
             $this->mnhCEOCAspectsSection.= '<tr>
@@ -4592,30 +4597,40 @@ GROUP BY st_name,sc_name,facilityCode;";
                 }
                 $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category,'facility', $fac_mfl);
                 
-                // print_r($dataFound);die;
-                $current = trim($dataFound[0]['section'], 'section-');
-                
-                // echo $current;
+//                print_r($dataFound);
+                $current = trim($dataFound[0]['max_section'], 'section-');
+//                 echo $current;
                 $last_activity = $dataFound[0]['last_activity'];
+                $label = $dataFound[0]['status'];
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
                     $linkClass = 'action';
                     $attr = 'begin';
-                    $label = 'not started';
-                    $label_class='red';
+                   
                 } elseif ($progress == 100) {
                     $linkText = 'Review Entries';
                     $linkClass = 'action';
                     $attr = 'review';
-                    $label = 'completed';
-                    $label_class='green';
+                    
                 } else {
                     $linkText = 'Continue Survey';
                     $linkClass = 'action';
                     $attr = 'continue';
-                    $label = 'pending';
-                    $label_class='orange';
+                    
+                }
+                switch ($label) {
+                	case 'complete':
+                	$label_class='green';
+                	break;
+                	
+                	case 'pending':
+                	$label_class='orange';
+                	break;
+                	default:
+                	$label = 'not started';
+                	 $label_class='red';
+                	break;
                 }
                 
                 $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
@@ -4624,7 +4639,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                 
                 $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
                 
-                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" href="#">' . $linkText . '</a></td>';
+                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
                 
                 $this->districtFacilityListSection.= '<tr>
 
