@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('doctrine','session','table');
+$autoload['libraries'] = array('database','doctrine');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('doctrine','session','table');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','array','form','file');
+$autoload['helper'] = array('url');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url','array','form','file');
 |
 */
 
-$autoload['config'] = array('globals');
+$autoload['config'] = array();
 
 
 /*

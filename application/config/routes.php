@@ -38,20 +38,9 @@
 |
 */
 
-$route['default_controller'] = 'c_analytics';
-$route['home']='c_front/index';
+$route['default_controller'] = "datagrid/load_grid";
 $route['404_override'] = '';
 
-$route['takesurvey']='c_front/active_survey';#active survey url
-$route['assessment']='c_front/inventory'; #active survey home page url
-$route['analytics']='c_analytics/active_results/';#active results url
-
-$route['session/new']='c_auth/go';#log in url
-$route['session/close']='c_auth/logout';#log out url
-
-#Admin Routes
-$route['admin']= 'c_admin/index';
-$route['firepad']= 'c_admin/firepad';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
