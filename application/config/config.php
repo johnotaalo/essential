@@ -15,7 +15,7 @@
 |
 */
 #$config['base_url']	= 'https://'.$_SERVER['HTTP_HOST'].'/mohsurveys/';
-$config['base_url']	= ($_SERVER['SERVER_PORT']==443?'https':'http') . "://{$_SERVER['HTTP_HOST']}/mnh";
+$config['base_url']	= ($_SERVER['SERVER_PORT']==443?'https':'http') . "://{$_SERVER['HTTP_HOST']}/essential/";
 
 /*
 |--------------------------------------------------------------------------
