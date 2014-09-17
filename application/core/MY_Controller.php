@@ -585,7 +585,7 @@ $this->write_counties();
 
             case 'ch':
                 
-                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other', 'Not Applicable');
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward','Pharmacy', 'Other', 'Not Applicable');
                 break;
         }
         $supplier_names = $this->selectCommoditySuppliers;
