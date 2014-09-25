@@ -1684,14 +1684,14 @@ ORDER BY oa.question_code ASC";
                     foreach ($this->dataSet as $value) {
                         $data['data'][] = $value;
                     }
-                    $commodities = $this->getAllCommodityNames();
+                    $commodities = $this->getCommodities();
                     foreach ($commodities as $commodity) {
                         if ($commodity['commFor'] == $for) {
                             $data['commodities'][] = $commodity['commName'];
                         }
                     }
 
-                    $commodityOptions = $this->getCommodityUsageOptionsList();
+                    $commodityOptions = $this->getCommodityOutageOptions();
                     foreach ($commodityOptions as $option) {
                         $data['commodity_options'][$option['cooId']] = $option['cooDescription'];
                     }
@@ -4167,13 +4167,13 @@ ORDER BY question_code";
                     foreach ($this->dataSet as $value) {
                         $data['data'][] = $value;
                     }
-                    $commodities = $this->getAllCommodityNames();
+                    $commodities = $this->getCommodities();
                     foreach ($commodities as $commodity) {
                         if ($commodity['commFor'] == $for) {
                             $data['commodities'][] = $commodity['commName'];
                         }
                     }
-                    $commodityOptions = $this->getCommodityUsageOptions();
+                    $commodityOptions = $this->getCommodityOutageOptions();
                     foreach ($commodityOptions as $option) {
                          $data['commodity_options'][$option['cooId']] = $option['cooDescription'];
                     }
