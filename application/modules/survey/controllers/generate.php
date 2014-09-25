@@ -15,6 +15,11 @@ class Generate extends MY_Controller {
         // $this->createQuestionSection();
         
     }
+    /**
+     * [getRepositoryByFormName description]
+     * @param  [type] $form [description]
+     * @return [type]       [description]
+     */
     function getRepositoryByFormName($form) {
         $this->the_form = $this->em->getRepository($form);
         return $this->theForm;

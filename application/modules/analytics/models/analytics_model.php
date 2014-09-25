@@ -12,7 +12,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 //for the query builder
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
-class M_Analytics extends MY_Model
+class Analytics_Model extends MY_Model
 {
     
     /*user variables*/
@@ -3905,6 +3905,7 @@ ORDER BY question_code";
                 
                 foreach ($this->dataSet as $value_) {
                 	$question = $this->getQuestionName($value_['question_code']);
+                    // var_dump($question);
                    	// $question = trim($question, 'Does this facility have an updated');
                     // $question = trim($question, '?');
                     
@@ -3949,7 +3950,7 @@ ORDER BY question_code";
                     }
                 }
                 
-                //die(var_dump($this->dataSet));
+                
                 
                 
             }
@@ -4889,5 +4890,4 @@ WHERE
             }
         }
     }
-    
     
