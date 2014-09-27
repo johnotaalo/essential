@@ -109,7 +109,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 
 	//load 1st section of the assessment on page load
-	$(".form-container").load(base_url + 'c_load/get_facility_list', function() {
+	$(".form-container").load(base_url + 'survey/createFacilityTable', function() {
 		// facilityMFL=12864;
 		//loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
@@ -138,7 +138,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			//linkSub=$(link_id).attr('class');
 			//linkIdUrl=link_id.substr(link_id.indexOf('#')+1,(link_id.indexOf('_li')-1));
 			facilityMFL = link_id;
-			the_url = base_url + 'c_load/startSurvey/' + survey + '/' + survey_category + '/' + facilityMFL + '/2013-2014';
+			the_url = base_url + 'survey/startSurvey/' + survey + '/' + survey_category + '/' + facilityMFL + '/2013-2014';
 			$.ajax({
 				type: 'POST',
 				data: '',
@@ -163,11 +163,11 @@ function startSurvey(base_url, survey, survey_category, district) {
 			//alert(link_id);
 			if (link_id) {
 				if (survey == 'mnh') {
-					current_form = 'c_load/get_mnh_form';
+					current_form = 'survey/get_mnh_form';
 				} else if (survey == 'hcw') {
-					current_form = 'c_load/get_hcw_form';
+					current_form = 'survey/get_hcw_form';
 				} else {
-					current_form = 'c_load/get_mch_form';
+					current_form = 'survey/get_mch_form';
 				}
 			}
 			$(".form-container").load(base_url + current_form, function() {
@@ -189,7 +189,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function renderFacilityInfo(facilityMFL) {
 		$.ajax({
 			type: "GET",
-			url: base_url + "c_load/getFacilityDetails",
+			url: base_url + "survey/getFacilityDetails",
 			dataType: "json",
 			cache: "true",
 			data: "facilityMFL=" + facilityMFL,
@@ -955,7 +955,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 							if (survey == 'mnh') {
 								if (fdata.currentStep == 'section-8') {
 
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
@@ -970,7 +970,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 									//$(form_id).formwizard('reset');
 									//$(form_id).formwizard('show','No');
 									// console.log($(form_id).formwizard('state'));
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
@@ -984,7 +984,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 									//$(form_id).formwizard('reset');
 									//$(form_id).formwizard('show','No');
 									// console.log($(form_id).formwizard('state'));
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
@@ -1037,7 +1037,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 					if (data.currentStep == 'No') {
 						$("#data").fadeTo(5000, 0);
 						//$('#sectionNavigation').hide();
-						$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+						$(".form-container").load(base_url + 'survey/survey_complete', function() {
 							window.location = base_url + '/assessment';
 						});
 
@@ -1129,7 +1129,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function getDistrictData(base_url, district, survey_type, survey_category) {
 		//alert(county);
 		$.ajax({
-			url: base_url + 'c_analytics/getDistrictData/' + survey_type + '/' + survey_category + '/' + district,
+			url: base_url + 'survey/getDistrictData/' + survey_type + '/' + survey_category + '/' + district,
 			beforeSend: function(xhr) {
 				xhr.overrideMimeType("text/plain; charset=x-user-defined");
 			},

@@ -46,7 +46,7 @@ $route['mnch/home']='reporting/index';
 $route['404_override'] = '';
 
 $route['mnch/takesurvey']='survey/active_survey';#active survey url
-$route['mnch/assessment']='reporting/inventory'; #active survey home page url
+$route['mnch/assessment']='survey/index'; #active survey home page url
 $route['mnch/analytics']='analytics/active_results/';#active results url
 
 $route['mnch/session/new']='auth/go';#log in url

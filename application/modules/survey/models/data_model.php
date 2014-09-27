@@ -1,5 +1,5 @@
 <?php
-class Data extends MY_Model
+class Data_Model extends MY_Model
 {
     var $em;
     function __construct() {

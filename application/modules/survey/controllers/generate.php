@@ -3,7 +3,7 @@ class Generate extends MY_Controller {
     public $mode;
     function __construct() {
         parent::__construct();
-        $this->load->model('data');
+        $this->load->model('data_model');
         $this->mode=$this->session->userdata('survey_form');
 // echo $this->mode;
         /**
@@ -29,9 +29,9 @@ class Generate extends MY_Controller {
     * @return [type] [description]
     */
     public function createIndicatorSection(){
-    $data_found = $this->data->getIndicators();
+    $data_found = $this->data_model->getIndicators();
     // var_dump($data_found);die;
-        $retrieved = $this->data->retrieveData('log_indicators', 'indicator_code');
+        $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
         $counter = 0;
         $countme = 0;
         $section = '';
@@ -272,11 +272,11 @@ $findingRow = '<input type="text"> ' .$finding;
 */
 public function createQuestionSection(){
 // echo $this->mode;die;
-$data_found = $this->data->getQuestions();
-        $retrieved = $this->data->retrieveData('log_questions', 'question_code');
+$data_found = $this->data_model->getQuestions();
+        $retrieved = $this->data_model->retrieveData('log_questions', 'question_code');
         // echo "<pre>";print_r($data_found);die;
         
-        // var_dump($this->data_found);die;
+        // var_dump($this->data_model_found);die;
         $counter = 0;
         $section = '';
         $numbering = array_merge(range('A', 'Z'), range('a', 'z'));
@@ -424,8 +424,8 @@ $data_found = $this->data->getQuestions();
         return $this->questions;
 }
 public function createCommoditySection(){
-$data_found = $this->data->getCommodities();
-        $retrieved = $this->data->retrieveData('available_commodities', 'comm_code');
+$data_found = $this->data_model->getCommodities();
+        $retrieved = $this->data_model->retrieveData('available_commodities', 'comm_code');
         
         // echo"<pre>";print_r($data_found);die;
         $counter = 0;
@@ -575,13 +575,13 @@ $data_found = $this->data->getCommodities();
         return $this->commodities;
 }
 public function createCommodityUsageandOutageSection(){
-$data_found = $this->data->getSpecificCommodities('mnh');
-        $retrieved = $this->data->retrieveData('log_commodity_stock_outs', 'comm_id');
+$data_found = $this->data_model->getSpecificCommodities('mnh');
+        $retrieved = $this->data_model->retrieveData('log_commodity_stock_outs', 'comm_id');
         $OutageOptions = array('1', '2', '3', '4', '5');
         $UnavailabilityTimes = array('' => 'Select One','Once' => 'a. 1 Week', '2-3' => 'b. 2 weeks', '5-5' => 'c. 1 month', 'more than 5' => 'd. more than 1 month');
         // echo "<pre>";print_r($retrieved);die;
         
-        // var_dump($this->data_found);die;
+        // var_dump($this->data_model_found);die;
         $unit = "";
         $counter = 0;
         switch($this->mode){
@@ -683,11 +683,11 @@ $data_found = $this->data->getSpecificCommodities('mnh');
  * @return [type] [description]
  */
 public function createEquipmentSection(){
-$data_found = $this->data->getEquipments();
-        $retrieved = $this->data->retrieveData('available_equipments', 'eq_code');
+$data_found = $this->data_model->getEquipments();
+        $retrieved = $this->data_model->retrieveData('available_equipments', 'eq_code');
         // echo"<pre>";print_r($retrieved);die;
         
-        // var_dump($this->data_found);die;
+        // var_dump($this->data_model_found);die;
         $unit = "";
         $counter = 0;
         $survey = $this->session->userdata('survey');
@@ -814,8 +814,8 @@ foreach ($data_found as $value) {
  * @return [type] [description]
  */
 public function createSuppliesSection(){
-$data_found = $this->data->getSupplies();
-    $retrieved = $this->data->retrieveData('available_supplies', 'supply_code');
+$data_found = $this->data_model->getSupplies();
+    $retrieved = $this->data_model->retrieveData('available_supplies', 'supply_code');
         $survey = $this->session->userdata('survey');
         // echo $survey;die;
         switch ($survey) {
@@ -826,7 +826,7 @@ $data_found = $this->data->getSupplies();
                 $locations = array('Delivery Room', 'Pharmacy', 'Store', 'Other');
                 break;
         }
-        //echo '<pre>';print_r($this->data_found);echo '</pre>';die;
+        //echo '<pre>';print_r($this->data_model_found);echo '</pre>';die;
         $counter = 0;
         $section = '';
         
@@ -970,7 +970,7 @@ else if($section=='tes'){
  * @return [type] [description]
  */
 public function createSupplierOptions(){
-$suppliers = $this->data->getSuppliers();
+$suppliers = $this->data_model->getSuppliers();
 foreach($suppliers as $supplier){
 $supplierOptions[$supplier['supplierFor']] .='<input type="radio" name="supplierName" value="'.$supplier['supplierCode'].'">'.$supplier['supplierName'];
 }

@@ -2504,37 +2504,37 @@ ORDER BY f.fac_county ASC;";
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
         }
-        function getReportingRatio($survey, $survey_category, $county,$statistic) {
+        // function getReportingRatio($survey, $survey_category, $county,$statistic) {
             
-            /*using DQL*/
+        //     /*using DQL*/
             
-            $finalData = array();
+        //     $finalData = array();
             
-            try {
+        //     try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
-                $myData = $this->db->query($query);
-                $finalData = $myData->result_array();
+        //         $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
+        //         $myData = $this->db->query($query);
+        //         $finalData = $myData->result_array();
                 
-                $myData->next_result();
+        //         $myData->next_result();
                 
-                // Dump the extra resultset.
-                $myData->free_result();
+        //         // Dump the extra resultset.
+        //         $myData->free_result();
                 
-                // Does what it says.
-                
-                
-            }
-            catch(exception $ex) {
-                
-                //ignore
-                
-                //echo($ex -> getMessage());
+        //         // Does what it says.
                 
                 
-            }
-            return $finalData;
-        }
+        //     }
+        //     catch(exception $ex) {
+                
+        //         //ignore
+                
+        //         //echo($ex -> getMessage());
+                
+                
+        //     }
+        //     return $finalData;
+        // }
         
         function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
             

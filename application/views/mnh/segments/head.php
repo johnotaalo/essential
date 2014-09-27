@@ -6,13 +6,13 @@
 <meta name="author" content="Ministry of Health, Government of Kenya">
 
 <!--fav and touch icons -->
-<link rel="shortcut icon"  href="<?php echo base_url(); ?>/images/favicon.ico">
+<link rel="shortcut icon"  href="<?php echo base_url(); ?>assets/images/favicon.ico">
 <title><?php echo $title; ?></title>
 
 <!-- Le styles -->
 <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'> -->
 
 
 <!-- New Bower Components -->

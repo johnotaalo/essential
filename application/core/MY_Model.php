@@ -447,4 +447,99 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
+    /**
+     * [getFacilitiesByDistrict description]
+     * @param  [type] $districtName [description]
+     * @return [type]               [description]
+     */
+    public function getFacilitiesByDistrict($districtName) {
+        try {
+            
+            //Using DQL
+            
+            $result = $this->em->createQuery('SELECT f.facMfl,f.facName FROM models\Entities\Facilities f WHERE f.facDistrict= :district ORDER BY f.facName ASC ');
+            $result ->setParameter('district', $districtName);
+            
+            $result = $result->getArrayResult();
+            // return $result;
+            var_dump($result);die;
+            
+            
+        }
+        catch(exception $ex) {
+            
+            //ignore
+            //die($ex->getMessage());
+            
+            
+        }
+    }
+    /**
+     * [getSurveyInfo description]
+     * @param  [type] $survey_type     [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $statistic       [description]
+     * @param  [type] $facMFL          [description]
+     * @return [type]                  [description]
+     */
+    public function getSurveyInfo($survey_type, $survey_category,$statistic, $facMFL) {
+        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
+        
+        try {
+            $myData = $this->db->query($query);
+            $finalData = $myData->result_array();
+           // print($this->db->last_query());die;
+            $myData->next_result();
+            
+            // Dump the extra resultset.
+            $myData->free_result();
+            
+            // Does what it says.
+            
+            
+        }
+        catch(exception $ex) {
+        }
+        return $finalData;
+    }
+    /**
+     * [getReportingRatio description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $county          [description]
+     * @param  [type] $statistic       [description]
+     * @return [type]                  [description]
+     */
+    function getReportingRatio($survey, $survey_category, $county,$statistic) {
+            
+            /*using DQL*/
+            
+            $finalData = array();
+            
+            try {
+                
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
+                $myData = $this->db->query($query);
+                $finalData = $myData->result_array();
+                
+                $myData->next_result();
+                
+                // Dump the extra resultset.
+                $myData->free_result();
+                
+                // Does what it says.
+                
+                
+            }
+            catch(exception $ex) {
+                
+                //ignore
+                
+                //echo($ex -> getMessage());
+                
+                
+            }
+            return $finalData;
+        }
+    
 }

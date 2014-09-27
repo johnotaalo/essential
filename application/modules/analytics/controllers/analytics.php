@@ -51,7 +51,7 @@ class Analytics extends MY_Controller
         $this->getReportingCounties();
         $this->county = $this->session->userdata('county_analytics');
         
-        redirect('analytics');
+        redirect('mnch/analytics');
     }
     
     public function getFacilityProgress($survey, $survey_category) {
@@ -65,16 +65,6 @@ class Analytics extends MY_Controller
             //echo '<pre>';print_r($resultArray);echo '</pre>';die;
             $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'line');
         }
-    }
-    public function template($data) {
-        $data['head'] = 'mnh/segments/head';
-        $data['header'] = 'mnh/segments/header';
-        $data['footer'] = 'mnh/segments/footer';
-        $data['modals'] = 'mnh/segments/modals';
-        $data['show_menu'] = 0;
-        $data['show_sidemenu'] = 0;
-        $this->load->module('template');
-        $this->template->index($data);
     }
     
     /**
@@ -104,6 +94,7 @@ class Analytics extends MY_Controller
      */
     public function active_results($survey = '') {
         $this->data['content'] = 'mnh/pages/v_analytics';
+
         
         //$this -> session -> unset_userdata('survey');
         if ($survey != '') {
