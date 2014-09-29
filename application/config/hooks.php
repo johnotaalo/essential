@@ -10,11 +10,6 @@
 |
 */
 
-$hook['pre_system'] = array(
-	'function' => 'load_exceptions',
-	'filename' => 'uhoh.php',
-	'filepath' => 'hooks',
-);
 
 
 /* End of file hooks.php */

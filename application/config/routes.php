@@ -38,16 +38,19 @@
 |
 */
 
-$route['default_controller'] = 'c_analytics';
-$route['home']='c_front/index';
+$route['default_controller'] = "analytics";
 $route['404_override'] = '';
 
-$route['takesurvey']='c_front/active_survey';#active survey url
-$route['assessment']='c_front/inventory'; #active survey home page url
-$route['analytics']='c_analytics/active_results/';#active results url
+// MNCH Routes
+$route['mnch/home']='reporting/index';
+$route['404_override'] = '';
 
-$route['session/new']='c_auth/go';#log in url
-$route['session/close']='c_auth/logout';#log out url
+$route['mnch/takesurvey']='survey/active_survey';#active survey url
+$route['mnch/assessment']='survey/index'; #active survey home page url
+$route['mnch/analytics']='analytics/active_results/';#active results url
+
+$route['mnch/session/new']='auth/go';#log in url
+$route['mnch/session/close']='auth/logout';#log out url
 
 #Admin Routes
 $route['admin']= 'c_admin/index';
