@@ -1,9 +1,0 @@
-{
-  "require":{
-    "php": ">=5.3",
-    "monolog/monolog": "*",
-    "components/bootstrap": ">=3",
-    "components/font-awesome": ">=4",
-    "components/modernizr": "*"
-  }
-}
