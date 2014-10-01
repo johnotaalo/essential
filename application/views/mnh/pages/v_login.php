@@ -1,4 +1,4 @@
-<?php $this -> load -> view('segments/nav-public'); ?>
+
 
 <div id="site-title">
 
@@ -9,7 +9,7 @@
     <div class="row">
         
 		<div id="form-login" style = "width: 60%: margin: 0 auto;">
-            <form id="authenticate" name="authenticate" action="<?php echo base_url().'session/new'?>" method="post" accept-charset="utf-8">
+            <form id="authenticate" name="authenticate" action="<?php echo base_url().'mnch/session/new'?>" method="post" accept-charset="utf-8">
                 <h2><?php echo $login_message; ?></h2>
 
                 <!--p style="margin-bottom:5px"><label for="username">Facility Name</label</p><p><input id="username" name="username" type="text" placeholder="Facility Name"></p-->

@@ -55,7 +55,7 @@
                             
                                 <select name="county_select" id="county_select" class="input">
                                     <option data-scope="national" >All Counties Selected</option>
-                                    <?php echo $this->selectReportingCounties;?>
+                                    <?php echo $selectCounties;?>
                                 </select>
                             
                                 <select name="sub_county_select" id="sub_county_select" class="input">

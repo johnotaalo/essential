@@ -105,7 +105,7 @@ class Doctrine {
 		$this->tool = new SchemaTool($this->em);
 
 		//auto generate entities from database
-		//$this->generate_entities();
+		// $this->generate_entities();
 	}
 
 	public function generate_entities()
