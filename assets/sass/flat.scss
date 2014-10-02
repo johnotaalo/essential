@@ -196,6 +196,7 @@ form{
 }
 #network{
     @extend .breadcrumb;
+    margin-bottom:0;
     li{
         i{
             padding-right:5px;
@@ -782,4 +783,31 @@ h6.table-header{
     margin-bottom:0;
     height:20px !important;
     padding:3px;
+}
+
+/**
+ * Image Styles
+ */
+img{
+    @extend .img-responsive;
+}
+img#coat_of_arms{
+    width:8%;
+}
+
+/**
+ * Banner Styles
+ */
+img#coat_of_arms,#description{
+    display:inline-block;
+    vertical-align:middle;
+}
+#description{
+    #project_name{
+        @extend .zeta;
+        margin-bottom:0;
+    }
+    #ministry{
+        font-weight:800;
+    }
 }
