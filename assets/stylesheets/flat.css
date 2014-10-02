@@ -9216,121 +9216,127 @@ a.disabled:hover {
 /* line 676, ../sass/flat.scss */
 .dataTables_length {
   width: 200px;
-  float: left;
+  display: inline-block;
+  vertical-align: top;
 }
-/* line 680, ../sass/flat.scss */
+/* line 682, ../sass/flat.scss */
 .dataTables_length label select {
   display: inherit;
   width: 50px !important;
 }
 
-/* line 688, ../sass/flat.scss */
-.dataTables_filter label {
+/* line 689, ../sass/flat.scss */
+.dataTables_filter {
+  display: inline-block;
+  vertical-align: top;
   float: right;
+}
+/* line 693, ../sass/flat.scss */
+.dataTables_filter label {
   padding-right: 5%;
 }
-/* line 691, ../sass/flat.scss */
+/* line 696, ../sass/flat.scss */
 .dataTables_filter label input {
   display: initial;
   width: 200px;
 }
 
-/* line 699, ../sass/flat.scss */
+/* line 704, ../sass/flat.scss */
 .dataTables_info {
   font-size: 14px;
 }
 
-/* line 703, ../sass/flat.scss */
+/* line 708, ../sass/flat.scss */
 .editable-click:hover {
   cursor: hand !important;
 }
 
-/* line 706, ../sass/flat.scss */
+/* line 711, ../sass/flat.scss */
 .modal {
   z-index: 2000000000000000000000000;
 }
 
-/* line 710, ../sass/flat.scss */
+/* line 715, ../sass/flat.scss */
 .sizer, .show-collapse {
   float: right;
   color: #ccc;
   cursor: pointer;
 }
 
-/* line 715, ../sass/flat.scss */
+/* line 720, ../sass/flat.scss */
 .sizer:hover, .show-collapse:hover {
   color: #333;
   cursor: hand;
 }
 
-/* line 720, ../sass/flat.scss */
+/* line 725, ../sass/flat.scss */
 #graph {
   height: 300px;
   overflow: auto;
 }
 
-/* line 724, ../sass/flat.scss */
+/* line 729, ../sass/flat.scss */
 h6.table-header {
   margin-bottom: 2px !important;
   padding: 5px 7.5px;
   background: #e7e7e7;
 }
-/* line 728, ../sass/flat.scss */
+/* line 733, ../sass/flat.scss */
 h6.table-header span {
   padding-left: 30%;
 }
-/* line 730, ../sass/flat.scss */
+/* line 735, ../sass/flat.scss */
 h6.table-header span button {
   margin-left: 5px;
 }
 
-/* line 739, ../sass/flat.scss */
+/* line 744, ../sass/flat.scss */
 .analytics_row {
   border-top: 1px solid #ddd !important;
   box-shadow: none !important;
 }
-/* line 742, ../sass/flat.scss */
+/* line 747, ../sass/flat.scss */
 .analytics_row .panel-heading {
   border-top: 1px solid #ddd;
   background-color: #fff !important;
   border: none;
 }
-/* line 746, ../sass/flat.scss */
+/* line 751, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title {
   padding-left: 0;
   margin-bottom: 5px !important;
 }
-/* line 750, ../sass/flat.scss */
+/* line 755, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title a {
   text-decoration: none !important;
 }
-/* line 753, ../sass/flat.scss */
+/* line 758, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title i {
   color: inherit;
   padding-left: 10px;
 }
-/* line 760, ../sass/flat.scss */
+/* line 765, ../sass/flat.scss */
 .analytics_row .panel-collapse .panel-body {
   border: none !important;
   box-shadow: 0;
 }
 
-/* line 768, ../sass/flat.scss */
+/* line 773, ../sass/flat.scss */
 .activity, .status {
   font-size: 10px !important;
 }
-/* line 770, ../sass/flat.scss */
+/* line 775, ../sass/flat.scss */
 .activity .activity-text, .status .activity-text {
   font-style: italic;
   font-weight: bold;
 }
 
-/* line 775, ../sass/flat.scss */
+/* line 780, ../sass/flat.scss */
 .status {
   float: right;
 }
 
-/* line 779, ../sass/flat.scss */
+/* line 784, ../sass/flat.scss */
 #district_progress {
   display: inline-block;
   vertical-align: middle;
@@ -9343,7 +9349,7 @@ h6.table-header span button {
 /**
  * Image Styles
  */
-/* line 794, ../sass/flat.scss */
+/* line 799, ../sass/flat.scss */
 img#coat_of_arms {
   width: 8%;
 }
@@ -9351,17 +9357,17 @@ img#coat_of_arms {
 /**
  * Banner Styles
  */
-/* line 801, ../sass/flat.scss */
+/* line 806, ../sass/flat.scss */
 img#coat_of_arms, #description {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 806, ../sass/flat.scss */
+/* line 811, ../sass/flat.scss */
 #description #project_name {
   margin-bottom: 0;
 }
-/* line 810, ../sass/flat.scss */
+/* line 815, ../sass/flat.scss */
 #description #ministry {
   font-weight: 800;
 }

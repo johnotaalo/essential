@@ -3013,9 +3013,9 @@ class Analytics extends MY_Controller
     }
     
     public function getCountyNamesJSON() {
-        $county = urldecode($county);
         $options = '';
         $results = $this->analytics_model->getReportingCounties();
+        // echo '<pre>';print_r($results);
         foreach ($results as $result) {
             $data[] = array('id' => ucwords($result['county']), 'text' => ucwords($result['county']));
         }

@@ -675,7 +675,9 @@ a.disabled:hover{
 }
 .dataTables_length{
     width:200px;
-    float:left;
+    display:inline-block;
+    vertical-align:top;
+    // float:left;
     label{
         select{
             display:inherit;
@@ -685,8 +687,11 @@ a.disabled:hover{
     }
 }
 .dataTables_filter{
+    display:inline-block;
+    vertical-align:top;
+    float:right;
     label{
-        float:right;
+        
         padding-right:5%;
         input{
             display: initial;

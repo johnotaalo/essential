@@ -365,11 +365,16 @@ class MY_Model extends CI_Model
     public function retrieveData($table_name, $identifier) {
         $results = $this->db->get_where($table_name, array('ss_id' => $this->session->userdata('survey_status')));
         $results = $results->result_array();
-        
-        foreach ($results as $result) {
+        if($results){
+            foreach ($results as $result) {
             $data[$result[$identifier]] = $result;
         }
+    }else{
+            $data=array();
+        }
         return $data;
+        
+        
     }
     
     /**
@@ -461,8 +466,8 @@ class MY_Model extends CI_Model
             $result ->setParameter('district', $districtName);
             
             $result = $result->getArrayResult();
-            // return $result;
-            var_dump($result);die;
+            return $result;
+            // var_dump($result);
             
             
         }
@@ -541,5 +546,34 @@ class MY_Model extends CI_Model
             }
             return $finalData;
         }
+        /**
+    * [verifyRespondedByDistrict description]
+    * @return [type] [description]
+    */
+    public function verifyRespondedByDistrict() {
+        if ($this->input->post()) {
+            try {
+                $district = $this->em->getRepository('models\Entities\Districts')->findOneBy(array('districtName' => $this->input->post('district', TRUE), 'districtAccessCode' => md5($this->input->post('usercode', TRUE))));
+                
+                if ($district) {
+                    $result['found']= 'true';
+                    $result['id']=$district->getDistrictId();
+                    $result['name']=$district->getDistrictName();
+                } else {
+                    $result['found']= 'false';
+                }
+            }
+            catch(exception $ex) {
+                
+                //ignore
+                die($ex->getMessage());
+            }
+            return $result;
+        }
+        
+        //close the this->input->post
+        
+        
+    }
     
 }
