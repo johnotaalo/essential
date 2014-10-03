@@ -1357,6 +1357,7 @@ class Analytics extends MY_Controller
      * @return [type]         [description]
      */
     public function getSectionsChosen($survey) {
+        $sectionList='';
         switch ($survey) {
             case 'mnh':
                 $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies', 'Resources', 'Community Strategy');
@@ -2964,15 +2965,12 @@ class Analytics extends MY_Controller
      */
     public function getSpecificDistrictNamesChosen($county) {
         $county = urldecode($county);
-        $options = '';
+        // $options = '';
         $results = $this->analytics_model->getSpecificDistrictNames($county);
-        $options = '<option selected=selected>All Sub-Counties Selected</option>';
         foreach ($results as $result) {
-            $options.= '<option>' . $result['facDistrict'] . '</option>';
+            $data[] = array('id' => ucwords($result['facDistrict']), 'text' => ucwords($result['facDistrict']));
         }
-        
-        //return $dataArray;
-        echo ($options);
+        echo json_encode($data);
     }
     
     public function getSurveyTypeNamesJSON() {
@@ -3013,7 +3011,6 @@ class Analytics extends MY_Controller
     }
     
     public function getCountyNamesJSON() {
-        $options = '';
         $results = $this->analytics_model->getReportingCounties();
         // echo '<pre>';print_r($results);
         foreach ($results as $result) {

@@ -458,6 +458,11 @@ h4{
     @extend .epsilon;
     padding-left:15px;
 }
+#page-crumb{
+    @extend .ui;
+    @extend .breadcrumb;
+    @extend .zeta
+}
 .breadcrumb{
     border-color: #e7e7e7 !important;
     .ui.button{
@@ -468,6 +473,12 @@ h4{
     }
 .ui.label{
         font-size:10px !important;
+    }
+    .ui.dropdown{
+        font-size:14px;
+        .menu{
+            font-size:12px !important;
+        }
     }
 }
 #page_sidebar{
