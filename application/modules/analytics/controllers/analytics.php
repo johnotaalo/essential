@@ -1357,7 +1357,7 @@ class Analytics extends MY_Controller
      * @return [type]         [description]
      */
     public function getSectionsChosen($survey) {
-        $sectionList='';
+        $sectionList = '';
         switch ($survey) {
             case 'mnh':
                 $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies', 'Resources', 'Community Strategy');
@@ -2965,6 +2965,7 @@ class Analytics extends MY_Controller
      */
     public function getSpecificDistrictNamesChosen($county) {
         $county = urldecode($county);
+        
         // $options = '';
         $results = $this->analytics_model->getSpecificDistrictNames($county);
         foreach ($results as $result) {
@@ -2973,6 +2974,10 @@ class Analytics extends MY_Controller
         echo json_encode($data);
     }
     
+    /**
+     * [getSurveyTypeNamesJSON description]
+     * @return [type] [description]
+     */
     public function getSurveyTypeNamesJSON() {
         $data = array('Maternal and Neonatal Health', 'Child Health', 'IMCI Follow-Up');
         foreach ($data as $k => $dat) {
@@ -2981,6 +2986,10 @@ class Analytics extends MY_Controller
         echo json_encode($newData);
     }
     
+    /**
+     * [getSurveyCategoryNamesJSON description]
+     * @return [type] [description]
+     */
     public function getSurveyCategoryNamesJSON() {
         $results = $this->db->get('survey_categories');
         $results = $results->result_array();
@@ -2990,6 +2999,11 @@ class Analytics extends MY_Controller
         echo json_encode($data);
     }
     
+    /**
+     * [getDistrictNamesJSON description]
+     * @param  [type] $county [description]
+     * @return [type]         [description]
+     */
     public function getDistrictNamesJSON($county) {
         $county = urldecode($county);
         $options = '';
@@ -3000,24 +3014,56 @@ class Analytics extends MY_Controller
         echo json_encode($data);
     }
     
+    /**
+     * [getFacilityNamesJSON description]
+     * @param  string $district District Name parsed from UI
+     * @return JSON Array Used in UI to make DropDown
+     */
     public function getFacilityNamesJSON($district) {
+        
+        /**
+         * [$data Array populated with Facility Names]
+         * @var array
+         */
+        $data = array();
+        
+        /**
+         * [$district District Name parsed from UI]
+         * @var string
+         */
         $district = urldecode($district);
-        $options = '';
-        $results = $this->analytics_model->getSpecificFacilityNames($district);
+        
+        /**
+         * [$results Array retreived from Query Result]
+         * @var array
+         */
+        $results = $this->analytics_model->getFacilitiesByDistrict($district);
         foreach ($results as $result) {
             $data[] = array('id' => ucwords($result['facName']), 'text' => ucwords($result['facName']), 'val' => '');
         }
         echo json_encode($data);
     }
     
+    /**
+     * [getCountyNamesJSON description]
+     * @return [type] [description]
+     */
     public function getCountyNamesJSON() {
         $results = $this->analytics_model->getReportingCounties();
+        
         // echo '<pre>';print_r($results);
         foreach ($results as $result) {
             $data[] = array('id' => ucwords($result['county']), 'text' => ucwords($result['county']));
         }
         echo json_encode($data);
     }
+    
+    /**
+     * [edit_facility_info description]
+     * @param  [type] $table       [description]
+     * @param  [type] $primary_key [description]
+     * @return [type]              [description]
+     */
     public function edit_facility_info($table, $primary_key) {
         $table = 'facilities';
         $primary_key = 'fac_id';

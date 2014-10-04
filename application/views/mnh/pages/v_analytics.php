@@ -84,6 +84,15 @@
                                       
                                     </div>
                                 </div>
+                                <div class="ui selection dropdown">
+                                <i class="icon hospital"></i>
+                                    <input id="facility_select" type="hidden">
+                                    <div class="default text">Choose a Facility</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      
+                                    </div>
+                                </div>
                             
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

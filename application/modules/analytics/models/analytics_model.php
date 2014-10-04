@@ -2185,27 +2185,7 @@ ORDER BY lastActivity DESC";
             
             
         }
-        function getSpecificFacilityNames($district) {
-            
-            /*using DQL*/
-            try {
-                $query = $this->em->createQuery('SELECT DISTINCT(f.facName,f.facMfl) FROM  models\Entities\Facilities f WHERE f.facDistrict = :district ORDER BY f.facName ASC');
-                $query->setParameter('district', $district);
-                $this->facilityName = $query->getResult();
-                
-                //die(var_dump($this->districtName));
-                
-                
-            }
-            catch(exception $ex) {
-                
-                //ignore
-                //$ex->getMessage();
-                
-                
-            }
-            return $this->facilityName;
-        }
+        
         
         /*end of getSpecificDistrictNames*/
         
