@@ -162,13 +162,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			});
 			//alert(link_id);
 			if (link_id) {
-				if (survey == 'mnh') {
-					current_form = 'survey/get_mnh_form';
-				} else if (survey == 'hcw') {
-					current_form = 'survey/get_hcw_form';
-				} else {
-					current_form = 'survey/get_mch_form';
-				}
+				current_form='survey/load/'+survey+'/online';
 			}
 			$(".form-container").load(base_url + current_form, function() {
 				loadGlobalScript();

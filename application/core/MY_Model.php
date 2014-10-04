@@ -365,9 +365,12 @@ class MY_Model extends CI_Model
     public function retrieveData($table_name, $identifier) {
         $results = $this->db->get_where($table_name, array('ss_id' => $this->session->userdata('survey_status')));
         $results = $results->result_array();
-        
-        foreach ($results as $result) {
-            $data[$result[$identifier]] = $result;
+        if ($results) {
+            foreach ($results as $result) {
+                $data[$result[$identifier]] = $result;
+            }
+        } else {
+            $data = array();
         }
         return $data;
     }
@@ -428,7 +431,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-
+    
     /**
      * [getCommodityOutageOptionName description]
      * @param  [type] $code [description]
@@ -447,6 +450,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
+    
     /**
      * [getFacilitiesByDistrict description]
      * @param  [type] $districtName [description]
@@ -458,11 +462,12 @@ class MY_Model extends CI_Model
             //Using DQL
             
             $result = $this->em->createQuery('SELECT f.facMfl,f.facName FROM models\Entities\Facilities f WHERE f.facDistrict= :district ORDER BY f.facName ASC ');
-            $result ->setParameter('district', $districtName);
+            $result->setParameter('district', $districtName);
             
             $result = $result->getArrayResult();
-            // return $result;
-            var_dump($result);die;
+            return $result;
+            
+            // var_dump($result);
             
             
         }
@@ -474,6 +479,7 @@ class MY_Model extends CI_Model
             
         }
     }
+    
     /**
      * [getSurveyInfo description]
      * @param  [type] $survey_type     [description]
@@ -482,13 +488,14 @@ class MY_Model extends CI_Model
      * @param  [type] $facMFL          [description]
      * @return [type]                  [description]
      */
-    public function getSurveyInfo($survey_type, $survey_category,$statistic, $facMFL) {
-        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
+    public function getSurveyInfo($survey_type, $survey_category, $statistic, $facMFL) {
+        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic . '",' . $facMFL . ');';
         
         try {
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-           // print($this->db->last_query());die;
+            
+            // print($this->db->last_query());die;
             $myData->next_result();
             
             // Dump the extra resultset.
@@ -502,6 +509,7 @@ class MY_Model extends CI_Model
         }
         return $finalData;
     }
+    
     /**
      * [getReportingRatio description]
      * @param  [type] $survey          [description]
@@ -510,36 +518,65 @@ class MY_Model extends CI_Model
      * @param  [type] $statistic       [description]
      * @return [type]                  [description]
      */
-    function getReportingRatio($survey, $survey_category, $county,$statistic) {
+    function getReportingRatio($survey, $survey_category, $county, $statistic) {
+        
+        /*using DQL*/
+        
+        $finalData = array();
+        
+        try {
             
-            /*using DQL*/
+            $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
+            $myData = $this->db->query($query);
+            $finalData = $myData->result_array();
             
-            $finalData = array();
+            $myData->next_result();
             
+            // Dump the extra resultset.
+            $myData->free_result();
+            
+            // Does what it says.
+            
+            
+        }
+        catch(exception $ex) {
+            
+            //ignore
+            
+            //echo($ex -> getMessage());
+            
+            
+        }
+        return $finalData;
+    }
+    
+    /**
+     * [verifyRespondedByDistrict description]
+     * @return [type] [description]
+     */
+    public function verifyRespondedByDistrict() {
+        if ($this->input->post()) {
             try {
+                $district = $this->em->getRepository('models\Entities\Districts')->findOneBy(array('districtName' => $this->input->post('district', TRUE), 'districtAccessCode' => md5($this->input->post('usercode', TRUE))));
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
-                $myData = $this->db->query($query);
-                $finalData = $myData->result_array();
-                
-                $myData->next_result();
-                
-                // Dump the extra resultset.
-                $myData->free_result();
-                
-                // Does what it says.
-                
-                
+                if ($district) {
+                    $result['found'] = 'true';
+                    $result['id'] = $district->getDistrictId();
+                    $result['name'] = $district->getDistrictName();
+                } else {
+                    $result['found'] = 'false';
+                }
             }
             catch(exception $ex) {
                 
                 //ignore
-                
-                //echo($ex -> getMessage());
-                
-                
+                die($ex->getMessage());
             }
-            return $finalData;
+            return $result;
         }
-    
+        
+        //close the this->input->post
+        
+        
+    }
 }
