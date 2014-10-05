@@ -86,7 +86,7 @@ class Survey extends MY_Controller
                 $this->form->get_mnh_form();
                 break;
 
-            case 'mch':
+            case 'ch':
                 $this->form->get_mch_form();
                 break;
 
@@ -370,6 +370,11 @@ public function createFacilityTable() {
         $data['form_id'] = '';
         $this -> load -> view('form', $data);
     }
+    public function getNationalData($survey_type, $survey_category) {
+        $county = urldecode($county);
+        $results = $this->data_model->getReportingRatio($survey_type, $survey_category, '', 'national');
+        echo json_encode($results);
+    }
     /**
      * [getCountyData description]
      * @param  [type] $survey_type     [description]
@@ -378,7 +383,6 @@ public function createFacilityTable() {
      * @return [type]                  [description]
      */
     public function getCountyData($survey_type, $survey_category, $county) {
-        
         $county = urldecode($county);
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'county');
         echo json_encode($results);
@@ -391,7 +395,6 @@ public function createFacilityTable() {
      * @return [type]                  [description]
      */
     public function getDistrictData($survey_type, $survey_category, $county) {
-        
         $county = urldecode($county);
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'district');
         echo json_encode($results);

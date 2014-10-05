@@ -369,8 +369,8 @@ class Generate extends MY_Controller
                 </tr>';
                         } else if ($section == 'guide' || $section == 'job') {
                             $guidelinequestions = '<tr>
-            <td colspan="6">' . $value['questionName'] . '</td>
-            <td colspan="3">
+            <td>' . $value['questionName'] . '</td>
+            <td>
             <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned is-guideline">';
                             if ($questionResponse == 'Yes') {
                                 $guidelinequestions.= '<option value="">Select One</option>
@@ -387,7 +387,7 @@ class Generate extends MY_Controller
                             }
                             $guidelinequestions.= '</select>
             </td>
-            <td colspan="3"><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "' . $questionCount . '" disabled/></td>
+            <td ><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "' . $questionCount . '" disabled/></td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                             $data[$section][] = $guidelinequestions;

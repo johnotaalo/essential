@@ -2,9 +2,10 @@
 
 @import "variables";
 @import "bootstrap";
+@import "bourbon/bourbon";
 
 @import "typeplate/_typeplate";
-
+@import "CSS:../bower_components/animate.css/animate";
 @mixin inner-style($height){
     overflow-y: auto;
     height:$height;
@@ -22,7 +23,9 @@
 }
 
 //Variables
-$stat-color:#16a085;
+$stat-color:#428bca;
+$my-grey:#e7e7e7;
+
 //Body
 body{
     font-family:Lato !important;
@@ -34,7 +37,6 @@ body{
     top:0;
     width:100%;
     z-index:100000000;
-    @extends .fixed;
     border-bottom:1.5px solid black;
     .top-bar{
         background:darkcyan !important;
@@ -133,7 +135,7 @@ body{
 }
 
 #firepad{
-    border:2px solid #e7e7e7;
+    border:2px solid $my-grey;
     width:95%;
     margin:auto;
     height:80%;
@@ -294,12 +296,69 @@ table{
     }
 }
 .small-graph{
+
     @extend .standard-graph;
     @extend .col-md-3;
-    .portlet-body{
-        height:300px;
+    .outer{
+        .inner{
+            @extend .row;
+         background:$stat-color;
+        
+        // border-top:1px solid #ddd;
+        padding:6px 12px;
+        i.main{
+            
+             color:white;
+            @extend .col-md-3;
 
+            @extend .mega;
+        }
+        
+        .content{
+            color:white;
+            padding:0;
+            @extend .col-md-8;
+            height:13%;
+            .digit{
+                width:100%;
+height:80%;
+                @extend .gamma;
+                text-align:right;
+                margin-bottom:0;
+                #targeted{
+                }
+#finished{
+    color:green;
+}
+#not-finished{
+    color:orange;
+}
+#not-started{
+    color:red;
+}
+            }
+            .text{
+                text-align:right;
+            }
+        }
     }
+    .link{
+        cursor:pointer;
+            background:$my-grey;
+            color:#333;
+             @extend .col-md-12;
+             i{
+                padding-right:10px;
+             }
+        }
+    .link:hover{
+        cursor:hand;
+        @extend .animated;
+        @extend .flash;
+    }
+
+    
+}
 }
 .semi-large-graph{
     @extend .standard-graph;
@@ -317,7 +376,10 @@ table{
             padding: 5px 7.5px;
             color: #333333;
             background-color: whitesmoke;
-            border-color: #e7e7e7;
+            border-color: $my-grey;
+            .graph-title{
+                @include ellipsis(50%);
+            }
             .statistic{
                 display: inline-block;
                 font-weight: normal;
@@ -464,7 +526,7 @@ h4{
     @extend .zeta
 }
 .breadcrumb{
-    border-color: #e7e7e7 !important;
+    border-color: $my-grey !important;
     .ui.button{
         font-size:10px !important;
         a{
@@ -483,13 +545,13 @@ h4{
 }
 #page_sidebar{
     @extend .col-md-3;
-    border-right:1px solid #e7e7e7;
+    border-right:1px solid $my-grey;
     height:100%;
     padding:0;
     padding-left:15px;
     h6{
         padding:10px 15px;
-        background: #e7e7e7;
+        background: $my-grey;
         margin-bottom:0;
     }
 }
@@ -673,7 +735,7 @@ a.paginate_button{
     cursor:pointer;
 }
 a.paginate_button:hover{
-    background:#e7e7e7;
+    background:$my-grey;
     text-decoration: none;
     cursor: hand;
 }
@@ -740,7 +802,7 @@ a.disabled:hover{
 h6.table-header{
     margin-bottom: 2px !important;
     padding:5px 7.5px;
-    background:#e7e7e7;
+    background:$my-grey;
     span{
         padding-left:30%;
         button{

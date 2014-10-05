@@ -4,8 +4,55 @@
     }
 </style>
 <!-- BEGIN CHART PORTLET 1-->
+<!-- Pushy Menu -->
 
+
+<div id="statistic_summary" style="display:none">
+    <h4>Stats</h4>
+    <div id="survey_stat" class="small-graph" style="display:none">
+        <div class="outer">
+            <div class="inner">
+                <i class='main icon hospital'></i>
+                <div class="content">
+                    <div class='digit'><span id="targeted">0</span>|<span id="finished">0</span>|<span id="not-finished">0</span>|<span id="not-started">0</span></div>
+                    <div class='text'>Facilities Reported</div>
+                </div>
+            </div>
+            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+        </div>
+    </div>
+    <div id="district_stat" class="small-graph" style="display:none">
+        <div class="outer">
+            <div class="inner">
+                <i class='main icon map marker'></i>
+                <div class="content">
+                    <div class='digit'>0</div>
+                    <div class='text'>Sub-Counties in <span id="county"></span></div>
+                </div>
+            </div>
+            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+        </div>
+    </div>
+    <div class="small-graph" style="display:none">
+        <div class="title">Last Entry</div>
+        <div class="outer">
+
+            <div class="content" id="date">0</div>
+        </div>
+
+    </div>
+    <div class="small-graph" style="display:none">
+        <div class="title">...</div>
+        <div class="outer">
+
+            <div class="content">0</div>
+        </div>
+
+    </div>
+
+</div>
 <div class="panel-group" id="accordion">
+
     <div class="panel panel-default analytics_row section" id="reporting-parent">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -138,16 +185,16 @@
                         </div>
                     </div>
                 </div>
-              <!--<div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
+                <!--<div class="medium-graph">
+<div class="portlet-title">
+<h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
+</div>
+<div class="portlet-body">
 
-                        <div class="chart" id="job_aids">
-                        </div>
-                    </div>
-              </div>-->
+<div class="chart" id="job_aids">
+</div>
+</div>
+</div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tools</span><span class="sizer">Click to Enlarge</span></h6>
@@ -184,50 +231,50 @@
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
-                   <h5>Data From Under 5 Register</h5>
-                   <div class="x-large-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="u5_register">
+                    <h5>Data From Under 5 Register</h5>
+                    <div class="x-large-graph">
+                        <div class="portlet-title">
+                            <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                         </div>
-                    </div>
+                        <div class="portlet-body">
+
+                            <div class="chart" id="u5_register">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="x-large-graph">
-                   <h5>Classification and Treatment</h5>
+                    <h5>Classification and Treatment</h5>
                     <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diarrhoea</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
+                        <div class="portlet-title">
+                            <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diarrhoea</span><span class="sizer">Click to Enlarge</span></h6>
+                        </div>
+                        <div class="portlet-body">
 
-                        <div class="chart" id="other_treatment_options_dia">
+                            <div class="chart" id="other_treatment_options_dia">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Pneumonia</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
+                    <div class="medium-graph">
+                        <div class="portlet-title">
+                            <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Pneumonia</span><span class="sizer">Click to Enlarge</span></h6>
+                        </div>
+                        <div class="portlet-body">
 
-                        <div class="chart" id="other_treatment_options_pne">
+                            <div class="chart" id="other_treatment_options_pne">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Malaria</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
+                    <div class="medium-graph">
+                        <div class="portlet-title">
+                            <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Malaria</span><span class="sizer">Click to Enlarge</span></h6>
+                        </div>
+                        <div class="portlet-body">
 
-                        <div class="chart" id="other_treatment_options_fev">
+                            <div class="chart" id="other_treatment_options_fev">
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="medium-graph">
@@ -515,7 +562,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-9">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -524,39 +571,39 @@
                 </a>
             </h4>
         </div>
-      <div id="collapseNine" class="panel-collapse collapse">
+        <div id="collapseNine" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
 
-                    <div class="chart" id="chcommunity_units">
+                        <div class="chart" id="chcommunity_units">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="chart" id="chCases">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Trained</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="chart" id="chIMCITraining">
+                        </div>
                     </div>
                 </div>
             </div>
-         <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-				<div class="chart" id="chCases">
-                    </div>
-                </div>
-            </div>
-       <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Trained</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-					<div class="chart" id="chIMCITraining">
-                    </div>
-                </div>
-            </div>
-           </div>
-           </div>
-           </div>
+        </div>
+    </div>
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-1">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -1115,37 +1162,37 @@
         <div id="collapseNineteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
 
-                    <div class="chart" id="community_units">
+                        <div class="chart" id="community_units">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
 
-                    <div class="chart" id="community_cases">
+                        <div class="chart" id="community_cases">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Training</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Training</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
 
-                    <div class="chart" id="imci_trainings">
+                        <div class="chart" id="imci_trainings">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>

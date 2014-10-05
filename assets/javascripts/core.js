@@ -755,7 +755,9 @@ $('.ui.selection.dropdown')
     cheet('ctrl m f l', function() {
         showMasterFacilityList(base_url, 'table');
     });
-
+    cheet('m e n u', function() {
+        $('.menu-btn').trigger('click');
+    });
     cheet('ctrl e d i t m f l', function() {
         showMasterFacilityList(base_url, 'editable');
     });

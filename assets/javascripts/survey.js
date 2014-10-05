@@ -162,7 +162,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			});
 			//alert(link_id);
 			if (link_id) {
-				current_form='survey/load/'+survey+'/online';
+				current_form='survey/load/online/'+survey;
 			}
 			$(".form-container").load(base_url + current_form, function() {
 				loadGlobalScript();
