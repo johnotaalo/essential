@@ -20,23 +20,12 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
     file_name = file_name.replace('_', ' ');
     $('#' + container).highcharts({
         colors: color_scheme,
-        /*exporting: {
-            filename: file_name
-        },*/
         chart: {
             zoomType: 'x',
             height: chart_length,
             width: chart_width,
             type: chart_type,
             marginBottom: chart_margin
-            /*events: {
-                load: function () {
-                    var ch = this;
-                    setTimeout(function(){
-                        ch.exportChart();
-                    },1);
-                }
-            }*/
         },
         title: {
             text: ''
@@ -70,14 +59,6 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
                     return this.point.category + '<br/>' + this.series.name + ' : <b>' + this.y + '</b>';
 
                 }
-                /**
- * else if(typeof this.point.category != 'undefined' && this.point.category.length>0) {
-                    return this.point.category + '<br/>' + this.series.name + ' : <b>' + this.y + '</b>';
-
-                } else{
- return this.x.name + ' : <b>' + this.y + '</b>';
-                }
- */
             },
             followPointer: true
 
@@ -141,7 +122,120 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
     });
 
 }
+/**
+ * [runSimpleGraph description]
+ * @param  {[type]} container             [description]
+ * @param  {[type]} chart_title           [description]
+ * @param  {[type]} chart_stacking        [description]
+ * @param  {[type]} chart_type            [description]
+ * @param  {[type]} chart_categories      [description]
+ * @param  {[type]} chart_series          [description]
+ * @param  {[type]} chart_drilldown       [description]
+ * @param  {[type]} chart_length          [description]
+ * @param  {[type]} chart_width           [description]
+ * @param  {[type]} chart_margin          [description]
+ * @param  {[type]} color_scheme          [description]
+ * @param  {[type]} chart_label_rotation  [description]
+ * @param  {[type]} chart_legend_floating [description]
+ * @return {[type]}                       [description]
+ */
+function runSimpleGraph(container, chart_title, chart_stacking, chart_type, chart_categories, chart_series, chart_drilldown, chart_length, chart_width, chart_margin, color_scheme, chart_label_rotation, chart_legend_floating) {
+    file_name = container.replace('#', '');
+    file_name = file_name.replace('_', ' ');
+    $('#' + container).highcharts({
+        colors: color_scheme,
+        chart: {
+            zoomType: 'x',
+            height: 60,
+            width: 200,
+            type: chart_type,
+            marginBottom: chart_margin,
+            backgroundColor: null
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            lineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            labels: {
+                enabled: false
+            },
+            minorTickLength: 0,
+            tickLength: 0,
+            categories: chart_categories,
+            
+        },
+        exporting: {
+            enabled: false
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            gridLineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            labels: {
+                enabled: false
+            },
+            minorTickLength: 0
+        },
 
+        plotOptions: {
+            series: {
+                stacking: chart_stacking
+            },
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true,
+                tooltip: {
+                    formatter: function() {
+
+                        return this.series.name + ' : <b>' + this.y + '</b>';
+
+                    }
+
+                },
+                followPointer: true
+            },
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                        if (this.y != 0 && chart_stacking == 'percent') {
+                            return Math.round(this.percentage) + '%';
+                        } else {
+                            return this.value;
+                        }
+                    },
+                    color: 'white'
+                },
+                events: {
+                    legendItemClick: function() {
+                        return false; // <== returning false will cancel the default action
+                    }
+                }
+            },
+        },
+        legend: {
+            enabled:false
+        },
+        credits: {
+            enabled: false
+        },
+        series: chart_series,
+        drilldown: {
+            series: chart_drilldown
+        }
+    });
+
+}
 /**
  * [loadGraph description]
  * @param  {[type]} base_url      [description]
@@ -173,6 +267,38 @@ function loadGraph(base_url, function_url, graph_section) {
                 graph_text = $(graph_section).parent().parent().find('.portlet-title h6 .graph-title').text();
                 $(graph_section).parent().parent().find('.portlet-title h6 .sizer').attr('data-text', graph_text);
                 runGraph(obj.container, obj.chart_title, obj.chart_stacking, obj.chart_type, obj.chart_categories, obj.chart_series, obj.chart_drilldown, obj.chart_length, obj.chart_width, obj.chart_margin, obj.color_scheme, obj.chart_label_rotation, obj.chart_legend_floating);
+            } else {
+                $(graph_section).append('<div class="null_message"><i class="fa fa-exclamation-triangle"></i>No Data Found</div>');
+
+            }
+        },
+        error: function(xhr) {
+            $(graph_section).empty();
+            $(graph_section).append('<div class="null_message"><i class="fa fa-exclamation-triangle"></i>Process Interrupted</div>');
+        }
+    });
+}
+/**
+ * [loadSimpleGraph description]
+ * @param  {[type]} base_url      [description]
+ * @param  {[type]} function_url  [description]
+ * @param  {[type]} graph_section [description]
+ * @return {[type]}               [description]
+ */
+function loadSimpleGraph(base_url, function_url, graph_section) {
+
+    $.ajax({
+        url: base_url + function_url,
+        beforeSend: function(xhr) {
+            $(graph_section).empty();
+        },
+        success: function(data) {
+            obj = jQuery.parseJSON(data);
+            // console.log(obj);
+            $(graph_section).empty();
+            if (obj.chart_series != null && obj.chart_series[0] != null) {
+               $(graph_section).append('<div id="' + obj.container + '" ></div>');
+                runSimpleGraph(obj.container, obj.chart_title, obj.chart_stacking, obj.chart_type, obj.chart_categories, obj.chart_series, obj.chart_drilldown, obj.chart_length, obj.chart_width, obj.chart_margin, obj.color_scheme, obj.chart_label_rotation, obj.chart_legend_floating);
             } else {
                 $(graph_section).append('<div class="null_message"><i class="fa fa-exclamation-triangle"></i>No Data Found</div>');
 
@@ -416,7 +542,7 @@ function loadData(base_url, function_url, value, container, placeholder_text) {
  */
 function loadMasterFacilityList(base_url, container, form) {
     $.ajax({
-        url: base_url + 'analytics/getMasterFacilityList/'+form,
+        url: base_url + 'analytics/getMasterFacilityList/' + form,
         async: false,
         beforeSend: function(xhr) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -680,54 +806,54 @@ function startIntro() {
  * @return {[type]}          [description]
  */
 function trim(str, charlist) {
-  //  discuss at: http://phpjs.org/functions/trim/
-  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // improved by: mdsjack (http://www.mdsjack.bo.it)
-  // improved by: Alexander Ermolaev (http://snippets.dzone.com/user/AlexanderErmolaev)
-  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // improved by: Steven Levithan (http://blog.stevenlevithan.com)
-  // improved by: Jack
-  //    input by: Erkekjetter
-  //    input by: DxGx
-  // bugfixed by: Onno Marsman
-  //   example 1: trim('    Kevin van Zonneveld    ');
-  //   returns 1: 'Kevin van Zonneveld'
-  //   example 2: trim('Hello World', 'Hdle');
-  //   returns 2: 'o Wor'
-  //   example 3: trim(16, 1);
-  //   returns 3: 6
+    //  discuss at: http://phpjs.org/functions/trim/
+    // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: mdsjack (http://www.mdsjack.bo.it)
+    // improved by: Alexander Ermolaev (http://snippets.dzone.com/user/AlexanderErmolaev)
+    // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: Steven Levithan (http://blog.stevenlevithan.com)
+    // improved by: Jack
+    //    input by: Erkekjetter
+    //    input by: DxGx
+    // bugfixed by: Onno Marsman
+    //   example 1: trim('    Kevin van Zonneveld    ');
+    //   returns 1: 'Kevin van Zonneveld'
+    //   example 2: trim('Hello World', 'Hdle');
+    //   returns 2: 'o Wor'
+    //   example 3: trim(16, 1);
+    //   returns 3: 6
 
-  var whitespace, l = 0,
-    i = 0;
-  str += '';
+    var whitespace, l = 0,
+        i = 0;
+    str += '';
 
-  if (!charlist) {
-    // default list
-    whitespace =
-      ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
-  } else {
-    // preg_quote custom list
-    charlist += '';
-    whitespace = charlist.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g, '$1');
-  }
-
-  l = str.length;
-  for (i = 0; i < l; i++) {
-    if (whitespace.indexOf(str.charAt(i)) === -1) {
-      str = str.substring(i);
-      break;
+    if (!charlist) {
+        // default list
+        whitespace =
+            ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
+    } else {
+        // preg_quote custom list
+        charlist += '';
+        whitespace = charlist.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g, '$1');
     }
-  }
 
-  l = str.length;
-  for (i = l - 1; i >= 0; i--) {
-    if (whitespace.indexOf(str.charAt(i)) === -1) {
-      str = str.substring(0, i + 1);
-      break;
+    l = str.length;
+    for (i = 0; i < l; i++) {
+        if (whitespace.indexOf(str.charAt(i)) === -1) {
+            str = str.substring(i);
+            break;
+        }
     }
-  }
 
-  return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
+    l = str.length;
+    for (i = l - 1; i >= 0; i--) {
+        if (whitespace.indexOf(str.charAt(i)) === -1) {
+            str = str.substring(0, i + 1);
+            break;
+        }
+    }
+
+    return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
 }
 
 /**
@@ -738,13 +864,10 @@ $(document).ready(function() {
     var theclass;
 
     //startIntro();
-    
-$('.ui.selection.dropdown')
-  .dropdown()
-;
 
+    $('.ui.selection.dropdown')
+        .dropdown();
 
-    
 
 
     $.fn.editable.defaults.mode = 'inline';

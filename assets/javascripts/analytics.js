@@ -21,6 +21,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
     /**
      * Run on Page Load
      */
+    survey_category='';
     loadCounties();
     if (county === '') {
         county = 'Unselected';
@@ -69,6 +70,9 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
 
         survey = $(this).attr('value');
+        if(survey_category!=''){
+            loadSimpleGraph(base_url, 'analytics/getFacilityProgress/' + survey + '/' + survey_category, '#reporting_stat .outer .inner .content .inner-graph');
+        }
         loadSurvey(survey);
     });
     $('#survey_category').change(function() {
@@ -101,6 +105,10 @@ function startAnalytics(base_url, county, survey, survey_category) {
             $('#statistic_summary').show();
             $('#survey_stat').show();
             $('#survey_stat').addClass('animated bounceInUp');
+            $('#reporting_stat').show();
+            $('#reporting_stat').addClass('animated bounceInUp');
+
+            loadSimpleGraph(base_url, 'analytics/getFacilityProgress/' + survey + '/' + survey_category, '#reporting_stat .outer .inner .content .inner-graph');
 
             variableHandler(scope, county, district, facility, survey, survey_category, indicator_type, section);
         }
@@ -574,7 +582,8 @@ function getFacilityCount(base_url, national, county, district, survey, survey_c
     $('#not-started').animateNumber({
         number: data[0].notstarted
     });
-    $('#survey_stat .outer .inner .content .digit').quickfit({min:20});
+    $('span').popup();
+    $('#survey_stat .outer .inner .content .digit').quickfit({min:18});
 }
 
 

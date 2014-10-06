@@ -325,16 +325,22 @@ height:80%;
                 @extend .gamma;
                 text-align:right;
                 margin-bottom:0;
+                span{
+                    cursor:pointer
+                }
+                span:hover{
+                    cursor:hand;
+                }
                 #targeted{
                 }
 #finished{
-    color:green;
+    color:lawngreen;
 }
 #not-finished{
-    color:orange;
+    color:moccasin;
 }
 #not-started{
-    color:red;
+    color:lightpink;
 }
             }
             .text{
