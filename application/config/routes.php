@@ -56,5 +56,41 @@ $route['mnch/session/close']='auth/logout';#log out url
 $route['admin']= 'c_admin/index';
 $route['firepad']= 'c_admin/firepad';
 
+# IMCI Routes
+$route['imci/home'] = 'home';
+
+$route['imci/account/create'] = 'account/create';
+$route['imci/account/access'] = 'account/access';
+$route['imci/account/forgot_password'] = 'account/forgot_password';
+
+$route['imci/account'] = 'account';
+$route['imci/account/profile'] = 'account/profile';
+$route['imci/account/edit/:num'] = 'account/edit/:num';
+$route['imci/account/logout'] = 'account/logout';
+
+$route['imci/learn'] = 'learn';
+$route['imci/learn/content/read'] = 'learn/content/read';
+$route['imci/learn/content/see'] = 'learn/content/see';
+
+$route['imci/test'] = 'test';
+
+$route['imci/test'] = 'test';
+$route['imci/test/practice/:num'] = 'test/practice/:num';
+$route['imci/test/start/:num'] = 'test/start/:num';
+
+$route['imci/manage'] = 'manage';
+$route['imci/manage/users/admins/view'] = 'manage/users/admins/view';
+$route['imci/manage/users/trainees/view'] = 'manage/users/trainees/view';
+$route['imci/manage/media/pictures/view'] = 'manage/media/pictures/view';
+$route['imci/manage/media/videos/view'] = 'manage/media/videos/view';
+$route['imci/manage/exams/view'] = 'manage/exams/view';
+$route['imci/manage/users/perfomance/view'] = 'manage/users/perfomance/view';
+
+$route['imci/manage/upload/admin'] = 'manage/upload/admin';
+$route['imci/manage/upload/media'] = 'manage/upload/media';
+$route['imci/manage/upload/material'] = 'manage/upload/material';
+$route['imci/manage/upload/exam'] = 'manage/upload/exam';
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
