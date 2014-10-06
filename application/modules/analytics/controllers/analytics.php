@@ -53,7 +53,12 @@ class Analytics extends MY_Controller
         
         redirect('mnch/analytics');
     }
-    
+    /**
+     * [getFacilityProgress description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @return [type]                  [description]
+     */
     public function getFacilityProgress($survey, $survey_category) {
         $results = $this->analytics_model->getFacilityProgress($survey, $survey_category);
         // ksort($results);
@@ -64,6 +69,22 @@ class Analytics extends MY_Controller
         }
         $resultArray[] = array('name' => 'Daily Entries', 'data' => $data);
         $this->populateGraph($resultArray, '', $category, $criteria, '', '', 'line','','','','',array('#ffffff'));
+    }
+    /**
+     * [getFacilityProgress description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @return [type]                  [description]
+     */
+    public function getCountyProgress($survey, $survey_category) {
+        $results = $this->analytics_model->getCountyProgress($survey, $survey_category);
+        // echo '<pre>';print_r($results);die;
+        foreach ($results as $county => $value) {
+            $data[] = (int)sizeof($value);
+            $category[] = $county;
+        }
+        $resultArray[] = array('name' => 'Facilities Reported', 'data' => $data);
+        $this->populateGraph($resultArray, '', $category, $criteria, '', '', 'column','','','','',array('#ffffff'));
     }
     
     /**
@@ -597,6 +618,15 @@ class Analytics extends MY_Controller
         
         
     }
+    /**
+     * [getStaffRetention description]
+     * @param  [type] $criteria        [description]
+     * @param  [type] $value           [description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $for             [description]
+     * @return [type]                  [description]
+     */
     public function getStaffRetention($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $resultsArray = array();
         $results = $this->analytics_model->getStaffRetention($criteria, $value, $survey, $survey_category, $for);

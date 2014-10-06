@@ -10,7 +10,7 @@
     </head>
 
     <body>
-<<<<<<< HEAD
+
     <div class="menu-btn"></div>
     <nav class="pushy pushy-left">
     <div class="ui vertical menu">
@@ -36,10 +36,7 @@
 </nav>
     <div class="site-overlay"></div>
         <div id="header" class="push">
-=======
 
-        <div id="header">
->>>>>>> 7749f2ba9e493a496f77faec4ca7e0489a27a98b
             <?php $this -> load->view($header); ?>
 
             <?php 
@@ -51,7 +48,6 @@
             }
             ?>
         </div>
-<<<<<<< HEAD
         <div id="content" class="push">
             <?php $this -> load->view($content); ?>
         </div>
@@ -59,15 +55,7 @@
             <?php
                 $this->load->view($footer);
             ?>
-=======
 
-        <div id="content">
-            <?php $this -> load->view($content); ?>
-        </div>
-        
-        <div id="footer">
-            <?php $this->load->view($footer); ?>
->>>>>>> 7749f2ba9e493a496f77faec4ca7e0489a27a98b
         </div>
 
     </body>

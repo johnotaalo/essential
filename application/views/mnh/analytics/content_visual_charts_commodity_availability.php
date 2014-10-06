@@ -21,6 +21,18 @@
             <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
+    <div id="county_stat" class="small-graph" style="display:none">
+        <div class="outer">
+            <div class="inner">
+                <i class='main icon map marker'></i>
+                <div class="content">
+                    <div class='inner-graph'></div>
+                    <div class='text'>Counties Reported</div>
+                </div>
+            </div>
+            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+        </div>
+    </div>
     <div id="district_stat" class="small-graph" style="display:none">
         <div class="outer">
             <div class="inner">

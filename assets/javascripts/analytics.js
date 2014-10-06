@@ -107,8 +107,10 @@ function startAnalytics(base_url, county, survey, survey_category) {
             $('#survey_stat').addClass('animated bounceInUp');
             $('#reporting_stat').show();
             $('#reporting_stat').addClass('animated bounceInUp');
-
+$('#county_stat').show();
+            $('#county_stat').addClass('animated bounceInUp');
             loadSimpleGraph(base_url, 'analytics/getFacilityProgress/' + survey + '/' + survey_category, '#reporting_stat .outer .inner .content .inner-graph');
+            loadSimpleGraph(base_url, 'analytics/getCountyProgress/' + survey + '/' + survey_category, '#county_stat .outer .inner .content .inner-graph');
 
             variableHandler(scope, county, district, facility, survey, survey_category, indicator_type, section);
         }

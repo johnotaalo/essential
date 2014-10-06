@@ -4913,7 +4913,12 @@ WHERE
             catch(exception $ex) {
             }
         }
-        
+        /**
+         * [getFacilityProgress description]
+         * @param  [type] $survey          [description]
+         * @param  [type] $survey_category [description]
+         * @return [type]                  [description]
+         */
         public function getFacilityProgress($survey, $survey_category) {
             
             $query = "CALL get_facility_activity('" . $survey . "','" . $survey_category . "');";
@@ -4933,6 +4938,38 @@ WHERE
                         $day = new DateTime($value['ast_last_activity']);
                         $day = $day->format('M-Y');
                         $data[$day][] = $value;
+                    }
+                    
+                    //die;
+                    
+                    
+                }
+                return $data;
+            }
+            catch(exception $e) {
+            }
+        }
+        /**
+         * [getFacilityProgress description]
+         * @param  [type] $survey          [description]
+         * @param  [type] $survey_category [description]
+         * @return [type]                  [description]
+         */
+        public function getCountyProgress($survey, $survey_category) {
+            
+            $query = "CALL get_facility_activity('" . $survey . "','" . $survey_category . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+                
+                // Dump the extra resultset.
+                $queryData->free_result();
+                
+                //echo $this->db->last_query();die;
+                if ($this->dataSet !== NULL) {
+                    foreach ($this->dataSet as $value) {
+                        $data[$value['fac_county']][]=$value;
                     }
                     
                     //die;
