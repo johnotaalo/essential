@@ -7,9 +7,10 @@
     -->
     <head>
         <?php $this -> load->view($head) ?>
-
     </head>
+
     <body>
+
     <div class="menu-btn"></div>
     <nav class="pushy pushy-left">
     <div class="ui vertical menu">
@@ -35,16 +36,17 @@
 </nav>
     <div class="site-overlay"></div>
         <div id="header" class="push">
+
             <?php $this -> load->view($header); ?>
 
             <?php 
-if(isset($logged)){
-$this -> load->view('mnh/segments/nav-logged-in'); 
-}
-else{
-   $this -> load->view('mnh/segments/nav-public'); 
-}?> 
-            
+            if(isset($logged)){
+            $this -> load->view('mnh/segments/nav-logged-in'); 
+            }
+            else{
+               $this -> load->view('mnh/segments/nav-public'); 
+            }
+            ?>
         </div>
         <div id="content" class="push">
             <?php $this -> load->view($content); ?>
@@ -53,6 +55,9 @@ else{
             <?php
                 $this->load->view($footer);
             ?>
+
         </div>
+
     </body>
+
 </html>

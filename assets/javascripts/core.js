@@ -165,7 +165,7 @@ function runSimpleGraph(container, chart_title, chart_stacking, chart_type, char
             minorTickLength: 0,
             tickLength: 0,
             categories: chart_categories,
-            
+
         },
         exporting: {
             enabled: false
@@ -182,6 +182,7 @@ function runSimpleGraph(container, chart_title, chart_stacking, chart_type, char
             },
             minorTickLength: 0
         },
+
 
         plotOptions: {
             series: {
@@ -205,6 +206,9 @@ function runSimpleGraph(container, chart_title, chart_stacking, chart_type, char
                 followPointer: true
             },
             bar: {
+                tooltip: {
+                    followPointer: true
+                },
                 dataLabels: {
                     enabled: true,
                     formatter: function() {
@@ -224,7 +228,7 @@ function runSimpleGraph(container, chart_title, chart_stacking, chart_type, char
             },
         },
         legend: {
-            enabled:false
+            enabled: false
         },
         credits: {
             enabled: false
@@ -297,7 +301,7 @@ function loadSimpleGraph(base_url, function_url, graph_section) {
             // console.log(obj);
             $(graph_section).empty();
             if (obj.chart_series != null && obj.chart_series[0] != null) {
-               $(graph_section).append('<div id="' + obj.container + '" ></div>');
+                $(graph_section).append('<div id="' + obj.container + '" ></div>');
                 runSimpleGraph(obj.container, obj.chart_title, obj.chart_stacking, obj.chart_type, obj.chart_categories, obj.chart_series, obj.chart_drilldown, obj.chart_length, obj.chart_width, obj.chart_margin, obj.color_scheme, obj.chart_label_rotation, obj.chart_legend_floating);
             } else {
                 $(graph_section).append('<div class="null_message"><i class="fa fa-exclamation-triangle"></i>No Data Found</div>');
