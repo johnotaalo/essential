@@ -2,7 +2,7 @@
     <div class="center-wrapper">
 
         <!--logo and main nav-->
-        <?php $this -> load -> view('segments/nav-public'); ?>
+        
 
         <div class="main" >
             <div class="row">

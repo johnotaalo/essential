@@ -324,14 +324,14 @@ class Form extends MY_Controller
 
 	
 		<tr>
-			<th colspan="12" >PROVISION OF Comprehensive Emergency Obstetric and Newborn Care (CEmONC) SERVICES IN THE LAST THREE MONTHS</th>
+			<th colspan="2" >PROVISION OF Comprehensive Emergency Obstetric and Newborn Care (CEmONC) SERVICES IN THE LAST THREE MONTHS</th>
 		</tr>
-		<tr><td style="background:#fff" colspan="13"><p class="instruction">
+		<tr><td style="background:#fff" colspan="2"><p class="instruction">
 		* Verify this information by looking at patients records: 5 Patients Files, Registers and Partograph
 		</p></td></tr>
 		<tr>		
-		<th colspan="7">QUESTION</th>
-		<th colspan="5">RESPONSE</th>	
+		<th>QUESTION</th>
+		<th>RESPONSE</th>	
 		</tr>
 		' . $this->$this->questions['ceoc'] . '
 	</table>
@@ -345,8 +345,8 @@ class Form extends MY_Controller
 		* Verify this information by looking at patients records: 5 Patients Files and Registers
 		</p></td></tr>
 				<tr>
-					<th style="width:35%">QUESTION</th>
-					<th style="width:65%;text-align:left">RESPONSE</th>
+					<th>QUESTION</th>
+					<th>RESPONSE</th>
 
 				</tr>
 	

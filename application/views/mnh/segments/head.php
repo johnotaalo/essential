@@ -18,7 +18,8 @@
 <!-- New Bower Components -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/flat-ui-official/css/flat-ui.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/stylesheets/flat.css">
-
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/animate.css/animate.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/pushy/css/pushy.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/flat-ui-official/bootstrap/css/prettify.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/intro.js/introjs.css">
 
@@ -47,6 +48,7 @@
 <script src="<?php echo base_url();?>assets/bower_components/select2/select2.js"></script>
 <script src="<?php echo base_url();?>assets/javascripts/core.js"></script>
 <!-- Bower Components -->
+<!-- Flat UI -->
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.ui.touch-punch.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap-select.js"></script>
@@ -55,27 +57,28 @@
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/flatui-radio.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.tagsinput.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.placeholder.js"></script>
+<!-- Pushy -->
+<script src="<?php echo base_url();?>assets/bower_components/pushy/js/pushy.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/respond/dest/respond.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/intro.js/intro.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<!-- Scrollr -->
 <script src="<?php echo base_url();?>assets/bower_components/skrollr/dist/skrollr.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist/skrollr.menu.min.js"></script>
-
+<!-- Cheet JS -->
 <script src="<?php echo base_url();?>assets/bower_components/cheet.js/cheet.js"></script>
+<!-- Numeral JS -->
 <script src="<?php echo base_url();?>assets/bower_components/numeraljs/numeral.js"></script>
 <script src="<?php echo base_url()?>assets/javascripts/jquery.quickfit.js"></script>
+<script src="<?php echo base_url()?>assets/javascripts/jquery.animateNumber.js"></script>
 <!-- Semantic UI -->
 <script src="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>
 <!-- Scripts for Editable and Searchable Tables -->
 <script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script
-
-
-<!--script src="<?php echo base_url();?>assets/bower_components/"></script-->
-
-
+<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script>
+<!-- HighCharts -->
 <script src="<?php echo base_url()?>assets/javascripts/highcharts.js"></script>
 <script src="<?php echo base_url()?>assets/javascripts/exporting.js"></script>
 
@@ -135,7 +138,7 @@
         // }
 
 
-       // var s = skrollr.init(/*other stuff*/);
+       var s = skrollr.init(/*other stuff*/);
 
 //The options (second parameter) are all optional. The values shown are the default values.
 //skrollr.menu.init(s, {

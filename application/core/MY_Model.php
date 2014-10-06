@@ -393,7 +393,43 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+    /**
+     * [getIndicatorName description]
+     * @param  [type] $code [description]
+     * @return [type]       [description]
+     */
+    public function getTreatmentName($code) {
+        try {
+            $this->result = $this->em->getRepository('models\Entities\treatments')->findOneBy(array('treatmentCode' => $code));
+            // var_dump($this->result);die;
+            $result = $this->result->getTreatmentName();
+            
+            
+            
+            
+        }
+        catch(exception $ex) {
+        }
+        return $result;
+    }
+    /**
+     * [getCommodityName description]
+     * @param  [type] $code [description]
+     * @return [type]       [description]
+     */
+    public function getCommodityName($code) {
+        try {
+            $this->result = $this->em->getRepository('models\Entities\commodityName')->findOneBy(array('commCode' => $code));
+            $result = $this->result->getCommName();
+            
+            // var_dump($result);die;
+            
+            
+        }
+        catch(exception $ex) {
+        }
+        return $result;
+    }
     /**
      * [getIndicatorName description]
      * @param  [type] $code [description]
