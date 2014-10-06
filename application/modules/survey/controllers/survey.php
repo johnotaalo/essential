@@ -248,12 +248,17 @@ class Survey extends MY_Controller
     public function createFacilitiesListSection() {
     /*retrieve facility list*/
         $result = $this->data_model->getFacilitiesByDistrict($this->session->userdata('dName'));
+        // var_dump($result);
         $counter = 0;
         $link = '';
         $surveyCompleteFlag = '';
+        /**
+ * [$districtFacilityListSection description]
+ * @var string
+ */
+            $districtFacilityListSection = '';
         if (count($result) > 0) {
 
-            
             //set session data
             $this->session->set_userdata(array('fCount' => count($result)));
             
@@ -272,11 +277,19 @@ class Survey extends MY_Controller
                 }
                 $dataFound = $this->data_model->getSurveyInfo($survey, $survey_category,'facility', $fac_mfl);
                 
-               // print_r($dataFound);
+               if($dataFound){
                 $current = trim($dataFound[0]['max_section'], 'section-');
 //                 echo $current;
                 $last_activity = $dataFound[0]['last_activity'];
                 $label = $dataFound[0]['status'];
+               }
+               else{
+                $current=NULL;
+                $last_activity=NULL;
+                $label = NULL;
+               }
+                
+                
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
@@ -335,10 +348,11 @@ class Survey extends MY_Controller
 
 public function createFacilityTable() {
     $districtFacilityListSection=$this->createFacilitiesListSection();
+    // var_dump($districtFacilityListSection);die;
 //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
-        $facilityList .= '
+        $facilityList = '
         <table class="centre dataTable">
 
 <thead>
@@ -351,6 +365,7 @@ public function createFacilityTable() {
 </thead>
         </tr>' . $districtFacilityListSection . '
         </table>';
+        // echo $facilityList;
         $data['form'] = $facilityList;
         $data['form_id'] = '';
         $this -> load -> view('form', $data);

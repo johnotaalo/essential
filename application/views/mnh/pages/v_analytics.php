@@ -32,48 +32,68 @@
 
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                         <h4 class="page-title">
-
-                            <?php echo $analytics_main_title; ?> 
-                            <!--for <?php echo $this->session->userdata('county_analytics')." County:"?> <?php echo strtoupper($this->session->userdata('survey')) ?> <small><?php echo $analytics_mini_title; ?></small>-->
-
+                            <!-- <div id="page-crumb">
+                                <a class="section">Food</a>
+                                <div class="divider"> / </div>
+                                <a class="section">Fruit</a>
+                                <div class="divider"> / </div>
+                                <div class="active section">Apples</div>
+                            </div> -->
+                            
                         </h4>
 
                         <ul class="breadcrumb" data-start="border-bottom:0;opacity:1;position:relative" data-top="opacity:0.9;z-index:1000;position:fixed;top:0;width:100%;border-bottom:1px solid #ddd">
                          
-                                <select name="survey_type" id="survey_type" class="input">
-                                    <option>No Survey Type Selected</option>
-                                    <option value="mnh">MNH</option>
-                                    <option value="ch">CH</option>
-                                    <option value="hcw">IMCI FOLLOW UP</option>
-                                </select>
-                                <select  name="survey_category" id="survey_category" class="input">
-                                    <option>No Survey Category Selected</option>
-                                    <option value="baseline">Baseline</option>
-                                    <option value="mid-term">Mid-Term</option>
-                                    <option value="end-term">End-Term</option>
-                                </select>
+                                <div class="ui selection dropdown">
+                                    <input id="survey_type" type="hidden">
+                                    <i class="icon book"></i>
+                                    <div class="default text">Choose a Survey</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      <div class="item" data-value="mnh">MNH</div>
+                                      <div class="item" data-value="ch">CH</div>
+                                      <div class="item" data-value="hcw">IMCI Follow Up</div>
+                                    </div>
+                                </div>
+                                <div class="ui selection dropdown">
+                                <i class="icon time"></i>
+                                    <input id="survey_category" type="hidden">
+                                    <div class="default text">Choose a Survey Category</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      <div class="item" data-value="baseline">Baseline</div>
+                                      <div class="item" data-value="mid-term">Mid-Term</div>
+                                      <div class="item" data-value="end-term">End-Term</div>
+                                    </div>
+                                </div>
+                               <div class="ui selection dropdown">
+                               <i class="icon map marker"></i>
+                                    <input id="county_select" type="hidden">
+                                    <div class="default text">Choose a County</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      
+                                    </div>
+                                </div>
+                                <div class="ui selection dropdown">
+                                <i class="icon map marker"></i>
+                                    <input id="sub_county_select" type="hidden">
+                                    <div class="default text">Choose a Sub County</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      
+                                    </div>
+                                </div>
+                                <div class="ui selection dropdown">
+                                <i class="icon hospital"></i>
+                                    <input id="facility_select" type="hidden">
+                                    <div class="default text">Choose a Facility</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      
+                                    </div>
+                                </div>
                             
-                                <select name="county_select" id="county_select" class="input">
-                                    <option data-scope="national" >All Counties Selected</option>
-                                    <?php echo $selectCounties;?>
-                                </select>
-                            
-                                <select name="sub_county_select" id="sub_county_select" class="input">
-                                    <option data-scope="county" >All Sub-Counties Selected</option>
-
-                                </select>
-                                <!-- <select name="facility_select" id="facility_select" class="input">
-                                    <option data-scope="national" >All Facilities Selected</option>
-
-                                </select> -->
-                            <!--<a data-start="display:none" data-top="display:inline-block" href="" class="go-top">
-                <i class="fa fa-chevron-up title="Top""></i>
-                &nbsp; Move to Top
-            </a>*/-->
-                               
-                           
-
-
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>

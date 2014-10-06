@@ -196,6 +196,7 @@ form{
 }
 #network{
     @extend .breadcrumb;
+    margin-bottom:0;
     li{
         i{
             padding-right:5px;
@@ -457,6 +458,11 @@ h4{
     @extend .epsilon;
     padding-left:15px;
 }
+#page-crumb{
+    @extend .ui;
+    @extend .breadcrumb;
+    @extend .zeta
+}
 .breadcrumb{
     border-color: #e7e7e7 !important;
     .ui.button{
@@ -467,6 +473,12 @@ h4{
     }
 .ui.label{
         font-size:10px !important;
+    }
+    .ui.dropdown{
+        font-size:14px;
+        .menu{
+            font-size:12px !important;
+        }
     }
 }
 #page_sidebar{
@@ -674,7 +686,9 @@ a.disabled:hover{
 }
 .dataTables_length{
     width:200px;
-    float:left;
+    display:inline-block;
+    vertical-align:top;
+    // float:left;
     label{
         select{
             display:inherit;
@@ -684,8 +698,11 @@ a.disabled:hover{
     }
 }
 .dataTables_filter{
+    display:inline-block;
+    vertical-align:top;
+    float:right;
     label{
-        float:right;
+        
         padding-right:5%;
         input{
             display: initial;
@@ -783,3 +800,31 @@ h6.table-header{
     height:20px !important;
     padding:3px;
 }
+
+/**
+ * Image Styles
+ */
+img{
+    @extend .img-responsive;
+}
+img#coat_of_arms{
+    width:8%;
+}
+
+/**
+ * Banner Styles
+ */
+img#coat_of_arms,#description{
+    display:inline-block;
+    vertical-align:middle;
+}
+#description{
+    #project_name{
+        @extend .zeta;
+        margin-bottom:0;
+    }
+    #ministry{
+        font-weight:800;
+    }
+}
+

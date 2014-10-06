@@ -739,7 +739,9 @@ $(document).ready(function() {
 
     //startIntro();
     
-
+$('.ui.selection.dropdown')
+  .dropdown()
+;
 
 
     
