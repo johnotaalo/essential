@@ -632,44 +632,43 @@ class Analytics extends MY_Controller
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar');
     }
-    
+    /**
+     * [getStaffAvailability description]
+     * @param  [type] $criteria        [description]
+     * @param  [type] $value           [description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $for             [description]
+     * @return [type]                  [description]
+     */
     public function getStaffAvailability($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $category = $resultsArray = array();
         $value = urldecode($value);
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
         
+        //echo '<pre>';print_r($results);echo '</pre>';
         $category = array();
-        foreach ($results as $guide ) {
-            $category = array('total_in_facility','total_on_duty');
+        foreach ($results as $guide) {
+            // $category = array('Total in Facility', 'Total On Duty');
+            
+            //echo '<pre>';print_r($guide);echo '</pre>';
             foreach ($guide as $name => $data) {
+                
                 //echo '<pre>';print_r($guide);echo '</pre>';
-                $gData[$name]['total_in_facility'][] = (int)$data['total_facility'];
-                $gData[$name]['total_on_duty'][] = (int)$data['total_duty'];
+                $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
+                $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
-
         }
         
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         
-        //echo '<pre>';print_r($gData);echo '</pre>'; exit;
-        $colorCount = 0;
         foreach ($gData as $name => $data) {
-            $color = $colors[$colorCount];
-            $count = 0;
-            foreach ($data as $stack => $actual) {
-                //echo '<pre>';print_r($actual);echo '</pre>';
-                if ($count == 0) {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'color' => $color);
-                } else {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'linkedTo' => ':previous', 'color' => $color);
-                }
-                $count++;
-            }
-            $colorCount++;
+            $category=array_keys($data);
+            $resultArray[]=array('name'=>$name,'data'=>array_values($data));
         }
         
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar');
+        // echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar','','','','',$colors);
     }
     
     //get treatment symptoms
@@ -693,10 +692,10 @@ class Analytics extends MY_Controller
                 //echo $name;
                 switch ($statistic) {
                     case 'cases':
-                        $category = '';
+                        $category[] = $stack;
                         
-                        $resultArray[] = array('name' => $name, 'data' => array($data), 'stack' => $stack);
-                        
+                        $gData[$stack]+= $data;
+                        // $classifications[] = $name;
                         break;
 
                     case 'treatment':
@@ -704,6 +703,7 @@ class Analytics extends MY_Controller
                         $gData = array();
                         
                         foreach ($data as $commodity => $numbers) {
+                            
                             // echo $commodity . '</br>';
                             // $commodity = $this->sortTreatment($commodity, $option);
                             // echo 'New :</br>';
@@ -712,16 +712,15 @@ class Analytics extends MY_Controller
                         }
                         $category[$stack][] = $name;
                         
-                        
-                        
                         foreach ($newdata[$option] as $key => $value) {
                             
                             foreach ($category[$option] as $cat) {
                                 if (array_key_exists($cat, $value)) {
+                                    
                                     // $treatment_number+=$value[$cat];
-                                    $finalData[$option][$key][$cat]= $value[$cat];
+                                    $finalData[$option][$key][$cat] = $value[$cat];
                                 } else {
-                                    $finalData[$option][$key][$cat]= 0;
+                                    $finalData[$option][$key][$cat] = 0;
                                 }
                             }
                         }
@@ -731,11 +730,13 @@ class Analytics extends MY_Controller
                 $count++;
             }
         }
-        foreach($finalData[$option] as $commodity =>$data){
-            foreach($data as $classification =>$numbers){
-                $theArray[$option][$this->sortTreatment($commodity, $option)][$classification]+=$numbers;
-            }   
+        
+        foreach ($finalData[$option] as $commodity => $data) {
+            foreach ($data as $classification => $numbers) {
+                $theArray[$option][$this->sortTreatment($commodity, $option) ][$classification]+= $numbers;
+            }
         }
+        
         //echo "<pre>";print_r($theArray);echo "</pre>";die;
         // //echo "<pre>";print_r($category);echo "</pre>";die;
         // echo "<pre>";
@@ -753,12 +754,25 @@ class Analytics extends MY_Controller
             foreach ($cleanData as $comm => $ndata) {
                 $resultArray[] = array('name' => $comm, 'data' => $ndata);
             }
-
+        } else {
+            $resultArray=array(
+                array('name'=>'Diarrhoea','data'=>array($gData['dia'],0,0)),
+                array('name'=>'Malaria','data'=>array(0,$gData['fev'],0)),
+                array('name'=>'Pneumonia','data'=>array(0,0,$gData['pne'])));
+             $category[$option]=array('Diarrhoea','Malaria','Pneumonia');
+            // echo '<pre>';print_r($gData);die;
+            foreach ($gData as $k => $values) {
+                // echo '<pre>';print_r($values);die;
+                
+            }
+          
         }
-        
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category[$option], $criteria, 'normal', 120, 'bar');
-    }
+       
+    
+    
+    //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+    $this->populateGraph($resultArray, '', $category[$option], $criteria, 'normal', 120, 'bar');
+}
     public function sortTreatment($treatment,$stack) {
         
         // $treatment = urldecode($treatment);
