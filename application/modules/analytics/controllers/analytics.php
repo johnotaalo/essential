@@ -941,6 +941,10 @@ class Analytics extends MY_Controller
                 }
             }
             foreach ($data as $key => $val) {
+            	if($key == 'Never Available'){
+            	$name = 'Not Available';
+				$key = $name;
+            }
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
@@ -1164,7 +1168,8 @@ class Analytics extends MY_Controller
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')|| ($statistic == 'supplier' && $for == 'mnh')|| ($statistic == 'supplier' && $for == 'ch')){
+		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') 
+		|| ($statistic == 'location' && $for == 'bun')|| ($statistic == 'supplier' && $for == 'mnh')|| ($statistic == 'supplier' && $for == 'ch')){
 			$key = str_replace('_', ' ', $key);
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
@@ -1188,7 +1193,12 @@ class Analytics extends MY_Controller
         }
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
     
-		}else{
+		}else if($statistic == 'location' && $for == 'mnh'){
+            foreach ($results as $key => $value) {
+                print_r($value);die;
+            }
+        }
+		else{
         $key = str_replace('_', ' ', $key);
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
@@ -1946,7 +1956,7 @@ class Analytics extends MY_Controller
      */
     public function getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-        $color = array('#2f7ed8', '#0d233a');
+        //$color = array('#ff0000', '#00ff00');
         //echo "<pre>";print_r($results);echo "</pre>";die;
         //$count = 0;
         $number = $resultArray = $q = array();
@@ -1956,8 +1966,8 @@ class Analytics extends MY_Controller
             $yes[] = (int)$value['yes'];
             $no[] = (int)$value['no'];
         }
-		
-        $resultArray = array(array('name' => 'Yes', 'data' => $yes, 'color' => $color), array('name' => 'No', 'data' => $no,'color' => $color));
+		$resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+        //$resultArray = array(array('name' => 'Yes', 'data' => $yes, 'color' => $color), array('name' => 'No', 'data' => $no,'color' => $color));
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
     }
