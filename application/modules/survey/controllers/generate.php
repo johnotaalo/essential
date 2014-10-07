@@ -457,7 +457,7 @@ class Generate extends MY_Controller
                     }
                 }
                 
-                // var_dump($this->questions['job']);die;
+                 // var_dump($this->questions['cms']);die;
                 return $this->questions;
             }
             public function createCommoditySection() {
@@ -724,7 +724,7 @@ class Generate extends MY_Controller
                             } else {
                                 $unit = '';
                             }
-                            $commodityUsageAndOutageSection.= '<tr>
+                            $commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
             <td colspan="2" style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
             <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>

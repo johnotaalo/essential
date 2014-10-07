@@ -240,11 +240,11 @@ class Form extends MY_Controller
 		
 		<table>
 		<tr>
-		<th colspan="12" >Health Facility Management</th>
+		<th colspan="2" >Health Facility Management</th>
 		</tr>
 		<tr>		
-		<th colspan="7">QUESTION</th>
-		<th colspan="5">RESPONSE</th>	
+		<th colspan="1">QUESTION</th>
+		<th colspan="1">RESPONSE</th>	
 		</tr>
 		' . $this->questions['commi'] . '
 	</table>
@@ -333,7 +333,7 @@ class Form extends MY_Controller
 		<th>QUESTION</th>
 		<th>RESPONSE</th>	
 		</tr>
-		' . $this->$this->questions['ceoc'] . '
+		' . $this->questions['ceoc'] . '
 	</table>
 	<p style="margin-top:300px"></p>
 	<table >
@@ -721,7 +721,7 @@ class Form extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->commodityUsageandOutage . '
+			' . $this->commodityUsageandOutage['mnh'] . '
 		</table>
 	</div><!--\.section-5-->
 	<div id="section-6" class="step">
@@ -915,60 +915,7 @@ class Form extends MY_Controller
 	</div><!--\.section-6-->
 
 	<div id="section-7" class="step">
-		<input type="hidden" name="step_name" value="section-7"/>
-	
-		<!--p style="margin-top:100px"></p>
-		<table>
-			<thead>
-			
-			<th colspan="9"> IN THE LAST 3 MONTHS INDICATE NUMBER OF TIMES THE SUPPLY WAS NOT AVAILABLE.</br>
-				WHEN THE SUPPLY WAS NOT AVAILABLE WHAT HAPPENED? </th>
-
-				<tr>
-					
-					<th colspan="1" rowspan="2">
-						Supply Name
-					</th>
-
-					<th colspan="2">
-						Number Of Times the supply was unavailable</th>
-					<th colspan="5">
-						When the supply was not available what happened?
-						</br>
-						<strong>(Multiple Selections Allowed)</strong>
-					</th>
-
-				</tr>
-				<tr >
-					
-					<th colspan="2">Times Unavailable </th>
-
-					<th colspan="1">
-					
-						Patient purchased the supply privately
-					</th>
-					<th colspan="1">
-					
-						Facility purchased the supply privately
-					</th>
-					<th colspan="1">
-					
-						Facility received the supply from another facility
-					</th>
-					<th colspan="1">
-					
-						The procedure was not conducted
-					</th>
-					<th colspan="1">
-					
-						The procedure was conducted without the supply
-					</th>
-
-				</tr>
-			</thead>
-			' . $this->suppliesUsageAndOutageSectionPDF . '
-		</table-->
-		
+		<input type="hidden" name="step_name" value="section-7"/>	
 		<table >
 			<thead>
 				<tr>
@@ -990,7 +937,7 @@ class Form extends MY_Controller
 				<th   colspan="1" > RESPONSE </th>	
 			</tr>		
 			</thead>
-			' . $this->mnhCommunityStrategySectionPDF . '
+			' . $this->question['cms'] . '
 	</table>
 	</div><!--\.section-7-->
 </form>
@@ -1326,7 +1273,7 @@ class Form extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->mchIndicatorsSectionPDF['ror'] . '
+			' . $this->indicators['ror'] . '
 		</table>
 		<!--table class="centre">
 
@@ -1566,7 +1513,7 @@ class Form extends MY_Controller
             <th colspan="2"> RESPONSE </th>
         </tr>
     </thead>
-    ' . $this->mchIndicatorsSectionPDF['sgn'] . '
+    ' . $this->indicators['sgn'] . '
 </table>
 <table class="centre">
 
@@ -1605,7 +1552,7 @@ class Form extends MY_Controller
         </tr>
     </thead>
     
-     ' . $this->mchIndicatorsSectionPDF['pne'] . '
+     ' . $this->indicators['pne'] . '
 
 	<tr>
 		<th colspan="5">Treatment</th>
@@ -1655,7 +1602,7 @@ class Form extends MY_Controller
         	<th width="200px">Findings</th>
         </tr>
     </thead>
-     ' . $this->mchIndicatorsSectionPDF['dgn'] . '
+     ' . $this->indicators['dgn'] . '
      <tr>
 		<th colspan="5">Treatment</th>
 	</tr>
@@ -1704,7 +1651,7 @@ class Form extends MY_Controller
         	<th width="200px">Findings</th>
         </tr>
     </thead>
-     ' . $this->mchIndicatorsSectionPDF['fev'] . '
+     ' . $this->indicators['fev'] . '
      <tr>
 		<th colspan="5">Treatment</th>
 	</tr>
@@ -1753,7 +1700,7 @@ class Form extends MY_Controller
         	<th width="200px">Findings</th>
         </tr>
     </thead>
-     ' . $this->mchIndicatorsSectionPDF['ear'] . '
+     ' . $this->indicators['ear'] . '
      <tr>
 		<th colspan="5">Treatment</th>
 	</tr>
@@ -1784,7 +1731,7 @@ class Form extends MY_Controller
         	</tr>
     </thead>
     <tbody>
-     ' . $this->mchIndicatorsSectionPDF['mal'] . '
+     ' . $this->indicators['mal'] . '
     </tbody>
 </table>
 <table class="centre">
@@ -1802,7 +1749,7 @@ class Form extends MY_Controller
         	</tr>
     </thead>
     <tbody>
-     ' . $this->mchIndicatorsSectionPDF['anm'] . '
+     ' . $this->indicators['anm'] . '
     </tbody>
 </table>
 <table class="centre">
@@ -1820,7 +1767,7 @@ class Form extends MY_Controller
         	</tr>
     </thead>
     <tbody>
-     ' . $this->mchIndicatorsSectionPDF['con'] . '
+     ' . $this->indicators['con'] . '
     </tbody>
 </table>	
 <p style="display:true;margin-top:300px" class="message success">
@@ -1833,7 +1780,7 @@ class Form extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Commodities <strong>Below</strong>?</td>
-            <td>' . $this->selectMCHCommoditySuppliersPDF . '</td>
+            <td>' . $this->supplierOptions['ch'] . '</td>
         </tr>
 	</tr>
 	</table>
@@ -1875,7 +1822,7 @@ class Form extends MY_Controller
 			</tr>
 			
 		</thead>
-		' . $this->mchCommodityAvailabilitySectionPDF . '
+		' . $this->commodities['ch'] . '
 
 	</table>  
 	<p style="margin-top:200px"></p>
@@ -1886,7 +1833,7 @@ class Form extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Commodities <strong>Below</strong>?</td>
-            <td>' . $this->selectMCHCommoditySuppliersPDF . '</td>
+            <td>' . $this->supplierOptions['ch'] . '</td>
         </tr>
 	</tr>
 	</table>
@@ -1933,7 +1880,7 @@ class Form extends MY_Controller
 			<th>Not Applicable</th>
 			<th>No. of Units</th>
 
-		</tr></thead>' . $this->mchBundlingPDF . '
+		</tr></thead>' . $this->commodities['bun'] . '
 
 	</table>
 
@@ -1974,7 +1921,7 @@ class Form extends MY_Controller
 					<th   style="width:65%;text-align:left"> RESPONSE </th>
 				</tr>
 			</thead>
-			' . $this->ortCornerAspectsSectionPDF . '
+			' . $this->questions['ort'] . '
 		</table>
 
 	</div><!--\.section-4-->
@@ -2010,7 +1957,7 @@ class Form extends MY_Controller
 					<th>Non-Functional</th>
 				</tr>
 			</thead>
-			' . $this->equipmentsMCHSection . '
+			' . $this->equipment['ort'] . '
 
 		</table>
 
@@ -2053,7 +2000,7 @@ class Form extends MY_Controller
 					<th>Other</th>
 				</tr>
 			</thead>
-			' . $this->suppliesMCHSectionPDF . '
+			' . $this->supplies['ch'] . '
 		</table>
 		<table  class="centre" >
 			<thead>
@@ -2075,7 +2022,7 @@ class Form extends MY_Controller
 					<th>Other</th>
 				</tr>
 			</thead>
-			' . $this->mchSuppliesPDF['tst'] . '
+			' . $this->supplies['tst'] . '
 		</table>
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
@@ -2135,8 +2082,8 @@ class Form extends MY_Controller
 	</div><!--\.section-5-->
 				';
         
-        // echo $this -> combined_form;die;
-        return $this->combined_form;
+        echo $this -> combined_form;die;
+        // return $this->combined_form;
     }
     public function get_hcw_form() {
         $this->combined_form = '
