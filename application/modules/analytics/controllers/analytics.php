@@ -922,6 +922,10 @@ class Analytics extends MY_Controller
         if (($statistic == 'location' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')) {
             foreach ($results as $key => $result) {
                 foreach ($result as $k => $value) {
+                	if($k == 'N/A'){
+            	$name = 'Not Available';
+				$k = $name;
+            	}
                     $gData[] = array('name' => $k, 'y' => (int)$value);
                 }
             }
@@ -943,6 +947,9 @@ class Analytics extends MY_Controller
             foreach ($data as $key => $val) {
             	if($key == 'Never Available'){
             	$name = 'Not Available';
+				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
 				$key = $name;
             }
                 $key = str_replace('_', ' ', $key);
@@ -967,6 +974,13 @@ class Analytics extends MY_Controller
                 }
             }
             foreach ($data as $key => $val) {
+            	if($key == 'Never Available'){
+            	$name = 'Not Available';
+				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
+				$key = $name;
+            }
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
@@ -1132,6 +1146,9 @@ class Analytics extends MY_Controller
         	if($key == 'Never Available'){
             	$name = 'Not Available';
 				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
+				$key = $name;
             }
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
@@ -1176,7 +1193,7 @@ class Analytics extends MY_Controller
             $key = ucwords($key);
             $category[] = $key;
             foreach ($result as $name => $value) {
-                if ($name != 'Sometimes Available' && $name != 'N/A') {
+                if ($name != 'Sometimes Available') {
                     $data[$name][] = (int)$value;
                 }
             }
@@ -1184,6 +1201,9 @@ class Analytics extends MY_Controller
         foreach ($data as $key => $val) {
             if($key == 'Never Available'){
             	$name = 'Not Available';
+				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
 				$key = $name;
             }
             $key = str_replace('_', ' ', $key);
@@ -1265,6 +1285,13 @@ class Analytics extends MY_Controller
             }
         }
         foreach ($data as $key => $val) {
+        	if($key == 'Never Available'){
+            	$name = 'Not Available';
+				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
+				$key = $name;
+            }
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
@@ -1999,6 +2026,9 @@ class Analytics extends MY_Controller
 	}
 	public function getHS($criteria,$value,$survey,$survey_category,$for,$statistics){
 		$this->getHSQuestions($criteria, $value, $survey, $survey_category, 'hs', 'healthservice');
+	}
+	public function getBloodMainSource($criteria,$value,$survey,$survey_category,$for,$statistics){
+		$this->getHSQuestions($criteria, $value, $survey, $survey_category, 'ceoc', 'mainsource');
 	}
 	
     /**
