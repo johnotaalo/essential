@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -30,10 +30,10 @@
  */
 class CI_DB_driver {
 
-	var $username;      
-	var $password;      
-	var $hostname;      
-	var $database;      
+	var $username;
+	var $password;
+	var $hostname;
+	var $database;
 	var $dbdriver		= 'mysql';
 	var $dbprefix		= '';
 	var $char_set		= 'utf8';
@@ -322,12 +322,12 @@ class CI_DB_driver {
 				// Log and display errors
 				log_message('error', 'Query error: '.$error_msg);
 				return $this->display_error(
-									array(
-											'Error Number: '.$error_no,
-											$error_msg,
-											$sql
-										)
-									);
+										array(
+												'Error Number: '.$error_no,
+												$error_msg,
+												$sql
+											)
+										);
 			}
 
 			return FALSE;
