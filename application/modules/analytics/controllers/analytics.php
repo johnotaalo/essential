@@ -2108,16 +2108,17 @@ class Analytics extends MY_Controller
     }
     public function getCSReasons($criteria, $value, $survey, $survey_category, $option) {
         $results = $this->analytics_model->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'ceoc', 'reason');
+        //print_r($results);die;
         $count = 0;
         foreach ($results as $key => $result) {
             if ($count == 0) {
                 $data['transfusion'] = $result;
-            } else {
+           }else {
                 $data['cs'] = $result;
             }
             $count++;
-        }
         
+        }
         //echo "<pre>";print_r($data[$option]);echo "</pre>";die;
         foreach ($data[$option] as $key => $value) {
             $gData[] = array('name' => $key, 'y' => (int)$value);
