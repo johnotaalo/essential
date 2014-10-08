@@ -625,6 +625,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getCEOC/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#CEmONC');
                     loadGraph(base_url, 'analytics/getCSReasons/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/cs', '#CEOCReasons');
                     loadGraph(base_url, 'analytics/getCSReasons/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/transfusion', '#TransfusionReasons');
+                    loadGraph(base_url, 'c_analytics/getBloodMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#bloodmainsource');
                     loadGraph(base_url, 'analytics/getNewborn/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHnewborn');
                     loadGraph(base_url, 'analytics/getKangarooMotherCare/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHkmc');
                     loadGraph(base_url, 'analytics/getDeliveries/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#delivery_preparedness');

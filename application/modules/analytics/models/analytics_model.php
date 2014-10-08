@@ -1649,9 +1649,7 @@ ORDER BY oa.question_code ASC";
                         }
                     }
                     $data = $newData;
-                } else {
-                    return null;
-                }
+                } 
                 
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 
@@ -3963,7 +3961,9 @@ ORDER BY question_code";
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
                             
                             break;
-
+						case 'mainsource':
+							$data[$question][$value_['reason']]=(int)$value_['total_response'];
+							break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
