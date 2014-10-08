@@ -1,9 +1,8 @@
 {
-  "require":{
-    "php": ">=5.3",
-    "monolog/monolog": "*",
-    "components/bootstrap": ">=3",
-    "components/font-awesome": ">=4",
-    "components/modernizr": "*"
-  }
+    "require": {
+        "monolog/monolog": "1.2.*"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    }
 }
