@@ -7,7 +7,9 @@ class Analytics extends MY_Controller
         parent::__construct();
         $this->data = '';
         $this->load->module('mnch_data');
+        $this->load->module('template');
         $this->load->model('analytics_model');
+
         
         // $this->load->library('PHPExcel');
         
@@ -137,7 +139,7 @@ class Analytics extends MY_Controller
         
         //$this -> data['analytics_content_to_load'] = 'analytics/content_dashboard';
         //$this -> ch_survey_response_rate();
-        $this->template($this->data);
+        $this->template->mnch($this->data);
     }
     
     public function summary() {
