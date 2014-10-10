@@ -1149,7 +1149,7 @@ class Analytics extends MY_Controller
             	$name = 'Not Available';
 				$key = $name;
             }else if($key == 'N/A'){
-            	$name = 'Null Data';
+            	$name = 'No Data';
 				$key = $name;
             }
             $key = str_replace('_', ' ', $key);
@@ -1205,7 +1205,7 @@ class Analytics extends MY_Controller
             	$name = 'Not Available';
 				$key = $name;
             }else if($key == 'N/A'){
-            	$name = 'Null Data';
+            	$name = 'No Data';
 				$key = $name;
             }
             $key = str_replace('_', ' ', $key);
@@ -1227,7 +1227,7 @@ class Analytics extends MY_Controller
             $key = ucwords($key);
             $category[] = $key;
             foreach ($result as $name => $value) {
-                if ($name != 'Sometimes Available' && $name != 'N/A') {
+                if ($name != 'Sometimes Available') {
                     $data[$name][] = (int)$value;
                 }
             }
@@ -1235,6 +1235,9 @@ class Analytics extends MY_Controller
         foreach ($data as $key => $val) {
         	if($key == 'Never Available'){
             	$name = 'Not Available';
+				$key = $name;
+            }else if(($key == 'N/A') || ($key == '')){
+            	$name = 'No Data';
 				$key = $name;
             }
             $key = str_replace('_', ' ', $key);
@@ -1994,8 +1997,9 @@ class Analytics extends MY_Controller
             $q[] = $key;
             $yes[] = (int)$value['yes'];
             $no[] = (int)$value['no'];
+			$null[]=(int)$value['null'];
         }
-		$resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+		$resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no),array('name' => 'No data', 'data' => $null));
         //$resultArray = array(array('name' => 'Yes', 'data' => $yes, 'color' => $color), array('name' => 'No', 'data' => $no,'color' => $color));
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
