@@ -3945,14 +3945,18 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
+                    //echo '<pre>';print_r($value);echo '</pre>';die;
+                  
                     switch ($statistics) {
                         case 'response':
                             $yes = $value_['Yes'];
                             $no = $value_['No'];
+							$null = $value_[''];
                             
                             //1. collect the categories
                             $data[$question]['yes'] = $yes;
                             $data[$question]['no'] = $no;
+							$data[$question]['null']=$null;
                             break;
 
                         case 'total':
