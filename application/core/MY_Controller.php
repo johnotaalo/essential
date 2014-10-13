@@ -20,17 +20,6 @@ class MY_Controller extends MX_Controller
         }
 
     }
-
-    public function template($data) {
-        $data['head'] = 'mnh/segments/head';
-        $data['header'] = 'mnh/segments/header';
-        $data['footer'] = 'mnh/segments/footer';
-        $data['modals'] = 'mnh/segments/modals';
-        $data['show_menu'] = 0;
-        $data['show_sidemenu'] = 0;
-        $this->load->module('template');
-        $this->template->index($data);
-    }
     
     public function load_imci_defaults()
     {

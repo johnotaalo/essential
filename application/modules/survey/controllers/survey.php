@@ -13,6 +13,7 @@ class Survey extends MY_Controller
         $this->rows = '';
         $this->combined_form;
         $this->load->model('data_model');
+        $this->load->module('template');
     }
     
     public function index() {
@@ -34,7 +35,7 @@ class Survey extends MY_Controller
             $this->data['survey'] = strtoupper($this->survey);
             // print_r($this->data);
             //$this -> load -> view('index', $this->data); //login view
-            $this->template($this->data);
+            $this->template->mnch($this->data);
         } else {
             $this->inventory();
         }
@@ -61,7 +62,7 @@ class Survey extends MY_Controller
             $this->data['logged'] = 1;
             $this->data['form_id'] = '';
             $this->data['content'] = 'mnh/pages/v_survey_main';
-            $this->template($this->data);
+            $this->template->mnch($this->data);
         } else {
             redirect(base_url() . 'home', 'refresh');
         }
