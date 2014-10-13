@@ -1712,7 +1712,8 @@ ORDER BY oa.question_code ASC";
                         if ($commodity['commFor'] == $for) {
                             $data['commodities'][] = $commodity['commName'];
                         }
-                    }   
+                    }
+               
                 }
                 
                 // echo "<pre>";print_r($data);echo "</pre>";die;
