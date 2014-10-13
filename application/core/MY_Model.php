@@ -458,14 +458,15 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\signalFunctions')->findOneBy(array('sfCode' => $code));
             $result = $this->result->getSfName();
-            
+            return $result;
             // var_dump($result);die;
             
             
         }
         catch(exception $ex) {
+            print_r($ex);
         }
-        return $result;
+        
     }
     
     /**

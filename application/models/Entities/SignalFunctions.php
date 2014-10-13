@@ -26,7 +26,7 @@ class SignalFunctions
      *
      * @Column(name="sf_code", type="string", length=15, nullable=false)
      */
-    private $sfacilityMFL;
+    private $sfCode;
 
     /**
      * @var string
