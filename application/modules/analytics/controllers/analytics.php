@@ -722,16 +722,15 @@ class Analytics extends MY_Controller
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
         
-        // echo "<pre>";print_r($results);echo "</pre>";die;
+        //echo "<pre>";print_r($results);echo "</pre>";die;
         
         $count = 0;
         foreach ($results as $stack => $result) {
-            foreach ($result as $name => $data) {
-                
-                //echo $name;
+        	foreach ($result as $name => $data) {
+                 //echo $name;
                 switch ($statistic) {
                     case 'cases':
-                        $category[] = $stack;
+						 $category[] = $stack;
                         
                         $gData[$stack]+= $data;
                         
@@ -795,8 +794,9 @@ class Analytics extends MY_Controller
                 $resultArray[] = array('name' => $comm, 'data' => $ndata);
             }
         } else {
-            $resultArray = array(array('name' => 'Diarrhoea', 'data' => array($gData['dia'], 0, 0)), array('name' => 'Malaria', 'data' => array(0, $gData['fev'], 0)), array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'])));
-            $category[$option] = array('Diarrhoea', 'Malaria', 'Pneumonia');
+            $resultArray = array(array('name' => 'Diarrhoea', 'data' => array($gData['dia'], 0, 0,0)), array('name' => 'Malaria', 'data' => array(0, $gData['fev'], 0,0)),
+             array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'],0)), array('name' => 'Other Totals','data'=>array(0,0,0,$gData[''])));
+            $category[$option] = array('Diarrhoea', 'Malaria', 'Pneumonia','Other Totals');
             
             // echo '<pre>';print_r($gData);die;
             foreach ($gData as $k => $values) {
@@ -1188,7 +1188,52 @@ class Analytics extends MY_Controller
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         // echo '<pre>';print_r($results);die;
-        if (($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun') || ($statistic == 'supplier' && $for == 'mnh') || ($statistic == 'supplier' && $for == 'ch')) {
+        if (($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')) {
+            $key = str_replace('_', ' ', $key);
+            foreach ($results as $key => $result) {
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+            foreach ($data as $key => $val) {
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                }else if ($key == 'N/A') {
+                    $name = 'No Data';
+                    $key = $name;
+                }
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                if($key=='No-Data'){
+                   $color='#dddddd';
+                }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available' || $key=='Expired'){
+                    $color='#f66c6f';
+                }
+                else if($key=='Ordered-But-Not-Yet-Received'){
+                    $color='#f6c76c';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+               
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$colors);
+        } else if (($statistic == 'supplier' && $for == 'ch') || ($statistic == 'supplier' && $for == 'mnh')){
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1201,20 +1246,19 @@ class Analytics extends MY_Controller
                 }
             }
             foreach ($data as $key => $val) {
-                if ($key == 'Never Available') {
-                    $name = 'Not Available';
-                    $key = $name;
-                } else if ($key == 'N/A') {
-                    $name = 'No Data';
-                    $key = $name;
-                }
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
+				if ($key == '') {
+                    $name = 'No Data';
+                    $key = $name;
                 $resultArray[] = array('name' => $key, 'data' => $val);
+				}else{
+					$resultArray[] = array('name' => 'Tier'.''.$key, 'data' => $val);
+				}
             }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
-        }  else {
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+        }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -2438,9 +2482,9 @@ class Analytics extends MY_Controller
             $key = ucwords($key);
             $category[] = $key;
             foreach ($result as $name => $value) {
-                if ($name != 'NULL') {
+                //if ($name != 'NULL') {
                     $data[$name][] = (int)$value;
-                }
+                //}
             }
         }
         foreach ($data as $key => $val) {
@@ -2485,15 +2529,20 @@ class Analytics extends MY_Controller
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column');
     }
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();
         
-        //echo '<pre>';print_r($results);echo '</pre>';die;
-        $options = '<option>Choose Indicator Type</option>';
+       //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
         foreach ($results as $value) {
-            if ($value['il_full_name'] != '') {
+           if (($value['il_for'] == 'pne') ||($value['il_for'] == 'dgn') || ($value['il_for'] == 'fev') || ($value['il_for'] == 'ear') ||($value['il_for'] == 'mal') || ($value['il_for'] == 'anm')|| ($value['il_for'] == 'con')) {
+                	if(($value['il_for'])=='con'){
+                		$value['il_full_name']= 'Condition';
+                	}else if(($value['il_for'])=='mal'){
+                		$value['il_full_name']= 'Malnutrition';
+					}
                 $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
             }
         }
@@ -2519,7 +2568,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getDangerSigns($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'dgn');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn');
     }
     
     /**
@@ -3596,7 +3645,7 @@ class Analytics extends MY_Controller
             
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
-            $category[] = 'Level ' . $key;
+            $category[] = 'Tier' . $key;
             foreach ($result as $name => $value) {
                 if ($name != 'n/a' && $name != '') {
                     $data[$name][] = (int)$value;

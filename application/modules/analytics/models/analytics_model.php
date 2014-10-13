@@ -404,10 +404,14 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
                 
-                // echo '<pre>';var_dump($this->dataSet);die;
+               //echo '<pre>';var_dump($this->dataSet);die;
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
                         case 'cases':
+							if($value['treatment'] == 'OtherTotal'){
+								$value['treatment_for']== 'other_totals';
+							}
+							//print_r($value['treatment_for']);die;
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                             
                             break;
@@ -1123,7 +1127,7 @@ WHERE
                 
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
-                    
+                     //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     //prep data for the pie chart format
                     $size = count($this->dataSet);
                     $i = 0;
@@ -1136,7 +1140,11 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        
+                        //echo '<pre>';print_r($value);echo '</pre>';die;
+                        if(($value['response']) == ''){
+                        	$name = 'No data';
+							$value['response']= $name;
+                        }
                         $indicator = $value['indicator_name'];
                         
                         //echo $value['indicator'];die;
@@ -1772,8 +1780,8 @@ ORDER BY oa.question_code ASC";
                             }
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
-                        } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['commodity_name']][$value['supplier_code']] = (int)$value['supplier_name'];
+                        } else if (array_key_exists('fac_level', $value)) {
+                            $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
                         }
                     }
                     
