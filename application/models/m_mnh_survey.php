@@ -3340,8 +3340,8 @@ class M_MNH_Survey extends MY_Model
             (isset($this->elements[$i]['eqAvailability'])) ? $this->theForm->setAeAvailability($this->elements[$i]['eqAvailability']) : $this->theForm->setAeAvailability("N/A");
             (isset($this->elements[$i]['eqLocation'])) ? $this->theForm->setAeLocation($this->elements[$i]['eqLocation']) : $this->theForm->setAeLocation("N/A");
             (isset($this->elements[$i]['eqQtyFullyFunctional']) || $this->elements[$i]['eqQtyFullyFunctional'] != '') ? $this->theForm->setAeFullyFunctional($this->elements[$i]['eqQtyFullyFunctional']) : $this->theForm->setAeFullyFunctional(-1);
-            (isset($this->elements[$i]['eqQtyPartiallyFunctional'])) ? $this->theForm->setAePartiallyFunctional($this->elements[$i]['eqQtyFullyFunctional']) : $this->theForm->setAePartiallyFunctional(-1);
-            (isset($this->elements[$i]['eqQtyNonFunctional']) || $this->elements[$i]['eqQtyNonFunctional'] != '') ? $this->theForm->setAeNonFunctional($this->elements[$i]['eqQtyFullyFunctional']) : $this->theForm->setAeNonFunctional(-1);
+            (isset($this->elements[$i]['eqQtyPartiallyFunctional'])) ? $this->theForm->setAePartiallyFunctional($this->elements[$i]['eqQtyPartiallyFunctional']) : $this->theForm->setAePartiallyFunctional(-1);
+            (isset($this->elements[$i]['eqQtyNonFunctional']) || $this->elements[$i]['eqQtyNonFunctional'] != '') ? $this->theForm->setAeNonFunctional($this->elements[$i]['eqQtyNonFunctional']) : $this->theForm->setAeNonFunctional(-1);
             
             $this->theForm->setAeCreated(new DateTime());
             $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
