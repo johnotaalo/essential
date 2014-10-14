@@ -1408,7 +1408,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
         /*
          * ORT Corner Assessment
         */
-        public function getORTCornerAssessment($criteria, $value, $survey, $survey_category) {
+        public function getORTCornerAssessment($criteria, $value, $survey, $survey_category,$for,$statistic) {
             
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
@@ -1424,50 +1424,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
              * something of this kind:
              * $data_series[0]="name: '.$value['analytic_variable'].',data:".json_encode($data_set[0])
              */
-            
-            switch ($criteria) {
-                case 'national':
-                    $criteria_condition = ' ';
-                    break;
-
-                case 'county':
-                    $criteria_condition = 'WHERE fac_county=?';
-                    break;
-
-                case 'district':
-                    $criteria_condition = 'WHERE fac_district=?';
-                    break;
-
-                case 'facility':
-                    $criteria_condition = 'WHERE fac_mfl=?';
-                    break;
-
-                case 'none':
-                    $criteria_condition = '';
-                    break;
-            }
-            
-            $query = "SELECT
-    oa.question_code AS assessment_item, oa.lq_response as response
-FROM
-    log_questions oa
-WHERE
-    oa.question_code IN (SELECT
-            question_code
-        FROM
-            questions
-        WHERE
-            question_for = 'ort')
-        AND oa.fac_mfl IN (SELECT
-            fac_mfl
-        FROM
-            facilities f
-                JOIN
-            survey_status ss ON ss.fac_id = f.fac_mfl
-                JOIN
-            survey_types st ON (st.st_id = ss.st_id
-                AND st.st_name = 'ch')" . $criteria_condition . ")
-ORDER BY oa.question_code ASC";
+ 				$query = "CALL get_ortcorner_statistic('".$criteria."','".$value."','".$survey."','".$survey_category."','".$for."','".$statistic."');";
             try {
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
@@ -1480,45 +1437,12 @@ ORDER BY oa.question_code ASC";
                     $i = 0;
                     
                     foreach ($this->dataSet as $value) {
-                        switch ($this->getQuestionName($value['assessment_item'])) {
-                            case 'Is the ORT Corner functional?':
-                                if ($value['response'] == 'Yes') {
-                                    $functionalTotalY++;
-                                } else if ($value['response'] == 'No') {
-                                    $functionalTotalN++;
-                                }
-                                break;
-
-                            case 'Does this Facility have a designated location for oral rehydration?':
-                                if ($value['response'] == 'Yes') {
-                                    $rehydrationTotalY++;
-                                } else if ($value['response'] == 'No') {
-                                    $rehydrationTotalN++;
-                                }
-                                break;
-
-                            case 'Where is the designated location of the ORT Corner?':
-                                if ($value['response'] == 'Yes') {
-                                    $locationY++;
-                                } else if ($value['response'] == 'No') {
-                                    $locationN++;
-                                }
-                                break;
-                            }
-                            
-                            /*if ($value['response'] == 'Yes') {
-                                $data_y[] = array($this -> getChildHealthQuestionName($value['assessment_item']), 1);
-                                } else if ($value['response'] == 'No') {
-                                $data_n[] = array($this -> getChildHealthQuestionName($value['assessment_item']), 1);
-                                }*/
-                            
-                            //get a set of the 3 items for ORT assessment
-                            
-                            
-                        }
-                        $data['categories'] = array('Is the ORT Corner functional?', 'Does this Facility have a designated location for oral rehydration?');
-                        $data['yes_values'] = array($functionalTotalY, $rehydrationTotalY);
-                        $data['no_values'] = array($functionalTotalN, $rehydrationTotalN);
+                    	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    	if(array_key_exists('flevel', $value)){
+                    		$data[$value['question_name']][$value['response']][$value['flevel']] = (int)$value['total_response'];
+                    		
+                    	}
+					}
                         
                         $this->dataSet = $data;
                         
@@ -1539,6 +1463,7 @@ ORDER BY oa.question_code ASC";
                 
                 
             }
+			return $data;
         }
         
         public function getReasonStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -1616,6 +1541,7 @@ ORDER BY oa.question_code ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1627,6 +1553,9 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
+                        }else if(array_key_exists('fully_functional', $value)){
+                        	$data[$value['equipment_name']]['functional']+=(int)$value['fully_functional'];
+							$data[$value['equipment_name']]['nonfunctional']+=(int)$value['non_functional'];
                         }
                     }
                 }
@@ -1882,8 +1811,8 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('supply_name', $value)) {
-                            $data[$value['supply_name']][$value['supply_name']] = (int)$value['total_response'];
+                        } else if (array_key_exists('fac_level', $value)) {
+                            $data[$value['supply_name']][$value['fac_level']] = (int)$value['total_response'];
                         }
                     }
                     
@@ -2121,8 +2050,8 @@ LIMIT 0 , 1000
                                 $data[$this->getCHEquipmentName($value['equipment']) ][$place]+= (int)$value['total_response'];
                             }
                         }
-                        if (array_key_exists('suppliers', $value)) {
-                            $data[$value['resource_name']][$value['suppliers']] = (int)$value['total_response'];
+                        if (array_key_exists('fac_level', $value)) {
+                            $data[$value['suppliers']][$value['fac_level']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];
