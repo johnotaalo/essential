@@ -6,13 +6,13 @@ ini_set('memory_limit', '-1');
 
 class MY_Controller extends MX_Controller
 {
-	public $questions,$indicators,$commodities,$survey;
+	public $questions,$indicators,$commodities,$survey,$survey_form;
 
     public function __construct() {
         parent::__construct();
         
-        $this->load->module('survey/generate');
-
+       
+// $this->survey_form='';
         // Load IMCI defaults if one is accessing IMCI
         if($this->uri->segment(1) === 'imci')
         {
