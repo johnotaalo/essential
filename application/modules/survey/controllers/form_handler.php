@@ -1,9 +1,9 @@
 <?php
 
 //include ('c_load.php');
-class Form extends MY_Controller
+class Form_Handler extends MY_Controller
 {
-    var $rows, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment,$supplies;
+    var $rows, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection;
     
     public function __construct() {
         parent::__construct();
@@ -48,11 +48,23 @@ class Form extends MY_Controller
          * @var [type]
          */
         $this->equipment = $this->generate->createEquipmentSection();
-/**
- * [$this->supplies description]
- * @var [type]
- */
+        
+        /**
+         * [$this->monthlyDeliveries description]
+         * @var [type]
+         */
+        $this->monthlyDeliveries = $this->generate->createMonthlyDeliveriesSection();
+        
+        /**
+         * [$this->supplies description]
+         * @var [type]
+         */
         $this->supplies = $this->generate->createSuppliesSection();
+        /**
+         * [$this->signalFunctionsSection description]
+         * @var [type]
+         */
+        $this->signalFunctionsSection = $this->generate->createBemoncSection();
     }
     
     public function index() {
@@ -63,10 +75,10 @@ class Form extends MY_Controller
 		<p style="display:true" class="message success">
 			SECTION 1 of 7: FACILITY INFORMATION
 		</p>
-		<table border="2">
+		<table >
 
 			<thead>
-				<th colspan="9">FACILITY INFORMATION</th>
+				<tr><th colspan="9">FACILITY INFORMATION</th></tr>
 			</thead>
 			<tbody>
 				<tr>
@@ -102,7 +114,7 @@ class Form extends MY_Controller
 		</p>
 		<table>
 			<thead>
-				<th colspan="3" >FACILITY CONTACT INFORMATION</th>
+				<tr><th colspan="5" >FACILITY CONTACT INFORMATION</th></tr>
 			</thead>
 			<tbody>
 				<tr >
@@ -199,9 +211,9 @@ class Form extends MY_Controller
 			</table>	
 		<table>
 			<thead>
-				
+				<tr>
 					<th colspan="2" >PROVISION OF Nurses</th>
-			
+			</tr>
 				<tr>
 					<th >QUESTION</th>
 					<th>RESPONSE</th>
@@ -212,33 +224,35 @@ class Form extends MY_Controller
 		</table>	
 		<table>
 			<thead>
-				
+				<tr>
 					<th colspan="2" >PROVISION OF Beds</th>
-			
+			</tr>
+				<tr>
 				<tr>
 					<th >QUESTION</th>
 					<th>RESPONSE</th>
-
+</tr>
 				</tr>
 			</thead>
 			' . $this->questions['bed'] . '
 		</table>
 		<table>
 			<thead>
-				
+				<tr>
 					<th colspan="2" >PROVISION OF Services</th>
-			
+			</tr>
 				<tr>
 					<th >QUESTION</th>
 					<th>RESPONSE</th>
 
 				</tr>
 			</thead>
-			' . $this->questions['ser'] . '
+			' . $this->questions['serv'] . '
 		</table>	
 		
 		
 		<table>
+		<thead>
 		<tr>
 		<th colspan="2" >Health Facility Management</th>
 		</tr>
@@ -246,6 +260,7 @@ class Form extends MY_Controller
 		<th colspan="1">QUESTION</th>
 		<th colspan="1">RESPONSE</th>	
 		</tr>
+		</thead>
 		' . $this->questions['commi'] . '
 	</table>
 	
@@ -260,47 +275,11 @@ class Form extends MY_Controller
 
 			<thead>
 				<tr>
-					<th colspan="13" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE FOLLOWING PERIODS </th>
-				</tr>
-				<tr>
-					<th> MONTH</th><th> JANUARY</th><th>FEbrUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th><th> JULY</th><th> AUGUST</th>
-					<th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
+					<th colspan="7" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE FOLLOWING PERIODS </th>
 				</tr>
 			</thead>
-			<tr>
-				<td>' . date('Y') . '</td>
-				<td style ="text-align:center;" class="not-read">
-				</td>
-
-				<td style ="text-align:center;" class="not-read">
-				</td>
-				<td style ="text-align:center;">
-				<input type="text" id="dnmarch_13" name="dnmarch_13" size="8"class="cloned numbers"/>
-				</td>
-				<td style ="text-align:center;">
-				<input type="text" id="dnapril_13" name="dnapril_13" size="8"class="cloned numbers"/>
-				</td>
-				<td style ="text-align:center;">
-				<input type="text" id="dnmay_13" name="dnmay_13" size="8"class="cloned numbers" />
-				</td>
-				<td style ="text-align:center;" class="not-read">
-				</td>
-				<td style ="text-align:center;" class="not-read">
-				</td>
-				<td style ="text-align:center;" class="not-read">
-				</td>
-				<td  style ="text-align:center;" class="not-read">
-				</td>
-				<td style ="text-align:center;" class="not-read">
-				</td>
-				<td style ="text-align:center;" width="15" class="not-read">
-				</td>
-
-				<td style ="text-align:center;" class="not-read">
-				</td>
-			</tr>
+			' . $this->monthlyDeliveries . '
 		</table>
-       <p style="margin-top:50px"></p>
 		<table>
 			<thead>
 				<tr>
@@ -317,7 +296,7 @@ class Form extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->signalFunctionsSectionPDF . '
+			' . $this->signalFunctionsSection . '
 		</table>
 	
 <table>
@@ -335,7 +314,8 @@ class Form extends MY_Controller
 		</tr>
 		' . $this->questions['ceoc'] . '
 	</table>
-	<p style="margin-top:300px"></p>
+
+       <p style="margin-top:50px"></p>
 	<table >
 		
 				<tr>
@@ -356,12 +336,12 @@ class Form extends MY_Controller
 		<table >
 			<thead>
 				<tr>
-					<th colspan="12" >PROVISION OF Newborn Care</th>
+					<th colspan="2">PROVISION OF Newborn Care</th>
 				
 				</tr>
 				<tr>
-					<th colspan="7">QUESTION</th>
-					<th colspan="5">RESPONSE</th>
+					<th>QUESTION</th>
+					<th>RESPONSE</th>
 				</tr>
 </thead>
 				
@@ -394,6 +374,9 @@ class Form extends MY_Controller
 				 Receiving Place ; Adequate Light ; No draft(cold air); Clean (delivery beds, recovery beds and all surfaces)	; Waste Disposal System	
 				; Sterilization color-coded	;Sharp Container; Privacy; Delivery Kit		
 					</th>
+					</tr>
+					<tr>
+					<th colspan="12" class="guide">A facility must meet the <b>ABOVE</b> criteria to be fully prepared </th>
 				</tr>
 				<tr>
 					<th style="width:35%">QUESTION</th>
@@ -659,7 +642,7 @@ class Form extends MY_Controller
 
 	
 	</div><!--\.section-4-->
-<p style="margin-top:100px"></p>
+<p style="margin-top:400px"></p>
 	<div id="section-5" class="step">
 		<input type="hidden" name="step_name" value="section-5"/>
 		<p style="display:true;margin-top:100px" class="message success">
@@ -764,7 +747,7 @@ class Form extends MY_Controller
 					<th colspan="1" rowspan="2">Testing Supplies</th>
 
 					<th colspan="2" style="text-align:center"> Availability <strong></BR> (One Selection Allowed) </strong></th>
-					<th colspan="5" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
+					<th colspan="8" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
 					
 
 				</tr>
@@ -774,7 +757,10 @@ class Form extends MY_Controller
 					<th>OPD</th>
 					<th>MCH</th>
 					<th>U5 Clinic</th>
+					<th>LAB</th>
 					<th>Ward</th>
+					<th>Store</th>
+					<th>Pharmacy</th>
 					<th>Other</th>
 				</tr>
 			</thead>
@@ -817,14 +803,14 @@ class Form extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Supplies <strong>Below</strong>?</td>
-            <td>' . $this->supplierOptions['ch'] . '</td>
+            <td>' . $this->supplierOptions['mch'] . '</td>
         </tr>
 	</tr>
 	</table>
 		<table>
 			<thead>
 				<tr>
-					<th colspan="10">INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING SUPPLIES.INCLUDE REASON FOR UNAVAILABILITY.</th>
+					<th colspan="9">INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING SUPPLIES.INCLUDE REASON FOR UNAVAILABILITY.</th>
 				</tr>
 				<tr>
 					<th colspan="1" rowspan="2">Supplies Name</th>
@@ -849,7 +835,7 @@ class Form extends MY_Controller
 			</thead>
 			' . $this->supplies['mnh'] . '
 		</table>
-<p style="display:true;margin-top:100px" class="message success">SECTION 7 of 8: III.  RESOURCE AVAILABILITY</p>
+<p style="display:true" class="message success">SECTION 7 of 8: III.  RESOURCE AVAILABILITY</p>
 		<table>
 			<thead>
 				<th colspan="10">INDICATE THE AVAILABILITY, LOCATION AND MAIN SOURCE OF THE FOLLOWING.</th>
@@ -878,14 +864,14 @@ class Form extends MY_Controller
 
 		<table >
 			<thead>
-			<th colspan="12" >INDICATE THE STORAGE AND ACCESS TO WATER BY THE COMMUNITY </th>
+			<th colspan="3" >INDICATE THE STORAGE AND ACCESS TO WATER BY THE COMMUNITY </th>
 				<tr>
-			<th  colspan="7">ASPECT</th>
-			<th   colspan="5"> RESPONSE </th>			
-			<th   colspan="2"> SPECIFY </th>	
+			<th  colspan="1">ASPECT</th>
+			<th   colspan="1"> RESPONSE </th>			
+			<th   colspan="1"> SPECIFY </th>	
 
 		</tr>
-		</thead>' . $this->supplies['mhw'] . '
+		</thead>' . $this->questions['mnhw'] . '
 		</table>
  
 		 <table  class="centre" >
@@ -926,9 +912,9 @@ class Form extends MY_Controller
 					<th style="width:65%;text-align:left">RESPONSE</th>
 				</tr>
 			</thead>
-			' . $this->question['waste'] . '
+			' . $this->questions['waste'] . '
 		</table>
-		<p class="message success" style="margin-top:200px">SECTION 8 of 8: COMMUNITY STRATEGY</p>
+		<p class="message success">SECTION 8 of 8: COMMUNITY STRATEGY</p>
 <table class="centre">
 			<thead><tr>
 				<th colspan="2" >COMMUNITY STRATEGY </th>
@@ -937,12 +923,12 @@ class Form extends MY_Controller
 				<th   colspan="1" > RESPONSE </th>	
 			</tr>		
 			</thead>
-			' . $this->question['cms'] . '
+			' . $this->questions['cmsM'] . '
 	</table>
 	</div><!--\.section-7-->
 </form>
 ';
-        echo $this->combined_form;
+        return $this->combined_form;
     }
     
     public function get_mch_form() {
@@ -951,7 +937,7 @@ class Form extends MY_Controller
 		<p style="display:true" class="message success">
 	SECTION 1 of 9: FACILITY INFORMATION
 </p>
-<table border="2">
+<table>
 
 	<thead>
 	<tr>
@@ -2082,8 +2068,11 @@ class Form extends MY_Controller
 	</div><!--\.section-5-->
 				';
         
-        echo $this -> combined_form;die;
+        return $this->combined_form;
+        die;
+        
         // return $this->combined_form;
+        
     }
     public function get_hcw_form() {
         $this->combined_form = '
@@ -3065,8 +3054,12 @@ class Form extends MY_Controller
         return $this->combined_form;
     }
     
-    public function loadPDF($survey) {
+    public function loadPDF($form,$survey) {
+    	// $css=read_file('assets/stylesheets/flat.css');
+    	
+     //    $stylesheet = $css;
         $stylesheet = ('
+
 			<style>
 		input[type="text"]{
 			width:200%;
@@ -3108,38 +3101,35 @@ background: #91c5d4;
         //echo $html;die;
         $this->load->library('mpdf');
         $this->mpdf = new mPDF('', 'A4-L', 0, '', 15, 15, 16, 16, 9, 9, '');
-        
+        /**
+         * Stores the PDF
+         * @var string
+         */
+        $html='';
+        $html = $form;
         switch ($survey) {
             case 'mnh':
-                $html = $this->get_mnh_form();
+               
                 $this->mpdf->SetTitle('MNH Assessment Tool');
                 $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">MNH Assessment Tool:</em> October 2013 - March 2014 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>MNH Assessment Tool</em> <p style="display:inline-block;vertical-align:top;font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 $report_name = 'MNH Assessment Tool' . ".pdf";
-                
-                // echo $html;die;
                 break;
 
             case 'mch':
-                $html = $this->get_mch_form();
                 $this->mpdf->SetTitle('CH Assessment Tool');
                 $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">CH Assessment Tool:</em> October 2013 - March 2014 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>CH Assessment Tool</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'CH Assessment Tool' . ".pdf";
-                
-                //echo $html;die;
                 break;
 
             case 'hcw':
-                $html = $this->get_hcw_form();
                 $this->mpdf->SetTitle('Follow-Up Tool after IMCI Training');
                 $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">Follow-Up Tool after IMCI Training:</em> October 2013 - March 2014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>Follow-Up Tool after IMCI Training</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'Follow-Up Tool after IMCI Training' . ".pdf";
-                
-                //echo $html;die;
                 break;
         }
         
