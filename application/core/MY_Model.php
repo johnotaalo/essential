@@ -236,7 +236,7 @@ class MY_Model extends CI_Model
      */
     public function getIndicators() {
         try {
-            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i ORDER BY i.indicatorFor');
+            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i ORDER BY i.indicatorFor,i.indicatorCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -250,7 +250,7 @@ class MY_Model extends CI_Model
      */
     public function getQuestions() {
         try {
-            $result = $this->em->createQuery('SELECT q FROM models\Entities\Questions q ORDER BY q.questionFor');
+            $result = $this->em->createQuery('SELECT q FROM models\Entities\Questions q ORDER BY q.questionFor,q.questionCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
