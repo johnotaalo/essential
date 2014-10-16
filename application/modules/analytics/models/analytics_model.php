@@ -3935,6 +3935,7 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 foreach ($this->dataSet as $value_) {
+                	//echo '<pre>';print_r($value_);echo '</pre>';die;
                     $question = $this->getQuestionName($value_['question_code']);
                     
                     // var_dump($question);
@@ -3953,18 +3954,11 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
-                    //echo '<pre>';print_r($value);echo '</pre>';die;
-                  
+                      //echo '<pre>';print_r($value_);echo '</pre>';die;
                     switch ($statistics) {
                         case 'response':
-                            $yes = $value_['Yes'];
-                            $no = $value_['No'];
-							$null = $value_[''];
-                            
-                            //1. collect the categories
-                            $data[$question]['yes'] = $yes;
-                            $data[$question]['no'] = $no;
-							$data[$question]['null']=$null;
+							$data[$question][$value_['response']]= $value_['total_response'];
+							
                             break;
 
                         case 'total':
@@ -4003,7 +3997,8 @@ ORDER BY question_code";
                 
             }
             
-            // var_dump($data);die;
+            //var_dump($data);die;
+			//echo '<pre>';print_r($data);echo '</pre>';die;
             return $data;
         }
         public function getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, $for, $statistics) {
