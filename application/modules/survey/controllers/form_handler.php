@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection;
+    var $rows, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges;
     
     public function __construct() {
         parent::__construct();
@@ -60,11 +60,23 @@ class Form_Handler extends MY_Controller
          * @var [type]
          */
         $this->supplies = $this->generate->createSuppliesSection();
+        
         /**
          * [$this->signalFunctionsSection description]
          * @var [type]
          */
         $this->signalFunctionsSection = $this->generate->createBemoncSection();
+        
+        /**
+         * [$this->treatments description]
+         * @var [type]
+         */
+        $this->treatments = $this->generate->createTreatmentSection();
+        /**
+         * [$this->accessChallenges description]
+         * @var [type]
+         */
+        $this->accessChallenges = $this->generate->createAccessChallenges();
     }
     
     public function index() {
@@ -1223,11 +1235,11 @@ class Form_Handler extends MY_Controller
             <th> RESPONSE </th>
         </tr>
     </thead>
-    ' . $this->mchConsultationSection . '
+    ' . $this->questions['imci'] . '
 </table>
 <!--\.the section-1 -->
 
-
+<pagebreak />
 <div id="section-2" class="step">
 	<input type="hidden" name="step_name" value="section-2"/>
 	<p style="display:true;margin-top:100px" class="message success">
@@ -1245,7 +1257,7 @@ class Form_Handler extends MY_Controller
 				<th>If <strong>Yes</strong>, Indicate Total Quantities Available </th>
 			</tr>
 		</thead>
-		' . $this->mchGuidelineAvailabilitySectionPDF . '
+		' . $this->questions['guide'] . '
 	</table>
 		<table class="centre">
 
@@ -1262,114 +1274,16 @@ class Form_Handler extends MY_Controller
 			</thead>
 			' . $this->indicators['ror'] . '
 		</table>
-		<!--table class="centre">
+		
 
-			<thead>
-			<tr>
-				<th colspan="3" > DATA FROM THE TOOLS </th>
-			</tr>
-			<tr>
-				<th colspan="3" > (A) MALARIA</th>
-			</tr>
-				<tr>
-
-					<th  rowspan="2" style="width:600px">TREATMENT</th>
-					<th colspan="2" style="text-align:center"> Classification</th>
-
-				</tr>
-				
-				<tr >
-
-					<th>Malaria</th>
-					<th>Fever No malaria</th>
-					</tr>
-					<tr>
-				<td colspan="3" style="background:#ffffff">
-				<p class="instruction" >* Include all treatments used comma separated without regarding the dosages</p>
-			</td>
-			</tr>
-					</thead>
-					<tr>
-					<td><textarea style="width:600px;height:100px"></textarea></td>
-					<td><input type="radio"></td>
-					<td><input type="radio"></td>
-					</tr>
-
-
-			
-		</table>
-		<table class="centre">
-
-			<thead>
-			<tr>
-				<th colspan="3" > (B) PNEUMONIA</th>
-			</tr>
-				<tr>
-
-					<th  rowspan="2" style="width:600px">TREATMENT</th>
-					<th colspan="2" style="text-align:center"> Classification</th>
-
-				</tr>
-				<tr >
-
-					<th >Severe Pneumonia</th>
-					<th>Pneumonia</th>
-				</tr>
-				<tr>
-				<td colspan="3" style="background:#ffffff">
-				<p class="instruction" >* Include all treatments used comma separated without regarding the dosages</p>
-			</td>
-			</tr>
-				</thead>
-			<tr>
-			<td><textarea style="width:600px;height:100px"></textarea></td>
-			<td><input type="radio"></td>
-			<td><input type="radio"></td>
-			</tr>
-			
-		</table>
-		<table class="centre">
-
-			<thead>
-			<tr>
-				<th colspan="6" > (C) DIARRHOEA </th>
-			</tr>
-				<tr>
-					<th colspan="5" style="text-align:center"> Classification</th>
-
-				</tr>
-				<tr >
-
-					<th >Severe Dehydration</th>
-					<th>Some Dehydration</th>
-					<th>No Dehydration</th>
-					<th>Dysentry</th>
-					<th>No Classification</th>
-				</tr>
-				<tr>
-			<td colspan="6" style="background:#ffffff">
-				<p class="instruction" >* Include all treatments used comma separated without regarding the dosages</p>
-			</td>
-		</tr>
-			</thead>
-			<tr>
-			<td><textarea style="width:600px;height:100px"></textarea></td>
-			<td><input type="radio"></td>
-			<td><input type="radio"></td>
-			<td><input type="radio"></td>
-<td><input type="radio"></td>
-<td><input type="radio"></td>
-			</tr>
-		</table-->
-
-	<p style="margin-top:300px"> </p>
+	<pagebreak />
 
 	 <table class="centre">
             <tbody>
-                <th colspan="2">TOTAL U5 CHILDREN SEEN IN THE LAST 1 MONTH</th>                
+               <tr> <th colspan="2">TOTAL U5 CHILDREN SEEN IN THE LAST 1 MONTH</th>                
                     <th><input type = "number" id = "totalu5" name = "mchtotalTreatment[totalu5]"/></th>
              <th colspan = "2"></th>
-
+</tr>
             <tr>
                 <th colspan = "5">Classification</th>
             </tr>
@@ -1397,31 +1311,31 @@ class Form_Handler extends MY_Controller
                     </style>
                     <div class = "treatmentdropdownarea" id ="treat">
                    Treatment
-                   <textarea style="width:200px;height:200px"></textarea>' . $this->treatments['dia'] . '
+                   ' . $this->treatments['dia'] . '
                     </div>
                 </td>
                 <td>
                     <div class = "treatmentdropdownarea" id ="treat">
                     Treatment
-                    <textarea style="width:200px;height:200px"></textarea>' . $this->treatments['dia'] . '
+                    ' . $this->treatments['dia'] . '
                     </div>
                 </td>
                 <td>
                     <div class = "treatmentdropdownarea" id ="treat">
                     Treatment
-                    <textarea style="width:200px;height:200px"></textarea>' . $this->treatments['dia'] . '
+                    ' . $this->treatments['dia'] . '
                     </div>
                 </td>
                 <td>
                     <div class = "treatmentdropdownarea" id ="treat">
                     Treatment
-                    <textarea style="width:200px;height:200px"></textarea>' . $this->treatments['dia'] . '
+                    ' . $this->treatments['dia'] . '
                     </div>
                 </td>
                 <td>
                     <div class = "treatmentdropdownarea" id ="treat">
                     Treatment
-                    <textarea style="width:200px;height:200px"></textarea>' . $this->treatments['dia'] . '
+                    ' . $this->treatments['dia'] . '
                     </div>
                 </td>
             </tr>
@@ -1443,13 +1357,11 @@ class Form_Handler extends MY_Controller
                 <tr>
                 <td colspan = "3">
                 <div class = "treatmentdropdownarea">
-                Treatment
-                <textarea style="width:500px;height:200px"></textarea>' . $this->treatments['pne'] . '</div>
+                ' . $this->treatments['pne'] . '</div>
                 </td>
                 <td colspan = "3">
                 <div class = "treatmentdropdownarea">
-                Treatment
-                <textarea style="width:500px;height:200px"></textarea>' . $this->treatments['pne'] . '</div>
+                ' . $this->treatments['pne'] . '</div>
                 </td>
                 </tr>
 
@@ -1469,11 +1381,11 @@ class Form_Handler extends MY_Controller
 <tr>
                 <td colspan = "3">
                 <div class = "treatmentdropdownarea">
-                <span id = "malTreatmentSection">&nbsp</span>' . $this->treatments['fev'] . '</div>
+                <span id = "malTreatmentSection"></span>' . $this->treatments['fev'] . '</div>
                 </td>
                 <td colspan = "3">
                 <div class = "treatmentdropdownarea" >
-                <span id = "malTreatmentSection_2">&nbsp</span>' . $this->treatments['fev'] . '</div>
+                <span id = "malTreatmentSection_2"></span>' . $this->treatments['fev'] . '</div>
                 </td>
                 </tr>
         </table>
@@ -1702,6 +1614,7 @@ class Form_Handler extends MY_Controller
 			<td colspan="5"><textarea style="width:1000px;height:100px"></textarea></td>
 			</tr>
 </table>
+<pagebreak />
 <p class="message success">SECTION 3 of 9: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
 <table class="centre">
     <thead>
@@ -1756,8 +1669,10 @@ class Form_Handler extends MY_Controller
     <tbody>
      ' . $this->indicators['con'] . '
     </tbody>
-</table>	
-<p style="display:true;margin-top:300px" class="message success">
+</table>
+<pagebreak />	
+<p style="display:true" class="message success">
+
 		SECTION 4 of 9: COMMODITY AND BUNDLING AVAILABILITY
 	</p>
 	<table>
@@ -1767,17 +1682,17 @@ class Form_Handler extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Commodities <strong>Below</strong>?</td>
-            <td>' . $this->supplierOptions['ch'] . '</td>
+            <td>' . $this->supplierOptions['mch'] . '</td>
         </tr>
 	</tr>
 	</table>
 	<table>
 		<thead>
 			<tr class="persist-header">
-				<th colspan="14">INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING COMMODITIES.INCLUDE REASON FOR UNAVAILABILITY. </th>
+				<th colspan="15">INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING COMMODITIES.INCLUDE REASON FOR UNAVAILABILITY. </th>
 			</tr>
 			<tr>
-			<td colspan="14" style="background:#ffffff">
+			<td colspan="15" style="background:#ffffff">
 				<p class="instruction">* Include all expiry dates(coma-separated) in the format (DD-MM-YYYY)</p>
 			</td>
 			</tr>
@@ -1787,7 +1702,7 @@ class Form_Handler extends MY_Controller
 				<th rowspan="2" >Commodity Unit</th>
 				<th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
 				<th rowspan="2"> Main Reason For  Unavailability </th>
-				<th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
+				<th colspan="8" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
 				<th rowspan="1" colspan="2" >Available Quantities</th>
 				
 				
@@ -1801,6 +1716,7 @@ class Form_Handler extends MY_Controller
 				<th>U5 Clinic</th>
 				<th>Ward</th>
 				<th>Pharmacy</th>
+				<th>Store</th>
 				<th>Other</th>
 				<th>Not Applicable</th>
 				<th>No. of Units</th>
@@ -1812,7 +1728,7 @@ class Form_Handler extends MY_Controller
 		' . $this->commodities['ch'] . '
 
 	</table>  
-	<p style="margin-top:200px"></p>
+	<p></p>
 	<table>
 	<tr>
 		<tr>
@@ -1820,7 +1736,7 @@ class Form_Handler extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Commodities <strong>Below</strong>?</td>
-            <td>' . $this->supplierOptions['ch'] . '</td>
+            <td>' . $this->supplierOptions['mch'] . '</td>
         </tr>
 	</tr>
 	</table>
@@ -1828,10 +1744,10 @@ class Form_Handler extends MY_Controller
 	<thead>
 	    <tr class="persist-header">
 		
-			<th colspan="14">BUNDLING: INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING COMMODITIES. </th>
+			<th colspan="15">BUNDLING: INDICATE THE AVAILABILITY, LOCATION, SUPPLIER AND QUANTITIES ON HAND OF THE FOLLOWING COMMODITIES. </th>
 		</tr>
 		<tr>
-			<td colspan="14" style="background:#ffffff">
+			<td colspan="15" style="background:#ffffff">
 				<p class="instruction" >* Include all expiry dates(coma-separated) in the format (DD-MM-YYYY)</p>
 			</td>
 		</tr>
@@ -1848,7 +1764,7 @@ class Form_Handler extends MY_Controller
 				Main Reason For  Unavailability
 			</div>
 			</th>
-			<th colspan="7" style="text-align:center"> Location of Availability  </BR><strong> (Multiple Selections Allowed)</strong></th>
+			<th colspan="8" style="text-align:center"> Location of Availability  </BR><strong> (Multiple Selections Allowed)</strong></th>
 			<th colspan="1">Available Quantities</th>
 			
 
@@ -1863,6 +1779,7 @@ class Form_Handler extends MY_Controller
 			<th>U5 Clinic</th>
 			<th>Ward</th>
 			<th>Pharmacy</th>
+			<th>Store</th>
 			<th>Other</th>
 			<th>Not Applicable</th>
 			<th>No. of Units</th>
@@ -1874,7 +1791,7 @@ class Form_Handler extends MY_Controller
 		
 		
 	</div><!--\.section 3-->
-		
+		<pagebreak />
 	<div id="section-4" class="step">
 		<input type="hidden" name="step_name" value="section-4"/>
 		<p style="display:true;margin-top:200px" class="message success">
@@ -1887,9 +1804,9 @@ class Form_Handler extends MY_Controller
 		
 		<thead>
 		<tr>
-			<th colspan="6" > (C) WHAT IS THE MAIN CHALLENGE IN ACCESSING <span style="text-decoration:underline">DATA FROM</span> U5 REGISTERS IN THE LAST 3 MONTHS</th></tr>
+			<th colspan="6" > (C) WHAT IS THE <b>MAIN</b> CHALLENGE IN ACCESSING <span style="text-decoration:underline">DATA FROM</span> U5 REGISTERS IN THE LAST 3 MONTHS</th></tr>
 		</thead>
-		' . $this->selectAccessChallenges . '
+		' . $this->accessChallenges . '
 		
 		
 	</table>
@@ -1912,10 +1829,10 @@ class Form_Handler extends MY_Controller
 		</table>
 
 	</div><!--\.section-4-->
-	
+	<pagebreak />
 	<div id="section-5" class="step">
 		<input type="hidden" name="step_name" value="section-5"/>
-		<p style="display:true;margin-top:300px" class="message success">
+		<p style="display:true" class="message success">
 			SECTION 6 of 9: EQUIPMENT AVAILABILITY AND STATUS
 		</p>
 
@@ -1924,12 +1841,12 @@ class Form_Handler extends MY_Controller
 		<table  class="centre" >
 			<thead>
 				<tr>
-					<th colspan="10">INDICATE THE AVAILABILITY, LOCATION  AND FUNCTIONALITY OF THE FOLLOWING EQUIPMENT AT THE ORT CORNER.</th>
+					<th colspan="12">INDICATE THE AVAILABILITY, LOCATION  AND FUNCTIONALITY OF THE FOLLOWING EQUIPMENT AT THE ORT CORNER.</th>
 				</tr>
 				<tr>
 					<th colspan="1" rowspan="2">Equipment Name</th>
 					<th colspan="2" style="text-align:center">Availability <strong></br> (One Selection Allowed) </strong></th>
-					<th colspan="5" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
+					<th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
 					<th colspan="2">Available Quantities</th>
 				</tr>
 				<tr >
@@ -1939,6 +1856,8 @@ class Form_Handler extends MY_Controller
 					<th>MCH</th>
 					<th>U5 Clinic</th>
 					<th>Ward</th>
+					<th>Pharmacy</th>
+					<th>Store</th>
 					<th>Other</th>
 					<th>Fully-Functional</th>
 					<th>Non-Functional</th>
@@ -1949,7 +1868,7 @@ class Form_Handler extends MY_Controller
 		</table>
 
         </div><!--\.section-6-->
-
+<pagebreak />
 		<div id="section-7" class="step">
 		<input type="hidden" name="step_name" value="section-7"/>
 		<p style="display:true" class="message success">
@@ -1962,18 +1881,18 @@ class Form_Handler extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Supplies <strong>Below</strong>?</td>
-            <td>' . $this->selectMCHOtherSuppliersPDF . '</td>
+            <td>' . $this->supplierOptions['mch'] . '</td>
         </tr>
 	</tr>
 	</table>
 		<table  class="centre" >
 			<thead>
-				<th colspan="9">INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th>
+				<tr><th colspan=11>INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th></tr>
 				<tr>
 					<th colspan="1" rowspan="2">Supplies Name</th>
 
 					<th colspan="2" style="text-align:center"> Availability <strong></BR> (One Selection Allowed) </strong></th>
-					<th colspan="5" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
+					<th colspan="7" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
 					
 
 				</tr>
@@ -1983,6 +1902,8 @@ class Form_Handler extends MY_Controller
 					<th>OPD</th>
 					<th>MCH</th>
 					<th>U5 Clinic</th>
+					<th>Pharmacy</th>
+					<th>Store</th>
 					<th>Ward</th>
 					<th>Other</th>
 				</tr>
@@ -1995,7 +1916,7 @@ class Form_Handler extends MY_Controller
 					<th colspan="1" rowspan="2">Testing Supplies</th>
 
 					<th colspan="2" style="text-align:center"> Availability <strong></BR> (One Selection Allowed) </strong></th>
-					<th colspan="5" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
+					<th colspan="8" style="text-align:center"> Location of Availability </BR><strong> (Multiple Selections Allowed)</strong></th>
 					
 
 				</tr>
@@ -2005,12 +1926,16 @@ class Form_Handler extends MY_Controller
 					<th>OPD</th>
 					<th>MCH</th>
 					<th>U5 Clinic</th>
+					<th>Pharmacy</th>
+					<th>Store</th>
+					<th>LAB</th>
 					<th>Ward</th>
 					<th>Other</th>
 				</tr>
 			</thead>
 			' . $this->supplies['tst'] . '
 		</table>
+		<pagebreak />
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
 		</p>
@@ -2021,13 +1946,13 @@ class Form_Handler extends MY_Controller
 		</tr>
 		<tr>
             <td>Who is the Main Supplier of the Resources <strong>Below</strong>?</td>
-            <td>' . $this->selectMCHOtherSuppliersPDF . '</td>
+            <td>' . $this->supplierOptions['mch'] . '</td>
         </tr>
 	</tr>
 	</table>
 		<table  class="centre" >
 			<thead>
-				<th colspan="9">INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th>
+				<tr><th colspan="9">INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th></tr>
 
 				<tr>
 					<th colspan="1" rowspan="2">Resource Name</th>
@@ -2046,7 +1971,7 @@ class Form_Handler extends MY_Controller
 					<th>Other</th>
 				</tr>
 			</thead>
-			' . $this->hardwareMCHSectionPDF . '
+			' . $this->equipment['hwr'] . '
 		</table>
 		<p style="display:true;margin-top:50px" class="message success">
 			SECTION 9 of 9: COMMUNITY STRATEGY
@@ -2061,7 +1986,7 @@ class Form_Handler extends MY_Controller
 		<th  style="width:65%">ASPECT</th>
 		<th   style="width:35%;text-align:left"> RESPONSE </th>
 	</tr>
-	' . $this->mchCommunityStrategySection . '
+	' . $this->questions['cmsC'] . '
 </table>
 		
 
@@ -2070,9 +1995,10 @@ class Form_Handler extends MY_Controller
 				';
         
         return $this->combined_form;
-        die;
+       
         
         // return $this->combined_form;
+        
         
     }
     public function get_hcw_form() {
@@ -3055,10 +2981,11 @@ class Form_Handler extends MY_Controller
         return $this->combined_form;
     }
     
-    public function loadPDF($form,$survey) {
-    	// $css=read_file('assets/stylesheets/flat.css');
-    	
-     //    $stylesheet = $css;
+    public function loadPDF($form, $survey) {
+        
+        // $css=read_file('assets/stylesheets/flat.css');
+        
+        //    $stylesheet = $css;
         $stylesheet = ('
 
 			<style>
@@ -3102,24 +3029,25 @@ background: #91c5d4;
         //echo $html;die;
         $this->load->library('mpdf');
         $this->mpdf = new mPDF('', 'A4-L', 0, '', 15, 15, 16, 16, 9, 9, '');
+        
         /**
          * Stores the PDF
          * @var string
          */
-        $html='';
+        $html = '';
         $html = $form;
         switch ($survey) {
             case 'mnh':
-               
+                
                 $this->mpdf->SetTitle('MNH Assessment Tool');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">MNH Assessment Tool:</em> October 2014 - March 2015 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">MNH Assessment Tool:</em> October 2014 - March 2015 <b><em>TERM:</em></b> _____________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>MNH Assessment Tool</em> <p style="display:inline-block;vertical-align:top;font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 $report_name = 'MNH Assessment Tool' . ".pdf";
                 break;
 
-            case 'mch':
+            case 'ch':
                 $this->mpdf->SetTitle('CH Assessment Tool');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">CH Assessment Tool:</em> October 2014 - March 2015 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">CH Assessment Tool:</em> October 2014 - March 2015 <b><em>TERM:</em></b> _____________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>CH Assessment Tool</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'CH Assessment Tool' . ".pdf";
@@ -3127,7 +3055,7 @@ background: #91c5d4;
 
             case 'hcw':
                 $this->mpdf->SetTitle('Follow-Up Tool after IMCI Training');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">Follow-Up Tool after IMCI Training:</em> October 2014 - March 2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">Follow-Up Tool after IMCI Training:</em> October 2014 - March 2015 <b><em>TERM:</em></b> _____________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>Follow-Up Tool after IMCI Training</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'Follow-Up Tool after IMCI Training' . ".pdf";
