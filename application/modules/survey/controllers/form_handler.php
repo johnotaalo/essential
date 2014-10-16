@@ -275,11 +275,12 @@ class Form_Handler extends MY_Controller
 
 			<thead>
 				<tr>
-					<th colspan="7" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE FOLLOWING PERIODS </th>
+					<th colspan="7" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE LAST 3 MONTHS </th>
 				</tr>
 			</thead>
 			' . $this->monthlyDeliveries . '
 		</table>
+		<br/>
 		<table>
 			<thead>
 				<tr>
@@ -298,7 +299,7 @@ class Form_Handler extends MY_Controller
 			</thead>
 			' . $this->signalFunctionsSection . '
 		</table>
-	
+	<br/>
 <table>
 
 	
@@ -3111,14 +3112,14 @@ background: #91c5d4;
             case 'mnh':
                
                 $this->mpdf->SetTitle('MNH Assessment Tool');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">MNH Assessment Tool:</em> October 2013 - March 2014 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">MNH Assessment Tool:</em> October 2014 - March 2015 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>MNH Assessment Tool</em> <p style="display:inline-block;vertical-align:top;font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 $report_name = 'MNH Assessment Tool' . ".pdf";
                 break;
 
             case 'mch':
                 $this->mpdf->SetTitle('CH Assessment Tool');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">CH Assessment Tool:</em> October 2013 - March 2014 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">CH Assessment Tool:</em> October 2014 - March 2015 (mid-term)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>CH Assessment Tool</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'CH Assessment Tool' . ".pdf";
@@ -3126,7 +3127,7 @@ background: #91c5d4;
 
             case 'hcw':
                 $this->mpdf->SetTitle('Follow-Up Tool after IMCI Training');
-                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">Follow-Up Tool after IMCI Training:</em> October 2013 - March 2014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
+                $this->mpdf->SetHTMLHeader('<p style="border-bottom:2px solid #000;font-size:15px;margin-bottom:40px"><em style="font-weight:bold;padding-right:10px">Follow-Up Tool after IMCI Training:</em> October 2014 - March 2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><em style="font-weight:bold">Date Printed: </em>' . date('D, d-M-Y') . '</span></p>');
                 $this->mpdf->SetHTMLFooter('<em>Follow-Up Tool after IMCI Training</em> <p style="font-size:14px;font-weight:bold;margin-left:900px">{PAGENO} of {nb}<p>');
                 
                 $report_name = 'Follow-Up Tool after IMCI Training' . ".pdf";

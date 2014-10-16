@@ -43,7 +43,7 @@ class MY_Model extends CI_Model
      */
     public function getCommodities() {
         try {
-            $result = $this->em->createQuery('SELECT c.commCode,c.commName,c.commFor, c.commUnit FROM models\Entities\Commodities c ORDER BY c.commFor, c.commCode ASC ');
+            $result = $this->em->createQuery('SELECT c.commCode,c.commName,c.commFor, c.commUnit FROM models\Entities\Commodities c ORDER BY c.commFor, c.commName ASC ');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
