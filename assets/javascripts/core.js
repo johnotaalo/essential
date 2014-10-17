@@ -72,7 +72,22 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    backgroundColor: '#428bca',
+                    borderRadius: '3px',
+                    padding: 4,
+                    enabled: true,
+                    distance: -40,
+                    formatter: function() {
+
+                        return Math.round(this.percentage) + '%';
+
+
+                    },
+                    color: 'white',
+                    style: {
+                        fontWeight: 'bold',
+                        opacity: 0.7
+                    }
                 },
                 showInLegend: true,
                 tooltip: {
@@ -103,6 +118,22 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
                     }
                 }
             },
+            column: {
+                dataLabels: {
+                    enabled: true,
+                    color: 'white',
+                    style:{
+                        fontSize:'0.5em'
+                    },
+                    formatter: function() {
+                        if (this.y != 0 && chart_stacking == 'percent') {
+                            return Math.round(this.percentage) + '%';
+                        } else {
+                            return this.value;
+                        }
+                    }
+                }
+            }
         },
         legend: {
             layout: 'horizontal',
@@ -599,7 +630,7 @@ function submitForm(base_url, function_url) {
  */
 function loadModalForm(base_url, function_url, modal_title, modal_width, contents) {
     $('#universalModal .header').text(modal_title);
-    $('#universalModal').css('width', modal_width);
+    // $('#universalModal').css('width', modal_width);
 
     $('#universalModal .content').empty();
     $('#universalModal .content').append(contents);

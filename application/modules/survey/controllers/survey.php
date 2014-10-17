@@ -13,6 +13,7 @@ class Survey extends MY_Controller
         $this->rows = '';
         $this->combined_form;
         $this->load->model('data_model');
+        $this->load->module('template');
     }
     
     public function index() {
@@ -32,9 +33,10 @@ class Survey extends MY_Controller
             $this->data['login_response'] = '';
             $this->data['login_message'] = 'Login to Take Survey';
             $this->data['survey'] = strtoupper($this->survey);
+            
             // print_r($this->data);
             //$this -> load -> view('index', $this->data); //login view
-            $this->template($this->data);
+            $this->template->mnch($this->data);
         } else {
             $this->inventory();
         }
@@ -61,7 +63,7 @@ class Survey extends MY_Controller
             $this->data['logged'] = 1;
             $this->data['form_id'] = '';
             $this->data['content'] = 'mnh/pages/v_survey_main';
-            $this->template($this->data);
+            $this->template->mnch($this->data);
         } else {
             redirect(base_url() . 'home', 'refresh');
         }
@@ -74,24 +76,45 @@ class Survey extends MY_Controller
      * @return [type]              [description]
      */
     public function load($survey_form, $survey_type) {
+        
+        /**
+         * Form stores the form selected
+         * @var string
+         */
+        $form = '';
         $this->session->unset_userdata('survey_form');
         $this->session->set_userdata('survey_form', $survey_form);
-        
+        $this->survey_form=$survey_form;
+        $this->load->module('survey/generate');
+
         $this->session->unset_userdata('survey');
         $this->session->set_userdata('survey', $survey_type);
         
-        $this->load->module('survey/form');
+        $this->load->module('survey/form_handler');
         switch ($survey_type) {
             case 'mnh':
-                $this->form->get_mnh_form();
+                $form = $this->form_handler->get_mnh_form();
                 break;
 
             case 'ch':
-                $this->form->get_mch_form();
+                $form = $this->form_handler->get_mch_form();
                 break;
 
             case 'hcw':
-                $this->form->get_hcw_form();
+                $form = $this->form_handler->get_hcw_form();
+                break;
+        }
+        switch ($survey_form) {
+            case 'offline':
+                $this->form_handler->loadPDF($form,$survey_type);
+                break;
+
+            case 'online':
+                echo $form;
+                break;
+
+            default:
+                
                 break;
         }
     }
@@ -133,6 +156,7 @@ class Survey extends MY_Controller
                 //print $key.' '.$value.'<br />';
                 //$json_data=array('code'=>$value->fac_mfl,'name'=>$value->fac_name);
                 
+                
             }
             print json_encode($json_data);
             
@@ -144,6 +168,7 @@ class Survey extends MY_Controller
             
             //ignore
             //$ex->getMessage();
+            
             
         }
     }
@@ -241,24 +266,28 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
+    
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
      */
     public function createFacilitiesListSection() {
-    /*retrieve facility list*/
+        
+        /*retrieve facility list*/
         $result = $this->data_model->getFacilitiesByDistrict($this->session->userdata('dName'));
+        
         // var_dump($result);
         $counter = 0;
         $link = '';
         $surveyCompleteFlag = '';
+        
         /**
- * [$districtFacilityListSection description]
- * @var string
- */
-            $districtFacilityListSection = '';
+         * [$districtFacilityListSection description]
+         * @var string
+         */
+        $districtFacilityListSection = '';
         if (count($result) > 0) {
-
+            
             //set session data
             $this->session->set_userdata(array('fCount' => count($result)));
             
@@ -275,59 +304,57 @@ class Survey extends MY_Controller
                 } else {
                     $total = 5;
                 }
-                $dataFound = $this->data_model->getSurveyInfo($survey, $survey_category,'facility', $fac_mfl);
+                $dataFound = $this->data_model->getSurveyInfo($survey, $survey_category, 'facility', $fac_mfl);
                 
-               if($dataFound){
-                $current = trim($dataFound[0]['max_section'], 'section-');
-//                 echo $current;
-                $last_activity = $dataFound[0]['last_activity'];
-                $label = $dataFound[0]['status'];
-               }
-               else{
-                $current=NULL;
-                $last_activity=NULL;
-                $label = NULL;
-               }
-                
+                if ($dataFound) {
+                    $current = trim($dataFound[0]['max_section'], 'section-');
+                    
+                    //                 echo $current;
+                    $last_activity = $dataFound[0]['last_activity'];
+                    $label = $dataFound[0]['status'];
+                } else {
+                    $current = NULL;
+                    $last_activity = NULL;
+                    $label = NULL;
+                }
                 
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
                     $linkClass = 'action';
                     $attr = 'begin';
-                   
                 } elseif ($progress == 100) {
                     $linkText = 'Review Entries';
                     $linkClass = 'action';
                     $attr = 'review';
-                    
                 } else {
                     $linkText = 'Continue Survey';
                     $linkClass = 'action';
                     $attr = 'continue';
-                    
                 }
                 switch ($label) {
                     case 'complete':
-                    $label_class='green';
-                    break;
-                    
+                        $label_class = 'green';
+                        break;
+
                     case 'pending':
-                    $label_class='orange';
-                    break;
+                        $label_class = 'orange';
+                        break;
+
                     default:
-                    $label = 'not started';
-                     $label_class='red';
-                    break;
+                        $label = 'not started';
+                        $label_class = 'red';
+                        break;
                 }
                 
                 $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
-                 // echo $last_activity;die;
+                
+                // echo $last_activity;die;
                 // Get Survey Information
                 
                 $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
                 
-                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
+                $link.= '<div class="ui label ' . $label_class . ' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
                 
                 $districtFacilityListSection.= '<tr>
 
@@ -336,20 +363,24 @@ class Survey extends MY_Controller
         <td >' . $value['facName'] . '</td>
         ' . $link . '
         </tr>';
-        }
-        //print 'fs: '.$this->districtFacilityListSection;die;
+            }
+            
+            //print 'fs: '.$this->districtFacilityListSection;die;
+            
         } else {
-        //print 'false'; die;
-        $districtFacilityListSection.= '<tr><td colspan="22">No Facilities Found</td></tr>';
+            
+            //print 'false'; die;
+            $districtFacilityListSection.= '<tr><td colspan="22">No Facilities Found</td></tr>';
         }
-
+        
         return $districtFacilityListSection;
-}
-
-public function createFacilityTable() {
-    $districtFacilityListSection=$this->createFacilitiesListSection();
-    // var_dump($districtFacilityListSection);die;
-//<div class="breadcrumb">
+    }
+    
+    public function createFacilityTable() {
+        $districtFacilityListSection = $this->createFacilitiesListSection();
+        
+        // var_dump($districtFacilityListSection);die;
+        //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
         $facilityList = '
@@ -365,16 +396,18 @@ public function createFacilityTable() {
 </thead>
         </tr>' . $districtFacilityListSection . '
         </table>';
+        
         // echo $facilityList;
         $data['form'] = $facilityList;
         $data['form_id'] = '';
-        $this -> load -> view('form', $data);
+        $this->load->view('form', $data);
     }
     public function getNationalData($survey_type, $survey_category) {
         $county = urldecode($county);
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, '', 'national');
         echo json_encode($results);
     }
+    
     /**
      * [getCountyData description]
      * @param  [type] $survey_type     [description]
@@ -387,6 +420,7 @@ public function createFacilityTable() {
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'county');
         echo json_encode($results);
     }
+    
     /**
      * [getDistrictData description]
      * @param  [type] $survey_type     [description]
