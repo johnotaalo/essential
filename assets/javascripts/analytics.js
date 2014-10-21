@@ -510,7 +510,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getMNHresourcesSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_mainSource');
                     loadGraph(base_url, 'analytics/getRunningWaterLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_location');
                     loadGraph(base_url, 'analytics/getWasteStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_wasteDisposal');
-
+                    loadGraph(base_url, 'analytics/getStorageStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_storage');
 
                     break;
 

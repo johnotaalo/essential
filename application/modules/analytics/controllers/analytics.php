@@ -1010,7 +1010,7 @@ class Analytics extends MY_Controller
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
     }
     
-    /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
+     public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
         
         //echo "<pre>"; print_r($results);echo "</pre>";die;
@@ -1025,7 +1025,7 @@ class Analytics extends MY_Controller
             //echo "<pre>"; print_r($resultArray);echo "</pre>";die;
          }
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column');
-    }*/
+    }
     
     /**
      * [getResourcesStatistics description]
