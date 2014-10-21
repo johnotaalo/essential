@@ -1109,14 +1109,14 @@ WHERE
          * @param  [type] $for      [description]
          * @return [type]           [description]
          */
-        public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for) {
+        public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
             $data_y = array();
             $data_n = array();
             
-            $query = "CALL get_indicator_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_indicator_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistic . "');";
             try {
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
@@ -1142,18 +1142,28 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
+                        switch ($statistic) {
+                            case 'response':
+                                if (($value['response']) == '') {
+                                    $name = 'No data';
+                                    $value['response'] = $name;
+                                }
+                                $indicator = $value['indicator_name'];
+                                
+                                //echo $value['indicator'];die;
+                                $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
+                                
+                                $data['categories'] = array_keys($data['response']);
+                                break;
+
+                            case 'response_raw':
+                                $data[] = $value;
+                                break;
+                        }
                         
                         //echo '<pre>';print_r($value);echo '</pre>';die;
-                        if (($value['response']) == '') {
-                            $name = 'No data';
-                            $value['response'] = $name;
-                        }
-                        $indicator = $value['indicator_name'];
                         
-                        //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
                         
-                        $data['categories'] = array_keys($data['response']);
                     }
                     $this->dataSet = $data;
                     

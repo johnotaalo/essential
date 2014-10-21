@@ -2731,7 +2731,7 @@ class Analytics extends MY_Controller
      */
     public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for);
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for,'response');
         
         // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
@@ -2757,9 +2757,14 @@ class Analytics extends MY_Controller
         }
         $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }
-    
+    public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
+        
+        // echo "<pre>";print_r($results);echo "</pre>";die;
+        echo $this->generateData($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+    }
     /**
      * [getIndicatorComparison description]
      * @param  [type] $criteria        [description]
