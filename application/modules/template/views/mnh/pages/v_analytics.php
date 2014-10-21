@@ -122,7 +122,7 @@
         $(document).ready(startAnalytics(base_url,county,survey,survey_category));
     </script>
     <!-- END JAVASCRIPTS -->
-    <?php $this->load->view($modals)?>
+    <?php //$this->load->view($modals)?>
 </body>
 <!-- END BODY -->
 </html>

@@ -43,7 +43,7 @@ class MY_Model extends CI_Model
      */
     public function getCommodities() {
         try {
-            $result = $this->em->createQuery('SELECT c.commCode,c.commName,c.commFor, c.commUnit FROM models\Entities\Commodities c ORDER BY c.commFor, c.commCode ASC ');
+            $result = $this->em->createQuery('SELECT c.commCode,c.commName,c.commFor, c.commUnit FROM models\Entities\Commodities c ORDER BY c.commFor, c.commName ASC ');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -236,7 +236,7 @@ class MY_Model extends CI_Model
      */
     public function getIndicators() {
         try {
-            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i');
+            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i ORDER BY i.indicatorFor,i.indicatorCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -250,7 +250,7 @@ class MY_Model extends CI_Model
      */
     public function getQuestions() {
         try {
-            $result = $this->em->createQuery('SELECT q FROM models\Entities\Questions q');
+            $result = $this->em->createQuery('SELECT q FROM models\Entities\Questions q ORDER BY q.questionFor,q.questionCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -348,7 +348,7 @@ class MY_Model extends CI_Model
      */
     public function getTreatments() {
         try {
-            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t');
+            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t ORDER BY t.treatmentFor');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -458,14 +458,15 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\signalFunctions')->findOneBy(array('sfCode' => $code));
             $result = $this->result->getSfName();
-            
+            return $result;
             // var_dump($result);die;
             
             
         }
         catch(exception $ex) {
+            print_r($ex);
         }
-        return $result;
+        
     }
     
     /**

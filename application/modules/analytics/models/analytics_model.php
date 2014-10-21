@@ -121,6 +121,7 @@ class Analytics_Model extends MY_Model
             //ignore
             //die($ex->getMessage());//exit;
             
+            
         }
         
         //die(var_dump($data));die;
@@ -403,10 +404,14 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
                 
-                // echo '<pre>';var_dump($this->dataSet);die;
+               //echo '<pre>';var_dump($this->dataSet);die;
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
                         case 'cases':
+							if($value['treatment'] == 'OtherTotal'){
+								$value['treatment_for']== 'other_totals';
+							}
+							//print_r($value['treatment_for']);die;
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                             
                             break;
@@ -426,10 +431,10 @@ ORDER BY lq.lq_response ASC";
                                 
                                 // echo '<pre>';var_dump($treatment_array);
                                 foreach ($treatment_array as $treatment) {
-                                    if ($treatment !== 'TRM' && $treatment !== 'TRM05' && $treatment !== 'TRM11'&& $treatment !== 'TRM10'&& $treatment !== 'TRM14'&& $treatment !== 'TRM15' && $treatment !== 'TRM18') {
+                                    if ($treatment !== 'TRM' && $treatment !== 'TRM05' && $treatment !== 'TRM11' && $treatment !== 'TRM10' && $treatment !== 'TRM14' && $treatment !== 'TRM15' && $treatment !== 'TRM18') {
+                                        
                                         // echo $treatment.'<br/>';
                                         $data[$value['treatment_for']][$value['treatment']][$this->getTreatmentName($treatment) ]+= (int)$value['total_treatment'];
-
                                     }
                                 }
                             }
@@ -1122,12 +1127,12 @@ WHERE
                 
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
-                    
+                     //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     //prep data for the pie chart format
                     $size = count($this->dataSet);
                     $i = 0;
                     
-                    //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     // foreach ($this->dataSet as $value) {
                     //     if (array_key_exists('response', $value)) {
                     //         $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1135,11 +1140,15 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        
+                        //echo '<pre>';print_r($value);echo '</pre>';die;
+                        if(($value['response']) == ''){
+                        	$name = 'No data';
+							$value['response']= $name;
+                        }
                         $indicator = $value['indicator_name'];
                         
                         //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['count(il.li_response)'];
+                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
                         
                         $data['categories'] = array_keys($data['response']);
                     }
@@ -1199,7 +1208,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                //die(var_dump($this->dataSet));
+                die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1607,9 +1616,8 @@ ORDER BY oa.question_code ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
-                	//echo "<pre>";print_r($this->dataSet);echo "<pre>";die;
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                    	
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1620,9 +1628,11 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        }else if (array_key_exists('functional', $value)) {
-                            $data[$value['equipment_name']]['functional']+= (int)$value['fully_functional'];
-                            $data[$value['equipment_name']]['nonfunctional']+= (int)$value['non_functional'];
+                        }else if(array_key_exists('equipment_name', $value)){
+                        	if(($value['equipment_name']=='Wall Clock/Timing device') || ($value['equipment_name']=='Weighing scale')
+							|| ($value['equipment_name']=='Thermometer')|| ($value['equipment_name']=='MUAC Tape')){
+								$data[$value['equipment_name']][$value['equipment_name']]=(int)$value['total_response'];
+							}
                         }
                     }
                 }
@@ -1654,7 +1664,7 @@ ORDER BY oa.question_code ASC";
                         }
                     }
                     $data = $newData;
-                } 
+                }
                 
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 
@@ -1667,7 +1677,7 @@ ORDER BY oa.question_code ASC";
                 
                 
             }
-            //echo "<pre>";print_r($data);echo "</pre>";die;
+            
             return $data;
         }
         
@@ -1695,28 +1705,31 @@ ORDER BY oa.question_code ASC";
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
-                    
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                        $data['data'][] = $value;
+                        switch ($statistic) {
+                            case 'reason':
+                                $foundOptions = explode(',', $value['lcso_option_on_outage']);
+                                foreach ($foundOptions as $option) {
+                                    $data['data'][$this->getCommodityOutageOptionName($option)]+= $value['total'];
+                                }
+                                break;
+
+                            default:
+                                $data['data'][] = $value;
+                                break;
+                        }
+
+                        
                     }
                     $commodities = $this->getCommodities();
                     foreach ($commodities as $commodity) {
                         if ($commodity['commFor'] == $for) {
                             $data['commodities'][] = $commodity['commName'];
                         }
-                    }
-                    
-                    $commodityOptions = $this->getCommodityOutageOptions();
-                    foreach ($commodityOptions as $option) {
-                        $data['commodity_options'][$option['cooId']] = $option['cooDescription'];
-                    }
-                    
-                    //echo "<pre>";print_r($data);echo "</pre>";die;
-                    
+                    }   
                 }
                 
-                //echo "<pre>";print_r($data);echo "</pre>";die;
+                // echo "<pre>";print_r($data);echo "</pre>";die;
                 
                 
             }
@@ -1773,8 +1786,8 @@ ORDER BY oa.question_code ASC";
                             }
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
-                        } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['commodity_name']][$value['fac_level']] = (int)$value['supplier_name'];
+                        } else if (array_key_exists('fac_level', $value)) {
+                            $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
                         }
                     }
                     
@@ -1789,7 +1802,7 @@ ORDER BY oa.question_code ASC";
                      */
                     switch ($survey) {
                         case 'mnh':
-                            $location = array('Delivery room', 'Store', 'Pharmacy', 'Other');
+                            $location = array('Delivery Room', 'Store', 'Pharmacy', 'Other', 'N/A');
                             break;
 
                         case 'ch':
@@ -1814,7 +1827,7 @@ ORDER BY oa.question_code ASC";
                     } else {
                     }
                     
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($data);echo "</pre>";die;
                     
                     
                 }
@@ -1870,6 +1883,7 @@ ORDER BY oa.question_code ASC";
                             
                             //$data[$value['supply_name']][$value['location']]=(int)$value['total_response'];
                             
+                            
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
@@ -1879,6 +1893,7 @@ ORDER BY oa.question_code ASC";
                     }
                     
                     //echo "<pre>";print_r($data);echo "</pre>";die;
+                    
                     
                     
                     /**
@@ -1911,6 +1926,7 @@ ORDER BY oa.question_code ASC";
                     //     $data = $newData;
                     // }
                     //echo "<pre>";print_r($data);echo "</pre>";die;
+                    
                     
                 }
             }
@@ -3738,12 +3754,14 @@ ORDER BY question_code";
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
                 
-                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                // echo "<pre>";print_r($this->dataSet);echo "</pre>";
                 
                 foreach ($this->dataSet as $value_) {
                     
                     //print_r($this->dataSet);die;
                     $question = $this->getSignalName($value_['sf_code']);
+                    
+                    // var_dump($value_['sf_code']);die;
                     
                     $yes = $value_['yes_values'];
                     $no = $value_['no_values'];
@@ -3923,6 +3941,7 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 foreach ($this->dataSet as $value_) {
+                	//echo '<pre>';print_r($value_);echo '</pre>';die;
                     $question = $this->getQuestionName($value_['question_code']);
                     
                     // var_dump($question);
@@ -3941,16 +3960,11 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
-                    //echo "<pre>";print_r($value_);echo "</pre>";die;
+                      //echo '<pre>';print_r($value_);echo '</pre>';die;
                     switch ($statistics) {
                         case 'response':
-							$data[$question][$value_['response']]=(int)$value_['total_response'];
-                            /*$yes = $value_['Yes'];
-                            $no = $value_['No'];
-                            
-                            //1. collect the categories
-                            $data[$question]['yes'] = $yes;
-                            $data[$question]['no'] = $no;*/
+							$data[$question][$value_['response']]= $value_['total_response'];
+							
                             break;
 
                         case 'total':
@@ -3965,26 +3979,14 @@ ORDER BY question_code";
                             break;
 
                         case 'healthservice':
-							if($value_['response'] == ''){
-								$value_['response']= 'No data';
-								$data[$question][$value_['response']] = (int)$value_['total_response'];
-							}else{
-							$data[$question][$value_['response']] = (int)$value_['total_response'];
-                            }
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
                             
                             break;
-						case 'mainsource':
-							$data[$question][$value_['reason']]=(int)$value_['total_response'];
-							break;
-						case 'availability':
-							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
-							break;
-						case 'location':
-							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
-							break;
-						case 'functionality':
-							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
-							break;
+
+                        case 'mainsource':
+                            $data[$question][$value_['reason']] = (int)$value_['total_response'];
+                            break;
+
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4001,7 +4003,8 @@ ORDER BY question_code";
                 
             }
             
-            // var_dump($data);die;
+            //var_dump($data);die;
+			//echo '<pre>';print_r($data);echo '</pre>';die;
             return $data;
         }
         public function getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, $for, $statistics) {
@@ -4024,10 +4027,9 @@ ORDER BY question_code";
                     switch ($statistics) {
                         case 'response':
                             $question = $this->getQuestionName($value_['question_code']);
-							$data[$question][$value_['response']] = $value_['total_response'];
-                           /* foreach ($value_ as $key => $v) {
+                            foreach ($value_ as $key => $v) {
                                 $data[$question][$key] = $v;
-                            }*/
+                            }
                             break;
 
                         case 'reason':
@@ -4149,6 +4151,7 @@ ORDER BY question_code";
                     // $data[$question]['delivery room'] = $deliveryvalue;
                     // $data[$question]['other'] = $othervalue;
                     
+                    
                 } else {
                     return null;
                 }
@@ -4200,6 +4203,7 @@ ORDER BY question_code";
                         
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
                         //echo "<pre>";print_r($other);echo "</pre>";die;
+                        
                         
                     }
                 }
@@ -4425,6 +4429,9 @@ ORDER BY question_code";
                 $queryData->free_result();
                 $pharmacyvalue = 0;
                 if ($this->dataSet !== NULL) {
+                    echo '<pre>';
+                    print_r($this->dataSet);
+                    die;
                     foreach ($this->dataSet as $key => $value) {
                         
                         if (array_key_exists('phar_values', $value)) {
@@ -4935,6 +4942,7 @@ WHERE
             catch(exception $ex) {
             }
         }
+        
         /**
          * [getFacilityProgress description]
          * @param  [type] $survey          [description]
@@ -4971,6 +4979,7 @@ WHERE
             catch(exception $e) {
             }
         }
+        
         /**
          * [getFacilityProgress description]
          * @param  [type] $survey          [description]
@@ -4991,7 +5000,7 @@ WHERE
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
-                        $data[$value['fac_county']][]=$value;
+                        $data[$value['fac_county']][] = $value;
                     }
                     
                     //die;

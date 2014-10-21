@@ -1,3 +1,4 @@
+<div id="network">
 <li><i class="icon-calendar"></i><?php echo '<strong>'.date("l, d F Y").'</strong>';?></li>
 <li><i class="icon-user"></i>Logged on as, <?php echo '<strong>Respondent</strong> for <strong>'. $this -> session -> userdata('dName').' District</strong>';?></li>
 
@@ -6,3 +7,4 @@
         </li>
 
 
+</div>
