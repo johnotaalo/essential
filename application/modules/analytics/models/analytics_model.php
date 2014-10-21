@@ -1702,7 +1702,10 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
-                        
+                        if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
+                            $data[]=$value;
+                        }
+                        else{
                         //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1724,6 +1727,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('supplier_code', $value)) {
                             $data[$value['fac_level']][$value['supplier_code']] = (int)$value['supplier_name'];
                         }
+                    }
                     }
                     
                     // unset($data['']);
