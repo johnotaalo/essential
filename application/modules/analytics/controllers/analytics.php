@@ -979,13 +979,13 @@ class Analytics extends MY_Controller
                 }
             }
             foreach ($data as $key => $val) {
-                if ($key == 'Never Available') {
-                    $name = 'Not Available';
-                    $key = $name;
-                } else if ($key == 'N/A') {
-                    $name = 'No Data';
-                    $key = $name;
-                }
+            	if($key == 'Never Available'){
+            	$name = 'Not Available';
+				$key = $name;
+            }else if($key == 'N/A'){
+            	$name = 'Null Data';
+				$key = $name;
+            }
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
