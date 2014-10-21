@@ -3854,6 +3854,7 @@ ORDER BY question_code";
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
+                // echo $this->db->last_query();die;
                 
                 // Dump the extra resultset.
                 $queryData->free_result();

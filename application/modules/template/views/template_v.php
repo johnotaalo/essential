@@ -1,25 +1,19 @@
-<!--
-    Template Page   
--->
 <html>
-    <!--
-        Head
-    -->
-    <head>
-        <?php $this -> load->view($head) ?>
 
-    </head>
-    <body>
-        <div id="header">
-            <?php $this -> load->view($header); ?>
-        </div>
-        <div id="content">
-            <?php $this -> load->view($content); ?>
-        </div>
-        <div id="footer">
-            <?php
-                $this->load->view($footer);
-            ?>
-        </div>
-    </body>
+  <head><?php
+    // Load system wide assets
+    $this->load->view('system_head'); 
+  ?></head>
+
+  <body><?php
+    // Load application body content
+    // var_dump($application_body); die();
+    foreach ($application_body as  $value) {
+      $this->load->view($value);
+    }
+    
+    // Load application footer
+    $this->load->view($application_footer);
+  ?></body>
+
 </html>

@@ -19,7 +19,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	//start of close_opened_form click event
 	$("#close_opened_form").click(function() {
 
-		$(".form-container").load(base_url + 'c_front/formviewer', function() {
+		$(".form-container .actual-form").load(base_url + 'c_front/formviewer', function() {
 
 			//delegate events
 			loadGlobalScript();
@@ -96,12 +96,12 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function loadGlobalScript() {
 		loaded = true;
 
-		var scripts = [base_url + 'js/js_ajax_load.js'];
+		var scripts = [base_url + 'assets/javascripts/js_ajax_load.js'];
 
 		for (i = 0; i < scripts.length; i++) {
 			loadGlobalJS(scripts[i], function() {});
 		}
-		form_id = '#' + $(".form-container").find('form').attr('id');
+		form_id = '#' + $(".form-container .actual-form").find('form').attr('id');
 
 	}
 	/*----------------------------------------------------------------------------------------------------------------*/
@@ -109,7 +109,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 
 	//load 1st section of the assessment on page load
-	$(".form-container").load(base_url + 'c_load/get_facility_list', function() {
+	$(".form-container .actual-form").load(base_url + 'survey/createFacilityTable', function() {
 		// facilityMFL=12864;
 		//loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
@@ -138,15 +138,15 @@ function startSurvey(base_url, survey, survey_category, district) {
 			//linkSub=$(link_id).attr('class');
 			//linkIdUrl=link_id.substr(link_id.indexOf('#')+1,(link_id.indexOf('_li')-1));
 			facilityMFL = link_id;
-			the_url = base_url + 'c_load/startSurvey/' + survey + '/' + survey_category + '/' + facilityMFL + '/2013-2014';
+			the_url = base_url + 'survey/startSurvey/' + survey + '/' + survey_category + '/' + facilityMFL + '/2013-2014';
 			$.ajax({
 				type: 'POST',
 				data: '',
 				async: false,
 				url: the_url,
 				beforeSend: function() {
-					$(".form-container").empty();
-            $(".form-container").append('<div class="loader" >Loading...</div>');
+					$(".form-container .actual-form").empty();
+            $(".form-container .actual-form").append('<div class="loader" >Loading...</div>');
 
 				},
 				success: function(data) {
@@ -157,39 +157,57 @@ function startSurvey(base_url, survey, survey_category, district) {
 					fac_county = obj[0].fac_county;
 					message = obj[0].fac_name + ' in ' + obj[0].fac_district + ' District, ' + obj[0].fac_county + ' County, is now reporting on the ' + survey.toUpperCase() + ' Survey.';
 					console.log(message);
-					runNotification(base_url, 'c_admin/getContacts', message);
+					// runNotification(base_url, 'c_admin/getContacts', message);
 				}
 			});
 			//alert(link_id);
 			if (link_id) {
-				if (survey == 'mnh') {
-					current_form = 'c_load/get_mnh_form';
-				} else if (survey == 'hcw') {
-					current_form = 'c_load/get_hcw_form';
-				} else {
-					current_form = 'c_load/get_mch_form';
-				}
+				current_form='survey/load/online/'+survey;
 			}
-			$(".form-container").load(base_url + current_form, function() {
+			$(".form-container .actual-form").load(base_url + current_form, function() {
 				loadGlobalScript();
 				renderFacilityInfo(facilityMFL);
 				break_form_to_steps(form_id);
 				select_option_changed();
 				loadSection(section,action);
+				$('#steps').show();
+				// $('actual-form .step').hide();
+
+			});
+
+			//Step Handler
+			$('.ui.step').click(function(){
+				section=$(this).attr('data-section');
+				$('.ui.step').removeClass('active');
+				$(this).addClass('active');
+				$('.actual-form .step').hide();
+				$('#'+section).show();
+
 
 			});
 
 		}); /*end of which link was clicked*/
 	}); /*close form-container LOAD FN() */
 	/*----------------------------------------------------------------------------------------------------------------*/
-
+function loadSection(section,action,survey) {
+	section=(section=='')?'section-1':section
+		console.log(section);
+		$('.actual-form .step').hide();
+		if (action == 'continue') {
+			$('#'+section).show();
+		}else{
+			$('#section-1').show();
+		
+		}
+		$('#steps').find("[data-section='"+ section + "']").addClass('active');
+	}
 
 	/*-----------------------------------------------------------------------------------------------------------------*/
 	/*start of ajax data requests*/
 	function renderFacilityInfo(facilityMFL) {
 		$.ajax({
 			type: "GET",
-			url: base_url + "c_load/getFacilityDetails",
+			url: base_url + "survey/getFacilityDetails",
 			dataType: "json",
 			cache: "true",
 			data: "facilityMFL=" + facilityMFL,
@@ -955,13 +973,13 @@ function startSurvey(base_url, survey, survey_category, district) {
 							if (survey == 'mnh') {
 								if (fdata.currentStep == 'section-8') {
 
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container .actual-form").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
 									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
 									console.log(message);
-									runNotification(base_url, 'c_admin/getContacts', message);
+									// runNotification(base_url, 'c_admin/getContacts', message);
 								}
 
 							} else if (survey == 'ch') {
@@ -970,13 +988,13 @@ function startSurvey(base_url, survey, survey_category, district) {
 									//$(form_id).formwizard('reset');
 									//$(form_id).formwizard('show','No');
 									// console.log($(form_id).formwizard('state'));
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container .actual-form").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
 									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
 									console.log(message);
-									runNotification(base_url, 'c_admin/getContacts', message);
+									// runNotification(base_url, 'c_admin/getContacts', message);
 								}
 							} else {
 								if (fdata.currentStep == 'section-5') {
@@ -984,13 +1002,13 @@ function startSurvey(base_url, survey, survey_category, district) {
 									//$(form_id).formwizard('reset');
 									//$(form_id).formwizard('show','No');
 									// console.log($(form_id).formwizard('state'));
-									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+									$(".form-container .actual-form").load(base_url + 'survey/survey_complete', function() {
 										window.location = base_url + '/assessment';
 									});
 
 									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
 									console.log(message);
-									runNotification(base_url, 'c_admin/getContacts', message);
+									// runNotification(base_url, 'c_admin/getContacts', message);
 								}
 							}
 
@@ -1037,7 +1055,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 					if (data.currentStep == 'No') {
 						$("#data").fadeTo(5000, 0);
 						//$('#sectionNavigation').hide();
-						$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+						$(".form-container .actual-form").load(base_url + 'survey/survey_complete', function() {
 							window.location = base_url + '/assessment';
 						});
 
@@ -1129,7 +1147,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function getDistrictData(base_url, district, survey_type, survey_category) {
 		//alert(county);
 		$.ajax({
-			url: base_url + 'c_analytics/getDistrictData/' + survey_type + '/' + survey_category + '/' + district,
+			url: base_url + 'survey/getDistrictData/' + survey_type + '/' + survey_category + '/' + district,
 			beforeSend: function(xhr) {
 				xhr.overrideMimeType("text/plain; charset=x-user-defined");
 			},
@@ -1175,18 +1193,29 @@ function startSurvey(base_url, survey, survey_category, district) {
 	}
 	/**
 	 * [loadSection description]
-	 * @param  {[type]} base_url        [description]
-	 * @param  {[type]} survey          [description]
-	 * @param  {[type]} survey_category [description]
-	 * @param  {[type]} facilityMFL     [description]
-	 * @return {[type]}                 [description]
+	 * @param  {[type]} section [description]
+	 * @param  {[type]} action  [description]
+	 * @return {[type]}         [description]
 	 */
-	function loadSection(section,action) {
-		if (action == 'continue') {
-			
-			(data != '') ? $(form_id).formwizard('show', 'section-' + (parseInt(section) + 1)) : $(form_id).formwizard('show', 'section-1');
+	/*function loadSection(survey_type,survey_category,$facility){
+		$('.actual-form .step').hide();
+		$.ajax({
+			url: base_url + 'survey/getFacilitySection/' + survey_type + '/' + survey_category + '/' + facility,
+			beforeSend: function(xhr) {
+				xhr.overrideMimeType("text/plain; charset=x-user-defined");
+			},
+			success: function(data) {
+				obj = jQuery.parseJSON(data);
+				console.log(obj);
+				(data != '') ? $('#'+data).show() : $('#section-1').show;
+	// 	
+			}
+		});
+		
 		}
-	}
+	}*/
+
+	
 }
 
 /*---------------------end form wizard functions----------------------------------------------------------------*/
