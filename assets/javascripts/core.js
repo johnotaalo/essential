@@ -121,7 +121,7 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
             column: {
                 dataLabels: {
                     enabled: true,
-                     backgroundColor: '#428bca',
+                    backgroundColor: '#428bca',
                     borderRadius: '3px',
                     padding: 2,
                     formatter: function() {
@@ -135,7 +135,7 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
                     style: {
                         fontWeight: 'bold',
                         opacity: 0.7,
-                        fontSize:'0.7em'
+                        fontSize: '0.7em'
                     }
                 }
             }
@@ -350,7 +350,30 @@ function loadSimpleGraph(base_url, function_url, graph_section) {
         }
     });
 }
+/**
+ * [loadRawDownload description]
+ * @param  {[type]} base_url     [description]
+ * @param  {[type]} function_url [description]
+ * @return {[type]}              [description]
+ */
+function loadRawDownload(base_url, function_url) {
+    $('#pdf').attr('data-url', base_url + function_url + '/pdf');
+    $('#excel').attr('data-url', base_url + function_url + '/excel');
+    $('.download').click(function() {
+        url = $(this).attr('data-url');
+        if(url!=''){
+        window.open(url);
+    }
+    });
 
+}
+/**
+ * [loadFacilityRawData description]
+ * @param  {[type]} base_url     [description]
+ * @param  {[type]} function_url [description]
+ * @param  {[type]} container    [description]
+ * @return {[type]}              [description]
+ */
 function loadFacilityRawData(base_url, function_url, container) {
     $.ajax({
         url: base_url + function_url + '/table',
@@ -362,16 +385,11 @@ function loadFacilityRawData(base_url, function_url, container) {
             $(container).empty();
             $(container).append(data);
             $(document).trigger('datatable_loaded');
-            $('#pdf').attr('data-url', base_url + function_url + '/pdf');
-            $('#excel').attr('data-url', base_url + function_url + '/excel');
+
         }
 
     });
-    $('h6.table-header > span > button').click(function() {
-        alert('clicked');
-        url = $(this).attr('data-url');
-        window.open(url);
-    });
+
 
 }
 
@@ -638,7 +656,8 @@ function loadModalForm(base_url, function_url, modal_title, modal_width, content
     // $('#universalModal').css('width', modal_width);
 
     $('#universalModal .content').empty();
-    $('#universalModal .content').append(contents);
+    // console.log(contents['graph']);
+    $('#universalModal .content').append(contents['graph'] + contents['facility_data']);
     $('#universalModal form').attr('action', base_url + function_url);
 }
 /**
@@ -791,7 +810,7 @@ function showHelp(base_url) {
  * @return {[type]}          [description]
  */
 function showEnlargedGraph(base_url, function_url, title, raw_url) {
-    $('#universalModal').modal('show');
+    $('#universalModal').modal('setting', 'closable', false).modal('show');
     $('#universalModal').delay(2000, function(nxt) {
         loadEnlargedGraph(base_url, function_url, title, raw_url);
 
