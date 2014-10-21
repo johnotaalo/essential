@@ -1425,13 +1425,10 @@ class Analytics extends MY_Controller
         }
     }
     
-<<<<<<< HEAD
-     public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
-        $results = $this->m_analytics->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
-=======
+
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
->>>>>>> 35bfaeb70df8b9c4d8769304842c1f5f69de7aec
+
         
         //echo "<pre>"; print_r($results);echo "</pre>";die;
        

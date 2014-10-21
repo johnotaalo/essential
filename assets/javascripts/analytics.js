@@ -681,20 +681,9 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 
                     break;
 
-<<<<<<< HEAD
-                case 'section-9':
-                    loadGraph(base_url, 'analytics/getMNHresourcesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_availability');
-                    loadGraph(base_url, 'analytics/getMNHresourcesSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_mainSource');
-                    loadGraph(base_url, 'analytics/getRunningWaterLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_location');
-                    loadGraph(base_url, 'analytics/getWasteStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_wasteDisposal');
-                    loadGraph(base_url, 'analytics/getStorageStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_storage');
 
-                    break;
-
-                case 'section-10':
-=======
                 case 'section-8':
->>>>>>> 35bfaeb70df8b9c4d8769304842c1f5f69de7aec
+
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/community', '#community_units');
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/referral', '#community_cases');
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/trained', '#imci_trainings');
