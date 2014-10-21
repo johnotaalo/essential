@@ -926,7 +926,7 @@ class Analytics extends MY_Controller
         $results = $this->analytics_model->getSuppliesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
         //echo '<pre>';print_r($results);echo '</pre>';die;
-        if (($statistic == 'location' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mnh')) {
+        if (($statistic == 'location' && $for == 'mh') ) {
             foreach ($results as $key => $result) {
                 foreach ($result as $k => $value) {
                     if ($k == 'N/A') {
@@ -984,7 +984,7 @@ class Analytics extends MY_Controller
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
-        } else if($statistic == 'supplier' && $for == 'mch'){
+        } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')){
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
@@ -1044,8 +1044,34 @@ class Analytics extends MY_Controller
                 $resultArray[] = array('name' => $key, 'data' => $val);
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
-        }
-        	else {
+        }else if(($statistic == 'supplier' && $for == 'mh')){
+        	 foreach ($results as $key => $result) {
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available') {
+                        
+                        //if ($name != 'Sometimes Available') {
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+            foreach ($data as $key => $val) {
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                } else if ($key == 'N/A') {
+                    $name = 'No Data';
+                    $key = $name;
+                }
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+            }
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
+        }else {
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
@@ -1102,7 +1128,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category, $for) {
-        $this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'mnh');
+        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh','location' );
     }
     public function getMNHSuppliers($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'supplier');

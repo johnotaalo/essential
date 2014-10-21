@@ -1541,7 +1541,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
-                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                	echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
