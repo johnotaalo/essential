@@ -1,34 +1,19 @@
-<!--
-    Template Page   
--->
 <html>
-    <!--
-        Head
-    -->
-    <head>
-        <?php $this -> load->view($head) ?>
 
-    </head>
-    <body>
-        <div id="header">
-            <?php $this -> load->view($header); ?>
+  <head><?php
+    // Load system wide assets
+    $this->load->view('system_head'); 
+  ?></head>
 
-            <?php 
-if(isset($logged)){
-$this -> load->view('mnh/segments/nav-logged-in'); 
-}
-else{
-   $this -> load->view('mnh/segments/nav-public'); 
-}?> 
-            
-        </div>
-        <div id="content">
-            <?php $this -> load->view($content); ?>
-        </div>
-        <div id="footer">
-            <?php
-                $this->load->view($footer);
-            ?>
-        </div>
-    </body>
+  <body><?php
+    // Load application body content
+    // var_dump($application_body); die();
+    foreach ($application_body as  $value) {
+      $this->load->view($value);
+    }
+    
+    // Load application footer
+    $this->load->view($application_footer);
+  ?></body>
+
 </html>

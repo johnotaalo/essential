@@ -6,6 +6,7 @@ class Auth extends MY_Controller {
         parent::__construct();
         $this->data='';
         $this->load->model('data_model');
+        $this->load->module('template');
     }
     public function go(){
         
@@ -33,7 +34,7 @@ class Auth extends MY_Controller {
             $this->data['content']='mnh/pages/v_survey_main';
             $this->data['logged']='Yes';
             $this->data['title']='MoH::Data Management Tool';
-            $this->template($this->data);
+            $this->template->mnch($this->data);
         }else {
             #use an ajax request and not a whole refresh
             $data['title']='MoH::Data Management Tool';
@@ -42,7 +43,7 @@ class Auth extends MY_Controller {
             $this->data['survey'] = '';
             $this -> data['content'] = 'mnh/pages/v_login';
             //$this -> load -> view('index', $this->data); //login view
-            $this->template($this -> data);
+            $this->template->mnch($this -> data);
         }
     }
 public function doCheckFacilityCode(){/**from the session data*/
