@@ -3986,7 +3986,15 @@ ORDER BY question_code";
                         case 'mainsource':
                             $data[$question][$value_['reason']] = (int)$value_['total_response'];
                             break;
-
+						case 'availability':
+							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
+							break;
+						case 'location':
+							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
+							break;
+						case 'functionality':
+							$data[$value_['fac_level']][$value_['response']]=(int)$value_['total_response'];
+							break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
