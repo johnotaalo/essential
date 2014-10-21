@@ -1616,6 +1616,7 @@ ORDER BY oa.question_code ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1627,6 +1628,11 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
+                        }else if(array_key_exists('equipment_name', $value)){
+                        	if(($value['equipment_name']=='Wall Clock/Timing device') || ($value['equipment_name']=='Weighing scale')
+							|| ($value['equipment_name']=='Thermometer')|| ($value['equipment_name']=='MUAC Tape')){
+								$data[$value['equipment_name']][$value['equipment_name']]=(int)$value['total_response'];
+							}
                         }
                     }
                 }
