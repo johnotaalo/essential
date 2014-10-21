@@ -16,8 +16,28 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
         survey_category='<?php echo $this->session->userdata("survey_category");  ?>';
         district='<?php echo $this->session->userdata("dName");  ?>';
         $(document).ready(startSurvey(base_url, survey, survey_category, district));
+        loadSectionList(base_url,survey);
         
     });
+    /**
+     * [loadSectionList description]
+     * @param  {[type]} base_url    [description]
+     * @param  {[type]} survey_type [description]
+     * @return {[type]}             [description]
+     */
+    function loadSectionList(base_url,survey_type){
+$.ajax({
+            url: base_url + 'survey/loadSection/' + survey_type,
+            beforeSend: function(xhr) {
+                xhr.overrideMimeType("text/plain; charset=x-user-defined");
+            },
+            success: function(data) {
+                obj = jQuery.parseJSON(data);
+                console.log(obj);
+                $('#steps').html(obj);
+            }
+        });
+    }
 /**
      * [selectpnesevereTreatment description]
      * @param  {[type]} select [description]
@@ -450,8 +470,14 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
             <!--logo and main nav-->
             
 
-            <div class="main form-container ui-widget" >
-                <?php echo $form; ?>
+            <div class="form-container ui-widget" >
+            <div class="ui vertical steps" id="steps" style="display:none">
+
+</div>
+<div class='actual-form'>
+ <?php echo $form; ?>
+</div>
+               
 
 
             </div>
@@ -460,3 +486,4 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
 
         </div>
     </div>
+    <div class="ui bottom sidebar menu"></div>

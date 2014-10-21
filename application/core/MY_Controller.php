@@ -49,8 +49,8 @@ class MY_Controller extends MX_Controller
 
     public function imci_template($template, $data)
     {
-        $this->load->module('template_imci');
-        $this->template_imci->$template($data);
+        $this->load->module('template');
+        $this->template->imci($data);
     }
 
 }
