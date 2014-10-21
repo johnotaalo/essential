@@ -2023,19 +2023,26 @@ class Analytics extends MY_Controller
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
         
         //$color = array('#ff0000', '#00ff00');
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-        //$count = 0;
+        $count = 0;
         $number = $resultArray = $q = array();
-        $number = $resultArray = $q = $yes = $no = array();
+        $number = $resultArray = $q = $yes = $no = $gdata = $data =array();
         foreach ($results as $key => $value) {
-            $q[] = $key;
-            $yes[] = (int)$value['yes'];
-            $no[] = (int)$value['no'];
-        }
-        $resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+        	$q[] = $key;
+			$data[] = $value;
+		}
+		foreach ($data as $k => $val) {
+			foreach ($val as $name => $value_) {
+				$gdata[$name][]=$value_;
+			}
+			}	
+		
+	$resultArray[]= array('name' => $k, 'data' => $gdata);
+		echo "<pre>";print_r($resultArray);echo "</pre>";die;
+		//$resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no), array('name' => 'No data', 'data' => $null));
         
         //$resultArray = array(array('name' => 'Yes', 'data' => $yes, 'color' => $color), array('name' => 'No', 'data' => $no,'color' => $color));
         $category = $q;
+        
         $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
         $chart_margin = (sizeof($category > 5)) ? 150 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type, '', $for, 'question', $statistics);
@@ -3007,7 +3014,7 @@ class Analytics extends MY_Controller
             
             //$data = array();
             
-            $name = 'Level  ' . $value['facilityLevel'];
+            $name = 'Tier ' . $value['facilityLevel'];
             
             //echo '<pre>';print_r($name);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
