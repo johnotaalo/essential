@@ -1261,7 +1261,7 @@ class Analytics extends MY_Controller
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
          
-        if(($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun') || ($statistic == 'supplier' && $for == 'mnh') || ($statistic == 'supplier' && $for == 'ch')) {
+        if(($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun')) {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1309,7 +1309,7 @@ class Analytics extends MY_Controller
                 if ($key == 'Never Available') {
                     $name = 'Not Available';
                     $key = $name;
-                } else if ($key == 'N/A') {
+                } else if (($key == 'N/A')|| ($key == ''))  {
                     $name = 'No Data';
                     $key = $name;
                 }
@@ -2175,7 +2175,30 @@ class Analytics extends MY_Controller
 		}
 		$category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
-    }else{
+    }else if(($statistics =='availability' && $for == 'ort')||($statistics =='location' && $for == 'ort')){
+        	$number = $resultArray = $q = $data= $gdata =array();
+        foreach ($results as $key => $value) {
+        	if($key == ''){
+        		$name = 'Not specified Tier';
+				$key = $name;
+				$q[]=$key;
+        	}else{
+        	$q[] = 'Tier'.''.$key;		
+        	}
+        	$data[]= $value;
+         }
+		foreach ($data as $k => $val) {
+			foreach ($val as $r => $value_) {
+				$gdata[$r][]=$value_;
+			}
+			}
+		foreach ($gdata as $name => $value1) {
+			$resultArray[]=array('name'=> $name, 'data'=> $value1);
+		}
+		$category = $q;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column', '', $for, 'question', $statistics);
+    }
+    else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
         foreach ($results as $key => $value) {
