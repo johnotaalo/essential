@@ -1101,7 +1101,7 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category, $for) {
+    public function getMNHSuppliesLocation($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'mnh');
     }
     public function getMNHSuppliers($criteria, $value, $survey, $survey_category) {
@@ -2028,7 +2028,8 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
-        
+
+        //echo "<pre>";print_r($results);echo "</pre>";die;
         foreach ($results as $key => $value) {
             foreach ($value as $location => $val) {
                 $gData[] = array(ucwords($location), (int)$val);

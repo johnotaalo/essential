@@ -2047,7 +2047,7 @@ LIMIT 0 , 1000
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$this->getCHEquipmentName($value['equipment']) ][$place]+= (int)$value['total_response'];
+                                 $data[$this->getCHEquipmentName($value['equipment']) ][$place]+= (int)$value['total_response'];
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
@@ -2058,7 +2058,7 @@ LIMIT 0 , 1000
                         }
                     }
                     
-                    // echo "<pre>";print_r($data);echo "</pre>";die;
+                     echo "<pre>";print_r($data);echo "</pre>";die;
                     
                     
                     
@@ -3860,6 +3860,7 @@ ORDER BY question_code";
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
+
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
@@ -3878,7 +3879,9 @@ ORDER BY question_code";
                     // // } else {
                     
                     // //     //$question = trim($question, 'National Guidelines for ');
-                    
+                    //$question = trim($question, 'Total number of');
+                    //$question = trim($question, '?');
+
                     // // }
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
@@ -4059,15 +4062,15 @@ ORDER BY question_code";
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $key => $value) {
                         
-                        if (array_key_exists('phar_values', $value)) {
-                            $pharmacyvalue+= $value['phar_values'];
+                        if (array_key_exists('del_values', $value)) {
+                            $pharmacyvalue+= $value['del_values'];
                         }
                         
-                        if (array_key_exists('sto_values', $value)) {
-                            $storevalue+= $value['sto_values'];
+                        if (array_key_exists('phar_values', $value)) {
+                            $storevalue+= $value['phar_values'];
                         }
-                        if (array_key_exists('del_values', $value)) {
-                            $deliveryvalue+= $value['del_values'];
+                        if (array_key_exists('sto_values', $value)) {
+                            $deliveryvalue+= $value['sto_values'];
                         }
                         if (array_key_exists('ot_values', $value)) {
                             $othervalue+= $value['ot_values'];
@@ -4075,17 +4078,15 @@ ORDER BY question_code";
                     }
                     
                     //1. collect the categories
-                    // $data[$question]['pharmacy'] = $pharmacyvalue;
-                    // $data[$question]['store'] = $storevalue;
-                    // $data[$question]['delivery room'] = $deliveryvalue;
-                    // $data[$question]['other'] = $othervalue;
-                    
-                    
+                    $data[$question]['delivery room'] = $deliveryvalue;
+                    $data[$question]['pharmacy'] = $pharmacyvalue;
+                    $data[$question]['store'] = $storevalue;
+                    $data[$question]['other'] = $othervalue;
                 } else {
                     return null;
                 }
                 
-                //echo "<pre>";print_r($other);echo "</pre>";die;
+                //echo "<pre>";print_r($data);echo "</pre>";die;
                 
                 
             }
