@@ -345,7 +345,7 @@ class Generate extends MY_Controller
                             $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
                         }
                         $base++;
-                        if ($section == 'nur') {
+                        if ($section == 'nur' || $section=='bed') {
                             $data[$section][] = '
                 <tr>
                 <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
@@ -368,7 +368,7 @@ class Generate extends MY_Controller
                     </td>
                     <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
-                        } else if ($section == 'guide' || $section == 'job') {
+                        } else if ($section == 'guide' || $section == 'job' || $section== 'gp') {
                             $guidelinequestions = '<tr>
             <td>' . $value['questionName'] . '</td>
             <td>
@@ -388,37 +388,120 @@ class Generate extends MY_Controller
                             }
                             $guidelinequestions.= '</select>
             </td>
-            <td ><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "' . $questionCount . '" disabled/></td>
+            <td ><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "' . $questionCount . '" /></td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                             $data[$section][] = $guidelinequestions;
-                        } else {
-                            if ($value['questionName'] == 'Document cases seen over 3 months') {
-                                $numbers = explode(',', $questionResponse);
-                                $data[$section][] = '
-                            <tr>
-                        <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
-                     <td>1 <input name="questionResponse_' . $counter . '[' . '1' . ']"  type="number" value = "' . $numbers[0] . '">  2 <input name="questionResponse_' . $counter . '[' . '2' . ']"  type="number" value = "' . $numbers[1] . '">
-                        May <input name="questionResponse_' . $counter . '[' . '3' . ']"  type="number" value = "' . $numbers[2] . '"></td>
-                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-                    </tr>';
-                            } else {
-                                if ($questionResponse == 'Yes') {
-                                    $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"><input type="text" style="display:none" name="questionReason_' . $counter . '"></td>';
-                                } else if ($questionResponse == 'No') {
-                                    $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"><input type="text" name="questionReason_' . $counter . '"></td>';
+                        } /**
+                             * If Section is Water Resource
+                             * @var [type]
+                             */
+                            else if ($section == 'mnhw') {
+                                $supplierOptions = $this->createSupplierOptions();
+                                $aspect_response_on_yes = '';
+                                
+                                if ($value['questionCode'] == 'QMNH01') {
+                                    $aspect_response_on_yes = '<label>Water Storage Point</label><br/>
+            <input type="text"  name="mnhwAspectWaterSpecify_' . $counter . '" id="mnhwStoragePoint_' . $counter . '" value="" size="45" placeholder="specify"/>';
                                 } else {
-                                    $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                                    $aspect_response_on_yes = '<label style="font-weight:bold">Main Source</label><br/>' . $supplierOptions['mh'];
                                 }
+                                $data[$section][] = '<tr>
+            <td>' . $value['questionName'] . '</td>
+            <td>
+            Yes<input type="checkbox">No<input type="checkbox">
+            </td>
+            <td >
+            ' . $aspect_response_on_yes . '
+            </td>
+            <input type="hidden"  name="mnhwAspectCode_' . $counter . '" id="mnhwAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                            }
+                            
+                            /**
+                             * If Section is Community Strategy
+                             * @var [type]
+                             */
+                            
+                            else if ($section == 'cms') {
+                                $foundC = strpos($value['questionCode'], 'QUC');
+                                $foundM = strpos($value['questionCode'], 'QMNH');
+                                $section = ($foundM !== false) ? 'cmsM' : 'cmsC';
+                                $numbering=range(1,20);
                                 $data[$section][] = '
-                            <tr>
-                        <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
-                            ' . $questionRow . '
-                        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-                    </tr>';
+                <tr>
+            <td colspan="1"><strong>(' . $numbering[sizeof($data[$section])] . ')</strong> ' . $value['questionName'] . '</td>
+         <td><input name="questionCount_' . $counter . '" id="questionCount_' . $counter . '"   type="number"></td>
+            <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                            } else if ($section == 'ort') {
+                                if ($value['questionCode'] == 'QUC01') {
+                                    
+                                    //set follow up question if qn on designated ort location is yes
+                                    
+                                    $aspect = '<tr>
+            <td colspan="1">' . $value['questionName'] . '</td>
+            <td colspan="1">
+            Yes <input type="checkbox"> No <input type="checkbox">
+            </td>
+            <input type="hidden"  name="ortcAspectCode_' . $counter . '" id="ortcAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                                    $data[$section][] = $aspect;
+                                } else {
+                                    
+                                    if ($value['questionCode'] == 'QUC02b') {
+                                        $ort_location = '<tr id="ort_location" style="display:true">
+            <td colspan="1">' . $value['questionName'] . '</td>
+            <td colspan="2">
+            <label>Multiple Selections Allowed</label><br/>
+            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="MCH"/>
+            <label for="" style="font-weight:normal">MCH</label><br/>
+
+            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="U5 Clinic"/>
+            <label for="" style="font-weight:normal">U5 Clinic</label><br/>
+
+            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="OPD"/>
+            <label for="" style="font-weight:normal">OPD</label><br/>
+
+
+            <input type="checkbox" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="WARD"/>
+            <label for="" style="font-weight:normal">WARD</label><br/>
+
+
+            <input type="checkbox" name="ortLocationOther_' . $counter . '[]" id="ortLocationOther_' . $counter . '"  value=""/>
+            <label for="" style="font-weight:normal">Other</label><br/>
+            <input type="text" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="" maxlength="45" size="45" placeholder="please specify"/>
+
+
+            </td>
+            <input type="hidden"  name="ortcAspectCode_' . $counter . '" id="ortcAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                                        
+                                        $data[$section][] = $ort_location;
+                                    } elseif ($value['questionCode'] == 'QUC02a') {
+                                        $ort_functional = $this->getORTFunctionality();
+                                        $data[$section][] = '<tr>
+            <td colspan="2"><b>' . $value['questionName'] . '</b></td>
+           </tr>' . $ort_functional;
+                                    } else {
+                                        
+                                        $data[$section][] = '<tr>
+            <td colspan="1">' . $value['questionName'] . '</td>
+            <td colspan="1">
+            Yes <input type="checkbox"> No <input type="checkbox">
+            <input type="hidden"  name="ortcAspectCode_' . $counter . '" id="ortcAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                                    }
+                                }
+                            } else {
+                                $data[$section][] = '
+                <tr>
+            <td colspan="1"><strong>(' . $base . ')</strong> ' . $value['questionName'] . '</td>
+         <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="checkbox"> No <input value="No" name="mchIndicator_' . $counter . '"  type="checkbox"></td>
+            <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
                             }
                         }
-                    }
                     break;
 
                 case 'offline':
@@ -430,17 +513,15 @@ class Generate extends MY_Controller
                         $current = ($base == 0) ? $section : $current;
                         
                         $base++;
-                        if ($value['questionName'] == 'Document cases seen over the last 3 months') {
-                            
+                         if ($section == 'nur' || $section=='bed') {
                             $data[$section][] = '
                 <tr>
-            <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
-         <td>1 <input name="questionResponse_' . $counter . '"  type="text">  2 <input name="questionResponse_' . $counter . '"  type="text">
-            3 <input name="questionResponse_' . $counter . '"  type="text"></td>
-            <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
-        </tr>';
-                        } else {
-                            if ($section == 'ceoc') {
+                <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
+                <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+                </tr>';
+                        } 
+                            else if ($section == 'ceoc') {
                                 if ($value['questionCode'] == 'QMNH03') {
                                     $follow_up_question = '
             <tr id="transfusion_y">
@@ -558,7 +639,7 @@ class Generate extends MY_Controller
                                 $data[$section][] = '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[sizeof($data[$section])] . ')</strong> ' . $value['questionName'] . '</td>
-         <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="checkbox"> No <input value="No" name="mchIndicator_' . $counter . '"  type="checkbox"></td>
+         <td><input name="questionCount_' . $counter . '" id="questionCount_' . $counter . '"   type="number"></td>
             <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                             } else if ($section == 'ort') {
@@ -608,7 +689,7 @@ class Generate extends MY_Controller
                                     } elseif ($value['questionCode'] == 'QUC02a') {
                                         $ort_functional = $this->getORTFunctionality();
                                         $data[$section][] = '<tr>
-            <td colspan="2">' . $value['questionName'] . '</td>
+            <td colspan="2"><b>' . $value['questionName'] . '</b></td>
            </tr>' . $ort_functional;
                                     } else {
                                         
@@ -629,7 +710,7 @@ class Generate extends MY_Controller
         </tr>';
                             }
                         }
-                    }
+                    
                     break;
                 }
                 
@@ -651,13 +732,23 @@ class Generate extends MY_Controller
                 
                 foreach ($data_found as $value) {
                     if ($value['questionFor'] == 'ortf') {
+                         if ($value['questionCode'] == 'QUC29') {
+                            
+                            $result.= '
+                <tr>
+            <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
+         <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
+           MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+            <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+                        }else{
                         $result.= '  <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
          <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="checkbox"> No <input value="No" name="mchIndicator_' . $counter . '"  type="checkbox"></td>
             <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         $counter++;
-                    }
+                    }}
                 }
                 return $result;
             }
@@ -764,20 +855,20 @@ class Generate extends MY_Controller
                             }
                             if ($expiryDate != '') {
                                 $expiryRow = '<td style ="text-align:center;">
-            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text" size="350" class="cloned expiryDate" value="' . $expiryDate . '"/>
+            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text"  class="cloned expiryDate" value="' . $expiryDate . '"/>
             </td>';
                             } else {
                                 $expiryRow = '<td style ="text-align:center;">
-            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text" size="350" class="cloned expiryDate"/>
+            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text"  class="cloned expiryDate"/>
             </td>';
                             }
                             if ($quantity != '') {
                                 $quantityRow = '<td style ="text-align:center;">
-            <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text" size="100" class="cloned numbers" value="' . $quantity . '"/>
+            <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text"  class="cloned numbers" value="' . $quantity . '"/>
             </td>';
                             } else {
                                 $quantityRow = '<td style ="text-align:center;">
-            <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text" size="100" class="cloned numbers"/>
+            <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text"  class="cloned numbers"/>
             </td>';
                             }
                             
@@ -1095,8 +1186,12 @@ class Generate extends MY_Controller
                                     // print_r($locations);die;
                                     
                                 }
-                                
-                                //Loop through preset locations
+                                if ($value['eqFor'] == 'hwr') {
+                                    unset($locations[4]);
+                                    unset($locations[5]);
+                                    
+                                    $locationRowTemp=array();
+                                     //Loop through preset locations
                                 foreach ($locations as $loc) {
                                     
                                     //Check if value retrieved is NOT NULL
@@ -1121,6 +1216,36 @@ class Generate extends MY_Controller
                                 foreach ($locationRowTemp as $temp) {
                                     $locationRow.= $temp;
                                 }
+                                }
+                                else{
+                                    $locationRowTemp=array();
+                                    //Loop through preset locations
+                                foreach ($locations as $loc) {
+                                    
+                                    //Check if value retrieved is NOT NULL
+                                    if ($location != '') {
+                                        
+                                        //Check whether the values from the locations array exist in the location array
+                                        if (in_array($loc, $location)) {
+                                            $locationRowTemp[$loc] = '<td style ="text-align:center;">
+                            <input checked="checked" name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
+                            </td>';
+                                        } else {
+                                            $locationRowTemp[$loc] = '<td style ="text-align:center;">
+                            <input name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
+                            </td>';
+                                        }
+                                    } else {
+                                        $locationRowTemp[$loc] = '<td style ="text-align:center;">
+                                        <input name="eqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
+                                        </td>';
+                                    }
+                                }
+                                foreach ($locationRowTemp as $temp) {
+                                    $locationRow.= $temp;
+                                }
+                                }
+                               
                                 
                                 if ($value['eqFor'] == 'hwr') {
                                     if ($value['eqUnit'] != null) {
@@ -1546,13 +1671,10 @@ class Generate extends MY_Controller
                         }
                         
                         $monthlydeliveries.= '<tr>
-        <th> YEAR</th><th><div style="width: 50px"> JANUARY</div></th> <th>FEBRUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th>
+        <th> YEAR</th><th><div style="width: 50px"> JAN</div></th> <th>FEB</th><th>MAR</th><th> APR</th><th> MAY</th><th>JUN</th>
+        <th> JUL</th><th> AUG</th><th> SEP</th><th> OCT</th><th> NOV</th><th> DEC</th>
         <tr>
-            <td><input type="text" name="delivery_year"></td>' . $upperrow . '
-            </tr><tr>
-            <th> YEAR</th><th> JULY</th><th> AUGUST</th><th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
-            <tr>
-            <td><input type="text" name="delivery_year"></td>' . $lowerrow . '
+            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . ' 
             </tr>';
                         break;
 
@@ -1571,20 +1693,13 @@ class Generate extends MY_Controller
                             }
                         }
                         
-                        $monthlydeliveries.= '
-<tr>
-        <th>YEAR</th><td><input type="text" name="delivery_year"></td>
-        </tr>
-
-                <tr>
-        <th><div style="width: 50px"> JANUARY</div></th> <th>FEBRUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th>
+                        $monthlydeliveries.= '<tr>
+        <th> YEAR</th><th><div style="width: 50px"> JAN</div></th> <th>FEB</th><th>MAR</th><th> APR</th><th> MAY</th><th>JUN</th>
+        <th> JUL</th><th> AUG</th><th> SEP</th><th> OCT</th><th> NOV</th><th> DEC</th>
         <tr>
-            ' . $upperrow . '
-            </tr><tr>
-            <th> JULY</th><th> AUGUST</th><th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
-            <tr>
-            </td>' . $lowerrow . '
+            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . ' 
             </tr>';
+                        
                         break;
                 }
                 return $monthlydeliveries;
@@ -1684,7 +1799,7 @@ class Generate extends MY_Controller
                 
                 foreach ($this->data_found as $value) {
                     $counter++;
-                    $treatments[$value['treatmentFor']].= '<p><input type = "checkbox" >' . $value['treatmentName'] . '<input type="text" style="margin-left:20px" size="8"></p>';
+                    $treatments[$value['treatmentFor']].= '<tr><td><input type = "checkbox" ></td><td>' . $value['treatmentName'] . '</td><td><input type="text" style="margin-left:20px" size="8"></td></tr>';
                 }
                 
                 //echo '<pre>'; print_r( $this->treatments);echo '</pre>';die;

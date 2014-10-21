@@ -6,6 +6,7 @@
 
 @import "typeplate/_typeplate";
 @import "CSS:../bower_components/animate.css/animate";
+@import "CSS:../bower_components/semantic-ui/build/packaged/css/semantic";
 @mixin inner-style($height){
     overflow-y: auto;
     height:$height;
@@ -148,7 +149,7 @@ button{
 }
 form{
     input,select,textarea{
-        @extend .form-control;
+        
     }
     button{
         @extend .btn;
@@ -174,7 +175,24 @@ form{
     }
 }
 .form-container{
-    padding:0 !important;
+    width:98%;
+    margin:auto;
+}
+.step{
+    padding-left: 25%;
+width: 100%;
+}
+#steps{
+    display:inline-block;
+    position:fixed;
+    top:29%;
+    width:20%;
+    z-index:100000000 !important;
+    div{
+        font-size:10px !important;
+        width:100% !important;
+
+    }
 }
 #logout{
     margin-left:20px;
@@ -210,27 +228,14 @@ form{
     padding-top:0;
 }
 //Table Styling
+td{
+    @extend .field;
+}
 table{
-    width:100%;
-    thead{
-        tr{
-            background:#fd7972;
-        }
-    }
-    tbody{
-
-        tr{
-            background:#c8defc;
-        }
-        th{
-            background:#72bcf5;
-        }
-    }
-    td,th{
-        margin-bottom: 5px;
-        padding:0.5%;
-        border:2px solid white;
-    }
+    @extend .ui;
+    @extend .table;
+    @extend .segment;
+    @extend .celled;
     td{
         .progress{
             margin-bottom:0;
