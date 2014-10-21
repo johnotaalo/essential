@@ -1710,8 +1710,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             }
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
-                        } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
+                        } else if (array_key_exists('supplier_code', $value)) {
+                            $data[$value['fac_level']][$value['supplier_code']]= (int)$value['supplier_name'];
                         }
                     }
                     
@@ -2047,7 +2047,7 @@ LIMIT 0 , 1000
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$this->getCHEquipmentName($value['equipment']) ][$place]+= (int)$value['total_response'];
+                                $data[$value['equipment_name']][$place]+= (int)$value['total_response'];
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
@@ -3868,8 +3868,8 @@ ORDER BY question_code";
                     $question = $this->getQuestionName($value_['question_code']);
                     
                     // var_dump($question);
-                    // $question = trim($question, 'Does this facility have an updated');
-                    // $question = trim($question, '?');
+                     $question = trim($question, 'Does this facility have');
+                    $question = trim($question, '?');
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
                     // //     $question = 'Baby Friendly Hospital Initiative';
@@ -3883,18 +3883,19 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
-                    //echo '<pre>';print_r($value);echo '</pre>';die;
+                    //echo '<pre>';print_r($value_);echo '</pre>';die;
                   
                     switch ($statistics) {
                         case 'response':
-                            $yes = $value_['Yes'];
+							$data[$question][$value_['response']]=(int)$value_['total_response'];
+                           /* $yes = $value_['Yes'];
                             $no = $value_['No'];
 							$null = $value_[''];
                             
                             //1. collect the categories
                             $data[$question]['yes'] = $yes;
                             $data[$question]['no'] = $no;
-							$data[$question]['null']=$null;
+							$data[$question]['null']=$null;*/
                             break;
 
                         case 'total':
@@ -3912,11 +3913,18 @@ ORDER BY question_code";
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
                             
                             break;
-
                         case 'mainsource':
                             $data[$question][$value_['reason']] = (int)$value_['total_response'];
                             break;
-
+						 case 'availability':
+                            $data[$value_['fac_level']][$value_['response']]= (int)$value_['total_response'];
+                            break;
+						case 'functionality':
+                            $data[$value_['fac_level']][$value_['response']]= (int)$value_['total_response'];
+                            break;
+						case 'location':
+                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -3955,10 +3963,11 @@ ORDER BY question_code";
                     
                     switch ($statistics) {
                         case 'response':
-                            $question = $this->getQuestionName($value_['question_code']);
+							$data[$question][$value_['response']]=(int)$value_['total_response'];
+                           /* $question = $this->getQuestionName($value_['question_code']);
                             foreach ($value_ as $key => $v) {
                                 $data[$question][$key] = $v;
-                            }
+                            }*/
                             break;
 
                         case 'reason':
