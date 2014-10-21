@@ -192,7 +192,10 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
     });
     $(document).on('datatable_loaded', function() {
-        $('.dataTable').dataTable();
+        $('.dataTable').dataTable({
+            "sPaginationType": "full_numbers"
+        });
+        $('.dataTables_info').addClass('breadcrumb');
     });
     $('select#indicator_types').change(function() {
         indicator_type = $('select#indicator_types option:selected').attr('value');
@@ -229,6 +232,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
         showEnlargedGraph(base_url, graph_url, graph_text, raw_url);
     });
+
     //Change Event for District Select
     $('select#compare_1').change(function() {
         $("#graph_10").empty();
@@ -413,21 +417,52 @@ function setRawUrl(criteria, county, district, facility, survey, survey_category
         case 'question':
             raw_url = 'analytics/getQuestionRaw/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + data_for + '/' + statistic;
             break;
+         case 'indicator':
+            raw_url = 'analytics/getIndicatorRaw/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + data_for ;
+            break;   
+            case 'commodity':
+            raw_url = 'analytics/getCommodityRaw/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + data_for+ '/' + statistic ;
+            break;   
     }
     return raw_url;
 }
 // function setScope(criteria, county, district, facility, survey, survey_category) {
 // }
 function loadEnlargedGraph(base_url, graph_url, title, raw_url) {
+    var contents = [];
     if (raw_url != '') {
-        contents = '<div class="row">' + '<div class="medium-graph" id="graph"></div>' + '<div class="large-graph" ><h6 class="table-header">Facility Raw Information<span><button id="excel"><i class="fa fa-download"></i>Download Excel</button><button id="pdf"><i class="fa fa-download"></i>Download PDF</button></span></h6>' + '<div id="table" style="font-size:10px !important"></div></div>' + '</div>';
+        contents['graph'] = '<div class="x-large-graph active side" id="graph"></div>';
+        contents['facility_data'] = '<div class="x-large-graph side" id="facility_data"></div>';
+
         loadModalForm(base_url, '', title, '90%', contents);
         loadGraph(base_url, graph_url, '#graph');
-        loadFacilityRawData(base_url, raw_url, '#table');
+        loadRawDownload(base_url,raw_url);
+        $('#show_data').show();
+      $('#pdf').removeClass('disabled');
+        $('#excel').removeClass('disabled');
+        $('#show_data').click(function() {
+            $('#graph').hide();
+            $('#show_data').hide();
+            $('#show_graph').show();
+            loadFacilityRawData(base_url, raw_url, '#facility_data');
+        });
+         $('#show_graph').click(function() {
+            $('#graph').show();
+            $('#facility_data').empty();
+            $('#show_graph').hide();
+            $('#show_data').show();
+            loadGraph(base_url, graph_url, '#graph');
+        });
+
     } else {
-        contents = '<div class="row">' + '<div class="x-large-graph" id="graph"></div>' + '</div>';
+        $('#pdf').addClass('disabled');
+        $('#excel').addClass('disabled');
+        $('.download').attr('data-url','');
+        contents['graph'] = '<div class="x-large-graph active side" id="graph"></div>';
+        contents['facility_data'] = '';
         loadModalForm(base_url, '', title, '90%', contents);
         loadGraph(base_url, graph_url, '#graph');
+        $('#show_data').hide();
     }
 }
 
@@ -625,7 +660,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getCEOC/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#CEmONC');
                     loadGraph(base_url, 'analytics/getCSReasons/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/cs', '#CEOCReasons');
                     loadGraph(base_url, 'analytics/getCSReasons/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/transfusion', '#TransfusionReasons');
-                    loadGraph(base_url, 'c_analytics/getBloodMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#bloodmainsource');
+                    loadGraph(base_url, 'analytics/getBloodMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#bloodmainsource');
                     loadGraph(base_url, 'analytics/getNewborn/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHnewborn');
                     loadGraph(base_url, 'analytics/getKangarooMotherCare/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHkmc');
                     loadGraph(base_url, 'analytics/getDeliveries/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#delivery_preparedness');
@@ -714,7 +749,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/dia', '#other_treatment_options_dia');
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/pne', '#other_treatment_options_pne');
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/fev', '#other_treatment_options_fev');
-                    loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type, '#indicator_comparison');
+                    //loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type, '#indicator_comparison');
                     break;
                 case 'section-4':
                     loadGraph(base_url, 'analytics/getCHCommodityAvailabilityFrequency/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#commodity_availability');

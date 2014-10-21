@@ -43,6 +43,40 @@ class Survey extends MY_Controller
     }
     
     /**
+     * [loadSection description]
+     * @param  [type] $survey [description]
+     * @return [type]         [description]
+     */
+    public function loadSection($survey) {
+        switch ($survey) {
+            case 'mnh':
+                
+                //$sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
+                $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Community Strategy');
+                $sections = 8;
+                break;
+
+            case 'ch':
+                $sectionNames = array('Facility Information', 'Guidelines,Job Aids and Tools', 'Case Management', 'Commodity & Bundling', 'ORT Corner Assessment', 'Equipment Availability and Status', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
+                $sections = 9;
+                break;
+
+            case 'hcw':
+                $sections = 5;
+                break;
+
+            default:
+                break;
+        }
+        for ($x = 1; $x <= $sections; $x++) {
+            $stringLength = strlen($sectionNames[$x - 1]);
+            $class = ($stringLength>50)?'ui step two line':'ui step';
+            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="section-' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
+        }
+        echo json_encode($sectionList);
+    }
+    
+    /**
      * [inventory description]
      * @return [type] [description]
      */
@@ -84,9 +118,9 @@ class Survey extends MY_Controller
         $form = '';
         $this->session->unset_userdata('survey_form');
         $this->session->set_userdata('survey_form', $survey_form);
-        $this->survey_form=$survey_form;
+        $this->survey_form = $survey_form;
         $this->load->module('survey/generate');
-
+        
         $this->session->unset_userdata('survey');
         $this->session->set_userdata('survey', $survey_type);
         
@@ -106,7 +140,7 @@ class Survey extends MY_Controller
         }
         switch ($survey_form) {
             case 'offline':
-                $this->form_handler->loadPDF($form,$survey_type);
+                $this->form_handler->loadPDF($form, $survey_type);
                 break;
 
             case 'online':
@@ -234,9 +268,17 @@ class Survey extends MY_Controller
      * @param  [type] $survey_category [description]
      * @return [type]                  [description]
      */
-    public function getFacilitySection($survey, $fac_mfl, $survey_category) {
-        $section = $this->getSection($survey, $fac_mfl, $survey_category);
-        echo $section;
+    public function getFacilitySection($survey, $survey_category, $fac_mfl) {
+        /**
+         * [$current description]
+         * @var string
+         */
+        $current='';
+
+        if ($dataFound) {
+            $current = $dataFound[0]['max_section'];
+        }
+        echo $current;
     }
     
     /**
@@ -366,6 +408,7 @@ class Survey extends MY_Controller
             }
             
             //print 'fs: '.$this->districtFacilityListSection;die;
+            
             
         } else {
             
