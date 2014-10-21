@@ -121,16 +121,21 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
             column: {
                 dataLabels: {
                     enabled: true,
-                    color: 'white',
-                    style:{
-                        fontSize:'0.5em'
-                    },
+                     backgroundColor: '#428bca',
+                    borderRadius: '3px',
+                    padding: 2,
                     formatter: function() {
                         if (this.y != 0 && chart_stacking == 'percent') {
                             return Math.round(this.percentage) + '%';
                         } else {
                             return this.value;
                         }
+                    },
+                    color: 'white',
+                    style: {
+                        fontWeight: 'bold',
+                        opacity: 0.7,
+                        fontSize:'0.7em'
                     }
                 }
             }

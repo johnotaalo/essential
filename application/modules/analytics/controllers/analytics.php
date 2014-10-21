@@ -2290,7 +2290,7 @@ class Analytics extends MY_Controller
 		$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
 		foreach ($gdata as $name => $value1) {
-			if($name=='No Data'){
+			if($name=='No data'){
                    $color='#dddddd';
                 }else if($name=='Yes'){
                     $color='#8bbc21';
@@ -2304,9 +2304,10 @@ class Analytics extends MY_Controller
                 }
 			$resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
 		}
+        // echo '<pre>';print_r($resultArray);die;
 		$category = $q;
 		$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'column', '', $for, 'question', $statistics,$colors);
     }
     }
     public function getHSQuestions($criteria, $value, $survey, $survey_category, $for, $statistics) {
