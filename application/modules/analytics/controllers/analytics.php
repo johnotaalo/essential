@@ -1377,41 +1377,41 @@ class Analytics extends MY_Controller
                
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         } else if (($statistic == 'supplier' && $for == 'ch') || ($statistic == 'supplier' && $for == 'mnh')){
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
-            	//echo '<pre>';print_r($results);die;
+                //echo '<pre>';print_r($results);die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-				if($key == ''){
-					$key = 'No tier specified';
-					$category[] = $key;
-				}else{
-					 $category[] = 'Tier'.$key;
-				}
+                if($key == ''){
+                    $key = 'No tier specified';
+                    $category[] = $key;
+                }else{
+                     $category[] = 'Tier'.$key;
+                }
                
                foreach ($result as $name => $value) {
-                	//echo '<pre>';print_r($result); echo '</pre>';die;
+                    //echo '<pre>';print_r($result); echo '</pre>';die;
                        $data[$name][] = (int)$value;
                    
                 }
-			  
+              
             }
            foreach ($data as $key => $value) {
-            	//echo '<pre>';print_r($val);die;
+                //echo '<pre>';print_r($val);die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
-				if ($key == '') {
+                if ($key == '') {
                     $name = 'No Data';
                     $key = $name;
                 $resultArray[] = array('name' => $key, 'data' => $value);
-				}else{
-					$resultArray[] = array('name' =>$key, 'data' => $value);
-				}
+                }else{
+                    $resultArray[] = array('name' =>$key, 'data' => $value);
+                }
             }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
@@ -1456,8 +1456,15 @@ class Analytics extends MY_Controller
                
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }
+    }
+    
+    public function getCommodityRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
+        $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
+        
+        // echo "<pre>";print_r($results);echo "</pre>";die;
+        echo $this->generateData($results, 'Commodity Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -2756,7 +2763,7 @@ class Analytics extends MY_Controller
      */
     public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for);
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for,'response');
         
         // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
@@ -2782,9 +2789,14 @@ class Analytics extends MY_Controller
         }
         $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }
-    
+    public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
+        
+        // echo "<pre>";print_r($results);echo "</pre>";die;
+        echo $this->generateData($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+    }
     /**
      * [getIndicatorComparison description]
      * @param  [type] $criteria        [description]
