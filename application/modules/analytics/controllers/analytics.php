@@ -1292,10 +1292,10 @@ class Analytics extends MY_Controller
             $key = str_replace(' ', '-', $key);
 			if($key=='No-Data'){
                    $color='#dddddd';
-                }else if($key=='Available'){
+                }else if($key=='Available' || $key=='Functional'){
                     $color='#8bbc21';
-                }else if($key=='Not-Available'){
-                    $color='#f66c6f';
+                }else if($key=='Not-Available' || $key=='Nonfunctional'){
+                    $color='#fb4347';
                 }
                 
                 else{
