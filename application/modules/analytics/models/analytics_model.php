@@ -3882,8 +3882,13 @@ ORDER BY question_code";
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
-                        //$question = trim($question, 'Does this facility have');
-                        //$question = trim($question, '?');
+                        foreach ($question as $value) {
+                            echo '<pre>';print_r($value);echo '</pre>';di
+                        }
+                        // $question = ltrim($question, 'Does this facility have');
+                         //$question = rtrim($question, '?');
+                      //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
+                       //$question = substr($question, 24);
                     }
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
@@ -3985,7 +3990,7 @@ ORDER BY question_code";
                     switch ($statistics) {
                         case 'response':
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
-                            
+                           
                             /* $question = $this->getQuestionName($value_['question_code']);
                             foreach ($value_ as $key => $v) {
                                 $data[$question][$key] = $v;
