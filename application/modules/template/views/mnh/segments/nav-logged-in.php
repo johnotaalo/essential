@@ -3,7 +3,7 @@
        <?php $this->load->view('banner'); ?>
 </div>
 
-    <div class="breadcrumb" id="survey_crumb">
+    <div class="breadcrumb" id="survey_crumb" data-start="border-bottom:0;opacity:1;position:relative" data-top="opacity:0.9;z-index:1000;position:fixed;top:0;width:100%;border-bottom:1px solid #ddd">
     <li><a id="li_survey"href="<?php echo base_url() ?>home">Home</a></li>
     <li><a id="li_facilities" href="<?php echo base_url().'assessment';?>"> <?php echo $this -> session -> userdata('dName');?> Facilities</a></li>
 <div class="ui label mini" >
