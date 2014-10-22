@@ -342,9 +342,10 @@
                         <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
-
+						<p>Please Select an option from drop down menu to load the graph</p>	
                         <div class="chart" id="indicator_comparison">
                         </div>
+                        
                     </div>
                 </div>
 
