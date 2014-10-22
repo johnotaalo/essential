@@ -2323,12 +2323,12 @@ class Analytics extends MY_Controller
 		$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
 		foreach ($gdata as $name => $value1) {
-			if($name=='No Data'){
+			if($name=='No data'){
                    $color='#dddddd';
                 }else if($name=='Yes'){
                     $color='#8bbc21';
                 }else if($name=='No'){
-                    $color='#f66c6f';
+                    $color='#fb4347';
                 }
                 
                 else{
@@ -2499,7 +2499,14 @@ class Analytics extends MY_Controller
         
         //echo "<pre>";print_r($data[$option]);echo "</pre>";die;
         foreach ($data[$option] as $key => $value) {
-            $gData[] = array('name' => $key, 'y' => (int)$value);
+            if($key=='No data'){
+                $color='#dddddd';
+                $gData[] = array('name' => $key, 'y' => (int)$value,'color'=>$color);
+            }
+            else{
+                $gData[] = array('name' => $key, 'y' => (int)$value);
+            }
+            
         }
         $resultArray[] = array('name' => 'Reasons', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', 'ceoc', 'question', 'reason');
@@ -3951,7 +3958,14 @@ class Analytics extends MY_Controller
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
-            $resultArray[] = array('name' => $key, 'data' => $val);
+            if($key=='No data'){
+                   $color='#dddddd';
+                    $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+                }
+           else{
+             $resultArray[] = array('name' => $key, 'data' => $val);
+           }     
+           
         }
         
         //echo "<pre>"; print_r($resultArray);echo "</pre>";die;
@@ -4106,7 +4120,15 @@ class Analytics extends MY_Controller
         foreach ($results as $key => $result) {
             $category[] = $key;
             foreach ($result as $name => $value) {
-                $gData[] = array('name' => $name, 'y' => (int)$value);
+                if($name=='No data'){
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }
+                $gData[] = array('name' => $name, 'y' => (int)$value,'color'=>$color);
+
             }
         }
         $resultArray[] = array('name' => 'Response', 'data' => $gData);
