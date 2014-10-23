@@ -1706,7 +1706,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data[]=$value;
                         }
                         else{
-                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -3883,7 +3883,7 @@ ORDER BY question_code";
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
                         foreach ($question as $value) {
-                            echo '<pre>';print_r($value);echo '</pre>';di
+                            // echo '<pre>';print_r($value);echo '</pre>';di
                         }
                         // $question = ltrim($question, 'Does this facility have');
                          //$question = rtrim($question, '?');

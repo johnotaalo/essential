@@ -1340,7 +1340,7 @@ class Analytics extends MY_Controller
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-         //echo '<pre>';print_r($results);die;
+         // echo '<pre>';print_r($results);die;
         if (($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')) {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
