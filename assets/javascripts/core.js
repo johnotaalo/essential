@@ -120,7 +120,7 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
             },
             column: {
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                     
                     formatter: function() {
                         if (this.y != 0 && chart_stacking == 'percent') {
