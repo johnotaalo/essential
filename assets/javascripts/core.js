@@ -121,9 +121,7 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
             column: {
                 dataLabels: {
                     enabled: true,
-                    backgroundColor: '#428bca',
-                    borderRadius: '3px',
-                    padding: 2,
+                    
                     formatter: function() {
                         if (this.y != 0 && chart_stacking == 'percent') {
                             return Math.round(this.percentage) + '%';
@@ -131,12 +129,15 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
                             return this.value;
                         }
                     },
-                    color: 'white',
-                    style: {
-                        fontWeight: 'bold',
-                        opacity: 0.7,
-                        fontSize: '0.7em'
-                    }
+                    color: 'white'
+                    // backgroundColor: '#428bca',
+                    // borderRadius: '3px',
+                    // padding: 2,
+                    // style: {
+                    //     fontWeight: 'bold',
+                    //     opacity: 0.7,
+                    //     fontSize: '0.7em'
+                    // }
                 }
             }
         },
