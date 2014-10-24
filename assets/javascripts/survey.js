@@ -29,7 +29,43 @@ function startSurvey(base_url, survey, survey_category, district) {
 	/*end of close_opened_form click event
 
 
+
         /*----------------------------------------------------------------------------------------------------------------*/
+
+    //try saving data
+  //   $('#next_btn').click(function(){
+  //   	//dddform_id = $('form').attr("id");
+  //   	$(form_id).submit();
+  //   	form_id.preventde
+  //   	var remoteAjax = {};
+  //   	the_url = '';
+  //   	the_url = base_url + "survey/complete_survey";
+		// $(form_id + ".step").each(function() {
+		// 	alert(form_id);
+		// });
+  //   });
+
+    $("#next_btn").click(function(){
+		$(form_id).submit(function(){
+			the_url = '';
+			the_url = base_url + "survey/complete_survey";
+			var formData = new FormData($(this)[0]);
+			// var r = document.getElementById('result');
+
+		    $.ajax({
+		        url: the_url,
+		        type: 'POST',
+		        success: function (data) {
+		            //problem comes here
+		        },
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });
+
+	    return false;
+		});
+	});
 
 	/*start of loadGlobalJS*/
 	var onload_queue = [];

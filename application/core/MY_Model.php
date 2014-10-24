@@ -348,7 +348,7 @@ class MY_Model extends CI_Model
      */
     public function getTreatments() {
         try {
-            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t ORDER BY t.treatmentFor');
+            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t ORDER BY t.treatmentFor, t.treatmentCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
