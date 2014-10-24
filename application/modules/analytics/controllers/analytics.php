@@ -1051,30 +1051,39 @@ class Analytics extends MY_Controller
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
         }else if(($statistic == 'supplier' && $for == 'mh')){
-        	 foreach ($results as $key => $result) {
+        	 $key = str_replace('_', ' ', $key);
+            
+            foreach ($results as $key => $result) {
+                //echo '<pre>';print_r($results);die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-                $category[] = $key;
-                foreach ($result as $name => $value) {
-                    if ($name != 'Sometimes Available') {
-                        
-                        //if ($name != 'Sometimes Available') {
-                        $data[$name][] = (int)$value;
-                    }
+                if($key == ''){
+                    $key = 'No tier specified';
+                    $category[] = $key;
+                }else{
+                     $category[] = 'Tier'.$key;
+                     
                 }
+               
+               foreach ($result as $name => $value) {
+                    //echo '<pre>';print_r($result); echo '</pre>';die;
+                       $data[$name][] = (int)$value;
+                   
+                }
+              
             }
-            foreach ($data as $key => $val) {
-                if ($key == 'Never Available') {
-                    $name = 'Not Available';
-                    $key = $name;
-                } else if ($key == 'N/A') {
-                    $name = 'No Data';
-                    $key = $name;
-                }
+           foreach ($data as $key => $value) {
+                //echo '<pre>';print_r($val);die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
-                $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+                if ($key == '') {
+                    $name = 'No Data';
+                    $key = $name;
+                $resultArray[] = array('name' => $key, 'data' => $value);
+                }else{
+                    $resultArray[] = array('name' =>$key, 'data' => $value);
+                }
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
         }else {
@@ -2852,7 +2861,7 @@ class Analytics extends MY_Controller
             
             
         }
-        $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }
