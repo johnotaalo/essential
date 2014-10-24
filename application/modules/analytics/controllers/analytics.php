@@ -1754,7 +1754,7 @@ class Analytics extends MY_Controller
      * @param  [type] $survey [description]
      * @return [type]         [description]
      */
-    public function getSectionsChosen($survey) {
+  /*  public function getSectionsChosen($survey) {
         switch ($survey) {
             case 'mnh':
                 
@@ -1779,7 +1779,7 @@ class Analytics extends MY_Controller
             $sectionList.= '<li><a href="#' . $survey . '-section-' . $x . '">Section ' . $x . ' : ' . $sectionNames[$x - 1] . '</a></li>';
         }
         echo json_encode($sectionList);
-    }
+    }*/
     
     /**
      * [getMNHCommodityLocation description]
