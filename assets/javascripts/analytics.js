@@ -716,7 +716,9 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 
                     break;
 
+
                 case 'section-8':
+
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/community', '#community_units');
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/referral', '#community_cases');
                     loadGraph(base_url, 'analytics/getCommunityStrategyMNH/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/trained', '#imci_trainings');
