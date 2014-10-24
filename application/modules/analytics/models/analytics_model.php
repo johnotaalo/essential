@@ -3887,26 +3887,17 @@ ORDER BY question_code";
                 foreach ($this->dataSet as $value_) {
                     //echo $for;
                     if (array_key_exists('question_code', $value_)) {
-<<<<<<< HEAD
-                         $question = $this->getQuestionName($value_['question_code']);
-                           //$question = trim($question, '?');
 
-                         //$question = trim($question, 'Totla number of ');
-                    //     $question = trim($question, 'n updated');
-                         $question = trim($question, '?');
-                     
-                   //echo '<pre>';print_r($question);echo '</pre>';die;
-=======
                         $question = $this->getQuestionName($value_['question_code']);
                         foreach ($question as $value) {
                             // echo '<pre>';print_r($value);echo '</pre>';di
-                        }
+                        
                         // $question = ltrim($question, 'Does this facility have');
                          //$question = rtrim($question, '?');
                       //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
                        //$question = substr($question, 24);
                     }
->>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
+
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
                     // //     $question = 'Baby Friendly Hospital Initiative';
@@ -3975,9 +3966,11 @@ ORDER BY question_code";
                         case 'total_raw':
                             $data[] = $value_;
                             break;
-                    }
+                    }}
                 }
-            }
+
+                
+            
             catch(exception $ex) {
                 
                 //ignore
@@ -4018,11 +4011,9 @@ ORDER BY question_code";
 
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
-<<<<<<< HEAD
-                            $data[$question][$value_['reason']] += (int)$value_['total_response'];
-=======
+
 							$data[$question][$value_['reason']]+= (int)$value_['total_response'];
->>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
+
                             break;
                     }
                     
