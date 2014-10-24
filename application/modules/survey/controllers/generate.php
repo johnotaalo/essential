@@ -1396,24 +1396,48 @@ class Generate extends MY_Controller
         </tr>';
                                     $this->global_counter = $counter;
                                 } else {
-                                    if ($fully_functioning != '') {
-                                        $fullyFunctioningRow = '<td style ="text-align:center;">
-                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                            </td>';
-                                    } else {
-                                        $fullyFunctioningRow = '<td style ="text-align:center;">
-                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                            </td>';
-                                    }
-                                    if ($non_functioning != '') {
-                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                    if($value['eqFor'] == 'ort')
+                                        {
+                                            if(($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38'))
+                                            {
+                                                $fullyFunctioningRow = '<td style ="text-align:center;">
+                                                <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                                </td>';
+                                            }
+                                            else
+                                            {
+                                                $fullyFunctioningRow = '<td style ="text-align:center;"></td>';
+                                            }
+                                        }
+                                    // if ($fully_functioning != '') {
+                                        
+                                    // } else {
+                                    //     $fullyFunctioningRow = '<td style ="text-align:center;">
+                                    //         <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                    //         </td>';
+                                    // }
+                                    if($value['eqFor'] == 'ort')
+                                        {
+                                            if(($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38'))
+                                            {
+                                                $nonFunctioningRow = '<td style ="text-align:center;">
                                             <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
                                             </td>';
-                                    } else {
-                                        $nonFunctioningRow = '<td style ="text-align:center;">
-                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
-                                            </td>';
-                                    }
+                                            }
+                                            else
+                                            {
+                                                $nonFunctioningRow = '<td style ="text-align:center;"></td>';
+                                            }
+                                        }
+                                    // if ($non_functioning != '') {
+                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
+                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                    //         </td>';
+                                    // } else {
+                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
+                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                    //         </td>';
+                                    // }
                                     
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
