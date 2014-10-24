@@ -476,4 +476,10 @@ class Survey extends MY_Controller
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'district');
         echo json_encode($results);
     }
+
+    public function complete_survey()
+    {
+        $this->load->model('m_complete_survey');
+        $this->m_complete_survey->store_data();
+    }
 }

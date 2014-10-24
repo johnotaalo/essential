@@ -42,10 +42,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
             <div class="main form-container ui-widget" >
                 <?php echo $form; ?>
 
-
             </div>
-
-
 
         </div>
     </div>

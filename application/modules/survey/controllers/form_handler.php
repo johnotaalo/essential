@@ -1353,15 +1353,16 @@ class Form_Handler extends MY_Controller
                 <tbody>
 
                     <tr>
-                    <th colspan = "2">Pneumonia Total: </th>
+                    <th colspan = "3">Pneumonia Total: </th>
                                         <th><input type = "number" id = "pnetotal" name = "mchtotalTreatment[pnetotal]"></th>
 
-                    <th colspan = "3"></th>
+                    <th colspan = "5"></th>
                     </tr>
                 </tbody>
                 <tr>
                                        <td colspan = "3">Severe Pneumonia: <input type = "number" name = "mchtotalTreatment[SeverePneumonia]" id = "severepne" onkeyup = "additionfunction()"></td>
                     <td colspan = "3">Pneumonia: <input type = "number" name = "mchtotalTreatment[Pneumonia]" id = "pne" onkeyup = "additionfunction()"></td>
+                    <td colspan = "3">No Pneumonia/Cough/Cold: <input type = "number" name = "mchtotalTreatment[NoPneumonia]" id = "nopne"></td>
 </tr>
                 <tr>
                 <td colspan = "3">
@@ -1369,6 +1370,12 @@ class Form_Handler extends MY_Controller
                 <b>Recommended Treatment</b><table style="font-size:10px !important">
                 ' . $this->treatments['pne'] . '</div></table>
                 </td>
+                <td colspan = "3">
+                <div class = "treatmentdropdownarea">
+                <b>Recommended Treatment</b><table style="font-size:10px !important">
+                ' . $this->treatments['pne'] . '</div></table>
+                </td>
+
                 <td colspan = "3">
                 <div class = "treatmentdropdownarea">
                 <b>Recommended Treatment</b><table style="font-size:10px !important">
@@ -1901,7 +1908,7 @@ class Form_Handler extends MY_Controller
 	</table>
 		<table  class="centre" >
 			<thead>
-				<tr><th colspan=11>INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th></tr>
+				<tr><th colspan=11>INDICATE THE AVAILABILITY AND LOCATION OF THE FOLLOWING.</th></tr>
 				<tr>
 					<th colspan="1" rowspan="2">Supplies Name</th>
 
@@ -1966,7 +1973,7 @@ class Form_Handler extends MY_Controller
 	</table>
 		<table  class="centre" >
 			<thead>
-				<tr><th colspan="9">INDICATE THE AVAILABILITY, LOCATION AND SUPPLIER OF THE FOLLOWING.</th></tr>
+				<tr><th colspan="9">INDICATE THE AVAILABILITY AND LOCATION OF THE FOLLOWING.</th></tr>
 
 				<tr>
 					<th colspan="1" rowspan="2">Resource Name</th>
