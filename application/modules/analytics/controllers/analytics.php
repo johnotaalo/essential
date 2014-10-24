@@ -634,7 +634,7 @@ class Analytics extends MY_Controller
      * @param  [type] $for             [description]
      * @return [type]                  [description]
      */
-    public function getStaffRetention($criteria, $value, $survey, $survey_category, $for) {
+   /* public function getStaffRetention($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $resultsArray = array();
         $results = $this->analytics_model->getStaffRetention($criteria, $value, $survey, $survey_category, $for);
         
@@ -668,7 +668,7 @@ class Analytics extends MY_Controller
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar');
-    }
+    }*/
     
     /**
      * [getStaffAvailability description]
@@ -1769,7 +1769,7 @@ class Analytics extends MY_Controller
      * @param  [type] $survey [description]
      * @return [type]         [description]
      */
-    public function getSectionsChosen($survey) {
+  /*  public function getSectionsChosen($survey) {
         switch ($survey) {
             case 'mnh':
                 
@@ -1794,7 +1794,7 @@ class Analytics extends MY_Controller
             $sectionList.= '<li><a href="#' . $survey . '-section-' . $x . '">Section ' . $x . ' : ' . $sectionNames[$x - 1] . '</a></li>';
         }
         echo json_encode($sectionList);
-    }
+    }*/
     
     /**
      * [getMNHCommodityLocation description]
@@ -2835,9 +2835,13 @@ class Analytics extends MY_Controller
             
             
         }
-        $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
-        $chart_margin = (sizeof($category > 5)) ? 70 : 70;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
+		//$chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
+        //$chart_margin = (sizeof($category > 5)) ? 70 : 70;
+        //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
+    
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'bar';
+        $chart_margin = (sizeof($category > 5)) ? 130 : 130;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,$chart_type,'',$for,'indicator','','');
     }
     public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
@@ -2872,7 +2876,7 @@ class Analytics extends MY_Controller
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();

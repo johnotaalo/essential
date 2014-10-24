@@ -87,7 +87,7 @@
         </div>
         <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="semi-large-graph">
+                <!--<div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6>Sections <i>(Click to Select a Section)</i></h6>
                     </div>
@@ -99,7 +99,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+              <!--  <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training & Retention in CH Unit</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -184,7 +184,7 @@
                         <div class="chart" id="staff_retention">
                         </div>
                     </div>
-                </div>
+              </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
@@ -346,7 +346,7 @@
                         
                         <div class="chart" id="indicator_comparison">
                         </div>
-                        <h6>Please select an option above to load the graph</h6>
+                        <h6>Please select main symptom/condition above to load the graph</h6>
                     </div>
                 </div>
 
