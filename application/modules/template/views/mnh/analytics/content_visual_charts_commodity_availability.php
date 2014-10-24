@@ -341,12 +341,20 @@
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
                     </div>
+<<<<<<< HEAD
 
                     <div class="portlet-body">
                         
                         <div class="chart" id="indicator_comparison">
                         </div>
                         <h6>Please select an option above to load the graph</h6>
+=======
+                    <div class="portlet-body">
+						<p>Please Select an option from drop down menu to load the graph</p>	
+                        <div class="chart" id="indicator_comparison">
+                        </div>
+                        
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
                     </div>
                 </div>
 

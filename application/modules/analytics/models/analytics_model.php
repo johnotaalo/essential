@@ -1709,7 +1709,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data[]=$value;
                         }
                         else{
-                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1728,7 +1728,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
                         } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['fac_level']][$value['supplier_code']] = (int)$value['supplier_name'];
+                            $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
                         }
                     }
                     }
@@ -3887,6 +3887,7 @@ ORDER BY question_code";
                 foreach ($this->dataSet as $value_) {
                     //echo $for;
                     if (array_key_exists('question_code', $value_)) {
+<<<<<<< HEAD
                          $question = $this->getQuestionName($value_['question_code']);
                            //$question = trim($question, '?');
 
@@ -3895,6 +3896,17 @@ ORDER BY question_code";
                          $question = trim($question, '?');
                      
                    //echo '<pre>';print_r($question);echo '</pre>';die;
+=======
+                        $question = $this->getQuestionName($value_['question_code']);
+                        foreach ($question as $value) {
+                            // echo '<pre>';print_r($value);echo '</pre>';di
+                        }
+                        // $question = ltrim($question, 'Does this facility have');
+                         //$question = rtrim($question, '?');
+                      //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
+                       //$question = substr($question, 24);
+                    }
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
                     // //     $question = 'Baby Friendly Hospital Initiative';
@@ -3991,13 +4003,13 @@ ORDER BY question_code";
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
                     
                     switch ($statistics) {
                         case 'response':
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
-                            
+                           
                             /* $question = $this->getQuestionName($value_['question_code']);
                             foreach ($value_ as $key => $v) {
                                 $data[$question][$key] = $v;
@@ -4006,14 +4018,18 @@ ORDER BY question_code";
 
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
+<<<<<<< HEAD
                             $data[$question][$value_['reason']] += (int)$value_['total_response'];
+=======
+							$data[$question][$value_['reason']]+= (int)$value_['total_response'];
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
                             break;
                     }
                     
                     unset($data[$question]['question_code']);
                 }
                 
-                //echo '<pre>';print_r($data);echo '</pre>';die;
+               //echo '<pre>';print_r($data);echo '</pre>';die;
                 
                 //die(var_dump($this->dataSet));
                 
@@ -4164,12 +4180,18 @@ ORDER BY question_code";
                     
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $key => $value) {
-                        if (array_key_exists('question_code', $value)) {
+                    	//if($value['response'] !='Other Reason'){
+                    		if (array_key_exists('question_code', $value)) {
                             $reason = explode(',', $value['lq_reason']);
                             foreach ($reason as $value_) {
-                                $data['question_code'][$value_] = (int)$value['total_response'];
+                                $data['question_code'][$value_] += (int)$value['total_response'];
                             }
                         }
+                        //else{
+                       // 	$data['question_code'][$value_] += (int)$value['total_response'];
+                        //}
+                    	//}
+                    	
                         
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
                         //echo "<pre>";print_r($other);echo "</pre>";die;

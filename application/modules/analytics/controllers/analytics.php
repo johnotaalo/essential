@@ -984,9 +984,13 @@ class Analytics extends MY_Controller
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
+<<<<<<< HEAD
         } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')){
             $key = str_replace('_', ' ', $key);
             
+=======
+        } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')||($statistic == 'supplier' && $for == 'mh')){
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
             foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);die;
                 $key = str_replace('_', ' ', $key);
@@ -1006,6 +1010,7 @@ class Analytics extends MY_Controller
                 }
               
             }
+<<<<<<< HEAD
            foreach ($data as $key => $value) {
                 //echo '<pre>';print_r($val);die;
                 $key = str_replace('_', ' ', $key);
@@ -1020,6 +1025,31 @@ class Analytics extends MY_Controller
                 }
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
+=======
+            foreach ($data as $key => $val) {
+            	$key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                } else if ($key == 'N/A'||$key == '') {
+                    $name = 'No Data';
+                    $key = $name;
+					$resultArray[] = array('name' => $key, 'data' => $val);
+                }else{
+                	$resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+                }
+					
+				//}
+				//else{
+					 // $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+            
+				//}
+                
+              }
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
         }else if($statistic == 'location' && $for == 'ch'){
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1050,11 +1080,17 @@ class Analytics extends MY_Controller
                 $resultArray[] = array('name' => $key, 'data' => $val);
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+<<<<<<< HEAD
         }else if(($statistic == 'supplier' && $for == 'mh')){
         	 $key = str_replace('_', ' ', $key);
             
             foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);die;
+=======
+        }
+        /*else if(($statistic == 'supplier' && $for == 'mh')){
+        	 foreach ($results as $key => $result) {
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 if($key == ''){
@@ -1086,7 +1122,8 @@ class Analytics extends MY_Controller
                 }
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
-        }else {
+        }*/
+		  else {
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
@@ -1309,10 +1346,10 @@ class Analytics extends MY_Controller
             $key = str_replace(' ', '-', $key);
 			if($key=='No-Data'){
                    $color='#dddddd';
-                }else if($key=='Available'){
+                }else if($key=='Available' || $key=='Functional'){
                     $color='#8bbc21';
-                }else if($key=='Not-Available'){
-                    $color='#f66c6f';
+                }else if($key=='Not-Available' || $key=='Nonfunctional'){
+                    $color='#fb4347';
                 }
                 
                 else{
@@ -1349,7 +1386,7 @@ class Analytics extends MY_Controller
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-         //echo '<pre>';print_r($results);die;
+         // echo '<pre>';print_r($results);die;
         if (($statistic == 'availability' && $for == 'bun') || ($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')) {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
@@ -1400,9 +1437,9 @@ class Analytics extends MY_Controller
             $key = str_replace('_', ' ', $key);
             
             foreach ($results as $key => $result) {
-                //echo '<pre>';print_r($results);die;
-                $key = str_replace('_', ' ', $key);
+            	$key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
+<<<<<<< HEAD
                 if($key == ''){
                     $key = 'No tier specified';
                     $category[] = $key;
@@ -1415,9 +1452,20 @@ class Analytics extends MY_Controller
                     //echo '<pre>';print_r($result); echo '</pre>';die;
                        $data[$name][] = (int)$value;
                    
+=======
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                	if($name == ''){
+                		$name = 'No Data';
+                	}else if ($name != 'Sometimes Available' ) {
+                        
+                        //if ($name != 'Sometimes Available') {
+                        $data[$name][] = (int)$value;
+                    }
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
                 }
-              
             }
+<<<<<<< HEAD
 
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
@@ -1436,8 +1484,28 @@ class Analytics extends MY_Controller
                     
                 }
                 $resultArray[] = array('name' => $key, 'data' => $value, 'color'=>$color);
+=======
+            foreach ($data as $key => $val) {
+            	//echo "<pre>";print_r($key);echo "</pre>";die;
+                	
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                } else if ($key == 'N/A') {
+                    $name = 'No Data';
+                    $key = $name;
+                }else if ($key == '') {
+                    $name = 'No Data';
+                    $key = $name;
+				}
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+               $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
             }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
+			 
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
@@ -2135,17 +2203,22 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $skillvalue = $staffvalue = $infrastructurevalue = $equipmentvalue = $commoditiesvalue = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
-        
         //echo "<pre>";print_r($results);echo "</pre>";die;
+        
         foreach ($results as $key => $value) {
             
-            //if($value == 'Inadequate skill' || $value == 'Inadequate staff' || $value == 'Inadequate infrastructure' || $value == 'Inadequate Equipment' || $value == 'Inadequate commodities and supplies' || $value == 'Other(Please Specify)'){
             foreach ($value as $location => $val) {
-                if ($location == 'Inadequate skill' || $location == 'Inadequate staff' || $location == 'Inadequate infrastructure' || $location == 'Inadequate Equipment' || $location == 'Inadequate commodities and supplies') {
+            	//echo "<pre>";print_r($location);echo "</pre>";die;
+            	
+                if ($location != 0 || $location == 'Inadequate skill' || $location == 'Inadequate staff' || $location == 'Inadequate infrastructure' || $location == 'Inadequate Equipment' || $location == 'Inadequate commodities and supplies') {
+                    	if($location == "0"){
+                    		$location = "No Data";
+                    	}
                     $getData[] = array(ucwords($location), (int)$val);
                 }
             }
         }
+		
         $category[] = "Delivery Reasons";
         
         $resultArray[] = array('name' => 'Reasons', 'data' => $getData);
@@ -2399,6 +2472,7 @@ class Analytics extends MY_Controller
 
             }
         //echo"<pre>";print_r($category);echo"<pre>";die;
+<<<<<<< HEAD
 
 
 
@@ -2433,6 +2507,14 @@ class Analytics extends MY_Controller
 
                 
             //$gData[] = array('name' => $key, 'y' => $value_,'color'=>$color);
+=======
+        
+        foreach ($data as $key => $value_) {
+            if($key == ''){
+            	$key = 'No data';
+            }
+            $gData[] = array('name' => $key, 'y' => $value_);
+>>>>>>> 433270e30d0fd86221e269f4ead1dc8d4ca4eab2
         }
         $resultArray[] = array('name' => 'Values', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', $for, 'question', $statistics);
@@ -2571,11 +2653,14 @@ class Analytics extends MY_Controller
                 $gData[] = array('name' => $key, 'y' => (int)$value,'color'=>$color);
             }
             else{
+            	//print_r($gData);die;
                 $gData[] = array('name' => $key, 'y' => (int)$value);
             }
             
         }
+		
         $resultArray[] = array('name' => 'Reasons', 'data' => $gData);
+		//echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', 'ceoc', 'question', 'reason');
         
         //$this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'ceoc', 'reason');
