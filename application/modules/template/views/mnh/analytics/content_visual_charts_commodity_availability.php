@@ -1356,7 +1356,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+               <!--  <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Electricity Source</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -1365,7 +1365,7 @@
                         <div class="chart" id="mnhelectricitysource">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 </div>
                 <div class="panel-body">
            		<div class="medium-graph">

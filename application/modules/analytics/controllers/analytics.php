@@ -2584,13 +2584,13 @@ class Analytics extends MY_Controller
     }
     
     /**
-     * [getORTOne description]
+     * [getORTAvailability description]
      * @param  [type] $criteria [description]
      * @param  [type] $value    [description]
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getORTOne($criteria, $value, $survey, $survey_category) {
+    public function getORTAvailability($criteria, $value, $survey, $survey_category) {
        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'ort', 'availability');
 	}
        /* $results = $this->analytics_model->getORTCornerAssessment($criteria, $value, $survey, $survey_category, 'ort', 'availability');
