@@ -109,9 +109,12 @@ class Analytics_Model extends MY_Model
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;  cms
                     if (array_key_exists('strategy', $value)) {
+                      
+                        
                         $data[$value['question_name']][$value['strategy']] = (int)$value['strategy_number'];
+                     
                     }
                 }
             }
@@ -3882,15 +3885,14 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 foreach ($this->dataSet as $value_) {
+                    //echo $for;
                     if (array_key_exists('question_code', $value_)) {
-                        $question = $this->getQuestionName($value_['question_code']);
-                         $question = trim($question, 'Total number of');
-                          $question = trim($question, 'Does this facility have');
-                           $question = trim($question, '?');
+                         $question = $this->getQuestionName($value_['question_code']);
+                           //$question = trim($question, '?');
 
-                    //     $question = trim($question, 'Does this facility have');
+                         //$question = trim($question, 'Totla number of ');
                     //     $question = trim($question, 'n updated');
-                    //     $question = trim($question, '?');
+                         $question = trim($question, '?');
                      
                    //echo '<pre>';print_r($question);echo '</pre>';die;
                     

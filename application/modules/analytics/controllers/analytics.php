@@ -4243,10 +4243,7 @@ class Analytics extends MY_Controller
         //print_r($results );die;
         ksort($results);
         
-        // echo "<pre>";
-        // print_r($results);
-        // echo "</pre>";
-        // die;
+        // echo "<pre>";print_r($results);echo "</pre>";die;
         $count = 0;
         
         foreach ($results as $key => $result) {
@@ -4269,6 +4266,7 @@ class Analytics extends MY_Controller
             $category[] = $key;
             $gData[] = $value;
         }
+        //echo "<pre>";print_r($data[$option]);echo "</pre>";die;
         
         $resultArray[] = array('name' => 'Numbers', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
