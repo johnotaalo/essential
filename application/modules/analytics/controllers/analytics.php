@@ -1409,6 +1409,9 @@ class Analytics extends MY_Controller
                 }
               
             }
+
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
            foreach ($data as $key => $value) {
                 //echo '<pre>';print_r($val);die;
                 $key = str_replace('_', ' ', $key);
@@ -1417,10 +1420,13 @@ class Analytics extends MY_Controller
                 if ($key == '') {
                     $name = 'No Data';
                     $key = $name;
-                $resultArray[] = array('name' => $key, 'data' => $value);
+                    $color='#dddddd';
                 }else{
-                    $resultArray[] = array('name' =>$key, 'data' => $value);
+                    $color = $colors[$colorCounter];
+                     $colorCounter++;
+                    
                 }
+                $resultArray[] = array('name' => $key, 'data' => $value, 'color'=>$color);
             }
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
@@ -2383,30 +2389,41 @@ class Analytics extends MY_Controller
             $data = $value;
 
             }
-       
-        
         //echo"<pre>";print_r($category);echo"<pre>";die;
+
+
+
+   $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($data as $key => $value_) {
+
            // echo"<pre>";print_r($key);echo"<pre>";die;
             if ($key == 'blood bank available') {
                     $name = 'Blood Bank available';
                     $key = $name;
+                    $color='#2f7ed8';
                 } else if ($key == 'Not Applicable') {
                     $name = 'Not Applicable';
                     $key = $name;
+                    $color='#0d233a';
                 } else if ($key == 'transfusion done') {
                     $name = 'Transfusion Done';
                     $key = $name;
+                    $color='#f28f43';
                 } else if ($key == '') {
-                    $name = 'No Data';
+                    $name = 'No data';
                     $key = $name;
-                   //  if($key=='No data'){
                     $color='#dddddd';
-                    // $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
                 }
-                
-            $gData[] = array('name' => $key, 'y' => $value_);
 
+            
+                $gData[] = array('name' => $key, 'y' => $value_,'color'=>$color);
+
+                
+            //$gData[] = array('name' => $key, 'y' => $value_,'color'=>$color);
         }
         $resultArray[] = array('name' => 'Values', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', $for, 'question', $statistics);
