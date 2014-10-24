@@ -1827,7 +1827,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
                         } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['supply_name']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
                     
@@ -2068,14 +2068,14 @@ LIMIT 0 , 1000
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
-                            $data[$value['suppliers']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];
                         }
                     }
                     
-                     echo "<pre>";print_r($data);echo "</pre>";die;
+                     //echo "<pre>";print_r($data);echo "</pre>";die;
                     
                     
                     

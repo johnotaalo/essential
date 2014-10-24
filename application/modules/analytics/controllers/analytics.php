@@ -985,24 +985,22 @@ class Analytics extends MY_Controller
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
         } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')){
-            $name = str_replace('_', ' ', $name);
+            $key = str_replace('_', ' ', $key);
             
-            foreach ($results as $name => $result) {
+            foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);die;
-                $name = str_replace('_', ' ', $name);
-                $name = ucwords($name);
-                
-               
-               foreach ($result as $key => $value) {
-                    //echo '<pre>';print_r($result); echo '</pre>';die;
-                if($key != ''){
-                    $category[] = 'Tier'.$key;
-                }
-                 else{
-                      $key = 'No tier specified';
-                     $category[] = $key;
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                if($key == ''){
+                    $key = 'No tier specified';
+                    $category[] = $key;
+                }else{
+                     $category[] = 'Tier'.$key;
                      
-                 }
+                }
+               
+               foreach ($result as $name => $value) {
+                    //echo '<pre>';print_r($result); echo '</pre>';die;
                        $data[$name][] = (int)$value;
                    
                 }
@@ -1513,24 +1511,22 @@ class Analytics extends MY_Controller
     public function getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         if($statistic == 'supplier' && $for == 'hwr'){
-         $name = str_replace('_', ' ', $name);
+         $key = str_replace('_', ' ', $key);
             
-            foreach ($results as $name => $result) {
+            foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);die;
-                $name = str_replace('_', ' ', $name);
-                $name = ucwords($name);
-                
-               
-               foreach ($result as $key => $value) {
-                    //echo '<pre>';print_r($result); echo '</pre>';die;
-                if($key != ''){
-                    $category[] = 'Tier'.$key;
-                }
-                 else{
-                      $key = 'No tier specified';
-                     $category[] = $key;
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                if($key == ''){
+                    $key = 'No tier specified';
+                    $category[] = $key;
+                }else{
+                     $category[] = 'Tier'.$key;
                      
-                 }
+                }
+               
+               foreach ($result as $name => $value) {
+                    //echo '<pre>';print_r($result); echo '</pre>';die;
                        $data[$name][] = (int)$value;
                    
                 }
