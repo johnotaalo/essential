@@ -390,6 +390,8 @@ ORDER BY lq.lq_response ASC";
         
         return $data;
     }
+
+
     
     // get treatment statistics
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic) {
@@ -1707,7 +1709,20 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     foreach ($this->dataSet as $value) {
                         if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
                             $data[]=$value;
-                        }
+                        } 
+                        //else if ($statistic=='location' && ($value['commodities'] != NULL)) {
+                        //         $commodity_array = explode(',', $value['commodities']);
+                                
+                        //         // echo '<pre>';var_dump($treatment_array);
+                        //         foreach ($commodity_array as $commodity) {
+                        //             if ($commodity !== 'CMD' && $commodity == 'CMD27') {
+                                        
+                        //                 // echo $treatment.'<br/>';
+                        //                 $data[$value['treatment_for']][$value['treatment']][$this->getCommodityName($commodity) ]+= (int)$value['total_treatment'];
+                        //             }
+                        //         }
+                        //     }
+                        // 
                         else{
                         // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {

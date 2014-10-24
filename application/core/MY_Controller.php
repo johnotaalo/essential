@@ -24,7 +24,7 @@ class MY_Controller extends MX_Controller
     
     public function load_imci_defaults()
     {
-        $this->meta_description = 'The INtegrated Management of Childhood Infections';
+        $this->meta_description = 'The Integrated Management of Childhood Infections';
         $this->meta_keywords = array('html', 'css', 'javascript', 'bootstrap', 'codeigniter', 'nairobi', 'kenya');
         $this->meta_author = 'HP-Strathmore Lab, Clinton Health Access Initiative, @Biggie_1969';
 
