@@ -46,17 +46,20 @@ function startSurvey(base_url, survey, survey_category, district) {
   //   });
 
     $("#next_btn").click(function(){
-		$(form_id).submit(function(){
+    	form_id = $('form').attr("id");
+    	// console.log(form_id);
+		$('#'+form_id).submit(function(){
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
 			var formData = new FormData($(this)[0]);
 			// var r = document.getElementById('result');
-
+console.log(formData);
 		    $.ajax({
 		        url: the_url,
 		        type: 'POST',
 		        success: function (data) {
 		            //problem comes here
+		            alert('trying');
 		        },
 		        cache: false,
 		        contentType: false,
