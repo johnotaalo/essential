@@ -50,22 +50,18 @@ function startSurvey(base_url, survey, survey_category, district) {
 		// console.log(form_id);
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			console.log(the_url);
-			var formData = $('#'+form_id).serializeArray();
-			console.log(formData);
+			// console.log(the_url);
+			var formData = $('#'+form_id).serialize();
+			// console.log(formData);
 			// var r = document.getElementById('result');
-			console.log(formData);
+			// console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
 				data: formData,
 				success: function(data) {
-					//problem comes here
-					alert('trying');
-				},
-				cache: false,
-				contentType: false,
-				processData: false
+					console.log(data);
+				}
 			});
 
 	});
@@ -231,10 +227,10 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 * @return {[type]}         [description]
 	 */
 	function loadSection(section, action, survey) {
-		section = (section == '') ? 'section-1' : section
+		section = (section == '') ? '1' : parseInt(section)+1;
 		console.log(section);
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 
 		$('#steps').find("[data-section='" + section + "']").addClass('active');
@@ -247,7 +243,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function disableFields(section) {
 		//Disable all Input Fields except for Section
 		$('form :input').attr('disabled', 'disabled');
-		$('#' + section + ' :input').removeAttr('disabled');
+		$('#section-' + section + ' :input').removeAttr('disabled');
 	}
 	/**
 	 * [changeSection description]
@@ -258,7 +254,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 		$('.ui.step').removeClass('active');
 		$(that).addClass('active');
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 	}
 	//equipment availability change detectors

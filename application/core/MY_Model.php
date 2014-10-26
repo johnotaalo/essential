@@ -616,4 +616,20 @@ class MY_Model extends CI_Model
         
         
     }
+    /**
+     * [getStoredData description]
+     * @param  [type] $table [description]
+     * @param  [type] $data  [description]
+     * @return [type]        [description]
+     */
+    public function getStoredData($table, $data) {
+        try {
+            $result = $this->em->getRepository($table)->findOneBy($data);
+        }
+        catch(Exception $ex) {
+            echo $ex->getMessage();
+        }
+        
+        return $result;
+    }
 }
