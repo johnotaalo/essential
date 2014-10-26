@@ -48,15 +48,17 @@ function startSurvey(base_url, survey, survey_category, district) {
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
 		// console.log(form_id);
-		$('#' + form_id).submit(function() {
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			var formData = new FormData($(this)[0]);
+			console.log(the_url);
+			var formData = $('#'+form_id).serializeArray();
+			console.log(formData);
 			// var r = document.getElementById('result');
 			console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
+				data: formData,
 				success: function(data) {
 					//problem comes here
 					alert('trying');
@@ -66,8 +68,6 @@ function startSurvey(base_url, survey, survey_category, district) {
 				processData: false
 			});
 
-			return false;
-		});
 	});
 
 	/*start of loadGlobalJS*/
@@ -205,7 +205,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			}
 			$(".form-container .actual-form").load(base_url + current_form, function() {
 				loadGlobalScript();
-				renderFacilityInfo(facilityMFL);
+				// renderFacilityInfo(facilityMFL);
 				// break_form_to_steps(form_id);
 				select_option_changed();
 				loadSection(section, action);
@@ -246,8 +246,8 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 */
 	function disableFields(section) {
 		//Disable all Input Fields except for Section
-		$('form input').prop('disabled', true);
-		$('#' + section + ' input').prop('disabled', false);
+		$('form :input').attr('disabled', 'disabled');
+		$('#' + section + ' :input').removeAttr('disabled');
 	}
 	/**
 	 * [changeSection description]
