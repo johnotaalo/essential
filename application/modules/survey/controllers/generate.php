@@ -1760,18 +1760,18 @@ class Generate extends MY_Controller
                 $counter = 0;
                 
                 /**
-                 * Retrieve Data
-                 */
-                if (array_key_exists($value['sf_code'], $retrieved)) {
-                    $bemoncResponse = ($retrieved[$value['sfCode']]['bem_conducted'] != 'n/a') ? $retrieved[$value['sfCode']]['bem_conducted'] : '';
-                    $bemoncChallenge = ($retrieved[$value['sfCode']]['challenge_code'] != 'n/a') ? $retrieved[$value['sfCode']]['challenge_code'] : '';
-                }
-                
-                /**
                  * Looping Through Each Row
                  */
                 foreach ($this->data_found as $value) {
                     $counter++;
+                    
+                    /**
+                     * Retrieve Data
+                     */
+                    if (array_key_exists($value['sfCode'], $retrieved)) {
+                        $bemoncResponse = ($retrieved[$value['sfCode']]['bem_conducted'] != 'n/a') ? $retrieved[$value['sfCode']]['bem_conducted'] : '';
+                        $bemoncChallenge = ($retrieved[$value['sfCode']]['challenge_code'] != 'n/a') ? $retrieved[$value['sfCode']]['challenge_code'] : '';
+                    }
                     
                     /**
                      * [$challengeCounter description]
@@ -1789,6 +1789,7 @@ class Generate extends MY_Controller
                      * Handling Yes/No Response
                      * @var [type]
                      */
+                    
                     foreach ($responses as $response) {
                         $responseCounter++;
                         if ($response == $bemoncResponse) {
