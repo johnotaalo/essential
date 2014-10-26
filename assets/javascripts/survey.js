@@ -32,41 +32,41 @@ function startSurvey(base_url, survey, survey_category, district) {
 
         /*----------------------------------------------------------------------------------------------------------------*/
 
-    //try saving data
-  //   $('#next_btn').click(function(){
-  //   	//dddform_id = $('form').attr("id");
-  //   	$(form_id).submit();
-  //   	form_id.preventde
-  //   	var remoteAjax = {};
-  //   	the_url = '';
-  //   	the_url = base_url + "survey/complete_survey";
-		// $(form_id + ".step").each(function() {
-		// 	alert(form_id);
-		// });
-  //   });
+	//try saving data
+	//   $('#next_btn').click(function(){
+	//   	//dddform_id = $('form').attr("id");
+	//   	$(form_id).submit();
+	//   	form_id.preventde
+	//   	var remoteAjax = {};
+	//   	the_url = '';
+	//   	the_url = base_url + "survey/complete_survey";
+	// $(form_id + ".step").each(function() {
+	// 	alert(form_id);
+	// });
+	//   });
 
-    $("#next_btn").click(function(){
-    	form_id = $('form').attr("id");
-    	// console.log(form_id);
-		$('#'+form_id).submit(function(){
+	$("#next_btn").click(function() {
+		form_id = $('form').attr("id");
+		// console.log(form_id);
+		$('#' + form_id).submit(function() {
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
 			var formData = new FormData($(this)[0]);
 			// var r = document.getElementById('result');
-console.log(formData);
-		    $.ajax({
-		        url: the_url,
-		        type: 'POST',
-		        success: function (data) {
-		            //problem comes here
-		            alert('trying');
-		        },
-		        cache: false,
-		        contentType: false,
-		        processData: false
-		    });
+			console.log(formData);
+			$.ajax({
+				url: the_url,
+				type: 'POST',
+				success: function(data) {
+					//problem comes here
+					alert('trying');
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
 
-	    return false;
+			return false;
 		});
 	});
 
@@ -152,9 +152,9 @@ console.log(formData);
 		// facilityMFL=12864;
 		//loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
-		
+
 		// $('.dataTables_length').addClass('breadcrumb');
-		
+
 		$('.activity-text').each(function() {
 			time = $(this).text();
 			if (time != 'not started yet') {
@@ -185,7 +185,7 @@ console.log(formData);
 				url: the_url,
 				beforeSend: function() {
 					$(".form-container .actual-form").empty();
-            $(".form-container .actual-form").append('<div class="loader" >Loading...</div>');
+					$(".form-container .actual-form").append('<div class="loader" >Loading...</div>');
 
 				},
 				success: function(data) {
@@ -201,44 +201,65 @@ console.log(formData);
 			});
 			//alert(link_id);
 			if (link_id) {
-				current_form='survey/load/online/'+survey;
+				current_form = 'survey/load/online/' + survey;
 			}
 			$(".form-container .actual-form").load(base_url + current_form, function() {
 				loadGlobalScript();
 				renderFacilityInfo(facilityMFL);
-				break_form_to_steps(form_id);
+				// break_form_to_steps(form_id);
 				select_option_changed();
-				loadSection(section,action);
+				loadSection(section, action);
 				$('#steps').show();
 				// $('actual-form .step').hide();
 
 			});
 
 			//Step Handler
-			$('.ui.step').click(function(){
-				section=$(this).attr('data-section');
-				$('.ui.step').removeClass('active');
-				$(this).addClass('active');
-				$('.actual-form .step').hide();
-				$('#'+section).show();
-
-
+			$('.ui.step').click(function() {
+				section = $(this).attr('data-section');
+				changeSection(section,this);
 			});
 
 		}); /*end of which link was clicked*/
 	}); /*close form-container LOAD FN() */
 	/*----------------------------------------------------------------------------------------------------------------*/
-function loadSection(section,action,survey) {
-	section=(section=='')?'section-1':section
+	/**
+	 * [loadSection description]
+	 * @param  {[type]} section [description]
+	 * @param  {[type]} action  [description]
+	 * @param  {[type]} survey  [description]
+	 * @return {[type]}         [description]
+	 */
+	function loadSection(section, action, survey) {
+		section = (section == '') ? 'section-1' : section
 		console.log(section);
 		$('.actual-form .step').hide();
-		if (action == 'continue') {
-			$('#'+section).show();
-		}else{
-			$('#section-1').show();
-		
-		}
-		$('#steps').find("[data-section='"+ section + "']").addClass('active');
+		$('#' + section).show();
+		disableFields(section);
+
+		$('#steps').find("[data-section='" + section + "']").addClass('active');
+	}
+	/**
+	 * [disableFields description]
+	 * @param  {[type]} section [description]
+	 * @return {[type]}         [description]
+	 */
+	function disableFields(section) {
+		//Disable all Input Fields except for Section
+		$('form input').prop('disabled', true);
+		$('#' + section + ' input').prop('disabled', false);
+	}
+	/**
+	 * [changeSection description]
+	 * @param  {[type]} section [description]
+	 * @return {[type]}         [description]
+	 */
+	function changeSection(section,that) {
+		$('.ui.step').removeClass('active');
+		$(that).addClass('active');
+		$('.actual-form .step').hide();
+		$('#' + section).show();
+		disableFields(section);
 	}
 
 	/*-----------------------------------------------------------------------------------------------------------------*/
@@ -1254,7 +1275,7 @@ function loadSection(section,action,survey) {
 		}
 	}*/
 
-	
+
 }
 
 /*---------------------end form wizard functions----------------------------------------------------------------*/
