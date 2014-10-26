@@ -722,12 +722,12 @@ class Analytics extends MY_Controller
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
         
-        //echo "<pre>";print_r($results);echo "</pre>";die;
+        
         
         $count = 0;
         foreach ($results as $stack => $result) {
         	foreach ($result as $name => $data) {
-                 //echo $name;
+        		 //echo $name;
                 switch ($statistic) {
                     case 'cases':
 						 $category[] = $stack;
@@ -1754,7 +1754,7 @@ class Analytics extends MY_Controller
      * @param  [type] $survey [description]
      * @return [type]         [description]
      */
-    public function getSectionsChosen($survey) {
+  /*  public function getSectionsChosen($survey) {
         switch ($survey) {
             case 'mnh':
                 
@@ -1779,7 +1779,7 @@ class Analytics extends MY_Controller
             $sectionList.= '<li><a href="#' . $survey . '-section-' . $x . '">Section ' . $x . ' : ' . $sectionNames[$x - 1] . '</a></li>';
         }
         echo json_encode($sectionList);
-    }
+    }*/
     
     /**
      * [getMNHCommodityLocation description]
@@ -2815,7 +2815,7 @@ class Analytics extends MY_Controller
             
             
         }
-        $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'bar';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }
@@ -2852,7 +2852,7 @@ class Analytics extends MY_Controller
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();

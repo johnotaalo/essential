@@ -87,7 +87,7 @@
         </div>
         <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="semi-large-graph">
+                <!--<div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6>Sections <i>(Click to Select a Section)</i></h6>
                     </div>
@@ -99,7 +99,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+               <!-- <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training & Retention in CH Unit</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -184,7 +184,7 @@
                         <div class="chart" id="staff_retention">
                         </div>
                     </div>
-                </div>
+               </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
@@ -342,7 +342,7 @@
                         <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
-						<p>Please Select an option from drop down menu to load the graph</p>	
+						<p>Please Select main symptom/condition above to load the graph</p>	
                         <div class="chart" id="indicator_comparison">
                         </div>
                         
@@ -485,7 +485,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                    Section 6 :Equipment  Availability and Status<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 6 :Equipment  Availability and Status at ORT Corner<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>

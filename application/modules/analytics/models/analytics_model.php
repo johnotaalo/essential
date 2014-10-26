@@ -404,7 +404,7 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
                 
-                //echo '<pre>';var_dump($this->dataSet);die;
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
                         case 'cases':
@@ -414,9 +414,9 @@ ORDER BY lq.lq_response ASC";
                             
                             //print_r($value['treatment_for']);die;
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
-                            
+                           // echo '<pre>';print_r($data);echo '</pre>';die;
                             break;
-
+				
                         case 'treatment':
                             $treatment_array = explode(',', $value['lt_treatments']);
                             
