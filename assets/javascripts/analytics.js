@@ -301,7 +301,7 @@ function loadSurvey(survey) {
 function getReportingData(base_url, survey_type, survey_category, container) {
     progressRow = '';
     $.ajax({
-        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category,
+        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category ,
         beforeSend: function(xhr) {
             $(container).empty();
             $(container).append('<div class="loader" >Loading...</div>');
@@ -650,7 +650,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getDeliveryReason/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MainDeliveryReasons');
                     loadGraph(base_url, 'analytics/getServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#24Hr');
                     loadGraph(base_url, 'analytics/getHFM/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#HFM');
-                    loadGraph(base_url, 'analytics/getBedStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#NnB');
+                    loadGraph(base_url, 'analytics/getBedStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#Beds');
                     break;
                 case 'section-2':
                     //Section 2 MNH 

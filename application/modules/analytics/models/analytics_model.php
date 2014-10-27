@@ -2057,7 +2057,7 @@ LIMIT 0 , 1000
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$value['equipment_name']][$place]+= (int)$value['total_response'];
+                                $data[$value['equipment_name']][$place] += (int)$value['total_response'];
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
@@ -2462,10 +2462,11 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
         
-        function getAllReportingRatio($survey, $survey_category,$option) {
+        function getAllReportingRatio($survey, $survey_category) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
             
             //var_dump($reportingCounties);die;
+
             for ($x = 0; $x < sizeof($reportingCounties); $x++) {
             	$allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
 			}
