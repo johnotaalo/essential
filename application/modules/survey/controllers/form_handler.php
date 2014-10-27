@@ -1266,7 +1266,7 @@ class Form_Handler extends MY_Controller
 				<th>If <strong>Yes</strong>, Indicate Total Quantities Available </th>
 			</tr>
 		</thead>
-		' . $this->questions['guide'] . '
+		' . $this->questions['gp'] . '
 	</table>
 		<table class="centre">
 
