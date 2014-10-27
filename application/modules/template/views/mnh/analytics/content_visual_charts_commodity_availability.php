@@ -283,7 +283,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
 </div>
@@ -401,7 +401,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+                </div> -->
                 
                <!--  <div class="x-large-graph">
                    <h5>Classification and Treatment</h5>
@@ -516,6 +516,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Supplier</span><span class="sizer">Click to Enlarge</span></h6>
@@ -557,6 +558,132 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+
+                <div class="x-large-graph">
+                   <h5>Diarrhoea</h5>
+                    <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="diarrhoeaAvailability">
+                        </div>
+                    </div>
+                </div>
+                <!-- Bundling -->
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="diarrhoeaReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="diarrhoeaLocation">
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+
+<div class="x-large-graph">
+                   <h5>Malaria</h5>
+                    <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="malariaAvailability">
+                        </div>
+                    </div>
+                </div>
+                <!-- Bundling -->
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="malariaReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="malariaLocation">
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+
+<div class="x-large-graph">
+                   <h5>Pneumonia</h5>
+                  <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="pneumoniaAvailability">
+                        </div>
+                    </div>
+                </div>
+                <!-- Bundling -->
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="pneumoniaReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="pneumoniaLocation">
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
 
             </div>
         </div>
