@@ -404,17 +404,12 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
                 
-                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+              
                 foreach ($this->dataSet as $value) {
+                	 //echo '<pre>';print_r($value);echo '</pre>';die;
                     switch ($statistic) {
                         case 'cases':
-                            if ($value['treatment'] == 'OtherTotal') {
-                                $value['treatment_for'] == 'other_totals';
-                            }
-                            
-                            //print_r($value['treatment_for']);die;
-                            $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
-                           // echo '<pre>';print_r($data);echo '</pre>';die;
+							$data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                             break;
 				
                         case 'treatment':
@@ -460,7 +455,7 @@ ORDER BY lq.lq_response ASC";
             
         }
         
-        //print_r($data);die;
+       // print_r($data);die;
         
         return $data;
     }
@@ -1725,7 +1720,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
                         } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
+                            $data[$value['fac_level']][$value['supplier_code']] = (int)$value['supplier_name'];
                         }
                     }
                     }
@@ -1827,7 +1822,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
                         } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['supply_name']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
                     
@@ -2066,7 +2061,7 @@ LIMIT 0 , 1000
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
-                            $data[$value['suppliers']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];
@@ -2467,17 +2462,33 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
         
-        function getAllReportingRatio($survey, $survey_category) {
+        function getAllReportingRatio($survey, $survey_category,$option) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
             
             //var_dump($reportingCounties);die;
             for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            }
+            	$allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+			}
+            	//switch ($option) {
+					//case 'reporting':
+						//for ($x = 0; $x < 24; $x++) {
+               // $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            //}
+						//break;
+					
+					//case 'reportingright':
+						//for ($x = 24; $x < sizeof($reportingCounties); $x++) {
+                //$allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+           // }
+			
+						//break;
+						 return $allData;
+				}
+            	
             
             //echo '<pre>';print_r($allData);echo '</pre>';
-            return $allData;
-        }
+            //return $allData;
+        //}
         
         // function getReportingRatio($survey, $survey_category, $county,$statistic) {
         
