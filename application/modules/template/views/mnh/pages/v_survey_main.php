@@ -471,11 +471,13 @@ $.ajax({
             
 
             <div class="form-container ui-widget" >
+            <div style = "position: fixed; top: 500px;"><a class="positive ui button" id = "next_btn">Save Section</a></div>
             <div class="ui vertical steps" id="steps" style="display:none">
+            <h6>Section Navigation</h6>
 
 </div>
 <div class='actual-form'>
- <?php echo $form; ?>
+ <?php //echo $form; ?>
 </div>
                
 
