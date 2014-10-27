@@ -87,7 +87,7 @@
         </div>
         <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="semi-large-graph">
+               <!-- <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6>Sections <i>(Click to Select a Section)</i></h6>
                     </div>
@@ -99,7 +99,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+               </div>-->
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
