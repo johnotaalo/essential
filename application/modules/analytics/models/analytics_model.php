@@ -404,18 +404,19 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
                 
-               //echo '<pre>';var_dump($this->dataSet);die;
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
                         case 'cases':
-							if($value['treatment'] == 'OtherTotal'){
-								$value['treatment_for']== 'other_totals';
-							}
-							//print_r($value['treatment_for']);die;
-                            $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
+                            if ($value['treatment'] == 'OtherTotal') {
+                                $value['treatment_for'] == 'other_totals';
+                            }
                             
+                            //print_r($value['treatment_for']);die;
+                            $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
+                           // echo '<pre>';print_r($data);echo '</pre>';die;
                             break;
-
+				
                         case 'treatment':
                             $treatment_array = explode(',', $value['lt_treatments']);
                             
@@ -1108,14 +1109,14 @@ WHERE
          * @param  [type] $for      [description]
          * @return [type]           [description]
          */
-        public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for) {
+        public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
             $data_y = array();
             $data_n = array();
             
-            $query = "CALL get_indicator_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_indicator_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistic . "');";
             try {
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
@@ -1127,7 +1128,8 @@ WHERE
                 
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
-                     //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    
+                    //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     //prep data for the pie chart format
                     $size = count($this->dataSet);
                     $i = 0;
@@ -1140,17 +1142,28 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        //echo '<pre>';print_r($value);echo '</pre>';die;
-                        if(($value['response']) == ''){
-                        	$name = 'No data';
-							$value['response']= $name;
+                        switch ($statistic) {
+                            case 'response':
+                                if (($value['response']) == '') {
+                                    $name = 'No data';
+                                    $value['response'] = $name;
+                                }
+                                $indicator = $value['indicator_name'];
+                                
+                                //echo $value['indicator'];die;
+                                $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
+                                
+                                $data['categories'] = array_keys($data['response']);
+                                break;
+
+                            case 'response_raw':
+                                $data[] = $value;
+                                break;
                         }
-                        $indicator = $value['indicator_name'];
                         
-                        //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
+                        //echo '<pre>';print_r($value);echo '</pre>';die;
                         
-                        $data['categories'] = array_keys($data['response']);
+                        
                     }
                     $this->dataSet = $data;
                     
@@ -1408,7 +1421,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
         /*
          * ORT Corner Assessment
         */
-        public function getORTCornerAssessment($criteria, $value, $survey, $survey_category,$for,$statistic) {
+        public function getORTCornerAssessment($criteria, $value, $survey, $survey_category, $for, $statistic) {
             
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
@@ -1424,7 +1437,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
              * something of this kind:
              * $data_series[0]="name: '.$value['analytic_variable'].',data:".json_encode($data_set[0])
              */
- 				$query = "CALL get_ortcorner_statistic('".$criteria."','".$value."','".$survey."','".$survey_category."','".$for."','".$statistic."');";
+            $query = "CALL get_ortcorner_statistic('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistic . "');";
             try {
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
@@ -1437,24 +1450,24 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     $i = 0;
                     
                     foreach ($this->dataSet as $value) {
-                    	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
-                    	if(array_key_exists('flevel', $value)){
-                    		$data[$value['question_name']][$value['response']][$value['flevel']] = (int)$value['total_response'];
-                    		
-                    	}
-					}
                         
-                        $this->dataSet = $data;
-                        
-                        //var_dump($this->dataSet);die;
-                        return $this->dataSet;
-                    } else {
-                        return $this->dataSet = null;
+                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        if (array_key_exists('flevel', $value)) {
+                            $data[$value['question_name']][$value['response']][$value['flevel']] = (int)$value['total_response'];
+                        }
                     }
                     
-                    //die(var_dump($this->dataSet));
+                    $this->dataSet = $data;
                     
-                    
+                    //var_dump($this->dataSet);die;
+                    return $this->dataSet;
+                } else {
+                    return $this->dataSet = null;
+                }
+                
+                //die(var_dump($this->dataSet));
+                
+                
             }
             catch(exception $ex) {
                 
@@ -1463,7 +1476,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 
                 
             }
-			return $data;
+            return $data;
         }
         
         public function getReasonStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -1541,7 +1554,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
-                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    
+                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1553,9 +1567,9 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        }else if(array_key_exists('fully_functional', $value)){
-                        	$data[$value['equipment_name']]['functional']+=(int)$value['fully_functional'];
-							$data[$value['equipment_name']]['nonfunctional']+=(int)$value['non_functional'];
+                        } else if (array_key_exists('fully_functional', $value)) {
+                            $data[$value['equipment_name']]['functional']+= (int)$value['fully_functional'];
+                            $data[$value['equipment_name']]['nonfunctional']+= (int)$value['non_functional'];
                         }
                     }
                 }
@@ -1633,7 +1647,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             case 'reason':
                                 $foundOptions = explode(',', $value['lcso_option_on_outage']);
                                 foreach ($foundOptions as $option) {
-                                    $data['data'][$this->getCommodityOutageOptionName($option)]+= $value['total'];
+                                    $data['data'][$this->getCommodityOutageOptionName($option) ]+= $value['total'];
                                 }
                                 break;
 
@@ -1641,8 +1655,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                                 $data['data'][] = $value;
                                 break;
                         }
-
-                        
                     }
                     $commodities = $this->getCommodities();
                     foreach ($commodities as $commodity) {
@@ -1650,7 +1662,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data['commodities'][] = $commodity['commName'];
                         }
                     }
-               
                 }
                 
                 // echo "<pre>";print_r($data);echo "</pre>";die;
@@ -1691,8 +1702,11 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
-                        
-                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
+                            $data[]=$value;
+                        }
+                        else{
+                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1710,9 +1724,10 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             }
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
-                        } else if (array_key_exists('fac_level', $value)) {
+                        } else if (array_key_exists('supplier_code', $value)) {
                             $data[$value['supplier_code']][$value['fac_level']] = (int)$value['supplier_name'];
                         }
+                    }
                     }
                     
                     // unset($data['']);
@@ -2047,7 +2062,7 @@ LIMIT 0 , 1000
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$this->getCHEquipmentName($value['equipment']) ][$place]+= (int)$value['total_response'];
+                                $data[$value['equipment_name']][$place]+= (int)$value['total_response'];
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
@@ -3865,11 +3880,16 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 foreach ($this->dataSet as $value_) {
-                    $question = $this->getQuestionName($value_['question_code']);
-                    
-                    // var_dump($question);
-                    // $question = trim($question, 'Does this facility have an updated');
-                    // $question = trim($question, '?');
+                    if (array_key_exists('question_code', $value_)) {
+                        $question = $this->getQuestionName($value_['question_code']);
+                        foreach ($question as $value) {
+                            // echo '<pre>';print_r($value);echo '</pre>';di
+                        }
+                        // $question = ltrim($question, 'Does this facility have');
+                         //$question = rtrim($question, '?');
+                      //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
+                       //$question = substr($question, 24);
+                    }
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
                     // //     $question = 'Baby Friendly Hospital Initiative';
@@ -3883,18 +3903,20 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
-                    //echo '<pre>';print_r($value);echo '</pre>';die;
-                  
+                    //echo '<pre>';print_r($value_);echo '</pre>';die;
+                    
                     switch ($statistics) {
                         case 'response':
-                            $yes = $value_['Yes'];
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                            
+                            /* $yes = $value_['Yes'];
                             $no = $value_['No'];
-							$null = $value_[''];
+                            $null = $value_[''];
                             
                             //1. collect the categories
                             $data[$question]['yes'] = $yes;
                             $data[$question]['no'] = $no;
-							$data[$question]['null']=$null;
+                            $data[$question]['null']=$null;*/
                             break;
 
                         case 'total':
@@ -3915,6 +3937,18 @@ ORDER BY question_code";
 
                         case 'mainsource':
                             $data[$question][$value_['reason']] = (int)$value_['total_response'];
+                            break;
+
+                        case 'availability':
+                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+                        case 'functionality':
+                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+                        case 'location':
+                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
                         case 'reason_raw':
@@ -3950,27 +3984,29 @@ ORDER BY question_code";
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
                     
                     switch ($statistics) {
                         case 'response':
-                            $question = $this->getQuestionName($value_['question_code']);
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                           
+                            /* $question = $this->getQuestionName($value_['question_code']);
                             foreach ($value_ as $key => $v) {
                                 $data[$question][$key] = $v;
-                            }
+                            }*/
                             break;
 
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
-                            $data[$question][$value_['reason']] = $value_['total_response'];
+							$data[$question][$value_['reason']]+= (int)$value_['total_response'];
                             break;
                     }
                     
                     unset($data[$question]['question_code']);
                 }
                 
-                //echo '<pre>';print_r($data);echo '</pre>';die;
+               //echo '<pre>';print_r($data);echo '</pre>';die;
                 
                 //die(var_dump($this->dataSet));
                 
@@ -4123,12 +4159,18 @@ ORDER BY question_code";
                     
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $key => $value) {
-                        if (array_key_exists('question_code', $value)) {
+                    	//if($value['response'] !='Other Reason'){
+                    		if (array_key_exists('question_code', $value)) {
                             $reason = explode(',', $value['lq_reason']);
                             foreach ($reason as $value_) {
-                                $data['question_code'][$value_] = (int)$value['total_response'];
+                                $data['question_code'][$value_] += (int)$value['total_response'];
                             }
                         }
+                        //else{
+                       // 	$data['question_code'][$value_] += (int)$value['total_response'];
+                        //}
+                    	//}
+                    	
                         
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
                         //echo "<pre>";print_r($other);echo "</pre>";die;

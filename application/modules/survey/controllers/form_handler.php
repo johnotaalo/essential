@@ -86,6 +86,7 @@ class Form_Handler extends MY_Controller
         $this->combined_form.= '
           <form class="bbq" name="mnh_tool" id="mnh_tool" method="POST">
         <div class="step" id="section-1">
+        <input type="hidden" name="step_name" value="section-1"/>
 		<p style="display:true" class="message success">
 			SECTION 1 of 8: FACILITY INFORMATION
 		</p>
@@ -97,27 +98,27 @@ class Form_Handler extends MY_Controller
 			<tbody>
 				<tr>
 					<td>Facility Name </td><td>
-					<input type="text" >
-					</td><td>Facility Tier </td><td><!--input type="text" id="facilityLevel" name="facilityLevel" class="cloned"  /-->
+					<input type="text" size="50" >
+					</td><td>Facility Tier </td><td>
 					<input type="text"  >
 					</td><td>County </td>
 					<td>
-					<input type="text"  >
+					<input type="text" size="50"  >
 					</td>
 				</tr>
 				<tr>
 					<td>Facility Type </td>
 					<td>
-					<input type="text"  >
+					<input type="text" size="50"  >
 					</td>
 					<td>Owned By </td>
 					<td>
-					<input type="text"  >
+					<input type="text"  size="50" >
 					</td>
 
 					<td>District/Sub County </td>
 					<td>
-					<input type="text"  >
+					<input type="text"  size="50" >
 					</td>
 				</tr>
 			</tbody>
@@ -171,18 +172,17 @@ class Form_Handler extends MY_Controller
 			</tbody>
 		</table>
 		<table>
-		<tr>
-			
-				<th> DOES THIS FACILITY CONDUCT DELIVERIES?</th>
-			
-			
-				
-					<td> Yes
-					<input type="checkbox">
-					No
-					<input type="checkbox">
-					</td>
+			<thead>
+				<tr>
+					<th colspan="2" >PROVISION OF Nurses</th>
 				</tr>
+				<tr>
+					<th >QUESTION</th>
+					<th>RESPONSE</th>
+
+				</tr>
+			</thead>
+			' . $this->questions['del'] . '
 			
 		</table>
 		<table>
@@ -226,7 +226,7 @@ class Form_Handler extends MY_Controller
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >PROVISION OF Nurses</th>
+					<th colspan="2" >PROVISION OF Deliveries</th>
 			</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -234,7 +234,7 @@ class Form_Handler extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->questions['nur'] . '
+			' . $this->questions['del'] . '
 		</table>	
 		<table>
 			<thead>
@@ -969,27 +969,27 @@ class Form_Handler extends MY_Controller
 	<tbody>
 		<tr>
 			<td>Facility Name </td><td>
-			<input type="text" >
+			<input size="50" type="text" >
 			</td><td>Facility Tier </td><td><!--input type="text" id="facilityLevel" name="facilityLevel" class="cloned"  /-->
-			<input type="text"  >
+			<input size="50" type="text"  >
 			</td><td>County </td>
 			<td>
-			<input type="text"  >
+			<input size="50" type="text"  >
 			</td>
 		</tr>
 		<tr>
 			<td>Facility Type </td>
 			<td>
-			<input type="text"  >
+			<input size="50" type="text"  >
 			</td>
 			<td>Owned By </td>
 			<td>
-			<input type="text"  >
+			<input size="50" type="text"  >
 			</td>
 
 			<td>District/Sub County </td>
 			<td>
-			<input type="text"  >
+			<input size="50" type="text"  >
 			</td>
 		</tr>
 	</tbody>
@@ -1008,23 +1008,22 @@ class Form_Handler extends MY_Controller
 		<tr>
 			<td>Name </td>
 			<td>
-			<input type="text" >
+			<input size="50"  type="text" >
 			</td>
 			<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-			<input type="text"  >
+			<input size="50"  type="text"  >
 			</td>
 			<td>Email </td>
 			<td>
-			<input type="text"  >
+			<input size="50"  type="text"  >
 			</td>
 			</td><td>Phone Number </td>
 			<td>
-			<input type="text"  >
+			<input size="50"  type="text"  >
 			</td>
 		</tr>
 	</tbody>
 </table>
-
 <table>
 	<thead>
 		<tr>
@@ -1040,43 +1039,43 @@ class Form_Handler extends MY_Controller
 		</tr>
 		<tr>
 			<td >Facility Incharge </td><td>
-			<input type="text" id="facilityInchargename" name="facilityInchargename" class="cloned" />
+			<input size="50" type="text" id="facilityInchargename" name="facilityInchargename" class="cloned" />
 			</td><td>
-			<input type="text" id="facilityInchargemobile" name="facilityInchargemobile" class="phone" />
+			<input size="50" type="text" id="facilityInchargemobile" name="facilityInchargemobile" class="phone" />
 			</td>
 			<td>
-			<input type="text" id="facilityInchargeemail" name="facilityInchargeemail" class="cloned mail" />
+			<input size="50" type="text" id="facilityInchargeemail" name="facilityInchargeemail" class="cloned mail" />
 			</td>
 		</tr>
 		<tr>
 			<td >MCH Incharge</td><td>
-			<input type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
+			<input size="50" type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
 			</td><td>
-			<input type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
+			<input size="50" type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
 			</td>
 			<td>
-			<input type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
+			<input size="50" type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
 			</td>
 		</tr>
 		<tr>
 			<td >Maternity Incharge </td><td>
-			<input type="text" id="facilityMaternityname" name="facilityMaternityname" class="cloned" />
+			<input size="50" type="text" id="facilityMaternityname" name="facilityMaternityname" class="cloned" />
 			</td>
 			<td>
-			<input type="text" id="facilityMaternitymobile" name="facilityMaternitymobile" class="phone" />
+			<input size="50" type="text" id="facilityMaternitymobile" name="facilityMaternitymobile" class="phone" />
 			</td>
 			<td>
-			<input type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
+			<input size="50" type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
 			</td>
 		</tr>
 		<tr>
 			<td>OPD Incharge</td><td>
-			<input type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
+			<input size="50" type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
 			</td><td>
-			<input type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
+			<input size="50" type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
 			</td>
 			<td>
-			<input type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
+			<input size="50" type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
 			</td>
 		</tr>
 	</tbody>
@@ -1195,6 +1194,7 @@ class Form_Handler extends MY_Controller
 		</tr>
 
 	</table>
+	<pagebreak />
 <table>
   <thead>
   <tr>
@@ -1214,7 +1214,7 @@ class Form_Handler extends MY_Controller
 		<td>Other</td>
 		<td><input type="radio" name="children_seen" value="other",></td>
 		<td>If Other, Specify</td>
-		<input type="text" size="100" name="specify" colspan="2">
+		<input type="text" size="50" name="specify" colspan="2">
 		</tr>
 
 	<tr><td colspan = "9">Where are Early Infant Diagnosis(EID) samples collected in the facility?</td>
@@ -1229,7 +1229,7 @@ class Form_Handler extends MY_Controller
 		<td>CCC</td>
 		<td><input type="radio" name="children_seen" value="other",></td>
 		<td>If Other, Specify</td>
-		<input type="text" size="100" name="specify" colspan="2">
+		<input type="text" size="50" name="specify" colspan="2">
 		</tr>
 	</tbody>
 </table>
@@ -2279,7 +2279,7 @@ class Form_Handler extends MY_Controller
 					<tr>
 					<td>Gender (M or F)</td><td><input type="text"></td>
 					<td>Age (In Months)</td><td><input type="text"></td>
-					<td>Presenting complaints?</td><td><input size="100" type="text"></td>            
+					<td>Presenting complaints?</td><td><input size="50" type="text"></td>            
 					</tr>
 				</table>
 				
@@ -2905,7 +2905,7 @@ class Form_Handler extends MY_Controller
 				<input name="questionResponse_1000" type="radio">	Practicing with gaps
 				</td>
 				<td>
-				Reason <input name="questionResponseOther_1000" type="text" size="100">
+				Reason <input name="questionResponseOther_1000" type="text" size="50">
 				</td>
 				</tr>
 				<tr>
@@ -2913,7 +2913,7 @@ class Form_Handler extends MY_Controller
 				<input name="questionResponse_1000" type="radio">	Not practicing at all
 				</td>
 				<td>
-				Reason <input name="questionResponseOther_1000" type="text" size="100">
+				Reason <input name="questionResponseOther_1000" type="text" size="50">
 				</td>
 				</tr>
 				<tr>

@@ -71,7 +71,7 @@ class Survey extends MY_Controller
         for ($x = 1; $x <= $sections; $x++) {
             $stringLength = strlen($sectionNames[$x - 1]);
             $class = ($stringLength>50)?'ui step two line':'ui step';
-            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="section-' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
+            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
         }
         echo json_encode($sectionList);
     }

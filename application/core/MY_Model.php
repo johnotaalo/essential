@@ -236,7 +236,7 @@ class MY_Model extends CI_Model
      */
     public function getIndicators() {
         try {
-            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i ORDER BY i.indicatorFor');
+            $result = $this->em->createQuery('SELECT i FROM models\Entities\Indicators i ORDER BY i.indicatorFor,i.indicatorCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -615,5 +615,21 @@ class MY_Model extends CI_Model
         //close the this->input->post
         
         
+    }
+    /**
+     * [getStoredData description]
+     * @param  [type] $table [description]
+     * @param  [type] $data  [description]
+     * @return [type]        [description]
+     */
+    public function getStoredData($table, $data) {
+        try {
+            $result = $this->em->getRepository($table)->findOneBy($data);
+        }
+        catch(Exception $ex) {
+            echo $ex->getMessage();
+        }
+        
+        return $result;
     }
 }

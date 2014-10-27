@@ -471,9 +471,9 @@ $.ajax({
             
 
             <div class="form-container ui-widget" >
-            <div style = "position: fixed; top: 500px;"><a class="positive ui button" id = "next_btn">Next Section</a></div>
-            <div style = "position: fixed; top: 600px;"><a class="positive ui button" id = "prev_btn">Previous Section</a></div>
+            <div style = "position: fixed; top: 500px;"><a class="positive ui button" id = "next_btn">Save Section</a></div>
             <div class="ui vertical steps" id="steps" style="display:none">
+            <h6>Section Navigation</h6>
 
 </div>
 <div class='actual-form'>

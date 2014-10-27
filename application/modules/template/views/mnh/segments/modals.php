@@ -68,21 +68,28 @@
   </div>
 </div>
 
-<div class="ui modal" id="universalModal" style="margin-top:-200px;height:600px">
+<div class="ui large modal" id="universalModal" style="margin-top:-200px">
   
   <div class="header">
     Header 
   </div>
-  <i class="close icon"></i>
-  <div class="content">
-    
+  <div class="content row">
+   
   </div>
-  <div class="actions" style="font-size:12px">
-    <button class="ui mini labeled icon red button">
-      <i class="icon close"></i>Close
-    </button>
-    <button style="display:none" id="form-submit" class="ui mini right labeled icon green button" form="modal-form">
+ <div class="actions" >
+ <a style="display:none" href="#" id="show_data">Show Facility Data</a>
+  <a style="display:none" href="#" id="show_graph">Show Graph</a> 
+    <button style="display:none;font-size:0.8em !important" id="form-submit" class="ui mini right labeled icon green button" form="modal-form">
       <i class="right icon save"></i>Submit
+    </button>
+    <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="pdf">
+      <i class="icon basic doc"></i>Download PDF
+    </div>
+    <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon  download" id="excel">
+      <i class="icon basic doc"></i>Download Excel
+    </div>
+     <button style="font-size:0.8em !important" class="mini ui button  labeled icon red ">
+      <i class="icon close"></i>Close
     </button>
   </div>
 </div>
