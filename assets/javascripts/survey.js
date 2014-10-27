@@ -55,8 +55,13 @@ function startSurvey(base_url, survey, survey_category, district) {
 		    $.ajax({
 		        url: the_url,
 		        type: 'POST',
+		        data: formData,
 		        success: function (data) {
-		            //problem comes here
+		            console.log(data);
+		        },
+		        error: function(data)
+		        {
+		        	console.log(data);
 		        },
 		        cache: false,
 		        contentType: false,
