@@ -87,7 +87,7 @@
         </div>
         <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="semi-large-graph">
+                <!--<div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6>Sections <i>(Click to Select a Section)</i></h6>
                     </div>
@@ -99,13 +99,20 @@
                             </ul>
                         </div>
                     </div>
+                </div>-->
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
+                        <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
+                    </div>
+                    <div id="reportingleft"></div>
                 </div>
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
                         <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
                     </div>
-                    <div id="reporting"></div>
+                    <div id="reportingright"></div>
                 </div>
 
             </div>
@@ -175,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+               <!-- <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training & Retention in CH Unit</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -184,7 +191,7 @@
                         <div class="chart" id="staff_retention">
                         </div>
                     </div>
-                </div>
+               </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
@@ -283,171 +290,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-12">
+               
+  <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
 </div>
                 </div>
-
-                <div class="x-large-graph">
-                   <h5>Diarrhoea</h5>
-                    <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="diarrhoeaAvailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="diarrhoeaReasons">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="diarrhoeaLocation">
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-md-12">
-                <div class="ui horizontal icon divider">
-  <i class="icon circular fa fa-bar-chart"></i>
-</div>
-                </div>
-
-<div class="x-large-graph">
-                   <h5>Malaria</h5>
-                    <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="malariaAvailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="malariaReasons">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="malariaLocation">
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-md-12">
-                <div class="ui horizontal icon divider">
-  <i class="icon circular fa fa-bar-chart"></i>
-</div>
-                </div>
-
-<div class="x-large-graph">
-                   <h5>Pneumonia</h5>
-                    <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="pneumoniaAvailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="pneumoniaReasons">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="pneumoniaLocation">
-                        </div>
-                    </div>
-                </div>
-                </div> -->
-                
-               <!--  <div class="x-large-graph">
-                   <h5>Classification and Treatment</h5>
-                    <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diarrhoea</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="other_treatment_options_dia">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Pneumonia</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="other_treatment_options_pne">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Malaria</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="other_treatment_options_fev">
-                        </div>
-                    </div>
-                </div>
-                </div> -->
-  <!-- <div class="col-md-12">
-                <div class="ui horizontal icon divider">
-  <i class="icon circular fa fa-bar-chart"></i>
-</div> -->
-                </div>
-                
-                 <div class="col-md-12">
-                <div class="ui horizontal icon divider">
-  <i class="icon circular fa fa-bar-chart"></i>
-</div>
-                </div>
-
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed in ongoing session</span><span class="sizer">Click to Enlarge</span></h6>
@@ -462,16 +310,13 @@
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
                     </div>
-
                     <div class="portlet-body">
-						<p>Please Select an option from drop down menu to load the graph</p>	
+						<p>Please Select main symptom/condition above to load the graph</p>	
                         <div class="chart" id="indicator_comparison">
                         </div>
                         
-
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -736,7 +581,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                    Section 6 :Equipment  Availability and Status<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 6 :Equipment  Availability and Status at ORT Corner<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -992,11 +837,11 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Nurses and Beds Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Beds Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
-                        <div class="chart" id="NnB">
+                        <div class="chart" id="Beds">
                         </div>
                     </div>
                 </div>
@@ -1262,7 +1107,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
-                    Section 5 & 6: Commodity Availability & Usage<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 5 : Commodity Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
 
                 </a>
             </h4>
@@ -1309,43 +1154,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Consumption</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="MNHcommodity_consumption">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Duration Of Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="MNHunavailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">What happened when the Commodity Was Unavailable?</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="MNHReason">
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-
-    
-    <!-- <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-6">
+    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-6">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
@@ -1387,7 +1199,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-7">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -1606,7 +1418,7 @@
                         </div>
                     </div>
                 </div>
-               <!--  <div class="medium-graph">
+                <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Electricity Source</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -1615,7 +1427,7 @@
                         <div class="chart" id="mnhelectricitysource">
                         </div>
                     </div>
-                </div> -->
+                </div>
                 </div>
                 <div class="panel-body">
            		<div class="medium-graph">
