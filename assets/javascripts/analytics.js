@@ -765,15 +765,15 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getbundlingUnavailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#bundling_unavailability');
                     loadGraph(base_url, 'analytics/getbundlingLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#bundling_location');
                     
-                    loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/dia', '#diarrhoeaAvailability');
+                    loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/availability/dia', '#diarrhoeaAvailability');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/unavailability/dia', '#diarrhoeaReasons');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/location/dia', '#diarrhoeaLocation');
 
-                    loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/fev', '#malariaAvailability');
+                    loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/availability/fev', '#malariaAvailability');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/unavailability/fev', '#malariaReasons');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/location/fev', '#malariaLocation');
 
-                    loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/pne', '#pneumoniaAvailability');
+                    loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/availability/pne', '#pneumoniaAvailability');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/unavailability/pne', '#pneumoniaReasons');
                     loadGraph(base_url, 'analytics/getCaseTreatment/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/ch/location/pne', '#pneumoniaLocation');
 

@@ -817,6 +817,101 @@ class Analytics extends MY_Controller
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
+        }else if ($statistic == 'availability' && $for == 'ch') {
+            $key = str_replace('_', ' ', $key);
+            foreach ($results as $key => $result) {
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+
+                switch($option){
+                
+                       case 'dia':
+
+                      if($key=="Low Osmolarity Oral Rehydration Salts (ORS)"){
+                          $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+                      break;
+
+                      case 'fev':
+
+                      if(($key=='Artesunate Injection') || ($key=='Tablet Quinine') || ($key=='Injection Quinine')){
+                          $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+                      break;
+
+                      case 'pne':
+
+                      if(($key=='Tablet Paed Cotrimoxazole') || ($key=='Tablet Cotrimoxazole') || ($key=='Tablet Amoxicillin') || ($key=='Syrup Amoxicillin')){
+                          $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+                      break;
+
+                   default:
+                       $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
+                   
+                   break;
+                }   
+            }
+
+
+
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+            foreach ($data as $key => $val) {
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                }else if ($key == 'N/A') {
+                    $name = 'No Data';
+                    $key = $name;
+                }
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                if($key=='No-Data'){
+                   $color='#dddddd';
+                }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available' || $key=='Expired'){
+                    $color='#f66c6f';
+                }
+                else if($key=='Ordered-But-Not-Yet-Received'){
+                    $color='#f6c76c';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+               
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
