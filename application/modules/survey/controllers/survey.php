@@ -71,7 +71,7 @@ class Survey extends MY_Controller
         for ($x = 1; $x <= $sections; $x++) {
             $stringLength = strlen($sectionNames[$x - 1]);
             $class = ($stringLength>50)?'ui step two line':'ui step';
-            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="section-' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
+            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
         }
         echo json_encode($sectionList);
     }
@@ -475,5 +475,11 @@ class Survey extends MY_Controller
         $county = urldecode($county);
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'district');
         echo json_encode($results);
+    }
+
+    public function complete_survey()
+    {
+        $this->load->model('m_complete_survey');
+        $this->m_complete_survey->store_data();
     }
 }

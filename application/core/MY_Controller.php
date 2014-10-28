@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(1);
 ini_set('memory_limit', '-1');
 
@@ -23,7 +24,7 @@ class MY_Controller extends MX_Controller
     
     public function load_imci_defaults()
     {
-        $this->meta_description = 'The INtegrated Management of Childhood Infections';
+        $this->meta_description = 'The Integrated Management of Childhood Infections';
         $this->meta_keywords = array('html', 'css', 'javascript', 'bootstrap', 'codeigniter', 'nairobi', 'kenya');
         $this->meta_author = 'HP-Strathmore Lab, Clinton Health Access Initiative, @Biggie_1969';
 
@@ -101,7 +102,7 @@ class MY_Controller extends MX_Controller
         foreach ($data[0] as $k=>$cell) {
             
             //echo $column . $rowExec; die;
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar','',str_replace('as','',str_replace('ae','',str_replace('ac','',str_replace('li','',str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
             $objPHPExcel->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec)->getFont()->setBold(true)->setSize(14);
             $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(true);
             
@@ -222,7 +223,7 @@ background: #ddd;
             //set table headers
             foreach ($data[0] as $title => $column) {
                 if ($pk != 0) {
-                    $titles[] = ucwords(str_replace('comm','commodity',str_replace('ar','',str_replace('as','',str_replace('ae','',str_replace('ac','',str_replace('li','',str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+                    $titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
                 } else {
                     $primary_key = $title;
                 }
