@@ -678,11 +678,13 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getStaffRetention/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHstaffRetention');
                     loadGraph(base_url, 'analytics/getStaffAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHStaffTraining');
                     break;
-                case 'section-5 and 6':
+                case 'section-5':
                     loadGraph(base_url, 'analytics/getMNHCommodityAvailabilityFrequency/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_availability');
                     loadGraph(base_url, 'analytics/getMNHCommodityAvailabilityUnavailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_unavailability');
                     loadGraph(base_url, 'analytics/getMNHCommodityLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_location');
                     loadGraph(base_url, 'analytics/getMNHCommoditySupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_supplier');
+                    
+              //case'section-6':
                     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/consumption', '#MNHcommodity_consumption');
                     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/unavailability', '#MNHunavailability');
                     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/reason', '#MNHReason');
@@ -700,6 +702,8 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getMNHDeliveryKitsFunctionality/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhDelivery_functionality');
                     loadGraph(base_url, 'analytics/getMNHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhsupplies_availability');
                     loadGraph(base_url, 'analytics/getMNHSuppliesNameLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhsupplies_location');
+                    loadGraph(base_url, 'analytics/getMNHSuppliesReason/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhsupplies_reason');
+                    
                     //section 7 of 8: Part III
                     loadGraph(base_url, 'analytics/getRunningWaterAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_availability');
                     loadGraph(base_url, 'analytics/getRunningWaterLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_location');
@@ -711,9 +715,9 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getMNHMainSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysupplier');
                     //loadGraph(base_url, 'analytics/getMNHElectricityMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysource');
                     //section 7 of 8: Other
-                    loadGraph(base_url, 'analytics/getMNHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_availability');
-                    loadGraph(base_url, 'analytics/getMNHSuppliesLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_location');
-                    loadGraph(base_url, 'analytics/getMNHSuppliers/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/', '#MNHsupplies_supplier');
+                    //loadGraph(base_url, 'analytics/getMNHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_availability');
+                    //loadGraph(base_url, 'analytics/getMNHSuppliesLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_location');
+                    //loadGraph(base_url, 'analytics/getMNHSuppliers/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/', '#MNHsupplies_supplier');
 
                     break;
 

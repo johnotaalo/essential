@@ -1202,26 +1202,25 @@ class Analytics extends MY_Controller
                     if ($k == 'N/A') {
                         $name = 'Not Available';
                         $k = $name;
+                        $color='#f66c6f';
+                    } else if($k=='No-Data'){
+                         $color='#dddddd';
+                    }else if($k=='Available'){
+                         $color='#0d233a';
+                    }else if($k=='Not-Available' || $k=='Expired'){
+                         $color='#f66c6f';
                     }
-
-                    if($k=='No-Data'){
-                   $color='#dddddd';
-                }else if($k=='Available'){
-                    $color='#0d233a';
-                }else if($k=='Not-Available' || $k=='Expired'){
-                    $color='#f66c6f';
-                }
-                else{
-                     $color = $colors[$colorCounter];
-                     $colorCounter++;
-                }
-                    $gData[] = array('name' => $k, 'y' => (int)$value,'color'=>$color);
-                }
+                    else{
+                        $color = $colors[$colorCounter];
+                        $colorCounter++;
+                    }
+                        $gData[] = array('name' => $k, 'y' => (int)$value,'color'=>$color);
+                    }
             }
             $resultArray[] = array('name' => $key, 'data' => $gData);
             $this->populateGraph($resultArray, '', $category, $criteria, '', 40, 'pie', (int)sizeof($category));
         } else if (($statistic == 'availability' && $for == 'ch') || ($statistic == 'availability' && $for == 'mnh') 
-		||($statistic == 'availability' && $for == 'tst')) {
+		||($statistic == 'availability' && $for == 'tst') || ($statistic == 'unavailability' && $for == 'mnh')) {
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
@@ -1295,6 +1294,7 @@ class Analytics extends MY_Controller
                 } else if ($key == 'N/A'||$key == '') {
                     $name = 'No Data';
                     $key = $name;
+                    $color = '#dddddd';
 					$resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
                 }else{
                     
@@ -1311,7 +1311,7 @@ class Analytics extends MY_Controller
 				//}
                 
               }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
         }else if($statistic == 'location' && $for == 'ch'){
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1397,7 +1397,10 @@ class Analytics extends MY_Controller
                 if ($key == 'Never Available') {
                     $name = 'Not Available';
                     $key = $name;
-                     $color = '#f66c6f';
+                     $color = '#ED4747';
+                }else if ($key == 'Available') {
+                    $color = '#8bbc21';
+                    
                 } else if ($key == 'N/A') {
                     $name = 'No Data';
                     $color = '#dddddd';
@@ -1419,6 +1422,17 @@ class Analytics extends MY_Controller
         
     }
     
+    /**
+     * [getMNHSuppliesReason description]
+     * @param  [type] $criteria [description]
+     * @param  [type] $value    [description]
+     * @param  [type] $survey   [description]
+     * @return [type]           [description]
+     */
+    public function getMNHSuppliesReason($criteria, $value, $survey, $survey_category) {
+        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'unavailability');
+    }
+
     /**
      * [getMNHSuppliesAvailability description]
      * @param  [type] $criteria [description]
@@ -1831,12 +1845,13 @@ class Analytics extends MY_Controller
 			if ($key == '') {
                 $name = 'No Data';
                 $key = $name;
-				$resultArray[] = array('name' =>$key, 'data' => $val);
+                $colors = '#dddddd';
+				$resultArray[] = array('name' =>$key, 'data' => $val, 'color'=> $colors);
             }else{
              $resultArray[] = array('name' => 'Tier'.''.$key, 'data' => $val);	
             }
            }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
     }else if($statistic == 'availability' && $for == 'hwr') {
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1870,6 +1885,8 @@ class Analytics extends MY_Controller
                    $color='#dddddd';
                 }else if($key=='Available'){
                     $color='#8bbc21';
+                }else if($key=='Not-Available'){
+                    $color='#FF3333';
                 }
                 else{
                      $color = $colors[$colorCounter];
@@ -1892,18 +1909,23 @@ class Analytics extends MY_Controller
                 }
             }
         }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($data as $key => $val) {
-            if ($key == 'Never Available') {
-                $name = 'Not Available';
-                $key = $name;
-            } else if ($key == 'N/A') {
-                $name = 'No Data';
-                $key = $name;
-            }
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
-            $resultArray[] = array('name' => $key, 'data' => $val);
+
+            if($key=='N/A'){
+                  $name='No data';
+                  $key=$name;
+                   $color='#dddddd';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            
+            $resultArray[] = array('name' => $key, 'data' => $val, 'color' => $color);
            }  
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
 	}
@@ -2123,30 +2145,51 @@ class Analytics extends MY_Controller
     public function getEquipmentLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getEquipmentLocation($criteria, $value, $survey, $survey_category, $for);
         
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-        $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
-        $number = $resultArray = $q = array();
-        $count = 0;
-        
-        foreach ($results as $key => $value) {
-            
-            //echo "<pre>";print_r($results);echo "</pre>";die;
-            
-            //var_dump($value);
-            foreach ($value as $location => $val) {
-                $gData[] = array(ucwords($location), (int)$val);
+        $key = str_replace('_', ' ', $key);
+            foreach ($results as $key => $result) {
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != 'Sometimes Available' && $name != 'All Used') {
+
+                        $data[$name][] = (int)$value;
+                    }
+                }
             }
-        }
-        $category[] = "Equipments";
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+            foreach ($data as $key => $val) {
+                if ($key == 'Never Available') {
+                    $name = 'Not Available';
+                    $key = $name;
+                }else if ($key == 'N/A') {
+                    $name = 'No Data';
+                    $key = $name;
+                }
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                if($key=='No-Data'){
+                   $color='#dddddd';
+                }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available' || $key=='Expired'){
+                    $color='#f66c6f';
+                }
+                else if($key=='Ordered-But-Not-Yet-Received'){
+                    $color='#f6c76c';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+               
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         
-        //echo "<pre>";print_r($gData);echo "</pre>";die;
-        $resultArray[] = array('name' => 'Equipment Location', 'data' => $gData);
-        
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $category = $q;
-        
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
     
     /**
@@ -2197,10 +2240,10 @@ class Analytics extends MY_Controller
      */
     
     public function getMNHEquipmentLocation($criteria, $value, $survey, $survey_category) {
-        $this->getEquipmentLocation($criteria, $value, $survey, $survey_category, 'mnh');
+       $this->getEquipmentStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'location');
     }
     public function getMNHDeliveryKitsLocation($criteria, $value, $survey, $survey_category) {
-        $this->getEquipmentLocation($criteria, $value, $survey, $survey_category, 'dke');
+        $this->getEquipmentStatistics($criteria, $value, $survey, $survey_category, 'dke','location');
     }
     
     /**
@@ -2627,7 +2670,7 @@ class Analytics extends MY_Controller
 			$resultArray[]=array('name'=> $name, 'data'=> $value1);
 		}
 		$category = $q;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column', '', $for, 'question', $statistics);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
     }else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -2689,7 +2732,16 @@ class Analytics extends MY_Controller
             if($key == ''){
             	$key = 'No data';
             }
-            $gData[] = array('name' => $key, 'y' => $value_);
+            if($key=='No data'){
+                   $color='#dddddd';
+                    //$resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+                    $gData[] = array('name' => $key, 'y' => $value_,'color'=>$color);
+                }
+           else{
+            
+             $gData[] = array('name' => $key, 'y' => $value_);
+           }   
+            
         }
         $resultArray[] = array('name' => 'Values', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', $for, 'question', $statistics);
@@ -4285,6 +4337,10 @@ class Analytics extends MY_Controller
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
+            if($key=='Select-One'){
+                $name='No data';
+                $key=$name;
+            }
             if($key=='No data'){
                    $color='#dddddd';
                     $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
