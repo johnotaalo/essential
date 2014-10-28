@@ -2467,33 +2467,33 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
         
-        function getAllReportingRatio($survey, $survey_category,$option) {
+        function getAllReportingRatio($survey, $survey_category) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
             
             //var_dump($reportingCounties);die;
 
-            // for ($x = 0; $x < sizeof($reportingCounties); $x++) {
+            for ($x = 0; $x < sizeof($reportingCounties); $x++) {
+                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            }
+
+            // switch ($option) {
+
+            //     case 'reportingleft':
+            //         for ($x = 0; $x < 24; $x++) {
             //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             // }
+            //         break;
 
-            switch ($option) {
-
-                case 'reportingleft':
-                    for ($x = 0; $x < 24; $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            }
-                    break;
-
-                    case 'reportingright':
-                    for ($x = 24; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            }
-                    break;
+            //         case 'reportingright':
+            //         for ($x = 24; $x < sizeof($reportingCounties); $x++) {
+            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            // }
+            //         break;
                 
-                default:
-                    echo 'not working';
-                    break;
-            }
+            //     default:
+            //         echo 'not working';
+            //         break;
+            // }
             
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;

@@ -39,8 +39,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
                 variableHandler('district', county, district, facility, survey, survey_category, indicator_type);
             }
         }
-        getReportingData(base_url, survey, survey_category, '#reportingleft');
-        getReportingData(base_url, survey, survey_category, '#reportingright');
+        getReportingData(base_url, survey, survey_category, '#reporting');
+        //getReportingData(base_url, survey, survey_category, '#reportingright');
     }
     // if (county !== '') {
     //     $("#county_select").parent().find(".menu ").filter(function(index) {
@@ -100,8 +100,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
         if (survey != '') {
 
-            getReportingData(base_url, survey, survey_category, '#reportingleft');
-            getReportingData(base_url, survey, survey_category, '#reportingright');
+            getReportingData(base_url, survey, survey_category, '#reporting');
+            //getReportingData(base_url, survey, survey_category, '#reportingright');
             section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
             section = trim(section, 'ch-');
             $('#statistic_summary').show();
@@ -678,7 +678,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getStaffRetention/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHstaffRetention');
                     loadGraph(base_url, 'analytics/getStaffAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHStaffTraining');
                     break;
-                case 'section-5':
+                case 'section-5 and 6':
                     loadGraph(base_url, 'analytics/getMNHCommodityAvailabilityFrequency/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_availability');
                     loadGraph(base_url, 'analytics/getMNHCommodityAvailabilityUnavailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_unavailability');
                     loadGraph(base_url, 'analytics/getMNHCommodityLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#MNHcommodity_location');
@@ -687,11 +687,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/unavailability', '#MNHunavailability');
                     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/reason', '#MNHReason');
                     break;
-                // case 'section-6':
-                //     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/consumption', '#MNHcommodity_consumption');
-                //     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/unavailability', '#MNHunavailability');
-                //     loadGraph(base_url, 'analytics/getCommodityUsage/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey + '/reason', '#MNHReason');
-                //     break;
+               
                 case 'section-7':
                     loadGraph(base_url, 'analytics/getMNHEquipmentFrequency/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhequipment_availability');
                     loadGraph(base_url, 'analytics/getMNHEquipmentFunctionality/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhequipment_functionality');

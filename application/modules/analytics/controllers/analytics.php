@@ -200,8 +200,8 @@ class Analytics extends MY_Controller
         echo $counties;
     }
     
-    public function getAllReportedCounties($survey, $survey_category,$option) {
-        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category,$option);
+    public function getAllReportedCounties($survey, $survey_category) {
+        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category);
         
         //m var_dump($reportingCounties);
         $counter = 0;
@@ -4260,7 +4260,7 @@ class Analytics extends MY_Controller
         
         $resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
         $category = $q;
-        $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
         $chart_margin = (sizeof($category > 5)) ? 150 : 70;
         
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type);
