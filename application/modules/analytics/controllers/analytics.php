@@ -682,21 +682,14 @@ class Analytics extends MY_Controller
     public function getStaffAvailability($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $category = $resultsArray = array();
         $value = urldecode($value);
-        $nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
+        //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
         
         $category = array();
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
 
-        foreach ($nurse as $name => $val) {
-            foreach($val as $key => $value){
-            $category = $name;
-            $gData[$name]['Total Skilled'] = 0;
-            
-         }
-         //$resultArray[] = array('name' => $name, 'data' => $gData);
-        }
+        
         //echo '<pre>';print_r($resultArray);echo '</pre>';
         
         foreach ($results as $guide) {
@@ -710,7 +703,7 @@ class Analytics extends MY_Controller
                 $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
                 $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
-                $gData[$name]['Total Skilled'] = $value;
+               
             
             
         }
@@ -721,13 +714,7 @@ class Analytics extends MY_Controller
 
         foreach ($gData as $name => $data) {
             $category = array_keys($data);
-            if($data=='Total Skilled'){
-                   $color='#dddddd';
-                }
-                else{
-                     $color = $colors[$colorCounter];
-                     $colorCounter++;
-                }
+           
             $resultArray[] = array('name' => $name, 'data' => array_values($data));
         }
         
@@ -989,23 +976,35 @@ class Analytics extends MY_Controller
     
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
-        
-        
-        
+
+        //echo "<pre>";print_r($results);echo "</pre>";die;
         $count = 0;
         foreach ($results as $stack => $result) {
+
         	foreach ($result as $name => $data) {
-        		 //echo $name;
+          
+
                 switch ($statistic) {
+                   
                     case 'cases':
-						 $category[] = $stack;
-                        
+                   if($stack==''){
+                    if ($count == 12):
+                        $category[] = $stack;
+                         
+                        $gData[$stack] = $data;
+                        //echo "<pre>";print_r($gData);echo "</pre>";die;
+                   endif;
+                   $count++;
+                       }else{
+
+                        $category[] = $stack;
+                 
                         $gData[$stack]+= $data;
-                        
+                       }
                         // $classifications[] = $name;
                         break;
 
-                    case 'treatment':
+                    
                     case 'other_treatment':
                         $gData = array();
                         
@@ -1741,7 +1740,7 @@ class Analytics extends MY_Controller
                $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
             }
 			 
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'commodity',$statistic,$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {
@@ -2666,8 +2665,17 @@ class Analytics extends MY_Controller
 				$gdata[$r][]=$value_;
 			}
 			}
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
 		foreach ($gdata as $name => $value1) {
-			$resultArray[]=array('name'=> $name, 'data'=> $value1);
+            if($name=='No data'){
+                   $color='#dddddd';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+			$resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
 		}
 		$category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
@@ -2902,7 +2910,7 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getORTOne($criteria, $value, $survey, $survey_category) {
+    public function getORTAvailability($criteria, $value, $survey, $survey_category) {
        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'ort', 'availability');
 	}
        /* $results = $this->analytics_model->getORTCornerAssessment($criteria, $value, $survey, $survey_category, 'ort', 'availability');

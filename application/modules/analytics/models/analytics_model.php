@@ -406,6 +406,7 @@ ORDER BY lq.lq_response ASC";
                 
                 //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value) {
+
                     switch ($statistic) {
                         case 'cases':
                             if ($value['treatment'] == 'OtherTotal') {
