@@ -20,11 +20,12 @@
 
 <!-- JS -->
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
+<script src="<?php echo base_url('assets/bower_components/offline/js/offline.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/reconnect.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/requests.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/simulate.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/snake.js');?>"></script>
+<script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/ui.js');?>"></script>
 <script>
   $(function(){
