@@ -7,9 +7,9 @@
 
 <div class="login-container">
     <div class="row">
-        
+
 		<div id="form-login" style = "width: 60%: margin: 0 auto;">
-            <form id="authenticate" name="authenticate" action="<?php echo base_url().'mnch/session/new'?>" method="post" accept-charset="utf-8">
+            <form id="authenticate" name="authenticate" action="<?php echo base_url().'mnch/session/new'?>" method="post" accept-charset="utf-8" class="online">
                 <h2><?php echo $login_message; ?></h2>
 
                 <!--p style="margin-bottom:5px"><label for="username">Facility Name</label</p><p><input id="username" name="username" type="text" placeholder="Facility Name"></p-->
@@ -38,6 +38,9 @@
                     <button type="submit" class="" style="width:inherit">Begin Survey</button>
                 </div>
             </form>
+            <div class="ui message red offline" style="display:none">
+              Sorry. You can only sign in when you have an active internet connection.
+            </div>
         </div>
     </div>
 
@@ -58,4 +61,3 @@
     </script>
 
 </div><!-- container -->
-
