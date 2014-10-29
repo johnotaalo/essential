@@ -48,26 +48,26 @@ function startSurvey(base_url, survey, survey_category, district) {
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
 		// console.log(form_id);
-		$('#' + form_id).submit(function() {
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			var formData = new FormData($(this)[0]);
+			// console.log(the_url);
+			var formData = $('#'+form_id).serialize();
+			// console.log(formData);
 			// var r = document.getElementById('result');
-			console.log(formData);
+			// console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
+				data: formData,
 				success: function(data) {
-					//problem comes here
-					alert('trying');
+					console.log(data);
 				},
-				cache: false,
-				contentType: false,
-				processData: false
+				fail: function()
+				{
+					console.log("error");
+				}
 			});
 
-			return false;
-		});
 	});
 
 	/*start of loadGlobalJS*/
@@ -205,7 +205,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			}
 			$(".form-container .actual-form").load(base_url + current_form, function() {
 				loadGlobalScript();
-				renderFacilityInfo(facilityMFL);
+				// renderFacilityInfo(facilityMFL);
 				// break_form_to_steps(form_id);
 				select_option_changed();
 				loadSection(section, action);
@@ -231,10 +231,10 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 * @return {[type]}         [description]
 	 */
 	function loadSection(section, action, survey) {
-		section = (section == '') ? 'section-1' : section
+		section = (section == '') ? '1' : parseInt(section)+1;
 		console.log(section);
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 
 		$('#steps').find("[data-section='" + section + "']").addClass('active');
@@ -246,8 +246,8 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 */
 	function disableFields(section) {
 		//Disable all Input Fields except for Section
-		$('form input').prop('disabled', true);
-		$('#' + section + ' input').prop('disabled', false);
+		$('form :input').attr('disabled', 'disabled');
+		$('#section-' + section + ' :input').removeAttr('disabled');
 	}
 	/**
 	 * [changeSection description]
@@ -258,7 +258,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 		$('.ui.step').removeClass('active');
 		$(that).addClass('active');
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 	}
 	//equipment availability change detectors
@@ -1198,10 +1198,10 @@ function startSurvey(base_url, survey, survey_category, district) {
 				obj = jQuery.parseJSON(data);
 				console.log(obj);
 				(data != '') ? $('#'+data).show() : $('#section-1').show;
-	// 	
+	//
 			}
 		});
-		
+
 		}
 	}*/
 

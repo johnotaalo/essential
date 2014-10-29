@@ -86,6 +86,7 @@ class Form_Handler extends MY_Controller
         $this->combined_form.= '
           <form class="bbq" name="mnh_tool" id="mnh_tool" method="POST">
         <div class="step" id="section-1">
+        <input type="hidden" name="step_name" value="section-1"/>
 		<p style="display:true" class="message success">
 			SECTION 1 of 8: FACILITY INFORMATION
 		</p>
@@ -171,18 +172,17 @@ class Form_Handler extends MY_Controller
 			</tbody>
 		</table>
 		<table>
-		<tr>
-			
-				<th> DOES THIS FACILITY CONDUCT DELIVERIES?</th>
-			
-			
-				
-					<td> Yes
-					<input type="checkbox">
-					No
-					<input type="checkbox">
-					</td>
+			<thead>
+				<tr>
+					<th colspan="2" >PROVISION OF Nurses</th>
 				</tr>
+				<tr>
+					<th >QUESTION</th>
+					<th>RESPONSE</th>
+
+				</tr>
+			</thead>
+			' . $this->questions['del'] . '
 			
 		</table>
 		<table>
@@ -226,7 +226,7 @@ class Form_Handler extends MY_Controller
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >PROVISION OF Nurses</th>
+					<th colspan="2" >PROVISION OF Deliveries</th>
 			</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -234,7 +234,7 @@ class Form_Handler extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->questions['nur'] . '
+			' . $this->questions['del'] . '
 		</table>	
 		<table>
 			<thead>
