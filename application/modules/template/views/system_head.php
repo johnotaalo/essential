@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default-indicator.css');?>">
 
 <?php $this->load->view($application_css); ?>
-
+<script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <!-- JS -->
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/offline.js');?>"></script>
@@ -27,6 +27,9 @@
 <script src="<?php echo base_url('assets/bower_components/offline/js/snake.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/ui.js');?>"></script>
+
+<script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script>
+
 <script>
   $(function(){
 Offline.options={
@@ -43,12 +46,12 @@ Offline.options={
   },
 
   // Should we store and attempt to remake requests which fail while the connection is down.
-  requests: true,
+  requests: true
 
   // Should we show a snake game while the connection is down to keep the user entertained?
   // It's not included in the normal build, you should bring in js/snake.js in addition to
   // offline.min.js.
-  game: true
+
 };
         var
             $online = $('.online'),
