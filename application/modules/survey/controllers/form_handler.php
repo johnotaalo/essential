@@ -2790,78 +2790,78 @@ class Form_Handler extends MY_Controller
 				<div class="step" id="section-3">
 					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
 					<table class="centre">
-					<thead>
-					<tr>
-						<th width="500px" rowspan="2">Malnutrition</th>
-						<th colspan="2">HCW Response</th>
-						<th colspan="2">Assessor Response</th>
-					</tr>
-					<tr>
-						<th width="100px">Response</th>
-						<th width="200px">Findings</th>
-						<th width="100">Response</th>
-						<th width="200px">Findings</th>
-					</tr>
-					</thead>
-					<tbody>
-					' . $this->mchIndicatorsSectionPDF['mal'] . '
-					</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Anaemia</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['anm'] . '
-				</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Condition</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['con'] . '
-				</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Treatment and Counselling</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Malnutrition</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->mchIndicatorsSectionPDF['mal'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Anaemia</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->mchIndicatorsSectionPDF['anm'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+							<tr>
+								<th width="500px" rowspan="2">Condition</th>
+								<th colspan="2">HCW Response</th>
+								<th colspan="2">Assessor Response</th>
+							</tr>
+							<tr>
+								<th width="100px">Response</th>
+								<th width="200px">Findings</th>
+								<th width="100">Response</th>
+								<th width="200px">Findings</th>
+							</tr>
+						</thead>
+						<tbody>
+						' . $this->mchIndicatorsSectionPDF['con'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Treatment and Counselling</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
 
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['cnl'] . '
-				</tbody>
-				</table>
+						</thead>
+						<tbody>
+						' . $this->mchIndicatorsSectionPDF['cnl'] . '
+						</tbody>
+					</table>
 				</div>
 				<div class="step" id="section-4">
 				<p class="message success">SECTION 4: CONSULTATION AND EXIT INTERVIEWS</p>
