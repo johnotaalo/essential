@@ -14,8 +14,6 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 	// Bound Events
 
-
-
 	//start of close_opened_form click event
 	$("#close_opened_form").click(function() {
 
@@ -33,41 +31,32 @@ function startSurvey(base_url, survey, survey_category, district) {
         /*----------------------------------------------------------------------------------------------------------------*/
 
 	//try saving data
-	//   $('#next_btn').click(function(){
-	//   	//dddform_id = $('form').attr("id");
-	//   	$(form_id).submit();
-	//   	form_id.preventde
-	//   	var remoteAjax = {};
-	//   	the_url = '';
-	//   	the_url = base_url + "survey/complete_survey";
-	// $(form_id + ".step").each(function() {
-	// 	alert(form_id);
-	// });
-	//   });
-
+	
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
-		// console.log(form_id);
-		$('#' + form_id).submit(function() {
+			curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
+			// console.log(trim('section-', curr_section));
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			var formData = new FormData($(this)[0]);
-			// var r = document.getElementById('result');
-			console.log(formData);
+			//console.log('found');
+			var formData = $('#'+form_id).serialize();
+			//console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
+				data: formData,
 				success: function(data) {
-					//problem comes here
-					alert('trying');
+					//console.log(curr_section +=1);
+					nextsection = curr_section += 1;
+					thethat = $('.step[data-section="' + nextsection + '"]');
+					changeSection(curr_section, thethat);
 				},
-				cache: false,
-				contentType: false,
-				processData: false
+				fail: function(data)
+				{
+					console.log('Error: '+ data);
+				}
 			});
 
-			return false;
-		});
 	});
 
 	/*start of loadGlobalJS*/
@@ -205,7 +194,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			}
 			$(".form-container .actual-form").load(base_url + current_form, function() {
 				loadGlobalScript();
-				renderFacilityInfo(facilityMFL);
+				// renderFacilityInfo(facilityMFL);
 				// break_form_to_steps(form_id);
 				select_option_changed();
 				loadSection(section, action);
@@ -231,10 +220,10 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 * @return {[type]}         [description]
 	 */
 	function loadSection(section, action, survey) {
-		section = (section == '') ? 'section-1' : section
-		console.log(section);
+		section = (section == '') ? '1' : parseInt(section)+1;
+		//console.log(section);
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 
 		$('#steps').find("[data-section='" + section + "']").addClass('active');
@@ -246,8 +235,8 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 */
 	function disableFields(section) {
 		//Disable all Input Fields except for Section
-		$('form input').prop('disabled', true);
-		$('#' + section + ' input').prop('disabled', false);
+		$('form :input').attr('disabled', 'disabled');
+		$('#section-' + section + ' :input').removeAttr('disabled');
 	}
 	/**
 	 * [changeSection description]
@@ -258,7 +247,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 		$('.ui.step').removeClass('active');
 		$(that).addClass('active');
 		$('.actual-form .step').hide();
-		$('#' + section).show();
+		$('#section-' + section).show();
 		disableFields(section);
 	}
 	//equipment availability change detectors

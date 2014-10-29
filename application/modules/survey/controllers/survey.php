@@ -62,6 +62,7 @@ class Survey extends MY_Controller
                 break;
 
             case 'hcw':
+                $sectionNames = array('Facility Information', 'Observation of Case Management: One Case Per HCW', 'Does the HCW check for the following conditions', 'Consultation and Exit Interviews', 'Cerfitication');
                 $sections = 5;
                 break;
 
@@ -71,7 +72,7 @@ class Survey extends MY_Controller
         for ($x = 1; $x <= $sections; $x++) {
             $stringLength = strlen($sectionNames[$x - 1]);
             $class = ($stringLength>50)?'ui step two line':'ui step';
-            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="section-' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
+            $sectionList.= '<div class="'.$class.'" '.$strLength.'data-section="' . $x . '">'.$x .':'. $sectionNames[$x - 1] . '</div>';
         }
         echo json_encode($sectionList);
     }
@@ -480,6 +481,6 @@ class Survey extends MY_Controller
     public function complete_survey()
     {
         $this->load->model('m_complete_survey');
-        $this->m_complete_survey->store_data();
+        $x = $this->m_complete_survey->store_data();
     }
 }
