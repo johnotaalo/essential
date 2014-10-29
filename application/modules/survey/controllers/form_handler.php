@@ -2803,7 +2803,7 @@ class Form_Handler extends MY_Controller
 						</tr>
 						</thead>
 						<tbody>
-						' . $this->mchIndicatorsSectionPDF['mal'] . '
+						' . $this->indicators['mal'] . '
 						</tbody>
 					</table>
 					<table class="centre">
@@ -2821,7 +2821,7 @@ class Form_Handler extends MY_Controller
 						</tr>
 						</thead>
 						<tbody>
-						' . $this->mchIndicatorsSectionPDF['anm'] . '
+						' . $this->indicators['anm'] . '
 						</tbody>
 					</table>
 					<table class="centre">
@@ -2839,7 +2839,7 @@ class Form_Handler extends MY_Controller
 							</tr>
 						</thead>
 						<tbody>
-						' . $this->mchIndicatorsSectionPDF['con'] . '
+						' . $this->indicators['con'] . '
 						</tbody>
 					</table>
 					<table class="centre">
@@ -2858,7 +2858,7 @@ class Form_Handler extends MY_Controller
 
 						</thead>
 						<tbody>
-						' . $this->mchIndicatorsSectionPDF['cnl'] . '
+						' . $this->indicators['cnl'] . '
 						</tbody>
 					</table>
 				</div>
