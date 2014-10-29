@@ -202,7 +202,6 @@ class Analytics extends MY_Controller
     
     public function getAllReportedCounties($survey, $survey_category,$option) {
         $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category,$option);
-        
         //m var_dump($reportingCounties);
         $counter = 0;
         $allProgress = '';
@@ -213,7 +212,7 @@ class Analytics extends MY_Controller
             $counter++;
         }
         
-        //echo '<pre>';print_r($allProgress);echo '</pre>';
+        //echo '<pre>';print_r($allProgress);echo '</pre>';die;
         echo json_encode($allProgress);
     }
     
@@ -683,7 +682,6 @@ class Analytics extends MY_Controller
         $in_facility = $on_duty = $category = $resultsArray = array();
         $value = urldecode($value);
        $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
-        
         $category = array();
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
@@ -1270,7 +1268,13 @@ class Analytics extends MY_Controller
                 //echo '<pre>';print_r($results);echo '</pre>';die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-                $category[] = $key;
+				if($key == ''){
+					$key = 'Not specified tier';
+					$category[] = $key;
+				}else{
+					$category[] = 'Tier'.$key;
+				}
+                
                 foreach ($result as $name => $value) {
                     if ($name != 'Sometimes Available') {
                         
@@ -1298,7 +1302,7 @@ class Analytics extends MY_Controller
                      $color = $colors[$colorCounter];
                      $colorCounter++;
                 
-                	$resultArray[] = array('name' => 'Tier'.$key, 'data' => $val,'color'=>$color);
+                	$resultArray[] = array('name' =>$key, 'data' => $val,'color'=>$color);
                 }
 					
 				//}
@@ -1709,12 +1713,13 @@ class Analytics extends MY_Controller
             	$key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
 				if($key == ''){
+
 					$key = 'Not specifed tier';
 					$category[] = $key;
 				}else{
 				$category[] = 'Tier'.$key;	
 				}
-                
+
                 foreach ($result as $name => $value) {
                 	if($name == ''){
                 		$name = 'No Data';
@@ -1834,7 +1839,13 @@ class Analytics extends MY_Controller
             
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
-            $category[] = $key;
+			if($key == ''){
+				$key = "Not specified tier";
+				$category[] = $key;
+			}else{
+			$category[] = 'Tier'.$key;	
+			}
+            
             foreach ($result as $name => $value) {
                 if ($name != 'Sometimes Available') {
                     $data[$name][] = (int)$value;
@@ -1851,7 +1862,7 @@ class Analytics extends MY_Controller
                 $colors = '#dddddd';
 				$resultArray[] = array('name' =>$key, 'data' => $val, 'color'=> $colors);
             }else{
-             $resultArray[] = array('name' => 'Tier'.''.$key, 'data' => $val);	
+             $resultArray[] = array('name' =>$key, 'data' => $val);	
             }
            }
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
