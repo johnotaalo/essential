@@ -1865,13 +1865,14 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     //     }
                     //     $data = $newData;
                     // }
-                    //echo "<pre>";print_r($data);echo "</pre>";die;
+                    //
                     
                     
                 }
             }
             catch(exception $ex) {
             }
+           // echo "<pre>";print_r($data);echo "</pre>";die;
             return $data;
         }
         

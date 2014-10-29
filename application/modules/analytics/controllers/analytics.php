@@ -1220,6 +1220,7 @@ class Analytics extends MY_Controller
             $this->populateGraph($resultArray, '', $category, $criteria, '', 40, 'pie', (int)sizeof($category));
         } else if (($statistic == 'availability' && $for == 'ch') || ($statistic == 'availability' && $for == 'mnh') 
 		||($statistic == 'availability' && $for == 'tst') || ($statistic == 'unavailability' && $for == 'mnh')) {
+            //echo "<pre>";print_r($results);echo "</pre>";die;
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
@@ -1241,13 +1242,10 @@ class Analytics extends MY_Controller
                     $key = $name;
                 }else if($k=='Available'){
                     $color='#2f7ed8';
-                } else if ($key == 'N/A') {
+                } else if (($key == 'N/A')|| ($key == '')) {
                     $name = 'No Data';
                     $key = $name;
-                }else if ($key == '') {
-                    $name = 'No Data';
-                    $key = $name;
-				}
+                }
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
@@ -1266,7 +1264,7 @@ class Analytics extends MY_Controller
                
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$colors);
         } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')||($statistic == 'supplier' && $for == 'mh')){
             foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);echo '</pre>';die;
