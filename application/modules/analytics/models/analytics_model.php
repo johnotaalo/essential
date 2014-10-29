@@ -406,6 +406,7 @@ ORDER BY lq.lq_response ASC";
                 
                 //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value) {
+
                     switch ($statistic) {
                         case 'cases':
                             if ($value['treatment'] == 'OtherTotal') {
@@ -1827,7 +1828,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
                         } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['supply_name']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
                     
@@ -1864,13 +1865,14 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     //     }
                     //     $data = $newData;
                     // }
-                    //echo "<pre>";print_r($data);echo "</pre>";die;
+                    //
                     
                     
                 }
             }
             catch(exception $ex) {
             }
+           // echo "<pre>";print_r($data);echo "</pre>";die;
             return $data;
         }
         
@@ -2066,7 +2068,7 @@ LIMIT 0 , 1000
                             }
                         }
                         if (array_key_exists('fac_level', $value)) {
-                            $data[$value['suppliers']][$value['fac_level']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];

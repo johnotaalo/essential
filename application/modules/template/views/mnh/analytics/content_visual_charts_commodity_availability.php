@@ -1109,7 +1109,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
-                    Section 5 : Commodity Availability & Usage<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 5 & 6: Commodity Availability & Usage<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
 
                 </a>
             </h4>
@@ -1305,7 +1305,7 @@
                 </div> -->
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Supplies Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Diagnostic Kits Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1315,7 +1315,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Supplies Location of Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Diagnostic Kits Location of Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
