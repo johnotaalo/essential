@@ -11,8 +11,14 @@
 <title><?php echo $application_title; ?></title>
 
 <!-- CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english.css');?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english-indicator.css');?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default.css');?>">
+
 <?php $this->load->view($application_css); ?>
 
 <!-- JS -->
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.js');?>"></script>
+<script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
+<!--script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script-->
 <?php $this->load->view($application_js); ?>
