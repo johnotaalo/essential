@@ -21,4 +21,10 @@
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <!--script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script-->
+<script>
+  $(document).ready(function(){
+    Offline.check();
+    console.log(Offline.state);
+  });
+</script>
 <?php $this->load->view($application_js); ?>
