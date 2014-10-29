@@ -140,33 +140,33 @@ class Form_Handler extends MY_Controller
 				</tr>
 				<tr>
 					<td  colspan="2">Facility Incharge </td><td>
-					<input type="text" id="facilityInchargename" name="facilityInchargename" class="cloned" />
+					<input type="text" id="facilityInchargename" name="contactfacilityInchargename" class="cloned" />
 					</td><td>
-					<input type="text" id="facilityInchargemobile" name="facilityInchargemobile" class="phone" />
+					<input type="text" id="facilityInchargemobile" name="contactfacilityInchargemobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityInchargeemail" name="facilityInchargeemail" class="cloned mail" />
+					<input type="text" id="facilityInchargeemail" name="contactfacilityInchargeemail" class="cloned mail" />
 					</td>
 				</tr>
 				<tr>
 					<td  colspan="2">MCH Incharge </td><td>
-					<input type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
+					<input type="text" id="facilityMchname" name="contactfacilityMchname" class="cloned" />
 					</td><td>
-					<input type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
+					<input type="text" id="facilityMchmobile" name="contactfacilityMchmobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
+					<input type="text" id="facilityMchemail" name="contactfacilityMchemail" class="cloned mail" />
 					</td>
 				</tr>
 				<tr>
 					<td  colspan="2">Maternity Incharge </td><td>
-					<input type="text" id="facilityMaternityname" name="facilityMaternityname" class="cloned" />
+					<input type="text" id="facilityMaternityname" name="contactfacilityMaternityname" class="cloned" />
 					</td>
 					<td>
-					<input type="text" id="facilityMaternitymobile" name="facilityMaternitymobile" class="phone" />
+					<input type="text" id="facilityMaternitymobile" name="contactfacilityMaternitymobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
+					<input type="text" id="facilityMaternityemail" name="contactfacilityMaternityemail" class="cloned mail" />
 					</td>
 				</tr>
 			</tbody>
@@ -221,12 +221,13 @@ class Form_Handler extends MY_Controller
 					<input type="text" name="facRsnNoDeliveries[]" id="rsnDeliveriesOther" value="" />
 					</td>
 
+					<input type = "hidden" name = "questionCode_10000" value = "QMNH200" />
 				</tr>
 			</table>	
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >PROVISION OF Deliveries</th>
+					<th colspan="2" >Provision OF Deliveries</th>
 			</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -2024,6 +2025,8 @@ class Form_Handler extends MY_Controller
     }
     public function get_hcw_form() {
         $this->combined_form = '
+        <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
+        	<div class="step" id="section-1">
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table border="2">
 				<thead>
@@ -2179,9 +2182,9 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td colspan="1">Year, Month when trained in IMCI <input type="text"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-				<p><input type="radio">MOH/KPA/CHAI</p>
-				<p><input type="radio">MOH only</p>
-				<p><input type="radio">Other</p>
+				<p><input type="radio" name = "coordinator">MOH/KPA/CHAI</p>
+				<p><input type="radio" name = "coordinator">MOH only</p>
+				<p><input type="radio" name = "coordinator">Other</p>
 				<p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
 				</td>
 				</tr>
@@ -2219,53 +2222,11 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
-				<td>
-				1.	Is the HCW still working in the original facility they were when they got trained?
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">
-				If No to question 1 indicate whether the HCW:
-				</td>
-				</tr>
-				<tr>
-				<td>
-				Transferred to another facility in the same county
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">If Yes, indicate name of the facility <input type="text"> </td>
-				</tr>
-				<tr>
-				<td>
-				Transferred to another facility in another county
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">If  Yes, indicate the name of the county <input type="text"> and facility <input type="text"> </td>
-				</tr>
+				'.$this->questions['wp'].'
 				</tbody>
 				</table>
-				
+				</div>
+				<div class="step" id="section-2">
 				<p class="message success">SECTION 2: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW</p>
 				<p class="instruction">
 					* Assessor should indicate findings alongside Healthcare Worker findings.
@@ -2294,7 +2255,7 @@ class Form_Handler extends MY_Controller
 							<th> FINDINGS </th>
 						</tr>
 					</thead>
-					' . $this->mchIndicatorsSectionPDF['svc'] . '
+					' . $this->indicators['svc'] . '
 				</table>
 				
 				<table class="centre">
@@ -2307,7 +2268,7 @@ class Form_Handler extends MY_Controller
 				<th colspan="2"> RESPONSE </th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['sgn'] . '
+				' . $this->indicators['sgn'] . '
 				</table>
 
 				<p class="message success">SECTION 2A: ASSESSMENT OF THE SICK CHILD AGE 2 MONTHS UP TO 5 YEARS</p>
@@ -2352,7 +2313,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 
-				' . $this->mchIndicatorsSectionPDF['pne'] . '
+				' . $this->indicators['pne'] . '
 
 				<tr>
 				<th colspan="5">Treatment</th>
@@ -2402,7 +2363,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['dgn'] . '
+				' . $this->indicators['dgn'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2416,7 +2377,7 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td colspan="5"><textarea style="width:1000px;height:100px"></textarea></td>
 				</tr>
-
+				</div>
 				<p class="instruction" >Move to Section 3</p>
 
 
@@ -2454,7 +2415,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['fev'] . '
+				' . $this->indicators['fev'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2502,7 +2463,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['ear'] . '
+				' . $this->indicators['ear'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2525,7 +2486,7 @@ class Form_Handler extends MY_Controller
 				<tr>
 				</table>
 
-				<p class="message success" style="margin-top:200px">SECTION 2B: ASSESMENT FOR THE SICK YOUNG INFANT AGE UPTO 2 MONTHS( IF APPLICABLE)</p>
+				<p class="message success" style="margin-top:10px">SECTION 2B: ASSESMENT FOR THE SICK YOUNG INFANT AGE UPTO 2 MONTHS( IF APPLICABLE)</p>
 				<table class="centre">
 				<tr>
 				<th>
@@ -2559,7 +2520,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['svd'] . '
+				' . $this->indicators['svd'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2606,7 +2567,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['jau'] . '
+				' . $this->indicators['jau'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2654,7 +2615,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['eye'] . '
+				' . $this->indicators['eye'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2702,7 +2663,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['dgn'] . '
+				' . $this->indicators['dgn'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2735,10 +2696,10 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['fed'] . '
+				' . $this->indicators['fed'] . '
 
 				</table>
-				<p class="message success" style="margin-top:200px">IF INFANT IS LESS THAN ONE WEEK</p>
+				<p class="message success" style="margin-top:10px">IF INFANT IS LESS THAN ONE WEEK</p>
 
 				<table class="centre">
 
@@ -2758,7 +2719,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['wgt'] . '
+				' . $this->indicators['wgt'] . '
 
 				</table>
 				<table class="centre">
@@ -2779,84 +2740,87 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['stn'] . '
+				' . $this->indicators['stn'] . '
 
 				</table>
+				</div>
+				<div class="step" id="section-3">
+					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Malnutrition</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['mal'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Anaemia</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['anm'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+							<tr>
+								<th width="500px" rowspan="2">Condition</th>
+								<th colspan="2">HCW Response</th>
+								<th colspan="2">Assessor Response</th>
+							</tr>
+							<tr>
+								<th width="100px">Response</th>
+								<th width="200px">Findings</th>
+								<th width="100">Response</th>
+								<th width="200px">Findings</th>
+							</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['con'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Treatment and Counselling</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
 
-				<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Malnutrition</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['mal'] . '
-				</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Anaemia</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['anm'] . '
-				</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Condition</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['con'] . '
-				</tbody>
-				</table>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Treatment and Counselling</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['cnl'] . '
-				</tbody>
-				</table>
+						</thead>
+						<tbody>
+						' . $this->indicators['cnl'] . '
+						</tbody>
+					</table>
+				</div>
+				<div class="step" id="section-4">
 				<p class="message success">SECTION 4: CONSULTATION AND EXIT INTERVIEWS</p>
 				<table>
 				<thead>
@@ -2868,7 +2832,7 @@ class Form_Handler extends MY_Controller
 
 				</thead>
 				<tbody>
-				' . $this->hcwConsultingAspectsSectionPDF . '
+				' . $this->questions['obs'] . '
 
 				</tbody>
 				<tfoot></tfoot>
@@ -2883,7 +2847,7 @@ class Form_Handler extends MY_Controller
 
 				</thead>
 				<tbody>
-				' . $this->hcwInterviewAspectsSectionPDF . '
+				' . $this->questions['int'] . '
 
 				</tbody>
 				<tfoot></tfoot>
@@ -2921,7 +2885,7 @@ class Form_Handler extends MY_Controller
 				<th colspan="2">Criteria for Certification: SECTION A</td>
 				</tr>
 
-				' . $this->questionPDF['certa'] . '
+				' . $this->questions['certa'] . '
 
 				<tr>
 				<td colspan="2">
@@ -2938,21 +2902,21 @@ class Form_Handler extends MY_Controller
 				<th colspan="2">Checked  for the Following: SECTION B</td>
 				</tr>
 
-				' . $this->questionPDF['certb'] . '
+				' . $this->questions['certb'] . '
 
 
 				<tr>
 				</table>
 
-				<p class="instruction" style="margin-top:400px">
+				<p class="instruction" style="margin-top:10px">
 				Where NO, these are gaps identified and the HCW will need mentorship to incorporate these in routine care for the child
 				<br/>
 				If YES to all, consider HCW for TOT and Mentorship Training
 				<br/>
 				(NOTE: IF THE HEALTHCARE WORKER FAILS TO ATTAIN ALLTHE POINTS IN SECTION A, THE PARTICIPANT SHOULD BE GIVEN A SECOND CHANCE. IF THE PARTICIPANT FAILS IN THE SECOND ATTEMPT, MENTORSHIP IS RECOMMENDED BEFORE FURTHER ASSESMENT)
 				</p>
-
-
+				</div>
+				<div class="step" id="section-5">
 				<table>
 				<thead>
 				<tr>
@@ -2960,7 +2924,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 
-				' . $this->questionPDF['out'] . '
+				' . $this->questions['out'] . '
 				</table>
 				<table>
 				<thead>
@@ -2997,7 +2961,8 @@ class Form_Handler extends MY_Controller
 				<td><i>Please leave a copy of signed report to respective facility before leaving and send one copy to district within 7 days of visit </i></td>
 				</tr>
 			</table>
-
+			</div>
+			</form>
 		';
         return $this->combined_form;
     }

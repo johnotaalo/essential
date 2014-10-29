@@ -344,7 +344,31 @@ class Generate extends MY_Controller
                             $questionReason = ($retrieved[$value['questionCode']]['lq_reason'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_reason'] : '';
                         }
                         $base++;
-                        if ($section == 'nur' || $section == 'bed') {
+                        if($section == 'wp')
+                        {
+                            $additionalinfo = '';
+                            if($value['questionCode'] == 'QUC32')
+                            {
+                                $additionalinfo = '<tr><td colspan = "3">If No to question 1 indicate whether the HCW:</td></tr>';
+                            }
+                            else if($value['questionCode'] == 'QUC33')
+                            {
+                                $additionalinfo = '<tr><td>If Yes, indicate name of the facility</td><td colspan = "2"><input type="text" name = "samecountyfacility" style = "width: 100%;"></td></tr>';
+                            }
+                            else if($value['questionCode'] == 'QUC34')
+                            {
+                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county <input type="text"> and facility <input type="text"></td></tr>';
+                            }
+                            $data[$section][] = '<tr>
+                            <td><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                            <td>
+                            <input type = "hidden" name = "questionCode_'.$counter.' value = "'.$value['questionCode'].'" />
+                            <input type = "radio" name = "questionCount_'. $counter .'" value = "Yes"></td>
+                            <td><input type = "radio" name = "questionCount_'. $counter .'" value = "No">
+                            </td>
+                            </tr>'.$additionalinfo;
+                        }
+                        else if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
                 <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
@@ -534,6 +558,7 @@ class Generate extends MY_Controller
                         $current = ($base == 0) ? $section : $current;
                         
                         $base++;
+
                         if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>

@@ -14,8 +14,6 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 	// Bound Events
 
-
-
 	//start of close_opened_form click event
 	$("#close_opened_form").click(function() {
 
@@ -33,34 +31,29 @@ function startSurvey(base_url, survey, survey_category, district) {
         /*----------------------------------------------------------------------------------------------------------------*/
 
 	//try saving data
-	//   $('#next_btn').click(function(){
-	//   	//dddform_id = $('form').attr("id");
-	//   	$(form_id).submit();
-	//   	form_id.preventde
-	//   	var remoteAjax = {};
-	//   	the_url = '';
-	//   	the_url = base_url + "survey/complete_survey";
-	// $(form_id + ".step").each(function() {
-	// 	alert(form_id);
-	// });
-	//   });
-
+	
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
-		// console.log(form_id);
+			curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
+			// console.log(trim('section-', curr_section));
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			// console.log(the_url);
+			//console.log('found');
 			var formData = $('#'+form_id).serialize();
-			// console.log(formData);
-			// var r = document.getElementById('result');
-			// console.log(formData);
+			//console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
 				data: formData,
 				success: function(data) {
-					console.log(data);
+					//console.log(curr_section +=1);
+					nextsection = curr_section += 1;
+					thethat = $('.step[data-section="' + nextsection + '"]');
+					changeSection(curr_section, thethat);
+				},
+				fail: function(data)
+				{
+					console.log('Error: '+ data);
 				}
 			});
 
@@ -228,7 +221,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	 */
 	function loadSection(section, action, survey) {
 		section = (section == '') ? '1' : parseInt(section)+1;
-		console.log(section);
+		//console.log(section);
 		$('.actual-form .step').hide();
 		$('#section-' + section).show();
 		disableFields(section);
