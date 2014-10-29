@@ -2024,6 +2024,8 @@ class Form_Handler extends MY_Controller
     }
     public function get_hcw_form() {
         $this->combined_form = '
+        <form class="bbq" name="mnh_tool" id="mnh_tool" method="POST">
+        	<div class="step" id="section-1">
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table border="2">
 				<thead>
@@ -2265,7 +2267,8 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</tbody>
 				</table>
-				
+				</div>
+				<div class="step" id="section-2">
 				<p class="message success">SECTION 2: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW</p>
 				<p class="instruction">
 					* Assessor should indicate findings alongside Healthcare Worker findings.
@@ -2416,11 +2419,12 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td colspan="5"><textarea style="width:1000px;height:100px"></textarea></td>
 				</tr>
-
+				</div>
 				<p class="instruction" >Move to Section 3</p>
 
 
 				</table>
+				<div class="step" id="section-3">
 				<table class="centre">
 				<tr>
 				<th>
@@ -2782,25 +2786,26 @@ class Form_Handler extends MY_Controller
 				' . $this->mchIndicatorsSectionPDF['stn'] . '
 
 				</table>
-
-				<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
-				<table class="centre">
-				<thead>
-				<tr>
-				<th width="500px" rowspan="2">Malnutrition</th>
-				<th colspan="2">HCW Response</th>
-				<th colspan="2">Assessor Response</th>
-				</tr>
-				<tr>
-				<th width="100px">Response</th>
-				<th width="200px">Findings</th>
-				<th width="100">Response</th>
-				<th width="200px">Findings</th>
-				</tr>
-				</thead>
-				<tbody>
-				' . $this->mchIndicatorsSectionPDF['mal'] . '
-				</tbody>
+				</div>
+				<div class="step" id="section-3">
+					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
+					<table class="centre">
+					<thead>
+					<tr>
+						<th width="500px" rowspan="2">Malnutrition</th>
+						<th colspan="2">HCW Response</th>
+						<th colspan="2">Assessor Response</th>
+					</tr>
+					<tr>
+						<th width="100px">Response</th>
+						<th width="200px">Findings</th>
+						<th width="100">Response</th>
+						<th width="200px">Findings</th>
+					</tr>
+					</thead>
+					<tbody>
+					' . $this->mchIndicatorsSectionPDF['mal'] . '
+					</tbody>
 				</table>
 				<table class="centre">
 				<thead>
@@ -2857,6 +2862,8 @@ class Form_Handler extends MY_Controller
 				' . $this->mchIndicatorsSectionPDF['cnl'] . '
 				</tbody>
 				</table>
+				</div>
+				<div class="step" id="section-4">
 				<p class="message success">SECTION 4: CONSULTATION AND EXIT INTERVIEWS</p>
 				<table>
 				<thead>
@@ -2951,8 +2958,8 @@ class Form_Handler extends MY_Controller
 				<br/>
 				(NOTE: IF THE HEALTHCARE WORKER FAILS TO ATTAIN ALLTHE POINTS IN SECTION A, THE PARTICIPANT SHOULD BE GIVEN A SECOND CHANCE. IF THE PARTICIPANT FAILS IN THE SECOND ATTEMPT, MENTORSHIP IS RECOMMENDED BEFORE FURTHER ASSESMENT)
 				</p>
-
-
+				</div>
+				<div class="step" id="section-5">
 				<table>
 				<thead>
 				<tr>
@@ -2997,7 +3004,8 @@ class Form_Handler extends MY_Controller
 				<td><i>Please leave a copy of signed report to respective facility before leaving and send one copy to district within 7 days of visit </i></td>
 				</tr>
 			</table>
-
+			</div>
+			</form>
 		';
         return $this->combined_form;
     }
