@@ -33,26 +33,15 @@ function startSurvey(base_url, survey, survey_category, district) {
         /*----------------------------------------------------------------------------------------------------------------*/
 
 	//try saving data
-	//   $('#next_btn').click(function(){
-	//   	//dddform_id = $('form').attr("id");
-	//   	$(form_id).submit();
-	//   	form_id.preventde
-	//   	var remoteAjax = {};
-	//   	the_url = '';
-	//   	the_url = base_url + "survey/complete_survey";
-	// $(form_id + ".step").each(function() {
-	// 	alert(form_id);
-	// });
-	//   });
-
+	
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
 		// console.log(form_id);
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			// console.log(the_url);
+			// console.log('found');
 			var formData = $('#'+form_id).serialize();
-			// console.log(formData);
+			console.log(formData);
 			// var r = document.getElementById('result');
 			// console.log(formData);
 			$.ajax({
