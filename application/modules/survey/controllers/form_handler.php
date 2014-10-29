@@ -2424,7 +2424,6 @@ class Form_Handler extends MY_Controller
 
 
 				</table>
-				<div class="step" id="section-3">
 				<table class="centre">
 				<tr>
 				<th>
