@@ -303,7 +303,7 @@ function loadSurvey(survey) {
 function getReportingData(base_url, survey_type, survey_category, container,option) {
     progressRow = '';
     $.ajax({
-    	  async: "false",
+    	  async: false,
         url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category + '/' + option,
         beforeSend: function(xhr) {
             $(container).empty();
