@@ -200,13 +200,13 @@ class Analytics extends MY_Controller
         echo $counties;
     }
     
-    public function getAllReportedCounties($survey, $survey_category) {
-        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category);
+    public function getAllReportedCounties($survey, $survey_category,$option) {
+        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category,$option);
         
         //m var_dump($reportingCounties);
         $counter = 0;
         $allProgress = '';
-        foreach ($reportingCounties as $key => $county) {
+        foreach ($reportingCounties[$option] as $key => $county) {
             
             //echo $key;
             $allProgress[] = $this->getReportedCountyJSON($county, $key);
@@ -682,8 +682,7 @@ class Analytics extends MY_Controller
     public function getStaffAvailability($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $category = $resultsArray = array();
         $value = urldecode($value);
-        $nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
-        $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
+       $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
         
         $category = array();
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
@@ -692,7 +691,6 @@ class Analytics extends MY_Controller
         foreach ($nurse as $name => $val) {
             foreach($val as $key => $value){
             $category = $name;
-            $gData[$name]['Total Skilled'] = 0;
             
          }
          //$resultArray[] = array('name' => $name, 'data' => $gData);
@@ -710,7 +708,6 @@ class Analytics extends MY_Controller
                 $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
                 $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
-                $gData[$name]['Total Skilled'] = $value;
             
             
         }
@@ -1711,7 +1708,13 @@ class Analytics extends MY_Controller
             foreach ($results as $key => $result) {
             	$key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-                $category[] = $key;
+				if($key == ''){
+					$key = 'Not specifed tier';
+					$category[] = $key;
+				}else{
+				$category[] = 'Tier'.$key;	
+				}
+                
                 foreach ($result as $name => $value) {
                 	if($name == ''){
                 		$name = 'No Data';
@@ -1738,10 +1741,10 @@ class Analytics extends MY_Controller
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
                 $key = str_replace(' ', '-', $key);
-               $resultArray[] = array('name' => 'Tier'.$key, 'data' => $val);
+               $resultArray[] = array('name' => $key, 'data' => $val);
             }
 			 
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'commodity',$statistic,$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'commodity',$statistic,$colors);
         }else {
             $key = str_replace('_', ' ', $key);
             foreach ($results as $key => $result) {

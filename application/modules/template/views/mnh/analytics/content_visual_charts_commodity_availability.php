@@ -105,9 +105,15 @@
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
                         <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
                     </div>
+							<div id="reporting_left"></div>
 
-                    
-                    <div id="reporting"></div>
+                </div>
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
+                        <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
+                    </div>
+						<div id="reporting_right"></div>
 
                 </div>
 

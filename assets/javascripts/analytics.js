@@ -782,7 +782,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 
                     break;
                 case 'section-5':
-                    loadGraph(base_url, 'analytics/getORTAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_availability');
+                    loadGraph(base_url, 'analytics/getORTOne/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_availability');
                     loadGraph(base_url, 'analytics/getLocationStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_location');
                     loadGraph(base_url, 'analytics/getORTFunctionality/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ort_reason');
                     break;
