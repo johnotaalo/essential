@@ -36,20 +36,22 @@ function startSurvey(base_url, survey, survey_category, district) {
 	
 	$("#next_btn").click(function() {
 		form_id = $('form').attr("id");
-		// console.log(form_id);
+			//console.log(form_id);
 			the_url = '';
 			the_url = base_url + "survey/complete_survey";
-			// console.log('found');
+			//console.log('found');
 			var formData = $('#'+form_id).serialize();
-			console.log(formData);
-			// var r = document.getElementById('result');
-			// console.log(formData);
+			//console.log(formData);
 			$.ajax({
 				url: the_url,
 				type: 'POST',
 				data: formData,
 				success: function(data) {
 					console.log(data);
+				},
+				fail: function(data)
+				{
+					console.log('Error: '+ data);
 				}
 			});
 

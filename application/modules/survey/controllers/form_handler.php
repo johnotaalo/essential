@@ -226,7 +226,7 @@ class Form_Handler extends MY_Controller
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >PROVISION OF Deliveries</th>
+					<th colspan="2" >Provision OF Deliveries</th>
 			</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -2024,7 +2024,7 @@ class Form_Handler extends MY_Controller
     }
     public function get_hcw_form() {
         $this->combined_form = '
-        <form class="bbq" name="mnh_tool" id="mnh_tool" method="POST">
+        <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
         	<div class="step" id="section-1">
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table border="2">
@@ -2297,7 +2297,7 @@ class Form_Handler extends MY_Controller
 							<th> FINDINGS </th>
 						</tr>
 					</thead>
-					' . $this->mchIndicatorsSectionPDF['svc'] . '
+					' . $this->indicators['svc'] . '
 				</table>
 				
 				<table class="centre">
@@ -2310,7 +2310,7 @@ class Form_Handler extends MY_Controller
 				<th colspan="2"> RESPONSE </th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['sgn'] . '
+				' . $this->indicators['sgn'] . '
 				</table>
 
 				<p class="message success">SECTION 2A: ASSESSMENT OF THE SICK CHILD AGE 2 MONTHS UP TO 5 YEARS</p>
@@ -2355,7 +2355,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 
-				' . $this->mchIndicatorsSectionPDF['pne'] . '
+				' . $this->indicators['pne'] . '
 
 				<tr>
 				<th colspan="5">Treatment</th>
@@ -2405,7 +2405,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['dgn'] . '
+				' . $this->indicators['dgn'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2457,7 +2457,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['fev'] . '
+				' . $this->indicators['fev'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2505,7 +2505,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['ear'] . '
+				' . $this->indicators['ear'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2528,7 +2528,7 @@ class Form_Handler extends MY_Controller
 				<tr>
 				</table>
 
-				<p class="message success" style="margin-top:200px">SECTION 2B: ASSESMENT FOR THE SICK YOUNG INFANT AGE UPTO 2 MONTHS( IF APPLICABLE)</p>
+				<p class="message success" style="margin-top:10px">SECTION 2B: ASSESMENT FOR THE SICK YOUNG INFANT AGE UPTO 2 MONTHS( IF APPLICABLE)</p>
 				<table class="centre">
 				<tr>
 				<th>
@@ -2562,7 +2562,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['svd'] . '
+				' . $this->indicators['svd'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2609,7 +2609,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['jau'] . '
+				' . $this->indicators['jau'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2657,7 +2657,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['eye'] . '
+				' . $this->indicators['eye'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2705,7 +2705,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['dgn'] . '
+				' . $this->indicators['dgn'] . '
 				<tr>
 				<th colspan="5">Treatment</th>
 				</tr>
@@ -2738,10 +2738,10 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['fed'] . '
+				' . $this->indicators['fed'] . '
 
 				</table>
-				<p class="message success" style="margin-top:200px">IF INFANT IS LESS THAN ONE WEEK</p>
+				<p class="message success" style="margin-top:10px">IF INFANT IS LESS THAN ONE WEEK</p>
 
 				<table class="centre">
 
@@ -2761,7 +2761,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['wgt'] . '
+				' . $this->indicators['wgt'] . '
 
 				</table>
 				<table class="centre">
@@ -2782,7 +2782,7 @@ class Form_Handler extends MY_Controller
 				<th width="200px">Findings</th>
 				</tr>
 				</thead>
-				' . $this->mchIndicatorsSectionPDF['stn'] . '
+				' . $this->indicators['stn'] . '
 
 				</table>
 				</div>
@@ -2874,7 +2874,7 @@ class Form_Handler extends MY_Controller
 
 				</thead>
 				<tbody>
-				' . $this->hcwConsultingAspectsSectionPDF . '
+				' . $this->questions['obs'] . '
 
 				</tbody>
 				<tfoot></tfoot>
@@ -2889,7 +2889,7 @@ class Form_Handler extends MY_Controller
 
 				</thead>
 				<tbody>
-				' . $this->hcwInterviewAspectsSectionPDF . '
+				' . $this->questions['int'] . '
 
 				</tbody>
 				<tfoot></tfoot>
@@ -2927,7 +2927,7 @@ class Form_Handler extends MY_Controller
 				<th colspan="2">Criteria for Certification: SECTION A</td>
 				</tr>
 
-				' . $this->questionPDF['certa'] . '
+				' . $this->questions['certa'] . '
 
 				<tr>
 				<td colspan="2">
@@ -2944,13 +2944,13 @@ class Form_Handler extends MY_Controller
 				<th colspan="2">Checked  for the Following: SECTION B</td>
 				</tr>
 
-				' . $this->questionPDF['certb'] . '
+				' . $this->questions['certb'] . '
 
 
 				<tr>
 				</table>
 
-				<p class="instruction" style="margin-top:400px">
+				<p class="instruction" style="margin-top:10px">
 				Where NO, these are gaps identified and the HCW will need mentorship to incorporate these in routine care for the child
 				<br/>
 				If YES to all, consider HCW for TOT and Mentorship Training
@@ -2966,7 +2966,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 
-				' . $this->questionPDF['out'] . '
+				' . $this->questions['out'] . '
 				</table>
 				<table>
 				<thead>
