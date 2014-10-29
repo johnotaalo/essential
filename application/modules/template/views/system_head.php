@@ -13,7 +13,8 @@
 <!-- CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english.css');?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english-indicator.css');?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default.css');?>">
+<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default.css');?>"> -->
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default-indicator.css');?>">
 
 <?php $this->load->view($application_css); ?>
 
@@ -22,9 +23,24 @@
 <script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <!--script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script-->
 <script>
-  $(document).ready(function(){
-    Offline.check();
-    console.log(Offline.state);
-  });
+  $(function(){
+
+        var
+            $online = $('.online'),
+            $offline = $('.offline');
+
+        Offline.on('confirmed-down', function () {
+            $online.fadeOut(function () {
+                $offline.fadeIn();
+            });
+        });
+
+        Offline.on('confirmed-up', function () {
+            $offline.fadeOut(function () {
+                $online.fadeIn();
+            });
+        });
+
+    });
 </script>
 <?php $this->load->view($application_js); ?>
