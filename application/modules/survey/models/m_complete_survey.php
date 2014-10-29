@@ -155,7 +155,7 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //return true;
+                    return true;
                     
                     
                 }
@@ -1095,7 +1095,7 @@ class M_complete_survey extends MY_Model
             //For every posted values
             if (strpos($key, 'contactfacility') !== FALSE) {
                 
-                // var_dump($val);die;
+                //var_dump($val);die;
                 //select data for availability of commodities
                 //we separate the attribute name from the number
                 

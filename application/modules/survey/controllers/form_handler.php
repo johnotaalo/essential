@@ -140,33 +140,33 @@ class Form_Handler extends MY_Controller
 				</tr>
 				<tr>
 					<td  colspan="2">Facility Incharge </td><td>
-					<input type="text" id="facilityInchargename" name="facilityInchargename" class="cloned" />
+					<input type="text" id="facilityInchargename" name="contactfacilityInchargename" class="cloned" />
 					</td><td>
-					<input type="text" id="facilityInchargemobile" name="facilityInchargemobile" class="phone" />
+					<input type="text" id="facilityInchargemobile" name="contactfacilityInchargemobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityInchargeemail" name="facilityInchargeemail" class="cloned mail" />
+					<input type="text" id="facilityInchargeemail" name="contactfacilityInchargeemail" class="cloned mail" />
 					</td>
 				</tr>
 				<tr>
 					<td  colspan="2">MCH Incharge </td><td>
-					<input type="text" id="facilityMchname" name="facilityMchname" class="cloned" />
+					<input type="text" id="facilityMchname" name="contactfacilityMchname" class="cloned" />
 					</td><td>
-					<input type="text" id="facilityMchmobile" name="facilityMchmobile" class="phone" />
+					<input type="text" id="facilityMchmobile" name="contactfacilityMchmobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityMchemail" name="facilityMchemail" class="cloned mail" />
+					<input type="text" id="facilityMchemail" name="contactfacilityMchemail" class="cloned mail" />
 					</td>
 				</tr>
 				<tr>
 					<td  colspan="2">Maternity Incharge </td><td>
-					<input type="text" id="facilityMaternityname" name="facilityMaternityname" class="cloned" />
+					<input type="text" id="facilityMaternityname" name="contactfacilityMaternityname" class="cloned" />
 					</td>
 					<td>
-					<input type="text" id="facilityMaternitymobile" name="facilityMaternitymobile" class="phone" />
+					<input type="text" id="facilityMaternitymobile" name="contactfacilityMaternitymobile" class="phone" />
 					</td>
 					<td>
-					<input type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
+					<input type="text" id="facilityMaternityemail" name="contactfacilityMaternityemail" class="cloned mail" />
 					</td>
 				</tr>
 			</tbody>
@@ -221,6 +221,7 @@ class Form_Handler extends MY_Controller
 					<input type="text" name="facRsnNoDeliveries[]" id="rsnDeliveriesOther" value="" />
 					</td>
 
+					<input type = "hidden" name = "questionCode_10000" value = "QMNH200" />
 				</tr>
 			</table>	
 		<table>
@@ -2181,9 +2182,9 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td colspan="1">Year, Month when trained in IMCI <input type="text"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-				<p><input type="radio">MOH/KPA/CHAI</p>
-				<p><input type="radio">MOH only</p>
-				<p><input type="radio">Other</p>
+				<p><input type="radio" name = "coordinator">MOH/KPA/CHAI</p>
+				<p><input type="radio" name = "coordinator">MOH only</p>
+				<p><input type="radio" name = "coordinator">Other</p>
 				<p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
 				</td>
 				</tr>
@@ -2221,50 +2222,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
-				<td>
-				1.	Is the HCW still working in the original facility they were when they got trained?
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">
-				If No to question 1 indicate whether the HCW:
-				</td>
-				</tr>
-				<tr>
-				<td>
-				Transferred to another facility in the same county
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">If Yes, indicate name of the facility <input type="text"> </td>
-				</tr>
-				<tr>
-				<td>
-				Transferred to another facility in another county
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				<td>
-				<input type="radio">
-				</td>
-				</tr>
-				<tr>
-				<td colspan="3">If  Yes, indicate the name of the county <input type="text"> and facility <input type="text"> </td>
-				</tr>
+				'.$this->questions['wp'].'
 				</tbody>
 				</table>
 				</div>
