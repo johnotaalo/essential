@@ -28,7 +28,7 @@
 <script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/offline/js/ui.js');?>"></script>
 
-<script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script>
+<!--script src="<?php echo base_url('assets/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js');?>"></script-->
 
 <script>
   $(function(){
@@ -61,12 +61,20 @@ Offline.options={
             $online.fadeOut(function () {
                 $offline.fadeIn();
             });
+            $('.ui.dropdown').dropdown('destroy');
+            $('.ui.dropdown').addClass('error');
+            $('.ui.button').addClass('disabled');
+            // $('a').attr('onclick','return false;');
         });
 
         Offline.on('confirmed-up', function () {
             $offline.fadeOut(function () {
                 $online.fadeIn();
             });
+            $('.ui.dropdown').dropdown('dropdown');
+            $('.ui.dropdown').removeClass('error');
+            $('.ui.button').removeClass('disabled');
+            // $('a').removeAttr('onclick');
         });
 
     });
