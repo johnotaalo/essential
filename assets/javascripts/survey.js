@@ -19,7 +19,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 	//start of close_opened_form click event
 	$("#close_opened_form").click(function() {
 
-		$(".form-container .actual-form").load(base_url + 'c_front/formviewer', function() {
+		$(".form-container .actual-form").load(base_url + 'reporting/formviewer', function() {
 
 			//delegate events
 			loadGlobalScript();
