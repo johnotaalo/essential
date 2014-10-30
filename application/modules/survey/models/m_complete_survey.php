@@ -12,7 +12,9 @@ class M_complete_survey extends MY_Model
         $this->survey = $this->session->userdata('survey');
         $this->commodityList = $this->countyList = $this->facilityTypeList = $this->specificDistrictList = $this->districtList = $this->facilityLevelList = $this->facilityOwnerList = $this->signalFunctionList = $this->supplierList = $this->trainingGuidelinesList = $this->suppliesList = '';
     }
-
+public function test(){
+  echo 'found';
+}
     public function verifyRespondedByDistrict() {
         if ($this->input->post()) {
 

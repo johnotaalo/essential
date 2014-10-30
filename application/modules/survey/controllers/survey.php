@@ -2,23 +2,23 @@
 class Survey extends MY_Controller
 {
     var $rows, $combined_form, $message, $data;
-    
+
     /**
      * [__construct Constructor Class]
      */
     public function __construct() {
         parent::__construct();
-        
+
         //print var_dump($this->tValue); exit;
         $this->rows = '';
         $this->combined_form;
         $this->load->model('data_model');
         $this->load->module('template');
     }
-    
+
     public function index() {
     }
-    
+
     /**
      * [active_survey description]
      * @return [type] [description]
@@ -26,14 +26,14 @@ class Survey extends MY_Controller
     public function active_survey() {
         $this->data['content'] = 'mnh/pages/v_login';
         if (!$this->session->userdata('dCode')) {
-            
+
             // $data['facility']=$this ->selectFacility;
             $this->data['title'] = 'MoH Data Management Tool::Authentication';
             $this->data['form'] = '<p>User Login<p>';
             $this->data['login_response'] = '';
             $this->data['login_message'] = 'Login to Take Survey';
             $this->data['survey'] = strtoupper($this->survey);
-            
+
             // print_r($this->data);
             //$this -> load -> view('index', $this->data); //login view
             $this->template->mnch($this->data);
@@ -41,7 +41,7 @@ class Survey extends MY_Controller
             $this->inventory();
         }
     }
-    
+
     /**
      * [loadSection description]
      * @param  [type] $survey [description]
@@ -50,7 +50,7 @@ class Survey extends MY_Controller
     public function loadSection($survey) {
         switch ($survey) {
             case 'mnh':
-                
+
                 //$sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
                 $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Community Strategy');
                 $sections = 8;
@@ -75,7 +75,7 @@ class Survey extends MY_Controller
         }
         echo json_encode($sectionList);
     }
-    
+
     /**
      * [inventory description]
      * @return [type] [description]
@@ -102,7 +102,7 @@ class Survey extends MY_Controller
             redirect(base_url() . 'home', 'refresh');
         }
     }
-    
+
     /**
      * [loadSurvey description]
      * @param  [type] $survey_form [description]
@@ -110,7 +110,7 @@ class Survey extends MY_Controller
      * @return [type]              [description]
      */
     public function load($survey_form, $survey_type) {
-        
+
         /**
          * Form stores the form selected
          * @var string
@@ -120,10 +120,10 @@ class Survey extends MY_Controller
         $this->session->set_userdata('survey_form', $survey_form);
         $this->survey_form = $survey_form;
         $this->load->module('survey/generate');
-        
+
         $this->session->unset_userdata('survey');
         $this->session->set_userdata('survey', $survey_type);
-        
+
         $this->load->module('survey/form_handler');
         switch ($survey_type) {
             case 'mnh':
@@ -148,16 +148,16 @@ class Survey extends MY_Controller
                 break;
 
             default:
-                
+
                 break;
         }
     }
     public function getFacilityDetails() {
-        
+
         /*retrieve facility info if any*/
         $this->load->model('m_mnh_survey');
         if (($this->m_mnh_survey->retrieveFacilityInfo($this->input->get_post('facilityMFL', TRUE))) == true) {
-            
+
             //retrieve existing data..else just load a blank form
             //set facility code into the session
             $new_data = array('facilityMFL' => $this->input->get_post('facilityMFL', TRUE));
@@ -165,48 +165,48 @@ class Survey extends MY_Controller
             print $this->m_mnh_survey->formRecords;
         }
     }
-    
+
     public function suggestfac_name() {
         $this->load->model('m_autocomplete');
         $fac_name = strtolower($this->input->get_post('term', TRUE));
-        
+
         //term is obtained from an ajax call
-        
+
         if (!strlen($fac_name) < 2)
-        
+
         //echo $fac_name;
-        
+
         try {
             $this->rows = $this->m_autocomplete->getAutocomplete(array('keyword' => $fac_name));
-            
+
             //die (var_dump($this->rows));
             $json_data = array();
-            
+
             //foreach($this->rows as $key=>$value)
             //array_push($json_data,$value['fac_name']);
             foreach ($this->rows as $value) {
                 array_push($json_data, $value->fac_name);
-                
+
                 //print $key.' '.$value.'<br />';
                 //$json_data=array('code'=>$value->fac_mfl,'name'=>$value->fac_name);
-                
-                
+
+
             }
             print json_encode($json_data);
-            
+
             //die;
-            
-            
+
+
         }
         catch(exception $ex) {
-            
+
             //ignore
             //$ex->getMessage();
-            
-            
+
+
         }
     }
-    
+
     /**
      * [startSurvey description]
      * @param  [type] $survey_type     [description]
@@ -216,38 +216,38 @@ class Survey extends MY_Controller
      * @return [type]                  [description]
      */
     public function startSurvey($survey_type, $survey_category, $fac_mfl, $survey_year) {
-        
+
         $result = $this->db->get_where('survey_types', array('st_name' => $survey_type));
         $result = $result->result_array();
         $survey_type = $result[0]['st_id'];
-        
+
         $result = $this->db->get_where('survey_categories', array('sc_name' => $survey_category));
         $result = $result->result_array();
         $survey_category = $result[0]['sc_id'];
-        
+
         $data = array('ss_year' => $survey_year, 'st_id' => $survey_type, 'sc_id' => $survey_category, 'fac_id' => $fac_mfl);
-        
+
         //echo '<pre>';print_r($data);echo '</pre>';die;
         $count = $this->checkifExists($data, 'survey_status');
         if ($count == 0) {
             $this->db->insert('survey_status', $data);
         } else {
         }
-        
+
         $result = $this->db->get_where('survey_status', array('ss_year' => $survey_year, 'st_id' => $survey_type, 'sc_id' => $survey_category, 'fac_id' => $fac_mfl));
         $result = $result->result_array();
         $ss_id = $result[0]['ss_id'];
         $data = array('survey_status' => $ss_id, 'facilityMFL' => $fac_mfl);
         $this->session->set_userdata($data);
-        
+
         $result = $this->db->get_where('facilities', array('fac_mfl' => $fac_mfl));
         $result = $result->result_array();
-        
+
         // print_r($result);die;
-        
+
         echo json_encode($result);
     }
-    
+
     /**
      * [checkifExists description]
      * @param  [type] $data  [description]
@@ -260,7 +260,7 @@ class Survey extends MY_Controller
         $count = $this->db->count_all_results();
         return (int)$count;
     }
-    
+
     /**
      * [getFacilitySection description]
      * @param  [type] $survey          [description]
@@ -280,59 +280,59 @@ class Survey extends MY_Controller
         }
         echo $current;
     }
-    
+
     /**
      * [suggest description]
      * @return [type] [description]
      */
     public function suggest() {
         $this->load->model('m_autocomplete');
-        
+
         //$fac_name=$this->input->post('username',TRUE);
-        
+
         try {
             $this->rows = $this->m_autocomplete->getAllFacilityNames();
-            
+
             //die(var_dump($this->rows));
             $json_data = array();
-            
+
             foreach ($this->rows as $key => $value)
-            
+
             //array_push($json_names,$value['fac_name']);
             $json_data = array('code' => $value['fac_mfl'], 'name' => $value['fac_name']);
             print json_encode($json_data);
         }
         catch(exception $ex) {
-            
+
             //ignore
             $ex->getMessage();
         }
     }
-    
+
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
      */
     public function createFacilitiesListSection() {
-        
+
         /*retrieve facility list*/
         $result = $this->data_model->getFacilitiesByDistrict($this->session->userdata('dName'));
-        
+
         // var_dump($result);
         $counter = 0;
         $link = '';
         $surveyCompleteFlag = '';
-        
+
         /**
          * [$districtFacilityListSection description]
          * @var string
          */
         $districtFacilityListSection = '';
         if (count($result) > 0) {
-            
+
             //set session data
             $this->session->set_userdata(array('fCount' => count($result)));
-            
+
             //print 'true'; die;
             foreach ($result as $value) {
                 $counter++;
@@ -347,10 +347,10 @@ class Survey extends MY_Controller
                     $total = 5;
                 }
                 $dataFound = $this->data_model->getSurveyInfo($survey, $survey_category, 'facility', $fac_mfl);
-                
+
                 if ($dataFound) {
                     $current = trim($dataFound[0]['max_section'], 'section-');
-                    
+
                     //                 echo $current;
                     $last_activity = $dataFound[0]['last_activity'];
                     $label = $dataFound[0]['status'];
@@ -359,7 +359,7 @@ class Survey extends MY_Controller
                     $last_activity = NULL;
                     $label = NULL;
                 }
-                
+
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
@@ -388,16 +388,16 @@ class Survey extends MY_Controller
                         $label_class = 'red';
                         break;
                 }
-                
+
                 $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
-                
+
                 // echo $last_activity;die;
                 // Get Survey Information
-                
+
                 $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
-                
+
                 $link.= '<div class="ui label ' . $label_class . ' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
-                
+
                 $districtFacilityListSection.= '<tr>
 
         <td >' . $counter . '</td>
@@ -406,22 +406,22 @@ class Survey extends MY_Controller
         ' . $link . '
         </tr>';
             }
-            
+
             //print 'fs: '.$this->districtFacilityListSection;die;
-            
-            
+
+
         } else {
-            
+
             //print 'false'; die;
             $districtFacilityListSection.= '<tr><td colspan="22">No Facilities Found</td></tr>';
         }
-        
+
         return $districtFacilityListSection;
     }
-    
+
     public function createFacilityTable() {
         $districtFacilityListSection = $this->createFacilitiesListSection();
-        
+
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
@@ -439,7 +439,7 @@ class Survey extends MY_Controller
 </thead>
         </tr>' . $districtFacilityListSection . '
         </table>';
-        
+
         // echo $facilityList;
         $data['form'] = $facilityList;
         $data['form_id'] = '';
@@ -450,7 +450,7 @@ class Survey extends MY_Controller
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, '', 'national');
         echo json_encode($results);
     }
-    
+
     /**
      * [getCountyData description]
      * @param  [type] $survey_type     [description]
@@ -463,7 +463,7 @@ class Survey extends MY_Controller
         $results = $this->data_model->getReportingRatio($survey_type, $survey_category, $county, 'county');
         echo json_encode($results);
     }
-    
+
     /**
      * [getDistrictData description]
      * @param  [type] $survey_type     [description]
@@ -480,6 +480,6 @@ class Survey extends MY_Controller
     public function complete_survey()
     {
         $this->load->model('m_complete_survey');
-        $this->m_complete_survey->store_data();
+        $this->m_complete_survey->test();
     }
 }

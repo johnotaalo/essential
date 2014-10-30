@@ -11,8 +11,8 @@ class MY_Controller extends MX_Controller
 
     public function __construct() {
         parent::__construct();
-        
-       
+
+
 // $this->survey_form='';
         // Load IMCI defaults if one is accessing IMCI
         if($this->uri->segment(1) === 'imci')
@@ -21,7 +21,7 @@ class MY_Controller extends MX_Controller
         }
 
     }
-    
+
     public function load_imci_defaults()
     {
         $this->meta_description = 'The Integrated Management of Childhood Infections';
@@ -75,7 +75,7 @@ class MY_Controller extends MX_Controller
         }
         return $result;
     }
-    
+
     /**
      * [loadExcel description]
      * @param  [type] $data     [description]
@@ -89,28 +89,28 @@ class MY_Controller extends MX_Controller
         $objPHPExcel->getProperties()->setTitle("Office 2007 XLSX Test Document");
         $objPHPExcel->getProperties()->setSubject("Office 2007 XLSX Test Document");
         $objPHPExcel->getProperties()->setDescription(" ");
-        
+
         // Add some data
         //  echo date('H:i:s') . " Add some data\n";
         $objPHPExcel->setActiveSheetIndex(0);
-        
+
         $rowExec = 1;
-        
+
         //Looping through the cells
         $column = 0;
         //echo '<pre>';print_r($data);echo'</pre>';die;
         foreach ($data[0] as $k=>$cell) {
-            
+
             //echo $column . $rowExec; die;
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
             $objPHPExcel->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec)->getFont()->setBold(true)->setSize(14);
             $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(true);
-            
+
             $column++;
         }
         $rowExec = 2;
         foreach ($data as $key=>$rowset) {
-            
+
             //Looping through the cells per facility
             $column = 0;
             //var_dump($rowset);die;
@@ -120,32 +120,32 @@ class MY_Controller extends MX_Controller
             }
             $rowExec++;
         }
-        
+
         //die ;
-        
+
         // Rename sheet
         //  echo date('H:i:s') . " Rename sheet\n";
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
-        
+
         // Save Excel 2007 file
         //echo date('H:i:s') . " Write to Excel2007 format\n";
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-        
+
         // We'll be outputting an excel file
         header('Content-type: application/vnd.ms-excel');
-        
+
         // It will be called file.xls
         header('Content-Disposition: attachment; filename=' . $filename . '.xlsx');
-        
+
         // Write file to the browser
         $objWriter->save('php://output');
-        
+
         // Echo done
         //echo date('H:i:s') . " Done writing file.\r\n";
-        
-        
+
+
     }
-    
+
     /**
      * [loadPDF description]
      * @param  [type] $pdf [description]
@@ -153,7 +153,7 @@ class MY_Controller extends MX_Controller
      */
     public function loadPDF($data, $filename) {
         $data = $this->loadTable($data);
-        
+
         //echo $data;die;
         $stylesheet = ('
             <style>
@@ -174,7 +174,7 @@ border-color: #FFFFEE;
 font: bold 100% sans-serif;}
         td:even{
             background:#eee;
-            
+
         }
         th {
 text-align: left;
@@ -205,7 +205,7 @@ background: #ddd;
         $report_name = $filename . ".pdf";
         $this->mpdf->Output($report_name, 'I');
     }
-    
+
     /**
      * [loadTable description]
      * @param  [type] $data     [description]
@@ -214,12 +214,12 @@ background: #ddd;
      */
     public function loadTable($data, $editable = '') {
         $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
-        
+
         $this->table->set_template($tmpl);
-        
+
         if ($custom_titles == '') {
             $pk = 0;
-            
+
             //set table headers
             foreach ($data[0] as $title => $column) {
                 if ($pk != 0) {
@@ -251,7 +251,7 @@ background: #ddd;
                 }
             }
             $counter++;
-            
+
             //echo '<pre>';print_r($row);echo '</pre>';die;
             $this->table->add_row($row);
         }
@@ -260,5 +260,3 @@ background: #ddd;
     }
 
 }
-
-
