@@ -3474,7 +3474,7 @@ ORDER BY question_code";
                     
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     
-                    $question = $this->getQuestionName($value_['question_code']);
+                    $question = $this->sName($value_['question_code']);
                     $response = $value_['total_response'];
                     
                     //1. collect the categories
@@ -3936,6 +3936,10 @@ ORDER BY question_code";
                     $question = substr($question, 16);
                 break;
 
+                // case 'hfm':
+                //     $question = substr($question, 16);
+                // break;
+
                 case'job':
                     $question = substr($question, 22);
                     $question = substr($question, 0,-9);
@@ -3948,7 +3952,8 @@ ORDER BY question_code";
 
                 case'guide':
                     $question = substr($question, 22);
-                    $question = substr($question, 0,-9);
+                    $question = trim($question, 'an updated');
+                    $question = substr($question, 0,-1);
                 break;
 
                 case'ceoc':
@@ -3957,9 +3962,14 @@ ORDER BY question_code";
                 $question = substr($question, 0,-1);
                 break;
 
+                case'kang':
+                $question = substr($question, 0,-1);
+                break;
+
                 case'commi':
                     $question = substr($question, 24);
                     $question = trim($question, 'in the maternity unit');
+                    $question = substr($question, 0,-1);
                 break;
 
                 case'hiv':
