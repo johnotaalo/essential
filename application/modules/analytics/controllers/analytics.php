@@ -71,7 +71,7 @@ class Analytics extends MY_Controller
             $data[] = (int)sizeof($value);
             $category[] = $day;
         }
-        $resultArray[] = array('name' => 'Daily Entries', 'data' => $data);
+        $resultArray[] = array('name' => 'Monthly Entries', 'data' => $data);
         $this->populateGraph($resultArray, '', $category, $criteria, '', '', 'line', '', '', '', '', array('#ffffff'));
     }
     
@@ -729,7 +729,6 @@ class Analytics extends MY_Controller
          //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', '', '', '', $colors);
     }
-    
     //get treatment symptoms
     public function getTreatmentSymptoms($criteria, $value, $survey, $survey_category) {
         $results = $this->analytics_model->getTreatmentSymptoms($criteria, $value, $survey, $survey_category);

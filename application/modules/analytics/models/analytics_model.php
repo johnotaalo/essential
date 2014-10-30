@@ -369,7 +369,7 @@ ORDER BY lq.lq_response ASC";
             $result = $category = array();
             
             //echo($this->db->last_query());die;
-            
+            //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     $data[$value['guide_name']][$value['cadre']]['total_facility'] = $value['total_in_facility'];
@@ -3901,9 +3901,7 @@ ORDER BY question_code";
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
-                        foreach ($question as $value) {
-                            // echo '<pre>';print_r($value);echo '</pre>';di
-                        }
+                       	
                         // $question = ltrim($question, 'Does this facility have');
                          //$question = rtrim($question, '?');
                       //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
