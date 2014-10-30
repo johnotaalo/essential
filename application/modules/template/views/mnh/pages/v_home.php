@@ -44,7 +44,6 @@
                                 </ul>
                             </div>
 <div class="ui message info" id="current-map">
-  <i class="close icon"></i>
     <i class="icon basic attention circle"></i>Please Choose an Assessment Above
 
   </div>
