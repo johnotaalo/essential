@@ -3942,6 +3942,7 @@ ORDER BY question_code";
 
                 case'job':
                     $question = substr($question, 22);
+                    $question = trim($question, 'an updated');
                     $question = substr($question, 0,-9);
                 break;
 
@@ -3952,7 +3953,9 @@ ORDER BY question_code";
 
                 case'guide':
                     $question = substr($question, 22);
+                    $question = trim($question, 'National');
                     $question = trim($question, 'an updated');
+                    $question = trim($question, 'Health');
                     $question = substr($question, 0,-1);
                 break;
 
