@@ -7,7 +7,7 @@ ini_set('memory_limit', '-1');
 
 class MY_Controller extends MX_Controller
 {
-	public $questions,$indicators,$commodities,$survey,$survey_form;
+	public $questions,$indicators,$commodities,$survey,$survey_form, $facilitydetails;
 
     public function __construct() {
         parent::__construct();

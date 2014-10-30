@@ -1896,5 +1896,38 @@ class Generate extends MY_Controller
                 }
                 return $selectAccessChallenges;
             }
+
+            public function createFacilityDetailsSection()
+            {
+                $facilities = $this->data_model->getFacilities();
+                $levels = $this->data_model->getFacilityLevels();
+                $counties = $this->data_model->
+                $facMFL = $this->session->userdata('facilityMFL');
+
+                foreach ($facilities as $key => $value) {
+                    if($value['facMfl'] == $facMFL)
+                    {
+                        $this->facilitysection .= '<tr>';
+                        $this->facilitysection .= "<td><input type = 'text' value = '".$value['facName']."'/></td>";
+                        $this->facilitysection .= "<td><select name = 'levels'><option value = ''>Select a facility level</option>";
+                        foreach ($levels as $level) {
+                            if($value['facLevel'] == $level['flName'])
+                            {
+                                $this->facilitysection .= "<option value = '".$level['flName']."' selected>".$level['flName']."</option>";
+                            }
+                            else
+                            {
+                                $this->facilitysection .= "<option value = '".$level['flName']."'>".$level['flName']."</option>";
+                            }
+                        }
+                        $this->facilitysection .= "</select></td>";
+                        echo $this->facilitysection;die;
+                        $this->facilitysection .= "<td><input type = 'text' value = '".$value['facName']."'/></td>";
+                        $this->facilitysection .= '</tr>';
+                        $this->facilitysection .= '<tr>';
+                        $this->facilitysection .= '</tr>';
+                    }
+                }die;
+            }
         }
         
