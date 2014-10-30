@@ -108,12 +108,19 @@ class Analytics_Model extends MY_Model
             $this->dataSet = $this->dataSet->result_array();
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
-                    
+                    //$question = $value['question_name'];
+                            $question = $value['question_name'];
+                            $question = substr($question, 16);
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     if (array_key_exists('strategy', $value)) {
-                        $data[$value['question_name']][$value['strategy']] = (int)$value['strategy_number'];
+                        $data[$question][$value['strategy']] = (int)$value['strategy_number'];
+                        
                     }
+
+                    
+                
                 }
+                //echo "<pre>";print_r($question);echo "</pre>";die;
             }
         }
         catch(Exception $ex) {
@@ -123,8 +130,9 @@ class Analytics_Model extends MY_Model
             
             
         }
+
         
-        //die(var_dump($data));die;
+        //echo "<pre>";print_r($data);echo "</pre>";die;
         return $data;
     }
     
@@ -369,7 +377,7 @@ ORDER BY lq.lq_response ASC";
             $result = $category = array();
             
             //echo($this->db->last_query());die;
-            //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+            
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     $data[$value['guide_name']][$value['cadre']]['total_facility'] = $value['total_in_facility'];
@@ -2469,30 +2477,33 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
         
-        function getAllReportingRatio($survey, $survey_category,$option) {
+        function getAllReportingRatio($survey, $survey_category) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
             
             //var_dump($reportingCounties);die;
 
-            /*for ($x = 0; $x < sizeof($reportingCounties); $x++) {
+            for ($x = 0; $x < sizeof($reportingCounties); $x++) {
                 $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            }*/
-
-            switch ($option) {
-
-                 case 'reportingleft':
-                    for ($x = 0; $x < 24; $x++) {
-                $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-             }
-                    break;
-
-                     case 'reportingright':
-                    for ($x = 24; $x < sizeof($reportingCounties); $x++) {
-                 $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             }
-                    break;
+
+            // switch ($option) {
+
+            //     case 'reportingleft':
+            //         for ($x = 0; $x < 24; $x++) {
+            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            // }
+            //         break;
+
+            //         case 'reportingright':
+            //         for ($x = 24; $x < sizeof($reportingCounties); $x++) {
+            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            // }
+            //         break;
                 
-           }
+            //     default:
+            //         echo 'not working';
+            //         break;
+            // }
             
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
@@ -3463,7 +3474,7 @@ ORDER BY question_code";
                     
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     
-                    $question = $this->getQuestionName($value_['question_code']);
+                    $question = $this->sName($value_['question_code']);
                     $response = $value_['total_response'];
                     
                     //1. collect the categories
@@ -3712,13 +3723,22 @@ ORDER BY question_code";
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
                 
-                // echo "<pre>";print_r($this->dataSet);echo "</pre>";
+                  //echo "<pre>";print_r($this->dataSet);echo "</pre>";
                 
                 foreach ($this->dataSet as $value_) {
                     
                     //print_r($this->dataSet);die;
                     $question = $this->getSignalName($value_['sf_code']);
+                    $code = $value_['sf_code'];
                     
+                   
+                 if ($count < 3):
+                        $question = substr($question, 18);
+                 endif;
+                 $count++;
+                   
+                
+                    //echo "<pre>";print_r($question);echo "</pre>";
                     // var_dump($value_['sf_code']);die;
                     
                     $yes = $value_['yes_values'];
@@ -3901,27 +3921,73 @@ ORDER BY question_code";
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
-                       	
-                        // $question = ltrim($question, 'Does this facility have');
-                         //$question = rtrim($question, '?');
-                      //  $question = substr("Does this facility have a fridge for storage of blood?", 24);
-                       //$question = substr($question, 24);
+                        foreach ($question as $value) {
+                             //echo '<pre>';print_r($question);echo '</pre>';die;
+                        }
+                        
                     }
                     
-                    // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
-                    // //     $question = 'Baby Friendly Hospital Initiative';
-                    // // } else if ($question == 'National Guidelines for Quality Obstetric and Prenatal Care') {
-                    // //     $question = 'Quality Obstetric and Prenatal Care';
-                    // // } else {
-                    
-                    // //     //$question = trim($question, 'National Guidelines for ');
-                    
-                    // // }
-                    // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
-                    // // }
-                    //echo $question;
-                    //echo '<pre>';print_r($value_);echo '</pre>';die;
-                    
+       switch($for){
+                case 'cms':
+                    $question = substr($question, 16);
+                break;
+
+                case 'bed':
+                    $question = substr($question, 16);
+                break;
+
+                // case 'hfm':
+                //     $question = substr($question, 16);
+                // break;
+
+                case'job':
+                    $question = substr($question, 22);
+                    $question = trim($question, 'an updated');
+                    $question = substr($question, 0,-9);
+                break;
+
+                case'gp':
+                    $question = substr($question, 23);
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'guide':
+                    $question = substr($question, 22);
+                    $question = trim($question, 'National');
+                    $question = trim($question, 'an updated');
+                    $question = trim($question, 'Health');
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'ceoc':
+                    $question = substr($question, 18);
+                $question = trim($question, 'have a');
+                $question = substr($question, 0,-1);
+                break;
+
+                case'kang':
+                $question = substr($question, 0,-1);
+                break;
+
+                case'commi':
+                    $question = substr($question, 24);
+                    $question = trim($question, 'in the maternity unit');
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'hiv':
+                   // $question = substr($question, 24);
+                $question = trim($question, 'Does this facility offer');
+                $question = substr($question, 0,-1);
+                break;
+
+                default:
+                     //echo 'Not Trimming';
+                break;
+
+                }
+
+
                     switch ($statistics) {
                         case 'response':
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
@@ -3974,8 +4040,13 @@ ORDER BY question_code";
                             $data[] = $value_;
                             break;
                     }
-                }
+
+                  
+
+              }
             }
+
+            
             catch(exception $ex) {
                 
                 //ignore
@@ -3983,7 +4054,7 @@ ORDER BY question_code";
                 
                 
             }
-            
+            //echo '<pre>';print_r($data);echo '</pre>';die;
             // var_dump($data);die;
             return $data;
         }
