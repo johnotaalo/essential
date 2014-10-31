@@ -110,7 +110,8 @@ class Analytics_Model extends MY_Model
                 foreach ($this->dataSet as $value) {
                     //$question = $value['question_name'];
                            $question = $value['question_name'];
-                           //$question = substr($question, 16); 
+                           $question = substr($question, 12); 
+                           $question = trim($question,' of');
                             
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
