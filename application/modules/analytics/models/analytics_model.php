@@ -109,15 +109,19 @@ class Analytics_Model extends MY_Model
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     //$question = $value['question_name'];
-                            $question = $value['question_name'];
-                            $question = substr($question, 16);
+                           $question = $value['question_name'];
+                           //$question = substr($question, 16); 
+                            
+
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     if (array_key_exists('strategy', $value)) {
-                        $data[$question][$value['strategy']] = (int)$value['strategy_number'];
-                        
-                    }
 
-                    
+                        $data[$question][$value['strategy']] = (int)$value['strategy_number'];
+                          
+                    }
+                
+                        
+                         
                 
                 }
                 //echo "<pre>";print_r($question);echo "</pre>";die;

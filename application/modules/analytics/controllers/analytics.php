@@ -1271,7 +1271,12 @@ class Analytics extends MY_Controller
                 //echo '<pre>';print_r($results);echo '</pre>';die;
                 $key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-                $category[] = 'Tier'.$key;
+                if($key==''){
+                   $category[] = 'Not specified Tier';
+                }else{
+                   $category[] = 'Tier '.$key;
+                }
+                
                 foreach ($result as $name => $value) {
                     if ($name != 'Sometimes Available') {
                         
@@ -1709,7 +1714,12 @@ class Analytics extends MY_Controller
             foreach ($results as $key => $result) {
             	$key = str_replace('_', ' ', $key);
                 $key = ucwords($key);
-                $category[] = 'Tier'.$key;
+                if($key==''){
+                   $category[] = 'Not specified Tier';
+                }else{
+                   $category[] = 'Tier '.$key; 
+                }
+                
                 foreach ($result as $name => $value) {
                 	if($name == ''){
                 		$name = 'No Data';
@@ -1829,7 +1839,12 @@ class Analytics extends MY_Controller
             
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
-            $category[] = $key;
+            if($key==''){
+                $category[] = 'Not specified Tier';
+            }else{
+                $category[] = 'Tier '.$key;
+            }
+            
             foreach ($result as $name => $value) {
                 if ($name != 'Sometimes Available') {
                     $data[$name][] = (int)$value;
@@ -1846,7 +1861,7 @@ class Analytics extends MY_Controller
                 $colors = '#dddddd';
 				$resultArray[] = array('name' =>$key, 'data' => $val, 'color'=> $colors);
             }else{
-             $resultArray[] = array('name' => 'Tier'.''.$key, 'data' => $val);	
+             $resultArray[] = array('name' => $key, 'data' => $val);	
             }
            }
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
