@@ -25,14 +25,23 @@
                     <input id="county" name="county" class="select2">
 
                 </div>
-                <div class="form-group">
+                <div style="margin:5px 0" class="ui fluid small input">
                     <input id="district" name="district" class="select2">
 
                 </div>
-
-                <div class="form-group">
+<div class="field" style="margin:5px 0">
+    <div class="ui fluid left labeled icon input">
+      <input id="usercode" name="usercode" type="password" placeholder="Please Enter the Correct Password"/>
+      <i class="icon key"></i>
+      <div class="ui corner label">
+        <i class="icon asterisk"></i>
+      </div>
+    </div>
+  </div>
+                <!-- <div style="margin:5px 0" class="ui fluid icon input">
                     <input id="usercode" name="usercode" type="password" placeholder="Please Enter the Correct Password"/>
-                </div>
+                    <i class="icon key"></i>
+                </div> -->
                 <label style="color: #e34848;display:none" for="buttonsPane" >Invalid District/Sub County and Password Combination!</label>
                 <div class="buttonsPane">
                     <button type="submit" class="" style="width:inherit">Begin Survey</button>

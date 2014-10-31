@@ -19,15 +19,15 @@ function startSurvey(base_url, survey, survey_category, district) {
 	//start of close_opened_form click event
 	$("#close_opened_form").click(function() {
 
-		$(".form-container .actual-form").load(base_url + 'c_front/formviewer', function() {
+		$(".form-container .actual-form").load(base_url + 'reporting/formviewer', function() {
 
 			//delegate events
 			loadGlobalScript();
 
 		});
 	});
-	/*end of close_opened_form click event
 
+	/*end of close_opened_form click event */
 
 
         /*----------------------------------------------------------------------------------------------------------------*/
@@ -58,6 +58,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 			});
 
 	});
+	
 
 	/*start of loadGlobalJS*/
 	var onload_queue = [];
@@ -211,6 +212,12 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 		}); /*end of which link was clicked*/
 	}); /*close form-container LOAD FN() */
+
+	// $('#m_county_choose').live(function(){
+	// 	console.log('changed');
+	// 	county = this.value;
+	// 	createFacilityDropDown(county);
+	// });
 	/*----------------------------------------------------------------------------------------------------------------*/
 	/**
 	 * [loadSection description]
@@ -246,8 +253,16 @@ function startSurvey(base_url, survey, survey_category, district) {
 	function changeSection(section,that) {
 		$('.ui.step').removeClass('active');
 		$(that).addClass('active');
-		$('.actual-form .step').hide();
-		$('#section-' + section).show();
+		if($('#section-' + section).length > 0)
+		{
+			$('.actual-form .step').hide();
+			$('#section-' + section).show();
+		}
+		else
+		{
+			$('.actual-form .step').hide();
+			$("#section-1").show();
+		}
 		disableFields(section);
 	}
 	//equipment availability change detectors
