@@ -2909,7 +2909,7 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<th colspan="2">Share your findings from observational sessions with provider.
 				Praise for the things done well and discuss on the identified weakness, show how it could be done.
-				<p></p>Ask provdier, for any problems regarding assessment, classification, treatment, counselling, follow up etc and solve the problem instantly.
+				<p></p>Ask provider, for any problems regarding assessment, classification, treatment, counselling, follow up etc and solve the problem instantly.
 				Note down the decisions which have been taken to improve the skills and continue the practices</th>
 				</tr>
 				</thead>

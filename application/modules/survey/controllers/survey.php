@@ -62,6 +62,7 @@ class Survey extends MY_Controller
                 break;
 
             case 'hcw':
+                $sectionNames = array('Facility,HCW and Work Station Information', 'Observation of Case Management: One Case per HCW', 'Does the HCW Check for the Following Conditions', 'Consultation and Exit Interviews', 'Certification');
                 $sections = 5;
                 break;
 
