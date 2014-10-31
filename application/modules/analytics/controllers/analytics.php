@@ -4590,19 +4590,16 @@ class Analytics extends MY_Controller
         //print_r($results );die;
         ksort($results);
         
-        // echo "<pre>";
-        // print_r($results);
-        // echo "</pre>";
-        // die;
+        //echo "<pre>";print_r($results);echo "</pre>";die;
         $count = 0;
         
         foreach ($results as $key => $result) {
-            if ($count < 3) {
-                $data['trained'][$key] = $result;
-            } elseif ($count < 4) {
-                $data['referral'][$key] = $result;
-            } else {
+            if ($count >= 1 && $count < 4) {
                 $data['community'][$key] = $result;
+            } elseif ($count >=4 && $count <= 6) {
+                $data['trained'][$key] = $result;
+            } else {
+                $data['referral'][$key] = $result;
             }
             $count++;
         }
