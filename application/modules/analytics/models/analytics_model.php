@@ -3942,6 +3942,10 @@ ORDER BY question_code";
                     $question = substr($question, 0,-9);
                 break;
 
+                case'imci':
+                    $question = substr($question, 0,-1);
+                break;
+
                 case'gp':
                 $count=0;
                     $question = substr($question, 23);
