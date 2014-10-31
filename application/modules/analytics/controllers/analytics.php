@@ -495,12 +495,12 @@ class Analytics extends MY_Controller
         $count = 0;
         
         foreach ($results as $key => $result) {
-           if ($count <= 3) {
-           	 $data['community'][$key] = $result;
-			} elseif ($count >= 4 && $count <= 7) {
-                $data['referral'][$key] = $result;
-            } else {
+           if ($count < 3) {
+           	 $data['community'][$key] = $result; 
+             }elseif ($count >= 6 && $count < 10) {
                 $data['trained'][$key] = $result;
+            } else{
+                $data['referral'][$key] = $result;
             }
 			$count++;
 		}
