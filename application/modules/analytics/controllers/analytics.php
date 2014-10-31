@@ -750,7 +750,7 @@ class Analytics extends MY_Controller
 
                   case 'dia':
 
-                      if($key=="Low Osmolarity Oral Rehydration Salts (ORS)"){
+                      if(($key=="Zinc Sulphate") || ($key=="Low Osmolarity Oral Rehydration Salts (ORS)")){
                           $category[] = $key;
                 foreach ($result as $name => $value) {
                     //echo '<pre>';print_r($result);die;
@@ -842,7 +842,7 @@ class Analytics extends MY_Controller
                 
                        case 'dia':
 
-                      if($key=="Low Osmolarity Oral Rehydration Salts (ORS)"){
+                       if(($key=="Zinc Sulphate") || ($key=="Low Osmolarity Oral Rehydration Salts (ORS)")){
                           $category[] = $key;
                 foreach ($result as $name => $value) {
                     if ($name != 'Sometimes Available' && $name != 'All Used') {
