@@ -3908,7 +3908,7 @@ ORDER BY question_code";
             /*using CI Database Active Record*/
             $value = urldecode($value);
             $data = array();
-            
+            $count = 0;
             $query = "CALL get_question_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistics . "');";
             try {
                 $queryData = $this->db->query($query, array($value));
@@ -3936,10 +3936,6 @@ ORDER BY question_code";
                     $question = substr($question, 16);
                 break;
 
-                // case 'hfm':
-                //     $question = substr($question, 16);
-                // break;
-
                 case'job':
                     $question = substr($question, 22);
                     $question = trim($question, 'an updated');
@@ -3947,14 +3943,15 @@ ORDER BY question_code";
                 break;
 
                 case'gp':
+                $count=0;
                     $question = substr($question, 23);
                     $question = substr($question, 0,-1);
                 break;
 
                 case'guide':
+                $count=0;
                     $question = substr($question, 22);
-                    $question = trim($question, 'National');
-                    $question = trim($question, 'an updated');
+                    $question = trim($question, 'an updated National');
                     $question = trim($question, 'Health');
                     $question = substr($question, 0,-1);
                 break;
