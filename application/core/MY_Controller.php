@@ -259,6 +259,59 @@ background: #ddd;
         return $generated_table;
     }
 
+   public function createFacilitiesInCounty($county)
+    {
+        $this->load->model('survey/data_model');
+        $facility_combo = '';
+        $facilities = $this->data_model->getFacInCounty($county);
+        $facility_combo .= '<select name = "facilitieslist"><option value = "">Select a Facility</option>';
+        foreach ($facilities as $facility) {
+            $facility_combo .= '<option value = "'.$facility['fac_name'].'">'.$facility['fac_name'].'</option>';
+        }
+        $facility_combo .= '</select>';
+        return $facility_combo;
+    }
+
+    public function createCounties()
+    {
+        $this->load->model('survey/data_model');
+        $county_combo = '';
+        $counties = $this->data_model->getCounties();
+        $county_combo .= '<select id = "m_county_choose" name = "counties_select"><option value = "">Select a County</option>';
+        foreach ($counties as $county) {
+            $county_combo .= '<option value = "'.$county['countyName'].'">'.$county['countyName'].'</option>';
+        }
+        $county_combo .= '</select>';
+        return $county_combo;
+    }
+
+    public function createCadre()
+    {
+         $this->load->model('survey/data_model');
+         $cadre_combo = '';
+         $cadres = $this->data_model->getCadre();
+         $cadre_combo .= '<select name = "cadre"><option value = "">Select a cadre</option>';
+         foreach ($cadres as $cadre) {
+            $cadre_combo .= '<option value = "'.$cadre['cadre_code'].'">'.$cadre['cadre'].'</option>';
+         }
+         $cadre_combo .= '</select>';
+
+         return $cadre_combo;
+    }
+
+    public function createServicePoint()
+    {
+        $this->load->model('survey/data_model');
+        $sp_combo = '';
+        $servicepoints = $this->data_model->getServicePoints();
+        $sp_combo .= '<select name = "servicepoint"><option value = "">Select a Service Point</option>';
+        foreach ($servicepoints as $servicepoint) {
+            $sp_combo .= '<option value = "'.$servicepoint['spoint_code'].'">'.$servicepoint['spoint'].'</option>';
+        }
+        $sp_combo .= '</select>';
+
+        return $sp_combo;
+    }
 }
 
 

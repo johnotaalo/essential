@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges;
     
     public function __construct() {
         parent::__construct();
@@ -77,6 +77,16 @@ class Form_Handler extends MY_Controller
          * @var [type]
          */
         $this->accessChallenges = $this->generate->createAccessChallenges();
+
+        /**
+         * [$this->facilitysection description]
+         * @var [type]
+         */
+        $this->facilitysection = $this->generate->createFacilityDetailsSection();
+
+        $this->servicepoint = $this->generate->createServicePoint();
+        $this->cadre = $this->generate->createCadre();
+
     }
     
     public function index() {
@@ -2028,43 +2038,13 @@ class Form_Handler extends MY_Controller
         <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
         	<div class="step" id="section-1">
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
-			<table border="2">
+			<table>
 				<thead>
 					<tr>
 						<th colspan="9">FACILITY INFORMATION</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>Facility Name </td>
-						<td>
-						<input type="text" >
-						</td>
-						<td>Facility Tier </td>
-						<td><!--input type="text" id="facilityLevel" name="facilityLevel" class="cloned"  /-->
-						<input type="text"  >
-						</td>
-						<td>County </td>
-						<td>
-							<input type="text"  >
-						</td>
-					</tr>
-					<tr>
-					<td>Facility Type </td>
-					<td>
-					<input type="text"  >
-					</td>
-					<td>Owned By </td>
-					<td>
-					<input type="text"  >
-					</td>
-
-					<td>District/Sub County </td>
-					<td>
-					<input type="text"  >
-					</td>
-					</tr>
-				</tbody>
+				<tbody>'.$this->facilitysection.'</tbody>
 			</table>
 				<table>
 				<thead>
@@ -2137,7 +2117,7 @@ class Form_Handler extends MY_Controller
 				<input type="text" >
 				</td>
 				<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-				<input type="text"  >
+				'.$this->cadre.'
 				</td>
 				<td>Email </td>
 				<td>
@@ -2190,7 +2170,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				<tr>
 				<td colspan="1"><label for="">Designation</label></td>
-				<td colspan="3"><input type="text"></td>
+				<td colspan="3">'.$this->cadre.'</td>
 				</tr>
 				' . $this->hcwProfileSection . '
 				</tbody>
@@ -2205,7 +2185,7 @@ class Form_Handler extends MY_Controller
 				<tbody>
 				<tr>
 				<td>Current Service Unit</td>
-				<td><input type="text"></td>
+				<td>'.$this->servicepoint.'</td>
 				</tr>
 
 				</tbody>
@@ -2226,6 +2206,8 @@ class Form_Handler extends MY_Controller
 				</tbody>
 				</table>
 				</div>
+
+				
 				<div class="step" id="section-2">
 				<p class="message success">SECTION 2: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW</p>
 				<p class="instruction">
@@ -2277,17 +2259,14 @@ class Form_Handler extends MY_Controller
 				</p>
 
 				<table class="centre">
-
+				<thead>
 				<tr>
 				<th colspan="5">ASSESSMENT FOR THE MAIN SYMPTOMS IN AN ONGOING SESSION FOR A CHILD</th>
 				</tr>
 				<tr>
-				<th>
+				<th colspan = "5">
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
-				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
-				</td>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2295,6 +2274,8 @@ class Form_Handler extends MY_Controller
 				* If NO proceed to the next symptom.
 				</p>
 				</td>
+				</tr>
+				</thead>
 				<tr>
 				<thead>
 				<tr>
@@ -2331,21 +2312,20 @@ class Form_Handler extends MY_Controller
 				</table>
 				<p style="margin-top:10px"></p>
 				<table class="centre">
-
+				<thead>
 				<tr>
-				<th>
+				<th colspan = "5">
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
-				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
-				</td>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
-				<p class="instruction" style="width:1000px">
+				<p class="instruction" style="width:1000px; margin-bottom: 0 !important; " >
 				* If NO proceed to the next symptom.
 				</p>
 				</td>
+				</tr>
+				</thead>
 				<tr>
 				<thead>
 				<tr>
@@ -2383,13 +2363,11 @@ class Form_Handler extends MY_Controller
 
 				</table>
 				<table class="centre">
+				<thead>
 				<tr>
-				<th>
+				<th colspan = "5">
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
-				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
-				</td>
 				</tr>
 
 				<tr>
@@ -2398,6 +2376,8 @@ class Form_Handler extends MY_Controller
 				* If NO proceed to the next symptom.
 				</p>
 				</td>
+				</tr>
+				<thead>
 				<tr>
 				<thead>
 				<tr>
@@ -2432,15 +2412,12 @@ class Form_Handler extends MY_Controller
 				</table>
 				<p style="margin-top:5px"></p>
 				<table class="centre">
+				<thead>
 				<tr>
-				<th>
+				<th colspan = "5">
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
-				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
-				</td>
 				</tr>
-				<thead>
 
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2448,7 +2425,8 @@ class Form_Handler extends MY_Controller
 				* If NO proceed to the next symptom.
 				</p>
 				</td>
-				<tr>
+				</tr>
+				</thead>
 				<tr>
 				<th width="500px">Symptom</th>
 				<th colspan="2">HCW Response</th>
@@ -2945,8 +2923,8 @@ class Form_Handler extends MY_Controller
 				<td><textarea name="hcwConclusionActionSupervisee_1" style="width:400px;height:100px"></textarea></td>
 				</tr>
 				<tr>
-				<td>Supervisor Signature<input name="hcwConclusionSignatureSupervisor_1" type="text" style="width:500px;padding:10px"></td>
-				<td>Supervisee Signature<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
+				<td>Supervisor Name<input name="hcwConclusionSignatureSupervisor_1" type="text" style="width:500px;padding:10px"></td>
+				<td>Supervisee Name<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
 				</tr>
 				<tr>
 				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px"></td>
