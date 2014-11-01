@@ -3160,6 +3160,8 @@ class Analytics extends MY_Controller
     public function getIMCICertificateB($criteria, $value, $survey, $survey_category) {
         $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certb', 'response');
     }
+
+
     
     /**
      * [getIndicatorStatistics description]
@@ -3169,10 +3171,10 @@ class Analytics extends MY_Controller
      * @param  [type] $for      [description]
      * @return [type]           [description]
      */
-    public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for) {
+    public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for,'response');
-        
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
+        if($statistics=='response'){
         // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
             
@@ -3195,9 +3197,50 @@ class Analytics extends MY_Controller
             
             
         }
-        $chart_type = (sizeof($category > 5)) ? 'bar' : 'bar';
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
+    }elseif ($statistics=='findings') {
+        foreach ($results as $key => $result) {
+            
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if ($key == 'N/A') {
+                $name = 'No Data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            if($key=='No-Data'){
+                   $color='#dddddd';
+               }
+                // }else if($key=='Available'){
+                //     $color='#8bbc21';
+                // }else if($key=='N/A'){
+                //     $color='#fb4347';
+                // }
+                
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+               
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$colors);
+    }
     }
     public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
@@ -3260,7 +3303,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getChildrenServices($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc','response');
     }
     
     /**
@@ -3271,7 +3314,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getDangerSigns($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','response');
     }
     
     /**
@@ -3282,7 +3325,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getActionsPerformed($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc','response');
     }
     
     /**
@@ -3293,7 +3336,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getCounselGiven($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cns');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cns','response');
     }
     
     /**
@@ -3304,7 +3347,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getTools($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'ror');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'ror','response');
     }
     
     /**
@@ -3315,7 +3358,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getAnaemia($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'anm');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'anm','response');
     }
     
     /**
@@ -3326,7 +3369,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getBreastfeeding($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'brf');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'brf','response');
     }
     
     /**
@@ -3337,7 +3380,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getCounselling($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cnl');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cnl','response');
     }
     
     /**
@@ -3348,7 +3391,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getCondition($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'con');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'con','response');
     }
     
     /**
@@ -3359,7 +3402,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomEar($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'ear');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'ear','response');
     }
     
     /**
@@ -3370,7 +3413,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomEye($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'eye');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'eye','response');
     }
     
     /**
@@ -3381,7 +3424,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomFever($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'fev');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'fev','response');
     }
     
     /**
@@ -3392,7 +3435,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomJaundice($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'jau');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'jau','response');
     }
     
     /**
@@ -3403,7 +3446,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomMalaria($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'mal');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'mal','response');
     }
     
     /**
@@ -3414,7 +3457,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getSymptomPneumonia($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'pne');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'pne','response');
     }
     
     /**
@@ -3425,7 +3468,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getMNHTools($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'tl');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'tl','response');
     }
     
     /**
@@ -3437,7 +3480,7 @@ class Analytics extends MY_Controller
      */
     public function getChHealthServices($criteria, $value, $survey, $survey_category) {
         
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'hs');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'hs','response');
     }
     
     /**
@@ -3448,7 +3491,18 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getCaseManagement($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cert');
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cert','response');
+    }
+
+    /**
+     * [getIndicatorFindings description]
+     * @param  [type] $criteria [description]
+     * @param  [type] $value    [description]
+     * @param  [type] $survey   [description]
+     * @return [type]           [description]
+     */
+    public function getIndicatorFindings($criteria, $value, $survey, $survey_category) {
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
     }
     
     /**

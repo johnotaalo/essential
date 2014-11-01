@@ -1173,6 +1173,13 @@ WHERE
                             case 'response_raw':
                                 $data[] = $value;
                                 break;
+
+                            case 'findings':
+                                if (array_key_exists('frequency', $value)) {
+                            $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                        }
+                                break;
+
                         }
                         
                         //echo '<pre>';print_r($value);echo '</pre>';die;
@@ -1180,14 +1187,14 @@ WHERE
                         
                     }
                     $this->dataSet = $data;
-                    
+                     //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     return $this->dataSet;
                 } else {
                     
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1196,7 +1203,7 @@ WHERE
                 
                 
             }
-            
+           
             return $this->dataSet;
         }
         public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for) {

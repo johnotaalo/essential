@@ -302,9 +302,21 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed by Findings</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="finding_signs">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Symptom Classification <span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
 						<p>Please Select main symptom/condition above to load the graph</p>	
