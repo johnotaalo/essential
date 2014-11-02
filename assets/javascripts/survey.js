@@ -143,6 +143,7 @@ function startSurvey(base_url, survey, survey_category, district) {
   $(".form-container .actual-form").load(base_url +
     'survey/createFacilityTable',
     function() {
+      $(document).trigger('datatable_loaded');
       // facilityMFL=12864;
       //loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
@@ -157,10 +158,7 @@ function startSurvey(base_url, survey, survey_category, district) {
         }
         //alert(moment().fromNow());
       });
-      $('.dataTable').dataTable({
-        "sPaginationType": "full_numbers"
-      });
-      $('.dataTables_info').addClass('breadcrumb');
+
       //so which link was clicked?
       $('.action').live('click', function() {
         link_id = '#' + $(this).attr('data-mfl');

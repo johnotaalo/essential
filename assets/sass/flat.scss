@@ -242,6 +242,8 @@ table{
     @extend .table;
     @extend .segment;
     @extend .celled;
+    margin-top:1em;
+    margin-bottom:1em;
     td{
         .progress{
             margin-bottom:0;
@@ -740,28 +742,20 @@ ul.sub{
     width:100%;
 }
 //Datatables Overrides
+#DataTables_Table_0_wrapper{
+  padding:1% !important;
+}
+
+
 .paging_full_numbers{
-    padding-left:60%;
+    @extend .ui;
+    @extend .pagination;
+    @extend .menu;
+    float:right;
 }
 a.paginate_button{
-    border:1px solid #ddd !important;
-    padding:5px 10px;
-    min-width:90px;
-    font-size:12px;
-    color:#333 !important;
-    cursor:pointer;
-}
-a.paginate_button:hover{
-    background:$my-grey;
-    text-decoration: none;
-    cursor: hand;
-}
-a.disabled{
-    background:#666;
-    color:white;
-}
-a.disabled:hover{
-    background:#666;
+    @extend .item;
+    font-size:12px !important;
 }
 .dataTables_length{
     width:200px;
@@ -790,6 +784,10 @@ a.disabled:hover{
             @extend .form-control;
         }
     }
+}
+.dataTables_info,.paging_full_numbers{
+  display:inline-block;
+  vertical-align:top;
 }
 .dataTables_info{
     font-size:14px;
