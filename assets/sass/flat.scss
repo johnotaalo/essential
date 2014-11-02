@@ -149,7 +149,7 @@ button{
 }
 form{
     input,select,textarea{
-        
+
     }
     button{
         @extend .btn;
@@ -314,17 +314,17 @@ table{
         .inner{
             @extend .row;
          background:$stat-color;
-        
+
         // border-top:1px solid #ddd;
         padding:6px 12px;
         i.main{
-            
+
              color:white;
             @extend .col-md-3;
 
             @extend .mega;
         }
-        
+
         .content{
             color:white;
             padding:0;
@@ -374,7 +374,7 @@ height:80%;
         @extend .flash;
     }
 
-    
+
 }
 }
 .semi-large-graph{
@@ -781,7 +781,7 @@ a.disabled:hover{
     vertical-align:top;
     float:right;
     label{
-        
+
         padding-right:5%;
         input{
             display: initial;
@@ -906,4 +906,3 @@ img#coat_of_arms,#description{
         font-weight:800;
     }
 }
-
