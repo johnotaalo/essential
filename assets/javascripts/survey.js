@@ -37,21 +37,20 @@ function startSurvey(base_url, survey, survey_category, district) {
   //try saving data
 
   $("#next_btn").click(function() {
+  	curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
     form_id = $('form').attr("id");
-    // console.log(form_id);
     the_url = '';
     the_url = base_url + "survey/complete_survey";
-    // console.log('found');
-    var formData = $('#' + form_id).serialize();
-    console.log(formData);
-    // var r = document.getElementById('result');
-    // console.log(formData);
+    var formData = $('#' + form_id).serializeArray();
     $.ajax({
       url: the_url,
       type: 'POST',
       data: formData,
       success: function(data) {
-        console.log(data);
+        //console.log(data);
+      	nextsection = curr_section += 1;
+    		thethat = $('.step[data-section="' + nextsection + '"]');
+    		changeSection(curr_section, thethat);
       },
       fail: function() {
         console.log("error");

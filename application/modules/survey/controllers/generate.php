@@ -354,7 +354,7 @@ class Generate extends MY_Controller
                             }
                             else if($value['questionCode'] == 'QUC33')
                             {
-                                $additionalinfo = '<tr><td>If Yes, indicate name of the facility</td><td colspan = "2">'.$facility_row.'</td>';
+                                $additionalinfo = '<tr><td>If Yes, indicate name of the facility</td><td colspan = "2">'.$facility_row.'</td></tr>';
                             }
                             else if($value['questionCode'] == 'QUC34')
                             {
@@ -363,11 +363,18 @@ class Generate extends MY_Controller
                             $data[$section][] = '<tr>
                             <td><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
                             <td>
-                            <input type = "hidden" name = "questionCode_'.$counter.' value = "'.$value['questionCode'].'" />
-                            <input type = "radio" name = "questionCount_'. $counter .'" value = "Yes"></td>
-                            <td><input type = "radio" name = "questionCount_'. $counter .'" value = "No">
+                            <input type = "radio" name = "questionResponse_'. $counter .'" value = "Yes"></td>
+                            <td><input type = "radio" name = "questionResponse_'. $counter .'" value = "No">
+                            <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
                             </td>
                             </tr>'.$additionalinfo;
+                        }
+                        else if($section == 'su'){
+                            $data[$section][] .= '<tr>
+                                <td><label>'.$value['questionName'].'</label></td>
+                                <td><select name = "questionResponse_'.$counter.'">'.$this->createServicePoint().'</select></td>
+                                <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
+                            </tr>';
                         }
                         else if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
@@ -1916,8 +1923,8 @@ class Generate extends MY_Controller
                     {
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control'/></td>";
-                        $facilitysection .= "<td><select name = 'levels'><option value = ''>Select a facility level</option>";
+                        $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+                        $facilitysection .= "<td><select name = 'levels'><option value = '' disabled>Select a facility level</option>";
                         foreach ($levels as $level) {
                             if($value['facLevel'] == $level['flName'])
                             {
@@ -1929,7 +1936,7 @@ class Generate extends MY_Controller
                             }
                         }
                         $facilitysection .= "</select></td>";
-                        $facilitysection .= '<td><select name = "county"><option value = "">Select a County</option>';
+                        $facilitysection .= '<td><select name = "county"><option value = "" disabled>Select a County</option>';
                         foreach ($counties as $county) {
                             if($fac_county == $county['countyName'])
                             {
@@ -1944,7 +1951,7 @@ class Generate extends MY_Controller
                         $facilitysection .= '</tr>';
                         $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= '<td><select name = "facility_type"><option value = "">Select a Facility Type</option>'; 
+                        $facilitysection .= '<td><select name = "facility_type" disabled = "disabled"><option value = "">Select a Facility Type</option>'; 
                         foreach ($facTypes as $facType) {
                             if($value['facType'] == $facType['ft_name'])
                             {
@@ -1956,7 +1963,7 @@ class Generate extends MY_Controller
                             }
                         }
                         $facilitysection .= "</select></td>";
-                        $facilitysection .= '<td><select name = "ownership" ><option value = "">Select an owner</option>';
+                        $facilitysection .= '<td><select name = "ownership" disabled><option value = "">Select an owner</option>';
                         foreach ($owners as $owner) {
                             if($value['facOwnership'] == $owner['foName'])
                             {
@@ -1968,7 +1975,7 @@ class Generate extends MY_Controller
                             }
                         }
                         $facilitysection .= '</select></td>';
-                        $facilitysection .= '<td><select name = "" ><option>Select a Sub County</option>';
+                        $facilitysection .= '<td><select name = "" disabled><option>Select a Sub County</option>';
                         foreach ($sub_counties as $sub_county) {
                             if ($value['facDistrict'] == $sub_county['districtName']) {
                                 $facilitysection .= '<option value = "'.$sub_county['districtName'].'" selected>'.$sub_county['districtName'].'</option>';

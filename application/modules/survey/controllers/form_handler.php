@@ -83,8 +83,6 @@ class Form_Handler extends MY_Controller
          * @var [type]
          */
         $this->facilitysection = $this->generate->createFacilityDetailsSection();
-
-        $this->servicepoint = $this->generate->createServicePoint();
         $this->cadre = $this->generate->createCadre();
 
     }
@@ -2037,6 +2035,7 @@ class Form_Handler extends MY_Controller
         $this->combined_form = '
         <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
         	<div class="step" id="section-1">
+        	<input type = "hidden" name = "step_name" value = "section-1"/> 
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table>
 				<thead>
@@ -2114,18 +2113,18 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td>Name </td>
 				<td>
-				<input type="text" >
+				<input type="text" name = "assesorname_1">
 				</td>
 				<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-				'.$this->cadre.'
+				<select name = "asesordesignation_1">'.$this->cadre.'</select>
 				</td>
 				<td>Email </td>
 				<td>
-				<input type="text"  >
+				<input type="email" name = "assesoremail_1">
 				</td>
 				</td><td>Phone Number </td>
 				<td>
-				<input type="text"  >
+				<input type="text" name = "assesorphoneNumber_1">
 				</td>
 				</tr>
 				</tbody>
@@ -2146,31 +2145,31 @@ class Form_Handler extends MY_Controller
 				</tr>
 				<tr>
 				<td>First Name</td>
-				<td><input type="text"></td>
+				<td><input type="text" name = "hpfirstname_1"></td>
 				<td>Surname</td>
-				<td><input type="text"></td>
+				<td><input type="text" name = "hpsurname_1"></td>
 				</tr>
 				<tr>
 				<td>National ID</td>
-				<td><input type="text"></td>
+				<td><input type="text" name = "hpnationalid_1"></td>
 				<td>Phone Number</td>
-				<td><input type="text"></td>
+				<td><input type="text" name = "hpphonephonenumber_1"></td>
 				</tr><tr>
 				<td>Personal Number</td>
 				<td colspan="3"><input type="text"></td>
 				</tr>
 				<tr>
-				<td colspan="1">Year, Month when trained in IMCI <input type="text"></td>
+				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-				<p><input type="radio" name = "coordinator">MOH/KPA/CHAI</p>
-				<p><input type="radio" name = "coordinator">MOH only</p>
-				<p><input type="radio" name = "coordinator">Other</p>
+				<p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+				<p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+				<p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
 				<p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
 				</td>
 				</tr>
 				<tr>
 				<td colspan="1"><label for="">Designation</label></td>
-				<td colspan="3">'.$this->cadre.'</td>
+				<td colspan="3"><select name = "hpdesignation_1">'.$this->cadre.'</select></td>
 				</tr>
 				' . $this->hcwProfileSection . '
 				</tbody>
@@ -2183,11 +2182,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
-				<td>Current Service Unit</td>
-				<td>'.$this->servicepoint.'</td>
-				</tr>
-
+				'.$this->questions['su'].'
 				</tbody>
 				</table>
 				<p class="instruction">
