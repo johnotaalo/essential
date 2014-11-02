@@ -290,11 +290,10 @@ background: #ddd;
          $this->load->model('survey/data_model');
          $cadre_combo = '';
          $cadres = $this->data_model->getCadre();
-         $cadre_combo .= '<select name = "cadre"><option value = "">Select a cadre</option>';
+         $cadre_combo .= '<option value = "">Select a cadre</option>';
          foreach ($cadres as $cadre) {
             $cadre_combo .= '<option value = "'.$cadre['cadre_code'].'">'.$cadre['cadre'].'</option>';
          }
-         $cadre_combo .= '</select>';
 
          return $cadre_combo;
     }
@@ -304,7 +303,7 @@ background: #ddd;
         $this->load->model('survey/data_model');
         $sp_combo = '';
         $servicepoints = $this->data_model->getServicePoints();
-        $sp_combo .= '<select name = "servicepoint"><option value = "">Select a Service Point</option>';
+        $sp_combo .= '<option value = "">Select a Service Point</option>';
         foreach ($servicepoints as $servicepoint) {
             $sp_combo .= '<option value = "'.$servicepoint['spoint_code'].'">'.$servicepoint['spoint'].'</option>';
         }

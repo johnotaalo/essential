@@ -481,6 +481,6 @@ class Survey extends MY_Controller
     public function complete_survey()
     {
         $this->load->model('m_complete_survey');
-        $this->m_complete_survey->test();
+        $this->m_complete_survey->store_data();
     }
 }
