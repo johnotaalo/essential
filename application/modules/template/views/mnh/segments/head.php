@@ -16,17 +16,17 @@
 
 
 <!-- New Bower Components -->
-<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/flat-ui-official/css/flat-ui.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/stylesheets/flat.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/animate.css/animate.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/pushy/css/pushy.css">
-<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/flat-ui-official/bootstrap/css/prettify.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/intro.js/introjs.css">
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2-bootstrap.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
-
+<!-- Bootstrap Datepicker -->
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/css/datepicker.css">
+<!-- Semantic UI -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/css/semantic.css">
 <!--
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.css">
@@ -36,10 +36,8 @@
 
 
 
-<!-- Load JS here for greater good
+<!-- Load JS here for greater good -->
 
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery-ui-1.10.3.custom.min.js"></script>
-=============================-->
 <script src="<?php echo base_url(); ?>assets/javascripts/js_libraries.js"></script>
 <script src="<?php echo base_url(); ?>assets/javascripts/js_ajax_load.js"></script>
 
@@ -47,12 +45,12 @@
 <!--<script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.js"></script>-->
 <script src="<?php echo base_url();?>assets/bower_components/select2/select2.js"></script>
 <script src="<?php echo base_url();?>assets/javascripts/core.js"></script>
+
 <!-- Bower Components -->
-<!-- Flat UI -->
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.ui.touch-punch.min.js"></script>
 <!-- Bootstrap -->
 <script src="<?php echo base_url();?>assets/bower_components/bootstrap/dist/bootstrap.js"></script>
-
+<!-- Bootstrap Datepicker -->
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/respond/dest/respond.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
@@ -124,11 +122,11 @@
 
 
 
-        
-        
+
+
         // $('.activity').text(moment($('.activity').text()).fromNow()  );
         // $('.modal-footer .btn-primary').click(function()){
-            
+
         // }
 
 

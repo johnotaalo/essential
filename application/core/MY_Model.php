@@ -348,7 +348,7 @@ class MY_Model extends CI_Model
      */
     public function getTreatments() {
         try {
-            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t ORDER BY t.treatmentFor');
+            $result = $this->em->createQuery('SELECT t FROM models\Entities\Treatments t ORDER BY t.treatmentFor, t.treatmentCode');
             $result = $result->getArrayResult();
         }
         catch(exception $ex) {
@@ -615,5 +615,60 @@ class MY_Model extends CI_Model
         //close the this->input->post
         
         
+    }
+    /**
+     * [getStoredData description]
+     * @param  [type] $table [description]
+     * @param  [type] $data  [description]
+     * @return [type]        [description]
+     */
+    public function getStoredData($table, $data) {
+        try {
+            $result = $this->em->getRepository($table)->findOneBy($data);
+        }
+        catch(Exception $ex) {
+            echo $ex->getMessage();
+        }
+        
+        return $result;
+    }
+
+    public function getFacilityTypes()
+    {
+        $query = $this->db->query("SELECT *  FROM facility_types");
+        $result = $query->result_array();
+
+        return $result;
+    }
+
+    public function getFacilityCounty($facmfl)
+    {
+        $query = $this->db->query("SELECT fac_county FROM facilities WHERE fac_mfl = '" . $facmfl . "' LIMIT 1");
+        $result = $query->result_array();
+
+        return $result[0]['fac_county'];
+    }
+
+    public function getFacInCounty($county)
+    {
+        $query = $this->db->query("SELECT * FROM facilities WHERE fac_county = '".$county."'");
+        $result = $query->result_array($query);
+
+        return $result;
+    }
+    public function getCadre()
+    {
+        $query = $this->db->query("SELECT * FROM cadre");
+        $result = $query->result_array($query);
+
+        return $result;
+    }
+
+    public function getServicePoints()
+    {
+        $query = $this->db->query("SELECT * FROM service_point");
+        $result = $query->result_array($query);
+
+        return $result;
     }
 }

@@ -9,7 +9,7 @@ class Auth extends MY_Controller {
         $this->load->module('template');
     }
     public function go(){
-        
+
         $result=$this->data_model->verifyRespondedByDistrict();
         if ($result['found']=='true') {
         //$this->m_zinc_ors_inventory->retrieveMFLInformation();
@@ -64,10 +64,9 @@ private function requestMFC(){
     public function logout(){
         //$data['facility']=$this ->selectFacility;
         $data['title']='MoH::Data Management Tool';
-        //$data['title']='MoH Data Management Tool::Authentication';
-        $data['form'] = '<p>You need to login.<p>';
-        $this -> load -> view('mnh/pages/v_home', $data);
+        $data['content']='mnh/pages/v_home';
         $this->session->sess_destroy();
+        $this->template->mnch($data);
         redirect(base_url(), 'refresh');
     }
 }
