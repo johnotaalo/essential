@@ -1,0 +1,21 @@
+CREATE TABLE `hr_information` (
+  `hr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `facility_incharge_name` varchar(400) DEFAULT 'n/a',
+  `facility_incharge_mobile` varchar(255) DEFAULT '-1',
+  `facility_incharge_emailAddress` varchar(255) DEFAULT '-1',
+  `mch_incharge_name` varchar(400) DEFAULT 'n/a',
+  `mch_incharge_mobile` varchar(255) DEFAULT '-1',
+  `mch_incharge_emailAddress` varchar(255) DEFAULT '-1',
+  `maternity_incharge_name` varchar(400) DEFAULT 'n/a',
+  `maternity_incharge_mobile` varchar(255) DEFAULT '-1',
+  `maternity_incharge_emailAddress` varchar(255) DEFAULT '-1',
+  `opd_incharge_name` varchar(400) DEFAULT 'n/a',
+  `opd_incharge_mobile` varchar(255) DEFAULT '-1',
+  `opd_incharge_emailAddress` varchar(255) DEFAULT '-1',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `facility_mfl` varchar(11) DEFAULT NULL,
+  `ss_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`hr_id`),
+  KEY `facilityID` (`facility_mfl`),
+  KEY `facilityID_2` (`facility_mfl`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

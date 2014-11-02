@@ -105,15 +105,9 @@
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
                         <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
                     </div>
-							<div id="reporting_left"></div>
 
-                </div>
-                <div class="semi-large-graph">
-                    <div class="portlet-title">
-                        <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
-                        <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
-                    </div>
-						<div id="reporting_right"></div>
+                    
+                    <div id="reporting"></div>
 
                 </div>
 
@@ -308,9 +302,21 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed by Findings</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="finding_signs">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Symptom Classification <span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
 						<p>Please Select main symptom/condition above to load the graph</p>	
@@ -333,85 +339,6 @@
         </div>
         <div id="collapseFour" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="commodity_availability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reason for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="commodity_unavailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="commodity_location">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Supplier</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart"id="commodity_supplier">
-                        </div>
-                    </div>
-                </div>
-                <!-- Bundling -->
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="bundling_availability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reasons for Bundling Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="bundling_unavailability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="bundling_location">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-12">
-                <div class="ui horizontal icon divider">
-  <i class="icon circular fa fa-bar-chart"></i>
-</div>
-                </div>
 
                 <div class="x-large-graph">
                    <h5>Diarrhoea</h5>
@@ -531,6 +458,86 @@
                 </div>
 
 
+                <div class="col-md-12">
+                  <div class="ui horizontal icon divider">
+                    <i class="icon circular fa fa-bar-chart"></i>
+                  </div>
+                </div>
+
+
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="commodity_availability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reason for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="commodity_unavailability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="commodity_location">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Supplier</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart"id="commodity_supplier">
+                        </div>
+                    </div>
+                </div>
+                <!-- Bundling -->
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="bundling_availability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reasons for Bundling Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="bundling_unavailability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="bundling_location">
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -544,7 +551,8 @@
             </h4>
         </div>
         <div id="collapseFive" class="panel-collapse collapse">
-            <div class="panel-body">
+            <div class="panel-body">        
+
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">ORT Corner Availability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1116,6 +1124,9 @@
         </div>
         <div id="collapseFourteen" class="panel-collapse collapse">
             <div class="panel-body">
+
+                 
+
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Availability</span><span class="sizer">Click to Enlarge</span></h6>

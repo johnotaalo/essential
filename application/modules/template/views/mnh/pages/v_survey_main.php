@@ -466,17 +466,13 @@ $.ajax({
 
     <div id="site">
         <div class="center-wrapper">
-
-            <!--logo and main nav-->
-
-
             <div class="form-container ui-widget" >
-            <div class="ui vertical steps" id="steps" style="display:none">
-            <h6>Section Navigation</h6>
+            <div class="ui vertical steps" id="steps" style="display:none"></div>
+            <div class="ui message info" id="click_form">
+              <i class="icon attention"></i> Please click on the <b><i>LINK</i></b> corresponding with the respective Survey to Begin / Continue the Survey.
 
-</div>
+            </div>
 <div class='actual-form'>
- <?php //echo $form; ?>
 </div>
 
 

@@ -14,11 +14,13 @@ function startSurvey(base_url, survey, survey_category, district) {
 
   // Bound Events
 
+
+
   //start of close_opened_form click event
   $("#close_opened_form").click(function() {
 
     $(".form-container .actual-form").load(base_url +
-      'c_front/formviewer',
+      'reporting/formviewer',
       function() {
 
         //delegate events
@@ -26,40 +28,37 @@ function startSurvey(base_url, survey, survey_category, district) {
 
       });
   });
-  /*end of close_opened_form click event
+
+  /*end of close_opened_form click event */
 
 
-
-         /*----------------------------------------------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------------------------------------------*/
 
   //try saving data
 
   $("#next_btn").click(function() {
+  	curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
     form_id = $('form').attr("id");
-    curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[
-      1]);
-    // console.log(trim('section-', curr_section));
     the_url = '';
     the_url = base_url + "survey/complete_survey";
-    //console.log('found');
-    var formData = $('#' + form_id).serialize();
-    //console.log(formData);
+    var formData = $('#' + form_id).serializeArray();
     $.ajax({
       url: the_url,
       type: 'POST',
       data: formData,
       success: function(data) {
-        //console.log(curr_section +=1);
-        nextsection = curr_section += 1;
-        thethat = $('.step[data-section="' + nextsection + '"]');
-        changeSection(curr_section, thethat);
+        //console.log(data);
+      	nextsection = curr_section += 1;
+    		thethat = $('.step[data-section="' + nextsection + '"]');
+    		changeSection(curr_section, thethat);
       },
-      fail: function(data) {
-        console.log('Error: ' + data);
+      fail: function() {
+        console.log("error");
       }
     });
 
   });
+
 
   /*start of loadGlobalJS*/
   var onload_queue = [];
@@ -210,10 +209,11 @@ function startSurvey(base_url, survey, survey_category, district) {
             select_option_changed();
             loadSection(section, action);
             $('#steps').show();
+            $('#form_post').addClass('active');
             // $('actual-form .step').hide();
 
           });
-        $('#form_post').addClass('active');
+
         //Step Handler
         $('.ui.step').click(function() {
           section = $(this).attr('data-section');
@@ -222,6 +222,12 @@ function startSurvey(base_url, survey, survey_category, district) {
 
       }); /*end of which link was clicked*/
     }); /*close form-container LOAD FN() */
+
+  // $('#m_county_choose').live(function(){
+  // 	console.log('changed');
+  // 	county = this.value;
+  // 	createFacilityDropDown(county);
+  // });
   /*----------------------------------------------------------------------------------------------------------------*/
   /**
    * [loadSection description]
@@ -232,7 +238,7 @@ function startSurvey(base_url, survey, survey_category, district) {
    */
   function loadSection(section, action, survey) {
       section = (section == '') ? '1' : parseInt(section) + 1;
-      //console.log(section);
+      console.log(section);
       $('.actual-form .step').hide();
       $('#section-' + section).show();
       disableFields(section);
@@ -257,8 +263,13 @@ function startSurvey(base_url, survey, survey_category, district) {
   function changeSection(section, that) {
       $('.ui.step').removeClass('active');
       $(that).addClass('active');
-      $('.actual-form .step').hide();
-      $('#section-' + section).show();
+      if ($('#section-' + section).length > 0) {
+        $('.actual-form .step').hide();
+        $('#section-' + section).show();
+      } else {
+        $('.actual-form .step').hide();
+        $("#section-1").show();
+      }
       disableFields(section);
     }
     //equipment availability change detectors

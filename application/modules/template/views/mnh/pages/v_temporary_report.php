@@ -44,7 +44,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
 			    //start of close_opened_form click event
 				$("#close_opened_form").click(function() {
 
-				$(".form-container").load('<?php echo base_url() . 'c_front/formviewer'; ?>',function(){
+				$(".form-container").load('<?php echo base_url() . 'reporting/formviewer'; ?>',function(){
 
 					//delegate events
 					loadGlobalScript();
