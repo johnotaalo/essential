@@ -42,7 +42,7 @@ function startSurvey(base_url, survey, survey_category, district) {
     the_url = '';
     the_url = base_url + "survey/complete_survey";
     // console.log('found');
-    var formData = $('#' + form_id).serialize();
+    var formData = $('#' + form_id).serializeArray();
     console.log(formData);
     // var r = document.getElementById('result');
     // console.log(formData);
@@ -212,6 +212,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#steps').show();
             $('#form_post').addClass('active');
             $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode: 1
+            });
+            $('select').select2();
             // $(':input').parent().addClass('ui input');
             $('#click_form').fadeOut();
             // $('actual-form .step').hide();

@@ -2160,7 +2160,7 @@ class Form_Handler extends MY_Controller
 				<td colspan="3"><input type="text"></td>
 				</tr>
 				<tr>
-				<td colspan="1">Year, Month when trained in IMCI <input type="text" class="bs-date"></td>
+				<td colspan="1">Year, Month when trained in IMCI <input type="text" class="bs-month"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
 				<p><input type="radio" name = "coordinator">MOH/KPA/CHAI</p>
 				<p><input type="radio" name = "coordinator">MOH only</p>
