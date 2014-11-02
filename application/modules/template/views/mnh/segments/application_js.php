@@ -1,7 +1,3 @@
-<!-- Load JS here for greater good
-
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery-ui-1.10.3.custom.min.js"></script>
-=============================-->
 <script src="<?php echo base_url(); ?>assets/javascripts/js_libraries.js"></script>
 <script src="<?php echo base_url(); ?>assets/javascripts/js_ajax_load.js"></script>
 
@@ -9,18 +5,12 @@
 <!--<script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.js"></script>-->
 <script src="<?php echo base_url();?>assets/bower_components/select2/select2.js"></script>
 <script src="<?php echo base_url();?>assets/javascripts/core.js"></script>
+
 <!-- Bower Components -->
-<!-- Flat UI -->
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.ui.touch-punch.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap-select.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap-switch.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/flatui-checkbox.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/flatui-radio.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.tagsinput.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.placeholder.js"></script>
-<!-- Pushy -->
-<script src="<?php echo base_url();?>assets/bower_components/pushy/js/pushy.js"></script>
+<!-- Bootstrap -->
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- Bootstrap Datepicker -->
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/respond/dest/respond.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
@@ -92,11 +82,11 @@
 
 
 
-        
-        
+
+
         // $('.activity').text(moment($('.activity').text()).fromNow()  );
         // $('.modal-footer .btn-primary').click(function()){
-            
+
         // }
 
 
@@ -130,17 +120,3 @@
 //});
     });
 </script>
-
-<link rel="shortcut icon"  href="<?php echo base_url(); ?>/images/favicon.ico">
-
-
-
-
-
-<!-- CODEMIRROR: Download from http://codemirror.net/codemirror.zip -->
-<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.css" />
-<script src="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.js"></script>
-
-<!-- Download from http://www.firepad.io/firepad.zip -->
-<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/firepad/firepad.css" />
-<script src="<?php echo base_url(); ?>assets/third-party/firepad/firepad.js"></script-->

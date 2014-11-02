@@ -37,20 +37,21 @@ function startSurvey(base_url, survey, survey_category, district) {
   //try saving data
 
   $("#next_btn").click(function() {
-  	curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
     form_id = $('form').attr("id");
+    // console.log(form_id);
     the_url = '';
     the_url = base_url + "survey/complete_survey";
+    // console.log('found');
     var formData = $('#' + form_id).serializeArray();
+    console.log(formData);
+    // var r = document.getElementById('result');
+    // console.log(formData);
     $.ajax({
       url: the_url,
       type: 'POST',
       data: formData,
       success: function(data) {
-        //console.log(data);
-      	nextsection = curr_section += 1;
-    		thethat = $('.step[data-section="' + nextsection + '"]');
-    		changeSection(curr_section, thethat);
+        console.log(data);
       },
       fail: function() {
         console.log("error");
@@ -210,6 +211,13 @@ function startSurvey(base_url, survey, survey_category, district) {
             loadSection(section, action);
             $('#steps').show();
             $('#form_post').addClass('active');
+            $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode: 1
+            });
+            $('select').select2();
+            // $(':input').parent().addClass('ui input');
+            $('#click_form').fadeOut();
             // $('actual-form .step').hide();
 
           });

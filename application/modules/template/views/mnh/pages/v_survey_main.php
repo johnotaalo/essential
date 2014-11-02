@@ -468,7 +468,7 @@ $.ajax({
         <div class="center-wrapper">
             <div class="form-container ui-widget" >
             <div class="ui vertical steps" id="steps" style="display:none"></div>
-            <div class="ui message info">
+            <div class="ui message info" id="click_form">
               <i class="icon attention"></i> Please click on the <b><i>LINK</i></b> corresponding with the respective Survey to Begin / Continue the Survey.
 
             </div>
