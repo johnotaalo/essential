@@ -1101,21 +1101,21 @@ function statisticsHandler(criteria, value, survey, survey_category,
       }
       break;
 
-      case 'hcw':
+    case 'hcw':
       //MNH Analytics
       //Section 1 MNH
       switch (section) {
         case 'section-1':
           loadGraph(base_url, 'analytics/getFacilityOwnerPerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#HCWfacility_ownership');
+            '#HCWfacility_owner');
           loadGraph(base_url, 'analytics/getFacilityLevelPerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_levels');
           loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_type');
-        break;
+          break;
       }
   }
 }
