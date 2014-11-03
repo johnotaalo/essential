@@ -683,8 +683,9 @@ class Analytics extends MY_Controller
      */
     public function getStaffAvailability($criteria, $value, $survey, $survey_category, $for) {
         $in_facility = $on_duty = $category = $resultsArray = array();
+        $number = $resultArray = $q = $yes = $no = $null= array();
         $value = urldecode($value);
-        //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
+        $nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
         
         $category = array();
@@ -693,7 +694,7 @@ class Analytics extends MY_Controller
 
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';
-        
+
         foreach ($results as $guide) {
             
             // $category = array('Total in Facility', 'Total On Duty');
@@ -709,6 +710,8 @@ class Analytics extends MY_Controller
             
             
         }
+
+
 
         
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
