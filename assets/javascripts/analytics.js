@@ -492,6 +492,14 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getEquipmentRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
+      case 'resource':
+        raw_url = 'analytics/getResourceRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'supplies':
+        raw_url = 'analytics/getSupliesRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
     }
     return raw_url;
   }

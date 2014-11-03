@@ -1870,7 +1870,7 @@ class Analytics extends MY_Controller
              $resultArray[] = array('name' => $key, 'data' => $val);
             }
            }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar','',$for,'resource',$statistic,$colors);
     }else if($statistic == 'availability' && $for == 'hwr') {
             foreach ($results as $key => $result) {
                 $key = str_replace('_', ' ', $key);
@@ -1915,7 +1915,7 @@ class Analytics extends MY_Controller
 
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'resource',$statistic,$colors);
         } else{
     	foreach ($results as $key => $result) {
 
@@ -1946,7 +1946,7 @@ class Analytics extends MY_Controller
 
             $resultArray[] = array('name' => $key, 'data' => $val, 'color' => $color);
            }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar','',$for,'resource',$statistic,$colors);
 	}
     }
 
