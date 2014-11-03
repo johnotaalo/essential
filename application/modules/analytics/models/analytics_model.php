@@ -383,7 +383,6 @@ ORDER BY lq.lq_response ASC";
 
             //echo($this->db->last_query());die;
 
-
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     $data[$value['guide_name']][$value['cadre']]['total_facility'] = $value['total_in_facility'];
@@ -1836,11 +1835,10 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-
-
-                        if (array_key_exists('frequency', $value)) {
-                          
-                          switch ($for) {
+                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'){
+                            $data[]=$value;
+                        }else if (array_key_exists('frequency', $value)) {
+                           switch ($for) {
                               case 'mh':
                                   $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
                                   break;
@@ -1849,9 +1847,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                                  $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                                   break;
                           }
-                          
-
-
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
@@ -2096,11 +2091,10 @@ LIMIT 0 , 1000
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-
-
-                        if (array_key_exists('frequency', $value)) {
-                            $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
-
+                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
+                            $data[]=$value;
+                        }else if (array_key_exists('frequency', $value)) {
+                            $data[$value['resource_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
@@ -4120,7 +4114,7 @@ ORDER BY question_code";
 
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
-							$data[$question][$value_['reason']]+= (int)$value_['total_response'];
+                            $data[$question][$value_['reason']]+= (int)$value_['total_response'];
                             break;
                     }
 
@@ -4246,7 +4240,7 @@ ORDER BY question_code";
 
 
             }
-     catch(exception $ex) {
+            catch(exception $ex) {
 
                 //ignore
                 //die($ex->getMessage());//exit;
@@ -4280,17 +4274,17 @@ ORDER BY question_code";
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $key => $value) {
-                    	//if($value['response'] !='Other Reason'){
-                    		if (array_key_exists('question_code', $value)) {
+                        //if($value['response'] !='Other Reason'){
+                            if (array_key_exists('question_code', $value)) {
                             $reason = explode(',', $value['lq_reason']);
                             foreach ($reason as $value_) {
                                 $data['question_code'][$value_] += (int)$value['total_response'];
                             }
                         }
                         //else{
-                       // 	$data['question_code'][$value_] += (int)$value['total_response'];
+                       //   $data['question_code'][$value_] += (int)$value['total_response'];
                         //}
-                    	//}
+                        //}
 
 
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
