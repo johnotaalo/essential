@@ -275,6 +275,40 @@
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diarrhoea</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="other_treatment_options_dia">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Malaria</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="other_treatment_options_fev">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Pneumonia</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="other_treatment_options_pne">
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="x-large-graph" style="height:400px">
                    <h5>Data From Under 5 Register</h5>
                     <div class="portlet-title">
@@ -305,7 +339,7 @@
 
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed by Findings</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Presence of Danger Signs</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -316,7 +350,7 @@
 
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Correct Symptom Classification <span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
 						<p>Please Select main symptom/condition above to load the graph</p>
@@ -342,6 +376,7 @@
 
                 <div class="x-large-graph">
                    <h5>Diarrhoea</h5>
+
                     <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -352,7 +387,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Bundling -->
+                
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1252,7 +1287,7 @@
 
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Testing Supplies Availability </span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diagnostic Kits Availability </span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1262,7 +1297,7 @@
                 </div>
                <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Testing Supplies Location</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diagnostic Kits Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1316,7 +1351,7 @@
                 </div> -->
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Diagnostic Kits Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Delivery Kit Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1326,7 +1361,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Diagnostic Kits Location of Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Delivery Kit Location of Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1547,7 +1582,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_owner">
+                    <div class="chart" id="HCWfacility_owner">
                     </div>
                 </div>
             </div>
@@ -1557,7 +1592,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                    <div class="chart" id="HCWfacility_levels">
                     </div>
                 </div>
             </div>
@@ -1567,7 +1602,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_type"f>
+                    <div class="chart" id="HCWfacility_type">
                     </div>
                 </div>
             </div>
@@ -1848,5 +1883,6 @@
         </div>
     </div>
 </div>
+
 
 </div>
