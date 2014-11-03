@@ -37,7 +37,8 @@ function startSurvey(base_url, survey, survey_category, district) {
   //try saving data
 
   $("#next_btn").click(function() {
-  	curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[1]);
+    curr_section = parseInt($('.step:visible[id]').attr("id").split('-')[
+      1]);
     form_id = $('form').attr("id");
     the_url = '';
     the_url = base_url + "survey/complete_survey";
@@ -48,9 +49,9 @@ function startSurvey(base_url, survey, survey_category, district) {
       data: formData,
       success: function(data) {
         //console.log(data);
-      	nextsection = curr_section += 1;
-    		thethat = $('.step[data-section="' + nextsection + '"]');
-    		changeSection(curr_section, thethat);
+        nextsection = curr_section += 1;
+        thethat = $('.step[data-section="' + nextsection + '"]');
+        changeSection(curr_section, thethat);
       },
       fail: function() {
         console.log("error");
@@ -142,6 +143,8 @@ function startSurvey(base_url, survey, survey_category, district) {
   $(".form-container .actual-form").load(base_url +
     'survey/createFacilityTable',
     function() {
+      $(document).trigger('datatable_loaded');
+
       // facilityMFL=12864;
       //loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
@@ -156,10 +159,7 @@ function startSurvey(base_url, survey, survey_category, district) {
         }
         //alert(moment().fromNow());
       });
-      $('.dataTable').dataTable({
-        "sPaginationType": "full_numbers"
-      });
-      $('.dataTables_info').addClass('breadcrumb');
+
       //so which link was clicked?
       $('.action').live('click', function() {
         link_id = '#' + $(this).attr('data-mfl');
