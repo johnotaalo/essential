@@ -17,7 +17,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
         district='<?php echo $this->session->userdata("dName");  ?>';
         $(document).ready(startSurvey(base_url, survey, survey_category, district));
         loadSectionList(base_url,survey);
-        
+
     });
     /**
      * [loadSectionList description]
@@ -466,20 +466,15 @@ $.ajax({
 
     <div id="site">
         <div class="center-wrapper">
-
-            <!--logo and main nav-->
-            
-
             <div class="form-container ui-widget" >
-            <div style = "position: fixed; top: 500px;"><a class="positive ui button" id = "next_btn">Save Section</a></div>
-            <div class="ui vertical steps" id="steps" style="display:none">
-            <h6>Section Navigation</h6>
+            <div class="ui vertical steps" id="steps" style="display:none"></div>
+            <div class="ui message info" id="click_form">
+              <i class="icon attention"></i> Please click on the <b><i>LINK</i></b> corresponding with the respective Survey to Begin / Continue the Survey.
 
-</div>
+            </div>
 <div class='actual-form'>
- <?php //echo $form; ?>
 </div>
-               
+
 
 
             </div>
@@ -488,4 +483,9 @@ $.ajax({
 
         </div>
     </div>
-    <div class="ui bottom sidebar menu"></div>
+    <div id="form_post" class="ui bottom sidebar menu">
+      <div>
+        <a style="font-size:12px;float:right;margin-top:5px;margin-right:5px" class="positive ui labeled icon button mini" id = "next_btn">
+      <i class="icon save"></i>Save Section</a>
+      </div>
+    </div>

@@ -2,7 +2,7 @@
     <div class="center-wrapper">
 
         <!--logo and main nav-->
-        
+
 
         <div class="main" >
             <div class="row">
@@ -43,15 +43,22 @@
                                     <li><a data-survey="hcw" data-survey-category="end-term" href="#">End-Term</a></li>
                                 </ul>
                             </div>
+<div class="ui message info" id="current-map">
+    <i class="icon basic attention circle"></i>Please Choose an Assessment Above
 
-                            <h6 id="current-map">Please Choose an Assessment Above</h6>
+  </div>
+                            <!-- <h6 id="current-map">Please Choose an Assessment Above</h6> -->
 
                         </div>
 
                         <div class="post" id="map">
 
                         </div><!--./kenya_county_map-->
-                        <h6>Click a county to see county data</h6>
+                        <div class="ui message info">
+                          <i class="close icon"></i>
+                            <i class="icon basic attention circle"></i>Click a county to see County Data
+
+                          </div>
 
                     </div>
 
@@ -73,19 +80,19 @@
                         <button id="load_analytics"><i class="fa fa-bar-chart-o"></i>Click to View Analytics</button>
                         <button id="load_county_summary"><i class="fa fa-bar-chart-o"></i>Click to Download Excel Summary</button>
                     </div>
-                    
+
                 </div>
 
             </div>
 
 
-            <!--footer-->
-            <?php //$this->load->view('segments/footer-public'); ?>
-
         </div>
     </div>
     <script>
         $(document).ready(function(){
+          $('.message .close').on('click', function() {
+  $(this).closest('.message').fadeOut();
+});
             var styles1={
                 'padding':'2%',
                 'border':'2px solid #ddd',
@@ -170,7 +177,7 @@
         function runMap(survey,survey_category){
 
             $.ajax({
-                url: '<?php echo base_url();?>c_front/runMap/'+survey+'/'+survey_category+'/county',
+                url: '<?php echo base_url();?>analytics/reporting/runMap/'+survey+'/'+survey_category+'/county',
                 beforeSend: function(xhr) {
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                 },
@@ -178,7 +185,7 @@
                     //console.log(data);
 
                     obj = jQuery.parseJSON(data);
-                    var map= new FusionMaps ("js/FusionMaps/Maps/FCMap_KenyaCounty.swf","KenyaMap","100%","70%","0","0");
+                    var map= new FusionMaps ("<?php echo base_url();?>assets/javascripts/FusionMaps/Maps/FCMap_KenyaCounty.swf","KenyaMap","100%","70%","0","0");
                     map.setJSONData(data);
                     map.render("map");
 

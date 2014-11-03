@@ -42,7 +42,7 @@ $route['default_controller'] = "analytics";
 $route['404_override'] = '';
 
 // MNCH Routes
-$route['mnch/home']='reporting/index';
+$route['mnch/home']='analytics/reporting/index';
 $route['404_override'] = '';
 
 $route['mnch/takesurvey']='survey/active_survey';#active survey url
