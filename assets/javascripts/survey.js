@@ -268,7 +268,8 @@ function startSurvey(base_url, survey, survey_category, district) {
         $('#section-' + section).show();
       } else {
         $('.actual-form .step').hide();
-        $("#section-1").show();
+        // Go back to Facility List
+        window.location = base_url + 'mnch/assessment';
       }
       disableFields(section);
     }
