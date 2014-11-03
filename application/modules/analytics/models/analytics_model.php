@@ -1835,7 +1835,9 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                        if (array_key_exists('frequency', $value)) {
+                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'){
+                            $data[]=$value;
+                        }else if (array_key_exists('frequency', $value)) {
                             $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
@@ -2081,7 +2083,9 @@ LIMIT 0 , 1000
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                        if (array_key_exists('frequency', $value)) {
+                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
+                            $data[]=$value;
+                        }else if (array_key_exists('frequency', $value)) {
                             $data[$value['resource_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
