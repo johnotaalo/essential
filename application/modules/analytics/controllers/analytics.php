@@ -3754,7 +3754,7 @@ class Analytics extends MY_Controller
 
             $name = $value['facilityOwner'];
 
-            //echo '<pre>';print_r($name);echo '</pre>';die;
+            //echo '<pre>';print_r($results);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
             $gData[] = array('name' => $name, 'y' => (int)$value['ownership_total']);
 
