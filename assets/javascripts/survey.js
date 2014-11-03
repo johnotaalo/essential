@@ -210,6 +210,8 @@ function startSurvey(base_url, survey, survey_category, district) {
             loadSection(section, action);
             $('#steps').show();
             $('#form_post').addClass('active');
+            $('#click_form').fadeOut();
+            $('select').select2();
             // $('actual-form .step').hide();
 
           });
@@ -268,7 +270,8 @@ function startSurvey(base_url, survey, survey_category, district) {
         $('#section-' + section).show();
       } else {
         $('.actual-form .step').hide();
-        $("#section-1").show();
+        // Go back to Facility List
+        window.location = base_url + 'mnch/takesurvey';
       }
       disableFields(section);
     }

@@ -2205,6 +2205,7 @@ class Form_Handler extends MY_Controller
 				
 				<div class="step" id="section-2">
 				<p class="message success">SECTION 2: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW</p>
+				<input type = "hidden" name = "step_name" value = "section-2"/>
 				<p class="instruction">
 					* Assessor should indicate findings alongside Healthcare Worker findings.
 				</p>
@@ -2718,6 +2719,7 @@ class Form_Handler extends MY_Controller
 				</table>
 				</div>
 				<div class="step" id="section-3">
+				<input type = "hidden" name = "step_name" value = "section-3"/>
 					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
 					<table class="centre">
 						<thead>
@@ -2794,6 +2796,7 @@ class Form_Handler extends MY_Controller
 					</table>
 				</div>
 				<div class="step" id="section-4">
+				<input type = "hidden" name = "step_name" value = "section-4"/>
 				<p class="message success">SECTION 4: CONSULTATION AND EXIT INTERVIEWS</p>
 				<table>
 				<thead>
@@ -2890,6 +2893,7 @@ class Form_Handler extends MY_Controller
 				</p>
 				</div>
 				<div class="step" id="section-5">
+				<input type = "hidden" name = "step_name" value = "section-5"/>
 				<table>
 				<thead>
 				<tr>
