@@ -1180,14 +1180,14 @@ WHERE
             
             return $this->dataSet;
         }
-        public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for) {
+        public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
             
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
             $data_y = array();
             $data_n = array();
             
-            $query = "CALL get_indicator_comparison('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_indicator_comparison('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "', '".$statistic."');";
             try {
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
@@ -1204,9 +1204,19 @@ WHERE
                     $size = count($this->dataSet);
                     $i = 0;
                     
-                    //var_dump($this->dataSet);
+                    //echo'<pre>';var_dump($this->dataSet);echo '</pre>';die;
                     foreach ($this->dataSet as $value) {
-                        $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                    	//echo'<pre>';var_dump($value);echo '</pre>';die;
+						switch ($statistic) {
+							case 'correctness':
+							$data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+								break;
+							
+							case 'assessment':
+						$data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+								break;
+						}
+                        
                     }
                     $this->dataSet = $data;
                     
@@ -1216,7 +1226,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1240,6 +1250,7 @@ WHERE
             return $this->dataSet;
         }
         
+		
         /*
          * Diarrhoea case numbers per Month
         */

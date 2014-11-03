@@ -104,15 +104,8 @@
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
                         <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
-                    </div>
-                    <div id="reportingleft"></div>
-                </div>
-                <div class="semi-large-graph">
-                    <div class="portlet-title">
-                        <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
-                        <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
-                    </div>
-                    <div id="reportingright"></div>
+                    </div>           
+                    <div id="reporting"></div>
                 </div>
             </div>
             
@@ -289,8 +282,6 @@
                         <div class="chart" id="u5_register">
                         </div>
                     </div>
-                </div>
-<<<<<<< HEAD
                 <!-- <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
@@ -451,10 +442,6 @@
                 </div>
                 
                  <div class="col-md-12">
-=======
-               
-  <div class="col-md-12">
->>>>>>> 183f26bef71b8a35e99b90eb09abeeb70d08fa67
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
 </div>
@@ -472,7 +459,7 @@
                 </div>
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classification <span><select id="indicator_types"></select></span></h6>
                     </div>
 
                     <div class="portlet-body">

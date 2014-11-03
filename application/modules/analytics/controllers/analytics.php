@@ -991,7 +991,7 @@ class Analytics extends MY_Controller
         $count = 0;
         foreach ($results as $stack => $result) {
         	foreach ($result as $name => $data) {
-        		
+        	
         	 //echo $name;
                 switch ($statistic) {
                     case 'cases':
@@ -3180,11 +3180,11 @@ class Analytics extends MY_Controller
      * @param  [type] $for             [description]
      * @return [type]                  [description]
      */
-    public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for) {
+    public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for);
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
         
-        //echo '<pre>';print_r($results);echo '</pre>';die;
+        echo '<pre>';print_r($results);echo '</pre>';die;
         foreach ($results as $indicator => $values) {
             $category[] = $indicator;
             foreach ($values as $verdict => $answer) {
@@ -3217,7 +3217,9 @@ class Analytics extends MY_Controller
         }
         echo $options;
     }
-    
+    public function getIndicatorAssessment($criteria,$value,$survey,$survey_category,$for,$statistic){
+			$this->getIndicatorComparison($criteria, $value, $survey, $survey_category,'ch', 'assessment');
+		}
     /**
      * [getChildrenServices description]
      * @param  [type] $criteria [description]
