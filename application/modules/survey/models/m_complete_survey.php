@@ -4680,19 +4680,13 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                            if ($this->sectionExists == false) {
-                                if ($this->addMCHIndicatorInfo() == true) {
+                               if ($this->addMCHIndicatorInfo() == true) {
                                      //defined in this model
                                     $this->writeAssessmentTrackerLog();
                                     return $this->response = 'true';
                                 } else {
                                     return $this->response = 'false';
                                 }
-                            } else {
-
-                                //die('Entry exsits');
-                                return $this->response = 'true';
-                            }
                             break;
 
                         case 'section-3':
@@ -4703,7 +4697,6 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                            if ($this->sectionExists == false) {
                                 if ($this->addMCHIndicatorInfo() == true) {
                                     //if($this->addInterviewAspect == true){
                                      //defined in this model
@@ -4712,11 +4705,7 @@ return true;
                                 } else {
                                     return $this->response = 'false';
                                 }
-                            } else {
 
-                                //die('Entry exsits');
-                                return $this->response = 'true';
-                            }
                             break;
 
                         case 'section-4':
@@ -4727,7 +4716,6 @@ return true;
                             //print var_dump($this->section);........
 
                             //insert log entry if new, else update the existing one
-                            if ($this->sectionExists == false) {
                                 if ( $this->addQuestionsInfo()==true) {
                                      //defined in this model
                                     $this->writeAssessmentTrackerLog();
@@ -4735,11 +4723,6 @@ return true;
                                 } else {
                                     return $this->response = 'false';
                                 }
-                            } else {
-
-                                //die('Entry exsits');
-                                return $this->response = 'true';
-                            }
                             break;
 
                         case 'section-5':
@@ -4750,7 +4733,6 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                            if ($this->sectionExists == false) {
                                 if ($this->addQuestionsInfo() == true && $this->addHCWConclusionInfo()==true) {
                                      //defined in this model
                                     $this->writeAssessmentTrackerLog();
@@ -4758,11 +4740,7 @@ return true;
                                 } else {
                                     return $this->response = 'false';
                                 }
-                            } else {
-
-                                //die('Entry exsits');
-                                return $this->response = 'true';
-                            }
+                            
                             break;
 
 
