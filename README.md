@@ -1,3 +1,5 @@
+[ ![Codeship Status for HPStrathmoreLab/essential](https://www.codeship.io/projects/c32559b0-457c-0132-91fa-6e63d9e4d03b/status)](https://www.codeship.io/projects/45015)
+
 # CodeIgniter 2 + HMVC + Doctrine 2
 
 Setup ready to use CodeIgniter framework with:
