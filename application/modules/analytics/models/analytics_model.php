@@ -382,7 +382,7 @@ ORDER BY lq.lq_response ASC";
             $result = $category = array();
             
             //echo($this->db->last_query());die;
-            
+            //echo '<pre>';print_r($this->dataSet);echo '</pre>';
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     $data[$value['guide_name']][$value['cadre']]['total_facility'] = $value['total_in_facility'];
@@ -1834,11 +1834,21 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
-                            $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
+                          
+                          switch ($for) {
+                              case 'mh':
+                                  $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
+                                  break;
+                              
+                              default:
+                                 $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
+                                  break;
+                          }
+                          
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$value['supply_name']][$place]+= (int)$value['total_response'];
+                                $data[$value['fac_level']][$place]+= (int)$value['total_response'];
                             }
                             
                             //$data[$value['supply_name']][$value['location']]=(int)$value['total_response'];
@@ -2080,7 +2090,7 @@ LIMIT 0 , 1000
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
-                            $data[$value['resource_name']][$value['frequency']] = (int)$value['total_response'];
+                            $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
