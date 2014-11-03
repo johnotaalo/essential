@@ -3,7 +3,7 @@ CREATE TABLE `commodities` (
   `comm_code` varchar(15) NOT NULL,
   `comm_name` text NOT NULL,
   `comm_unit` varchar(45) DEFAULT NULL,
-  `comm_for` varchar(3) NOT NULL COMMENT 'mnh or mch',
+  `comm_for` varchar(10) NOT NULL COMMENT 'mnh or mch',
   PRIMARY KEY (`comm_id`),
   UNIQUE KEY `idCommodity` (`comm_id`),
   UNIQUE KEY `commodityCode` (`comm_code`)
