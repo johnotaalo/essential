@@ -383,11 +383,7 @@ ORDER BY lq.lq_response ASC";
 
             //echo($this->db->last_query());die;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 6dac253db4a16aabd4683c5fd9bc52487209680a
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     $data[$value['guide_name']][$value['cadre']]['total_facility'] = $value['total_in_facility'];
@@ -1840,7 +1836,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-<<<<<<< HEAD
+
 
                         if (array_key_exists('frequency', $value)) {
                           
@@ -1855,12 +1851,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                           }
                           
 
-=======
-                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'){
-                            $data[]=$value;
-                        }else if (array_key_exists('frequency', $value)) {
-                            $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
->>>>>>> 6dac253db4a16aabd4683c5fd9bc52487209680a
+
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
@@ -2105,17 +2096,11 @@ LIMIT 0 , 1000
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-<<<<<<< HEAD
+
 
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
 
-=======
-                        if($statistic=='availability_raw' || $statistic=='quantity_raw'|| $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
-                            $data[]=$value;
-                        }else if (array_key_exists('frequency', $value)) {
-                            $data[$value['resource_name']][$value['frequency']] = (int)$value['total_response'];
->>>>>>> 6dac253db4a16aabd4683c5fd9bc52487209680a
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {

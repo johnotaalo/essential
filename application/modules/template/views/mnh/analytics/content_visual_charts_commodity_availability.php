@@ -1582,7 +1582,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_owner">
+                    <div class="chart" id="HCWfacility_owner">
                     </div>
                 </div>
             </div>
@@ -1592,7 +1592,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                    <div class="chart" id="HCWfacility_levels">
                     </div>
                 </div>
             </div>
@@ -1602,7 +1602,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_type"f>
+                    <div class="chart" id="HCWfacility_type">
                     </div>
                 </div>
             </div>
@@ -1884,57 +1884,5 @@
     </div>
 </div>
 
-<div class="panel panel-default analytics_row section" data-survey='hcw' id="hcw-section-1">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty">
-                    Section 1 : Facility Information <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwenty" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="medium-graph" >
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Facility Ownership</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-
-                        <div class="chart" id="HCWfacility_ownership">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Levels of Care</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="HCWfacility_levels">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Facility Type</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="HCWfacility_type">
-
-
-                        </div>
-                    </div>
-                </div>
-
-
-                
-                
-            </div>
-        </div>
-    </div>
 
 </div>
