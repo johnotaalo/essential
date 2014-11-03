@@ -977,14 +977,16 @@ $(document).ready(function() {
     });
     // $('.dataTables_info').addClass('breadcrumb');
     // Format Search Input Field
-    search = $('#DataTables_Table_0_filter label input');
-    search.attr('placeholder', 'Search...')
-    $('#DataTables_Table_0_filter label').remove();
-    $('#DataTables_Table_0_filter').append(search);
-    $('#DataTables_Table_0_filter').append(
+    // search = $('#DataTables_Table_0_filter label input');
+    // search.attr('placeholder', 'Search...')
+    // $('#DataTables_Table_0_filter label').remove();
+
+    // $('#DataTables_Table_0_filter label').attr('text', '');
+    // $('#DataTables_Table_0_filter label').append(search);
+    $('#DataTables_Table_0_filter label').append(
       '<div class="ui corner label"> <i class="search icon"></i> </div>'
     );
-    $('#DataTables_Table_0_filter').addClass('ui labeled input');
+    $('#DataTables_Table_0_filter label').addClass('ui labeled input');
     // Format Paginate Section
     paginate = $('#DataTables_Table_0_paginate');
     // paginate.remove();
@@ -1016,11 +1018,11 @@ $(document).ready(function() {
     showAnalytics(base_url);
   });
 
-  $('.dataTable').on('load', function() {
-    $('.dataTable').dataTable({
-      "sPaginationType": "full_numbers"
-    });
-  });
+  // $('.dataTable').on('load', function() {
+  //   $('.dataTable').dataTable({
+  //     "sPaginationType": "full_numbers"
+  //   });
+  // });
 
 
 });

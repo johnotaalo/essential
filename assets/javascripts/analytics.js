@@ -463,7 +463,7 @@ function setRawUrl(criteria, county, district, facility, survey,
     var raw_url = '';
     switch (criteria) {
       case 'national':
-        value = 'Aggegated';
+        value = 'Aggregated';
         break;
       case 'county':
         value = county;
@@ -486,6 +486,18 @@ function setRawUrl(criteria, county, district, facility, survey,
         break;
       case 'commodity':
         raw_url = 'analytics/getCommodityRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'equipment':
+        raw_url = 'analytics/getEquipmentRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'resource':
+        raw_url = 'analytics/getResourceRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'supplies':
+        raw_url = 'analytics/getSupliesRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
     }
