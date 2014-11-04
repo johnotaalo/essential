@@ -1614,7 +1614,7 @@
             <div class="x-large-graph">
               <h5>HCW Profile</h5>
               <table>
-
+                 
               </table>
             </div>
             <div class="col-md-12">
