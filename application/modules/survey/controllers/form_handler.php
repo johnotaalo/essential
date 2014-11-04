@@ -2263,9 +2263,10 @@ class Form_Handler extends MY_Controller
 				<th colspan="5">ASSESSMENT FOR THE MAIN SYMPTOMS IN AN ONGOING SESSION FOR A CHILD</th>
 				</tr>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2313,9 +2314,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2364,9 +2366,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 
 				<tr>
@@ -2413,9 +2416,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 
 				<tr>
