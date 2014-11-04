@@ -2473,34 +2473,32 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
         
-        function getAllReportingRatio($survey, $survey_category) {
+        function getAllReportingRatio($survey, $survey_category,$option) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
             
             //var_dump($reportingCounties);die;
 
-            for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-            	$allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-			}
-            	//switch ($option) {
-					//case 'reporting':
-						//for ($x = 0; $x < 24; $x++) {
-               // $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            //}
-						//break;
+            // /
+            	switch ($option) {
+					case 'reportingleft':
+						for ($x = 0; $x < 24; $x++) {
+               $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            }
+						break;
 					
-					//case 'reportingright':
-						//for ($x = 24; $x < sizeof($reportingCounties); $x++) {
-                //$allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-           // }
+					case 'reportingright':
+						for ($x = 24; $x < sizeof($reportingCounties); $x++) {
+                $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            }
 			
-						//break;
+						break;
 						 return $allData;
 				}
             	
             
             //echo '<pre>';print_r($allData);echo '</pre>';
             //return $allData;
-        //}
+        }
         
         // function getReportingRatio($survey, $survey_category, $county,$statistic) {
         

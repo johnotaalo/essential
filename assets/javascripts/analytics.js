@@ -39,7 +39,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
                 variableHandler('district', county, district, facility, survey, survey_category, indicator_type);
             }
         }
-        getReportingData(base_url, survey, survey_category, '#reporting');
+      getReportingData(base_url, survey, survey_category, '#reporting_left','reportingleft');
+      getReportingData(base_url, survey, survey_category, '#reporting_right','reportingright');
     }
     // if (county !== '') {
     //     $("#county_select").parent().find(".menu ").filter(function(index) {
@@ -99,7 +100,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
         if (survey != '') {
 
-            getReportingData(base_url, survey, survey_category, '#reporting');
+            getReportingData(base_url, survey, survey_category, '#reporting_left','reportingleft');
+            getReportingData(base_url, survey, survey_category, '#reporting_right','reportingright');
             section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
             section = trim(section, 'ch-');
             $('#statistic_summary').show();
@@ -298,10 +300,11 @@ function loadSurvey(survey) {
  * @param  {[type]} container       [description]
  * @return {[type]}                 [description]
  */
-function getReportingData(base_url, survey_type, survey_category, container) {
+function getReportingData(base_url, survey_type, survey_category, container,option) {
     progressRow = '';
     $.ajax({
-        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category ,
+    	async: false,
+        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category  + '/' + option,
         beforeSend: function(xhr) {
             $(container).empty();
             $(container).append('<div class="loader" >Loading...</div>');
