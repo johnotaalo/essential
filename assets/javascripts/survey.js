@@ -207,6 +207,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             // renderFacilityInfo(facilityMFL);
             // break_form_to_steps(form_id);
             select_option_changed();
+            $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode:1
+            });
             loadSection(section, action);
             $('#steps').show();
             $('#form_post').addClass('active');

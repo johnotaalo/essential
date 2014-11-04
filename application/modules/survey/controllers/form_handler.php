@@ -2162,7 +2162,7 @@ class Form_Handler extends MY_Controller
 				<td colspan="3"><input type="text"></td>
 				</tr>
 				<tr>
-				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1"></td>
+				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
 				<p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
 				<p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
@@ -2929,8 +2929,8 @@ class Form_Handler extends MY_Controller
 				<td>Supervisee Name<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
 				</tr>
 				<tr>
-				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px"></td>
-				<td>Date	<input name="hcwConclusionDateSupervisee_1" type="text" style="width:500px;padding:10px"></td>
+				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>
+				<td>Date	<input name="hcwConclusionDateSupervisee_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>
 				</tr>
 				</tbody>
 				</table>

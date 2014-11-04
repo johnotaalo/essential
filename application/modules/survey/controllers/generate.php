@@ -385,7 +385,13 @@ class Generate extends MY_Controller
                             {
                                 $relations_row = '';
                                 foreach ($relationships as $relationship) {
-                                    $relations_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$relationship.'" /> '.$relationship.'<br/>';
+                                    if($relationship == 'Other(Specify)')
+                                    {
+                                        $relations_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$relationship.'" /> '.$relationship.' <input type = "text" name = "relationship_other" /><br/>';
+                                    }
+                                    else{
+                                        $relations_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$relationship.'" /> '.$relationship.'<br/>';
+                                    }
                                 }
                                 $data[$section][] .= '<tr>
                                 <td><label>'.$value['questionName'].'</label></td>
@@ -397,7 +403,18 @@ class Generate extends MY_Controller
                             {
                                 $adviser_row = '';
                                 foreach ($advisers as $adviser) {
-                                    $adviser_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$adviser.'" /> '.$adviser.'<br/>';
+                                    if($adviser == 'Other(Specify)')
+                                    {
+                                        $adviser_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$adviser.'" /> '.$adviser.'<input type = "text" name = "adviserother"/><br/>';
+                                    }
+                                    else if($adviser == 'Media e.g. Radio')
+                                    {
+                                        $adviser_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$adviser.'" /> '.$adviser.' Specify Station <input type = "text" name = "station"/><br/>';
+                                    }
+                                    else
+                                    {
+                                        $adviser_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$adviser.'" /> '.$adviser.'<br/>';
+                                    }
                                 }
                                 $data[$section][] .= '<tr>
                                 <td><label>'.$value['questionName'].'</label></td>
