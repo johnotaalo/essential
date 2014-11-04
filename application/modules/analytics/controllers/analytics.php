@@ -1810,6 +1810,16 @@ class Analytics extends MY_Controller
         // echo "<pre>";print_r($results);echo "</pre>";die;
         echo $this->generateData($results, 'Equipment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
+    public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option){
+      $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
+
+      // Format Data by Treatments by Option
+      foreach ($results as $key => $value) {
+        $data[$value['treatment_for']][]=$value;
+      }
+echo '<pre>';print_r($data);
+
+    }
 
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);

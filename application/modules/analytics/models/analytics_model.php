@@ -455,6 +455,71 @@ ORDER BY lq.lq_response ASC";
                             }
 
                             break;
+                        case 'cases_raw':
+
+                          break;
+                        case 'treatment_raw':
+                          $treatments=explode(',',$value['lt_treatments']);
+                          foreach($treatments as $treatment){
+                            /**
+                             * Initialize Array to be formatted
+                             * @var array
+                             */
+                            $data_array=array();
+
+                            foreach ($value as $k => $val) {
+                              $data_array[$k]=$val;
+                            }
+                            /**
+                             * Unset the Old Treatment Key
+                             */
+                            unset($data_array['lt_treatments']);
+                            /**
+                             * Get the Treatment Name for the Code
+                             */
+                            if(trim($treatment)!=''){
+                              
+                              $treatment  = $this->getCommodityName($treatment);
+                            }
+                            /**
+                             * Pass the new TreatmentName
+                             */
+                            $data_array['treatment']=$treatment;
+                            $data[]=$data_array;
+                          }
+                          break;
+                        case 'other_treatment_raw':
+                        $other_treatments=explode(',',$value['lt_other_treatments']);
+                        foreach($other_treatments as $other_treatment){
+                          /**
+                           * Initialize Array to be formatted
+                           * @var array
+                           */
+                          $data_array=array();
+
+                          foreach ($value as $k => $val) {
+                            $data_array[$k]=$val;
+                          }
+                          /**
+                           * Unset the Old Treatment Key
+                           */
+                          unset($data_array['lt_other_treatments']);
+                          /**
+                           * Get the Treatment Name for the Code
+                           */
+                          if(trim($other_treatment)!=''){
+                            echo $other_treatment;
+                            $other_treatment  = $this->getTreatmentName($other_treatment);
+                          }
+                          /**
+                           * Pass the new TreatmentName
+                           */
+                          $data_array['other_treatment']=$other_treatment;
+                          $data[]=$data_array;
+                        }
+
+
+                        break;
                     }
                 }
 
@@ -1842,7 +1907,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                               case 'mh':
                                   $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
                                   break;
-                              
+
                               default:
                                  $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                                   break;
