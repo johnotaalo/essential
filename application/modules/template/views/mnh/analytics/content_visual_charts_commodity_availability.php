@@ -87,7 +87,7 @@
         </div>
         <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="semi-large-graph">
+               <!-- <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6>Sections <i>(Click to Select a Section)</i></h6>
                     </div>
@@ -99,13 +99,22 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
                         <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
                     </div>
-                    <div id="reporting"></div>
+                    <div id="reporting_left"></div>
+                </div>
+
+            
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6 id="countyHeader"><i class="fa fa-map-marker"></i>County</h6>
+                        <h6 id="progressHeader" ><i class="fa fa-tasks"></i>National Reporting Progress</h6>
+                    </div>
+                    <div id="reporting_right"></div>
                 </div>
 
             </div>
@@ -272,8 +281,8 @@
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="x-large-graph" style="height:400px">
-                   <h5>Data From Under 5 Register</h5>
+                <div class="medium-graph" style="height:400px">
+                   <!-- <h5>Data From Under 5 Register</h5> -->
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment: Cases Documented in Under five register in the last one month</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -283,12 +292,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="medium-graph" style="height:400px">
+                <div class="portlet-title">
+
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Correct Classification</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="correct_classifiction">
+                        </div>
+                    </div>
+                </div>
+                </div>
                 <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
 </div>
                 </div>
-                
                 <div class="x-large-graph">
                    <h5>Classification and Treatment</h5>
                     <div class="medium-graph">
@@ -339,7 +359,7 @@
                 </div>
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Health Care Worker Response <span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classification HCW Response Verses Assessor Response <span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
 

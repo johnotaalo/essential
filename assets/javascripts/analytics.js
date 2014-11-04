@@ -39,7 +39,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
                 variableHandler('district', county, district, facility, survey, survey_category, indicator_type);
             }
         }
-        getReportingData(base_url, survey, survey_category, '#reporting');
+        getReportingData(base_url, survey, survey_category, '#reporting_left','reportingleft');
+        getReportingData(base_url, survey, survey_category, '#reporting_right','reportingright');
     }
     // if (county !== '') {
     //     $("#county_select").parent().find(".menu ").filter(function(index) {
@@ -99,7 +100,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
         }
         if (survey != '') {
 
-            getReportingData(base_url, survey, survey_category, '#reporting');
+            getReportingData(base_url, survey, survey_category, '#reporting_left','reportingleft');
+            getReportingData(base_url, survey, survey_category, '#reporting_right','reportingright');
             section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
             section = trim(section, 'ch-');
             $('#statistic_summary').show();
@@ -298,10 +300,11 @@ function loadSurvey(survey) {
  * @param  {[type]} container       [description]
  * @return {[type]}                 [description]
  */
-function getReportingData(base_url, survey_type, survey_category, container) {
+function getReportingData(base_url, survey_type, survey_category, container,option) {
     progressRow = '';
     $.ajax({
-        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category,
+        async:false,
+        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category+ '/' + option,
         beforeSend: function(xhr) {
             $(container).empty();
             $(container).append('<div class="loader" >Loading...</div>');
@@ -375,25 +378,25 @@ function subHandler(criteria, county, district, facility, survey, survey_categor
     switch (criteria) {
         case 'national':
             value = 'Aggegated';
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type);
+            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
             break;
         case 'county':
             value = county;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type);
+            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
             break;
         case 'district':
             value = district;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type);
+            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
             break;
         case 'facility':
             value = facility;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type);
+            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
             break;
     }
 }
 
-function indicatorHandler(criteria, value, survey, survey_category, indicator_type) {
-    loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type, '#indicator_comparison');
+function indicatorHandler(criteria, value, survey, survey_category, indicator_type, statistic) {
+    loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type+ '/' + statistic, '#indicator_comparison');
 }
 
 function setRawUrl(criteria, county, district, facility, survey, survey_category, data_for, data_parent, statistic) {
@@ -744,6 +747,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     break;
                 case 'section-3':
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/cases', '#u5_register');
+                    loadGraph(base_url, 'analytics/getCorrectClassification/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#correct_classifiction');
                     loadGraph(base_url, 'analytics/getDangerSigns/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#danger_signs');
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/treatment', '#treatment_options');
                     loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/other_treatment/dia', '#other_treatment_options_dia');

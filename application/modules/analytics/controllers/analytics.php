@@ -71,7 +71,7 @@ class Analytics extends MY_Controller
             $data[] = (int)sizeof($value);
             $category[] = $day;
         }
-        $resultArray[] = array('name' => 'Daily Entries', 'data' => $data);
+        $resultArray[] = array('name' => 'Monthly Entries', 'data' => $data);
         $this->populateGraph($resultArray, '', $category, $criteria, '', '', 'line', '', '', '', '', array('#ffffff'));
     }
     
@@ -200,13 +200,13 @@ class Analytics extends MY_Controller
         echo $counties;
     }
     
-    public function getAllReportedCounties($survey, $survey_category) {
-        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category);
+    public function getAllReportedCounties($survey, $survey_category,$option) {
+        $reportingCounties = $this->analytics_model->getAllReportingRatio($survey, $survey_category,$option);
         
         //m var_dump($reportingCounties);
         $counter = 0;
         $allProgress = '';
-        foreach ($reportingCounties as $key => $county) {
+        foreach ($reportingCounties[$option] as $key => $county) {
             
             //echo $key;
             $allProgress[] = $this->getReportedCountyJSON($county, $key);
@@ -2320,8 +2320,6 @@ class Analytics extends MY_Controller
 				
 			}
 			}
-		$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-           $colorCounter=0;
 		foreach ($gdata as $name => $value1) {
 			if($name=='No data'){
                    $color='#dddddd';
@@ -2794,7 +2792,7 @@ class Analytics extends MY_Controller
             
             
         }
-        $chart_type = (sizeof($category > 5)) ? 'column' : 'bar';
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'bar';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }
@@ -2813,12 +2811,39 @@ class Analytics extends MY_Controller
      * @param  [type] $for             [description]
      * @return [type]                  [description]
      */
-    public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for) {
+    public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for);
-        
-        //echo '<pre>';print_r($results);echo '</pre>';die;
-        foreach ($results as $indicator => $values) {
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
+        if($statistic = 'classification' && $for = 'ch'){
+           foreach ($results as $indicator => $values) {
+            $category[] = $indicator;
+            foreach ($values as $verdict => $answer) {
+                $gData[$verdict][] = $answer;
+            }
+        }
+        //$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gData as $name => $data) {
+            // if($name=='N/A'){
+            //     $name = 'No data';
+            //        $color='#dddddd';
+            //     }else if($name=='Yes'){
+            //         $color='#8bbc21';
+            //     }else if($name=='No'){
+            //         $color='#fb4347';
+            //     }
+                
+            //     else{
+            //          $color = $colors[$colorCounter];
+            //          $colorCounter++;
+            //     }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data,'color'=>$color);
+        }
+       // echo '<pre>';print_r($resultArray);echo '</pre>';die;
+        // $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar'); 
+        }else{
+          foreach ($results as $indicator => $values) {
             $category[] = $indicator;
             foreach ($values as $verdict => $answer) {
                 $gData[$verdict][] = $answer;
@@ -2828,11 +2853,11 @@ class Analytics extends MY_Controller
         foreach ($gData as $name => $data) {
             $resultArray[] = array('name' => ucwords($name), 'data' => $data);
         }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');  
+        }
         
-        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'column');
-    }
+        }
+    
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();
         
@@ -2861,7 +2886,10 @@ class Analytics extends MY_Controller
     public function getChildrenServices($criteria, $value, $survey, $survey_category) {
         $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc');
     }
-    
+    public function getCorrectClassification($criteria,$value,$survey,$survey_category){
+        $this->getIndicatorComparison($criteria,$value,$survey,$survey_category,'ch','classification');
+    }
+
     /**
      * [getDangerSigns description]
      * @param  [type] $criteria [description]
