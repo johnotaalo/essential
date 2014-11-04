@@ -2037,7 +2037,7 @@ class Form_Handler extends MY_Controller
     public function get_hcw_form() {
         $this->combined_form = '
         <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
-        	<div class="step" id="section-1">
+        	<div class="step" id="section-1" style = "padding-bottom: 150px;">
         	<input type = "hidden" name = "step_name" value = "section-1"/> 
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table>
