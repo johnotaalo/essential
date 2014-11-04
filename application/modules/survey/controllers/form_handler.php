@@ -413,6 +413,7 @@ class Form_Handler extends MY_Controller
 		</table>
 		</div>
 		<div class="step" id="section-3">
+		<input type="hidden" name="step_name" value="section-3"/>
 		<p style="display:true" class="message success">
 			SECTION 3 of 8: GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY
 		</p>
@@ -462,6 +463,7 @@ class Form_Handler extends MY_Controller
 		<pagebreak />
 		</div>
 		<div class="step" id="section-4">
+		<input type="hidden" name="step_name" value="section-4"/>
 		<p style="display:true" class="message success">SECTION 4 of 8: STAFF TRAINING
 		</p>
 		<table class="centre">
@@ -612,6 +614,7 @@ class Form_Handler extends MY_Controller
 	</div><!--\.section 4-->
 <pagebreak />
 <div id="section-5" class="step">
+<input type="hidden" name="step_name" value="section-5"/>
 		<p style="display:true" class="message success">
 			SECTION 5 of 8: COMMODITY AVAILABILITY
 		</p>

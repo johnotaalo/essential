@@ -376,6 +376,44 @@ class Generate extends MY_Controller
                                 <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
                             </tr>';
                         }
+
+                        else if($section == 'int')
+                        {
+                            $advisers = array('Self', 'Spouse', 'Relative', 'Friend', 'Community Health Worker', 'Media e.g. Radio', 'Other(Specify)');
+                            $relationships = array('Mother', 'Father', 'Grandmother', 'Grandfather', 'Aunt', 'Uncle', 'Brother', 'Sister', 'Other(Specify)');
+                            if($value['questionCode'] == 'QHC18')
+                            {
+                                $relations_row = '';
+                                foreach ($relationships as $relationship) {
+                                    $relations_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$relationship.'" /> '.$relationship.'<br/>';
+                                }
+                                $data[$section][] .= '<tr>
+                                <td><label>'.$value['questionName'].'</label></td>
+                                <td>'.$relations_row.'</td>
+                                <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
+                            </tr>';
+                            }
+                            else if($value['questionCode'] == 'QHC13')
+                            {
+                                $adviser_row = '';
+                                foreach ($advisers as $adviser) {
+                                    $adviser_row .= '<input type = "radio" name = "questionResponse_'.$counter.'" value = "'.$adviser.'" /> '.$adviser.'<br/>';
+                                }
+                                $data[$section][] .= '<tr>
+                                <td><label>'.$value['questionName'].'</label></td>
+                                <td>'.$adviser_row.'</td>
+                                <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
+                            </tr>';
+                            }
+                            else
+                            {
+                                $data[$section][] = '<tr>
+                                <td><label>'.$value['questionName'].'</label></td>
+                                <td><input type = "radio" value = "Yes" name = "questionResponse_'.$counter.'"/> Yes <input type = "radio" value = "No" name = "questionResponse_'.$counter.'"/> No</td>
+                                <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
+                                </tr>';
+                            }
+                        }
                         else if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
@@ -1992,6 +2030,85 @@ class Generate extends MY_Controller
                 }
 
                 return $facilitysection;
+            }
+
+
+            public function createStaffTrainingGuidelinesSection() {
+                $this->data_found = $this->data_model->getTrainingGuidelines();
+
+                //var_dump( $this->data_found );die;
+
+                $counter = 0;
+                $section = '';
+                $base = 0;
+                $current = "";
+                $titles[1] = array('Total in Facility', 'Total Available On Duty');
+                $titles[2] = array('Total in Facility', 'Total Available On Duty');
+                $staff = array('Doctor', 'Nurse', 'R.C.O.');
+                $count = 0;
+
+                //Populate Titles
+                foreach ($this->data_found as $value) {
+                    $count++;
+                    if ($count < 5) {
+                        $titles[1][] = array('guide' => $value['guideName'], 'code' => $value['guideCode'], 'training' => 'train');
+                    } else {
+                        $titles[2][] = array('guide' => $value['guideName'], 'code' => $value['guideCode'], 'training' => 'train');
+                    }
+                }
+                $titles[1][] = 'Total Staff Members Still Working';
+                $titles[2][] = 'Total Staff Members Still Working';
+
+                //echo '<pre>';print_r($titles);echo '</pre>';die;
+
+                foreach ($staff as $member) {
+                    $counter++;
+                    $row = '<tr><td>' . $member . '<input type="hidden" name="mchTrainingStaff_' . $counter . '" id="mchTrainingStaff_' . $counter . '" value="' . $member . '"></td>';
+                    foreach ($titles[1] as $header) {
+
+                        if (sizeof($header) == 3) {
+                            $row.= '<td><input size="50" type="number" name="mchTrainingBefore_' . $counter . '[' . str_replace(' ', '', $header['code']) . ']" id="mchTrainingBefore_' . $counter . '" /></td><td><input size="50" type="number" id="mchTrainingAfter_' . $counter . '"  name=mchTrainingAfter_' . $counter . '[' . str_replace(' ', '', $header['code']) . ']" /></td>';
+                        } else {
+                            $row.= '<td><input type="number" name="mchTraining' . str_replace(' ', '', $header) . '_' . $counter . '" id="' . str_replace(' ', '', $header) . '_' . $counter . '"</td>';
+                        }
+                    }
+
+                    $row.= '</tr>';
+
+                    //echo '<table>'.$row.'</table>';
+                    $data[1][$member] = $row;
+                }
+
+                foreach ($staff as $member) {
+                    $counter++;
+                    $row = '<tr><td>' . $member . '<input type="hidden" name="mchTrainingStaff_' . $counter . '" id="mchTrainingStaff_' . $counter . '" value="' . $member . '"></td>';
+                    foreach ($titles[2] as $header) {
+
+                        if (sizeof($header) == 3) {
+                            $row.= '<td><input size="50" type="number" name="mchTrainingBefore_' . $counter . '[' . str_replace(' ', '', $header['code']) . ']" id="mchTrainingBefore_' . $counter . '" /></td><td><input size="50" type="number" id="mchTrainingAfter_' . $counter . '"  name=mchTrainingAfter_' . $counter . '[' . str_replace(' ', '', $header['code']) . ']" /></td>';
+                        } else {
+                            $row.= '<td><input type="number" name="mchTraining' . str_replace(' ', '', $header) . '_' . $counter . '" id="' . str_replace(' ', '', $header) . '_' . $counter . '"</td>';
+                        }
+                    }
+
+                    $row.= '</tr>';
+
+                    //echo '<table>'.$row.'</table>';
+                    $data[2][$member] = $row;
+                }
+
+                //echo '<pre>';print_r($data);echo '</pre>';die;
+
+                foreach ($data[1] as $key => $value) {
+                    $this->trainingGuidelineSection[1].= $value;
+                }
+
+                foreach ($data[2] as $key => $value) {
+                    $this->trainingGuidelineSection[2].= $value;
+                }
+
+                //echo $this->mchTrainingGuidelineSection;die;
+                return $this->trainingGuidelineSection;
             }
         }
         
