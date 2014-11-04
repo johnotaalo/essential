@@ -1800,8 +1800,21 @@ class Analytics extends MY_Controller
 
     public function getCommodityRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
+// echo "<pre>";print_r($results);echo "</pre>";die;
+switch($statistic){
+  case 'availability_raw':
+    $results = $this->formatArray($results,'fac_mfl','commodity','ac_availability');
+  break;
 
-        // echo "<pre>";print_r($results);echo "</pre>";die;
+  case 'unavailability_raw':
+  $results = $this->formatArray($results,'fac_mfl','commodity','ac_reason_unavailable');
+  break;
+
+  case 'location_raw':
+  $results = $this->formatArray($results,'fac_mfl','commodity','ac_location');
+  break;
+}
+
         echo $this->generateData($results, 'Commodity Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     public function getEquipmentRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
@@ -1810,14 +1823,16 @@ class Analytics extends MY_Controller
         // echo "<pre>";print_r($results);echo "</pre>";die;
         echo $this->generateData($results, 'Equipment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
-    public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option){
+    public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option,$form){
       $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
-
       // Format Data by Treatments by Option
       foreach ($results as $key => $value) {
         $data[$value['treatment_for']][]=$value;
       }
-echo '<pre>';print_r($data);
+
+      $result = $this->formatArray($data[$option],'fac_mfl','treatment','total_treatment');
+echo $this->generateData($result, 'Treatment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+
 
     }
 

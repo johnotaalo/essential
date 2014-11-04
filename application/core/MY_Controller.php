@@ -1,6 +1,6 @@
 <?php
 
-// error_reporting(1);
+error_reporting(1);
 ini_set('memory_limit', '-1');
 
 //# Extend CI_Controller to include Doctrine Entity Manager
@@ -58,6 +58,11 @@ class MY_Controller extends MX_Controller
             case 'table':
                 $result = $this->loadTable($data);
                 break;
+
+						case 'dynamic_table':
+								$result = $this->loadDynamicTable($data);
+								break;
+
 
             case 'excel':
                 $this->loadExcel($data, $filename);
@@ -207,57 +212,89 @@ background: #ddd;
     }
 
     /**
-     * [loadTable description]
-     * @param  [type] $data     [description]
-     * @param  string $editable [description]
-     * @return [type]           [description]
-     */
-    public function loadTable($data, $editable = '') {
-        $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
+		* [loadTable description]
+		* @param  [type] $data     [description]
+		* @param  string $editable [description]
+		* @return [type]           [description]
+		*/
+		public function loadTable($data, $editable = '') {
+				if ($custom_titles == '') {
+						$pk = 0;
 
-        $this->table->set_template($tmpl);
+						//set table headers
+						foreach ($data[0] as $title => $column) {
+								if ($pk != 0) {
+										$titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+								} else {
+										$primary_key = $title;
+								}
+								$pk++;
+						}
+						$this->table->set_heading($titles);
+				} else {
+						$this->table->set_heading($custom_titles);
+				}
+				$counter = 0;
+				foreach ($data as $key => $columns) {
+						$row = array();
+						foreach ($columns as $column => $value) {
 
-        if ($custom_titles == '') {
-            $pk = 0;
+								if ($column != $primary_key) {
+										switch ($editable) {
+												case 'editable':
+														$row[] = '<a id="' . $column . '_' . $counter . '" data-type="text" data-name="'.$column.'" data-pk="'.$columns[$primary_key].'" class="editable">' . $value . '</a>';
+														break;
 
-            //set table headers
-            foreach ($data[0] as $title => $column) {
-                if ($pk != 0) {
-                    $titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
-                } else {
-                    $primary_key = $title;
-                }
-                $pk++;
-            }
-            $this->table->set_heading($titles);
-        } else {
-            $this->table->set_heading($custom_titles);
-        }
-        $counter = 0;
-        foreach ($data as $key => $columns) {
-            $row = array();
-            foreach ($columns as $column => $value) {
+												default:
+														$row[] = $value;
+														break;
+										}
+								}
+						}
+						$counter++;
 
-                if ($column != $primary_key) {
-                    switch ($editable) {
-                        case 'editable':
-                            $row[] = '<a id="' . $column . '_' . $counter . '" data-type="text" data-name="'.$column.'" data-pk="'.$columns[$primary_key].'" class="editable">' . $value . '</a>';
-                            break;
+						//echo '<pre>';print_r($row);echo '</pre>';die;
+						$this->table->add_row($row);
+				}
+				$generated_table = $this->table->generate();
+				return $generated_table;
+		}
+		/**
+		 * [loadDynamicTable description]
+		 * @param [type] $data     [description]
+		 * @param string $editable [description]
+		 */
+		public function loadDynamicTable($data) {
 
-                        default:
-                            $row[] = $value;
-                            break;
-                    }
-                }
-            }
-            $counter++;
+						//set table headers
+						foreach ($data['columns'] as $title) {
+								$titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+						}
+						$this->table->set_heading($titles);
 
-            //echo '<pre>';print_r($row);echo '</pre>';die;
-            $this->table->add_row($row);
-        }
-        $generated_table = $this->table->generate();
-        return $generated_table;
-    }
+				$counter = 0;
+				foreach ($data['data'] as $key => $columns) {
+						$row = array();
+						foreach($data['columns'] as $title){
+								if (array_key_exists($title,$columns)) {
+														$row[] = $columns[$title];
+										}
+
+
+						else{
+							$row[] = 0;
+						}
+
+						$counter++;
+
+						//echo '<pre>';print_r($row);echo '</pre>';die;
+
+				}
+				$this->table->add_row($row);
+			}
+				$generated_table = $this->table->generate();
+				return $generated_table;
+		}
 
    public function createFacilitiesInCounty($county)
     {
@@ -311,4 +348,39 @@ background: #ddd;
 
         return $sp_combo;
     }
+		/**
+		* [formatArray description]
+		* @param [type] $array            [description]
+		* @param [type] $new_column       [description]
+		* @param [type] $new_column_value [description]
+		*/
+		public function formatArray($array,$sorting_key,$new_column,$new_column_value){
+			$newArray['columns']=array();
+			foreach ($array as $value) {
+
+				foreach ($value as $k => $val) {
+					if($k==$sorting_key){
+						$sorting_val=$value[$k];
+					}
+					else if($k==$new_column){
+						$column_key = $value[$k];
+					}
+					else if($k==$new_column_value){
+						$column_val = $value[$k];
+					}
+					if($k!=$new_column_value && $k!=$new_column ){
+						$newArray['data'][$sorting_val][$k]=$val;
+						$newArray['columns'][]=$k;
+
+						if($column_key!=NULL){
+							$newArray['columns'][]=$column_key;
+							$newArray['data'][$sorting_val][$column_key]=$column_val;
+							}
+}
+
+				}
+			}
+			$newArray['columns']=array_values(array_unique($newArray['columns']));
+			return $newArray;
+		}
 }

@@ -468,7 +468,7 @@ ORDER BY lq.lq_response ASC";
                             $data_array=array();
 
                             foreach ($value as $k => $val) {
-                              $data_array[$k]=$val;
+                                $data_array[$k]=$val;
                             }
                             /**
                              * Unset the Old Treatment Key
@@ -478,7 +478,7 @@ ORDER BY lq.lq_response ASC";
                              * Get the Treatment Name for the Code
                              */
                             if(trim($treatment)!=''){
-                              
+
                               $treatment  = $this->getCommodityName($treatment);
                             }
                             /**
@@ -508,13 +508,12 @@ ORDER BY lq.lq_response ASC";
                            * Get the Treatment Name for the Code
                            */
                           if(trim($other_treatment)!=''){
-                            echo $other_treatment;
                             $other_treatment  = $this->getTreatmentName($other_treatment);
                           }
                           /**
                            * Pass the new TreatmentName
                            */
-                          $data_array['other_treatment']=$other_treatment;
+                          $data_array['treatment']=$other_treatment;
                           $data[]=$data_array;
                         }
 
@@ -1790,8 +1789,29 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
+
                         if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
-                            $data[]=$value;
+                            switch($statistic){
+                              case 'availability_raw':
+                              case 'unavailability_raw':
+                              case 'location_raw':
+                                  foreach($value as $k=>$v){
+                                    $data_array[$k]=$v;
+
+                                  }
+                                  $data_array['commodity']=$value['comm_name'].'['.$value['comm_unit'].']';
+                                  unset($data_array['comm_name']);
+                                  unset($data_array['comm_unit']);
+                                  $data[]=$data_array;
+                                break;
+
+
+                              case 'supplier_raw':
+
+                                break;
+
+                            }
+
                         }
                         else{
                         // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
