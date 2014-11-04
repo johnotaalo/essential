@@ -1641,6 +1641,61 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
             return $data;
         }
 
+        /**
+         * [getWorkProfile description]
+         * @param  [type] $criteria  [description]
+         * @param  [type] $value     [description]
+         * @param  [type] $survey    [description]
+         * @param  [type] $for       [description]
+         * @param  [type] $statistic [description]
+         * @return [type]            [description]
+         */
+        public function getWorkProfile($criteria, $value, $survey, $survey_category, $for, $statistics) {
+            $value = urldecode($value);
+            $newData = array();
+
+            /*using CI Database Active Record*/
+            $data = $data_set = $data_series = $analytic_var = $data_categories = array();
+
+            //data to hold the final data to relayed to the view,data_set to hold sets of data, analytic_var to hold the analytic variables to be used in the data_series,data_series to hold the title and the json encoded sets of the data_set
+
+            $query = "CALL get_work_profile('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistics . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+
+                // Dump the extra resultset.
+                $queryData->free_result();
+
+                //echo($this->db->last_query());die;
+                if ($this->dataSet !== NULL) {
+
+                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    foreach ($this->dataSet as $value) {
+                       if (array_key_exists('frequency', $value)) {
+                            $data[$value['question_name']][$value['frequency']] = (int)$value['total_response'];
+                        }
+                    }
+                }
+
+            
+
+                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+
+
+            }
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());//exit;
+
+
+            }
+
+            return $data;
+        }
+
         public function getCommodityUsageOptions($criteria, $value, $survey, $survey_category, $for, $statistic) {
 
             $value = urldecode($value);
@@ -3940,10 +3995,10 @@ ORDER BY question_code";
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
-
+                  
                 // Dump the extra resultset.
                 $queryData->free_result();
-
+               // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
@@ -4018,16 +4073,8 @@ ORDER BY question_code";
                     switch ($statistics) {
                         case 'response':
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
-
-                            /* $yes = $value_['Yes'];
-                            $no = $value_['No'];
-                            $null = $value_[''];
-
-                            //1. collect the categories
-                            $data[$question]['yes'] = $yes;
-                            $data[$question]['no'] = $no;
-                            $data[$question]['null']=$null;*/
                             break;
+
 
                         case 'total':
 
@@ -4038,6 +4085,10 @@ ORDER BY question_code";
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']] = $value_['total_response'];
+                            break;
+
+                        case 'transfer':
+                           $data[$value_['question_name']][$value_['frequency']] = (int)$value_['total_response'];
                             break;
 
                         case 'healthservice':
@@ -4124,6 +4175,47 @@ ORDER BY question_code";
                //echo '<pre>';print_r($data);echo '</pre>';die;
 
                 //die(var_dump($this->dataSet));
+
+
+            }
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());//exit;
+
+
+            }
+
+            // var_dump($data);die;
+            return $data;
+        }
+
+
+        public function getHCWProfile($criteria, $value, $survey, $survey_category, $statistics) {
+
+            /*using CI Database Active Record*/
+            $value = urldecode($value);
+            $data = array();
+
+            $query = "CALL get_hcw_profile('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistics . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+
+                // Dump the extra resultset.
+                $queryData->free_result();
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                foreach ($this->dataSet as $value_) {
+
+                    
+                }
+
+               if ($this->dataSet) {
+                return $this->dataSet;
+            } else {
+                return $this->dataSet = false;
+            }
 
 
             }
