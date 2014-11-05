@@ -4753,8 +4753,6 @@ return true;
 
                             //insert log entry if new, else update the existing one
                                 if ($this->addMCHIndicatorInfo() == true) {
-                                    //if($this->addInterviewAspect == true){
-                                     //defined in this model
                                     $this->writeAssessmentTrackerLog();
                                     return $this->response = 'true';
                                 } else {
@@ -4795,11 +4793,11 @@ return true;
                                 } else {
                                     return $this->response = 'false';
                                 }
-                            
+
                             break;
 
 
-                    }
+                  }
                 //close switch
 
                 case 'ch':

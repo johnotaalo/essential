@@ -117,6 +117,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '#reporting_right', 'reportingright');
       section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
       section = trim(section, 'ch-');
+      section = trim(section, 'hcw-');
       $('#statistic_summary').show();
       $('#survey_stat').show();
       $('#survey_stat').addClass('animated bounceInUp');
@@ -158,6 +159,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
     survey_category = $('#survey_category').val();
     section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
     section = trim(section, 'ch-');
+    section = trim(section, 'hcw-');
 
     if (county != '' && county != 'All Counties Selected') {
       $('#district_stat .outer .inner .content .text #county').text(
@@ -200,6 +202,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
       survey_category = $('#survey_category').val();
       section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
       section = trim(section, 'ch-');
+      section = trim(section, 'hcw-');
       getFacilityCount(base_url, '', '', district, survey,
         survey_category);
       variableHandler(scope, county, district, facility, survey,
@@ -215,6 +218,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
       // survey_category = $('#survey_category').val();
       section = trim($('.collapse.in').parent().attr('id'), 'mnh-');
       section = trim(section, 'ch-');
+      section = trim(section, 'hcw-');
       variableHandler(scope, county, district, facility, survey,
         survey_category, indicator_type, section);
     }
@@ -289,6 +293,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
   $('.panel-collapse').on('show.bs.collapse', function() {
     section = trim($(this).parent().attr('id'), 'mnh-');
     section = trim(section, 'ch-');
+    section = trim(section, 'hcw-');
     // alert(section);
     $(this).parent().find('.panel-heading h4 a i.fa').attr('class',
       'fa fa-chevron-down');
@@ -463,7 +468,7 @@ function setRawUrl(criteria, county, district, facility, survey,
     var raw_url = '';
     switch (criteria) {
       case 'national':
-        value = 'Aggegated';
+        value = 'Aggregated';
         break;
       case 'county':
         value = county;
@@ -486,6 +491,18 @@ function setRawUrl(criteria, county, district, facility, survey,
         break;
       case 'commodity':
         raw_url = 'analytics/getCommodityRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'equipment':
+        raw_url = 'analytics/getEquipmentRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'resource':
+        raw_url = 'analytics/getResourceRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'supplies':
+        raw_url = 'analytics/getSupliesRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
     }
@@ -1083,5 +1100,35 @@ function statisticsHandler(criteria, value, survey, survey_category,
           break;
       }
       break;
+
+    case 'hcw':
+      //MNH Analytics
+      //Section 1 MNH
+      switch (section) {
+        case 'section-1':
+          loadGraph(base_url, 'analytics/getFacilityOwnerPerCounty/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#HCWfacility_owner');
+          loadGraph(base_url, 'analytics/getFacilityLevelPerCounty/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#HCWfacility_levels');
+          loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#HCWfacility_type');
+          loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category + '/profile_raw/table',
+            '#HCW_Profile');
+          loadGraph(base_url, 'analytics/getCurrentService/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#current_service');
+          loadGraph(base_url, 'analytics/getRetentionAfter/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#retentiontraining');
+          loadGraph(base_url, 'analytics/getTransferTraining/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#transfertraining');
+          
+          break;
+      }
   }
 }

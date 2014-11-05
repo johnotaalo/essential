@@ -48,7 +48,7 @@ function startSurvey(base_url, survey, survey_category, district) {
       type: 'POST',
       data: formData,
       success: function(data) {
-        console.log(data);
+        //console.log(data);
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
         changeSection(curr_section, thethat);
@@ -207,17 +207,11 @@ function startSurvey(base_url, survey, survey_category, district) {
             // renderFacilityInfo(facilityMFL);
             // break_form_to_steps(form_id);
             select_option_changed();
-            $('.bs-date').datepicker();
-            $('.bs-month').datepicker({
-              minViewMode:1
-            });
             loadSection(section, action);
             $('#steps').show();
             $('#form_post').addClass('active');
-            $('#addHCW').click(function(){
-              $table = $('#HCW-Profile');
-               var cloned_object = $table.find('tbody:last').clone(true);
-            });
+            $('#click_form').fadeOut();
+            $('select').select2();
             // $('actual-form .step').hide();
 
           });
@@ -276,7 +270,8 @@ function startSurvey(base_url, survey, survey_category, district) {
         $('#section-' + section).show();
       } else {
         $('.actual-form .step').hide();
-        $("#section-1").show();
+        // Go back to Facility List
+        window.location = base_url + 'mnch/takesurvey';
       }
       disableFields(section);
     }
