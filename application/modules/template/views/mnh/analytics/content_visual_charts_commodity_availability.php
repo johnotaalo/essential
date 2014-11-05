@@ -291,7 +291,7 @@
                         <div class="chart" id="u5_register">
                         </div>
                     </div>
-                 <div class="col-md-12">
+                <!-- <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
 </div>
@@ -419,9 +419,9 @@
                         </div>
                     </div>
                 </div>
-                </div> 
+                </div> -->
                 
-                 <div class="x-large-graph">
+               <!--  <div class="x-large-graph">
                    <h5>Classification and Treatment</h5>
                     <div class="medium-graph">
                     <div class="portlet-title">
@@ -453,7 +453,7 @@
                         </div>
                     </div>
                 </div>
-                </div> 
+                </div> -->
   <!-- <div class="col-md-12">
                 <div class="ui horizontal icon divider">
   <i class="icon circular fa fa-bar-chart"></i>
