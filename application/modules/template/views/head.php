@@ -9,7 +9,11 @@
 <!-- Styles -->
 <link rel="stylesheet" href="<?php echo base_url('assets/stylesheets/styles.css');?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/webfont-opensans/stylesheet.css');?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english.css');?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-language-english-indicator.css');?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/offline/themes/offline-theme-default.css');?>">
 <!-- Javascript -->
 
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/semantic-ui/build/packaged/javascript/semantic.js');?>"></script>
+<script src="<?php echo base_url('assets/bower_components/offline/offline.min.js');?>"></script>

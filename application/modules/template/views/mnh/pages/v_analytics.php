@@ -31,19 +31,12 @@
                     <div class="span12">
 
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                        <h4 class="page-title">
-                            <!-- <div id="page-crumb">
-                                <a class="section">Food</a>
-                                <div class="divider"> / </div>
-                                <a class="section">Fruit</a>
-                                <div class="divider"> / </div>
-                                <div class="active section">Apples</div>
-                            </div> -->
-                            
-                        </h4>
+                        <div class="ui message info">
+                          <i class="icon attention"></i>The information below is gathered from all facilities that have <b><i>entered</i></b> the assessment information onto the MNCH Web Tool.
+                        </div>
 
                         <ul class="breadcrumb" data-start="border-bottom:0;opacity:1;position:relative" data-top="opacity:0.9;z-index:1000;position:fixed;top:0;width:100%;border-bottom:1px solid #ddd">
-                         
+
                                 <div class="ui selection dropdown">
                                     <input id="survey_type" type="hidden">
                                     <i class="icon book"></i>
@@ -72,7 +65,7 @@
                                     <div class="default text">Choose a County</div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
-                                      
+
                                     </div>
                                 </div>
                                 <div class="ui selection dropdown">
@@ -81,7 +74,7 @@
                                     <div class="default text">Choose a Sub County</div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
-                                      
+
                                     </div>
                                 </div>
                                 <div class="ui selection dropdown">
@@ -90,10 +83,10 @@
                                     <div class="default text">Choose a Facility</div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
-                                      
+
                                     </div>
                                 </div>
-                            
+
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>

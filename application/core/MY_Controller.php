@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(1);
 ini_set('memory_limit', '-1');
 
@@ -6,12 +7,12 @@ ini_set('memory_limit', '-1');
 
 class MY_Controller extends MX_Controller
 {
-	public $questions,$indicators,$commodities,$survey,$survey_form;
+	public $questions,$indicators,$commodities,$survey,$survey_form, $facilitydetails;
 
     public function __construct() {
         parent::__construct();
-        
-       
+
+
 // $this->survey_form='';
         // Load IMCI defaults if one is accessing IMCI
         if($this->uri->segment(1) === 'imci')
@@ -20,10 +21,10 @@ class MY_Controller extends MX_Controller
         }
 
     }
-    
+
     public function load_imci_defaults()
     {
-        $this->meta_description = 'The INtegrated Management of Childhood Infections';
+        $this->meta_description = 'The Integrated Management of Childhood Infections';
         $this->meta_keywords = array('html', 'css', 'javascript', 'bootstrap', 'codeigniter', 'nairobi', 'kenya');
         $this->meta_author = 'HP-Strathmore Lab, Clinton Health Access Initiative, @Biggie_1969';
 
@@ -58,6 +59,11 @@ class MY_Controller extends MX_Controller
                 $result = $this->loadTable($data);
                 break;
 
+						case 'dynamic_table':
+								$result = $this->loadDynamicTable($data);
+								break;
+
+
             case 'excel':
                 $this->loadExcel($data, $filename);
                 $result = '';
@@ -74,7 +80,7 @@ class MY_Controller extends MX_Controller
         }
         return $result;
     }
-    
+
     /**
      * [loadExcel description]
      * @param  [type] $data     [description]
@@ -88,28 +94,28 @@ class MY_Controller extends MX_Controller
         $objPHPExcel->getProperties()->setTitle("Office 2007 XLSX Test Document");
         $objPHPExcel->getProperties()->setSubject("Office 2007 XLSX Test Document");
         $objPHPExcel->getProperties()->setDescription(" ");
-        
+
         // Add some data
         //  echo date('H:i:s') . " Add some data\n";
         $objPHPExcel->setActiveSheetIndex(0);
-        
+
         $rowExec = 1;
-        
+
         //Looping through the cells
         $column = 0;
         //echo '<pre>';print_r($data);echo'</pre>';die;
         foreach ($data[0] as $k=>$cell) {
-            
+
             //echo $column . $rowExec; die;
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar','',str_replace('as','',str_replace('ae','',str_replace('ac','',str_replace('li','',str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
             $objPHPExcel->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec)->getFont()->setBold(true)->setSize(14);
             $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(true);
-            
+
             $column++;
         }
         $rowExec = 2;
         foreach ($data as $key=>$rowset) {
-            
+
             //Looping through the cells per facility
             $column = 0;
             //var_dump($rowset);die;
@@ -119,32 +125,32 @@ class MY_Controller extends MX_Controller
             }
             $rowExec++;
         }
-        
+
         //die ;
-        
+
         // Rename sheet
         //  echo date('H:i:s') . " Rename sheet\n";
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
-        
+
         // Save Excel 2007 file
         //echo date('H:i:s') . " Write to Excel2007 format\n";
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-        
+
         // We'll be outputting an excel file
         header('Content-type: application/vnd.ms-excel');
-        
+
         // It will be called file.xls
         header('Content-Disposition: attachment; filename=' . $filename . '.xlsx');
-        
+
         // Write file to the browser
         $objWriter->save('php://output');
-        
+
         // Echo done
         //echo date('H:i:s') . " Done writing file.\r\n";
-        
-        
+
+
     }
-    
+
     /**
      * [loadPDF description]
      * @param  [type] $pdf [description]
@@ -152,7 +158,7 @@ class MY_Controller extends MX_Controller
      */
     public function loadPDF($data, $filename) {
         $data = $this->loadTable($data);
-        
+
         //echo $data;die;
         $stylesheet = ('
             <style>
@@ -173,7 +179,7 @@ border-color: #FFFFEE;
 font: bold 100% sans-serif;}
         td:even{
             background:#eee;
-            
+
         }
         th {
 text-align: left;
@@ -204,60 +210,177 @@ background: #ddd;
         $report_name = $filename . ".pdf";
         $this->mpdf->Output($report_name, 'I');
     }
-    
+
     /**
-     * [loadTable description]
-     * @param  [type] $data     [description]
-     * @param  string $editable [description]
-     * @return [type]           [description]
-     */
-    public function loadTable($data, $editable = '') {
-        $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
-        
-        $this->table->set_template($tmpl);
-        
-        if ($custom_titles == '') {
-            $pk = 0;
-            
-            //set table headers
-            foreach ($data[0] as $title => $column) {
-                if ($pk != 0) {
-                    $titles[] = ucwords(str_replace('comm','commodity',str_replace('ar','',str_replace('as','',str_replace('ae','',str_replace('ac','',str_replace('li','',str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
-                } else {
-                    $primary_key = $title;
-                }
-                $pk++;
-            }
-            $this->table->set_heading($titles);
-        } else {
-            $this->table->set_heading($custom_titles);
-        }
-        $counter = 0;
-        foreach ($data as $key => $columns) {
-            $row = array();
-            foreach ($columns as $column => $value) {
+		* [loadTable description]
+		* @param  [type] $data     [description]
+		* @param  string $editable [description]
+		* @return [type]           [description]
+		*/
+		public function loadTable($data, $editable = '') {
+				if ($custom_titles == '') {
+						$pk = 0;
 
-                if ($column != $primary_key) {
-                    switch ($editable) {
-                        case 'editable':
-                            $row[] = '<a id="' . $column . '_' . $counter . '" data-type="text" data-name="'.$column.'" data-pk="'.$columns[$primary_key].'" class="editable">' . $value . '</a>';
-                            break;
+						//set table headers
+						foreach ($data[0] as $title => $column) {
+								if ($pk != 0) {
+										$titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+								} else {
+										$primary_key = $title;
+								}
+								$pk++;
+						}
+						$this->table->set_heading($titles);
+				} else {
+						$this->table->set_heading($custom_titles);
+				}
+				$counter = 0;
+				foreach ($data as $key => $columns) {
+						$row = array();
+						foreach ($columns as $column => $value) {
 
-                        default:
-                            $row[] = $value;
-                            break;
-                    }
-                }
-            }
-            $counter++;
-            
-            //echo '<pre>';print_r($row);echo '</pre>';die;
-            $this->table->add_row($row);
+								if ($column != $primary_key) {
+										switch ($editable) {
+												case 'editable':
+														$row[] = '<a id="' . $column . '_' . $counter . '" data-type="text" data-name="'.$column.'" data-pk="'.$columns[$primary_key].'" class="editable">' . $value . '</a>';
+														break;
+
+												default:
+														$row[] = $value;
+														break;
+										}
+								}
+						}
+						$counter++;
+
+						//echo '<pre>';print_r($row);echo '</pre>';die;
+						$this->table->add_row($row);
+				}
+				$generated_table = $this->table->generate();
+				return $generated_table;
+		}
+		/**
+		 * [loadDynamicTable description]
+		 * @param [type] $data     [description]
+		 * @param string $editable [description]
+		 */
+		public function loadDynamicTable($data) {
+
+						//set table headers
+						foreach ($data['columns'] as $title) {
+								$titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+						}
+						$this->table->set_heading($titles);
+
+				$counter = 0;
+				foreach ($data['data'] as $key => $columns) {
+						$row = array();
+						foreach($data['columns'] as $title){
+								if (array_key_exists($title,$columns)) {
+														$row[] = $columns[$title];
+										}
+
+
+						else{
+							$row[] = 0;
+						}
+
+						$counter++;
+
+						//echo '<pre>';print_r($row);echo '</pre>';die;
+
+				}
+				$this->table->add_row($row);
+			}
+				$generated_table = $this->table->generate();
+				return $generated_table;
+		}
+
+   public function createFacilitiesInCounty($county)
+    {
+        $this->load->model('survey/data_model');
+        $facility_combo = '';
+        $facilities = $this->data_model->getFacInCounty($county);
+        $facility_combo .= '<select name = "facilitieslist"><option value = "">Select a Facility</option>';
+        foreach ($facilities as $facility) {
+            $facility_combo .= '<option value = "'.$facility['fac_name'].'">'.$facility['fac_name'].'</option>';
         }
-        $generated_table = $this->table->generate();
-        return $generated_table;
+        $facility_combo .= '</select>';
+        return $facility_combo;
     }
 
+    public function createCounties()
+    {
+        $this->load->model('survey/data_model');
+        $county_combo = '';
+        $counties = $this->data_model->getCounties();
+        $county_combo .= '<select id = "m_county_choose" name = "counties_select"><option value = "">Select a County</option>';
+        foreach ($counties as $county) {
+            $county_combo .= '<option value = "'.$county['countyName'].'">'.$county['countyName'].'</option>';
+        }
+        $county_combo .= '</select>';
+        return $county_combo;
+    }
+
+    public function createCadre()
+    {
+         $this->load->model('survey/data_model');
+         $cadre_combo = '';
+         $cadres = $this->data_model->getCadre();
+         $cadre_combo .= '<option value = "">Select a cadre</option>';
+         foreach ($cadres as $cadre) {
+            $cadre_combo .= '<option value = "'.$cadre['cadre_code'].'">'.$cadre['cadre'].'</option>';
+         }
+
+         return $cadre_combo;
+    }
+
+    public function createServicePoint()
+    {
+        $this->load->model('survey/data_model');
+        $sp_combo = '';
+        $servicepoints = $this->data_model->getServicePoints();
+        $sp_combo .= '<option value = "">Select a Service Point</option>';
+        foreach ($servicepoints as $servicepoint) {
+            $sp_combo .= '<option value = "'.$servicepoint['spoint_code'].'">'.$servicepoint['spoint'].'</option>';
+        }
+        $sp_combo .= '</select>';
+
+        return $sp_combo;
+    }
+		/**
+		* [formatArray description]
+		* @param [type] $array            [description]
+		* @param [type] $new_column       [description]
+		* @param [type] $new_column_value [description]
+		*/
+		public function formatArray($array,$sorting_key,$new_column,$new_column_value){
+			$newArray['columns']=array();
+			foreach ($array as $value) {
+
+				foreach ($value as $k => $val) {
+					if($k==$sorting_key){
+						$sorting_val=$value[$k];
+					}
+					else if($k==$new_column){
+						$column_key = $value[$k];
+					}
+					else if($k==$new_column_value){
+						$column_val = $value[$k];
+					}
+					if($k!=$new_column_value && $k!=$new_column ){
+						$newArray['data'][$sorting_val][$k]=$val;
+						$newArray['columns'][]=$k;
+
+						if($column_key!=NULL){
+							$newArray['columns'][]=$column_key;
+							$newArray['data'][$sorting_val][$column_key]=$column_val;
+							}
 }
 
-
+				}
+			}
+			$newArray['columns']=array_values(array_unique($newArray['columns']));
+			return $newArray;
+		}
+}
