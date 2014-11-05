@@ -2765,11 +2765,23 @@ class Analytics extends MY_Controller
                 $gdata[$r][]=$value_;
             }
             }
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gdata as $name => $value1) {
+             if($name=='nonfunctional'){
+                   $color='#fb4347';
+                }elseif($name == 'functional'){
+                    $color='#8bbc21';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
             $resultArray[]=array('name'=> $name, 'data'=> $value1);
         }
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
+     
     }else if(($statistics =='location' && $for == 'ort') || ($statistics == 'availability'&& $for == 'ort')){
             $number = $resultArray = $q = $data= $gdata =array();
         foreach ($results as $key => $value) {
@@ -3473,13 +3485,26 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-       
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gData as $name => $data) {
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data);
+            if($name=='N/A'){
+                $name = 'No data';
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                 }else if($name=='No'){
+                     $color='#fb4347';
+                 }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data,'color'=>$color);
         }
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
     }else{
        // echo '<pre>';print_r($results);echo '</pre>';die;
@@ -3489,11 +3514,12 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
+        
         foreach ($gData as $name => $data) {
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data);
+           $resultArray[] = array('name' => $name, 'data' => $data);
         }
 
-        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+       // echo '<pre>';print_r($resultArray);echo '</pre>';die;
          $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }  
     }
