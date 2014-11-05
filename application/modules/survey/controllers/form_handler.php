@@ -1953,6 +1953,7 @@ class Form_Handler extends MY_Controller
 		</div>
 		<pagebreak />
 		<div class = "step" id = "section-8">
+		<input type = "hidden" name = "step_name" value = "section-8" />
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
 		</p>
@@ -1992,6 +1993,7 @@ class Form_Handler extends MY_Controller
 		</table>
 		</div>
 		<div class = "step" id = "section-9">
+		<input type = "hidden" name = "step_name" value = "section-9" />
 		<p style="display:true;margin-top:50px" class="message success">
 			SECTION 9 of 9: COMMUNITY STRATEGY
 		</p>
