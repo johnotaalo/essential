@@ -692,7 +692,7 @@ class Analytics extends MY_Controller
            $colorCounter=0;
 
 
-        //echo '<pre>';print_r($resultArray);echo '</pre>';
+        //echo '<pre>';print_r($results);echo '</pre>';
 
         foreach ($results as $guide) {
 
@@ -2499,18 +2499,22 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
+
       if($statistics=='service'&&$for=='wp'){
         foreach ($results as $key => $value) {
             //echo "<pre>";print_r($results);echo "</pre>";die;
-             // if($count==0):
+             if($key=='N/a'){
+                    $name='No data';
+                    $key=$name;
+                }
             foreach ($value as $location => $val) {
+
                
            $gData[] = array(ucwords($location), (int)$val);
-
+               
              }    
            
-           // endif;
-           //  $count++;
+           
         }
         $category[] = "Work Profile";
 
@@ -2693,7 +2697,7 @@ class Analytics extends MY_Controller
     }
 
     public function getTransferTraining($criteria, $value, $survey, $survey_category) {
-        $results = $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'wp', 'transfer');
+        $results = $this->getQuestionStatistics($criteria, $value, 'mnh', $survey_category, 'wp', 'transfer');
     }
 
     /**
@@ -2799,25 +2803,32 @@ class Analytics extends MY_Controller
         }
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else if($statistics =='transfer' && $for == 'wp'){
            $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
+       //echo "<pre>";print_r($results);echo "</pre>";die;
+
+
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+
         foreach ($results as $key => $value) {
-             // if ($count == 0):
+             
                 
                 $q[] = $key;
-            $data[]= $value;
-            // endif;
-            // $count++;
-            
+              
+             $data[]= $value;
+           
          }
         foreach ($data as $k => $val) {
+         
+
             foreach ($val as $r => $value_) {
                 $gdata[$r][]=$value_;
 
             }
-            }
+        }
+
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gdata as $name => $value1) {
@@ -2837,7 +2848,8 @@ class Analytics extends MY_Controller
         }
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
