@@ -104,7 +104,7 @@ class Excel_Handler extends MY_Controller{
       //Looping through the cells
       $column = 0;
       //echo '<pre>';print_r($data);echo'</pre>';die;
-      foreach ($data[0] as $k=>$cell) {
+      foreach ($data['columns'] as $k=>$cell) {
 
           //echo $column . $rowExec; die;
           $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',
@@ -115,17 +115,24 @@ class Excel_Handler extends MY_Controller{
           $column++;
       }
       $rowExec = 2;
-      foreach ($data as $key=>$rowset) {
+      foreach ($data['data'] as $key=>$rowset) {
 
           //Looping through the cells per facility
           $column = 0;
           //var_dump($rowset);die;
-          foreach ($rowset as $cell) {
-              $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $cell);
-              $column++;
-          }
-          $rowExec++;
+          foreach($data['columns'] as $title){
+                if (array_key_exists($title,$rowset)) {
+                            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $rowset[$title]);
+                    }
+
+            else{
+              $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, "");
+            }
+
+          $column++;
       }
+      $rowExec++;
+    }
 
       //die ;
 

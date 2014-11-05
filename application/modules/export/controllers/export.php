@@ -37,6 +37,10 @@ class Export extends MY_Controller{
               $this->excel_handler->normal($data, $filename);
               $result = '';
               break;
+          case 'dynamic_excel':
+              $this->excel_handler->dynamic($data, $filename);
+              $result = '';
+              break;
 
           case 'editable':
               $result = $this->table_handler->normal($data, 'editable');
