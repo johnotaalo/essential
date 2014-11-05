@@ -1801,15 +1801,56 @@ class Analytics extends MY_Controller
     public function getCommodityRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
         $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
 
-        // echo "<pre>";print_r($results);echo "</pre>";die;
-        echo $this->generateData($results, 'Commodity Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+      switch($statistic){
+  case 'availability_raw':
+    $results = $this->arrays->format($results,'fac_mfl','commodity','ac_availability');
+  break;
+
+  case 'unavailability_raw':
+  $results = $this->arrays->format($results,'fac_mfl','commodity','ac_reason_unavailable');
+  break;
+
+  case 'location_raw':
+  $results = $this->arrays->format($results,'fac_mfl','commodity','ac_location');
+  break;
+}
+
+        echo $this->export->generate($results, 'Commodity Statistics for ' . strtoupper($for) . '(' . $value . ')', $form);
     }
     public function getEquipmentRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
         $results = $this->analytics_model->getEquipmentStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
 
-        // echo "<pre>";print_r($results);echo "</pre>";die;
-        echo $this->generateData($results, 'Equipment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+      switch($statistic){
+  case 'availability_raw':
+    $results = $this->arrays->format($results,'fac_mfl','equipment','ae_availability');
+  break;
+
+
+case 'functionality_raw':
+$results = $this->arrays->format($results,'fac_mfl','equipment','fully_functional');
+break;
+
+  case 'location_raw':
+  $results = $this->arrays->format($results,'fac_mfl','equipment','ae_location');
+  break;
+}
+echo '<pre>';print_r($results);die;
+
+        echo $this->export->generate($results, 'Equipment Statistics for' . strtoupper($for) . '(' . $value . ')', $form);
     }
+      public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option,$form){
+       $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
+
+       // Format Data by Treatments by Option
+       foreach ($results as $key => $value) {
+         $data[$value['treatment_for']][]=$value;
+       }
+
+       $results = $this->arrays->format($data[$option],'fac_mfl','treatment','total_treatment');
+       echo $this->export->generate($results, 'Treatment Statistics for' . strtoupper($for) . '(' . $value . ')', $form);
+
+     }
+
 
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
@@ -2507,7 +2548,7 @@ class Analytics extends MY_Controller
 
             foreach ($value as $location => $val) {
 
-               
+
            $gData[] = array(ucwords($location), (int)$val);
                
              }  
@@ -2527,12 +2568,14 @@ class Analytics extends MY_Controller
                     $color='#fb4347';
                 }
 
+
                 else{
                      $color = $colors[$colorCounter];
                      $colorCounter++;
                 }  
            
            
+
         }
 
 
@@ -2830,12 +2873,12 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $yes = $no = $null= array();
         foreach ($results as $key => $value) {
              if ($count == 0):
-                
+
                 $q[] = $key;
             $data[]= $value;
             endif;
             $count++;
-            
+
          }
         foreach ($data as $k => $val) {
             foreach ($val as $r => $value_) {
@@ -2872,12 +2915,14 @@ class Analytics extends MY_Controller
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
 
         foreach ($results as $key => $value) {
+
              
-                
+
                 $q[] = $key;
-              
-             $data[]= $value;
-           
+            $data[]= $value;
+            
+
+
          }
         foreach ($data as $k => $val) {
          

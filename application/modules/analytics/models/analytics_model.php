@@ -421,6 +421,71 @@ ORDER BY lq.lq_response ASC";
                 foreach ($this->dataSet as $value) {
 
                     switch ($statistic) {
+                                              case 'cases_raw':
+
+                          break;
+                        case 'treatment_raw':
+                          $treatments=explode(',',$value['lt_treatments']);
+                          foreach($treatments as $treatment){
+                            /**
+                             * Initialize Array to be formatted
+                             * @var array
+                             */
+                            $data_array=array();
+
+                            foreach ($value as $k => $val) {
+                              $data_array[$k]=$val;
+                            }
+                            /**
+                             * Unset the Old Treatment Key
+                             */
+                            unset($data_array['lt_treatments']);
+                            /**
+                             * Get the Treatment Name for the Code
+                             */
+                            if(trim($treatment)!=''){
+
+                              $treatment  = $this->getCommodityName($treatment);
+                            }
+                            /**
+                             * Pass the new TreatmentName
+                             */
+                            $data_array['treatment']=$treatment;
+                            $data[]=$data_array;
+                          }
+                          break;
+                        case 'other_treatment_raw':
+                        $other_treatments=explode(',',$value['lt_other_treatments']);
+                        foreach($other_treatments as $other_treatment){
+                          /**
+                           * Initialize Array to be formatted
+                           * @var array
+                           */
+                          $data_array=array();
+
+                          foreach ($value as $k => $val) {
+                            $data_array[$k]=$val;
+                          }
+                          /**
+                           * Unset the Old Treatment Key
+                           */
+                          unset($data_array['lt_other_treatments']);
+                          /**
+                           * Get the Treatment Name for the Code
+                           */
+                          if(trim($other_treatment)!=''){
+                            $other_treatment  = $this->getTreatmentName($other_treatment);
+                          }
+                          /**
+                           * Pass the new TreatmentName
+                           */
+                          $data_array['treatment']=$other_treatment;
+                          $data[]=$data_array;
+                        }
+
+
+                        break;
+
                         case 'cases':
                             if ($value['treatment'] == 'OtherTotal') {
                                 $value['treatment_for'] == 'other_totals';
@@ -1576,10 +1641,24 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
 
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                      if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='location_raw'){
-                          $data[]=$value;
+                      if($statistic=='availability_raw' || $statistic=='functionality_raw'|| $statistic=='location_raw'){
+                              switch($statistic){
+                                case 'availability_raw':
+                                case 'functionality_raw':
+                                case 'location_raw':
+                                    foreach($value as $k=>$v){
+                                      $data_array[$k]=$v;
+
+                                    }
+                                    $data_array['equipment']=$value['eq_name'];
+                                    unset($data_array['eq_name']);
+                                    unset($data_array['eq_unit']);
+                                    $data[]=$data_array;
+                                  break;
+
+                              }
                       }else if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1679,7 +1758,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     }
                 }
 
-            
+
 
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
@@ -1757,7 +1836,15 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             return $data;
         }
-
+/**
+ * [getCommodityStatistics description]
+ * @param [type] $criteria        [description]
+ * @param [type] $value           [description]
+ * @param [type] $survey          [description]
+ * @param [type] $survey_category [description]
+ * @param [type] $for             [description]
+ * @param [type] $statistic       [description]
+ */
         public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
             $newData = array();
@@ -1781,7 +1868,27 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
                         if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='supplier_raw'|| $statistic=='location_raw'){
-                            $data[]=$value;
+                            switch($statistic){
+                              case 'availability_raw':
+                              case 'unavailability_raw':
+                              case 'location_raw':
+                                  foreach($value as $k=>$v){
+                                    $data_array[$k]=$v;
+
+                                  }
+                                  $data_array['commodity']=$value['comm_name'].'['.$value['comm_unit'].']';
+                                  unset($data_array['comm_name']);
+                                  unset($data_array['comm_unit']);
+                                  $data[]=$data_array;
+                                break;
+
+
+                              case 'supplier_raw':
+
+                                break;
+
+                            }
+
                         }
                         else{
                         // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
@@ -1897,7 +2004,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                               case 'mh':
                                   $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
                                   break;
-                              
+
                               default:
                                  $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                                   break;
@@ -3995,7 +4102,7 @@ ORDER BY question_code";
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
-                  
+
                 // Dump the extra resultset.
                 $queryData->free_result();
                // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
@@ -4208,7 +4315,7 @@ ORDER BY question_code";
                 //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
 
-                    
+
                 }
 
                if ($this->dataSet) {

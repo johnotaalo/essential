@@ -5,13 +5,13 @@ date_default_timezone_set('Africa/Nairobi');
 
 class MY_Model extends CI_Model
 {
-    
+
     /**
      * [$em description]
      * @var [type]
      */
     var $em;
-    
+
     /**
      * [$result description]
      * @var [type]
@@ -22,7 +22,7 @@ class MY_Model extends CI_Model
         $this->em = $this->doctrine->em;
         $this->result = '';
     }
-    
+
     /**
      * [getAccessChallenges description]
      * @return [type] [description]
@@ -36,7 +36,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getCommodities description]
      * @return [type] [description]
@@ -50,7 +50,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     public function getSpecificCommodities($for) {
         try {
             $result = $this->em->createQuery('SELECT c.commCode,c.commName,c.commFor, c.commUnit FROM models\Entities\Commodities c WHERE c.commFor = :for ORDER BY c.commFor, c.commCode ASC ');
@@ -61,7 +61,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getEquipments description]
      * @return [type] [description]
@@ -75,7 +75,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSupplies description]
      * @return [type] [description]
@@ -89,7 +89,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSuppliers description]
      * @return [type] [description]
@@ -103,7 +103,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getChallenges description]
      * @return [type] [description]
@@ -117,7 +117,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getCommodityOutageOptions description]
      * @return [type] [description]
@@ -131,7 +131,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getContactsList description]
      * @return [type] [description]
@@ -145,7 +145,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getCounties description]
      * @return [type] [description]
@@ -159,7 +159,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getDistricts description]
      * @return [type] [description]
@@ -173,7 +173,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getFacilities description]
      * @return [type] [description]
@@ -187,7 +187,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getFacilityLevels description]
      * @return [type] [description]
@@ -201,7 +201,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getFacilityOwners description]
      * @return [type] [description]
@@ -215,7 +215,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getGuidelines description]
      * @return [type] [description]
@@ -229,7 +229,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getIndicators description]
      * @return [type] [description]
@@ -243,7 +243,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getQuestions description]
      * @return [type] [description]
@@ -257,7 +257,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getReasonNoDeliveries description]
      * @return [type] [description]
@@ -271,7 +271,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSignalFunctions description]
      * @return [type] [description]
@@ -285,7 +285,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSuppliesOutageOptions description]
      * @return [type] [description]
@@ -299,7 +299,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSurveyTypes description]
      * @return [type] [description]
@@ -313,7 +313,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getSurveyCategories description]
      * @return [type] [description]
@@ -327,7 +327,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getTreatmentClassifications description]
      * @return [type] [description]
@@ -341,7 +341,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [getTreatments description]
      * @return [type] [description]
@@ -355,7 +355,7 @@ class MY_Model extends CI_Model
         }
         return $result;
     }
-    
+
     /**
      * [retrieveData description]
      * @param  [type] $table_name [description]
@@ -374,7 +374,7 @@ class MY_Model extends CI_Model
         }
         return $data;
     }
-    
+
     /**
      * [getQuestionName description]
      * @param  [type] $code [description]
@@ -384,10 +384,10 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\questions')->findOneBy(array('questionCode' => $code));
             $result = $this->result->getQuestionName();
-            
+
             // var_dump($result);die;
-            
-            
+
+
         }
         catch(exception $ex) {
         }
@@ -402,11 +402,10 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\treatments')->findOneBy(array('treatmentCode' => $code));
             // var_dump($this->result);die;
-            $result = $this->result->getTreatmentName();
-            
-            
-            
-            
+            if($this->result!=null){
+              $result = $this->result->getTreatmentName();
+            }
+
         }
         catch(exception $ex) {
         }
@@ -419,12 +418,11 @@ class MY_Model extends CI_Model
      */
     public function getCommodityName($code) {
         try {
-            $this->result = $this->em->getRepository('models\Entities\commodityName')->findOneBy(array('commCode' => $code));
-            $result = $this->result->getCommName();
-            
-            // var_dump($result);die;
-            
-            
+            $this->result = $this->em->getRepository('models\Entities\commodities')->findOneBy(array('commCode' => $code));
+
+            if($this->result!=null){
+              $result = $this->result->getCommName();
+            }
         }
         catch(exception $ex) {
         }
@@ -439,16 +437,16 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\indicators')->findOneBy(array('indicatorCode' => $code));
             $result = $this->result->getIndicatorName();
-            
+
             // var_dump($result);die;
-            
-            
+
+
         }
         catch(exception $ex) {
         }
         return $result;
     }
-    
+
     /**
      * [getSignalName description]
      * @param  [type] $code [description]
@@ -460,15 +458,15 @@ class MY_Model extends CI_Model
             $result = $this->result->getSfName();
             return $result;
             // var_dump($result);die;
-            
-            
+
+
         }
         catch(exception $ex) {
             print_r($ex);
         }
-        
+
     }
-    
+
     /**
      * [getCommodityOutageOptionName description]
      * @param  [type] $code [description]
@@ -478,16 +476,16 @@ class MY_Model extends CI_Model
         try {
             $this->result = $this->em->getRepository('models\Entities\commodityOutageOptions')->findOneBy(array('cooId' => $code));
             $result = $this->result->getCooDescription();
-            
+
             // var_dump($result);die;
-            
-            
+
+
         }
         catch(exception $ex) {
         }
         return $result;
     }
-    
+
     /**
      * [getFacilitiesByDistrict description]
      * @param  [type] $districtName [description]
@@ -495,28 +493,28 @@ class MY_Model extends CI_Model
      */
     public function getFacilitiesByDistrict($districtName) {
         try {
-            
+
             //Using DQL
-            
+
             $result = $this->em->createQuery('SELECT f.facMfl,f.facName FROM models\Entities\Facilities f WHERE f.facDistrict= :district ORDER BY f.facName ASC ');
             $result->setParameter('district', $districtName);
-            
+
             $result = $result->getArrayResult();
             return $result;
-            
+
             // var_dump($result);
-            
-            
+
+
         }
         catch(exception $ex) {
-            
+
             //ignore
             //die($ex->getMessage());
-            
-            
+
+
         }
     }
-    
+
     /**
      * [getSurveyInfo description]
      * @param  [type] $survey_type     [description]
@@ -527,26 +525,26 @@ class MY_Model extends CI_Model
      */
     public function getSurveyInfo($survey_type, $survey_category, $statistic, $facMFL) {
         $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic . '",' . $facMFL . ');';
-        
+
         try {
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-            
+
             // print($this->db->last_query());die;
             $myData->next_result();
-            
+
             // Dump the extra resultset.
             $myData->free_result();
-            
+
             // Does what it says.
-            
-            
+
+
         }
         catch(exception $ex) {
         }
         return $finalData;
     }
-    
+
     /**
      * [getReportingRatio description]
      * @param  [type] $survey          [description]
@@ -556,37 +554,37 @@ class MY_Model extends CI_Model
      * @return [type]                  [description]
      */
     function getReportingRatio($survey, $survey_category, $county, $statistic) {
-        
+
         /*using DQL*/
-        
+
         $finalData = array();
-        
+
         try {
-            
+
             $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-            
+
             $myData->next_result();
-            
+
             // Dump the extra resultset.
             $myData->free_result();
-            
+
             // Does what it says.
-            
-            
+
+
         }
         catch(exception $ex) {
-            
+
             //ignore
-            
+
             //echo($ex -> getMessage());
-            
-            
+
+
         }
         return $finalData;
     }
-    
+
     /**
      * [verifyRespondedByDistrict description]
      * @return [type] [description]
@@ -595,7 +593,7 @@ class MY_Model extends CI_Model
         if ($this->input->post()) {
             try {
                 $district = $this->em->getRepository('models\Entities\Districts')->findOneBy(array('districtName' => $this->input->post('district', TRUE), 'districtAccessCode' => md5($this->input->post('usercode', TRUE))));
-                
+
                 if ($district) {
                     $result['found'] = 'true';
                     $result['id'] = $district->getDistrictId();
@@ -605,16 +603,16 @@ class MY_Model extends CI_Model
                 }
             }
             catch(exception $ex) {
-                
+
                 //ignore
                 die($ex->getMessage());
             }
             return $result;
         }
-        
+
         //close the this->input->post
-        
-        
+
+
     }
     /**
      * [getStoredData description]
@@ -629,7 +627,7 @@ class MY_Model extends CI_Model
         catch(Exception $ex) {
             echo $ex->getMessage();
         }
-        
+
         return $result;
     }
 
@@ -671,4 +669,5 @@ class MY_Model extends CI_Model
 
         return $result;
     }
+
 }
