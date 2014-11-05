@@ -3799,6 +3799,8 @@ return true;
 
     private function addSuppliesQuantityAvailabilityInfo() {
         $count = $finalCount = 1;
+        $suppliername = $this->input->post('supplierName');
+        // print_r($this->input->post());die;
         foreach ($this->input->post() as $key => $val) {
              //For every posted values
             if (strpos($key, 'sq') !== FALSE) {
@@ -3856,7 +3858,7 @@ return true;
             }
         }
          //close foreach ($this -> input -> post() as $key => $val)
-        //print var_dump($this->elements);
+        //print var_dump($this->elements);die;
 
         //exit;
 
@@ -3880,6 +3882,7 @@ return true;
 
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
             $this->theForm->setSupplyCode($this->elements[$i]['sqsupplyCode']);
+            $this->theForm->setSupplierCode($suppliername);
 
             //check if that key exists, else set it to some default value
             //(isset($this->elements[$i]['sqNumberOfUnits']))?$this -> theForm -> setQuantityAvailable($this->elements[$i]['sqNumberOfUnits']):$this -> theForm -> setQuantityAvailable(-1);
@@ -3914,7 +3917,7 @@ return true;
                 }
                 catch(Exception $ex) {
 
-                    //die($ex->getMessage());
+                    die($ex->getMessage());
                     return false;
 
                     /*display user friendly message*/
@@ -3942,7 +3945,7 @@ return true;
                 }
                 catch(Exception $ex) {
 
-                    //die($ex->getMessage());
+                    die($ex->getMessage());
                     return false;
 
                     /*display user friendly message*/
