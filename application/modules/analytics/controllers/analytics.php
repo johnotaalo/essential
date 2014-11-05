@@ -2697,7 +2697,7 @@ class Analytics extends MY_Controller
     }
 
     public function getTransferTraining($criteria, $value, $survey, $survey_category) {
-        $results = $this->getQuestionStatistics($criteria, $value, 'mnh', $survey_category, 'wp', 'transfer');
+        $results = $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'wp', 'transfer');
     }
 
     /**
@@ -2966,6 +2966,7 @@ class Analytics extends MY_Controller
 
         //echo "<pre>";print_r($results);echo "</pre>";die;
         echo $this->generateData($results, 'HCW Profile for ' . ucwords('hcw') . '(' . $value . ')', $form);
+        
     }
 
     /**
@@ -3353,6 +3354,7 @@ class Analytics extends MY_Controller
     public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
+        
         if($statistics=='response'){
         // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
@@ -3494,6 +3496,17 @@ class Analytics extends MY_Controller
      */
     public function getDangerSigns($criteria, $value, $survey, $survey_category) {
         $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','response');
+    }
+
+     /**
+     * [getDangerSigns description]
+     * @param  [type] $criteria [description]
+     * @param  [type] $value    [description]
+     * @param  [type] $survey   [description]
+     * @return [type]           [description]
+     */
+    public function getDangerFindings($criteria, $value, $survey, $survey_category) {
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
     }
 
     /**
