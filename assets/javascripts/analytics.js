@@ -1129,6 +1129,41 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '#transfertraining');
           
           break;
+
+
+          case 'section-2':
+          loadGraph(base_url, 'analytics/getCasesPresentation/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#casepresentation');
+
+          loadGraph(base_url, 'analytics/getChildrenServices/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#serviceprovision');
+
+          loadGraph(base_url, 'analytics/getDangerSigns/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#signsassessment');
+
+          loadGraph(base_url, 'analytics/getDangerFindings/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#signspresence');
+          
+          
+          break;
+
+
+          case 'section-3':
+          
+          // loadGraph(base_url, 'analytics/getCasesPresentation/' +
+          //   criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //   '#symptomsassessed');
+
+          // loadGraph(base_url, 'analytics/getChildrenServices/' +
+          //   criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //   '#assessedcorrectly');
+          
+          
+          break;
       }
   }
 }

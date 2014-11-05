@@ -692,7 +692,7 @@ class Analytics extends MY_Controller
            $colorCounter=0;
 
 
-        //echo '<pre>';print_r($resultArray);echo '</pre>';
+        //echo '<pre>';print_r($results);echo '</pre>';
 
         foreach ($results as $guide) {
 
@@ -2520,10 +2520,10 @@ echo '<pre>';print_r($results);die;
 
     public function getCurrentService($criteria, $value, $survey, $survey_category) {
         $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'service');
+    }
 
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-
-
+    public function getCasesPresentation($criteria, $value, $survey, $survey_category) {
+        $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'response');
     }
 
 
@@ -2540,29 +2540,94 @@ echo '<pre>';print_r($results);die;
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
-      if($statistics=='service'&&$for=='wp'){
+
+      if($statistics=='service' && $for=='wp'){
         foreach ($results as $key => $value) {
             //echo "<pre>";print_r($results);echo "</pre>";die;
-             // if($count==0):
+              
+
             foreach ($value as $location => $val) {
 
+
            $gData[] = array(ucwords($location), (int)$val);
+               
+             }  
 
-             }
+             if ($key == 'N/a' || $key=='n/a') {
+                $name = 'No data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+             if($key=='No-Data'){
+                    $color='#dddddd';
+                 }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available'){
+                    $color='#fb4347';
+                }
 
-           // endif;
-           //  $count++;
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }  
+           
+           
+
         }
+
+
         $category[] = "Work Profile";
 
         //echo "<pre>";print_r($gData);echo "</pre>";die;
-        $resultArray[] = array('name' => 'Current Service Unit', 'data' => $gData);
+        $resultArray[] = array('name' => 'Current Service Unit', 'data' => $gData, 'color'=>$color);
 
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;
 
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie',$color);
+    }elseif($statistics=='response' && $for=='wp'){
+         foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         // $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+         //   $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if ($key == 'N/a' || $key=='n/a') {
+                $name = 'No data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+             if($key=='No-Data'){
+                    $color='#dddddd';
+                 }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             //$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'question',$statistic,$color);
     }
     }
 
@@ -2840,25 +2905,34 @@ echo '<pre>';print_r($results);die;
         }
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else if($statistics =='transfer' && $for == 'wp'){
            $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
+       //echo "<pre>";print_r($results);echo "</pre>";die;
+
+
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+
         foreach ($results as $key => $value) {
-             // if ($count == 0):
+
+             
 
                 $q[] = $key;
             $data[]= $value;
-            // endif;
-            // $count++;
+            
+
 
          }
         foreach ($data as $k => $val) {
+         
+
             foreach ($val as $r => $value_) {
                 $gdata[$r][]=$value_;
 
             }
-            }
+        }
+
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gdata as $name => $value1) {
@@ -2878,7 +2952,8 @@ echo '<pre>';print_r($results);die;
         }
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -2995,6 +3070,7 @@ echo '<pre>';print_r($results);die;
 
         //echo "<pre>";print_r($results);echo "</pre>";die;
         echo $this->generateData($results, 'HCW Profile for ' . ucwords('hcw') . '(' . $value . ')', $form);
+        
     }
 
     /**
@@ -3382,6 +3458,7 @@ echo '<pre>';print_r($results);die;
     public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
+        
         if($statistics=='response'){
         // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
@@ -3523,6 +3600,17 @@ echo '<pre>';print_r($results);die;
      */
     public function getDangerSigns($criteria, $value, $survey, $survey_category) {
         $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','response');
+    }
+
+     /**
+     * [getDangerSigns description]
+     * @param  [type] $criteria [description]
+     * @param  [type] $value    [description]
+     * @param  [type] $survey   [description]
+     * @return [type]           [description]
+     */
+    public function getDangerFindings($criteria, $value, $survey, $survey_category) {
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
     }
 
     /**
