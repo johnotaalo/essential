@@ -57,9 +57,61 @@ function startAnalytics(base_url, county, survey, survey_category) {
   //         return survey_category === $(this).attr('value');
   //     }).prop("selected", "selected");
   // }
+  if (survey !== '') {
+    $("select#survey_type").find("option").filter(function(index) {
+      return survey === $(this).attr('value');
+    }).prop("selected", "selected");
+  }
+  $('#sectionList li').click(function() {
+    $('#sectionList').find('li').removeClass('active');
+    $(this).addClass('active');
+  });
+  $('#survey_type').change(function() {
+    district_select = $('#sub_county_select').val();
+    //alert(district_select)
+    if (district_select !== 'Please Select a District' && district_select !==
+      'All Sub-Counties Selected') {
+      district = district_select;
+    } else {
+      district = '';
+    }
 
+    survey = $(this).attr('value');
+    if (survey_category != '') {
+      loadSimpleGraph(base_url, 'analytics/getFacilityProgress/' + survey +
+        '/' + survey_category,
+        '#reporting_stat .outer .inner .content .inner-graph');
+    }
+    loadSurvey(survey);
+  });
+  $('#survey_category').change(function() {
+    district = $("#sub_county_select").val();
+    // alert(district);
+    survey = $('#survey_type').val();
+    survey_category = $('#survey_category').val();
+    // alert(survey_category);
+    if (district != '') {
+      district = encodeURIComponent(district);
+      loadFacilities(base_url, district);
+      scope = 'district';
+      getFacilityCount(base_url, '', '', district, survey,
+        survey_category);
+    } else {
+      district = '';
+      if (county != '' && county != 'Unselected') {
+        scope = 'county';
+        getFacilityCount(base_url, '', county, '', survey,
+          survey_category);
+
+      } else {
+        scope = 'national';
+        getFacilityCount(base_url, 'national', '', '', survey,
+          survey_category);
+      }
+    }
     if (survey != '') {
- getReportingData(base_url, survey, survey_category,
+
+      getReportingData(base_url, survey, survey_category,
         '#reporting_left', 'reportingleft');
       getReportingData(base_url, survey, survey_category,
         '#reporting_right', 'reportingright');
@@ -269,49 +321,16 @@ function loadSurvey(survey) {
     $('#reporting-parent').show();
     $('.analytics_row[data-survey="' + survey + '"]').show();
     $.ajax({
-        url: base_url + 'analytics/getSectionsChosen/' + survey,
-        beforeSend: function(xhr) {
-            xhr.overrideMimeType("text/plain; charset=x-user-defined");
-        },
-        success: function(data) {
-            obj = jQuery.parseJSON(data);
-            // console.log(obj);
-            $('#sectionList').empty();
-            $('#sectionList').append(obj);
-        }
-    });
-}
-/**
- * [getReportingData description]
- * @param  {[type]} base_url        [description]
- * @param  {[type]} survey_type     [description]
- * @param  {[type]} survey_category [description]
- * @param  {[type]} container       [description]
- * @return {[type]}                 [description]
- */
-function getReportingData(base_url, survey_type, survey_category, container,option) {
-    progressRow = '';
-    $.ajax({
-        async:false,
-        url: base_url + 'analytics/getAllReportedCounties/' + survey_type + '/' + survey_category+ '/' + option,
-        beforeSend: function(xhr) {
-            $(container).empty();
-            $(container).append('<div class="loader" >Loading...</div>');
-            xhr.overrideMimeType("text/plain; charset=x-user-defined");
-        },
-        success: function(data) {
-            obj = jQuery.parseJSON(data);
-            //console.log(obj);
-            $.each(obj, function(k, v) {
-                //alert(k);
-                county = '<label>' + v['county'] + '</label>';
-                progress = '<div class = "progress"><div class = "progress-bar" aria-valuenow = "' + v['percentage'] + '" aria-valuemax = "100" style="width:' + v['percentage'] + '%;background:' + v['color'] + '">' + v['percentage'] + '%</div></div>';
-                progressRow += '<div class="progressRow">' + county + progress + '</div>';
-                // alert(progressRow);
-            });
-            $(container).empty();
-            $(container).append(progressRow);
-        }
+      url: base_url + 'analytics/getSectionsChosen/' + survey,
+      beforeSend: function(xhr) {
+        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+      },
+      success: function(data) {
+        obj = jQuery.parseJSON(data);
+        // console.log(obj);
+        $('#sectionList').empty();
+        $('#sectionList').append(obj);
+      }
     });
   }
   /**
@@ -322,6 +341,40 @@ function getReportingData(base_url, survey_type, survey_category, container,opti
    * @param  {[type]} container       [description]
    * @return {[type]}                 [description]
    */
+function getReportingData(base_url, survey_type, survey_category, container,
+  option) {
+  progressRow = '';
+  $.ajax({
+    async: false,
+    url: base_url + 'analytics/getAllReportedCounties/' + survey_type +
+      '/' + survey_category + '/' + option,
+    beforeSend: function(xhr) {
+      $(container).empty();
+      $(container).append('<div class="loader" >Loading...</div>');
+      xhr.overrideMimeType("text/plain; charset=x-user-defined");
+    },
+    success: function(data) {
+      obj = null;
+      obj = jQuery.parseJSON(data);
+      //console.log(obj);
+      $.each(obj, function(k, v) {
+        //alert(k);
+        county = '<label>' + v['county'] + '</label>';
+        progress =
+          '<div class = "progress"><div class = "progress-bar" aria-valuenow = "' +
+          v['percentage'] + '" aria-valuemax = "100" style="width:' +
+          v['percentage'] + '%;background:' + v['color'] + '">' + v[
+            'percentage'] + '%</div></div>';
+        progressRow += '<div class="progressRow">' + county +
+          progress + '</div>';
+        // alert(progressRow);
+      });
+      $(container).empty();
+      $(container).append(progressRow);
+    }
+  });
+}
+
 function loadIndicatorTypes() {
   $('#indicator_types').load(base_url + 'analytics/getIndicatorTypes');
 }
@@ -375,29 +428,38 @@ function variableHandler(criteria, county, district, facility, survey,
       break;
   }
 }
-function subHandler(criteria, county, district, facility, survey, survey_category, indicator_type) {
-    switch (criteria) {
-        case 'national':
-            value = 'Aggegated';
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
-            break;
-        case 'county':
-            value = county;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
-            break;
-        case 'district':
-            value = district;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
-            break;
-        case 'facility':
-            value = facility;
-            indicatorHandler(criteria, value, survey, survey_category, indicator_type,'correctness');
-            break;
-    }
+
+function subHandler(criteria, county, district, facility, survey,
+  survey_category, indicator_type) {
+  switch (criteria) {
+    case 'national':
+      value = 'Aggegated';
+      indicatorHandler(criteria, value, survey, survey_category,
+        indicator_type,'correctness');
+      break;
+    case 'county':
+      value = county;
+      indicatorHandler(criteria, value, survey, survey_category,
+        indicator_type,'correctness');
+      break;
+    case 'district':
+      value = district;
+      indicatorHandler(criteria, value, survey, survey_category,
+        indicator_type,'correctness');
+      break;
+    case 'facility':
+      value = facility;
+      indicatorHandler(criteria, value, survey, survey_category,
+        indicator_type,'correctness');
+      break;
+  }
 }
 
-function indicatorHandler(criteria, value, survey, survey_category, indicator_type, statistic) {
-    loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type+ '/' + statistic, '#indicator_comparison');
+function indicatorHandler(criteria, value, survey, survey_category,
+  indicator_type,statistic) {
+  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
+    '#indicator_comparison');
 }
 
 function setRawUrl(criteria, county, district, facility, survey,
@@ -900,6 +962,9 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getTreatmentStatistics/' + criteria +
             '/' + value + '/' + survey + '/' + survey_category + '/cases',
             '#u5_register');
+          loadGraph(base_url, 'analytics/getCorrectClassification/' + criteria +
+            '/' + value + '/' + survey + '/' + survey_category + '/cases',
+            '#correct_classification');
           loadGraph(base_url, 'analytics/getDangerSigns/' + criteria + '/' +
             value + '/' + survey + '/' + survey_category, '#danger_signs');
           loadGraph(base_url, 'analytics/getIndicatorFindings/' + criteria +
@@ -1053,6 +1118,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_type');
+          loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category + '/profile_raw/table',
+            '#HCW_Profile');
+          loadGraph(base_url, 'analytics/getCurrentService/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#current_service');
+          loadGraph(base_url, 'analytics/getRetentionAfter/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#retentiontraining');
+          loadGraph(base_url, 'analytics/getTransferTraining/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#transfertraining');
+          
           break;
       }
   }

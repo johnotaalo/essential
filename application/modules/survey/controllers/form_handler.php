@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining;
     
     public function __construct() {
         parent::__construct();
@@ -84,6 +84,7 @@ class Form_Handler extends MY_Controller
          */
         $this->facilitysection = $this->generate->createFacilityDetailsSection();
         $this->cadre = $this->generate->createCadre();
+        // $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
 
     }
     
@@ -190,7 +191,7 @@ class Form_Handler extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->questions['del'] . '
+			' . $this->questions['nur'] . '
 			
 		</table>
 		<table>
@@ -229,7 +230,7 @@ class Form_Handler extends MY_Controller
 					<input type="text" name="facRsnNoDeliveries[]" id="rsnDeliveriesOther" value="" />
 					</td>
 
-					<input type = "hidden" name = "questionCode_10000" value = "QMNH200" />
+					<input type = "hidden" name = "facRsnNoDeliveriesCode_1" value = "QMNH200" />
 				</tr>
 			</table>	
 		<table>
@@ -413,6 +414,7 @@ class Form_Handler extends MY_Controller
 		</table>
 		</div>
 		<div class="step" id="section-3">
+		<input type="hidden" name="step_name" value="section-3"/>
 		<p style="display:true" class="message success">
 			SECTION 3 of 8: GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY
 		</p>
@@ -462,6 +464,7 @@ class Form_Handler extends MY_Controller
 		<pagebreak />
 		</div>
 		<div class="step" id="section-4">
+		<input type="hidden" name="step_name" value="section-4"/>
 		<p style="display:true" class="message success">SECTION 4 of 8: STAFF TRAINING
 		</p>
 		<table class="centre">
@@ -495,17 +498,17 @@ class Form_Handler extends MY_Controller
 		</thead>
 		<tr>
 			<td>Doctor</td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
-			<td><input type="text"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
 		</tr>
 		<tr>
 			<td>Nurse</td>
@@ -612,6 +615,7 @@ class Form_Handler extends MY_Controller
 	</div><!--\.section 4-->
 <pagebreak />
 <div id="section-5" class="step">
+<input type="hidden" name="step_name" value="section-5"/>
 		<p style="display:true" class="message success">
 			SECTION 5 of 8: COMMODITY AVAILABILITY
 		</p>
@@ -963,45 +967,20 @@ class Form_Handler extends MY_Controller
     }
     
     public function get_mch_form() {
-        $this->combined_form.= ' 
-
+        $this->combined_form.= '
+        <form class="bbq" name="mnh_tool" id="mch_tool" method="POST"> 
+        <div id = "section-1" class = "step">
 		<p style="display:true" class="message success">
 	SECTION 1 of 9: FACILITY INFORMATION
 </p>
 <table>
-
+<input type="hidden" name="step_name" value="section-1"/>
 	<thead>
 	<tr>
 		<th colspan="9">FACILITY INFORMATION</th>
 		</tr>
 	</thead>
-	<tbody>
-		<tr>
-			<td>Facility Name </td><td>
-			<input size="50" type="text" >
-			</td><td>Facility Tier </td><td><!--input type="text" id="facilityLevel" name="facilityLevel" class="cloned"  /-->
-			<input size="50" type="text"  >
-			</td><td>County </td>
-			<td>
-			<input size="50" type="text"  >
-			</td>
-		</tr>
-		<tr>
-			<td>Facility Type </td>
-			<td>
-			<input size="50" type="text"  >
-			</td>
-			<td>Owned By </td>
-			<td>
-			<input size="50" type="text"  >
-			</td>
-
-			<td>District/Sub County </td>
-			<td>
-			<input size="50" type="text"  >
-			</td>
-		</tr>
-	</tbody>
+	<tbody>'.$this->facilitysection.'</tbody>
 </table>
 <p class="instruction">
 		* For Facility Type(Dispensary, Health Centre etc.)
@@ -1256,6 +1235,7 @@ class Form_Handler extends MY_Controller
     ' . $this->questions['imci'] . '
 </table>
 <!--\.the section-1 -->
+</div>
 
 <pagebreak />
 <div id="section-2" class="step">
@@ -1643,7 +1623,10 @@ class Form_Handler extends MY_Controller
 			<td colspan="5"><textarea style="width:1000px;height:100px"></textarea></td>
 			</tr>
 </table>
+</div>
 <pagebreak />
+<div class = "step" id = "section-3">
+<input type="hidden" name="step_name" value="section-3"/>
 <p class="message success">SECTION 3 of 9: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
 <table class="centre">
     <thead>
@@ -1699,7 +1682,10 @@ class Form_Handler extends MY_Controller
      ' . $this->indicators['con'] . '
     </tbody>
 </table>
-<pagebreak />	
+</div>
+<pagebreak />
+<div class = "step" id = "section-4">	
+<input type = "hidden" name = "step_name" value = "section-4" />
 <p style="display:true" class="message success">
 
 		SECTION 4 of 9: COMMODITY AND BUNDLING AVAILABILITY
@@ -1820,10 +1806,9 @@ class Form_Handler extends MY_Controller
 
 		
 		
-	</div><!--\.section 3-->
-		<pagebreak />
-	<div id="section-4" class="step">
-		<input type="hidden" name="step_name" value="section-4"/>
+	</div><!--\.section 4-->
+	<div id="section-5" class="step">
+		<input type="hidden" name="step_name" value="section-5"/>
 		<p style="display:true;margin-top:200px" class="message success">
 			SECTION 5 of 9: REVIEW OF RECORDS
 		</p>
@@ -1858,10 +1843,10 @@ class Form_Handler extends MY_Controller
 			' . $this->questions['ort'] . '
 		</table>
 
-	</div><!--\.section-4-->
+	</div><!--\.section-5-->
 	<pagebreak />
-	<div id="section-5" class="step">
-		<input type="hidden" name="step_name" value="section-5"/>
+	<div id="section-6" class="step">
+		<input type="hidden" name="step_name" value="section-6"/>
 		<p style="display:true" class="message success">
 			SECTION 6 of 9: EQUIPMENT AVAILABILITY AND STATUS
 		</p>
@@ -1965,7 +1950,9 @@ class Form_Handler extends MY_Controller
 			</thead>
 			' . $this->supplies['tst'] . '
 		</table>
+		</div>
 		<pagebreak />
+		<div class = "step" id = "section-8">
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
 		</p>
@@ -2003,6 +1990,8 @@ class Form_Handler extends MY_Controller
 			</thead>
 			' . $this->equipment['hwr'] . '
 		</table>
+		</div>
+		<div class = "step" id = "section-9">
 		<p style="display:true;margin-top:50px" class="message success">
 			SECTION 9 of 9: COMMUNITY STRATEGY
 		</p>
@@ -2018,11 +2007,8 @@ class Form_Handler extends MY_Controller
 	</tr>
 	' . $this->questions['cmsC'] . '
 </table>
-		
-
-	</div><!--\.section-6 & 7-->
-	</div><!--\.section-5-->
-				';
+		</div>
+</form>	';
         
         return $this->combined_form;
        
@@ -2034,7 +2020,7 @@ class Form_Handler extends MY_Controller
     public function get_hcw_form() {
         $this->combined_form = '
         <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
-        	<div class="step" id="section-1">
+        	<div class="step" id="section-1" style = "padding-bottom: 150px;">
         	<input type = "hidden" name = "step_name" value = "section-1"/> 
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>	
 			<table>
@@ -2133,7 +2119,7 @@ class Form_Handler extends MY_Controller
 				* For Facility Type(Dispensary, Health Centre etc.)
 				* For Owned By (Public/Private/FBO/MOH/NGO)
 				</p>
-				<table>
+				<table id = "HCW-Profile">
 				<thead>
 				<tr>
 				<th colspan="4">HCW Profile </th>
@@ -2159,7 +2145,7 @@ class Form_Handler extends MY_Controller
 				<td colspan="3"><input type="text"></td>
 				</tr>
 				<tr>
-				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1"></td>
+				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
 				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
 				<p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
 				<p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
@@ -2171,9 +2157,10 @@ class Form_Handler extends MY_Controller
 				<td colspan="1"><label for="">Designation</label></td>
 				<td colspan="3"><select name = "hpdesignation_1">'.$this->cadre.'</select></td>
 				</tr>
-				' . $this->hcwProfileSection . '
+				<tr><td colspan = "4"><a href = "#" id = "addHCW" class = "small ui button">Add Health Care Worker</a></td></tr>
 				</tbody>
-				<tfoot></tfoot>
+				<tfoot>
+				</tfoot>
 				</table>
 				<table>
 				<thead>
@@ -2260,9 +2247,10 @@ class Form_Handler extends MY_Controller
 				<th colspan="5">ASSESSMENT FOR THE MAIN SYMPTOMS IN AN ONGOING SESSION FOR A CHILD</th>
 				</tr>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2310,9 +2298,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 				<tr>
 				<td colspan="5" style="background:#ffffff">
@@ -2361,9 +2350,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 
 				<tr>
@@ -2410,9 +2400,10 @@ class Form_Handler extends MY_Controller
 				<table class="centre">
 				<thead>
 				<tr>
-				<th colspan = "5">
-				DOES THE CHILD HAVE THE SYMPTOM BELOW?
+				<th colspan = "4">
+				DOES THE CHILD HAVE THE SYMPTOM BELOW? 
 				</th>
+				<th><input type="radio"> Yes <input type="radio"> No </th>
 				</tr>
 
 				<tr>
@@ -2926,8 +2917,8 @@ class Form_Handler extends MY_Controller
 				<td>Supervisee Name<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
 				</tr>
 				<tr>
-				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px"></td>
-				<td>Date	<input name="hcwConclusionDateSupervisee_1" type="text" style="width:500px;padding:10px"></td>
+				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>
+				<td>Date	<input name="hcwConclusionDateSupervisee_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>
 				</tr>
 				</tbody>
 				</table>
