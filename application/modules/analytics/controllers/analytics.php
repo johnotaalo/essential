@@ -1815,7 +1815,7 @@ class Analytics extends MY_Controller
   break;
 }
 
-        echo $this->export->generate($results, 'Commodity Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+        echo $this->export->generate($results, 'Commodity Statistics for ' . strtoupper($for) . '(' . $value . ')', $form);
     }
     public function getEquipmentRaw($criteria, $value, $survey, $survey_category, $for, $statistic,$form){
         $results = $this->analytics_model->getEquipmentStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
@@ -1825,16 +1825,18 @@ class Analytics extends MY_Controller
     $results = $this->arrays->format($results,'fac_mfl','equipment','ae_availability');
   break;
 
-  case 'unavailability_raw':
-  $results = $this->arrays->format($results,'fac_mfl','equipment','ae_reason_unavailable');
-  break;
+
+case 'functionality_raw':
+$results = $this->arrays->format($results,'fac_mfl','equipment','fully_functional');
+break;
 
   case 'location_raw':
   $results = $this->arrays->format($results,'fac_mfl','equipment','ae_location');
   break;
 }
+echo '<pre>';print_r($results);die;
 
-        echo $this->export->generate($results, 'Equipment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+        echo $this->export->generate($results, 'Equipment Statistics for' . strtoupper($for) . '(' . $value . ')', $form);
     }
       public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option,$form){
        $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
@@ -1845,7 +1847,7 @@ class Analytics extends MY_Controller
        }
 
        $results = $this->arrays->format($data[$option],'fac_mfl','treatment','total_treatment');
-       echo $this->export->generate($results, 'Treatment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+       echo $this->export->generate($results, 'Treatment Statistics for' . strtoupper($for) . '(' . $value . ')', $form);
 
      }
 

@@ -1641,10 +1641,24 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
 
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                      if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='location_raw'){
-                          $data[]=$value;
+                      if($statistic=='availability_raw' || $statistic=='functionality_raw'|| $statistic=='location_raw'){
+                              switch($statistic){
+                                case 'availability_raw':
+                                case 'functionality_raw':
+                                case 'location_raw':
+                                    foreach($value as $k=>$v){
+                                      $data_array[$k]=$v;
+
+                                    }
+                                    $data_array['equipment']=$value['eq_name'];
+                                    unset($data_array['eq_name']);
+                                    unset($data_array['eq_unit']);
+                                    $data[]=$data_array;
+                                  break;
+
+                              }
                       }else if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1822,7 +1836,15 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             return $data;
         }
-
+/**
+ * [getCommodityStatistics description]
+ * @param [type] $criteria        [description]
+ * @param [type] $value           [description]
+ * @param [type] $survey          [description]
+ * @param [type] $survey_category [description]
+ * @param [type] $for             [description]
+ * @param [type] $statistic       [description]
+ */
         public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
             $newData = array();
