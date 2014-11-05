@@ -1405,7 +1405,7 @@ class M_MCH_Survey extends MY_Model
                     $this->em->clear();
 
                     //detaches all objects from doctrine
-                    //return true;
+                    return true;
 
                 }
                 catch(Exception $ex) {
@@ -1427,7 +1427,7 @@ class M_MCH_Survey extends MY_Model
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    //return true;
+                    return true;
 
                 }
                 catch(Exception $ex) {

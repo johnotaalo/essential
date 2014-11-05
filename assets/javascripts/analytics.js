@@ -1115,6 +1115,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_type');
+          loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category + '/profile_raw/table',
+            '#HCW_Profile');
+          loadGraph(base_url, 'analytics/getCurrentService/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#current_service');
+          loadGraph(base_url, 'analytics/getRetentionAfter/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#retentiontraining');
+          loadGraph(base_url, 'analytics/getTransferTraining/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#transfertraining');
+          
           break;
       }
   }

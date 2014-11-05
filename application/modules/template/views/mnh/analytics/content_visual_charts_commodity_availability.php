@@ -1612,9 +1612,28 @@
 </div>
             </div>
             <div class="x-large-graph">
-              <h5>HCW Profile</h5>
+                <h5><span class="graph-title">HCW Profile</span><span class="sizer">Click to Enlarge</span></h5>
+                
+              <!-- <h5>HCW Profile</h5> -->
               <table>
-
+                 <th>First Name</th>
+                 <th>SurName</th>
+                 <th>National ID</th>
+                 <th>Phone Number</th>
+                 <th>Personal Number</th>
+                 <th>Year + Month Trained</th>
+                 <th>Key Co-odinator of training</th>
+                 <th>Designation</th>
+                 <tr>
+                  <td colspan="8">
+                    <div class="portlet-body">
+                 
+                    <div id="HCW_Profile">
+                    </div>
+                    </div>
+                 </td>
+                
+                 </tr>
               </table>
             </div>
             <div class="col-md-12">
@@ -1630,7 +1649,7 @@
                   </div>
                   <div class="portlet-body">
 
-                      <div class="chart" id="staff_availability">
+                      <div class="chart" id="current_service">
                       </div>
                   </div>
               </div>
@@ -1639,7 +1658,7 @@
                       <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Retention After Training</span><span class="sizer">Click to Enlarge</span></h6>
                   </div>
                   <div class="portlet-body">
-        <div class="chart" id="imci">
+        <div class="chart" id="retentiontraining">
                       </div>
                   </div>
               </div>
@@ -1649,7 +1668,7 @@
                       <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">County Transfers after Training</span><span class="sizer">Click to Enlarge</span></h6>
                   </div>
                   <div class="portlet-body">
-          <div class="chart" id="chhealth_service">
+          <div class="chart" id="transfertraining">
                       </div>
                   </div>
               </div>
