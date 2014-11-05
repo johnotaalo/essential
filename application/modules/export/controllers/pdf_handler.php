@@ -5,6 +5,7 @@ class Pdf_Handler extends MY_Controller{
   {
     parent::__construct();
     $this->load->library('mpdf');
+    $this->load->module('export/table_handler');
   }
 
   public function index()
@@ -16,8 +17,17 @@ class Pdf_Handler extends MY_Controller{
  * @param  [type] $pdf [description]
  * @return [type]      [description]
  */
-public function normal($data, $filename) {
-    $data = $this->loadTable($data);
+public function normal($data, $filename,$type) {
+  switch($type){
+    case 'normal':
+    $data = $this->table_handler->normal($data);
+    break;
+
+    case 'dynamic':
+    $data = $this->table_handler->dynamic($data);
+    break;
+  }
+
 
     //echo $data;die;
     $stylesheet = ('
@@ -68,4 +78,5 @@ background:#fdde0e;
     $this->mpdf->WriteHTML($stylesheet.$html);
     $report_name = $filename . ".pdf";
     $this->mpdf->Output($report_name, 'I');
+}
 }

@@ -33,7 +33,6 @@ class Export extends MY_Controller{
               $result = $this->table_handler->dynamic($data);
               break;
 
-
           case 'excel':
               $this->excel_handler->normal($data, $filename);
               $result = '';
@@ -44,9 +43,15 @@ class Export extends MY_Controller{
               break;
 
           case 'pdf':
-              $this->pdf_handler->loadPDF($data, $filename);
+              $this->pdf_handler->normal($data, $filename,'normal');
+              $result = '';
+              break;
+
+          case 'dynamic_pdf':
+              $this->pdf_handler->normal($data, $filename,'dynamic');
               $result = '';
               break;
       }
       return $result;
   }
+}

@@ -12,6 +12,7 @@ class MY_Controller extends MX_Controller
     public function __construct() {
         parent::__construct();
 				$this->load->module('export');
+				$this->load->module('data_handler/arrays');
         // Load IMCI defaults if one is accessing IMCI
         if($this->uri->segment(1) === 'imci')
         {
