@@ -17,6 +17,7 @@ class Auth extends MY_Controller {
             // $this->createFacilitiesListSection();
             $assessment = $this->input->post('assessment');
             $category = $this->input->post('term');
+            // echo $category;die;
             if($assessment=='Child Health'){
                 $assessment='ch';
             }
@@ -27,6 +28,11 @@ class Auth extends MY_Controller {
                 $assessment='hcw';
             }
             /*create session data*/
+            if(!$category)
+            {
+                $category = 'all';
+            }
+            // echo $category;die;
             $newdata = array('dName' => $result['name'],'dCode'=>$result['id'],'survey'=>$assessment,'survey_category'=>$category);
         //var_dump($newdata); exit;
         $this -> session -> set_userdata($newdata);

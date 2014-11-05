@@ -845,8 +845,8 @@ class Generate extends MY_Controller
                             $result.= '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
-         <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
-           MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+         <td>MONTH: <input type="text" class = "bs-date"> CASES: <input name="questionResponse_' . $counter . '"  type="text"><br/>  MONTH <input type="text" class = "bs-date">  CASES:  <input name="questionResponse_' . $counter . '"  type="text"><br/>
+           MONTH <input type="text" class = "bs-date">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td><br/>
             <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         } else {
@@ -1290,7 +1290,7 @@ class Generate extends MY_Controller
                                     }
                                 }
                                 if ($section == 'hwr') {
-                                    $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
+                                    $hwr_locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
                                     
                                     // print_r($locations);die;
                                     
@@ -1303,7 +1303,7 @@ class Generate extends MY_Controller
                                     $locationRowTemp = array();
                                     
                                     //Loop through preset locations
-                                    foreach ($locations as $loc) {
+                                    foreach ($hwr_locations as $loc) {
                                         
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
@@ -1838,7 +1838,7 @@ class Generate extends MY_Controller
             public function createBemoncSection() {
                 $this->data_found = $this->data_model->getSignalFunctions();
                 $retrieved = $this->data_model->retrieveData('bemonc_functions', 'sf_code');
-                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented');
                 $responses = array('Yes', 'No');
                 
                 /**
@@ -1979,68 +1979,14 @@ class Generate extends MY_Controller
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
                         $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
-                        $facilitysection .= "<td><select name = 'levels'><option value = '' disabled>Select a facility level</option>";
-                        foreach ($levels as $level) {
-                            if($value['facLevel'] == $level['flName'])
-                            {
-                                $facilitysection .= "<option value = '".$level['flName']."' selected>".$level['flName']."</option>";
-                            }
-                            else
-                            {
-                                $facilitysection .= "<option value = '".$level['flName']."'>".$level['flName']."</option>";
-                            }
-                        }
-                        $facilitysection .= "</select></td>";
-                        $facilitysection .= '<td><select name = "county"><option value = "" disabled>Select a County</option>';
-                        foreach ($counties as $county) {
-                            if($fac_county == $county['countyName'])
-                            {
-                                $facilitysection .= "<option value = '".$county['countyName']."' selected>".$county['countyName']."</option>";
-                            }
-                            else
-                            {
-                                $facilitysection .= "<option value = '".$county['countyName']."'>".$county['countyName']."</option>";
-                            }
-                        }
-                        $facilitysection .= "</select></td>";
+                        $facilitysection .= "<td>".$value['facLevel']."</td>";
+                        $facilitysection .= '<td>'.$fac_county.'</td>';
                         $facilitysection .= '</tr>';
                         $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= '<td><select name = "facility_type" disabled = "disabled"><option value = "">Select a Facility Type</option>'; 
-                        foreach ($facTypes as $facType) {
-                            if($value['facType'] == $facType['ft_name'])
-                            {
-                                $facilitysection .= "<option value = '".$facType['ft_name']."' selected>".$facType['ft_name']."</option>";
-                            }
-                            else
-                            {
-                                $facilitysection .= "<option value = '".$facType['ft_name']."'>".$facType['ft_name']."</option>";
-                            }
-                        }
-                        $facilitysection .= "</select></td>";
-                        $facilitysection .= '<td><select name = "ownership" disabled><option value = "">Select an owner</option>';
-                        foreach ($owners as $owner) {
-                            if($value['facOwnership'] == $owner['foName'])
-                            {
-                                $facilitysection .= '<option value = "'.$owner['foName'].'" select>'.$owner['foName'].'</option>';
-                            }
-                            else
-                            {
-                                $facilitysection .= '<option value = "'.$owner['foName'].'">'.$owner['foName'].'</option>';
-                            }
-                        }
-                        $facilitysection .= '</select></td>';
-                        $facilitysection .= '<td><select name = "" disabled><option>Select a Sub County</option>';
-                        foreach ($sub_counties as $sub_county) {
-                            if ($value['facDistrict'] == $sub_county['districtName']) {
-                                $facilitysection .= '<option value = "'.$sub_county['districtName'].'" selected>'.$sub_county['districtName'].'</option>';
-                            }
-                            else
-                            {
-                                $facilitysection .= '<option value = "'.$sub_county['districtName'].'">'.$sub_county['districtName'].'</option>';
-                            }
-                        }
-                        $facilitysection .= '</select></td>';
+                        $facilitysection .= '<td>'.$value['facType'].'</td>';
+                        $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
+                        $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
                         $facilitysection .= '</tr>';
                         
                     }

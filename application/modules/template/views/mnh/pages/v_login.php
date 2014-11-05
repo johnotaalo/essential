@@ -1,5 +1,4 @@
 
-
 <div id="site-title">
 
 </div>
@@ -8,7 +7,7 @@
 <div class="login-container">
     <div class="row">
 
-		<div id="form-login" style = "width: 60%: margin: 0 auto;">
+        <div id="form-login" style = "width: 60%: margin: 0 auto;">
             <form id="authenticate" name="authenticate" action="<?php echo base_url().'mnch/session/new'?>" method="post" accept-charset="utf-8" class="online">
                 <h2><?php echo $login_message; ?></h2>
 
@@ -62,6 +61,16 @@
             loadData(base_url,'getSurveyCategoryNamesJSON','','#term','Please Select a Survey Term');
             loadData(base_url,'getCountyNamesJSON','','#county','Please Select as County');
 
+            $('#assessment').change(function(){
+                if(this.value == 'IMCI Follow-Up')
+                {
+                    $('#term').prop('disabled', 'disabled');
+                }
+                else
+                {
+                    $('#term').prop('disabled', false);
+                }
+            });
             $('#county').change(function() {
                 value = $(this).val();
                 loadData(base_url,'getDistrictNamesJSON',value,'#district','Please Select a District');
