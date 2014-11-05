@@ -1626,6 +1626,7 @@ class Form_Handler extends MY_Controller
 </div>
 <pagebreak />
 <div class = "step" id = "section-3">
+<input type="hidden" name="step_name" value="section-3"/>
 <p class="message success">SECTION 3 of 9: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
 <table class="centre">
     <thead>
@@ -1684,6 +1685,7 @@ class Form_Handler extends MY_Controller
 </div>
 <pagebreak />
 <div class = "step" id = "section-4">	
+<input type = "hidden" name = "step_name" value = "section-4" />
 <p style="display:true" class="message success">
 
 		SECTION 4 of 9: COMMODITY AND BUNDLING AVAILABILITY
@@ -1805,7 +1807,6 @@ class Form_Handler extends MY_Controller
 		
 		
 	</div><!--\.section 4-->
-		<pagebreak />
 	<div id="section-5" class="step">
 		<input type="hidden" name="step_name" value="section-5"/>
 		<p style="display:true;margin-top:200px" class="message success">

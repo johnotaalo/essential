@@ -182,7 +182,7 @@ public function test(){
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    //return true;
+                    return true;
 
 
                 }
@@ -2585,7 +2585,11 @@ private function addhcwWorkProfile() {
         for ($i = 1; $i <= $this->noOfInsertsBatch + 1; ++$i) {
 
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogChallenges();
+            $this->theForm = $this->getStoredData('models\Entities\LogChallenges', array('ssId' => $this->session->userdata('survey_status'), 'facMfl' => $this->session->userdata('facilityMFL')));
+
+            if ($this->theForm == NULL) {
+                $this->theForm = new \models\Entities\LogChallenges();
+            }
 
             //create an object of the model
 
@@ -4468,8 +4472,135 @@ return true;
     }
     
     //close addCommodityUsageAndStockOutageInfo
+    private function addTotalMCHTreatment() {
+
+        $treatment =$this->input->post('mchtreatment');
+        $totalTreatment =$this->input->post('mchtotalTreatment');
+        $realtreatments = $this->input->post('mchtreatmentnew');
+        $numbers = $this->input->post('mchtreatmentnumbers');
+        $valnum = array();
+        $count = 0;
+        foreach ($numbers as $key => $value) {
+            $count++;
+            $valnum[$key] = array_filter($value);
+        }
+        //print_r($cleanednumbers);die;
+        //print_r($this->input->post());die;
+      //echo "<pre>";print_r($treatment);echo"</pre>";die;
+        $this->elements=array();
+        $count=0;
+        foreach ($totalTreatment as $key => $val) {
+            $count++;
+            $this->elements[$count]['totalTreatment'] = htmlentities($val);
+            $this->elements[$count]['classification'] = htmlentities($key);
+            $this->elements[$count]['treatment'] = implode(',', $treatment[$key]);
+            $this->elements[$count]['treatmentnew'] = implode(',', $realtreatments[$key]);
+            $this->elements[$count]['treatmentnumbers'] = implode(',', $valnum[$key]);
 
 
+        }
+        // print_r($this->elements);die;
+        //die;
+         //close foreach ($this -> input -> post() as $key => $val)
+        //exit;
+        //echo $count;
+        //get the highest value of the array that will control the number of inserts to be done
+        $this->noOfInsertsBatch = $count;
+        //echo $this->noOfInsertsBatch;die;
+        //labour and delivery Qn5 to 8 will have a single response each
+
+        for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
+
+            //echo 'Done '.$i;
+
+            $this->theForm = $this->getStoredData('models\Entities\LogTreatments', array('ssId' => $this->session->userdata('survey_status'), 'ltClassification' => $this->elements[$i]['classification']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogTreatments();
+            }
+            //create an object of the model
+
+            $this->theForm->setLtCreated(new DateTime());
+
+            /*timestamp option*/
+            $this->theForm->setFacilityMfl($this->session->userdata('facilityMFL'));
+
+
+
+            /*if no value set, then set to -1*/
+
+            //print_r($this->elements);die;
+
+            $this->theForm->setLtClassification($this->elements[$i]['classification']);
+            $this->theForm->setLtTotal($this->elements[$i]['totalTreatment']);
+            (array_key_exists('treatment', $this->elements[$i]) && $this->elements[$i]['treatment']!='')? $this->theForm->setLtTreatments($this->elements[$i]['treatment']) : $this->theForm->setLtTreatments('n/a');;
+
+            $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+            $this->theForm->setLtOtherTreatments($this->elements[$i]['treatmentnew']);
+            $this->theForm->setLtOtherTreatmentsNumbers($this->elements[$i]['treatmentnumbers']);
+            $this->em->persist($this->theForm);
+
+            //now do a batched insert, default at 5
+            $this->batchSize = 5;
+            if ($i % $this->batchSize == 0) {
+                echo "5";
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detaches all objects from doctrine
+                    return true;
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+                 //end of catch
+
+
+            } else if ($i < $this->batchSize || $i > $this->batchSize || $i == $this->noOfInsertsBatch && $this->noOfInsertsBatch - $i < $this->batchSize) {
+                echo $this->noOfInsertsBatch;
+                //total records less than a batch, insert all of them
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detactes all objects from doctrine
+                    return true;
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+                 //end of catch
+
+                //on the last record to be inserted, log the process and return true;
+                if ($i == $this->noOfInsertsBatch) {
+
+                    //die(print . $i);
+                    // $this->writeAssessmentTrackerLog();
+                    echo "true";die;
+                    return true;
+                }
+            }
+
+            //end of batch condition
+
+        }
+         //end of innner loop
+    }
+     //close addTotalMCHTreatment
     /**
      * [store_data description]
      * @return [type] [description]
@@ -4687,7 +4818,7 @@ return true;
                             break;
                         
                         case 'section-2':
-                            if($this->addTotalMCHTreatment()== true  && $this->addQuestionsInfo() == true && $this->addMCHIndicatorInfo() == true){
+                            if($this->addTotalMCHTreatment()== true  && $this->addQuestionsInfo() == true && $this->addIndicatorInfo() == true){
                             $this->writeAssessmentTrackerLog();
                                 return $this->response = 'true';
                             } else {
