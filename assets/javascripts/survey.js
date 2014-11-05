@@ -214,6 +214,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             loadSection(section, action);
             $('#steps').show();
             $('#form_post').addClass('active');
+            $('#addHCW').click(function(){
+              $table = $('#HCW-Profile');
+               var cloned_object = $table.find('tbody:last').clone(true);
+            });
             // $('actual-form .step').hide();
 
           });
