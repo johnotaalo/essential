@@ -1132,9 +1132,9 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
 
           case 'section-2':
-          // loadGraph(base_url, 'analytics/getDangerSigns/' +
-          //   criteria + '/' + value + '/' + survey + '/' + survey_category,
-          //   '#casepresentation');
+          loadGraph(base_url, 'analytics/getCasesPresentation/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#casepresentation');
 
           loadGraph(base_url, 'analytics/getChildrenServices/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
@@ -1147,6 +1147,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getDangerFindings/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#signspresence');
+          
+          
+          break;
+
+
+          case 'section-3':
+          loadGraph(base_url, 'analytics/getCasesPresentation/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#symptomsassessed');
+
+          loadGraph(base_url, 'analytics/getChildrenServices/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#assessedcorrectly');
           
           
           break;

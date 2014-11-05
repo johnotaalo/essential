@@ -2479,10 +2479,10 @@ class Analytics extends MY_Controller
 
     public function getCurrentService($criteria, $value, $survey, $survey_category) {
         $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'service');
+    }
 
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-
-
+    public function getCasesPresentation($criteria, $value, $survey, $survey_category) {
+        $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'response');
     }
 
 
@@ -2500,32 +2500,91 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = array();
         $count = 0;
 
-      if($statistics=='service'&&$for=='wp'){
+      if($statistics=='service' && $for=='wp'){
         foreach ($results as $key => $value) {
             //echo "<pre>";print_r($results);echo "</pre>";die;
-             if($key=='N/a'){
-                    $name='No data';
-                    $key=$name;
-                }
+              
+
             foreach ($value as $location => $val) {
 
                
            $gData[] = array(ucwords($location), (int)$val);
                
-             }    
+             }  
+
+             if ($key == 'N/a' || $key=='n/a') {
+                $name = 'No data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+             if($key=='No-Data'){
+                    $color='#dddddd';
+                 }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }  
            
            
         }
+
+
         $category[] = "Work Profile";
 
         //echo "<pre>";print_r($gData);echo "</pre>";die;
-        $resultArray[] = array('name' => 'Current Service Unit', 'data' => $gData);
+        $resultArray[] = array('name' => 'Current Service Unit', 'data' => $gData, 'color'=>$color);
 
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;
 
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie',$color);
+    }elseif($statistics=='response' && $for=='wp'){
+         foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         // $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+         //   $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if ($key == 'N/a' || $key=='n/a') {
+                $name = 'No data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+             if($key=='No-Data'){
+                    $color='#dddddd';
+                 }else if($key=='Available'){
+                    $color='#8bbc21';
+                }else if($key=='Not-Available'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             //$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'question',$statistic,$color);
     }
     }
 

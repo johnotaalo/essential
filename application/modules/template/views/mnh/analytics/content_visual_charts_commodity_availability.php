@@ -1744,21 +1744,21 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed ?</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_owner">
+                    <div class="chart" id="symptomsassessed">
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed correctly ?</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                    <div class="chart" id="assessedcorrectly">
                     </div>
                 </div>
             </div>
