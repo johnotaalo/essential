@@ -2781,7 +2781,7 @@ class Analytics extends MY_Controller
         }
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
-     
+
     }else if(($statistics =='location' && $for == 'ort') || ($statistics == 'availability'&& $for == 'ort')){
             $number = $resultArray = $q = $data= $gdata =array();
         foreach ($results as $key => $value) {
@@ -3477,7 +3477,7 @@ class Analytics extends MY_Controller
     public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
-       
+
         if($statistic = 'classification' && $for = 'ch'){
            foreach ($results as $indicator => $values) {
             $category[] = $indicator;
@@ -3505,7 +3505,7 @@ class Analytics extends MY_Controller
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }else{
        // echo '<pre>';print_r($results);echo '</pre>';die;
         foreach ($results as $indicator => $values) {
@@ -3514,16 +3514,16 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-        
+
         foreach ($gData as $name => $data) {
            $resultArray[] = array('name' => $name, 'data' => $data);
         }
 
        // echo '<pre>';print_r($resultArray);echo '</pre>';die;
          $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
-    }  
     }
-      
+    }
+
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();
 
@@ -4271,7 +4271,7 @@ class Analytics extends MY_Controller
         $this->analytics_model->universalEditor($table, $column, $value, $primary_key, $pk_value);
     }
     public function getMasterFacilityList($form) {
-        $this->db->select('fac_id,fac_name,fac_level,fac_ownership,fac_county,fac_district')->from('facilities')->order_by('fac_county ASC')->order_by('fac_district ASC');
+        $this->db->select('fac_id,fac_name,fac_level,fac_type,fac_ownership,fac_county,fac_district')->from('facilities')->order_by('fac_county ASC')->order_by('fac_district ASC');
 
         $results = $this->db->get();
 
