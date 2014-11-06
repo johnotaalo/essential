@@ -1271,14 +1271,14 @@ WHERE
 
             return $this->dataSet;
         }
-        public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for) {
+        public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
 
             /*using CI Database Active Record*/
             $data = $data_set = $data_series = $analytic_var = $data_categories = array();
             $data_y = array();
             $data_n = array();
 
-            $query = "CALL get_indicator_comparison('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_indicator_comparison('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','".$statistic."');";
             try {
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
@@ -1296,8 +1296,18 @@ WHERE
                     $i = 0;
 
                     //var_dump($this->dataSet);
+
                     foreach ($this->dataSet as $value) {
-                        $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                        switch ($statistic) {
+                            case 'correctness':
+                              $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                                break;
+
+                            case 'classification':
+                               $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
+                                break;
+                        }
+
                     }
                     $this->dataSet = $data;
 
@@ -1641,10 +1651,24 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
 
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                      if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='location_raw'){
-                          $data[]=$value;
+                      if($statistic=='availability_raw' || $statistic=='functionality_raw'|| $statistic=='location_raw'){
+                              switch($statistic){
+                                case 'availability_raw':
+                                case 'functionality_raw':
+                                case 'location_raw':
+                                    foreach($value as $k=>$v){
+                                      $data_array[$k]=$v;
+
+                                    }
+                                    $data_array['equipment']=$value['eq_name'];
+                                    unset($data_array['eq_name']);
+                                    unset($data_array['eq_unit']);
+                                    $data[]=$data_array;
+                                  break;
+
+                              }
                       }else if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1822,7 +1846,15 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             return $data;
         }
-
+/**
+ * [getCommodityStatistics description]
+ * @param [type] $criteria        [description]
+ * @param [type] $value           [description]
+ * @param [type] $survey          [description]
+ * @param [type] $survey_category [description]
+ * @param [type] $for             [description]
+ * @param [type] $statistic       [description]
+ */
         public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
             $newData = array();
@@ -2643,33 +2675,29 @@ ORDER BY f.fac_county ASC;";
             return $result;
         }
 
-        function getAllReportingRatio($survey, $survey_category) {
+        function getAllReportingRatio($survey, $survey_category,$option) {
             $reportingCounties = $this->getReportingCounties($survey, $survey_category);
 
             //var_dump($reportingCounties);die;
 
-            for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            //  for ($x = 0; $x < sizeof($reportingCounties); $x++) {
+            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            // }
+
+
+            switch ($option) {
+                case 'reportingleft':
+                for ($x = 0; $x < 24; $x++) {
+                $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             }
+                    break;
+                    case 'reportingright':
+                    for ($x = 24; $x < sizeof($reportingCounties); $x++) {
+                $allData[$option][$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
+            }
+                    break;
 
-            // switch ($option) {
-
-            //     case 'reportingleft':
-            //         for ($x = 0; $x < 24; $x++) {
-            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            // }
-            //         break;
-
-            //         case 'reportingright':
-            //         for ($x = 24; $x < sizeof($reportingCounties); $x++) {
-            //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
-            // }
-            //         break;
-
-            //     default:
-            //         echo 'not working';
-            //         break;
-            // }
+            }
 
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
@@ -2777,7 +2805,7 @@ ORDER BY f.fac_county ASC;";
          */
         public function runMap($survey, $survey_category, $statistic) {
             $myData = array();
-            $counties = $this->getAllCountyNames();
+            $counties = $this->getCounties();
             foreach ($counties as $county) {
                 $countyName = $county['countyName'];
 

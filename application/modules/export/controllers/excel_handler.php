@@ -104,28 +104,35 @@ class Excel_Handler extends MY_Controller{
       //Looping through the cells
       $column = 0;
       //echo '<pre>';print_r($data);echo'</pre>';die;
-      foreach ($data[0] as $k=>$cell) {
+      foreach ($data['columns'] as $cell) {
 
           //echo $column . $rowExec; die;
           $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',
-          str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))))))))));
+          str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $cell)))))))))));
           $objPHPExcel->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec)->getFont()->setBold(true)->setSize(14);
           $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(true);
 
           $column++;
       }
       $rowExec = 2;
-      foreach ($data as $key=>$rowset) {
+      foreach ($data['data'] as $key=>$rowset) {
 
           //Looping through the cells per facility
           $column = 0;
           //var_dump($rowset);die;
-          foreach ($rowset as $cell) {
-              $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $cell);
-              $column++;
-          }
-          $rowExec++;
+          foreach($data['columns'] as $title){
+                if (array_key_exists($title,$rowset)) {
+                            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $rowset[$title]);
+                    }
+
+            else{
+              $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, "");
+            }
+
+          $column++;
       }
+      $rowExec++;
+    }
 
       //die ;
 

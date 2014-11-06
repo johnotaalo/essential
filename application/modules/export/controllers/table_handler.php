@@ -86,9 +86,6 @@ public function normal($data, $editable = '') {
 						}
 
 						$counter++;
-
-						//echo '<pre>';print_r($row);echo '</pre>';die;
-
 				}
 				$this->table->add_row($row);
 			}
