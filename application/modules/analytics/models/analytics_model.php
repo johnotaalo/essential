@@ -1296,18 +1296,18 @@ WHERE
                     $i = 0;
 
                     //var_dump($this->dataSet);
-                   
+
                     foreach ($this->dataSet as $value) {
                         switch ($statistic) {
                             case 'correctness':
                               $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
                                 break;
-                            
+
                             case 'classification':
                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
                                 break;
                         }
-                        
+
                     }
                     $this->dataSet = $data;
 
@@ -2683,7 +2683,7 @@ ORDER BY f.fac_county ASC;";
             //  for ($x = 0; $x < sizeof($reportingCounties); $x++) {
             //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             // }
-            
+
 
             switch ($option) {
                 case 'reportingleft':
@@ -2805,7 +2805,7 @@ ORDER BY f.fac_county ASC;";
          */
         public function runMap($survey, $survey_category, $statistic) {
             $myData = array();
-            $counties = $this->getAllCountyNames();
+            $counties = $this->getCounties();
             foreach ($counties as $county) {
                 $countyName = $county['countyName'];
 
