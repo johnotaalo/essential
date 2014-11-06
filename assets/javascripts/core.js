@@ -408,7 +408,7 @@ function loadRawDownload(base_url, function_url) {
    */
 function loadFacilityRawData(base_url, function_url, container) {
   $.ajax({
-    url: base_url + function_url + '/table',
+    url: base_url + function_url + '/dynamic_table',
     beforeSend: function(xhr) {
       $(container).empty();
       $(container).append('<div class="loader" >Loading...</div>');

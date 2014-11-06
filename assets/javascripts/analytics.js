@@ -82,6 +82,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '/' + survey_category,
         '#reporting_stat .outer .inner .content .inner-graph');
     }
+
     loadSurvey(survey);
   });
   $('#survey_category').change(function() {
