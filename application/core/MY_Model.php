@@ -672,7 +672,7 @@ class MY_Model extends CI_Model
 
     public function getHCWByDistrict($dName)
     {
-        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName);
+        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName ."'");
         $result = $query->result_array();
 
         return $result;

@@ -10,7 +10,10 @@ function startSurvey(base_url, survey, survey_category, district) {
   var fac_county = '';
   var fac_district = '';
 
-  getDistrictData(base_url, district, survey, survey_category);
+  if(survey != 'hcw')
+  {
+    getDistrictData(base_url, district, survey, survey_category);
+  }
 
   // Bound Events
 
