@@ -312,6 +312,26 @@ class Survey extends MY_Controller
     public function createHCWListSection ()
     {
         $hcwlist = '';
+        $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
+        $counter = 0;
+        foreach ($result as $value) {
+            foreach ($value as $key => $val) {
+                if($val == NULL)
+                {
+                    $val = "";
+                    $value[$key] = $val;
+                }
+            }
+            $counter++;
+            $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><a class="ui red label">Cannot be traced</a></center></td>
+            </tr>';
+        }
+       // echo $hcwlist;die;
         return $hcwlist;
     }
     /**
@@ -470,7 +490,7 @@ class Survey extends MY_Controller
                     <th>Status</th>
                     <th>Link</th>
                 </thead>
-                <tbody></tbody>
+                <tbody>'.$hcwListSection.'</tbody>
             </table>';
         }
 
