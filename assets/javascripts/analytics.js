@@ -1171,6 +1171,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
 
           break;
+
+          case 'section-6':
+
+          loadGraph(base_url, 'analytics/getIMCIConsultation/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#consultationobserved');
+
+          loadGraph(base_url, 'analytics/getIMCIInterview/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#interviewcaregiver');
+
+
+          break;
       }
   }
 }
