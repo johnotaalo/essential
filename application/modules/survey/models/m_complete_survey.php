@@ -1252,7 +1252,7 @@ public function test(){
             (array_key_exists('hcwConclusionDateSupervisor', $this->elements[$i])) ? $this->theForm->setHcDateSupervisor($this->elements[$i]['hcwConclusionDateSupervisor']) : $this->theForm->setHcDateSupervisor('n/a');
             (array_key_exists('hcwConclusionDateSupervisee', $this->elements[$i])) ? $this->theForm->setHcDateSupervisee($this->elements[$i]['hcwConclusionDateSupervisee']) : $this->theForm->setHcDateSupervisee('n/a');
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
-            $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+            $this->theForm->setHcwid((int)$this->session->userdata('hcw_id'));
 
             /*timestamp option*/
             $this->em->persist($this->theForm);
@@ -1384,7 +1384,7 @@ private function addHCWAssessorInfo() {
        for ($i = 1; $i <= $this->noOfInsertsBatch + 1; ++$i) {
 
            //go ahead and persist data posted
-        $this->theForm = $this->getStoredData('models\Entities\AssessorInformation', array('ssId' => $this->session->userdata('survey_status'), 'facilityMfl' => $this->session->userdata('facilityMfl')));
+        $this->theForm = $this->getStoredData('models\Entities\AssessorInformation', array('ssId' => $this->session->userdata('hcw_id'), 'facilityMfl' => $this->session->userdata('facilityMfl')));
 
             if ($this->theForm == NULL) {
                 $this->theForm = new \models\Entities\AssessorInformation();
@@ -1399,7 +1399,7 @@ private function addHCWAssessorInfo() {
            (isset($this->elements[$i]['assesorphoneNumber']) && $this->elements[$i]['assesorphoneNumber'] != '') ? $this->theForm->setAssessorPhonenumber($this->elements[$i]['assesorphoneNumber']) : $this->theForm->setAssessorPhonenumber(-1);
            $this->theForm->setFacilityMfl($this->session->userdata('facilityMFL'));
            $this->theForm->setCreated(new DateTime());
-           $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+           $this->theForm->setSsId((int)$this->session->userdata('hcw_id'));
 
            /*timestamp option*/
            $this->em->persist($this->theForm);
@@ -1700,7 +1700,7 @@ private function addhcwWorkProfile() {
            $this -> theForm ->setQuestionCode($this->elements[$i]['questionCode']);
            $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
            $this->theForm->setLqCreated(new DateTime());
-           $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+           $this->theForm->setSsId((int)$this->session->userdata('hcw_id'));
 
 
             /*timestamp option*/
