@@ -46,3 +46,22 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
 
         </div>
     </div>
+    <script type="text/javascript">
+        function createFacilityDropDown(that)
+        {
+            var r = $('#facility-container');
+            alert(r);
+            $.ajax({
+            url: base_url + "/survey/generate/createFacilitiesInCounty/"+county,
+            beforeSend: function( xhr ) {
+                r.innerHTML = '<div><center><i class = "fa fa-spin fa-spinner"></i> Searching...<center></div>';
+            }
+            })
+            .done(function( data ) {
+                r.innerHTML = data;
+            })
+            .fail(function(){
+                r.innerHTML = "Error!";
+            });
+        }
+    </script>
