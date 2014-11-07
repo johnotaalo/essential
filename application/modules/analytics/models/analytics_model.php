@@ -418,12 +418,19 @@ ORDER BY lq.lq_response ASC";
             if ($this->dataSet !== NULL) {
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                 foreach ($this->dataSet as $value) {
 
                     switch ($statistic) {
 
                         case 'cases_raw':
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
                           break;
                         case 'treatment_raw':
@@ -437,7 +444,10 @@ ORDER BY lq.lq_response ASC";
 
                             foreach ($value as $k => $val) {
                               $data_array[$k]=$val;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                             }
                             /**
                              * Unset the Old Treatment Key
@@ -493,7 +503,10 @@ ORDER BY lq.lq_response ASC";
 
                // echo '<pre>';print_r($value);echo '</pre>';die;
                            
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
                             //print_r($value['treatment_for']);die;
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
@@ -1728,7 +1741,10 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             return $data;
         }
 
@@ -1771,7 +1787,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 }
 
 
-
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
 
@@ -1784,8 +1799,14 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             return $data;
         }
+
+       
 
         public function getCommodityUsageOptions($criteria, $value, $survey, $survey_category, $for, $statistic) {
 
@@ -4278,6 +4299,7 @@ ORDER BY question_code";
                     }
 
                     unset($data[$question]['question_code']);
+<<<<<<< HEAD
 
                 }
 
@@ -4285,6 +4307,56 @@ ORDER BY question_code";
 
                 //die(var_dump($this->dataSet));
 
+=======
+
+                }
+
+               //echo '<pre>';print_r($data);echo '</pre>';die;
+
+                //die(var_dump($this->dataSet));
+
+
+            }
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());//exit;
+
+
+            }
+
+            // var_dump($data);die;
+            return $data;
+        }
+
+
+        public function getHCWProfile($criteria, $value, $survey, $survey_category, $statistics) {
+
+            /*using CI Database Active Record*/
+            $value = urldecode($value);
+            $data = array();
+
+            $query = "CALL get_hcw_profile('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistics . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+
+                // Dump the extra resultset.
+                $queryData->free_result();
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                foreach ($this->dataSet as $value_) {
+
+
+                }
+
+               if ($this->dataSet) {
+                return $this->dataSet;
+            } else {
+                return $this->dataSet = false;
+            }
+
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
 
             }
@@ -4302,6 +4374,7 @@ ORDER BY question_code";
         }
 
 
+<<<<<<< HEAD
         public function getHCWProfile($criteria, $value, $survey, $survey_category, $statistics) {
 
             /*using CI Database Active Record*/
@@ -4342,6 +4415,9 @@ ORDER BY question_code";
             // var_dump($data);die;
             return $data;
         }
+=======
+        
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         /*  public function getStorageStatistics($criteria, $value, $survey, $survey_category) {
 

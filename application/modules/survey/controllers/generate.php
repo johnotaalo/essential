@@ -845,8 +845,18 @@ class Generate extends MY_Controller
                             $result.= '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
+<<<<<<< HEAD
          <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
            MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+=======
+<<<<<<< HEAD
+         <td>MONTH: <input type="text" class = "bs-date"> CASES: <input name="questionResponse_' . $counter . '"  type="text"><br/>  MONTH <input type="text" class = "bs-date">  CASES:  <input name="questionResponse_' . $counter . '"  type="text"><br/>
+           MONTH <input type="text" class = "bs-date">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td><br/>
+=======
+         <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
+           MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         } else {
@@ -1303,7 +1313,15 @@ class Generate extends MY_Controller
                                     $locationRowTemp = array();
                                     
                                     //Loop through preset locations
+<<<<<<< HEAD
                                     foreach ($locations as $loc) {
+=======
+<<<<<<< HEAD
+                                    foreach ($hwr_locations as $loc) {
+=======
+                                    foreach ($locations as $loc) {
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                                         
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
@@ -1838,7 +1856,15 @@ class Generate extends MY_Controller
             public function createBemoncSection() {
                 $this->data_found = $this->data_model->getSignalFunctions();
                 $retrieved = $this->data_model->retrieveData('bemonc_functions', 'sf_code');
+<<<<<<< HEAD
                 $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+=======
+<<<<<<< HEAD
+                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented');
+=======
+                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                 $responses = array('Yes', 'No');
                 
                 /**
@@ -1979,6 +2005,19 @@ class Generate extends MY_Controller
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
                         $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                        $facilitysection .= "<td>".$value['facLevel']."</td>";
+                        $facilitysection .= '<td>'.$fac_county.'</td>';
+                        $facilitysection .= '</tr>';
+                        $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
+                        $facilitysection .= '<tr>';
+                        $facilitysection .= '<td>'.$value['facType'].'</td>';
+                        $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
+                        $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                         $facilitysection .= "<td><select name = 'levels'><option value = '' disabled>Select a facility level</option>";
                         foreach ($levels as $level) {
                             if($value['facLevel'] == $level['flName'])
@@ -2041,6 +2080,10 @@ class Generate extends MY_Controller
                             }
                         }
                         $facilitysection .= '</select></td>';
+<<<<<<< HEAD
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                         $facilitysection .= '</tr>';
                         
                     }

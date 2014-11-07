@@ -244,6 +244,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
     }
   });
 
+<<<<<<< HEAD
   $('select#indicator_types2').change(function() {
     indicator_type2 = $('select#indicator_types2 option:selected').attr(
       'value');
@@ -264,6 +265,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
 
 
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
    $('select#assessment_types').change(function() {
     assessment_types = $('select#assessment_types option:selected').attr(
       'value');
@@ -282,6 +285,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
     }
   });
 
+<<<<<<< HEAD
    $('select#assessment_types3').change(function() {
     assessment_types3 = $('select#assessment_type3 option:selected').attr(
       'value');
@@ -300,6 +304,8 @@ function startAnalytics(base_url, county, survey, survey_category) {
     }
   });
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
   /**
    * [description]
    * @return {[type]} [description]
@@ -437,12 +443,17 @@ function getReportingData(base_url, survey_type, survey_category, container,
 function loadIndicatorTypes() {
   $('#indicator_types').load(base_url + 'analytics/getIndicatorTypes');
 
+<<<<<<< HEAD
    $('#indicator_types2').load(base_url + 'analytics/getIndicatorTypes');
 
    $('#assessment_types').load(base_url + 'analytics/getIndicatorTypes');
 
    $('#assessment_types3').load(base_url + 'analytics/getIndicatorTypes');
 
+=======
+   $('#assessment_types').load(base_url + 'analytics/getIndicatorTypes');
+
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 }
 
 function loadFacilities(base_url, district) {
@@ -523,6 +534,7 @@ function subHandler(criteria, county, district, facility, survey,
       value = facility;
       indicatorHandler(criteria, value, survey, survey_category,
 
+<<<<<<< HEAD
         indicator_type,'correctness');
       break;
   }
@@ -556,6 +568,8 @@ function subHandler2(criteria, county, district, facility, survey,
       value = facility;
       indicatorHandler2(criteria, value, survey, survey_category,
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
         indicator_type,'correctness');
       break;
   }
@@ -585,6 +599,7 @@ function subHandler1(criteria, county, district, facility, survey,
       indicatorHandler1(criteria, value, survey, survey_category,
         assessment_types,'assessment');
 
+<<<<<<< HEAD
       break;
   }
 }
@@ -612,12 +627,15 @@ function subHandler3(criteria, county, district, facility, survey,
       indicatorHandler3(criteria, value, survey, survey_category,
         assessment_types,'assessment');
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
       break;
   }
 }
 
 function indicatorHandler(criteria, value, survey, survey_category,
 
+<<<<<<< HEAD
   indicator_type,statistic) {
   loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
@@ -627,6 +645,8 @@ function indicatorHandler(criteria, value, survey, survey_category,
 
   function indicatorHandler2(criteria, value, survey, survey_category,
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
   indicator_type,statistic) {
   loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
@@ -640,6 +660,7 @@ function indicatorHandler1(criteria, value, survey, survey_category,
     value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison');
 
+<<<<<<< HEAD
   
 }
 
@@ -650,6 +671,8 @@ function indicatorHandler3(criteria, value, survey, survey_category,
     '#assessment_comparison3');
 
   
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 }
 
 function setRawUrl(criteria, county, district, facility, survey,
@@ -1375,7 +1398,10 @@ function statisticsHandler(criteria, value, survey, survey_category,
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#interviewcaregiver');
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
           break;
       }
   }
