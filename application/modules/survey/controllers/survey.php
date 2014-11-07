@@ -309,11 +309,15 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
+<<<<<<< HEAD
     public function createHCWListSection ()
     {
         $hcwlist = '';
         return $hcwlist;
     }
+=======
+
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
@@ -425,13 +429,18 @@ class Survey extends MY_Controller
     }
 
     public function createFacilityTable() {
+<<<<<<< HEAD
         
         
+=======
+        $districtFacilityListSection = $this->createFacilitiesListSection();
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
 
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
+<<<<<<< HEAD
         $survey = $this->session->userdata('survey');
         // echo $survey;die;
         if($survey != 'hcw')
@@ -473,6 +482,21 @@ class Survey extends MY_Controller
                 <tbody></tbody>
             </table>';
         }
+=======
+        $facilityList = '
+        <table class="centre dataTable">
+
+<thead>
+            <th>#</th>
+            <th>MFL CODE</th>
+            <th> FACILITY NAME </th>
+            <th>REPORTING PROGRESS</th>
+            <th style="width:100px">ACTIVITY</th>
+            <th>LINK</th>
+</thead>
+        </tr>' . $districtFacilityListSection . '
+        </table>';
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
 
         // echo $facilityList;
         $data['form'] = $facilityList;

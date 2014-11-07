@@ -665,19 +665,9 @@ class MY_Model extends CI_Model
     public function getServicePoints()
     {
         $query = $this->db->query("SELECT * FROM service_point");
-<<<<<<< HEAD
-        $result = $query->result_array();
 
-        return $result;
-    }
-
-    public function getHCWByDistrict($dName)
-    {
-        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName);
-        $result = $query->result_array();
-=======
         $result = $query->result_array($query);
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+
 
         return $result;
     }

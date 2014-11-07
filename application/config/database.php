@@ -51,11 +51,7 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
-<<<<<<< HEAD
 $db['default']['database'] = 'mnh_rest2';
-=======
-$db['default']['database'] = 'mnh_live';
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
