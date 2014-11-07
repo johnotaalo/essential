@@ -38,10 +38,17 @@ class Generate extends MY_Controller
      * @return [type] [description]
      */
     public function createIndicatorSection() {
-        $data_found = $this->data_model->getIndicators();
         
+            $data_found = $this->data_model->getIndicators();
         // var_dump($data_found);die;
-        $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
+        if($this->session->userdata('survey') != 'hcw')
+        {
+            $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
+        }   
+        else
+        {
+            $retrieved = '';
+        }
         $counter = 0;
         $countme = 0;
         $section = '';
