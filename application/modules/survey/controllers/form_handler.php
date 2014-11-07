@@ -2408,7 +2408,7 @@ class Form_Handler extends MY_Controller
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
 				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
+				Yes <input type="radio" name = "verysevere_check">No <input type="radio" name = "verysevere_check">
 				</td>
 				</tr>
 				<thead>
@@ -2456,7 +2456,7 @@ class Form_Handler extends MY_Controller
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
 				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
+				Yes <input type="radio" name = "jaundice_check">No <input type="radio" name = "jaundice_check">
 				</td>
 				</tr>
 				<thead>
@@ -2552,7 +2552,7 @@ class Form_Handler extends MY_Controller
 				DOES THE CHILD HAVE THE SYMPTOM BELOW?
 				</th>
 				<td colspan="4">
-				Yes <input type="radio">No <input type="radio">
+				Yes <input type="radio" name = "diarrhoea_check">No <input type="radio" name = "diarrhoea_check">
 				</td>
 				</tr>
 				<tr>
