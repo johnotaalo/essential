@@ -979,25 +979,26 @@ class Analytics extends MY_Controller
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
 
-        //echo "<pre>";print_r($results);echo "</pre>";die;
         $count = 0;
         foreach ($results as $stack => $result) {
+                  
+                        $category[] = $stack;
+
 
             foreach ($result as $name => $data) {
 
-
+                 echo "<pre>";print_r($name);echo "</pre>";die;
+        
                 switch ($statistic) {
 
                   case 'cases':
-                   if($stack==''){
-                    if ($count == 12):
-                        $category[] = $stack;
-
+                  if($stack=='OtherTotals'){
                         $gData[$stack] = $data;
                         //echo "<pre>";print_r($gData);echo "</pre>";die;
-                    endif;
-                    $count++;
+                    //endif;
+                    //$count++;
 
+                    
                     }else{
                         $category[] = $stack;
                         $gData[$stack]+= $data;
