@@ -7,7 +7,11 @@
 <div class="login-container">
     <div class="row">
 
+<<<<<<< HEAD
         <div id="form-login" style = "width: 60%: margin: 0 auto;">
+=======
+		<div id="form-login" style = "width: 60%: margin: 0 auto;">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
             <form id="authenticate" name="authenticate" action="<?php echo base_url().'mnch/session/new'?>" method="post" accept-charset="utf-8" class="online">
                 <h2><?php echo $login_message; ?></h2>
 

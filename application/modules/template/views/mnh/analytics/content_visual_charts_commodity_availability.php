@@ -380,6 +380,7 @@
 
                     </div>
                 </div>
+<<<<<<< HEAD
 
             </div>
         </div>
@@ -398,6 +399,37 @@
                 <div class="x-large-graph">
                    <h5>Diarrhoea</h5>
 
+=======
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>HCW Assessment Response<span><select id="assessment_types"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="assessment_comparison">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-4">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                    Section 4 : Commodity & Bundling <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+            <div class="panel-body">
+
+                <div class="x-large-graph">
+                   <h5>Diarrhoea</h5>
+
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1637,24 +1669,40 @@
                 
               <!-- <h5>HCW Profile</h5> -->
               <table>
+<<<<<<< HEAD
                  <!-- <th>First Name</th>
+=======
+                 <th>First Name</th>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                  <th>SurName</th>
                  <th>National ID</th>
                  <th>Phone Number</th>
                  <th>Personal Number</th>
                  <th>Year + Month Trained</th>
                  <th>Key Co-odinator of training</th>
+<<<<<<< HEAD
                  <th>Designation</th> -->
                  <!-- <tr>
                   <td colspan="8"> -->
+=======
+                 <th>Designation</th>
+                 <tr>
+                  <td colspan="8">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     <div class="portlet-body">
                  
                     <div id="HCW_Profile">
                     </div>
                     </div>
+<<<<<<< HEAD
                  <!-- </td>
                 
                  </tr> -->
+=======
+                 </td>
+                
+                 </tr>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
               </table>
             </div>
             <div class="col-md-12">
@@ -1710,6 +1758,7 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Cases Presentation</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
@@ -1725,26 +1774,49 @@
                 <div class="portlet-body">
 
                     <div class="chart" id="serviceprovision">
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_owner">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="signsassessment"f>
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_levels">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Presence</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="signspresence"f>
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_type"f>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
@@ -1765,21 +1837,37 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed ?</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="symptomsassessed">
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_owner">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed correctly ?</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="assessedcorrectly">
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_levels">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
@@ -1900,21 +1988,37 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Consultation observation</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="consultationobserved">
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_owner">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Exit Interview With The Caregiver</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
                     <div class="chart" id="interviewcaregiver">
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="facility_levels">
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
                     </div>
                 </div>
             </div>

@@ -104,7 +104,36 @@ class Form_Handler extends MY_Controller
 			<thead>
 				<tr><th colspan="9">FACILITY INFORMATION</th></tr>
 			</thead>
+<<<<<<< HEAD
 			<tbody>'.$this->facilitysection.'
+=======
+			<tbody>
+				<tr>
+					<td>Facility Name </td><td>
+					<input type="text" size="50" >
+					</td><td>Facility Tier </td><td>
+					<input type="text"  >
+					</td><td>County </td>
+					<td>
+					<input type="text" size="50"  >
+					</td>
+				</tr>
+				<tr>
+					<td>Facility Type </td>
+					<td>
+					<input type="text" size="50"  >
+					</td>
+					<td>Owned By </td>
+					<td>
+					<input type="text"  size="50" >
+					</td>
+
+					<td>District/Sub County </td>
+					<td>
+					<input type="text"  size="50" >
+					</td>
+				</tr>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 			</tbody>
 		</table>
 		<p class="instruction">
@@ -473,6 +502,7 @@ class Form_Handler extends MY_Controller
 		</thead>
 		<tr>
 			<td>Doctor</td>
+<<<<<<< HEAD
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
@@ -484,6 +514,19 @@ class Form_Handler extends MY_Controller
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
+=======
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 		</tr>
 		<tr>
 			<td>Nurse</td>
@@ -1928,7 +1971,10 @@ class Form_Handler extends MY_Controller
 		</div>
 		<pagebreak />
 		<div class = "step" id = "section-8">
+<<<<<<< HEAD
 		<input type = "hidden" name = "step_name" value = "section-8" />
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
 		</p>
@@ -1968,7 +2014,10 @@ class Form_Handler extends MY_Controller
 		</table>
 		</div>
 		<div class = "step" id = "section-9">
+<<<<<<< HEAD
 		<input type = "hidden" name = "step_name" value = "section-9" />
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 		<p style="display:true;margin-top:50px" class="message success">
 			SECTION 9 of 9: COMMUNITY STRATEGY
 		</p>
@@ -2180,8 +2229,13 @@ class Form_Handler extends MY_Controller
 						</tr>
 					</thead>
 					<tr>
+<<<<<<< HEAD
 					<td>Gender (M or F)</td><td><input type="text" size = "5"></td>
 					<td>Age (In Months)</td><td><input type="text" size = "5"></td>
+=======
+					<td>Gender (M or F)</td><td><input type="text"></td>
+					<td>Age (In Months)</td><td><input type="text"></td>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 					<td>Presenting complaints?</td><td><input size="50" type="text"></td>            
 					</tr>
 				</table>
@@ -2683,6 +2737,7 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 				' . $this->indicators['stn'] . '
+<<<<<<< HEAD
 
 				</table>
 				</div>
@@ -2757,6 +2812,82 @@ class Form_Handler extends MY_Controller
 							<th width="200px">Findings</th>
 						</tr>
 
+=======
+
+				</table>
+				</div>
+				<div class="step" id="section-3">
+				<input type = "hidden" name = "step_name" value = "section-3"/>
+					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Malnutrition</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['mal'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Anaemia</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['anm'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+							<tr>
+								<th width="500px" rowspan="2">Condition</th>
+								<th colspan="2">HCW Response</th>
+								<th colspan="2">Assessor Response</th>
+							</tr>
+							<tr>
+								<th width="100px">Response</th>
+								<th width="200px">Findings</th>
+								<th width="100">Response</th>
+								<th width="200px">Findings</th>
+							</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['con'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Treatment and Counselling</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
 						</thead>
 						<tbody>
 						' . $this->indicators['cnl'] . '

@@ -48,7 +48,11 @@ function startSurvey(base_url, survey, survey_category, district) {
       type: 'POST',
       data: formData,
       success: function(data) {
+<<<<<<< HEAD
         console.log(data);
+=======
+        //console.log(data);
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
         changeSection(curr_section, thethat);
