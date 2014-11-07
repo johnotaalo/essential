@@ -417,11 +417,13 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
 
-                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+
                 foreach ($this->dataSet as $value) {
 
                     switch ($statistic) {
-                                              case 'cases_raw':
+
+                        case 'cases_raw':
+
 
                           break;
                         case 'treatment_raw':
@@ -435,6 +437,7 @@ ORDER BY lq.lq_response ASC";
 
                             foreach ($value as $k => $val) {
                               $data_array[$k]=$val;
+
                             }
                             /**
                              * Unset the Old Treatment Key
@@ -487,9 +490,10 @@ ORDER BY lq.lq_response ASC";
                         break;
 
                         case 'cases':
-                            if ($value['treatment'] == 'OtherTotal') {
-                                $value['treatment_for'] == 'other_totals';
-                            }
+
+               // echo '<pre>';print_r($value);echo '</pre>';die;
+                           
+
 
                             //print_r($value['treatment_for']);die;
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
@@ -1297,16 +1301,24 @@ WHERE
 
                     //var_dump($this->dataSet);
 
-                    foreach ($this->dataSet as $value) {
+                   foreach ($this->dataSet as $value) {
+
                         switch ($statistic) {
                             case 'correctness':
                               $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
                                 break;
 
+                            
                             case 'classification':
                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
                                 break;
+
+                            case 'assessment':
+                            $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
+                            break;
+
                         }
+                        
 
                     }
                     $this->dataSet = $data;
@@ -1317,7 +1329,7 @@ WHERE
                     return $this->dataSet = null;
                 }
 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
 
@@ -1651,24 +1663,12 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
 
-                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+
+                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
-                      if($statistic=='availability_raw' || $statistic=='functionality_raw'|| $statistic=='location_raw'){
-                              switch($statistic){
-                                case 'availability_raw':
-                                case 'functionality_raw':
-                                case 'location_raw':
-                                    foreach($value as $k=>$v){
-                                      $data_array[$k]=$v;
+                      if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='location_raw'){
+                          $data[]=$value;
 
-                                    }
-                                    $data_array['equipment']=$value['eq_name'];
-                                    unset($data_array['eq_name']);
-                                    unset($data_array['eq_unit']);
-                                    $data[]=$data_array;
-                                  break;
-
-                              }
                       }else if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1715,6 +1715,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     $data = $newData;
                 }
 
+
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
 
@@ -1726,6 +1727,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
 
             }
+
 
             return $data;
         }
@@ -1846,15 +1848,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             return $data;
         }
-/**
- * [getCommodityStatistics description]
- * @param [type] $criteria        [description]
- * @param [type] $value           [description]
- * @param [type] $survey          [description]
- * @param [type] $survey_category [description]
- * @param [type] $for             [description]
- * @param [type] $statistic       [description]
- */
+
+
         public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
             $newData = array();
@@ -4283,11 +4278,13 @@ ORDER BY question_code";
                     }
 
                     unset($data[$question]['question_code']);
+
                 }
 
                //echo '<pre>';print_r($data);echo '</pre>';die;
 
                 //die(var_dump($this->dataSet));
+
 
 
             }
@@ -4298,6 +4295,7 @@ ORDER BY question_code";
 
 
             }
+
 
             // var_dump($data);die;
             return $data;
@@ -4339,6 +4337,7 @@ ORDER BY question_code";
 
 
             }
+
 
             // var_dump($data);die;
             return $data;
@@ -4488,8 +4487,10 @@ ORDER BY question_code";
                         }
                         //else{
                        //   $data['question_code'][$value_] += (int)$value['total_response'];
+
                         //}
                         //}
+
 
 
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;

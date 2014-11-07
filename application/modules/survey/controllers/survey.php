@@ -309,11 +309,7 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
-    public function createHCWListSection ()
-    {
-        $hcwlist = '';
-        return $hcwlist;
-    }
+
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
@@ -425,54 +421,25 @@ class Survey extends MY_Controller
     }
 
     public function createFacilityTable() {
-        
-        
+        $districtFacilityListSection = $this->createFacilitiesListSection();
 
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
-        $survey = $this->session->userdata('survey');
-        // echo $survey;die;
-        if($survey != 'hcw')
-        {
-            $districtFacilityListSection = $this->createFacilitiesListSection();
-            $facilityList = '
-                <table class="centre dataTable">
-        
-        <thead>
-                    <th>#</th>
-                    <th>MFL CODE</th>
-                    <th> FACILITY NAME </th>
-                    <th>REPORTING PROGRESS</th>
-                    <th style="width:100px">ACTIVITY</th>
-                    <th>LINK</th>
-        </thead>
-                </tr>' . $districtFacilityListSection . '
-                </table>';
-        }
-        else
-        {
-            $hcwListSection = $this->createHCWListSection();
-            // print_r($hcwListSection);die;
-            $facilityList = '<table class = "center dataTable">
-                <thead>
-                    <th>#</th>
-                    <th>MFL CODE</th>
-                    <th>Facility Name</th>
-                    <th>HCW Name</th>
-                    <th>National ID No</th>
-                    <th>Phone No</th>
-                    <th>Email Address</th>
-                    <th>Certified</th>
-                    <th>For Mentorship</th>
-                    <th>For TOT</th>
-                    <th>Status</th>
-                    <th>Link</th>
-                </thead>
-                <tbody></tbody>
-            </table>';
-        }
+        $facilityList = '
+        <table class="centre dataTable">
+
+<thead>
+            <th>#</th>
+            <th>MFL CODE</th>
+            <th> FACILITY NAME </th>
+            <th>REPORTING PROGRESS</th>
+            <th style="width:100px">ACTIVITY</th>
+            <th>LINK</th>
+</thead>
+        </tr>' . $districtFacilityListSection . '
+        </table>';
 
         // echo $facilityList;
         $data['form'] = $facilityList;
