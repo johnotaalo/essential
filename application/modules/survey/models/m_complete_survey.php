@@ -5122,7 +5122,7 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                            if ($this->addHCWQuestionInfo()==true) {
+                            if ($this->addHCWQuestionInfo()==true && $this->addMchHRInfo()== true && $this->addhcwProfileSection() == true && $this->addHCWProfile()== true&& $this->addhcwWorkProfile()) {
 
                                  //Defined in MY_Model
                                 $this->addHCWWriteAssessmentTracker();

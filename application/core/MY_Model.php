@@ -375,6 +375,18 @@ class MY_Model extends CI_Model
         return $data;
     }
 
+     public function retrieveDataHCW($table_name, $identifier) {
+        $results = $this->db->get_where($table_name, array('hcw_id' => $this->session->userdata('hcw_id')));
+        $results = $results->result_array();
+        if ($results) {
+            foreach ($results as $result) {
+                $data[$result[$identifier]] = $result;
+            }
+        } else {
+            $data = array();
+        }
+        return $data;
+    }
     /**
      * [getQuestionName description]
      * @param  [type] $code [description]

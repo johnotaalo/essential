@@ -47,7 +47,7 @@ class Generate extends MY_Controller
         }   
         else
         {
-            $retrieved = '';
+            $retrieved = $this->data_model->retrieveDataHCW('log_indicators_hcw', 'indicator_code');
         }
         $counter = 0;
         $countme = 0;
