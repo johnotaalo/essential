@@ -687,12 +687,12 @@ class Analytics extends MY_Controller
         //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
 
-        $category = array();
+        $category =array();
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
+          
 
-
-        //echo '<pre>';print_r($resultArray);echo '</pre>';
+       // echo '<pre>';print_r($nurse);echo '</pre>';die;
 
         foreach ($results as $guide) {
 
@@ -705,9 +705,6 @@ class Analytics extends MY_Controller
                 $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
                 $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
-
-
-
         }
 
 
@@ -979,26 +976,24 @@ class Analytics extends MY_Controller
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
 
-        $count = 0;
+         $count = 0;
         foreach ($results as $stack => $result) {
-                  
-                        $category[] = $stack;
-
 
             foreach ($result as $name => $data) {
 
-                 echo "<pre>";print_r($name);echo "</pre>";die;
-        
+
                 switch ($statistic) {
 
                   case 'cases':
-                  if($stack=='OtherTotals'){
+                  if($stack==''){
+                    if ($count == 12):
+                        $category[] = $stack;
+
                         $gData[$stack] = $data;
                         //echo "<pre>";print_r($gData);echo "</pre>";die;
-                    //endif;
-                    //$count++;
+                    endif;
+                    $count++;
 
-                    
                     }else{
                         $category[] = $stack;
                         $gData[$stack]+= $data;
@@ -3466,7 +3461,7 @@ class Analytics extends MY_Controller
     public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
-       
+        
         if($statistic = 'classification' && $for = 'ch'){
            foreach ($results as $indicator => $values) {
             $category[] = $indicator;
@@ -3474,9 +3469,21 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-       
+       $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gData as $name => $data) {
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data);
+            if($name=='N/A'){
+                $name = 'No data';
+                   $color='#dddddd';
+                }elseif($name == 'Yes'){
+                  $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
         }
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
@@ -3490,8 +3497,18 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gData as $name => $data) {
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data);
+            if($name == 'correct'){
+                  $color='#8bbc21';
+                }else if($name=='incorrect'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
         }
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
@@ -3507,9 +3524,18 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-       
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gData as $name => $data) {
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data);
+            if($name == 'assessment done'){
+                  $color='#8bbc21';
+                }else if($name=='assessment not done'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
         }
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;

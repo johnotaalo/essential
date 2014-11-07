@@ -418,7 +418,7 @@ ORDER BY lq.lq_response ASC";
             if ($this->dataSet !== NULL) {
 
                 foreach ($this->dataSet as $value) {
-
+                    //echo "<pre>";print_r($value);echo "</pre>";die;
                     switch ($statistic) {
 
                         case 'cases_raw':
@@ -487,11 +487,7 @@ ORDER BY lq.lq_response ASC";
                         break;
 
                         case 'cases':
-
-               // echo '<pre>';print_r($value);echo '</pre>';die;
-                           
-
-                            //print_r($value['treatment_for']);die;
+                            
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                            // echo '<pre>';print_r($data);echo '</pre>';die;
                             break;
