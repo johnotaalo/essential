@@ -15,6 +15,10 @@ function startSurvey(base_url, survey, survey_category, district) {
     getDistrictData(base_url, district, survey, survey_category);
   }
 
+  else
+  {
+     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
+  }
   // Bound Events
 
 
@@ -226,6 +230,54 @@ function startSurvey(base_url, survey, survey_category, district) {
         });
 
       }); /*end of which link was clicked*/
+
+      /*hcw-action clicked*/
+      $('.hcw-action').live('click', function(){
+        hcwid = $(this).attr('data-hcwid');
+        section = $(this).attr('data-section');
+        action = $(this).attr('data-action');
+        the_url = base_url + 'survey/startAssessment/' + hcwid;
+        $.ajax({
+          type: 'POST',
+          data: '',
+          async: false,
+          url: the_url,
+          beforeSend: function() {
+            $(".form-container .actual-form").empty();
+            $(".form-container .actual-form").append(
+              '<div class="loader" >Loading...</div>');
+
+          },
+          success:function(data) {
+            console.log("assessing hcw: " + data);
+          }
+        });
+
+        if (hcwid) {
+          current_form = 'survey/load/online/' + survey;
+        }
+
+        $(".form-container .actual-form").load(base_url + current_form,
+          function() {
+            loadGlobalScript();
+            // renderFacilityInfo(facilityMFL);
+            // break_form_to_steps(form_id);
+            select_option_changed();
+            loadSection(section, action);
+            $('#steps').show();
+            $('#form_post').addClass('active');
+            $('#click_form').fadeOut();
+            $('select').select2();
+            // $('actual-form .step').hide();
+
+          });
+
+        //Step Handler
+        $('.ui.step').click(function() {
+          section = $(this).attr('data-section');
+          changeSection(section, this);
+        });
+      }); /*end of hcw action*/
     }); /*close form-container LOAD FN() */
 
   // $('#m_county_choose').live(function(){

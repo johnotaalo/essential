@@ -4604,6 +4604,411 @@ return true;
          //end of innner loop
     }
      //close addTotalMCHTreatment
+
+    //add addHCWWriteAssessmentTracker
+    public function addHCWWriteAssessmentTracker()
+    {
+        //check if entry exists
+        $this->section = $this->sectionEntryExists($this->session->userdata('facilityMFL'), $this->input->post('step_name', TRUE), $this->session->userdata('survey'));
+
+        //print var_dump($this->section);
+
+        //insert log entry if new, else update the existing one
+        if ($this->sectionExists == false) {
+
+            //die('New entry, enter new one');
+            $this->theForm = new \models\Entities\HCWAssessmentTracker();
+
+            //create an object of the model
+            $this->theForm->setAstSection($this->input->post('step_name', TRUE));
+
+            //obtain facility code from current survey session val
+            $this->theForm->setAstLastActivity(new DateTime());
+
+            /*timestamp option*/
+            $this->theForm->setFacilitycode($this->session->userdata('facilityMFL'));
+            $this->theForm->setHcwId((int)$this->session->userdata('hcw_id'));
+
+            //obtain facility code from current temp session val
+
+
+        } else {
+
+            // die('Update log');
+            try {
+                $this->theForm = $this->em->getRepository('models\Entities\HCWAssessmentTracker')->findOneBy(array('hcwId' => $this->session->userdata('hcw_id'), 'astSection' => $this->input->post('step_name', TRUE)));
+            }
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());
+
+
+            }
+        }
+
+        $this->theForm->setAstLastActivity(new DateTime());
+
+        /*timestamp option*/
+
+        $this->em->persist($this->theForm);
+
+        try {
+
+            $this->em->flush();
+            $this->em->clear();
+
+            //detaches all objects from doctrine
+            //print 'true';
+
+
+        }
+        catch(Exception $ex) {
+
+            // die($ex->getMessage());
+            //print 'false';
+            /*display user friendly message*/
+        }
+
+        //end of catch
+
+    }
+    //close addHCWWriteAssessmentTracker
+    //add addHCWQuestionInfo
+    private function addHCWQuestionInfo() {
+        // print_r($this->session->userdata);die;
+        $this->elements = array();
+        $count = $finalCount = 1;
+       //print_r($this->input->post());die;
+        foreach ($this->input->post() as $key => $val) {
+
+            //For every posted values
+            if (strpos($key, 'question') !== FALSE) {
+                //print_r($this->input->post());
+                //echo($key).'<br/>';
+                //select data for bemonc signal functions
+                //we separate the attribute name from the number
+
+                $this->frags = explode("_", $key);
+
+                //$this->id = $this->frags[1];  // the id
+
+                $this->id = $count;
+
+                // the id
+
+                $this->attr = $this->frags[0];
+
+                //the attribute name
+
+                // print $key.' ='.$val.' <br />';
+                //print 'ids: '.$this->id.'<br />';
+                if (is_array($val)) {
+                    $val = implode(',', $val);
+                }
+
+                //mark the end of 1 row...for record count
+                if ($this->attr == "questionCode") {
+
+                    // print 'count at:'.$count.'<br />';
+
+                    $finalCount = $count;
+                    $count++;
+
+                    // print 'count at:'.$count.'<br />';
+                    //print 'final count at:'.$finalCount.'<br />';
+                    //print 'DOM: '.$key.' Attr: '.$this->attr.' val='.$val.' id='.$this->id.' <br />';
+
+
+                }
+
+                //collect key and value to an array
+                if (!empty($val)) {
+
+                    //We then store the value of this attribute for this element.
+                    $this->elements[$this->id][$this->attr] = htmlentities($val);
+
+                    //$this->elements[$this->attr]=htmlentities($val);
+
+
+                } else {
+                    $this->elements[$this->id][$this->attr] = '';
+
+                    //$this->element=array('id'=>$this->id,'name'=>$this->attr,'value'=>'');
+
+
+                }
+            }
+        }
+
+        //close foreach ($this -> input -> post() as $key => $val)
+        //echo '<pre>';print_r($this->elements);echo '</pre>';die;
+
+        //exit;
+
+        //get the highest value of the array that will control the number of inserts to be done
+        $this->noOfInsertsBatch = $finalCount;
+        // echo $this->noOfInsertsBatch;die;
+
+        for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
+
+            $this->theForm = $this->getStoredData('models\Entities\LogQuestionsHcw', array('hcwId' => $this->session->userdata('hcw_id'), 'questionCode' => $this->elements[$i]['questionCode']));
+
+            if ($this->theForm == NULL) {
+                $this->theForm = new \models\Entities\LogQuestionsHcw();
+            }
+
+            // print_r($this->theForm);die;
+            //echo "<pre>";print_r($this->theForm);echo "</pre>";die;
+            //go ahead and persist data posted
+
+            //create an object of the model
+
+            //$this -> theForm -> setIdMCHQuestionLog($this->elements[$i]['ortcAspectCode']);
+            $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
+
+            //check if that key exists, else set it to some default value
+
+            (array_key_exists('questionResponse', $this->elements[$i])) ? $this->theForm->setLqResponse($this->elements[$i]['questionResponse']) : $this->theForm->setLqResponse('n/a');
+            (array_key_exists('questionResponseOther', $this->elements[$i]) && $this->elements[$i]['questionResponseOther'] != '') ? $this->theForm->setLqResponse($this->elements[$i]['questionResponseOther']) : $x = 1;
+
+            (array_key_exists('questionCount', $this->elements[$i])) ? $this->theForm->setLqResponseCount($this->elements[$i]['questionCount']) : $this->theForm->setLqResponseCount(-1);
+            (array_key_exists('questionReason', $this->elements[$i])) ? $this->theForm->setLqReason($this->elements[$i]['questionReason']) : $this->theForm->setLqReason('n/a');
+            (array_key_exists('questionSpecified', $this->elements[$i])) ? $this->theForm->setLqSpecifiedOrFollowUp($this->elements[$i]['questionSpecified']) : $this->theForm->setLqSpecifiedOrFollowUp('n/a');
+            $this->theForm->setQuestionCode($this->elements[$i]['questionCode']);
+            $this->theForm->setHcwId((int)$this->session->userdata('hcw_id'));
+            $this->theForm->setLqCreated(new DateTime());
+
+            /*timestamp option*/
+            $this->em->persist($this->theForm);
+
+            //now do a batched insert, default at 5
+            $this->batchSize = 5;
+            if ($i % $this->batchSize == 0) {
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detaches all objects from doctrine
+                    return true;
+
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+
+                //end of catch
+
+
+            } else if ($i < $this->batchSize || $i > $this->batchSize || $i == $this->noOfInsertsBatch && $this->noOfInsertsBatch - $i < $this->batchSize) {
+
+                //total records less than a batch, insert all of them
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detactes all objects from doctrine
+                    return true;
+
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+
+                //end of catch
+
+                //on the last record to be inserted, log the process and return true;
+                if ($i == $this->noOfInsertsBatch) {
+
+                    //die(print $i);
+                    // $this->writeAssessmentTrackerLog();
+                    return true;
+                }
+            }
+
+            //end of batch condition
+
+
+        }
+
+        //end of innner loop
+
+
+    }
+    //close addHCWQuestionInfo
+
+    private function addHCWIndicatorsInfo()
+    {
+        $count = $finalCount = 1;
+        $this->elements = array();
+        foreach ($this->input->post() as $key => $val) {
+
+            //For every posted values
+            if (strpos($key, 'indicator') !== FALSE) {
+
+                //select data for bemonc signal functions
+                //we separate the attribute name from the number
+
+                $this->frags = explode("_", $key);
+
+                //$this->id = $this->frags[1];  // the id
+
+                $this->id = $count;
+
+                // the id
+
+                $this->attr = $this->frags[0];
+
+                //the attribute name
+
+                //print $key.' ='.$val.' <br />';
+                //print 'ids: '.$this->id.'<br />';
+                if (is_array($val)) {
+                    $val = implode(',', $val);
+                }
+
+                //mark the end of 1 row...for record count
+                if ($this->attr == "indicatorCode") {
+
+                    // print 'count at:'.$count.'<br />';
+
+                    $finalCount = $count;
+                    $count++;
+
+                    // print 'count at:'.$count.'<br />';
+                    //print 'final count at:'.$finalCount.'<br />';
+                    //print 'DOM: '.$key.' Attr: '.$this->attr.' val='.$val.' id='.$this->id.' <br />';
+
+
+                }
+
+                //collect key and value to an array
+                if (!empty($val)) {
+
+                    //We then store the value of this attribute for this element.
+                    $this->elements[$this->id][$this->attr] = htmlentities($val);
+
+                    //$this->elements[$this->attr]=htmlentities($val);
+
+
+                } else {
+                    $this->elements[$this->id][$this->attr] = '';
+
+                    //$this->element=array('id'=>$this->id,'name'=>$this->attr,'value'=>'');
+
+
+                }
+            }
+        }
+
+        //close foreach ($this -> input -> post() as $key => $val)
+        //echo '<pre>';print_r($this->elements);echo '</pre>';die;
+
+        //exit;
+
+        //get the highest value of the array that will control the number of inserts to be done
+        $this->noOfInsertsBatch = $finalCount;
+
+        for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
+
+            //go ahead and persist data posted
+            $this->theForm = $this->getStoredData('models\Entities\LogIndicatorsHcw', array('hcwId' => $this->session->userdata('hcw_id'), 'indicatorCode' => $this->elements[$i]['indicatorCode']));
+
+            if ($this->theForm == NULL) {
+                $this->theForm = new \models\Entities\LogIndicatorsHcw();
+            }
+
+            //create an object of the model
+
+            $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
+
+            //check if that key exists, else set it to some default value
+            (isset($this->elements[$i]['indicatorhcwResponse'])) ? $this->theForm->setLiHcwresponse($this->elements[$i]['indicatorhcwResponse']) : $this->theForm->setLiHcwresponse("N/A");
+            (isset($this->elements[$i]['indicatorhcwFindings'])) ? $this->theForm->setLiHcwfindings($this->elements[$i]['indicatorhcwFindings']) : $this->theForm->setLiHcwfindings("N/A");
+            (isset($this->elements[$i]['indicatorassessorResponse'])) ? $this->theForm->setLiAssessorresponse($this->elements[$i]['indicatorassessorResponse']) : $this->theForm->setLiAssessorresponse("N/A");
+            (isset($this->elements[$i]['indicatorassessorFindings'])) ? $this->theForm->setLiAssessorfindings($this->elements[$i]['indicatorassessorFindings']) : $this->theForm->setLiAssessorfindings("N/A");
+            $this->theForm->setIndicatorCode($this->elements[$i]['indicatorCode']);
+            $this->theForm->setHcwId((int)$this->session->userdata('hcw_id'));
+            $this->theForm->setLiCreated(new DateTime());
+
+            /*timestamp option*/
+            $this->em->persist($this->theForm);
+
+            //now do a batched insert, default at 5
+            $this->batchSize = 5;
+            if ($i % $this->batchSize == 0) {
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detaches all objects from doctrine
+                    //return true;
+
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+
+                //end of catch
+
+
+            } else if ($i < $this->batchSize || $i > $this->batchSize || $i == $this->noOfInsertsBatch && $this->noOfInsertsBatch - $i < $this->batchSize) {
+
+                //total records less than a batch, insert all of them
+                try {
+
+                    $this->em->flush();
+                    $this->em->clear();
+
+                    //detactes all objects from doctrine
+                    //return true;
+
+
+                }
+                catch(Exception $ex) {
+
+                    die($ex->getMessage());
+                    return false;
+
+                    /*display user friendly message*/
+                }
+
+                //end of catch
+
+                //on the last record to be inserted, log the process and return true;
+                if ($i == $this->noOfInsertsBatch) {
+
+                    //die(print $i);
+                    // $this->writeAssessmentTrackerLog();
+                    return true;
+                }
+            }
+
+            //end of batch condition
+
+
+        }
+
+        //end of innner loop
+    }
     /**
      * [store_data description]
      * @return [type] [description]
@@ -4712,15 +5117,15 @@ return true;
                     switch ($step) {
                         case 'section-1':
                             //check if entry exists
-                            $this->section = $this->sectionEntryExists($this->session->userdata('facilityMFL'), $this->input->post('step_name', TRUE), $this->session->userdata('survey'));
+                            
 
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                            if ($this->addMchHRInfo()== true && $this->addhcwProfileSection() == true && $this->addHCWProfile()== true&& $this->addhcwWorkProfile()==true && $this->addQuestionsInfo()==true) {
+                            if ($this->addHCWQuestionInfo()==true) {
 
                                  //Defined in MY_Model
-                                $this->writeAssessmentTrackerLog();
+                                $this->addHCWWriteAssessmentTracker();
                                 echo "true";
                                 return $this->response = 'true';
                             } else {
@@ -4738,9 +5143,9 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                               if ($this->addMCHIndicatorInfo() == true) {
+                               if ($this->addHCWIndicatorsInfo() == true) {
                                      //defined in this model
-                                    $this->writeAssessmentTrackerLog();
+                                    $this->addHCWWriteAssessmentTracker();
                                     return $this->response = 'true';
                                 } else {
                                     return $this->response = 'false';
@@ -4755,8 +5160,9 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                                if ($this->addMCHIndicatorInfo() == true) {
-                                    $this->writeAssessmentTrackerLog();
+                                if ($this->addHCWIndicatorsInfo() == true) {
+                                     //defined in this model
+                                    $this->addHCWWriteAssessmentTracker();
                                     return $this->response = 'true';
                                 } else {
                                     return $this->response = 'false';
@@ -4772,13 +5178,16 @@ return true;
                             //print var_dump($this->section);........
 
                             //insert log entry if new, else update the existing one
-                                if ( $this->addQuestionsInfo()==true) {
-                                     //defined in this model
-                                    $this->writeAssessmentTrackerLog();
-                                    return $this->response = 'true';
-                                } else {
-                                    return $this->response = 'false';
-                                }
+                               if ($this->addHCWQuestionInfo()==true) {
+
+                                 //Defined in MY_Model
+                                $this->addHCWWriteAssessmentTracker();
+                                echo "true";
+                                return $this->response = 'true';
+                            } else {
+                                echo "false";
+                                return $this->response = 'false';
+                            }
                             break;
 
                         case 'section-5':
@@ -4789,13 +5198,16 @@ return true;
                             //print var_dump($this->section);
 
                             //insert log entry if new, else update the existing one
-                                if ($this->addQuestionsInfo() == true && $this->addHCWConclusionInfo()==true) {
-                                     //defined in this model
-                                    $this->writeAssessmentTrackerLog();
-                                    return $this->response = 'true';
-                                } else {
-                                    return $this->response = 'false';
-                                }
+                                if ($this->addHCWQuestionInfo()==true && $this->addHCWConclusionInfo() == true) {
+
+                                 //Defined in MY_Model
+                                $this->addHCWWriteAssessmentTracker();
+                                echo "true";
+                                return $this->response = 'true';
+                            } else {
+                                echo "false";
+                                return $this->response = 'false';
+                            }
 
                             break;
 

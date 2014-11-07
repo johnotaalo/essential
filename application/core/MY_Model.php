@@ -672,8 +672,25 @@ class MY_Model extends CI_Model
 
     public function getHCWByDistrict($dName)
     {
-        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName ."'");
+        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName ."' AND  activity_id = 10");
         $result = $query->result_array();
+
+        return $result;
+    }
+
+    public function getHCWWorkProfile($hcw_id)
+    {
+        $result =  $this->db->get_where('hcw_list', array('id' => $hcw_id));
+
+        $result = $result->result_array();
+
+        return $result;
+    }
+
+    public function getCertification($hcw_id)
+    {
+        $result = $this->db->query("SELECT * FROM log_questions_hcw WHERE hcw_id = '" . $hcw_id . "'");
+        $result = $result->result_array();
 
         return $result;
     }

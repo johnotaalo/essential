@@ -322,13 +322,14 @@ class Survey extends MY_Controller
                     $value[$key] = $val;
                 }
             }
+            // echo $value['id'];die;
             $counter++;
             $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>
             <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
             <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
             <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
             <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
-            <td><center><a class="ui red label">Cannot be traced</a></center></td>
+            <td><center><a class="hcw-action ui green label" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Cannot be traced</a></center></td>
             </tr>';
         }
        // echo $hcwlist;die;
@@ -535,5 +536,13 @@ class Survey extends MY_Controller
     {
         $this->load->model('m_complete_survey');
         $this->m_complete_survey->store_data();
+    }
+    public function startAssessment($hcwid, $fac_mfl)
+    {
+         $result = $this->db->get_where('hcw_list', array('id' => $hcwid));
+         $result = $result->result_array();
+        $facilityMFL = $result[0]['mfl_code'];
+        $data = array('hcw_id' => $hcwid, 'facilityMFL' => $facilityMFL);
+        $this->session->set_userdata($data);
     }
 }
