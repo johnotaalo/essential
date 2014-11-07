@@ -304,7 +304,14 @@ class Generate extends MY_Controller
              * [$retrieved description]
              * @var [type]
              */
-            $retrieved = $this->data_model->retrieveData('log_questions', 'question_code');
+            if($this->session->userdata('survey') != 'hcw')
+            {
+                $retrieved = $this->data_model->retrieveData('log_questions', 'question_code');
+            }
+            else
+            {
+                $retrieved = $this->data_model->retrieveDataHCW('log_questions_hcw', 'question_code');
+            }
             
             /**
              * [$counter description]
