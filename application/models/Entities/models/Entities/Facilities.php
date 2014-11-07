@@ -601,4 +601,124 @@ class Facilities
     {
         return $this->facUpdated;
     }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_division", type="string", length=255, nullable=true)
+     */
+    private $facDivision;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_owner", type="string", length=255, nullable=true)
+     */
+    private $facOwner;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_location", type="string", length=255, nullable=true)
+     */
+    private $facLocation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_sub_location", type="string", length=255, nullable=true)
+     */
+    private $facSubLocation;
+
+
+    /**
+     * Set facDivision
+     *
+     * @param string $facDivision
+     * @return Facilities
+     */
+    public function setFacDivision($facDivision)
+    {
+        $this->facDivision = $facDivision;
+    
+        return $this;
+    }
+
+    /**
+     * Get facDivision
+     *
+     * @return string 
+     */
+    public function getFacDivision()
+    {
+        return $this->facDivision;
+    }
+
+    /**
+     * Set facOwner
+     *
+     * @param string $facOwner
+     * @return Facilities
+     */
+    public function setFacOwner($facOwner)
+    {
+        $this->facOwner = $facOwner;
+    
+        return $this;
+    }
+
+    /**
+     * Get facOwner
+     *
+     * @return string 
+     */
+    public function getFacOwner()
+    {
+        return $this->facOwner;
+    }
+
+    /**
+     * Set facLocation
+     *
+     * @param string $facLocation
+     * @return Facilities
+     */
+    public function setFacLocation($facLocation)
+    {
+        $this->facLocation = $facLocation;
+    
+        return $this;
+    }
+
+    /**
+     * Get facLocation
+     *
+     * @return string 
+     */
+    public function getFacLocation()
+    {
+        return $this->facLocation;
+    }
+
+    /**
+     * Set facSubLocation
+     *
+     * @param string $facSubLocation
+     * @return Facilities
+     */
+    public function setFacSubLocation($facSubLocation)
+    {
+        $this->facSubLocation = $facSubLocation;
+    
+        return $this;
+    }
+
+    /**
+     * Get facSubLocation
+     *
+     * @return string 
+     */
+    public function getFacSubLocation()
+    {
+        return $this->facSubLocation;
+    }
 }

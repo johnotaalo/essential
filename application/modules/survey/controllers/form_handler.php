@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection;
     
     public function __construct() {
         parent::__construct();
@@ -84,6 +84,7 @@ class Form_Handler extends MY_Controller
          */
         $this->facilitysection = $this->generate->createFacilityDetailsSection();
         $this->cadre = $this->generate->createCadre();
+        $this->hcwworkprofilesection = $this->generate->createHCWWorkerProfile();
         // $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
 
     }
@@ -1230,7 +1231,7 @@ class Form_Handler extends MY_Controller
 				<th>If <strong>Yes</strong>, Indicate Total Quantities Available </th>
 			</tr>
 		</thead>
-		' . $this->questions['guide'] . '
+		' . $this->questions['gp'] . '
 	</table>
 		<table class="centre">
 
@@ -2106,35 +2107,7 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td colspan="4">Name of Provider</td>
 				</tr>
-				<tr>
-				<td>First Name</td>
-				<td><input type="text" name = "hpfirstname_1"></td>
-				<td>Surname</td>
-				<td><input type="text" name = "hpsurname_1"></td>
-				</tr>
-				<tr>
-				<td>National ID</td>
-				<td><input type="text" name = "hpnationalid_1"></td>
-				<td>Phone Number</td>
-				<td><input type="text" name = "hpphonephonenumber_1"></td>
-				</tr><tr>
-				<td>Personal Number</td>
-				<td colspan="3"><input type="text"></td>
-				</tr>
-				<tr>
-				<td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
-				<td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-				<p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
-				<p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
-				<p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
-				<p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
-				</td>
-				</tr>
-				<tr>
-				<td colspan="1"><label for="">Designation</label></td>
-				<td colspan="3"><select name = "hpdesignation_1">'.$this->cadre.'</select></td>
-				</tr>
-				<tr><td colspan = "4"><a href = "#" id = "addHCW" class = "small ui button">Add Health Care Worker</a></td></tr>
+				'.$this->hcwworkprofilesection.'
 				</tbody>
 				<tfoot>
 				</tfoot>

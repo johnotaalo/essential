@@ -372,7 +372,7 @@ class Generate extends MY_Controller
                         else if($section == 'su'){
                             $data[$section][] .= '<tr>
                                 <td><label>'.$value['questionName'].'</label></td>
-                                <td><select name = "questionResponse_'.$counter.'">'.$this->createServicePoint().'</select></td>
+                                <td><select name = "questionResponse_'.$counter.'" id = "questionResponse_'.$counter.'">'.$this->createServicePoint().'</select></td>
                                 <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
                             </tr>';
                         }
@@ -1995,6 +1995,40 @@ class Generate extends MY_Controller
                 return $facilitysection;
             }
 
+            public function createHCWWorkerProfile()
+            {
+                $workprofilesection = '';
+                $hcwwork = $this->data_model->getHCWWorkProfile($this->session->userdata('hcw_id'));
+                $counter = 0;
+
+                foreach ($hcwwork as $key => $value) {
+                    
+                        $names = explode(" ", $value['names_of_participant']);
+                        $namecount = count($names);
+                        $firstname = $names[0];
+                        $lastname = $names[$namecount - 1];
+                    
+                    $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
+                    $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
+                    $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
+                    $workprofilesection .= '<tr>
+                <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                </td>
+                </tr>';
+                $workprofilesection .= '<tr>
+                <td colspan="1"><label for="">Designation</label></td>
+                <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
+                </tr>';
+                }
+
+                return $workprofilesection;
+
+            }
 
             public function createStaffTrainingGuidelinesSection() {
                 $this->data_found = $this->data_model->getTrainingGuidelines();

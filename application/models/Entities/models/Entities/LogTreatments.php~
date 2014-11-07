@@ -301,4 +301,34 @@ class LogTreatments
     {
         return $this->ltOtherTreatmentsNumbers;
     }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lt_other_treatment", type="text", nullable=true)
+     */
+    private $ltOtherTreatment;
+
+
+    /**
+     * Set ltOtherTreatment
+     *
+     * @param string $ltOtherTreatment
+     * @return LogTreatments
+     */
+    public function setLtOtherTreatment($ltOtherTreatment)
+    {
+        $this->ltOtherTreatment = $ltOtherTreatment;
+    
+        return $this;
+    }
+
+    /**
+     * Get ltOtherTreatment
+     *
+     * @return string 
+     */
+    public function getLtOtherTreatment()
+    {
+        return $this->ltOtherTreatment;
+    }
 }
