@@ -312,7 +312,7 @@ class Generate extends MY_Controller
             {
                 $retrieved = $this->data_model->retrieveDataHCW('log_questions_hcw', 'question_code');
             }
-            
+            // print_r($retrieved);die;
             /**
              * [$counter description]
              * @var integer

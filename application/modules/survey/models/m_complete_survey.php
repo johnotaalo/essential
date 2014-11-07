@@ -4798,14 +4798,14 @@ return true;
                     $this->em->clear();
 
                     //detaches all objects from doctrine
-                    return true;
+                    // return true;
 
 
                 }
                 catch(Exception $ex) {
 
                     die($ex->getMessage());
-                    return false;
+                    // return false;
 
                     /*display user friendly message*/
                 }
@@ -4822,14 +4822,14 @@ return true;
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    return true;
+                    // return true;
 
 
                 }
                 catch(Exception $ex) {
 
                     die($ex->getMessage());
-                    return false;
+                    // return false;
 
                     /*display user friendly message*/
                 }
@@ -4841,7 +4841,7 @@ return true;
 
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    return true;
+                    // return true;
                 }
             }
 
@@ -4851,7 +4851,7 @@ return true;
         }
 
         //end of innner loop
-
+        return true;
 
     }
     //close addHCWQuestionInfo

@@ -2062,6 +2062,7 @@ class Form_Handler extends MY_Controller
 				</td>
 				<td>
 				<input type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
+				<input type = "hidden" name = "facilityopdemail" />
 				</td>
 				</tr>
 
