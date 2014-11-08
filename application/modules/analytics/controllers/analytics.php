@@ -720,17 +720,7 @@ class Analytics extends MY_Controller
          //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', '', '', '', $colors);
     }
-
-    //get treatment symptoms
-    public function getTreatmentSymptoms($criteria, $value, $survey, $survey_category) {
-        $results = $this->analytics_model->getTreatmentSymptoms($criteria, $value, $survey, $survey_category);
-
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-
-
-    }
-
-
+    
     public function getCaseTreatment($criteria, $value, $survey, $survey_category, $for, $statistic, $option)
     {
          $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
@@ -975,7 +965,7 @@ class Analytics extends MY_Controller
 
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
-
+        //echo "<pre>";print_r($results);echo "</pre>";die;
          $count = 0;
         foreach ($results as $stack => $result) {
 
@@ -985,20 +975,19 @@ class Analytics extends MY_Controller
                 switch ($statistic) {
 
                   case 'cases':
-                  if($stack==''){
-                    if ($count == 12):
-                        $category[] = $stack;
+                  if($name=='OtherTotal'){
+                     $category[] = $stack;
 
-                        $gData[$stack] = $data;
-                        //echo "<pre>";print_r($gData);echo "</pre>";die;
-                    endif;
-                    $count++;
+                        $gData[]= $data;
+                   // echo "<pre>";print_r($gData);echo "</pre>";die;
+                    //endif;
+                    //$count++;
 
                     }else{
                         $category[] = $stack;
                         $gData[$stack]+= $data;
                        }
-
+                       // echo "<pre>";print_r($gData);echo "</pre>";die;
                         break;
 
 
@@ -1059,7 +1048,7 @@ class Analytics extends MY_Controller
             }
         } else {
             $resultArray = array(array('name' => 'Diarrhoea', 'data' => array($gData['dia'], 0, 0,0)), array('name' => 'Malaria', 'data' => array(0, $gData['fev'], 0,0)),
-             array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'],0)), array('name' => 'Other Totals','data'=>array(0,0,0,$gData[''])));
+             array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'],0)), array('name' => 'Other Totals','data'=>array(0,0,0,$gData[0])));
             $category[$option] = array('Diarrhoea', 'Malaria', 'Pneumonia','Other Totals');
 
             // echo '<pre>';print_r($gData);die;
