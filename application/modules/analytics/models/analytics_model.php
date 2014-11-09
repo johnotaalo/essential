@@ -417,20 +417,11 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                 foreach ($this->dataSet as $value) {
-
+                    //echo "<pre>";print_r($value);echo "</pre>";die;
                     switch ($statistic) {
 
                         case 'cases_raw':
-<<<<<<< HEAD
-
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
                           break;
                         case 'treatment_raw':
@@ -444,10 +435,6 @@ ORDER BY lq.lq_response ASC";
 
                             foreach ($value as $k => $val) {
                               $data_array[$k]=$val;
-<<<<<<< HEAD
-
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                             }
                             /**
                              * Unset the Old Treatment Key
@@ -500,15 +487,7 @@ ORDER BY lq.lq_response ASC";
                         break;
 
                         case 'cases':
-
-               // echo '<pre>';print_r($value);echo '</pre>';die;
-                           
-<<<<<<< HEAD
-
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-
-                            //print_r($value['treatment_for']);die;
+                            
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                            // echo '<pre>';print_r($data);echo '</pre>';die;
                             break;
@@ -1313,14 +1292,11 @@ WHERE
                     $i = 0;
 
                     //var_dump($this->dataSet);
-
                    foreach ($this->dataSet as $value) {
-
                         switch ($statistic) {
                             case 'correctness':
                               $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
                                 break;
-
                             
                             case 'classification':
                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
@@ -1332,7 +1308,6 @@ WHERE
 
                         }
                         
-
                     }
                     $this->dataSet = $data;
 
@@ -1342,7 +1317,7 @@ WHERE
                     return $this->dataSet = null;
                 }
 
-                //die(var_dump($this->dataSet));
+                die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
 
@@ -1676,12 +1651,10 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
 
-
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                       if($statistic=='availability_raw' || $statistic=='unavailability_raw'|| $statistic=='location_raw'){
                           $data[]=$value;
-
                       }else if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1728,7 +1701,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                     $data = $newData;
                 }
 
-
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
 
@@ -1741,10 +1713,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             return $data;
         }
 
@@ -1787,6 +1755,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 }
 
 
+
                 //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
 
@@ -1799,14 +1768,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             return $data;
         }
-
-       
 
         public function getCommodityUsageOptions($criteria, $value, $survey, $survey_category, $for, $statistic) {
 
@@ -1869,7 +1832,6 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             return $data;
         }
-
 
         public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
@@ -2699,7 +2661,7 @@ ORDER BY f.fac_county ASC;";
             //  for ($x = 0; $x < sizeof($reportingCounties); $x++) {
             //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             // }
-
+            
 
             switch ($option) {
                 case 'reportingleft':
@@ -2821,7 +2783,7 @@ ORDER BY f.fac_county ASC;";
          */
         public function runMap($survey, $survey_category, $statistic) {
             $myData = array();
-            $counties = $this->getCounties();
+            $counties = $this->getAllCountyNames();
             foreach ($counties as $county) {
                 $countyName = $county['countyName'];
 
@@ -4299,16 +4261,6 @@ ORDER BY question_code";
                     }
 
                     unset($data[$question]['question_code']);
-<<<<<<< HEAD
-
-                }
-
-               //echo '<pre>';print_r($data);echo '</pre>';die;
-
-                //die(var_dump($this->dataSet));
-
-=======
-
                 }
 
                //echo '<pre>';print_r($data);echo '</pre>';die;
@@ -4356,8 +4308,6 @@ ORDER BY question_code";
                 return $this->dataSet = false;
             }
 
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-
 
             }
             catch(exception $ex) {
@@ -4368,56 +4318,9 @@ ORDER BY question_code";
 
             }
 
-
             // var_dump($data);die;
             return $data;
         }
-
-
-<<<<<<< HEAD
-        public function getHCWProfile($criteria, $value, $survey, $survey_category, $statistics) {
-
-            /*using CI Database Active Record*/
-            $value = urldecode($value);
-            $data = array();
-
-            $query = "CALL get_hcw_profile('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistics . "');";
-            try {
-                $queryData = $this->db->query($query, array($value));
-                $this->dataSet = $queryData->result_array();
-                $queryData->next_result();
-
-                // Dump the extra resultset.
-                $queryData->free_result();
-                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
-                foreach ($this->dataSet as $value_) {
-
-
-                }
-
-               if ($this->dataSet) {
-                return $this->dataSet;
-            } else {
-                return $this->dataSet = false;
-            }
-
-
-            }
-            catch(exception $ex) {
-
-                //ignore
-                //die($ex->getMessage());//exit;
-
-
-            }
-
-
-            // var_dump($data);die;
-            return $data;
-        }
-=======
-        
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         /*  public function getStorageStatistics($criteria, $value, $survey, $survey_category) {
 
@@ -4563,10 +4466,8 @@ ORDER BY question_code";
                         }
                         //else{
                        //   $data['question_code'][$value_] += (int)$value['total_response'];
-
                         //}
                         //}
-
 
 
                         //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
