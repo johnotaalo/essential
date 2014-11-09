@@ -105,7 +105,42 @@ class Form_Handler extends MY_Controller
 			<thead>
 				<tr><th colspan="9">FACILITY INFORMATION</th></tr>
 			</thead>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 			<tbody>'.$this->facilitysection.'
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+			<tbody>
+				<tr>
+					<td>Facility Name </td><td>
+					<input type="text" size="50" >
+					</td><td>Facility Tier </td><td>
+					<input type="text"  >
+					</td><td>County </td>
+					<td>
+					<input type="text" size="50"  >
+					</td>
+				</tr>
+				<tr>
+					<td>Facility Type </td>
+					<td>
+					<input type="text" size="50"  >
+					</td>
+					<td>Owned By </td>
+					<td>
+					<input type="text"  size="50" >
+					</td>
+
+					<td>District/Sub County </td>
+					<td>
+					<input type="text"  size="50" >
+					</td>
+				</tr>
+<<<<<<< HEAD
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 			</tbody>
 		</table>
 		<p class="instruction">
@@ -474,6 +509,9 @@ class Form_Handler extends MY_Controller
 		</thead>
 		<tr>
 			<td>Doctor</td>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
@@ -485,34 +523,51 @@ class Form_Handler extends MY_Controller
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
 			<td><input type="text" size = "5"></td>
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+			<td><input type="number"></td>
+<<<<<<< HEAD
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 		</tr>
 		<tr>
 			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 	</table>
 	
@@ -547,45 +602,45 @@ class Form_Handler extends MY_Controller
 		</thead>
 		<tr>
 			<td>Doctor</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 	</table>
 	</div><!--\.section 4-->
@@ -665,7 +720,7 @@ class Form_Handler extends MY_Controller
 					WHEN THE COMMODITY WAS NOT AVAILABLE WHAT HAPPENED? </th>
 				</tr>
 				<tr >
-					<th rowspan="2">
+					<th colspan="2" rowspan="2">
 					<div style="width: 100px" >
 						Commodity Name
 					</div></th>
@@ -675,7 +730,7 @@ class Form_Handler extends MY_Controller
 					<th>					
 						Usage
 					</th>
-					<th>
+					<th  colspan="2">
 						Duration of Unavailability
 					</th>
 					<th  colspan="5">
@@ -689,7 +744,7 @@ class Form_Handler extends MY_Controller
 				<tr >
 					
 					<th colspan="1">Total Units Used</th>
-					<th >Times Unavailable </th>
+					<th colspan="2">Times Unavailable </th>
 
 					<th colspan="1">
 					<div style="width: 100px" >
@@ -1078,83 +1133,83 @@ class Form_Handler extends MY_Controller
 		</thead>
 		<tr>
 			<td>Doctor</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>Pharmaceutical Staff</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 		<tr>
 			<td>Lab Staff</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
+			<td><input type="text"></td>
 		</tr>
 
 	</table>
@@ -1929,7 +1984,13 @@ class Form_Handler extends MY_Controller
 		</div>
 		<pagebreak />
 		<div class = "step" id = "section-8">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 		<input type = "hidden" name = "step_name" value = "section-8" />
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 		<p style="display:true" class="message success">
 			SECTION 8 of 9: RESOURCE AVAILABILITY
 		</p>
@@ -1969,7 +2030,13 @@ class Form_Handler extends MY_Controller
 		</table>
 		</div>
 		<div class = "step" id = "section-9">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 		<input type = "hidden" name = "step_name" value = "section-9" />
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 		<p style="display:true;margin-top:50px" class="message success">
 			SECTION 9 of 9: COMMUNITY STRATEGY
 		</p>
@@ -2153,8 +2220,18 @@ class Form_Handler extends MY_Controller
 						</tr>
 					</thead>
 					<tr>
+<<<<<<< HEAD
+					<td>Gender (M or F)</td><td><input type="text"></td>
+					<td>Age (In Months)</td><td><input type="text"></td>
+=======
+<<<<<<< HEAD
 					<td>Gender (M or F)</td><td><input type="text" size = "5"></td>
 					<td>Age (In Months)</td><td><input type="text" size = "5"></td>
+=======
+					<td>Gender (M or F)</td><td><input type="text"></td>
+					<td>Age (In Months)</td><td><input type="text"></td>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 					<td>Presenting complaints?</td><td><input size="50" type="text"></td>            
 					</tr>
 				</table>
@@ -2656,6 +2733,10 @@ class Form_Handler extends MY_Controller
 				</tr>
 				</thead>
 				' . $this->indicators['stn'] . '
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
 				</table>
 				</div>
@@ -2730,6 +2811,85 @@ class Form_Handler extends MY_Controller
 							<th width="200px">Findings</th>
 						</tr>
 
+<<<<<<< HEAD
+=======
+=======
+
+				</table>
+				</div>
+				<div class="step" id="section-3">
+				<input type = "hidden" name = "step_name" value = "section-3"/>
+					<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS</p>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Malnutrition</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['mal'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Anaemia</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['anm'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+							<tr>
+								<th width="500px" rowspan="2">Condition</th>
+								<th colspan="2">HCW Response</th>
+								<th colspan="2">Assessor Response</th>
+							</tr>
+							<tr>
+								<th width="100px">Response</th>
+								<th width="200px">Findings</th>
+								<th width="100">Response</th>
+								<th width="200px">Findings</th>
+							</tr>
+						</thead>
+						<tbody>
+						' . $this->indicators['con'] . '
+						</tbody>
+					</table>
+					<table class="centre">
+						<thead>
+						<tr>
+							<th width="500px" rowspan="2">Treatment and Counselling</th>
+							<th colspan="2">HCW Response</th>
+							<th colspan="2">Assessor Response</th>
+						</tr>
+						<tr>
+							<th width="100px">Response</th>
+							<th width="200px">Findings</th>
+							<th width="100">Response</th>
+							<th width="200px">Findings</th>
+						</tr>
+
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 						</thead>
 						<tbody>
 						' . $this->indicators['cnl'] . '
