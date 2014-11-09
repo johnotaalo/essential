@@ -4219,7 +4219,14 @@ return true;
            (isset($this->elements[$i]['facilityopdmobile']) && $this->elements[$i]['facilityopdmobile'] != '') ? $this->theForm->setOpdInchargeMobile($this->elements[$i]['facilityopdmobile']) : $this->theForm->setOpdInchargeMobile('-1');
            (isset($this->elements[$i]['facilityopdemail']) && $this->elements[$i]['facilityopdemail'] != '') ? $this->theForm->setOpdInchargeEmailaddress($this->elements[$i]['facilityopdemail']) : $this->theForm->setOpdInchargeEmailaddress('N/A');
            $this->theForm->setCreated(new DateTime());
-           $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+           if($this->session->userdata('survey') != 'hcw')
+           {
+               $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+           }
+           else
+           {
+            $this->theForm->setSsId((int)$this->session->userdata('hcw_id'));
+           }
 
            /*timestamp option*/
            $this->em->persist($this->theForm);
