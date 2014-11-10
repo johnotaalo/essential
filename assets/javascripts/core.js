@@ -389,8 +389,8 @@ function loadSimpleGraph(base_url, function_url, graph_section) {
    * @return {[type]}              [description]
    */
 function loadRawDownload(base_url, function_url) {
-    $('#pdf').attr('data-url', base_url + function_url + '/pdf');
-    $('#excel').attr('data-url', base_url + function_url + '/excel');
+    $('#pdf').attr('data-url', base_url + function_url + '/dynamic_pdf');
+    $('#excel').attr('data-url', base_url + function_url + '/dynamic_excel');
     $('.download').click(function() {
       url = $(this).attr('data-url');
       if (url != '') {
@@ -408,7 +408,7 @@ function loadRawDownload(base_url, function_url) {
    */
 function loadFacilityRawData(base_url, function_url, container) {
   $.ajax({
-    url: base_url + function_url + '/table',
+    url: base_url + function_url + '/dynamic_table',
     beforeSend: function(xhr) {
       $(container).empty();
       $(container).append('<div class="loader" >Loading...</div>');
