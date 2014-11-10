@@ -1,21 +1,23 @@
 <?php
-class Upload extends MY_Controller(){
+class Upload extends MY_Controller{
 
   /**
   * Constructor Function
   */
   public function __construct() {
     parent::__construct();
+    $this->load->module('template');
     $this->load->library('PHPexcel');
+    $this->load->library('rb');
     ini_set('memory_size', '2048M');
   }
 
   function index() {
-    $dataArr['contentView'] = 'upload/upload_v';
+    $dataArr['content'] = 'upload/upload_v';
 
     $dataArr['uploaded'] = '';
     $dataArr['posted'] = 0;
-    $this->load->view('template_v', $dataArr);
+    $this->template->mnch($dataArr);
   }
 
   public function data_upload($activesheet = 0, $activity_id, $insert_table) {
@@ -115,7 +117,7 @@ class Upload extends MY_Controller(){
       //$edata -> setOutputEncoding("CP1251");
 
       if ($_FILES['file_1']['tmp_name']) {
-        $excelReader = PHPExcel_IOFactory::createReader('Excel2007');
+        $excelReader = PHPExcel_IOFactory::createReader('Excel5');
         $excelReader->setReadDataOnly(true);
         $objPHPExcel = PHPExcel_IOFactory::load($_FILES['file_1']['tmp_name']);
 
@@ -147,7 +149,7 @@ class Upload extends MY_Controller(){
       //echo $highestColumm;
       $data = $this->getData($arr, $start, $highestColumm, $highestRow);
 
-      //echo '<pre>';print_r($data);echo '</pre>';die;
+      // echo '<pre>';print_r($data);echo '</pre>';die;
       //$data =json_encode($data);
       //echo($data);die;
       $data = $this->formatData($data);
@@ -165,6 +167,7 @@ class Upload extends MY_Controller(){
 
     $dataArr['posted'] = 1;
     $dataArr['contentView'] = 'upload/upload_v';
+    $this->template->mnch($dataArr);
   }
   public function update_facility(){
     $this->facility_upload(0,'facilities');
@@ -327,8 +330,8 @@ class Upload extends MY_Controller(){
     foreach ($dataTables as $table) {
 
       foreach ($data['data'] as $data1) {
-        $currentTable = R::findOne($table,'fac_mfl=?',array($data1['fac_mfl']));
-        // echo '<pre>';print_r($currentTable);echo '</pre>';
+        $currentTable = R::findOne($table,'id=?',array($data1['Facility Id']));
+        // echo '<pre>';print_r($currentTable);echo '</pre>';die;
         if(!$currentTable){
           $currentTable = R::dispense($table);
         }
@@ -336,6 +339,7 @@ class Upload extends MY_Controller(){
 
         foreach ($title as $val) {
           $valN = strtolower($val);
+          $valN = str_replace('facility','fac',$valN);
           $valN = str_replace("/", " ", $valN);
           $valN = str_replace("-", " ", $valN);
           $valN = str_replace(" ", "_", $valN);
