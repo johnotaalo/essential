@@ -665,13 +665,10 @@ class MY_Model extends CI_Model
     public function getServicePoints()
     {
         $query = $this->db->query("SELECT * FROM service_point");
-<<<<<<< HEAD
-        $result = $query->result_array($query);
-=======
+
 
         $result = $query->result_array($query);
 
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         return $result;
     }

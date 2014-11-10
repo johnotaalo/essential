@@ -1652,39 +1652,9 @@
               <!-- <h5>HCW Profile</h5> -->
               <table>
 
-<<<<<<< HEAD
-              <!--    <th>First Name</th>
-=======
-                 <!-- <th>First Name</th>
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
-                 <th>SurName</th>
-                 <th>National ID</th>
-                 <th>Phone Number</th>
-                 <th>Personal Number</th>
-                 <th>Year + Month Trained</th>
-                 <th>Key Co-odinator of training</th>
-
-                 <th>Designation</th>
-                 <tr>
-                  <td colspan="8">
-<<<<<<< HEAD
-=======
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-                    <div class="portlet-body">
                  
-                    <div id="HCW_Profile">
-                    </div>
-                    </div>
 
-                 </td>
-                
-                 </tr> -->
-<<<<<<< HEAD
-=======
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
               </table>
             </div>
             <div class="col-md-12">
@@ -1799,7 +1769,7 @@
     </div>
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
-<<<<<<< HEAD
+
 
            <div class="semi-large-graph">
                     <div class="portlet-title">
@@ -1816,29 +1786,7 @@
                 <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span></h6>
-=======
-            <div class="medium-graph" >
-                <div class="portlet-title">
 
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed ?</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="symptomsassessed">
-
-                    </div>
-                </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed correctly ?</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="assessedcorrectly">
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
@@ -1979,16 +1927,7 @@
                     </div>
                 </div>
             </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="facility_type"f>
-                    </div>
-                </div>
-            </div>
+           
 
 
         </div>
