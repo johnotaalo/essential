@@ -4798,7 +4798,7 @@ return true;
                     $this->em->clear();
 
                     //detaches all objects from doctrine
-                    return true;
+                    // return true;
 
 
                 }
@@ -4822,7 +4822,7 @@ return true;
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    return true;
+                    // return true;
 
 
                 }
@@ -4841,7 +4841,7 @@ return true;
 
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    return true;
+                    // return true;
                 }
             }
 
@@ -4851,7 +4851,7 @@ return true;
         }
 
         //end of innner loop
-
+return true;
 
     }
     //close addHCWQuestionInfo
