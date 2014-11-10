@@ -10,15 +10,12 @@ function startSurvey(base_url, survey, survey_category, district) {
   var fac_county = '';
   var fac_district = '';
 
-  if(survey != 'hcw')
-  {
+  if (survey != 'hcw') {
     getDistrictData(base_url, district, survey, survey_category);
+  } else {
+    $('#current_survey').text(survey.toUpperCase() + ' SURVEY');
   }
-
-  else
-  {
-     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
-  }
+  // alert(survey);
   // Bound Events
 
 
@@ -55,15 +52,8 @@ function startSurvey(base_url, survey, survey_category, district) {
       type: 'POST',
       data: formData,
       success: function(data) {
-<<<<<<< HEAD
-        //console.log(data);
-=======
-<<<<<<< HEAD
+
         console.log(data);
-=======
-        //console.log(data);
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
         changeSection(curr_section, thethat);
@@ -240,7 +230,7 @@ function startSurvey(base_url, survey, survey_category, district) {
       }); /*end of which link was clicked*/
 
       /*hcw-action clicked*/
-      $('.hcw-action').live('click', function(){
+      $('.hcw-action').live('click', function() {
         hcwid = $(this).attr('data-hcwid');
         section = $(this).attr('data-section');
         action = $(this).attr('data-action');
@@ -256,7 +246,7 @@ function startSurvey(base_url, survey, survey_category, district) {
               '<div class="loader" >Loading...</div>');
 
           },
-          success:function(data) {
+          success: function(data) {
             console.log("assessing hcw: " + data);
           }
         });
