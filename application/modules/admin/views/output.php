@@ -1,5 +1,5 @@
 <div class="ui grid">
-  <div class="three column wide">
+  <div class="three wide column">
     <div class="ui vertical menu">
       <div class="item">
         <div class="ui input"><input type="text" placeholder="Search..."></div>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="six column wide">
+  <div class="six wide column">
     <div class="ui segment stacked">
 
     </div>
