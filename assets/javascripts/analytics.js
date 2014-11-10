@@ -1364,7 +1364,7 @@ function statisticsHandler(criteria, value, survey, survey_category,
         
           break;
 
-          case 'section-6':
+        case 'section-6':
 
           loadGraph(base_url, 'analytics/getIMCIConsultation/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
@@ -1374,6 +1374,21 @@ function statisticsHandler(criteria, value, survey, survey_category,
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#interviewcaregiver');
 
+          break;
+
+        case 'section-7':
+
+          loadGraph(base_url, 'analytics/getCertificationA/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#certificatesectionA');
+
+          loadGraph(base_url, 'analytics/getCertificationB/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#certificatesectionB');
+
+          loadGraph(base_url, 'analytics/getCertification/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#certification');
 
           break;
       }

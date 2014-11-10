@@ -1933,6 +1933,58 @@
         </div>
     </div>
 </div>
+<div class="panel panel-default analytics_row section" data-survey='hcw' id="hcw-section-7">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirtySix">
+                 Section 5 : Assessment Outcome <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseThirtySix" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="medium-graph" >
+                <div class="portlet-title">
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Criteria for Certification: Section A</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="certificatesectionA">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-graph">
+                <div class="portlet-title">
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Checked for the following: Section B</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="certificatesectionB">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-graph">
+                <div class="portlet-title">
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Certification</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="certification">
+
+                    </div>
+                </div>
+            </div>
+           
+
+
+        </div>
+    </div>
+</div>
 
 
 </div>

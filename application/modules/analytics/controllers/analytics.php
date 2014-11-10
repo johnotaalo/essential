@@ -3045,6 +3045,10 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
         foreach ($results as $key => $value) {
+            if($key==''){
+                $name='No data';
+                $key=$name;
+            }
             $q[] = $key;
             $data[]= $value;
          }
@@ -3057,7 +3061,7 @@ class Analytics extends MY_Controller
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gdata as $name => $value1) {
-            if($name=='No data'){
+            if($name=='No data' || $name==''){
                    $color='#dddddd';
                 }else if($name=='Yes'){
                     $color='#8bbc21';
@@ -3202,11 +3206,16 @@ class Analytics extends MY_Controller
      * @param  [type] $survey_category [description]
      * @return [type]                  [description]
      */
-    public function getServices($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'serv', 'response');
+    public function getCertificationA($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certa', 'response');
     }
-    public function getDeliveryServices($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'prep', 'response');
+
+    public function getCertificationB($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certb', 'response');
+    }
+
+    public function getCertification($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
     }
 
     // public function getWorkProfile($criteria, $value, $survey, $survey_category) {
