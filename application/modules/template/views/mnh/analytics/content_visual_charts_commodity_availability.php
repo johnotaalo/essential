@@ -1777,7 +1777,7 @@
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="indicator_comparison2">
+                        <div class="chart" id="indicator_comparison1">
                         </div>
 
                     </div>
@@ -1790,7 +1790,7 @@
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="assessment_comparison3">
+                        <div class="chart" id="assessment_comparison1">
                         </div>
 
                     </div>
@@ -1819,7 +1819,7 @@
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="indicator_comparison4">
+                        <div class="chart" id="indicator_comparison2">
                         </div>
 
                     </div>
@@ -1832,7 +1832,7 @@
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="assessment_comparison5">
+                        <div class="chart" id="assessment_comparison2">
                         </div>
 
                     </div>
@@ -1853,37 +1853,30 @@
     </div>
     <div id="collapseThirtyFour" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types3"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="indicator_comparison3">
+                        </div>
 
-                    <div class="chart" id="facility_owner">
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="assessment_comparison3">
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="facility_type"f>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
     </div>
