@@ -309,10 +309,6 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
     public function createHCWListSection ()
     {
         $hcwlist = '';
@@ -339,10 +335,6 @@ class Survey extends MY_Controller
        // echo $hcwlist;die;
         return $hcwlist;
     }
-=======
-
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
@@ -454,24 +446,13 @@ class Survey extends MY_Controller
     }
 
     public function createFacilityTable() {
-<<<<<<< HEAD
-        $districtFacilityListSection = $this->createFacilitiesListSection();
-=======
-<<<<<<< HEAD
-        
-        
-=======
-        $districtFacilityListSection = $this->createFacilitiesListSection();
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+
+
 
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         $survey = $this->session->userdata('survey');
         // echo $survey;die;
         if($survey != 'hcw')
@@ -479,7 +460,7 @@ class Survey extends MY_Controller
             $districtFacilityListSection = $this->createFacilitiesListSection();
             $facilityList = '
                 <table class="centre dataTable">
-        
+
         <thead>
                     <th>#</th>
                     <th>MFL CODE</th>
@@ -513,25 +494,6 @@ class Survey extends MY_Controller
                 <tbody>'.$hcwListSection.'</tbody>
             </table>';
         }
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-        $facilityList = '
-        <table class="centre dataTable">
-
-<thead>
-            <th>#</th>
-            <th>MFL CODE</th>
-            <th> FACILITY NAME </th>
-            <th>REPORTING PROGRESS</th>
-            <th style="width:100px">ACTIVITY</th>
-            <th>LINK</th>
-</thead>
-        </tr>' . $districtFacilityListSection . '
-        </table>';
-<<<<<<< HEAD
-=======
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         // echo $facilityList;
         $data['form'] = $facilityList;
