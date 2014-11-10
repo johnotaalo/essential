@@ -309,19 +309,87 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
     public function createHCWListSection ()
     {
         $hcwlist = '';
+        $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
+        $sections = $this->data_model->getAssessmentInfo();
+        // echo "<pre>"; print_r($sections);die;
+        $question_codes = array('QHC28'=>'blue', 'QHC29'=>'green', 'QHC30'=>'brown');
+        //print_r($result);die;
+        $checkbox_options = $this->data_model->getCheckOptions();
+        $counter = 0;
+        foreach ($result as $value) {
+            foreach ($value as $key => $val) {
+                if($val == NULL)
+                {
+                    $val = "";
+                    $value[$key] = $val;
+                }
+            }
+            // echo $value['id'];die;
+            $counter++;
+            $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>';
+            if (array_key_exists( $value['id'], $checkbox_options)) {
+                foreach ($question_codes as $code => $color) {
+                    $response = $checkbox_options[$value['id']][$code];
+                    if($response == 'Yes')
+                    {
+                        $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" checked disabled = "disabled"></div></div></center></div></td>';
+                    }
+                    else
+                    {
+                         $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>';
+                    }
+                }
+            }
+            else
+            {
+                 $hcwlist .= '
+            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
+            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
+            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
+            ';
+            }
+            
+            if(array_key_exists($value['id'], $sections))
+            {
+                $hcw_section = $sections[$value['id']]['sections'];
+                $hcw_section = trim($hcw_section, 'section-');
+            }
+            else
+            {
+                $hcw_section = 0;
+            }
+
+            if($hcw_section < 5 && $hcw_section > 0)
+            {
+                $percentage = ($hcw_section/5)*100;
+                $hcw_section = $hcw_section - 1;
+                $hcwlist .= '<td><center><div class="ui successful progress"><div class="bar" style="width:'.$percentage.'%"></div></div></center></td>';
+                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a></center></td>';
+            }
+            else if($hcw_section == 5)
+            {
+                $hcwlist .= '<td><center></center></td>';
+                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Reassess</a></center></td>';
+            }
+            else if($hcw_section == 0)
+            {
+                $hcwlist .= '<td><center></center></td>';
+                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Start Assessment</a></center></td>';
+            }
+            else
+            {
+                $hcwlist .= '';
+                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Could not be traced</a></center></td>';
+            }
+
+            $hcwlist .= '</tr>';
+        }
+       // echo $hcwlist;die;
         return $hcwlist;
     }
-=======
-
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
@@ -407,9 +475,11 @@ class Survey extends MY_Controller
                 // echo $last_activity;die;
                 // Get Survey Information
 
-                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
+                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' .
+                 $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
 
-                $link.= '<div class="ui label ' . $label_class . ' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
+                $link.= '<div class="ui label ' . $label_class . ' status">' . $label .
+                '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
 
                 $districtFacilityListSection.= '<tr>
 
@@ -433,24 +503,13 @@ class Survey extends MY_Controller
     }
 
     public function createFacilityTable() {
-<<<<<<< HEAD
-        $districtFacilityListSection = $this->createFacilitiesListSection();
-=======
-<<<<<<< HEAD
-        
-        
-=======
-        $districtFacilityListSection = $this->createFacilitiesListSection();
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+
+
 
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         $survey = $this->session->userdata('survey');
         // echo $survey;die;
         if($survey != 'hcw')
@@ -458,7 +517,7 @@ class Survey extends MY_Controller
             $districtFacilityListSection = $this->createFacilitiesListSection();
             $facilityList = '
                 <table class="centre dataTable">
-        
+
         <thead>
                     <th>#</th>
                     <th>MFL CODE</th>
@@ -486,31 +545,12 @@ class Survey extends MY_Controller
                     <th>Certified</th>
                     <th>For Mentorship</th>
                     <th>For TOT</th>
-                    <th>Status</th>
+                    <th style = "width: 20px;">Status</th>
                     <th>Link</th>
                 </thead>
-                <tbody></tbody>
+                <tbody style = "font-size: 80%;">'.$hcwListSection.'</tbody>
             </table>';
         }
-=======
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-        $facilityList = '
-        <table class="centre dataTable">
-
-<thead>
-            <th>#</th>
-            <th>MFL CODE</th>
-            <th> FACILITY NAME </th>
-            <th>REPORTING PROGRESS</th>
-            <th style="width:100px">ACTIVITY</th>
-            <th>LINK</th>
-</thead>
-        </tr>' . $districtFacilityListSection . '
-        </table>';
-<<<<<<< HEAD
-=======
->>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         // echo $facilityList;
         $data['form'] = $facilityList;
@@ -553,5 +593,13 @@ class Survey extends MY_Controller
     {
         $this->load->model('m_complete_survey');
         $this->m_complete_survey->store_data();
+    }
+    public function startAssessment($hcwid, $fac_mfl)
+    {
+         $result = $this->db->get_where('hcw_list', array('id' => $hcwid));
+         $result = $result->result_array();
+        $facilityMFL = $result[0]['mfl_code'];
+        $data = array('hcw_id' => $hcwid, 'facilityMFL' => $facilityMFL);
+        $this->session->set_userdata($data);
     }
 }

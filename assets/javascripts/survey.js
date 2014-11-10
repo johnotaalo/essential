@@ -10,8 +10,15 @@ function startSurvey(base_url, survey, survey_category, district) {
   var fac_county = '';
   var fac_district = '';
 
-  getDistrictData(base_url, district, survey, survey_category);
+  if(survey != 'hcw')
+  {
+    getDistrictData(base_url, district, survey, survey_category);
+  }
 
+  else
+  {
+     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
+  }
   // Bound Events
 
 
@@ -48,15 +55,7 @@ function startSurvey(base_url, survey, survey_category, district) {
       type: 'POST',
       data: formData,
       success: function(data) {
-<<<<<<< HEAD
-        //console.log(data);
-=======
-<<<<<<< HEAD
         console.log(data);
-=======
-        //console.log(data);
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
         changeSection(curr_section, thethat);
@@ -221,6 +220,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#click_form').fadeOut();
             $('select').select2();
             // $('actual-form .step').hide();
+            $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode : 1
+            });
 
           });
 
@@ -231,6 +234,59 @@ function startSurvey(base_url, survey, survey_category, district) {
         });
 
       }); /*end of which link was clicked*/
+
+      /*hcw-action clicked*/
+      $('.hcw-action').live('click', function(){
+        hcwid = $(this).attr('data-hcwid');
+        section = $(this).attr('data-section');
+        action = $(this).attr('data-action');
+        the_url = base_url + 'survey/startAssessment/' + hcwid;
+        $.ajax({
+          type: 'POST',
+          data: '',
+          async: false,
+          url: the_url,
+          beforeSend: function() {
+            $(".form-container .actual-form").empty();
+            $(".form-container .actual-form").append(
+              '<div class="loader" >Loading...</div>');
+
+          },
+          success:function(data) {
+            console.log("assessing hcw: " + data);
+          }
+        });
+
+        if (hcwid) {
+          current_form = 'survey/load/online/' + survey;
+        }
+
+        $(".form-container .actual-form").load(base_url + current_form,
+          function() {
+            loadGlobalScript();
+            // renderFacilityInfo(facilityMFL);
+            // break_form_to_steps(form_id);
+            select_option_changed();
+            loadSection(section, action);
+            $('#steps').show();
+            $('#form_post').addClass('active');
+            $('#click_form').fadeOut();
+            $('select').select2();
+            $('.bs-date').datepicker();
+          $('.bs-month').datepicker({
+            minViewMode : 1
+          });
+            $('.ui.checkbox').checkbox();
+            // $('actual-form .step').hide();
+
+          });
+
+        //Step Handler
+        $('.ui.step').click(function() {
+          section = $(this).attr('data-section');
+          changeSection(section, this);
+        });
+      }); /*end of hcw action*/
     }); /*close form-container LOAD FN() */
 
   // $('#m_county_choose').live(function(){
