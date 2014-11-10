@@ -38,10 +38,17 @@ class Generate extends MY_Controller
      * @return [type] [description]
      */
     public function createIndicatorSection() {
-        $data_found = $this->data_model->getIndicators();
         
+            $data_found = $this->data_model->getIndicators();
         // var_dump($data_found);die;
-        $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
+        if($this->session->userdata('survey') != 'hcw')
+        {
+            $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
+        }   
+        else
+        {
+            $retrieved = $this->data_model->retrieveDataHCW('log_indicators_hcw', 'indicator_code');
+        }
         $counter = 0;
         $countme = 0;
         $section = '';
@@ -297,7 +304,14 @@ class Generate extends MY_Controller
              * [$retrieved description]
              * @var [type]
              */
-            $retrieved = $this->data_model->retrieveData('log_questions', 'question_code');
+            if($this->session->userdata('survey') != 'hcw')
+            {
+                $retrieved = $this->data_model->retrieveData('log_questions', 'question_code');
+            }
+            else
+            {
+                $retrieved = $this->data_model->retrieveDataHCW('log_questions_hcw', 'question_code');
+            }
             
             /**
              * [$counter description]
@@ -372,7 +386,7 @@ class Generate extends MY_Controller
                         else if($section == 'su'){
                             $data[$section][] .= '<tr>
                                 <td><label>'.$value['questionName'].'</label></td>
-                                <td><select name = "questionResponse_'.$counter.'">'.$this->createServicePoint().'</select></td>
+                                <td><select name = "questionResponse_'.$counter.'" id = "questionResponse_'.$counter.'">'.$this->createServicePoint().'</select></td>
                                 <input type = "hidden" name = "questionCode_'.$counter.'" value = "'.$value['questionCode'].'" />
                             </tr>';
                         }
@@ -845,8 +859,18 @@ class Generate extends MY_Controller
                             $result.= '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
+<<<<<<< HEAD
+         <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
+           MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+=======
+<<<<<<< HEAD
          <td>MONTH: <input type="text" class = "bs-date"> CASES: <input name="questionResponse_' . $counter . '"  type="text"><br/>  MONTH <input type="text" class = "bs-date">  CASES:  <input name="questionResponse_' . $counter . '"  type="text"><br/>
            MONTH <input type="text" class = "bs-date">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td><br/>
+=======
+         <td>MONTH: <input type="text"> CASES: <input name="questionResponse_' . $counter . '"  type="text">  MONTH <input type="text">  CASES:  <input name="questionResponse_' . $counter . '"  type="text">
+           MONTH <input type="text">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td>
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
             <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         } else {
@@ -1290,7 +1314,7 @@ class Generate extends MY_Controller
                                     }
                                 }
                                 if ($section == 'hwr') {
-                                    $hwr_locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
+                                    $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
                                     
                                     // print_r($locations);die;
                                     
@@ -1303,7 +1327,15 @@ class Generate extends MY_Controller
                                     $locationRowTemp = array();
                                     
                                     //Loop through preset locations
+<<<<<<< HEAD
+                                    foreach ($locations as $loc) {
+=======
+<<<<<<< HEAD
                                     foreach ($hwr_locations as $loc) {
+=======
+                                    foreach ($locations as $loc) {
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                                         
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
@@ -1838,7 +1870,15 @@ class Generate extends MY_Controller
             public function createBemoncSection() {
                 $this->data_found = $this->data_model->getSignalFunctions();
                 $retrieved = $this->data_model->retrieveData('bemonc_functions', 'sf_code');
+<<<<<<< HEAD
+                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+=======
+<<<<<<< HEAD
                 $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented');
+=======
+                $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                 $responses = array('Yes', 'No');
                 
                 /**
@@ -1979,6 +2019,9 @@ class Generate extends MY_Controller
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
                         $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
                         $facilitysection .= "<td>".$value['facLevel']."</td>";
                         $facilitysection .= '<td>'.$fac_county.'</td>';
                         $facilitysection .= '</tr>';
@@ -1987,6 +2030,74 @@ class Generate extends MY_Controller
                         $facilitysection .= '<td>'.$value['facType'].'</td>';
                         $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
                         $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+                        $facilitysection .= "<td><select name = 'levels'><option value = '' disabled>Select a facility level</option>";
+                        foreach ($levels as $level) {
+                            if($value['facLevel'] == $level['flName'])
+                            {
+                                $facilitysection .= "<option value = '".$level['flName']."' selected>".$level['flName']."</option>";
+                            }
+                            else
+                            {
+                                $facilitysection .= "<option value = '".$level['flName']."'>".$level['flName']."</option>";
+                            }
+                        }
+                        $facilitysection .= "</select></td>";
+                        $facilitysection .= '<td><select name = "county"><option value = "" disabled>Select a County</option>';
+                        foreach ($counties as $county) {
+                            if($fac_county == $county['countyName'])
+                            {
+                                $facilitysection .= "<option value = '".$county['countyName']."' selected>".$county['countyName']."</option>";
+                            }
+                            else
+                            {
+                                $facilitysection .= "<option value = '".$county['countyName']."'>".$county['countyName']."</option>";
+                            }
+                        }
+                        $facilitysection .= "</select></td>";
+                        $facilitysection .= '</tr>';
+                        $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
+                        $facilitysection .= '<tr>';
+                        $facilitysection .= '<td><select name = "facility_type" disabled = "disabled"><option value = "">Select a Facility Type</option>'; 
+                        foreach ($facTypes as $facType) {
+                            if($value['facType'] == $facType['ft_name'])
+                            {
+                                $facilitysection .= "<option value = '".$facType['ft_name']."' selected>".$facType['ft_name']."</option>";
+                            }
+                            else
+                            {
+                                $facilitysection .= "<option value = '".$facType['ft_name']."'>".$facType['ft_name']."</option>";
+                            }
+                        }
+                        $facilitysection .= "</select></td>";
+                        $facilitysection .= '<td><select name = "ownership" disabled><option value = "">Select an owner</option>';
+                        foreach ($owners as $owner) {
+                            if($value['facOwnership'] == $owner['foName'])
+                            {
+                                $facilitysection .= '<option value = "'.$owner['foName'].'" select>'.$owner['foName'].'</option>';
+                            }
+                            else
+                            {
+                                $facilitysection .= '<option value = "'.$owner['foName'].'">'.$owner['foName'].'</option>';
+                            }
+                        }
+                        $facilitysection .= '</select></td>';
+                        $facilitysection .= '<td><select name = "" disabled><option>Select a Sub County</option>';
+                        foreach ($sub_counties as $sub_county) {
+                            if ($value['facDistrict'] == $sub_county['districtName']) {
+                                $facilitysection .= '<option value = "'.$sub_county['districtName'].'" selected>'.$sub_county['districtName'].'</option>';
+                            }
+                            else
+                            {
+                                $facilitysection .= '<option value = "'.$sub_county['districtName'].'">'.$sub_county['districtName'].'</option>';
+                            }
+                        }
+                        $facilitysection .= '</select></td>';
+<<<<<<< HEAD
+=======
+>>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                         $facilitysection .= '</tr>';
                         
                     }
@@ -1995,6 +2106,40 @@ class Generate extends MY_Controller
                 return $facilitysection;
             }
 
+            public function createHCWWorkerProfile()
+            {
+                $workprofilesection = '';
+                $hcwwork = $this->data_model->getHCWWorkProfile($this->session->userdata('hcw_id'));
+                $counter = 0;
+
+                foreach ($hcwwork as $key => $value) {
+                    
+                        $names = explode(" ", $value['names_of_participant']);
+                        $namecount = count($names);
+                        $firstname = $names[0];
+                        $lastname = $names[$namecount - 1];
+                    
+                    $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
+                    $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
+                    $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
+                    $workprofilesection .= '<tr>
+                <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                </td>
+                </tr>';
+                $workprofilesection .= '<tr>
+                <td colspan="1"><label for="">Designation</label></td>
+                <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
+                </tr>';
+                }
+
+                return $workprofilesection;
+
+            }
 
             public function createStaffTrainingGuidelinesSection() {
                 $this->data_found = $this->data_model->getTrainingGuidelines();

@@ -687,12 +687,12 @@ class Analytics extends MY_Controller
         //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', 'response');
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
 
-        $category = array();
+        $category =array();
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
+          
 
-
-        //echo '<pre>';print_r($resultArray);echo '</pre>';
+       // echo '<pre>';print_r($nurse);echo '</pre>';die;
 
         foreach ($results as $guide) {
 
@@ -705,9 +705,6 @@ class Analytics extends MY_Controller
                 $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
                 $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
-
-
-
         }
 
 
@@ -723,17 +720,7 @@ class Analytics extends MY_Controller
          //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', '', '', '', $colors);
     }
-
-    //get treatment symptoms
-    public function getTreatmentSymptoms($criteria, $value, $survey, $survey_category) {
-        $results = $this->analytics_model->getTreatmentSymptoms($criteria, $value, $survey, $survey_category);
-
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-
-
-    }
-
-
+    
     public function getCaseTreatment($criteria, $value, $survey, $survey_category, $for, $statistic, $option)
     {
          $results = $this->analytics_model->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
@@ -978,9 +965,8 @@ class Analytics extends MY_Controller
 
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
-
         //echo "<pre>";print_r($results);echo "</pre>";die;
-        $count = 0;
+         $count = 0;
         foreach ($results as $stack => $result) {
 
             foreach ($result as $name => $data) {
@@ -989,20 +975,19 @@ class Analytics extends MY_Controller
                 switch ($statistic) {
 
                   case 'cases':
-                   if($stack==''){
-                    if ($count == 12):
-                        $category[] = $stack;
+                  if($name=='OtherTotal'){
+                     $category[] = $stack;
 
-                        $gData[$stack] = $data;
-                        //echo "<pre>";print_r($gData);echo "</pre>";die;
-                    endif;
-                    $count++;
+                        $gData[]= $data;
+                   // echo "<pre>";print_r($gData);echo "</pre>";die;
+                    //endif;
+                    //$count++;
 
                     }else{
                         $category[] = $stack;
                         $gData[$stack]+= $data;
                        }
-
+                       // echo "<pre>";print_r($gData);echo "</pre>";die;
                         break;
 
 
@@ -1063,7 +1048,7 @@ class Analytics extends MY_Controller
             }
         } else {
             $resultArray = array(array('name' => 'Diarrhoea', 'data' => array($gData['dia'], 0, 0,0)), array('name' => 'Malaria', 'data' => array(0, $gData['fev'], 0,0)),
-             array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'],0)), array('name' => 'Other Totals','data'=>array(0,0,0,$gData[''])));
+             array('name' => 'Pneumonia', 'data' => array(0, 0, $gData['pne'],0)), array('name' => 'Other Totals','data'=>array(0,0,0,$gData[0])));
             $category[$option] = array('Diarrhoea', 'Malaria', 'Pneumonia','Other Totals');
 
             // echo '<pre>';print_r($gData);die;
@@ -2765,23 +2750,11 @@ class Analytics extends MY_Controller
                 $gdata[$r][]=$value_;
             }
             }
-            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-           $colorCounter=0;
         foreach ($gdata as $name => $value1) {
-             if($name=='nonfunctional'){
-                   $color='#fb4347';
-                }elseif($name == 'functional'){
-                    $color='#8bbc21';
-                }
-                else{
-                     $color = $colors[$colorCounter];
-                     $colorCounter++;
-                }
             $resultArray[]=array('name'=> $name, 'data'=> $value1);
         }
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
-     
     }else if(($statistics =='location' && $for == 'ort') || ($statistics == 'availability'&& $for == 'ort')){
             $number = $resultArray = $q = $data= $gdata =array();
         foreach ($results as $key => $value) {
@@ -3477,7 +3450,7 @@ class Analytics extends MY_Controller
     public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
-       
+        
         if($statistic = 'classification' && $for = 'ch'){
            foreach ($results as $indicator => $values) {
             $category[] = $indicator;
@@ -3485,26 +3458,25 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+       $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gData as $name => $data) {
             if($name=='N/A'){
                 $name = 'No data';
                    $color='#dddddd';
-                }else if($name=='Yes'){
-                    $color='#8bbc21';
-                 }else if($name=='No'){
-                     $color='#fb4347';
-                 }
-                else{
+                }elseif($name == 'Yes'){
+                  $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }else{
                      $color = $colors[$colorCounter];
                      $colorCounter++;
                 }
-            $resultArray[] = array('name' => ucwords($name), 'data' => $data,'color'=>$color);
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
         }
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
     }else{
        // echo '<pre>';print_r($results);echo '</pre>';die;
@@ -3514,16 +3486,52 @@ class Analytics extends MY_Controller
                 $gData[$verdict][] = $answer;
             }
         }
-        
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gData as $name => $data) {
-           $resultArray[] = array('name' => $name, 'data' => $data);
+            if($name == 'correct'){
+                  $color='#8bbc21';
+                }else if($name=='incorrect'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
         }
 
-       // echo '<pre>';print_r($resultArray);echo '</pre>';die;
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
          $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }  
     }
-      
+    public function getAssessmentComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
+        $value = urldecode($value);
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
+       foreach ($results as $indicator => $values) {
+            $category[] = $indicator;
+            foreach ($values as $verdict => $answer) {
+                $gData[$verdict][] = $answer;
+            }
+        }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gData as $name => $data) {
+            if($name == 'assessment done'){
+                  $color='#8bbc21';
+                }else if($name=='assessment not done'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
+        }
+
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
+    }
+
     public function getIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();
 

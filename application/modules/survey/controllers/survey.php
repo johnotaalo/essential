@@ -309,11 +309,40 @@ class Survey extends MY_Controller
             $ex->getMessage();
         }
     }
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
     public function createHCWListSection ()
     {
         $hcwlist = '';
+        $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
+        $counter = 0;
+        foreach ($result as $value) {
+            foreach ($value as $key => $val) {
+                if($val == NULL)
+                {
+                    $val = "";
+                    $value[$key] = $val;
+                }
+            }
+            // echo $value['id'];die;
+            $counter++;
+            $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><a class="hcw-action ui green label" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Cannot be traced</a></center></td>
+            </tr>';
+        }
+       // echo $hcwlist;die;
         return $hcwlist;
     }
+=======
+
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
     /**
      * [createFacilitiesListSection description]
      * @return [type] [description]
@@ -425,13 +454,24 @@ class Survey extends MY_Controller
     }
 
     public function createFacilityTable() {
+<<<<<<< HEAD
+        $districtFacilityListSection = $this->createFacilitiesListSection();
+=======
+<<<<<<< HEAD
         
         
+=======
+        $districtFacilityListSection = $this->createFacilitiesListSection();
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         // var_dump($districtFacilityListSection);die;
         //<div class="breadcrumb">
         //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
         //     <div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
         $survey = $this->session->userdata('survey');
         // echo $survey;die;
         if($survey != 'hcw')
@@ -470,9 +510,28 @@ class Survey extends MY_Controller
                     <th>Status</th>
                     <th>Link</th>
                 </thead>
-                <tbody></tbody>
+                <tbody>'.$hcwListSection.'</tbody>
             </table>';
         }
+=======
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
+        $facilityList = '
+        <table class="centre dataTable">
+
+<thead>
+            <th>#</th>
+            <th>MFL CODE</th>
+            <th> FACILITY NAME </th>
+            <th>REPORTING PROGRESS</th>
+            <th style="width:100px">ACTIVITY</th>
+            <th>LINK</th>
+</thead>
+        </tr>' . $districtFacilityListSection . '
+        </table>';
+<<<<<<< HEAD
+=======
+>>>>>>> 547299adc4316e4432b7d4e4db94702dc877747b
+>>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         // echo $facilityList;
         $data['form'] = $facilityList;
@@ -515,5 +574,13 @@ class Survey extends MY_Controller
     {
         $this->load->model('m_complete_survey');
         $this->m_complete_survey->store_data();
+    }
+    public function startAssessment($hcwid, $fac_mfl)
+    {
+         $result = $this->db->get_where('hcw_list', array('id' => $hcwid));
+         $result = $result->result_array();
+        $facilityMFL = $result[0]['mfl_code'];
+        $data = array('hcw_id' => $hcwid, 'facilityMFL' => $facilityMFL);
+        $this->session->set_userdata($data);
     }
 }

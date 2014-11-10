@@ -4,7 +4,7 @@
 
     <div id="site-title">
     <?php $this->load->view('banner'); ?>
-       
+
 
     </div>
 
@@ -64,6 +64,9 @@
                         </li>
                         <li>
                             <a href="health-cmp.or.ke">HCMP</a>
+                        </li>
+                        <li>
+                            <a href="#" id="upload">Upload</a>
                         </li>
                     </ul>
 

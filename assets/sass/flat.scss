@@ -574,12 +574,6 @@ h4{
         margin-bottom:0;
     }
 }
-.analytics_row{
-    margin-top: 10px;
-    padding-top: 10px;
-    @extend .col-md-12;
-    border-top:1px solid #ddd;
-}
 .container-fluid{
     padding:0 !important;
 }
@@ -830,6 +824,10 @@ h6.table-header{
 }
 //Hijacking Panels
 .analytics_row{
+  margin-top: 10px;
+  padding-top: 10px;
+  @extend .col-md-12;
+  margin-bottom:0;
     border-top: 1px solid #ddd !important;
     box-shadow: none !important;
     .panel-heading{
