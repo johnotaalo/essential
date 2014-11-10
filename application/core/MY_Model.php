@@ -630,7 +630,9 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-
+/**
+ * [getFacilityTypes description]
+ */
     public function getFacilityTypes()
     {
         $query = $this->db->query("SELECT *  FROM facility_types");
@@ -638,7 +640,10 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-
+/**
+ * [getFacilityCounty description]
+ * @param [type] $facmfl [description]
+ */
     public function getFacilityCounty($facmfl)
     {
         $query = $this->db->query("SELECT fac_county FROM facilities WHERE fac_mfl = '" . $facmfl . "' LIMIT 1");
@@ -646,7 +651,10 @@ class MY_Model extends CI_Model
 
         return $result[0]['fac_county'];
     }
-
+/**
+ * [getFacInCounty description]
+ * @param [type] $county [description]
+ */
     public function getFacInCounty($county)
     {
         $query = $this->db->query("SELECT * FROM facilities WHERE fac_county = '".$county."'");
@@ -654,6 +662,9 @@ class MY_Model extends CI_Model
 
         return $result;
     }
+    /**
+     * [getCadre description]
+     */
     public function getCadre()
     {
         $query = $this->db->query("SELECT * FROM cadre");
@@ -661,18 +672,13 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-
+/**
+ * [getServicePoints description]
+ */
     public function getServicePoints()
     {
         $query = $this->db->query("SELECT * FROM service_point");
-<<<<<<< HEAD
         $result = $query->result_array($query);
-=======
-
-        $result = $query->result_array($query);
-
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
-
         return $result;
     }
 
