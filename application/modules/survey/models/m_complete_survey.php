@@ -3799,14 +3799,8 @@ return true;
 
     private function addSuppliesQuantityAvailabilityInfo() {
         $count = $finalCount = 1;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         $suppliername = $this->input->post('supplierName');
         // print_r($this->input->post());die;
-=======
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
         foreach ($this->input->post() as $key => $val) {
              //For every posted values
             if (strpos($key, 'sq') !== FALSE) {
@@ -3864,15 +3858,7 @@ return true;
             }
         }
          //close foreach ($this -> input -> post() as $key => $val)
-<<<<<<< HEAD
-        //print var_dump($this->elements);
-=======
-<<<<<<< HEAD
         //print var_dump($this->elements);die;
-=======
-        //print var_dump($this->elements);
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
         //exit;
 
@@ -3896,13 +3882,7 @@ return true;
 
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
             $this->theForm->setSupplyCode($this->elements[$i]['sqsupplyCode']);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
             $this->theForm->setSupplierCode($suppliername);
-=======
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
 
             //check if that key exists, else set it to some default value
             //(isset($this->elements[$i]['sqNumberOfUnits']))?$this -> theForm -> setQuantityAvailable($this->elements[$i]['sqNumberOfUnits']):$this -> theForm -> setQuantityAvailable(-1);
@@ -3937,15 +3917,7 @@ return true;
                 }
                 catch(Exception $ex) {
 
-<<<<<<< HEAD
-                    //die($ex->getMessage());
-=======
-<<<<<<< HEAD
                     die($ex->getMessage());
-=======
-                    //die($ex->getMessage());
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                     return false;
 
                     /*display user friendly message*/
@@ -3973,15 +3945,7 @@ return true;
                 }
                 catch(Exception $ex) {
 
-<<<<<<< HEAD
-                    //die($ex->getMessage());
-=======
-<<<<<<< HEAD
                     die($ex->getMessage());
-=======
-                    //die($ex->getMessage());
->>>>>>> b8c29f04ec5e16662e0ab63728f4841bb6aac2b0
->>>>>>> c5558ba5d331e7f4426e7e1b582c73bdc3ebea23
                     return false;
 
                     /*display user friendly message*/
@@ -4785,7 +4749,7 @@ return true;
         }
 
         //close foreach ($this -> input -> post() as $key => $val)
-        // echo '<pre>';print_r($this->elements);echo '</pre>';die;
+        //echo '<pre>';print_r($this->elements);echo '</pre>';die;
 
         //exit;
 
@@ -4834,7 +4798,7 @@ return true;
                     $this->em->clear();
 
                     //detaches all objects from doctrine
-                    // return true;
+                    return true;
 
 
                 }
@@ -4858,7 +4822,7 @@ return true;
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    // return true;
+                    return true;
 
 
                 }
@@ -4887,7 +4851,7 @@ return true;
         }
 
         //end of innner loop
-return true;
+
 
     }
     //close addHCWQuestionInfo
