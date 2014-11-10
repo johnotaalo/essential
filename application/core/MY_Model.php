@@ -375,6 +375,18 @@ class MY_Model extends CI_Model
         return $data;
     }
 
+     public function retrieveDataHCW($table_name, $identifier) {
+        $results = $this->db->get_where($table_name, array('hcw_id' => $this->session->userdata('hcw_id')));
+        $results = $results->result_array();
+        if ($results) {
+            foreach ($results as $result) {
+                $data[$result[$identifier]] = $result;
+            }
+        } else {
+            $data = array();
+        }
+        return $data;
+    }
     /**
      * [getQuestionName description]
      * @param  [type] $code [description]
@@ -630,9 +642,7 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-/**
- * [getFacilityTypes description]
- */
+
     public function getFacilityTypes()
     {
         $query = $this->db->query("SELECT *  FROM facility_types");
@@ -640,10 +650,7 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-/**
- * [getFacilityCounty description]
- * @param [type] $facmfl [description]
- */
+
     public function getFacilityCounty($facmfl)
     {
         $query = $this->db->query("SELECT fac_county FROM facilities WHERE fac_mfl = '" . $facmfl . "' LIMIT 1");
@@ -651,10 +658,7 @@ class MY_Model extends CI_Model
 
         return $result[0]['fac_county'];
     }
-/**
- * [getFacInCounty description]
- * @param [type] $county [description]
- */
+
     public function getFacInCounty($county)
     {
         $query = $this->db->query("SELECT * FROM facilities WHERE fac_county = '".$county."'");
@@ -662,9 +666,6 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-    /**
-     * [getCadre description]
-     */
     public function getCadre()
     {
         $query = $this->db->query("SELECT * FROM cadre");
@@ -672,13 +673,37 @@ class MY_Model extends CI_Model
 
         return $result;
     }
-/**
- * [getServicePoints description]
- */
+
     public function getServicePoints()
     {
         $query = $this->db->query("SELECT * FROM service_point");
-        $result = $query->result_array($query);
+        $result = $query->result_array();
+
+        return $result;
+    }
+
+    public function getHCWByDistrict($dName)
+    {
+        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $dName ."' AND  activity_id = 10");
+        $result = $query->result_array();
+
+        return $result;
+    }
+
+    public function getHCWWorkProfile($hcw_id)
+    {
+        $result =  $this->db->get_where('hcw_list', array('id' => $hcw_id));
+
+        $result = $result->result_array();
+
+        return $result;
+    }
+
+    public function getCertification($hcw_id)
+    {
+        $result = $this->db->query("SELECT * FROM log_questions_hcw WHERE hcw_id = '" . $hcw_id . "'");
+        $result = $result->result_array();
+
         return $result;
     }
 
