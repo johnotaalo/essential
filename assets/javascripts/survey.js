@@ -217,6 +217,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#form_post').addClass('active');
             $('#click_form').fadeOut();
             $('select').select2();
+            $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode: 1
+            });
             // $('actual-form .step').hide();
 
           });

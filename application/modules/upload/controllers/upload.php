@@ -20,7 +20,7 @@ class Upload extends MY_Controller{
     $this->template->mnch($dataArr);
   }
 
-  public function data_upload($activesheet = 0, $activity_id, $insert_table) {
+  public function upload($activesheet = 0, $insert_table,$field,$value) {
     //convert .slk file to xlsx for upload
 
     //get activity ID
@@ -75,7 +75,7 @@ class Upload extends MY_Controller{
       //echo $highestColumm;
       $data = $this->getData($arr, $start, $highestColumm, $highestRow);
 
-      //echo '<pre>';print_r($data);echo '</pre>';die;
+      // echo '<pre>';print_r($data);echo '</pre>';die;
       //$data =json_encode($data);
       //echo($data);die;
       $data = $this->formatData($data);
@@ -83,8 +83,8 @@ class Upload extends MY_Controller{
       // echo '<pre>';print_r($data);echo '</pre>';die;
 
       //$this -> createTables();
-
-      $this->createAndSetProperties($data, $activity_id, $insert_table,$sheetName[$x]);
+      // echo $field. ' '.$value; die
+      $this->createAndSetProperties($data, $insert_table,$sheetName[$x],$field,$value);
 
       //echo $activity_id;die;
       $data = $this->makeTable($data);
@@ -171,6 +171,36 @@ class Upload extends MY_Controller{
   }
   public function update_facility(){
     $this->facility_upload(0,'facilities');
+  }
+  public function update_hcw(){
+    $this->upload(0,'hcwlist','names_of_participant','NAMES OF PARTICIPANT');
+  }
+  /**
+  * [clean description]
+  * @param  [type] $field  [description]
+  * @param  [type] $string [description]
+  * @return [type]         [description]
+  */
+  public function clean($field,$string){
+    switch($field){
+      case 'phone_number':
+      $string = str_replace('O',0,$string);
+      $string = str_replace(' – ','',$string);
+      $string = str_replace(' ','',$string);
+      $string = str_replace('-','',$string);
+      break;
+    }
+    return $string;
+  }
+  /**
+  * [find description]
+  * @param  [type] $field  [description]
+  * @param  [type] $string [description]
+  * @return [type]         [description]
+  */
+  public function find($field,$string){
+
+
   }
   public function upload_commit() {
 
@@ -272,21 +302,23 @@ class Upload extends MY_Controller{
   /**
   * Initializes Tables in the Database
   */
-  public function createAndSetProperties($data, $activity_id, $insert_table, $source = '') {
+  public function createAndSetProperties($data, $insert_table, $source = '',$field,$value) {
     $dataTables = array($insert_table);
     $title = $data['title'];
 
     //add to title
     $title[] = 'UPLOAD DATE';
-    $title[] = 'ACTIVITY ID';
-    $title[] = 'POLICY SOURCE';
     $rowCounter = 0;
     $tableObj = array();
     foreach ($dataTables as $table) {
 
       foreach ($data['data'] as $data1) {
-
-        $currentTable = R::dispense($table);
+        // echo $field.' '.$value;die;
+        $currentTable = R::findOne($table,$field.'=?',array($data1[$value]));
+        // echo '<pre>';print_r($currentTable);echo '</pre>';die;
+        if(!$currentTable){
+          $currentTable = R::dispense($table);
+        }
 
         //convert date to timestamp
         $data1 = $this->formatDate($data1, 'DATES');
@@ -294,17 +326,15 @@ class Upload extends MY_Controller{
         //set update time
         $data1['UPLOAD DATE'] = time();
 
-        $data1 = $this->addIfNotExists($data1, 'cadre', 'cadre_name', 'CADRE', 'cadre_id');
+        $data1['MOBILE NUMBER'] = $this->clean('phone_number',$data1['MOBILE NUMBER']);
 
-        //set activity id
-        $data1['ACTIVITY ID'] = $activity_id;
-        $data1['POLICY SOURCE'] = $source;
+        // $data1 = $this->addIfNotExists($data1, 'cadre', 'cadre_name', 'CADRE', 'cadre_id');
 
         //link FacilityName to MFC
 
         //remove excess columns
-        unset($data1['county']);
-        unset($data1['district']);
+        // unset($data1['county']);
+        // unset($data1['district']);
         foreach ($title as $val) {
           $valN = strtolower($val);
           $valN = str_replace("/", " ", $valN);

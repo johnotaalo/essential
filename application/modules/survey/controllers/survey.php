@@ -420,9 +420,11 @@ class Survey extends MY_Controller
                 // echo $last_activity;die;
                 // Get Survey Information
 
-                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
+                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' .
+                 $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
 
-                $link.= '<div class="ui label ' . $label_class . ' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
+                $link.= '<div class="ui label ' . $label_class . ' status">' . $label .
+                '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
 
                 $districtFacilityListSection.= '<tr>
 
