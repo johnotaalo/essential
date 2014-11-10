@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="six wide column">
+  <div class="right floated twelve wide column">
     <div class="ui segment stacked">
 
     </div>
