@@ -22,10 +22,9 @@ class HCW extends MY_Controller{
   * [read description]
   * @return [type] [description]
   */
-  public function read(){
+  public function read($form){
     $data = $this->data_model->get('hcw');
-    echo '<pre>';print_r($data);die;
-    $data=$this->export->generate($data,'','table');
+    $data=$this->export->generate($data,'HCW List',$form);
     echo ($data);
   }
   /**
