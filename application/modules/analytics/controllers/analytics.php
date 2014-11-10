@@ -3045,10 +3045,7 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
         foreach ($results as $key => $value) {
-            if($key==''){
-                $name='No data';
-                $key=$name;
-            }
+
             $q[] = $key;
             $data[]= $value;
          }
@@ -3710,7 +3707,9 @@ class Analytics extends MY_Controller
        //echo '<pre>';print_r($results);echo '</pre>';die;
         $options = '<option>Select Main Symptom/Condition</option>';
         foreach ($results as $value) {
-           if (($value['il_for'] == 'pne') ||($value['il_for'] == 'dgn') || ($value['il_for'] == 'fev') || ($value['il_for'] == 'ear') ||($value['il_for'] == 'mal') || ($value['il_for'] == 'anm')|| ($value['il_for'] == 'con')) {
+           if (($value['il_for'] == 'pne') ||($value['il_for'] == 'dgn') || ($value['il_for'] == 'fev')
+            || ($value['il_for'] == 'ear') ||($value['il_for'] == 'mal') || ($value['il_for'] == 'anm')
+            || ($value['il_for'] == 'con')) {
                     if(($value['il_for'])=='con'){
                         $value['il_full_name']= 'Condition';
                     }else if(($value['il_for'])=='mal'){
