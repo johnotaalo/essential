@@ -514,19 +514,19 @@ function loadIndicatorTypes() {
   $('#indicator_types').load(base_url + 'analytics/getIndicatorTypes');
 
 
-   $('#indicator_types1').load(base_url + 'analytics/getIndicatorTypes');
+   $('#indicator_types1').load(base_url + 'analytics/getIndicatorTypes2A');
 
-   $('#indicator_types2').load(base_url + 'analytics/getIndicatorTypes');
+   $('#indicator_types2').load(base_url + 'analytics/getIndicatorTypes2B');
 
-   $('#indicator_types3').load(base_url + 'analytics/getIndicatorTypes');
+   $('#indicator_types3').load(base_url + 'analytics/getIndicatorTypes3');
 
    $('#assessment_types').load(base_url + 'analytics/getIndicatorTypes');
 
-   $('#assessment_types1').load(base_url + 'analytics/getIndicatorTypes');
+   $('#assessment_types1').load(base_url + 'analytics/getIndicatorTypes2A');
 
-   $('#assessment_types2').load(base_url + 'analytics/getIndicatorTypes');
+   $('#assessment_types2').load(base_url + 'analytics/getIndicatorTypes2B');
 
-   $('#assessment_types3').load(base_url + 'analytics/getIndicatorTypes');
+   $('#assessment_types3').load(base_url + 'analytics/getIndicatorTypes3');
 
 
 }

@@ -3721,6 +3721,57 @@ class Analytics extends MY_Controller
         echo $options;
     }
 
+    public function getIndicatorTypes2A() {
+        $results = $this->analytics_model->getIndicatorTypes();
+
+       //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+           if (($value['il_for'] == 'pne') || ($value['il_for'] == 'ear')
+            || ($value['il_for'] == 'fev') || ($value['il_for'] == 'dgn')) {
+
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
+    public function getIndicatorTypes2B() {
+        $results = $this->analytics_model->getIndicatorTypes();
+
+       //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+           if (($value['il_for'] == 'svd') || ($value['il_for'] == 'jau')
+            || ($value['il_for'] == 'eye') || ($value['il_for'] == 'brf')) {
+                    
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
+    public function getIndicatorTypes3() {
+        $results = $this->analytics_model->getIndicatorTypes();
+
+       //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+           if (($value['il_for'] == 'mal') || ($value['il_for'] == 'anm')
+            || ($value['il_for'] == 'con') || ($value['il_for'] == 'cnl')) {
+                    if(($value['il_for'])=='con'){
+                        $value['il_full_name']= 'Condition';
+                    }else if(($value['il_for'])=='mal'){
+                        $value['il_full_name']= 'Malnutrition';
+                    }else if(($value['il_for'])=='cnl'){
+                        $value['il_full_name']= 'Treatment/Counselling';
+                    }
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
     /**
      * [getChildrenServices description]
      * @param  [type] $criteria [description]
