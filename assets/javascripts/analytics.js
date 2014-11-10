@@ -82,6 +82,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '/' + survey_category,
         '#reporting_stat .outer .inner .content .inner-graph');
     }
+
     loadSurvey(survey);
   });
   $('#survey_category').change(function() {
@@ -1168,6 +1169,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
           // loadGraph(base_url, 'analytics/getChildrenServices/' +
           //   criteria + '/' + value + '/' + survey + '/' + survey_category,
           //   '#assessedcorrectly');
+
+
+          break;
+
+          case 'section-6':
+
+          loadGraph(base_url, 'analytics/getIMCIConsultation/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#consultationobserved');
+
+          loadGraph(base_url, 'analytics/getIMCIInterview/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            '#interviewcaregiver');
 
 
           break;

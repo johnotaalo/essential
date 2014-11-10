@@ -1241,7 +1241,11 @@ public function test(){
         for ($i = 1; $i <= $this->noOfInsertsBatch; ++$i) {
 
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\HCWConclusion();
+            $this->theForm = $this->getStoredData('models\Entities\HCWConclusion', array('ssId' => $this->session->userdata('hcw_id'), 'facMfl' => $this->elements[$i]['facilityMFL']));
+
+            if ($this->theForm == NULL) {
+                $this->theForm = new \models\Entities\HCWConclusion();
+            }
 
             //create an object of the model
 
@@ -1266,7 +1270,7 @@ public function test(){
                     $this->em->clear();
 
                     //detaches all objects from doctrine
-                    //return true;
+                    return true;
 
                 }
                 catch(Exception $ex) {
@@ -1288,7 +1292,7 @@ public function test(){
                     $this->em->clear();
 
                     //detactes all objects from doctrine
-                    //return true;
+                    return true;
 
                 }
                 catch(Exception $ex) {
@@ -1314,7 +1318,7 @@ public function test(){
         }
          //end of innner loop
 
-
+        // return true;
     }
 
 private function addHCWAssessorInfo() {

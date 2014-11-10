@@ -55,17 +55,10 @@ function startSurvey(base_url, survey, survey_category, district) {
       type: 'POST',
       data: formData,
       success: function(data) {
-        alert(data);
-        if(data == 'true')
-        {
-          nextsection = curr_section += 1;
-          thethat = $('.step[data-section="' + nextsection + '"]');
-          changeSection(curr_section, thethat);
-        }
-        else
-        {
-           console.log(data);
-        }
+        console.log(data);
+        nextsection = curr_section += 1;
+        thethat = $('.step[data-section="' + nextsection + '"]');
+        changeSection(curr_section, thethat);
       },
       fail: function() {
         console.log("error");
@@ -283,7 +276,6 @@ function startSurvey(base_url, survey, survey_category, district) {
           $('.bs-month').datepicker({
             minViewMode : 1
           });
-            $('.ui.checkbox').checkbox();
             // $('actual-form .step').hide();
 
           });
@@ -340,9 +332,9 @@ function startSurvey(base_url, survey, survey_category, district) {
         $('.actual-form .step').hide();
         $('#section-' + section).show();
       } else {
-        //$('.actual-form .step').hide();
+        $('.actual-form .step').hide();
         // Go back to Facility List
-        //window.location = base_url + 'mnch/takesurvey';
+        window.location = base_url + 'mnch/takesurvey';
       }
       disableFields(section);
     }
