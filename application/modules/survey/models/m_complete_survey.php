@@ -1256,7 +1256,7 @@ public function test(){
             (array_key_exists('hcwConclusionDateSupervisor', $this->elements[$i])) ? $this->theForm->setHcDateSupervisor($this->elements[$i]['hcwConclusionDateSupervisor']) : $this->theForm->setHcDateSupervisor('n/a');
             (array_key_exists('hcwConclusionDateSupervisee', $this->elements[$i])) ? $this->theForm->setHcDateSupervisee($this->elements[$i]['hcwConclusionDateSupervisee']) : $this->theForm->setHcDateSupervisee('n/a');
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
-            $this->theForm->setHcwid((int)$this->session->userdata('hcw_id'));
+            $this->theForm->setSsId((int)$this->session->userdata('hcw_id'));
 
             /*timestamp option*/
             $this->em->persist($this->theForm);
