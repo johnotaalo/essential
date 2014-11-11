@@ -2860,8 +2860,8 @@ class Form_Handler extends MY_Controller
 				<td>Action/s taken by supervisee:</td>
 				</tr>
 				<tr>
-				<td>Supervisor Name<input name="hcwConclusionSignatureSupervisor_1" type="text" style="width:500px;padding:10px"></td>
-				<td>Supervisee Name<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
+				<td><textarea name="hcwConclusionActionSupervisor_1" style="width:400px;height:100px"></textarea></td>
+				<td><textarea name="hcwConclusionActionSupervisee_1" style="width:400px;height:100px"></textarea></td>
 				</tr>
 				<tr>
 				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>

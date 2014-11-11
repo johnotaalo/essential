@@ -372,7 +372,7 @@ class Generate extends MY_Controller
                             }
                             else if($value['questionCode'] == 'QUC34')
                             {
-                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"></div></tr>';
+                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"><input type = "text" name = "wpfacilitycounty_1"></div></tr>';
                             }
                             $data[$section][] = '<tr>
                             <td><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>

@@ -346,9 +346,9 @@ class Survey extends MY_Controller
             else
             {
                  $hcwlist .= '
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" > Certification</center>
+            <center><input type = "checkbox" disabled = "disabled" ></center>
+            <center><input type = "checkbox" disabled = "disabled" ></center></td>
             ';
             }
             
@@ -366,7 +366,7 @@ class Survey extends MY_Controller
             {
                 $percentage = ($hcw_section/5)*100;
                 $hcw_section = $hcw_section - 1;
-                $hcwlist .= '<td><center><div class="ui successful progress"><div class="bar" style="width:'.$percentage.'%"></div></div></center></td>';
+                $hcwlist .= '<td><center><div class="ui successful progress" style = "height: 30px;"><div class="bar tiny" style="width:'.$percentage.'%"></div></div></center></td>';
                 $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a></center></td>';
             }
             else if($hcw_section == 5)
