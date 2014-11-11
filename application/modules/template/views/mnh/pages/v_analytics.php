@@ -3,7 +3,11 @@
 <body class="fixed-top" >
     <!-- BEGIN HEADER -->
 
-
+<script>
+    $('#survey_type').change(function(){
+        alert('changed');
+    });
+</script>
 
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->

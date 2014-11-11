@@ -67,6 +67,15 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $(this).addClass('active');
   });
   $('#survey_type').change(function() {
+    survey_type = $('#survey_type').val();
+
+    if(survey_type == 'hcw')
+    {
+      //alert(survey_type);
+      $('#survey_category').addClass('disabled');
+    }else{
+      $('#survey_category').removeClass('disabled');
+    }
     district_select = $('#sub_county_select').val();
     //alert(district_select)
     if (district_select !== 'Please Select a District' && district_select !==
