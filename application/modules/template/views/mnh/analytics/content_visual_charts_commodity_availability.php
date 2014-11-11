@@ -1898,7 +1898,7 @@
     </div>
     <div id="collapseThirtyFive" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
+            <div class="semi-large-graph" >
                 <div class="portlet-title">
 
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Consultation observation</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1910,7 +1910,7 @@
                     </div>
                 </div>
             </div>
-            <div class="medium-graph">
+            <div class="semi-large-graph">
                 <div class="portlet-title">
 
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Exit Interview With The Caregiver</span><span class="sizer">Click to Enlarge</span></h6>
