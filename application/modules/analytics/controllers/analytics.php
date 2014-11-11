@@ -2617,10 +2617,10 @@ class Analytics extends MY_Controller
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
-
+     //echo "<pre>";print_r($results);echo "</pre>";die;
       if($statistics=='service' && $for=='wp'){
         foreach ($results as $key => $value) {
-            //echo "<pre>";print_r($results);echo "</pre>";die;
+           
               
 
             foreach ($value as $location => $val) {
@@ -2704,7 +2704,7 @@ class Analytics extends MY_Controller
 
             }
              //$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'question',$statistic,$color);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'question',$statistic,$color);
     }
     }
 

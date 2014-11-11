@@ -1773,18 +1773,6 @@
 
            <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types1"></select></span></h6>
-                    </div>
-                    <div class="portlet-body">
-                        <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="indicator_comparison1">
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="semi-large-graph">
-                    <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types1"></select></span></h6>
 
                     </div>
@@ -1795,6 +1783,20 @@
 
                     </div>
                 </div>
+
+           <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types1"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="indicator_comparison1">
+                        </div>
+
+                    </div>
+                </div>
+
+                
 
            
             
@@ -1813,17 +1815,7 @@
     </div>
     <div id="collapseThirtyThree" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="semi-large-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types2"></select></span></h6>
-                    </div>
-                    <div class="portlet-body">
-                        <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="indicator_comparison2">
-                        </div>
-
-                    </div>
-                </div>
+            
 
                 <div class="semi-large-graph">
                     <div class="portlet-title">
@@ -1838,7 +1830,17 @@
                     </div>
                 </div>
             
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types2"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="indicator_comparison2">
+                        </div>
 
+                    </div>
+                </div>
 
         </div>
     </div>
@@ -1853,6 +1855,22 @@
     </div>
     <div id="collapseThirtyFour" class="panel-collapse collapse">
         <div class="panel-body">
+
+
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="assessment_comparison3">
+                        </div>
+
+                    </div>
+                </div>
+
+                
             <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types3"></select></span></h6>
@@ -1865,18 +1883,7 @@
                     </div>
                 </div>
 
-                <div class="semi-large-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span></h6>
-
-                    </div>
-                    <div class="portlet-body">
-                        <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="assessment_comparison3">
-                        </div>
-
-                    </div>
-                </div>
+                
 
         </div>
     </div>

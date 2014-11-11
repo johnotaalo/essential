@@ -1760,22 +1760,45 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 // Dump the extra resultset.
                 $queryData->free_result();
 
-                //echo($this->db->last_query());die;
-                if ($this->dataSet !== NULL) {
 
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                foreach ($this->dataSet as $value) {
+                    if (array_key_exists('question_code', $value)) {
+                        $question = $this->getQuestionName($value['question_code']);
+                        foreach ($question as $value) {
+                             
+                        }
+
+                    }
+
+       switch($for){
+                
+
+                case 'wp':
+                    $question = substr($question, 22);
+                break;
+
+                
+
+                default:
+                     //echo 'Not Trimming';
+                break;
+
+                }
+
+
                     foreach ($this->dataSet as $value) {
                        if (array_key_exists('frequency', $value)) {
                             $data[$value['question_name']][$value['frequency']] = (int)$value['total_response'];
                         }
-                    }
+
+                        
                 }
 
 
-                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
-
-
+              }
             }
+
+
             catch(exception $ex) {
 
                 //ignore
@@ -1783,8 +1806,9 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
 
             }
-
-
+            //echo '<pre>';print_r($data);echo '</pre>';die;
+            // var_dump($data);die;
+            //echo '<pre>';print_r($question);echo '</pre>';die;
             return $data;
         }
 
@@ -4136,6 +4160,10 @@ ORDER BY question_code";
 
                 case'imci':
                     $question = substr($question, 0,-1);
+                break;
+
+                case'wp':
+                    $question = substr($question, 22);
                 break;
 
                 case'gp':
