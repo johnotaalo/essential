@@ -50,7 +50,7 @@ $('#field_list a').click(function(){
   object = $(this).attr('id');
   $('#title').text(title);
   $.ajax({
-    url:base_url+'admin/get/'+object+'/table',
+    url:base_url+'admin/get/'+object+'/datatable',
     beforeSend: function(xhr) {
       $('#display').empty();
       $('#display').append('<div class="loader" >Loading...</div>');
@@ -63,29 +63,27 @@ $('#field_list a').click(function(){
       tr='';
       th='';
       thead='';
+      tfoot='';
       counter=0;
-      $.each(obj, function(k, v) {
-        if(counter==0){
-          thead+='<thead>';
-          th='';
-          $.each(v, function(key, value) {
-            th+='<th>'+key+'</th>';
-          });
-          thead+=th+'</thead>';
-        }
-        if(counter<10){
-          tr+='<tr>';
-          td='';
-          $.each(v, function(key, value) {
-            td+='<td>'+value+'</td>';
-          });
-          tr+=td+'</tr>';
-          counter++;
-        }
+
+      thead+='<thead><tr>';
+      tfoot+='<tfoot><tr>';
+
+      $.each(obj.title, function(k, v) {
+        thead+='<th>'+v+'</th>';
+        tfoot+='<th>'+v+'</th>';
       });
-      table+=thead+tr+'</table>';
+
+      tfoot+='</tr></tfoot>';
+      thead+='</tr></thead>';
+
+      table+=thead+tfoot+'</table>';
+
       // console.log(table);
       $('#display').append(table);
+      $('#display table').dataTable( {
+        "aaData": obj.data
+    } );
       // $(document).trigger('datatable_loaded');
     }
   });

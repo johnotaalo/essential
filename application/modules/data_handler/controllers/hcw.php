@@ -24,10 +24,23 @@ class HCW extends MY_Controller{
   */
   public function read($form){
     $data = $this->data_model->get('hcw');
-echo json_encode($data);die;
-    $data=$this->export->generate($data,'HCW List',$form);
-    //
-    echo json_encode($data);
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'HCW List',$form);
+
+    if($form=='datatable'){
+      $recordSize = sizeof($raw['data']);
+      // $raw['data']=	array("data"=>$raw['data']);
+      // $raw['data']=	array(
+      //   "sEcho"						=> 1,
+      //   "iTotalRecords"				=>$recordSize,
+      //   "iTotalDisplayRecords"		=>$recordSize,
+      //   "aaData"					=>$raw['data']
+      // );
+      echo json_encode($raw);
+    }
+
   }
   /**
   * [update description]

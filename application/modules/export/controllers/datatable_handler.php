@@ -41,9 +41,8 @@ class Datatable_Handler extends MY_Controller{
       * @var array
       */
       $rowSet=array();
-      $rowSet['DT_RowId']='row_'.$rowCounter;
-      foreach($row as $field){
-        $rowSet[]=array($counter=>$field);
+      foreach($row as $k=>$field){
+        $rowSet[]=$field;
         $counter++;
       }
 

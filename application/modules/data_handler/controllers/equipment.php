@@ -23,6 +23,15 @@ class Equipment extends MY_Controller{
   */
   public function read(){
     $data = $this->data_model->get('equipment');
+    // var_dump($data);
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'Equipment List',$form);
+    var_dump($raw);
+    if($form=='datatable'){
+      echo json_encode($raw);
+    }
   }
   /**
   * [update description]
