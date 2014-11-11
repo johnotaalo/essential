@@ -18,11 +18,29 @@ class Indicators extends MY_Controller{
     $data = $this->input->post();
   }
   /**
+<<<<<<< HEAD
   * [read description]
   * @return [type] [description]
   */
   public function read(){
     $data = $this->data_model->get('indicators');
+=======
+   * [read description]
+   * @param  [type] $form [description]
+   * @return [type]       [description]
+   */
+  public function read($form){
+    $data = $this->data_model->get('indicators');
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'Indicators List',$form);
+
+    if($form=='datatable'){
+      $recordSize = sizeof($raw['data']);
+      echo json_encode($raw);
+    }
+>>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
   }
   /**
   * [update description]

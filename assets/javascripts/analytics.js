@@ -91,6 +91,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '/' + survey_category,
         '#reporting_stat .outer .inner .content .inner-graph');
     }
+
     loadSurvey(survey);
   });
   $('#survey_category').change(function() {
@@ -385,6 +386,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
   });
 
 
+
   /**
    * [description]
    * @return {[type]} [description]
@@ -523,6 +525,7 @@ function loadIndicatorTypes() {
   $('#indicator_types').load(base_url + 'analytics/getIndicatorTypes');
 
 
+
    $('#indicator_types1').load(base_url + 'analytics/getIndicatorTypes2A');
 
    $('#indicator_types2').load(base_url + 'analytics/getIndicatorTypes2B');
@@ -536,6 +539,7 @@ function loadIndicatorTypes() {
    $('#assessment_types2').load(base_url + 'analytics/getIndicatorTypes2B');
 
    $('#assessment_types3').load(base_url + 'analytics/getIndicatorTypes3');
+
 
 
 }
@@ -1414,7 +1418,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/' + value + '/' + survey + '/' + survey_category + '/cases',
             '#u5_register');
 
-          loadGraph(base_url, 'analytics/getCorrectClassification/' + criteria +
+          loadGraph(base_url, 'analytics/getCorrectClassification/' +
+            criteria +
 
             '/' + value + '/' + survey + '/' + survey_category + '/cases',
             '#correct_classification');
@@ -1496,7 +1501,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
           break;
         case 'section-5':
 
-          loadGraph(base_url, 'analytics/getORTAvailability/' + criteria + '/' + value +
+          loadGraph(base_url, 'analytics/getORTAvailability/' + criteria +
+            '/' + value +
 
             '/' + survey + '/' + survey_category, '#ort_availability');
           loadGraph(base_url, 'analytics/getLocationStatistics/' + criteria +
@@ -1575,7 +1581,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '#HCWfacility_type');
           loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
 
-            criteria + '/' + value + '/' + survey + '/' + survey_category + '/profile_raw/table',
+            criteria + '/' + value + '/' + survey + '/' + survey_category +
+            '/profile_raw/table',
 
             '#HCW_Profile');
           loadGraph(base_url, 'analytics/getCurrentService/' +
@@ -1627,6 +1634,7 @@ function statisticsHandler(criteria, value, survey, survey_category,
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#interviewcaregiver');
 
+
           break;
 
         case 'section-7':
@@ -1642,6 +1650,7 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getCertification/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certification');
+
 
           break;
       }

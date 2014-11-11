@@ -422,7 +422,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1648,12 +1648,11 @@
             </div>
             <div class="x-large-graph">
                 <h5><span class="graph-title">HCW Profile</span><span class="sizer">Click to Enlarge</span></h5>
-                
+
               <!-- <h5>HCW Profile</h5> -->
               <table>
 
 
-                 
 
               </table>
             </div>
@@ -1786,7 +1785,9 @@
 
            <div class="semi-large-graph">
                     <div class="portlet-title">
+
                         <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types1"></select></span></h6>
+
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
@@ -1796,10 +1797,7 @@
                     </div>
                 </div>
 
-                
 
-           
-            
 
 
         </div>

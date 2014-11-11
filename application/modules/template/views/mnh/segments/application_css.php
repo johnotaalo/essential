@@ -2,7 +2,8 @@
 <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/bower_components/devicons/css/devicons.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/bower_components/lato/css/lato.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/bower_components/octicons/octicons.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/bower_components/octicons/octicons/octicons.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/bower_components/ionicons/css/ionicons.css" rel="stylesheet">
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'> -->
 

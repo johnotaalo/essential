@@ -289,9 +289,11 @@ function startSurvey(base_url, survey, survey_category, district) {
     }); /*close form-container LOAD FN() */
 
   // $('#m_county_choose').live(function(){
-  //  console.log('changed');
-  //  county = this.value;
-  //  createFacilityDropDown(county);
+
+  // 	console.log('changed');
+  // 	county = this.value;
+  // 	createFacilityDropDown(county);
+
   // });
   /*----------------------------------------------------------------------------------------------------------------*/
   /**
@@ -500,7 +502,9 @@ function startSurvey(base_url, survey, survey_category, district) {
           $('#label_reason_other_2').hide();
         }
 
-        //  }//close if class is ceoc
+
+        //	}//close if class is ceoc
+
       });
 
       $(form_id).find(':radio').on('change', function() {
@@ -1309,24 +1313,28 @@ function startSurvey(base_url, survey, survey_category, district) {
      * @return {[type]}         [description]
      */
     /*function loadSection(survey_type,survey_category,$facility){
-    $('.actual-form .step').hide();
-    $.ajax({
-      url: base_url + 'survey/getFacilitySection/' + survey_type + '/' + survey_category + '/' + facility,
-      beforeSend: function(xhr) {
-        xhr.overrideMimeType("text/plain; charset=x-user-defined");
-      },
-      success: function(data) {
-        obj = jQuery.parseJSON(data);
-        console.log(obj);
-        (data != '') ? $('#'+data).show() : $('#section-1').show;
-  //
-      }
-    });
 
-    }
-  }*/
+		$('.actual-form .step').hide();
+		$.ajax({
+			url: base_url + 'survey/getFacilitySection/' + survey_type + '/' + survey_category + '/' + facility,
+			beforeSend: function(xhr) {
+				xhr.overrideMimeType("text/plain; charset=x-user-defined");
+			},
+			success: function(data) {
+				obj = jQuery.parseJSON(data);
+				console.log(obj);
+				(data != '') ? $('#'+data).show() : $('#section-1').show;
+	//
+			}
+		});
+
+		}
+	}*/
+
 
 
 }
 
+
 /*---------------------end form wizard functions----------------------------------------------------------------*/
+

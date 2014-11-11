@@ -315,7 +315,11 @@ class Survey extends MY_Controller
         $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
         $sections = $this->data_model->getAssessmentInfo();
         // echo "<pre>"; print_r($sections);die;
+<<<<<<< HEAD
         $question_codes = array('QHC28'=>'blue', 'QHC29'=>'green', 'QHC30'=>'brown');
+=======
+        $question_codes = array('QHC28', 'QHC29', 'QHC30');
+>>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
         //print_r($result);die;
         $checkbox_options = $this->data_model->getCheckOptions();
         $counter = 0;
@@ -331,6 +335,7 @@ class Survey extends MY_Controller
             $counter++;
             $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>';
             if (array_key_exists( $value['id'], $checkbox_options)) {
+<<<<<<< HEAD
                 foreach ($question_codes as $code => $color) {
                     $response = $checkbox_options[$value['id']][$code];
                     if($response == 'Yes')
@@ -340,15 +345,32 @@ class Survey extends MY_Controller
                     else
                     {
                          $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>';
+=======
+                foreach ($question_codes as $code) {
+                    $response = $checkbox_options[$value['id']][$code];
+                    if($response == 'Yes')
+                    {
+                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" checked></center></td>';
+                    }
+                    else
+                    {
+                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" ></center></td>';
+>>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
                     }
                 }
             }
             else
             {
                  $hcwlist .= '
+<<<<<<< HEAD
             <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
             <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
             <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
+=======
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+>>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
             ';
             }
             
@@ -548,7 +570,11 @@ class Survey extends MY_Controller
                     <th style = "width: 20px;">Status</th>
                     <th>Link</th>
                 </thead>
+<<<<<<< HEAD
                 <tbody style = "font-size: 80%;">'.$hcwListSection.'</tbody>
+=======
+                <tbody>'.$hcwListSection.'</tbody>
+>>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
             </table>';
         }
 

@@ -63,7 +63,10 @@
                             <a href="<?php echo $this -> config -> item('project_url'); ?>">Program Monitoring Tool</a>
                         </li>
                         <li>
-                            <a href="health-cmp.or.ke">HCMP</a>
+                            <a href="http://www.health-cmp.or.ke">HCMP</a>
+                        </li>
+                        <li>
+                            <a href="#" id="upload">Upload</a>
                         </li>
                         <li>
                             <a href="#" id="upload">Upload</a>
