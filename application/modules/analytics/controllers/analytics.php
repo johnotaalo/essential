@@ -3602,8 +3602,8 @@ class Analytics extends MY_Controller
     public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
-        
-        if($statistic = 'classification' && $for = 'ch'){
+       
+        if(($statistic = 'classification' && $for = 'ch') || ($statistic = 'correctness')){
            foreach ($results as $indicator => $values) {
             $category[] = $indicator;
             foreach ($values as $verdict => $answer) {
@@ -3613,12 +3613,13 @@ class Analytics extends MY_Controller
        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gData as $name => $data) {
+             //echo '<pre>';print_r($name);echo '</pre>';die;
             if($name=='N/A'){
                 $name = 'No data';
                    $color='#dddddd';
-                }elseif($name == 'Yes'){
+                }elseif(($name == 'Yes') || ($name == 'correct')){
                   $color='#8bbc21';
-                }else if($name=='No'){
+                }else if(($name=='No') || ($name == 'incorrect')){
                     $color='#fb4347';
                 }else{
                      $color = $colors[$colorCounter];
@@ -3641,7 +3642,9 @@ class Analytics extends MY_Controller
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($gData as $name => $data) {
+            //echo '<pre>';print_r($name);echo '</pre>';die;
             if($name == 'correct'){
+                //
                   $color='#8bbc21';
                 }else if($name=='incorrect'){
                     $color='#fb4347';
