@@ -17,6 +17,7 @@ class Datatable_Handler extends MY_Controller{
   }
 
   public function normal($data){
+    // var_dump($data);
     /**
     * [$dataSet description]
     * @var array

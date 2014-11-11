@@ -15,7 +15,8 @@ class Data_Model extends MY_Model{
   */
   public function get($object,$identifier=''){
     switch($object){
-    case 'hcw':
+
+      case 'hcw':
       $results = $this->getHCW($identifier);
 
       foreach($results as $result){
@@ -34,16 +35,55 @@ class Data_Model extends MY_Model{
         $newResults[]=$newResult;
       }
       break;
+
       case 'equipment':
       $results = $this->getEquipments();
+
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!='' && $key!='id'){
             $newResult[$key]=$value;
           }
         }
+        $newResults[]=$newResult;
+      }
+      break;
 
-        // $newResult['county']=$this->getFacilityCounty($result['mfl_code']);
+      case 'supplies':
+      $results = $this->getSupplies();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'questions':
+      $results = $this->getQuestions();
+print_r($results);die;
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'indicators':
+      $results = $this->getIndicators();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
         $newResults[]=$newResult;
       }
       break;

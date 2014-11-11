@@ -19,9 +19,10 @@ class HCW extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-  * [read description]
-  * @return [type] [description]
-  */
+   * [read description]
+   * @param  [type] $form [description]
+   * @return [type]       [description]
+   */
   public function read($form){
     $data = $this->data_model->get('hcw');
     foreach($data[0] as $key=>$value){
@@ -31,16 +32,8 @@ class HCW extends MY_Controller{
 
     if($form=='datatable'){
       $recordSize = sizeof($raw['data']);
-      // $raw['data']=	array("data"=>$raw['data']);
-      // $raw['data']=	array(
-      //   "sEcho"						=> 1,
-      //   "iTotalRecords"				=>$recordSize,
-      //   "iTotalDisplayRecords"		=>$recordSize,
-      //   "aaData"					=>$raw['data']
-      // );
       echo json_encode($raw);
     }
-
   }
   /**
   * [update description]

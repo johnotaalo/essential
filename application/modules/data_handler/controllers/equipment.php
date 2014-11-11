@@ -18,17 +18,17 @@ class Equipment extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-  * [read description]
-  * @return [type] [description]
-  */
-  public function read(){
+   * [read description]
+   * @param  [type] $form [description]
+   * @return [type]       [description]
+   */
+  public function read($form){
     $data = $this->data_model->get('equipment');
-    // var_dump($data);
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
     $raw['data']=$this->export->generate($data,'Equipment List',$form);
-    var_dump($raw);
+    // var_dump($raw['data']);
     if($form=='datatable'){
       echo json_encode($raw);
     }

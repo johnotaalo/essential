@@ -8,8 +8,11 @@ class Admin extends MY_Controller{
   */
   public function __construct() {
     parent::__construct();
+    $this->load->module('data_handler/indicators');
     $this->load->module('data_handler/hcw');
     $this->load->module('data_handler/equipment');
+    $this->load->module('data_handler/supplies');
+    $this->load->module('data_handler/questions');
     $this->load->module('template');
   }
   public function index(){
@@ -30,22 +33,20 @@ class Admin extends MY_Controller{
   public function get($object,$form){
     switch($object){
       case 'hcw':
-      $this->hcw->read($form);
-
-      break;
+        $this->hcw->read($form);
+          break;
       case 'equipment':
-      
-      $this->equipment->read($form);
-
-      break;
-      case 'update':
-      $this->hcw->update();
-
-      break;
-      case 'disable':
-      $this->hcw->disable();
-
-      break;
+        $this->equipment->read($form);
+          break;
+      case 'supplies':
+        $this->supplies->read($form);
+          break;
+      case 'questions':
+        $this->questions->read($form);
+          break;
+      case 'indicators':
+        $this->indicators->read($form);
+          break;
     }
   }
 }

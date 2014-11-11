@@ -18,11 +18,21 @@ class Questions extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-  * [read description]
-  * @return [type] [description]
-  */
-  public function read(){
+   * [read description]
+   * @param  [type] $form [description]
+   * @return [type]       [description]
+   */
+  public function read($form){
     $data = $this->data_model->get('questions');
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'Questions List',$form);
+
+    if($form=='datatable'){
+      $recordSize = sizeof($raw['data']);
+      echo json_encode($raw);
+    }
   }
   /**
   * [update description]

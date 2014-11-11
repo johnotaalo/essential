@@ -82,8 +82,13 @@ $('#field_list a').click(function(){
       // console.log(table);
       $('#display').append(table);
       $('#display table').dataTable( {
+        "sPaginationType": "full_numbers",
         "aaData": obj.data
     } );
+    $('#DataTables_Table_0_filter label').append(
+      '<div class="ui corner label"> <i class="search icon"></i> </div>'
+    );
+    $('#DataTables_Table_0_filter label').addClass('ui labeled input');
       // $(document).trigger('datatable_loaded');
     }
   });
