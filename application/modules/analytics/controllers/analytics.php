@@ -3781,6 +3781,10 @@ class Analytics extends MY_Controller
         $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','response');
     }
 
+    public function getDangerFindings($criteria, $value, $survey, $survey_category) {
+        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
+    }
+
     public function getCorrectClassification($criteria,$value,$survey,$survey_category){
         $this->getIndicatorComparison($criteria,$value,$survey,$survey_category,'ch','classification');
     }

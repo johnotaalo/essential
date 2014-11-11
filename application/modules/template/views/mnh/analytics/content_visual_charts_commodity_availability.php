@@ -1797,7 +1797,18 @@
                     </div>
                 </div>
 
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types"></select></span></h6>
 
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence">
+                        </div>
+
+                    </div>
+                </div>
 
 
         </div>
@@ -1840,6 +1851,19 @@
                     </div>
                 </div>
 
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types1"></select></span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence1">
+                        </div>
+
+                    </div>
+                </div>
+
         </div>
     </div>
 </div>
@@ -1876,6 +1900,19 @@
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
                         <div class="chart" id="indicator_comparison3">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types2"></select></span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence2">
                         </div>
 
                     </div>
