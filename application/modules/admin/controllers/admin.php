@@ -19,29 +19,31 @@ class Admin extends MY_Controller{
   public function test(){
     echo 'test';
   }
+
+  /**
+  * Handles R from CRUD - A & V Functions
+  * @param  string $object Value of Action required by user.
+  * @param  string $form File type to download.
+  * @return [type]         [description]
+  */
+  public function get($object,$form){
+    switch($object){
+      case 'hcw':
+      $this->hcw->read($form);
+
+      break;
+      case 'read':
+      $this->hcw->read();
+
+      break;
+      case 'update':
+      $this->hcw->update();
+
+      break;
+      case 'disable':
+      $this->hcw->disable();
+
+      break;
+    }
+  }
 }
-  // /**
-  // * Handles all CRUD - A & V Functions of HCW
-  // * @param  string $action Value of Action required by user.
-  // * @return [type]         [description]
-  // */
-  // public function hcw($action){
-  //   switch($action){
-  //     case 'create':
-  //       $this->hcw->create();
-  //
-  //     break;
-  //     case 'read':
-  //       $this->hcw->read();
-  //
-  //     break;
-  //     case 'update':
-  //       $this->hcw->update();
-  //
-  //     break;
-  //     case 'disable':
-  //       $this->hcw->disable();
-  //
-  //     break;
-  //   }
-  // }

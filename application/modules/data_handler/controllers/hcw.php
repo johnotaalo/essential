@@ -24,8 +24,10 @@ class HCW extends MY_Controller{
   */
   public function read($form){
     $data = $this->data_model->get('hcw');
+echo json_encode($data);die;
     $data=$this->export->generate($data,'HCW List',$form);
-    echo ($data);
+    //
+    echo json_encode($data);
   }
   /**
   * [update description]

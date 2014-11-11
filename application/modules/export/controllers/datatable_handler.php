@@ -51,3 +51,4 @@ class Datatable_Handler extends MY_Controller{
     }
     return $dataSet;
   }
+}
