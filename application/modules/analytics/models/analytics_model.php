@@ -426,7 +426,7 @@ ORDER BY lq.lq_response ASC";
                           break;
                         case 'treatment_raw':
                           $treatments=explode(',',$value['lt_treatments']);
-                          foreach($treatments as $treatment){
+                          foreach($treatments as $treatment){                                                                                                                          
                             /**
                              * Initialize Array to be formatted
                              * @var array
@@ -1665,9 +1665,9 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('fully_functional', $value)) {
-                            $data[$value['equipment_name']]['functional']+= (int)$value['fully_functional'];
-                            $data[$value['equipment_name']]['nonfunctional']+= (int)$value['non_functional'];
+                        } else if (array_key_exists('functional', $value)) {
+                            $data[$value['equipment_name']]['functional']+= (int)$value['functional'];
+                            $data[$value['equipment_name']]['non_functional']+= (int)$value['non_functional'];
                         }
                     }
                 }

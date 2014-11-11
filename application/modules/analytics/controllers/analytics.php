@@ -1608,9 +1608,9 @@ class Analytics extends MY_Controller
             $key = str_replace(' ', '-', $key);
             if($key=='No-Data'){
                    $color='#dddddd';
-                }else if($key=='Available' || $key=='Functional'){
+                }else if(($key=='Available') || ($key=='functional')){
                     $color='#8bbc21';
-                }else if($key=='Not-Available' || $key=='Nonfunctional'){
+                }else if(($key=='Not-Available') || ($key=='non_functional')){
                     $color='#fb4347';
                 }
 
@@ -1623,8 +1623,7 @@ class Analytics extends MY_Controller
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),$for,'equipment',$statistic,$colors);
-
-    }
+             }
 
     public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getStorageStatistics($criteria, $value, $survey, $survey_category, $for);
@@ -2732,7 +2731,7 @@ class Analytics extends MY_Controller
      */
     public function getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-       //echo "<pre>";print_r($results);echo "</pre>";die;
+      // echo "<pre>";print_r($results);echo "</pre>";die;
         if(($statistics == 'functionality' && $for == 'ortf')){
             $number = $resultArray = $q = $data= $gdata =array();
         foreach ($results as $key => $value) {
@@ -2750,11 +2749,24 @@ class Analytics extends MY_Controller
                 $gdata[$r][]=$value_;
             }
             }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($gdata as $name => $value1) {
-            $resultArray[]=array('name'=> $name, 'data'=> $value1);
-        }
+            if($name=='No data'){
+                   $color='#dddddd';
+                }elseif($name == 'functional'){
+                    $color = '#8bbc21';
+                }elseif($name == 'nonfunctional'){
+                    $color = '#fb4347';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
+         }
         $category = $q;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 110, 'bar', '', $for, 'question', $statistics);
     }else if(($statistics =='location' && $for == 'ort') || ($statistics == 'availability'&& $for == 'ort')){
             $number = $resultArray = $q = $data= $gdata =array();
         foreach ($results as $key => $value) {
@@ -2777,6 +2789,10 @@ class Analytics extends MY_Controller
         foreach ($gdata as $name => $value1) {
             if($name=='No data'){
                    $color='#dddddd';
+                }elseif(($name == 'Available') || ($name == 'functional')){
+                    $color = '#8bbc21';
+                }elseif(($name == 'Not Available')|| ($name == 'nonfunctional')){
+                    $color = '#fb4347';
                 }
                 else{
                      $color = $colors[$colorCounter];
@@ -2785,7 +2801,7 @@ class Analytics extends MY_Controller
             $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
         }
         $category = $q;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 110, 'bar', '', $for, 'question', $statistics);
     }else if($statistics =='response' && $for == 'wp'){
            $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -3392,6 +3408,7 @@ class Analytics extends MY_Controller
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }elseif ($statistics=='findings') {
+        //echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results as $key => $result) {
 
             $key = str_replace('_', ' ', $key);
@@ -3406,14 +3423,14 @@ class Analytics extends MY_Controller
          $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
            $colorCounter=0;
         foreach ($data as $key => $val) {
-            if ($key == 'N/A') {
+            if (($key == 'N/A')) {
                 $name = 'No Data';
                 $key = $name;
             }
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
-            if($key=='No-Data'){
+            if(($key=='N/A')){
                    $color='#dddddd';
                }else if($key=='Present'){
                     $color='#8bbc21';
