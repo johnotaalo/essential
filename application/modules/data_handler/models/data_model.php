@@ -24,7 +24,7 @@ class Data_Model extends MY_Model{
             $newResult[$key]=$value;
           }
         }
-        $newResult['county']=$this->getFacilityCounty($result['mfl_code']);
+        // $newResult['county']=$this->getFacilityCounty($result['mfl_code']);
         $newResults[]=$newResult;
       }
       break;
