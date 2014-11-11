@@ -458,6 +458,18 @@ $.ajax({
         color:#FF0000;
     }
 
+    .hcw-action
+    {
+        cursor: pointer;
+    }
+
+    .label
+    {
+        display: block;
+        font-size: 90%;
+        margin: .5em .5em 0 0;
+    }
+
 </style>
 
 </head>
