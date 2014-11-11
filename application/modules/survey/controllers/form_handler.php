@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection, $hcwassessorsection;
     
     public function __construct() {
         parent::__construct();
@@ -85,6 +85,7 @@ class Form_Handler extends MY_Controller
         $this->facilitysection = $this->generate->createFacilityDetailsSection();
         $this->cadre = $this->generate->createCadre();
         $this->hcwworkprofilesection = $this->generate->createHCWWorkerProfile();
+        $this->hcwassessorsection = $this->generate->createassessorsection();
         // $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
 
     }
@@ -2082,7 +2083,7 @@ class Form_Handler extends MY_Controller
 				<input type="text" name = "assesorname_1">
 				</td>
 				<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-				<select name = "asesordesignation_1">'.$this->cadre.'</select>
+				'.$this->hcwassessorsection.'
 				</td>
 				<td>Email </td>
 				<td>

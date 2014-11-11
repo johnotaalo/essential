@@ -1985,27 +1985,44 @@ class Generate extends MY_Controller
                 $sub_counties = $this->data_model->getDistricts();
                 $facMFL = $this->session->userdata('facilityMFL');
                 $fac_county = $this->data_model->getFacilityCounty($facMFL);
-                
+                switch ($this->survey_form)
+                {
+                    case 'online':
+                    foreach ($facilities as $key => $value) {
+                        if($value['facMfl'] == $facMFL)
+                        {
+                            $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+                            $facilitysection .= "<td>".$value['facLevel']."</td>";
+                            $facilitysection .= '<td>'.$fac_county.'</td>';
+                            $facilitysection .= '</tr>';
+                            $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= '<td>'.$value['facType'].'</td>';
+                            $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
+                            $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+                            $facilitysection .= '</tr>';
+                            
+                        }
+                    }
+                    break;
 
-                foreach ($facilities as $key => $value) {
-                    if($value['facMfl'] == $facMFL)
-                    {
+                    case 'offline':
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
-                        $facilitysection .= "<td>".$value['facLevel']."</td>";
-                        $facilitysection .= '<td>'.$fac_county.'</td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
                         $facilitysection .= '</tr>';
                         $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= '<td>'.$value['facType'].'</td>';
-                        $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
-                        $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
-                        $facilitysection .= '</tr>';
-                        
-                    }
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '</tr>'; 
+                        break;  
                 }
-
                 return $facilitysection;
             }
 
@@ -2014,32 +2031,53 @@ class Generate extends MY_Controller
                 $workprofilesection = '';
                 $hcwwork = $this->data_model->getHCWWorkProfile($this->session->userdata('hcw_id'));
                 $counter = 0;
-
-                foreach ($hcwwork as $key => $value) {
-                    
-                        $names = explode(" ", $value['names_of_participant']);
-                        $namecount = count($names);
-                        $firstname = $names[0];
-                        $lastname = $names[$namecount - 1];
-                    
-                    $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
-                    $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
-                    $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
-                    $workprofilesection .= '<tr>
-                <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
-                <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
-                <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
-                </td>
-                </tr>';
-                $workprofilesection .= '<tr>
-                <td colspan="1"><label for="">Designation</label></td>
-                <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
-                </tr>';
+                switch($this->survey_form)
+                {
+                    case 'online': 
+                        foreach ($hcwwork as $key => $value) {
+                            
+                                $names = explode(" ", $value['names_of_participant']);
+                                $namecount = count($names);
+                                $firstname = $names[0];
+                                $lastname = $names[$namecount - 1];
+                            
+                            $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
+                        </tr>';
+                        }
+                        break;
+                    case 'offline':
+                         $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1"  /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" ></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" ></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><input type = "text" /></td>
+                        </tr>';
+                        break;
                 }
-
                 return $workprofilesection;
 
             }
@@ -2120,6 +2158,25 @@ class Generate extends MY_Controller
 
                 //echo $this->mchTrainingGuidelineSection;die;
                 return $this->trainingGuidelineSection;
+            }
+
+            public function createassessorsection()
+            {
+                $assessor_section = '';
+
+                switch ($this->survey_form) {
+                    case 'online':
+                        $assessor_section = '<select name = "asesordesignation_1">'.$this->createCadre().'</select>';
+                        break;
+                    case 'offline':
+                        $assessor_section = '<input type = "text" />';
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+
+                return $assessor_section;
             }
         }
         

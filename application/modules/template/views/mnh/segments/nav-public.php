@@ -80,13 +80,13 @@
 <script>
     $(document).ready(function(){
         $('#mnh-form').click(function(){
-            window.open('<?php echo base_url();?>c_pdf/loadPDF/mnh');
+            window.open('<?php echo base_url();?>survey/load/offline/mnh');
         });
         $('#mch-form').click(function(){
-            window.open('<?php echo base_url();?>c_pdf/loadPDF/mch');
+            window.open('<?php echo base_url();?>survey/load/offline/ch');
         });
         $('#hcw-form').click(function(){
-            window.open('<?php echo base_url();?>c_pdf/loadPDF/hcw');
+            window.open('<?php echo base_url();?>survey/load/offline/hcw');
         });
 
         $('#mnh-completed').click(function(){
