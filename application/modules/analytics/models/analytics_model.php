@@ -1879,7 +1879,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                         }
                         else{
-                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -1898,7 +1898,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
                         } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['fac_level']][$value['supplier_code']] = (int)$value['supplier_name'];
+                            $data[$value['fac_tier']][$value['supplier_code']] = (int)$value['supplier_name'];
                         }
                     }
                     }
@@ -1990,15 +1990,15 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         }else if (array_key_exists('frequency', $value)) {
                            switch ($for) {
                               case 'mh':
-                                  $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
+                                  $data[$value['fac_tier']][$value['frequency']] = (int)$value['total_response'];
                                   break;
 
                               default:
                                  $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                                   break;
                           }
-                        } else if (array_key_exists('location', $value)) {
-                            $location = explode(',', $value['location']);
+                        } else if (array_key_exists('locations', $value)) {
+                            $location = explode(',', $value['locations']);
                             foreach ($location as $place) {
                                 $data[$value['supply_name']][$place]+= (int)$value['total_response'];
                             }
@@ -2009,8 +2009,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['fac_level']][$value['supply_name']] = (int)$value['total_response'];
+                        } else if (array_key_exists('fac_tier', $value)) {
+                            $data[$value['fac_tier']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
 
@@ -2251,8 +2251,8 @@ LIMIT 0 , 1000
                                 $data[$value['equipment_name']][$place] += (int)$value['total_response'];
                             }
                         }
-                        if (array_key_exists('fac_level', $value)) {
-                            $data[$value['fac_level']][$value['suppliers']] = (int)$value['total_response'];
+                        if (array_key_exists('fac_tier', $value)) {
+                            $data[$value['fac_tier']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];
