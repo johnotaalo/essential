@@ -315,7 +315,7 @@ class Survey extends MY_Controller
         $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
         $sections = $this->data_model->getAssessmentInfo();
         // echo "<pre>"; print_r($sections);die;
-        $question_codes = array('QHC28'=>'blue', 'QHC29'=>'green', 'QHC30'=>'brown');
+        $question_codes = array('QHC28', 'QHC29', 'QHC30');
         //print_r($result);die;
         $checkbox_options = $this->data_model->getCheckOptions();
         $counter = 0;
@@ -331,24 +331,24 @@ class Survey extends MY_Controller
             $counter++;
             $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>';
             if (array_key_exists( $value['id'], $checkbox_options)) {
-                foreach ($question_codes as $code => $color) {
+                foreach ($question_codes as $code) {
                     $response = $checkbox_options[$value['id']][$code];
                     if($response == 'Yes')
                     {
-                        $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" checked disabled = "disabled"></div></div></center></div></td>';
+                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" checked></center></td>';
                     }
                     else
                     {
-                         $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>';
+                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" ></center></td>';
                     }
                 }
             }
             else
             {
                  $hcwlist .= '
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
+            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
             ';
             }
             
@@ -545,10 +545,10 @@ class Survey extends MY_Controller
                     <th>Certified</th>
                     <th>For Mentorship</th>
                     <th>For TOT</th>
-                    <th style = "width: 20px;">Status</th>
+                    <th>Status</th>
                     <th>Link</th>
                 </thead>
-                <tbody style = "font-size: 80%;">'.$hcwListSection.'</tbody>
+                <tbody>'.$hcwListSection.'</tbody>
             </table>';
         }
 
