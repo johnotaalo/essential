@@ -24,7 +24,7 @@ public function normal($data, $editable = '') {
         //set table headers
         foreach ($data[0] as $title => $column) {
             if ($pk != 0) {
-                $titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+                $titles[] = ucwords(str_replace('_', ' ',str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac_', 'facility', $title))))))))));
             } else {
                 $primary_key = $title;
             }
@@ -68,7 +68,7 @@ public function normal($data, $editable = '') {
 
 						//set table headers
 						foreach ($data['columns'] as $title) {
-								$titles[] = ucwords(str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility', str_replace('_', ' ', $title))))))))));
+								$titles[] = ucwords(str_replace('_', ' ',str_replace('comm','commodity',str_replace('ar_','',str_replace('as_','',str_replace('ae_','',str_replace('ac_','',str_replace('li_','',str_replace('lq_','',str_replace('fac', 'facility',  $title))))))))));
 						}
 						$this->table->set_heading($titles);
 
