@@ -491,7 +491,7 @@ ORDER BY lq.lq_response ASC";
 
                         case 'cases':
 
-                            
+
 
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                            // echo '<pre>';print_r($data);echo '</pre>';die;
@@ -1302,7 +1302,7 @@ WHERE
                             case 'correctness':
                               $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
                                 break;
-                            
+
                             case 'classification':
                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
                                 break;
@@ -1312,7 +1312,7 @@ WHERE
                             break;
 
                         }
-                        
+
                     }
                     $this->dataSet = $data;
 
@@ -2676,7 +2676,7 @@ ORDER BY f.fac_county ASC;";
             //  for ($x = 0; $x < sizeof($reportingCounties); $x++) {
             //     $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'], 'county');
             // }
-            
+
 
             switch ($option) {
                 case 'reportingleft':
@@ -2725,71 +2725,49 @@ ORDER BY f.fac_county ASC;";
         //     }
         //     return $finalData;
         // }
-
-        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
-
+/**
+ * [getFacilityOwnerPerCounty description]
+ * @param [type] $criteria        [description]
+ * @param [type] $value           [description]
+ * @param [type] $survey          [description]
+ * @param [type] $survey_category [description]
+ * @param [type] $statistic       [description]
+ */
+        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
             /*using DQL*/
-
-            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic . "');";
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-
-            //echo $this->db->last_query();die;
-            //print_r($finalData);die;
-
             return $finalData;
         }
-
-        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
-
+/**
+ * [getFacilityLevelPerCounty description]
+ * @param [type] $criteria        [description]
+ * @param [type] $value           [description]
+ * @param [type] $survey          [description]
+ * @param [type] $survey_category [description]
+ * @param [type] $statistic       [description]
+ */
+        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
             /*using DQL*/
-            try {
-
-                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
-
-                $myData = $this->db->query($query);
-
-                // echo $this->db->last_query();die;
-
-                $finalData = $myData->result_array();
-
-                //echo $finalData;
-
-
-            }
-            catch(exception $ex) {
-
-                //ignore
-                //echo($ex -> getMessage());
-
-
-            }
+            $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic . "');";
+            $myData = $this->db->query($query);
+            $finalData = $myData->result_array();
             return $finalData;
         }
-        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
-
+        /**
+         * [getFacilityTypePerCounty description]
+         * @param [type] $criteria        [description]
+         * @param [type] $value           [description]
+         * @param [type] $survey          [description]
+         * @param [type] $survey_category [description]
+         * @param [type] $statistic       [description]
+         */
+        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
             /*using DQL*/
-            try {
-
-                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
-
-                $myData = $this->db->query($query);
-
-                // echo $this->db->last_query();die;
-
-                $finalData = $myData->result_array();
-
-                //echo $finalData;
-
-
-            }
-            catch(exception $ex) {
-
-                //ignore
-                //echo($ex -> getMessage());
-
-
-            }
+            $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic . "');";
+            $myData = $this->db->query($query);
+            $finalData = $myData->result_array();
             return $finalData;
         }
 
@@ -4133,7 +4111,7 @@ ORDER BY question_code";
                     $question = substr($question, 0,-1);
                 break;
 
-                
+
 
                 case'gp':
                 $count=0;
