@@ -2162,15 +2162,13 @@ public function getCommodityUsage($criteria, $value, $survey, $survey_category, 
 public function getCountyReportingSummary($county, $survey, $survey_category) {
   $county = urldecode($county);
   $results = $this->analytics_model->getCountyReportingSummary($county, $survey, $survey_category);
-
-  //echo "<pre>"; print_r($value);echo "</pre>";die;
-  $this->generateData($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
+  $results = $this->arrays->reset($results);
+  echo $this->export->generate($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
 }
 public function getReportingList($survey, $survey_category) {
   $result = $this->analytics_model->getReportingList($survey, $survey_category);
-
-  //echo "<pre>";print_r($result);echo "</pre>";die;
-  $this->generateData($result, 'Reporting List for' . ' ' . strtoupper($survey) . ':' . strtoupper($survey_category) . $value, 'excel');
+  results = $this->arrays->reset($results);
+  echo $this->export->generate($results,  'Reporting List for' . ' ' . strtoupper($survey) . ':' . strtoupper($survey_category) . $value, 'excel');
 }
 
 /**
@@ -3109,7 +3107,8 @@ public function getQuestionRaw($criteria, $value, $survey, $survey_category, $fo
   $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
 
   //echo "<pre>";print_r($results);echo "</pre>";die;
-  echo $this->generateData($results, 'Question Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+  $results = $this->arrays->reset($results);
+  echo $this->export->generate($results, 'Question Statistics for' . ucwords($for) . '(' . $value . ')', $form);
 }
 
 /**
@@ -3127,7 +3126,8 @@ public function getHCWProfileRaw($criteria, $value, $survey, $survey_category, $
   $results = $this->analytics_model->getHCWProfile($criteria, $value, $survey, $survey_category, $statistics);
 
   //echo "<pre>";print_r($results);echo "</pre>";die;
-  echo $this->generateData($results, 'HCW Profile for ' . ucwords('hcw') . '(' . $value . ')', $form);
+  $results = $this->arrays->reset($results);
+  echo $this->export->generate($results, 'HCW Profile for' . ucwords('hcw') . '(' . $value . ')', $form);
 }
 
 /**
@@ -3591,8 +3591,8 @@ public function getIndicatorStatistics($criteria, $value, $survey, $survey_categ
 public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
   $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
 
-  // echo "<pre>";print_r($results);echo "</pre>";die;
-  echo $this->generateData($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+  $results = $this->arrays->reset($results);
+  echo $this->export->generate($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
 }
 /**
 * [getIndicatorComparison description]
@@ -4544,13 +4544,8 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
 
     $results = $this->db->get();
 
-    $data = $this->generateData($results->result_array(), 'Master List', $form);
-
-    echo $data;
-
-    //die;
-
-
+    $results = $this->arrays->reset($results);
+echo $this->export->generate($results, 'MFL List', $form);
   }
 
   //Get Facilities per County
