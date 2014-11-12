@@ -218,6 +218,8 @@ class Survey extends MY_Controller
      */
     public function startSurvey($survey_type, $survey_category, $fac_mfl, $survey_year) {
 
+        
+
         $result = $this->db->get_where('survey_types', array('st_name' => $survey_type));
         $result = $result->result_array();
         $survey_type = $result[0]['st_id'];
