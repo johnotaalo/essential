@@ -329,7 +329,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
 
 
   $('select#assessment_types1').change(function() {
-    assessment_types3 = $('select#assessment_type1 option:selected').attr(
+    assessment_types3 = $('select#assessment_types1 option:selected').attr(
       'value');
     // console.log(indicator_type);
     if (county == 'Unselected') {
@@ -349,7 +349,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
 
 
   $('select#assessment_types2').change(function() {
-    assessment_types5 = $('select#assessment_type2 option:selected').attr(
+    assessment_types5 = $('select#assessment_types2 option:selected').attr(
       'value');
     // console.log(indicator_type);
     if (county == 'Unselected') {
@@ -683,6 +683,36 @@ function subHandler(criteria, county, district, facility, survey,
   }
 }
 
+
+
+function subHandler1(criteria, county, district, facility, survey,
+  survey_category, assessment_types) {
+  switch (criteria) {
+    case 'national':
+      value = 'Aggegated';
+      indicatorHandler1(criteria, value, survey, survey_category,
+        assessment_types, 'assessment');
+      break;
+    case 'county':
+      value = county;
+      indicatorHandler1(criteria, value, survey, survey_category,
+        assessment_types, 'assessment');
+      break;
+    case 'district':
+      value = district;
+      indicatorHandler1(criteria, value, survey, survey_category,
+        assessment_types, 'assessment');
+      break;
+    case 'facility':
+      value = facility;
+      indicatorHandler1(criteria, value, survey, survey_category,
+        assessment_types, 'assessment');
+
+
+      break;
+  }
+}
+
 function subHandler2(criteria, county, district, facility, survey,
   survey_category, indicator_type) {
   switch (criteria) {
@@ -716,57 +746,28 @@ function subHandler2(criteria, county, district, facility, survey,
   }
 }
 
-
-function subHandler1(criteria, county, district, facility, survey,
-  survey_category, assessment_types) {
-  switch (criteria) {
-    case 'national':
-      value = 'Aggegated';
-      indicatorHandler1(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
-      break;
-    case 'county':
-      value = county;
-      indicatorHandler1(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
-      break;
-    case 'district':
-      value = district;
-      indicatorHandler1(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
-      break;
-    case 'facility':
-      value = facility;
-      indicatorHandler1(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
-
-
-      break;
-  }
-}
-
 function subHandler3(criteria, county, district, facility, survey,
-  survey_category, assessment_types) {
+  survey_category, assessment_types3) {
   switch (criteria) {
     case 'national':
       value = 'Aggegated';
       indicatorHandler3(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types3, 'assessment');
       break;
     case 'county':
       value = county;
       indicatorHandler3(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types3, 'assessment');
       break;
     case 'district':
       value = district;
       indicatorHandler3(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types3, 'assessment');
       break;
     case 'facility':
       value = facility;
       indicatorHandler3(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types3, 'assessment');
 
 
       break;
@@ -807,27 +808,27 @@ function subHandler4(criteria, county, district, facility, survey,
 }
 
 function subHandler5(criteria, county, district, facility, survey,
-  survey_category, assessment_types) {
+  survey_category, assessment_types5) {
   switch (criteria) {
     case 'national':
       value = 'Aggegated';
       indicatorHandler5(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types5, 'assessment');
       break;
     case 'county':
       value = county;
       indicatorHandler5(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types5, 'assessment');
       break;
     case 'district':
       value = district;
       indicatorHandler5(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types5, 'assessment');
       break;
     case 'facility':
       value = facility;
       indicatorHandler5(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types5, 'assessment');
 
 
       break;
@@ -869,27 +870,27 @@ function subHandler6(criteria, county, district, facility, survey,
 }
 
 function subHandler7(criteria, county, district, facility, survey,
-  survey_category, assessment_types) {
+  survey_category, assessment_types7) {
   switch (criteria) {
     case 'national':
       value = 'Aggegated';
       indicatorHandler7(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types7, 'assessment');
       break;
     case 'county':
       value = county;
       indicatorHandler7(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types7, 'assessment');
       break;
     case 'district':
       value = district;
       indicatorHandler7(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types7, 'assessment');
       break;
     case 'facility':
       value = facility;
       indicatorHandler7(criteria, value, survey, survey_category,
-        assessment_types, 'assessment');
+        assessment_types7, 'assessment');
 
 
       break;
@@ -897,27 +898,27 @@ function subHandler7(criteria, county, district, facility, survey,
 }
 
 function subHandler8(criteria, county, district, facility, survey,
-  survey_category, assessment_types) {
+  survey_category, finding_types8) {
   switch (criteria) {
     case 'national':
       value = 'Aggegated';
       indicatorHandler8(criteria, value, survey, survey_category,
-        assessment_types, 'findings');
+        finding_types8, 'findings');
       break;
     case 'county':
       value = county;
       indicatorHandler8(criteria, value, survey, survey_category,
-        assessment_types, 'findings');
+        finding_types8, 'findings');
       break;
     case 'district':
       value = district;
       indicatorHandler8(criteria, value, survey, survey_category,
-        assessment_types, 'findings');
+        finding_types8, 'findings');
       break;
     case 'facility':
       value = facility;
       indicatorHandler8(criteria, value, survey, survey_category,
-        assessment_types, 'findings');
+        finding_types8, 'findings');
 
 
       break;
@@ -925,27 +926,27 @@ function subHandler8(criteria, county, district, facility, survey,
 }
 
 function subHandler9(criteria, county, district, facility, survey,
-  survey_category, finding_types) {
+  survey_category, finding_types9) {
   switch (criteria) {
     case 'national':
       value = 'Aggegated';
       indicatorHandler9(criteria, value, survey, survey_category,
-        finding_types, 'findings');
+        finding_types9, 'findings');
       break;
     case 'county':
       value = county;
       indicatorHandler9(criteria, value, survey, survey_category,
-        finding_types, 'findings');
+        finding_types9, 'findings');
       break;
     case 'district':
       value = district;
       indicatorHandler9(criteria, value, survey, survey_category,
-        finding_types, 'findings');
+        finding_types9, 'findings');
       break;
     case 'facility':
       value = facility;
       indicatorHandler9(criteria, value, survey, survey_category,
-        finding_types, 'findings');
+        finding_types9, 'findings');
 
 
       break;
@@ -1019,7 +1020,6 @@ function indicatorHandler3(criteria, value, survey, survey_category,
     value + '/' + survey + '/' + survey_category + '/' + assessment_types +
     '/' + statistic,
     '#assessment_comparison1');
-
 
 }
 
@@ -1143,6 +1143,7 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getTypeRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category;
         break;
+
     }
     return raw_url;
   }

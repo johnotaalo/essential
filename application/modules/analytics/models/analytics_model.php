@@ -31,7 +31,7 @@ class Analytics_Model extends MY_Model
         /* using CI database active record*/
         try {
             $query = "SELECT
-                        f.fac_mfl, f.fac_name ,f.fac_ownership ,f.fac_type ,f.fac_level ,
+                        f.fac_mfl, f.fac_name ,f.fac_ownership ,f.fac_type ,f.fac_tier ,
                         f.fac_district ,f.fac_county
                         FROM
                         assessment_tracker ast
@@ -1913,7 +1913,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
                         } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['fac_level']][$value['supplier_code']] = (int)$value['supplier_name'];
+                            $data[$value['fac_tier']][$value['supplier_code']] = (int)$value['supplier_name'];
                         }
                     }
                     }
@@ -2005,7 +2005,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         }else if (array_key_exists('frequency', $value)) {
                            switch ($for) {
                               case 'mh':
-                                  $data[$value['fac_level']][$value['frequency']] = (int)$value['total_response'];
+                                  $data[$value['fac_tier']][$value['frequency']] = (int)$value['total_response'];
                                   break;
 
                               default:
@@ -2024,8 +2024,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('fac_level', $value)) {
-                            $data[$value['fac_level']][$value['supply_name']] = (int)$value['total_response'];
+                        } else if (array_key_exists('fac_tier', $value)) {
+                            $data[$value['fac_tier']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
 
@@ -2266,8 +2266,8 @@ LIMIT 0 , 1000
                                 $data[$value['equipment_name']][$place] += (int)$value['total_response'];
                             }
                         }
-                        if (array_key_exists('fac_level', $value)) {
-                            $data[$value['fac_level']][$value['suppliers']] = (int)$value['total_response'];
+                        if (array_key_exists('fac_tier', $value)) {
+                            $data[$value['fac_tier']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
                             $data[$value['equipment_name']][$value['mainsource']] = (int)$value['total_response'];
@@ -4187,15 +4187,15 @@ ORDER BY question_code";
                             break;
 
                         case 'availability':
-                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
                         case 'functionality':
-                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
                         case 'location':
-                            $data[$value_['fac_level']][$value_['response']] = (int)$value_['total_response'];
+                            $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
                         case 'reason_raw':
