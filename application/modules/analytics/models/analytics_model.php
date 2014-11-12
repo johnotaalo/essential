@@ -1997,8 +1997,8 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                                  $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
                                   break;
                           }
-                        } else if (array_key_exists('locations', $value)) {
-                            $location = explode(',', $value['locations']);
+                        } else if (array_key_exists('location', $value)) {
+                            $location = explode(',', $value['location']);
                             foreach ($location as $place) {
                                 $data[$value['supply_name']][$place]+= (int)$value['total_response'];
                             }
