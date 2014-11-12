@@ -487,10 +487,8 @@ class Analytics extends MY_Controller
   */
 
   public function getCommunityStrategyCH($criteria, $value, $survey, $survey_category,$option) {
-    $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms');
+    $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms','response');
     ksort($results);
-
-    //echo "<pre>";print_r($results);echo "</pre>";die;
 
     $count = 0;
 
@@ -515,10 +513,17 @@ class Analytics extends MY_Controller
       }
     }
 
-    // var_dump($gData);
     $resultArray[] = array('name' => 'Numbers', 'data' => $gData);
-    $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
+    $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar', '',$for,'community','');
   }
+  public function getCommunityStrategyRaw($criteria, $value, $survey, $survey_category,$form) {
+    $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms','response_raw');
+    // print_r($results);die;
+    $results = $this->arrays->reset($results);
+    // print_r($results);die;
+    echo $this->export->generate($results, 'Community Strategy for' . ucwords($for) . '(' . $value . ')', $form);
+  }
+
 
   /*
   * Guidelines Availability
@@ -2700,19 +2705,19 @@ public function getDeliveryReason($criteria, $value, $survey, $survey_category) 
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+      }
     }
+
+    $category[] = "Delivery Reasons";
+
+    $resultArray[] = array('name' => 'Reasons', 'data' => $getData);
+
+    //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+    $category = $q;
+
+    //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+    $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
   }
-
-  $category[] = "Delivery Reasons";
-
-  $resultArray[] = array('name' => 'Reasons', 'data' => $getData);
-
-  //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-  $category = $q;
-
-  //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-  $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
-}
 }
 
 //public function getCHSuppliesLocation($criteria,$value,$survey,$survey_category,$for){
@@ -4234,7 +4239,7 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $resultArray[] = array('name' => 'Facility Ownership', 'data' => $gData);
 
     //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-  $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie','', '', 'ownership', '','');
+    $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie','', '', 'ownership', '','');
   }
   /**
   * [getOwnershipRaw description]
@@ -4288,13 +4293,13 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie','', '', 'level', '','');
   }
   /**
-   * [getTypeRaw description]
-   * @param [type] $criteria        [description]
-   * @param [type] $value           [description]
-   * @param [type] $survey          [description]
-   * @param [type] $survey_category [description]
-   * @param [type] $form            [description]
-   */
+  * [getTypeRaw description]
+  * @param [type] $criteria        [description]
+  * @param [type] $value           [description]
+  * @param [type] $survey          [description]
+  * @param [type] $survey_category [description]
+  * @param [type] $form            [description]
+  */
   public function getTypeRaw($criteria, $value, $survey, $survey_category,$form) {
 
     $value = urldecode($value);
@@ -4332,13 +4337,13 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie','', '', 'type', '','');
   }
   /**
-   * [getTypeRaw description]
-   * @param [type] $criteria        [description]
-   * @param [type] $value           [description]
-   * @param [type] $survey          [description]
-   * @param [type] $survey_category [description]
-   * @param [type] $form            [description]
-   */
+  * [getTypeRaw description]
+  * @param [type] $criteria        [description]
+  * @param [type] $value           [description]
+  * @param [type] $survey          [description]
+  * @param [type] $survey_category [description]
+  * @param [type] $form            [description]
+  */
   public function getLevelRaw($criteria, $value, $survey, $survey_category,$form) {
 
     $value = urldecode($value);
@@ -4545,7 +4550,7 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $results = $this->db->get();
 
     $results = $this->arrays->reset($results);
-echo $this->export->generate($results, 'MFL List', $form);
+    echo $this->export->generate($results, 'MFL List', $form);
   }
 
   //Get Facilities per County

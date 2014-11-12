@@ -1143,6 +1143,11 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getTypeRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category;
         break;
+      case 'community':
+        raw_url = 'analytics/getCommunityStrategyRaw/' + criteria + '/' + value +
+          '/' +
+          survey + '/' + survey_category;
+        break;
 
     }
     return raw_url;
