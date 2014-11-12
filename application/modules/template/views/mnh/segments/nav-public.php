@@ -68,6 +68,9 @@
                         <li>
                             <a href="#" id="upload">Upload</a>
                         </li>
+                        <li>
+                            <a href="#" id="upload">Upload</a>
+                        </li>
                     </ul>
 
 

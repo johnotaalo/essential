@@ -694,11 +694,15 @@ class MY_Model extends CI_Model
 
     public function getHCWWorkProfile($hcw_id)
     {
+
       $result =  $this->db->get_where('hcw_list', array('id' => $hcw_id));
+
 
       $result = $result->result_array();
 
+
       return $result;
+
     }
 
     public function getCertification($hcw_id)
@@ -719,10 +723,10 @@ class MY_Model extends CI_Model
       */
       $result=array();
       if($district!=''){
-        $query = $this->db->query("SELECT * FROM hcwlist WHERE district = '" . $district ."' ");
+        $query = $this->db->query("SELECT * FROM hcw_list WHERE district = '" . $district ."' ");
       }
       else{
-        $query = $this->db->query("SELECT * FROM hcwlist");
+        $query = $this->db->query("SELECT * FROM hcw_list");
       }
       $result = $query->result_array();
       // echo $this->db->last_query();die;

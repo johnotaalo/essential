@@ -417,11 +417,13 @@ ORDER BY lq.lq_response ASC";
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
 
+
                 foreach ($this->dataSet as $value) {
                     //echo "<pre>";print_r($value);echo "</pre>";die;
                     switch ($statistic) {
 
                         case 'cases_raw':
+
 
                           break;
                         case 'treatment_raw':
@@ -435,6 +437,7 @@ ORDER BY lq.lq_response ASC";
 
                             foreach ($value as $k => $val) {
                               $data_array[$k]=$val;
+
                             }
                             /**
                              * Unset the Old Treatment Key
@@ -487,7 +490,9 @@ ORDER BY lq.lq_response ASC";
                         break;
 
                         case 'cases':
+
                             
+
                             $data[$value['treatment_for']][$value['treatment']] = (int)$value['total'];
                            // echo '<pre>';print_r($data);echo '</pre>';die;
                             break;
@@ -1713,6 +1718,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             }
 
+
             return $data;
         }
 
@@ -1748,10 +1754,18 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
+
+                    $question = $value['question_name'];
+                           $question = trim($question, 'Is the');
+                           $question = trim($question, 'HCW ');
+                           $question = trim($question,'?');
+
+
                        if (array_key_exists('frequency', $value)) {
-                            $data[$value['question_name']][$value['frequency']] = (int)$value['total_response'];
+                            $data[$question][$value['frequency']] = (int)$value['total_response'];
                         }
                     }
+
                 }
 
 
@@ -1767,6 +1781,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
 
             }
+
 
             return $data;
         }
@@ -4118,6 +4133,8 @@ ORDER BY question_code";
                     $question = substr($question, 0,-1);
                 break;
 
+                
+
                 case'gp':
                 $count=0;
                     $question = substr($question, 23);
@@ -4261,6 +4278,7 @@ ORDER BY question_code";
                     }
 
                     unset($data[$question]['question_code']);
+
                 }
 
                //echo '<pre>';print_r($data);echo '</pre>';die;
@@ -4321,6 +4339,7 @@ ORDER BY question_code";
             // var_dump($data);die;
             return $data;
         }
+
 
         /*  public function getStorageStatistics($criteria, $value, $survey, $survey_category) {
 

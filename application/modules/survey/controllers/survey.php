@@ -352,7 +352,7 @@ class Survey extends MY_Controller
             <input type = "checkbox" disabled = "disabled" > For TOT</td>
             ';
             }
-            
+
             if(array_key_exists($value['id'], $sections))
             {
                 $hcw_section = $sections[$value['id']]['sections'];

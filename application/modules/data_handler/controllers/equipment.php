@@ -18,6 +18,7 @@ class Equipment extends MY_Controller{
     $data = $this->input->post();
   }
   /**
+
    * [read description]
    * @param  [type] $form [description]
    * @return [type]       [description]

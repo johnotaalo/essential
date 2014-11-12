@@ -5,6 +5,7 @@
         <div class="ui input"><input type="text" placeholder="Search..."></div>
       </div>
       <div class="item">
+
         <i class="octicon octicon-list-unordered"></i> Fields
         <div class="menu" id="field_list">
           <a class="active item" id="indicators"><i class="ion-toggle"></i>Indicators</a>
@@ -26,6 +27,7 @@
           <a class="item"><i class="settings icon"></i> Account Settings</a>
         </div>
       </div>
+
       <a class="item">
         <i class="grid layout icon"></i> Browse
       </a>

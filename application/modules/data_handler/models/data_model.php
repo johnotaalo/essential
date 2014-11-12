@@ -15,7 +15,6 @@ class Data_Model extends MY_Model{
   */
   public function get($object,$identifier=''){
     switch($object){
-
       case 'hcw':
       $results = $this->getHCW($identifier);
 
@@ -25,6 +24,7 @@ class Data_Model extends MY_Model{
             $newResult[$key]=$value;
           }
         }
+
         unset($newResult['designation']);
         unset($newResult['department']);
         unset($newResult['dates']);
