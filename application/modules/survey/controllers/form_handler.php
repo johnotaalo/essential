@@ -663,7 +663,7 @@ class Form_Handler extends MY_Controller
 		<table >
 			<thead>
 				<tr>
-					<th colspan="11"> IN THE LAST 3 MONTHS INDICATE THE USAGE, NUMBER OF TIMES THE COMMODITY WAS NOT AVAILABLE.</br>
+					<th colspan="9"> IN THE LAST 3 MONTHS INDICATE THE USAGE, NUMBER OF TIMES THE COMMODITY WAS NOT AVAILABLE.</br>
 					WHEN THE COMMODITY WAS NOT AVAILABLE WHAT HAPPENED? </th>
 				</tr>
 				<tr >

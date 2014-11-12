@@ -1196,11 +1196,11 @@ class Generate extends MY_Controller
                                 $unit = '';
                             }
                             $commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
-            <td colspan="2" style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
+            <td style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
             <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>
             </td>
-            <td colspan="2">
+            <td>
                 a. 1 week<input type="checkbox">
                 b. 2 weeks <input type="checkbox">
                 c. 1 month<input type="checkbox">
@@ -1529,13 +1529,16 @@ class Generate extends MY_Controller
                                         }
                                     }
 
-                                    // if ($fully_functioning != '') {
+                                    if ($fully_functioning != '') {
+                                      $fullyFunctioningRow = '<td style ="text-align:center;">
+                                          <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                          </td>';
 
-                                    // } else {
-                                    //     $fullyFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                    //         </td>';
-                                    // }
+                                    } else {
+                                        $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                                    }
                                     if ($value['eqFor'] == 'ort') {
                                         if (($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38')) {
                                             $nonFunctioningRow = '<td style ="text-align:center;">
@@ -1546,15 +1549,15 @@ class Generate extends MY_Controller
                                         }
                                     }
 
-                                    // if ($non_functioning != '') {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // } else {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // }
+                                    if ($non_functioning != '') {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    } else {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    }
 
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
