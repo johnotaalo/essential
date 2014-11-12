@@ -4217,7 +4217,7 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
 
       //$data = array();
 
-      $name = $value['facilityOwner'];
+      $name = $value['ownership'];
 
       //echo '<pre>';print_r($results);echo '</pre>';die;
       //$gData[] = (int)$value['level_total'];
@@ -4245,7 +4245,9 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $value = urldecode($value);
     $category[] = $county;
     $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,'response_raw');
-    echo $this->export->generate($results, 'Commodity Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+    print_r($results);die;
+    $results = $this->arrays->reset($results);
+    echo $this->export->generate($results, 'Ownership Statistics for' . ucwords($for) . '(' . $value . ')', $form);
   }
 
   /**
@@ -4279,8 +4281,6 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
 
     }
     $resultArray[] = array('name' => 'Facility Levels', 'data' => $gData);
-
-    //echo '<pre>';print_r($resultArray);echo '</pre>';die;
     $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie','', '', 'level', '','');
   }
   /**
@@ -4296,11 +4296,10 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $value = urldecode($value);
     $category[] = $county;
     $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,'response_raw');
+    $results = $this->arrays->reset($results);
     echo $this->export->generate($results, 'Facility Type for' . ucwords($for) . '(' . $value . ')', $form);
   }
   public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
-
-    //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
     $value = urldecode($value);
 
     //foreach ($allCounties as $county) {
@@ -4341,6 +4340,7 @@ public function getDiarrhoeaCaseTreatment($criteria, $value, $survey, $survey_ca
     $value = urldecode($value);
     $category[] = $county;
     $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,'response_raw');
+    $results = $this->arrays->reset($results);
     echo $this->export->generate($results, 'Facility Level for' . ucwords($for) . '(' . $value . ')', $form);
   }
 

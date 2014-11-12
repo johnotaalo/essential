@@ -5,6 +5,51 @@ DELIMITER $$
 USE `mnh_live`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_facility_level`(criteria VARCHAR(45), analytic_value VARCHAR(45), survey_type VARCHAR(45), survey_category VARCHAR(45) , statistic VARCHAR(45))
 BEGIN
+DECLARE section VARCHAR(45) DEFAULT NULL;
+
+CASE survey_category
+
+WHEN 'baseline' THEN
+
+CASE survey_type
+
+WHEN 'mnh' THEN
+SET section='section-6';
+WHEN 'ch' THEN
+SET section='section-6';
+WHEN 'hcw' THEN
+SET section='section-6';
+
+END CASE;
+
+WHEN 'mid-term' THEN
+
+CASE survey_type
+
+WHEN 'mnh' THEN
+SET section='section-8';
+WHEN 'ch' THEN
+SET section='section-9';
+WHEN 'hcw' THEN
+SET section='section-5';
+
+END CASE;
+
+WHEN 'end-term' THEN
+
+CASE survey_type
+
+WHEN 'mnh' THEN
+SET section='section-8';
+WHEN 'ch' THEN
+SET section='section-9';
+WHEN 'hcw' THEN
+SET section='section-5';
+
+END CASE;
+
+END CASE;
+
 CASE statistic
 WHEN 'response' THEN
 CASE criteria
@@ -18,6 +63,9 @@ FROM
             fac_county as countyName
     FROM
         facilities f
+	JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
     JOIN survey_status ss ON ss.fac_id = f.fac_mfl
     JOIN survey_types st ON (st.st_id = ss.st_id
         AND st.st_name = survey_type)
@@ -37,6 +85,9 @@ FROM
             fac_county as countyName
     FROM
         facilities f
+	JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
     JOIN survey_status ss ON ss.fac_id = f.fac_mfl
     JOIN survey_types st ON (st.st_id = ss.st_id
         AND st.st_name = survey_type)
@@ -58,6 +109,9 @@ FROM
             fac_county as countyName
     FROM
         facilities f
+	JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
     JOIN survey_status ss ON ss.fac_id = f.fac_mfl
     JOIN survey_types st ON (st.st_id = ss.st_id
         AND st.st_name = survey_type)
@@ -79,6 +133,9 @@ FROM
             fac_county as countyName
     FROM
         facilities f
+	JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
     JOIN survey_status ss ON ss.fac_id = f.fac_mfl
     JOIN survey_types st ON (st.st_id = ss.st_id
         AND st.st_name = survey_type)
@@ -102,6 +159,10 @@ SELECT
     f.fac_tier
 FROM
     facilities f
+	JOIN 
+    assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type 
         JOIN
     survey_status ss ON ss.fac_id = f.fac_mfl
         JOIN
@@ -122,6 +183,9 @@ SELECT
     f.fac_tier
 FROM
     facilities f
+    JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
         JOIN
     survey_status ss ON ss.fac_id = f.fac_mfl AND fac_county = analytc_value
         JOIN
@@ -142,6 +206,9 @@ SELECT
     f.fac_tier
 FROM
     facilities f
+    JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
         JOIN
     survey_status ss ON ss.fac_id = f.fac_mfl AND fac_district = analytic_value
         JOIN
@@ -162,6 +229,9 @@ SELECT
     f.fac_tier
 FROM
     facilities f
+    JOIN assessment_tracker ast ON ast.facilityCode = f.fac_mfl
+        AND ast.ast_section >= section
+        AND ast.ast_survey = survey_type
         JOIN
     survey_status ss ON ss.fac_id = f.fac_mfl AND fac_mfl = analytic_value
         JOIN
