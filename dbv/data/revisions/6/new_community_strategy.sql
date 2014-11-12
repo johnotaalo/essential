@@ -99,12 +99,13 @@ WHEN 'response_raw' THEN
 
 CASE criteria
 WHEN 'national' THEN
+
 SELECT 
 	f.fac_mfl,
     f.fac_name,
     f.fac_district,
     f.fac_county,
-    cs.strategy_code AS strategy,
+    SUM(cs.cs_response) AS strategy_number,
 	q.question_name AS question_name
 FROM
     community_strategies cs JOIN facilities f ON f.fac_mfl = cs.fac_mfl
@@ -119,20 +120,20 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-GROUP BY fac_mfl
+GROUP BY fac_mfl,strategy_code
 ORDER BY fac_county,fac_district,fac_name;
 
 WHEN 'county' THEN
+
 SELECT 
 	f.fac_mfl,
     f.fac_name,
     f.fac_district,
     f.fac_county,
-    cs.strategy_code AS strategy,
+    SUM(cs.cs_response) AS strategy_number,
 	q.question_name AS question_name
 FROM
-    community_strategies cs 
-    JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_county=analytic_value
+    community_strategies cs JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_county = analytic_value
         JOIN
     questions q ON cs.strategy_code = q.question_code
         AND q.question_for = questionfor
@@ -144,7 +145,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-GROUP BY fac_mfl
+GROUP BY fac_mfl,strategy_code
 ORDER BY fac_county,fac_district,fac_name;
 
 WHEN 'district' THEN
@@ -154,11 +155,10 @@ SELECT
     f.fac_name,
     f.fac_district,
     f.fac_county,
-    cs.strategy_code AS strategy,
+    SUM(cs.cs_response) AS strategy_number,
 	q.question_name AS question_name
 FROM
-    community_strategies cs 
-    JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_district = analytic_value
+    community_strategies cs JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_district = analytic_value
         JOIN
     questions q ON cs.strategy_code = q.question_code
         AND q.question_for = questionfor
@@ -170,7 +170,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-GROUP BY fac_mfl
+GROUP BY fac_mfl,strategy_code
 ORDER BY fac_county,fac_district,fac_name;
 
 WHEN 'facility' THEN
@@ -180,11 +180,10 @@ SELECT
     f.fac_name,
     f.fac_district,
     f.fac_county,
-    cs.strategy_code AS strategy,
+    SUM(cs.cs_response) AS strategy_number,
 	q.question_name AS question_name
 FROM
-    community_strategies cs 
-    JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_mfl = analytic_value
+    community_strategies cs JOIN facilities f ON f.fac_mfl = cs.fac_mfl AND fac_mfl = analytic_value
         JOIN
     questions q ON cs.strategy_code = q.question_code
         AND q.question_for = questionfor
@@ -196,8 +195,10 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-GROUP BY fac_mfl
+        AND cs.cs_response != - 1
+GROUP BY fac_mfl,strategy_code
 ORDER BY fac_county,fac_district,fac_name;
+
 END CASE;
 END CASE;
 END$$
