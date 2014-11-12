@@ -4230,7 +4230,7 @@ class Analytics extends MY_Controller
         $resultArray[] = array('name' => 'Facility Ownership', 'data' => $gData);
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 50, 'pie');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
 
     /**
