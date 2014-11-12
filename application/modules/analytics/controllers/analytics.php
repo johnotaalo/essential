@@ -517,7 +517,7 @@ class Analytics extends MY_Controller
     public function getCommunityStrategyRaw($criteria, $value, $survey, $survey_category, $form) {
         $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms', 'response_raw');
         
-       echo '<pre>'; print_r($results);die;
+       // echo '<pre>'; print_r($results);die;
         $results = $this->arrays->reset($results);
         
         // print_r($results);die;
