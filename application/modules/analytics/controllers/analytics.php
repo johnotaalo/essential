@@ -2715,6 +2715,7 @@ public function getDeliveryReason($criteria, $value, $survey, $survey_category) 
   //echo "<pre>";print_r($resultArray);echo "</pre>";die;
   $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
 }
+}
 
 //public function getCHSuppliesLocation($criteria,$value,$survey,$survey_category,$for){
 //$this->getSuppliesLocation($criteria, $value, $survey, $survey_category, 'ch');
