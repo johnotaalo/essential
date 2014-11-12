@@ -2697,15 +2697,11 @@ public function getDeliveryReason($criteria, $value, $survey, $survey_category) 
         if($location == "0"){
           $location = "No Data";
         }
-<<<<<<< HEAD
-        $getData[] = array(ucwords($location), (int)$val);
-      }
-=======
+
         $resultArray[] = array('name' => 'Facility Ownership', 'data' => $gData);
 
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
->>>>>>> f83e46ac046da35a6f27b9baf8fba0ced38ec486
     }
   }
 
