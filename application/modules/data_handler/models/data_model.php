@@ -15,16 +15,16 @@ class Data_Model extends MY_Model{
   */
   public function get($object,$identifier=''){
     switch($object){
-
       case 'hcw':
       $results = $this->getHCW($identifier);
 
       foreach($results as $result){
         foreach($result as $key=>$value){
-          if($value!='' && $key!='id'){
+          if($value!=''){
             $newResult[$key]=$value;
           }
         }
+
         unset($newResult['designation']);
         unset($newResult['department']);
         unset($newResult['dates']);

@@ -151,7 +151,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Levels of Care</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tiers</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -372,7 +372,7 @@
 
                 <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications HCW Verses Assessor Response<span><select id="indicator_types"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications HCW Versus Assessor Response<span><select id="indicator_types"></select></span></h6>
                     </div>
                     <div class="portlet-body">
 						<p>Please Select main symptom/condition above to load the graph</p>
@@ -875,7 +875,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Levels of Care</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tiers</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -1653,28 +1653,6 @@
               <table>
 
 
-                 <!-- <th>First Name</th>
-
-                 <th>SurName</th>
-                 <th>National ID</th>
-                 <th>Phone Number</th>
-                 <th>Personal Number</th>
-                 <th>Year + Month Trained</th>
-                 <th>Key Co-odinator of training</th>
-
-                 <th>Designation</th>
-                 <tr>
-                  <td colspan="8">
-
-                    <div class="portlet-body">
-
-                    <div id="HCW_Profile">
-                    </div>
-                    </div>
-
-                 </td>
-
-                 </tr> -->
 
               </table>
             </div>
@@ -1791,33 +1769,46 @@
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
 
+
            <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types2"></select></span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
+
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="indicator_comparison2">
+                        <div class="chart" id="assessment_comparison1">
                         </div>
 
                     </div>
                 </div>
 
-                <div class="semi-large-graph">
+           <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span></h6>
+
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
 
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
-                        <div class="chart" id="assessment_comparison3">
+                        <div class="chart" id="indicator_comparison1">
                         </div>
 
                     </div>
                 </div>
 
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types"></select></span><span class="sizer">Click to Enlarge</span></h6>
 
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence">
+                        </div>
 
+                    </div>
+                </div>
 
 
         </div>
@@ -1833,37 +1824,45 @@
     </div>
     <div id="collapseThirtyThree" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+            
 
-                    <div class="chart" id="facility_owner">
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types2"></select></span><span class="sizer">Click to Enlarge</span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="assessment_comparison2">
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+            
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types2"></select></span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="indicator_comparison2">
+                        </div>
 
-                    <div class="chart" id="facility_levels">
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
 
-                    <div class="chart" id="facility_type">
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence1">
+                        </div>
+
                     </div>
                 </div>
-            </div>
-
 
         </div>
     </div>
@@ -1878,37 +1877,48 @@
     </div>
     <div id="collapseThirtyFour" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
 
-                    <div class="chart" id="facility_owner">
+
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types3"></select></span><span class="sizer">Click to Enlarge</span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="assessment_comparison3">
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types3"></select></span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="indicator_comparison3">
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
 
-                    <div class="chart" id="facility_type"f>
+                <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Symptom Findings<span><select id="finding_types2"></select></span><span class="sizer">Click to Enlarge</span></h6>
+
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="symptompresence2">
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
+                
 
         </div>
     </div>
@@ -1923,7 +1933,7 @@
     </div>
     <div id="collapseThirtyFive" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
+            <div class="semi-large-graph" >
                 <div class="portlet-title">
 
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Consultation observation</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1935,7 +1945,7 @@
                     </div>
                 </div>
             </div>
-            <div class="medium-graph">
+            <div class="semi-large-graph">
                 <div class="portlet-title">
 
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Exit Interview With The Caregiver</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1947,16 +1957,59 @@
                     </div>
                 </div>
             </div>
-            <div class="medium-graph">
+           
+
+
+        </div>
+    </div>
+</div>
+<div class="panel panel-default analytics_row section" data-survey='hcw' id="hcw-section-7">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirtySix">
+                 Section 5 : Assessment Outcome <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseThirtySix" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="medium-graph" >
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Criteria for Certification: Section A</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_type"f>
+                    <div class="chart" id="certificatesectionA">
+
                     </div>
                 </div>
             </div>
+            <div class="medium-graph">
+                <div class="portlet-title">
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Checked for the following: Section B</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="certificatesectionB">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-graph">
+                <div class="portlet-title">
+
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Certification</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="certification">
+
+                    </div>
+                </div>
+            </div>
+           
 
 
         </div>

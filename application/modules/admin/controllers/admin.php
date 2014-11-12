@@ -8,6 +8,7 @@ class Admin extends MY_Controller{
   */
   public function __construct() {
     parent::__construct();
+
     $this->load->module('data_handler/indicators');
     $this->load->module('data_handler/hcw');
     $this->load->module('data_handler/equipment');
@@ -30,22 +31,48 @@ class Admin extends MY_Controller{
   * @param  string $form File type to download.
   * @return [type]         [description]
   */
-  public function get($object,$form){
+  public function get($object,$form,$identifier=''){
     switch($object){
       case 'hcw':
-        $this->hcw->read($form);
+        $this->hcw->read($form,$identifier);
           break;
       case 'equipment':
-        $this->equipment->read($form);
+        $this->equipment->read($form,$identifier);
           break;
       case 'supplies':
-        $this->supplies->read($form);
+        $this->supplies->read($form,$identifier);
           break;
       case 'questions':
-        $this->questions->read($form);
+        $this->questions->read($form,$identifier);
           break;
       case 'indicators':
-        $this->indicators->read($form);
+        $this->indicators->read($form,$identifier);
+          break;
+    }
+  }
+
+  /**
+  * Handles U from CRUD - A & V Functions
+  * @param  string $object Value of Action required by user.
+  * @param  string $form File type to download.
+  * @return [type]         [description]
+  */
+  public function edit($object){
+    switch($object){
+      case 'hcw':
+        $this->hcw->update();
+          break;
+      case 'equipment':
+        $this->equipment->update();
+          break;
+      case 'supplies':
+        $this->supplies->update();
+          break;
+      case 'questions':
+        $this->questions->update();
+          break;
+      case 'indicators':
+        $this->indicators->update();
           break;
     }
   }

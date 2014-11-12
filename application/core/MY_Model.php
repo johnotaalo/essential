@@ -694,11 +694,15 @@ class MY_Model extends CI_Model
 
     public function getHCWWorkProfile($hcw_id)
     {
+
       $result =  $this->db->get_where('hcw_list', array('id' => $hcw_id));
+
 
       $result = $result->result_array();
 
+
       return $result;
+
     }
 
     public function getCertification($hcw_id)
@@ -719,14 +723,30 @@ class MY_Model extends CI_Model
       */
       $result=array();
       if($district!=''){
-        $query = $this->db->query("SELECT * FROM hcwlist WHERE district = '" . $district ."' ");
+        $query = $this->em->createQuery("SELECT h FROM models\Entities\HcwList h ON h.district = '" . $district ."' ");
       }
       else{
-        $query = $this->db->query("SELECT * FROM hcwlist");
+      $query = $this->em->createQuery("SELECT h FROM models\Entities\HcwList h");
       }
-      $result = $query->result_array();
+      $result = $query->getArrayResult();
       // echo $this->db->last_query();die;
       // var_dump($result);die;
+      return $result;
+    }
+    /**
+    * Get LIST
+    * @param string $district [description]
+    */
+    public function updateField($table,$field,$value,$primary_key,$primary_value){
+      /**
+      * [$result description]
+      * @var array
+      */
+      $result=array();
+      $qb = $this->em->createQueryBuilder();
+      $q = $qb->update($table,'t')->set('t.'.$field,"'".$value."'")->where('t.'.$primary_key."= '".$primary_value."' ")->getQuery();
+  // print_r ($q);die;
+      $result = $q->execute();
       return $result;
     }
 
