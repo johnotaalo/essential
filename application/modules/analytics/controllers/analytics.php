@@ -2167,7 +2167,7 @@ public function getCountyReportingSummary($county, $survey, $survey_category) {
 }
 public function getReportingList($survey, $survey_category) {
   $result = $this->analytics_model->getReportingList($survey, $survey_category);
-  results = $this->arrays->reset($results);
+  $results = $this->arrays->reset($results);
   echo $this->export->generate($results,  'Reporting List for' . ' ' . strtoupper($survey) . ':' . strtoupper($survey_category) . $value, 'excel');
 }
 
