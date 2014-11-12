@@ -2454,9 +2454,29 @@ class Analytics extends MY_Controller
         $results = $this->analytics_model->getChallengeStatistics($criteria, $value, $survey, $survey_category);
 
         //echo "<pre>"; print_r($results);echo "</pre>";die;
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
         foreach ($results as $key => $value) {
             $category[] = $key;
-            $gData[] = array('name' => $key, 'y' => (int)$value);
+            if($key=='No-Data'){
+                   $color='#dddddd';
+                }else if($key=='Data not documented'){
+                    $color='#910000';
+                }else if($key=='Data collection tools not available AT ALL'){
+                    $color='#f66c6f';
+                }
+                else if($key=='Data collection tools available but not accessible'){
+                    $color='#f6c76c';
+                }else if($key=='Data collection tools available but not appropriate (e.g columns missing)'){
+                    $color='#1aadce';
+                }else if($key=='Staff not aware what to document'){
+                    $color='#492970';
+                }
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $gData[] = array('name' => $key, 'y' => (int)$value, 'color' => $color);
         }
         $resultArray[] = array('name' => 'Challenges', 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
@@ -4109,17 +4129,22 @@ class Analytics extends MY_Controller
         $category[] = $value;
         $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category);
 
-        //echo '<pre>';print_r($results);echo '</pre>';die;
+       // echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
         foreach ($results as $value) {
-
+           // echo '<pre>';print_r($value);echo '</pre>';die;
             //$data = array();
-
-            $name = 'Tier ' . $value['facilityLevel'];
-
-            //echo '<pre>';print_r($name);echo '</pre>';die;
+            
+             $name =  $value['facilityLevel'];   
+            if($name == ''){
+                $name = 'No tier specified';
+                $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
+             //echo '<pre>';print_r($name);echo '</pre>';die;
+            }else{
+              $gData[] = array('name' => 'Tier'.$name, 'y' => (int)$value['level_total']);  
+            }
             //$gData[] = (int)$value['level_total'];
-            $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
+            
 
             //echo '<pre>';print_r($resultArray);echo '</pre>';die;
 
@@ -4130,7 +4155,9 @@ class Analytics extends MY_Controller
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 30, 'pie');
     }
-
+    public function getFacilityLevel($criteria,$value,$survey,$survey_category,$statistic){
+        $this->getFacilityLevelPerCounty($criteria,$value,$survey,$survey_category,'response');
+    }
     public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
@@ -4735,7 +4762,7 @@ class Analytics extends MY_Controller
 
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
-            $category[] = 'Tier' . $key;
+            $category[] = 'Level' . $key;
             foreach ($result as $name => $value) {
                 if ($name != 'n/a' && $name != '') {
                     $data[$name][] = (int)$value;
