@@ -8,12 +8,12 @@
 
         <i class="octicon octicon-list-unordered"></i> Fields
         <div class="menu" id="field_list">
-          <a class="active item" id="indicators" data-identifier="indicatorCode" data-form="x-datatable"><i class="ion-toggle"></i>Indicators</a>
-          <a class="item" id="questions" data-identifier="questionCode" data-form="x-datatable"><i class="ion-help-circled"></i>Questions</a>
-          <a class="item" id="resources" data-identifier="eqCode" data-form="x-datatable"><i class="ion-hammer"></i>Resources</a>
-          <a class="item" id="supplies" data-identifier="supplyCode" data-form="x-datatable"><i class="ion-ios7-box"></i>Supplies</a>
-          <a class="item" id="equipment" data-identifier="eqCode" data-form="x-datatable"><i class="ion-ios7-box"></i>Equipment</a>
-          <a class="item" id="hcw" data-identifier="hcw_id" data-form="x-datatable"><i class="ion-ios7-people"></i>Health Care Workers</a>
+          <a class="active item" id="indicators" data-identifier="indicator_code" data-form="x-datatable"><i class="ion-toggle"></i>Indicators</a>
+          <a class="item" id="questions" data-identifier="question_code" data-form="x-datatable"><i class="ion-help-circled"></i>Questions</a>
+          <a class="item" id="resources" data-identifier="eq_code" data-form="x-datatable"><i class="ion-hammer"></i>Resources</a>
+          <a class="item" id="supplies" data-identifier="supply_code" data-form="x-datatable"><i class="ion-ios7-box"></i>Supplies</a>
+          <a class="item" id="equipment" data-identifier="eq_code" data-form="x-datatable"><i class="ion-ios7-box"></i>Equipment</a>
+          <a class="item" id="hcw" data-identifier="id" data-form="x-datatable"><i class="ion-ios7-people"></i>Health Care Workers</a>
         </div>
       </div>
       <a class="item">
@@ -51,8 +51,8 @@ $('#field_list a').click(function(){
   */
   identifier = $(this).attr('data-identifier');
   /**
-   * Export Form / Type
-   */
+  * Export Form / Type
+  */
   form = $(this).attr('data-form');
   console.log(identifier);
 
@@ -95,13 +95,20 @@ $('#field_list a').click(function(){
       $('#display').append(table);
       $('#display table').dataTable( {
         "sPaginationType": "full_numbers",
-        "aaData": obj.data
-      } );
+        "aaData": obj.data,
+        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+          $('td a', nRow).editable({
+            url: base_url+'admin/edit/'+object,
+          });
+        }
+      });
       $('#DataTables_Table_0_filter label').append(
         '<div class="ui corner label"> <i class="search icon"></i> </div>'
       );
       $('#DataTables_Table_0_filter label').addClass('ui labeled input');
-       $('.editable').editable();
+      // $('.editable').editable({
+      //   url: base_url+'admin/edit/'+object,
+      // });
       // $(document).trigger('datatable_loaded');
     }
   });

@@ -53,6 +53,9 @@ class Datatable_Handler extends MY_Controller{
   }
 
   public function editable($data,$identifier){
+    $identifier = explode('_',$identifier);
+    $identifier[1]=ucwords($identifier[1]);
+    $identifier = $identifier[0].$identifier[1];
     // var_dump($data);
     /**
     * [$dataSet description]

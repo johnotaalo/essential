@@ -50,4 +50,30 @@ class Admin extends MY_Controller{
           break;
     }
   }
+
+  /**
+  * Handles U from CRUD - A & V Functions
+  * @param  string $object Value of Action required by user.
+  * @param  string $form File type to download.
+  * @return [type]         [description]
+  */
+  public function edit($object){
+    switch($object){
+      case 'hcw':
+        $this->hcw->update();
+          break;
+      case 'equipment':
+        $this->equipment->update();
+          break;
+      case 'supplies':
+        $this->supplies->update();
+          break;
+      case 'questions':
+        $this->questions->update();
+          break;
+      case 'indicators':
+        $this->indicators->update();
+          break;
+    }
+  }
 }

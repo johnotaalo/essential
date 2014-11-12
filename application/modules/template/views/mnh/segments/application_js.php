@@ -15,6 +15,8 @@
 <script src="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/intro.js/intro.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
 <script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <!-- Scrollr -->
 <script src="<?php echo base_url();?>assets/bower_components/skrollr/dist/skrollr.min.js"></script>
@@ -28,7 +30,6 @@
 <!-- Semantic UI -->
 <script src="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>
 <!-- Scripts for Editable and Searchable Tables -->
-<script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script>
 <!-- HighCharts -->
 <script src="<?php echo base_url()?>assets/javascripts/highcharts.js"></script>

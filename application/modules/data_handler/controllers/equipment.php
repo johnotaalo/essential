@@ -36,11 +36,18 @@ class Equipment extends MY_Controller{
   }
   /**
   * [update description]
-  * @param  [type] $id [description]
-  * @return [type]     [description]
+  * @return [type] [description]
   */
-  public function update($id){
-    $data = $this->data_model->get('equipment',$id);
+  public function update(){
+    $data = $this->input->post();
+    $table ='models\Entities\Equipments';
+    $field = $this->input->post('name');
+    $value = $this->input->post('value');
+    $primary_key = 'eqCode';
+    $primary_value = $this->input->post('pk');
+    // echo $table.' '.$field.' '.$value.' '.$primary_key.' '.$primary_value;die;
+    $this->data_model->updateField($table,$field,$value,$primary_key,$primary_value);
+    // $data = $this->data_model->get('hcw',$id);
 
   }
   /**
