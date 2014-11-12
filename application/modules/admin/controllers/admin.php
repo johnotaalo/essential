@@ -31,22 +31,22 @@ class Admin extends MY_Controller{
   * @param  string $form File type to download.
   * @return [type]         [description]
   */
-  public function get($object,$form){
+  public function get($object,$form,$identifier=''){
     switch($object){
       case 'hcw':
-        $this->hcw->read($form);
+        $this->hcw->read($form,$identifier);
           break;
       case 'equipment':
-        $this->equipment->read($form);
+        $this->equipment->read($form,$identifier);
           break;
       case 'supplies':
-        $this->supplies->read($form);
+        $this->supplies->read($form,$identifier);
           break;
       case 'questions':
-        $this->questions->read($form);
+        $this->questions->read($form,$identifier);
           break;
       case 'indicators':
-        $this->indicators->read($form);
+        $this->indicators->read($form,$identifier);
           break;
     }
   }

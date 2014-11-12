@@ -8,12 +8,12 @@
 
         <i class="octicon octicon-list-unordered"></i> Fields
         <div class="menu" id="field_list">
-          <a class="active item" id="indicators"><i class="ion-toggle"></i>Indicators</a>
-          <a class="item" id="questions"><i class="ion-help-circled"></i>Questions</a>
-          <a class="item" id="resources"><i class="ion-hammer"></i>Resources</a>
-          <a class="item" id="supplies"><i class="ion-ios7-box"></i>Supplies</a>
-          <a class="item" id="equipment"><i class="ion-ios7-box"></i>Equipment</a>
-          <a class="item" id="hcw"><i class="ion-ios7-people"></i>Health Care Workers</a>
+          <a class="active item" id="indicators" data-identifier="indicatorCode" data-form="x-datatable"><i class="ion-toggle"></i>Indicators</a>
+          <a class="item" id="questions" data-identifier="questionCode" data-form="x-datatable"><i class="ion-help-circled"></i>Questions</a>
+          <a class="item" id="resources" data-identifier="eqCode" data-form="x-datatable"><i class="ion-hammer"></i>Resources</a>
+          <a class="item" id="supplies" data-identifier="supplyCode" data-form="x-datatable"><i class="ion-ios7-box"></i>Supplies</a>
+          <a class="item" id="equipment" data-identifier="eqCode" data-form="x-datatable"><i class="ion-ios7-box"></i>Equipment</a>
+          <a class="item" id="hcw" data-identifier="hcw_id" data-form="x-datatable"><i class="ion-ios7-people"></i>Health Care Workers</a>
         </div>
       </div>
       <a class="item">
@@ -46,13 +46,23 @@
 </div>
 <script>
 $('#field_list a').click(function(){
+  /**
+  * Primary Key
+  */
+  identifier = $(this).attr('data-identifier');
+  /**
+   * Export Form / Type
+   */
+  form = $(this).attr('data-form');
+  console.log(identifier);
+
   $('#field_list a').removeClass('active blue');
   $(this).addClass('active blue');
   title = $(this).text();
   object = $(this).attr('id');
   $('#title').text(title);
   $.ajax({
-    url:base_url+'admin/get/'+object+'/datatable',
+    url:base_url+'admin/get/'+object+'/'+form+'/'+identifier,
     beforeSend: function(xhr) {
       $('#display').empty();
       $('#display').append('<div class="loader" >Loading...</div>');
@@ -86,11 +96,12 @@ $('#field_list a').click(function(){
       $('#display table').dataTable( {
         "sPaginationType": "full_numbers",
         "aaData": obj.data
-    } );
-    $('#DataTables_Table_0_filter label').append(
-      '<div class="ui corner label"> <i class="search icon"></i> </div>'
-    );
-    $('#DataTables_Table_0_filter label').addClass('ui labeled input');
+      } );
+      $('#DataTables_Table_0_filter label').append(
+        '<div class="ui corner label"> <i class="search icon"></i> </div>'
+      );
+      $('#DataTables_Table_0_filter label').addClass('ui labeled input');
+       $('.editable').editable();
       // $(document).trigger('datatable_loaded');
     }
   });

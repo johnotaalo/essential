@@ -23,14 +23,14 @@ class Equipment extends MY_Controller{
    * @param  [type] $form [description]
    * @return [type]       [description]
    */
-  public function read($form){
+  public function read($form,$identifier=''){
     $data = $this->data_model->get('equipment');
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'Equipment List',$form);
+    $raw['data']=$this->export->generate($data,'Equipment List',$form,$identifier);
     // var_dump($raw['data']);
-    if($form=='datatable'){
+    if($form=='datatable' || $form=='x-datatable' ){
       echo json_encode($raw);
     }
   }

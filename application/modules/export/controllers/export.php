@@ -24,7 +24,8 @@ class Export extends MY_Controller{
    * @param  [type] $form     [description]
    * @return [type]           [description]
    */
-  public function generate($data, $filename, $form) {
+  public function generate($data, $filename, $form,$identifier='') {
+    // var_dump($identifier);
       switch ($form) {
           case 'table':
               $result = $this->table_handler->normal($data);
@@ -58,6 +59,9 @@ class Export extends MY_Controller{
               break;
           case 'datatable':
             $result = $this->datatable_handler->normal($data);
+              break;
+          case 'x-datatable':
+              $result = $this->datatable_handler->editable($data,$identifier);
               break;
       }
       return $result;
