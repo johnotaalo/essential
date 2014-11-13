@@ -4203,6 +4203,9 @@ ea.fac_mfl IN (SELECT
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
+                        case 'availability_raw':
+                        case 'location_raw':
+                        case 'functionality_raw':
                             $data[] = $value_;
                             break;
                     }
