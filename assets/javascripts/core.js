@@ -389,6 +389,15 @@ function loadSimpleGraph(base_url, function_url, graph_section) {
    * @return {[type]}              [description]
    */
 function loadRawDownload(base_url, function_url) {
+  $('#pdf').remove();
+  $('#excel').remove();
+  pdf = ' <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="pdf">'+
+      '<i class="icon basic doc"></i>Download PDF'+
+    '</div>';
+  excel = ' <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="excel">'+
+      '<i class="icon basic doc"></i>Download Excel'+
+    '</div>';
+  $('.actions').prepend(pdf+excel);
     $('#pdf').attr('data-url', base_url + function_url + '/dynamic_pdf');
     $('#excel').attr('data-url', base_url + function_url + '/dynamic_excel');
     $('.download').click(function() {

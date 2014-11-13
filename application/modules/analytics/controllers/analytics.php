@@ -4182,8 +4182,8 @@ class Analytics extends MY_Controller
         $value = urldecode($value);
         $category[] = $county;
         $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, 'response_raw');
-        print_r($results);
-        die;
+        // print_r($results);
+        // die;
         $results = $this->arrays->reset($results);
         echo $this->export->generate($results, 'Ownership Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
