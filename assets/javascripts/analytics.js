@@ -1165,15 +1165,15 @@ function loadEnlargedGraph(base_url, graph_url, title, raw_url) {
     loadModalForm(base_url, '', title, '90%', contents);
     loadGraph(base_url, graph_url, '#graph');
     loadRawDownload(base_url, raw_url);
-    $('#show_data').show();
+    // $('#show_data').show();
     $('#pdf').removeClass('disabled');
     $('#excel').removeClass('disabled');
-    $('#show_data').click(function() {
-      $('#graph').hide();
-      $('#show_data').hide();
-      $('#show_graph').show();
-      loadFacilityRawData(base_url, raw_url, '#facility_data');
-    });
+    // $('#show_data').click(function() {
+    //   $('#graph').hide();
+    //   $('#show_data').hide();
+    //   $('#show_graph').show();
+    //   loadFacilityRawData(base_url, raw_url, '#facility_data');
+    // });
     $('#show_graph').click(function() {
       $('#graph').show();
       $('#facility_data').empty();
