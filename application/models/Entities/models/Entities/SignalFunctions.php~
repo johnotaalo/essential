@@ -31,7 +31,7 @@ class SignalFunctions
     /**
      * @var string
      *
-     * @ORM\Column(name="sf_name", type="string", length=45, nullable=true)
+     * @ORM\Column(name="sf_name", type="text", nullable=true)
      */
     private $sfName;
 

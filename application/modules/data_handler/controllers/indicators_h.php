@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Questions extends MY_Controller{
+class Indicators_H extends MY_Controller{
   /**
   * Constructor Function
   */
@@ -23,13 +23,14 @@ class Questions extends MY_Controller{
    * @return [type]       [description]
    */
   public function read($form){
-    $data = $this->data_model->get('questions');
+    $data = $this->data_model->get('indicators');
+    // print_r($data);
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'Questions List',$form);
+    $raw['data']=$this->export->generate($data,'Indicators List',$form);
 
-    if($form=='datatable'){
+    if($form=='datatable'|| $form=='x-datatable'){
       $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
     }
@@ -40,7 +41,7 @@ class Questions extends MY_Controller{
   * @return [type]     [description]
   */
   public function update($id){
-    $data = $this->data_model->get('questions',$id);
+    $data = $this->data_model->get('indicators',$id);
 
   }
   /**
@@ -49,7 +50,7 @@ class Questions extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('questions',$id);
+    $data = $this->data_model->get('indicators',$id);
 
   }
   /**

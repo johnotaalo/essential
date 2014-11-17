@@ -259,6 +259,22 @@ class MY_Model extends CI_Model
   }
 
   /**
+   * [getUsers description]
+   * @return [type] [description]
+   */
+  public function getUsers() {
+    try {
+      $result = $this->em->createQuery('SELECT u FROM models\Entities\Users u');
+      $result = $result->getArrayResult();
+      // var_dump($result);
+    }
+    catch(exception $ex) {
+      // var_dump($ex);
+    }
+    return $result;
+  }
+
+  /**
   * [getReasonNoDeliveries description]
   * @return [type] [description]
   */

@@ -501,16 +501,16 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $('.chart div').width($('.chart div').parent().width());
     variableHandler(scope, county, district, facility, survey,
       survey_category, indicator_type, section);
-    //$('.panel-collapse collapse in').collapse('hide');
-    //$(this).collapse('show');
+    // $('.panel-collapse collapse in').collapse('hide');
+    // $(this).collapse('show');
   })
   $('.panel-collapse').on('hide.bs.collapse', function() {
     $(this).parent().find('.panel-heading h4 a i.fa').attr('class',
       'fa fa-chevron-right');
     $(this).parent().find('.panel-heading h4 a span .txt').text(
       'Click to Expand');
-    //$('.panel-collapse collapse in').collapse('hide');
-    //$(this).collapse('show');
+    // $('.panel-collapse collapse in').collapse('hide');
+    // $(this).collapse('show');
   });
 
 }
@@ -1147,6 +1147,11 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getCommunityStrategyRaw/' + criteria + '/' + value +
           '/' +
           survey + '/' + survey_category;
+        break;
+      case 'case_mgmt':
+        raw_url = 'analytics/getTreatmentRaw/' + criteria + '/' + value +
+          '/' +
+          survey + '/' + survey_category+'/' + statistic+ '/' + data_for ;
         break;
 
     }

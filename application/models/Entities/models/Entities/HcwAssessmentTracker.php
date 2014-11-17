@@ -2,50 +2,50 @@
 
 namespace models\Entities;
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HcwAssessmentTracker
  *
- * @Table(name="hcw_assessment_tracker")
- * @Entity
+ * @ORM\Table(name="hcw_assessment_tracker")
+ * @ORM\Entity
  */
 class HcwAssessmentTracker
 {
     /**
      * @var integer
      *
-     * @Column(name="ast_id", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="ast_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $astId;
 
     /**
      * @var string
      *
-     * @Column(name="ast_section", type="string", length=45, nullable=false)
+     * @ORM\Column(name="ast_section", type="string", length=45, nullable=false)
      */
     private $astSection;
 
     /**
      * @var \DateTime
      *
-     * @Column(name="ast_last_activity", type="datetime", nullable=false)
+     * @ORM\Column(name="ast_last_activity", type="datetime", nullable=false)
      */
     private $astLastActivity;
 
     /**
      * @var string
      *
-     * @Column(name="facilityCode", type="string", length=45, nullable=false)
+     * @ORM\Column(name="facilityCode", type="string", length=45, nullable=false)
      */
     private $facilitycode;
 
     /**
      * @var integer
      *
-     * @Column(name="hcw_id", type="integer", nullable=true)
+     * @ORM\Column(name="hcw_id", type="integer", nullable=true)
      */
     private $hcwId;
 
