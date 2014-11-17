@@ -92,4 +92,14 @@ private function requestMFC(){
         $this->template->mnch($data);
         redirect(base_url(), 'refresh');
     }
+        
+    /**
+     * [admin_auth description]
+     * @return [type] [description]
+     */
+    public function admin() {
+        $data = $this->input->post();
+        echo 'error';
+    }
+
 }
