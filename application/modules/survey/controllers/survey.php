@@ -314,7 +314,9 @@ class Survey extends MY_Controller
     public function createHCWListSection ()
     {
         $hcwlist = '';
-        $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
+        $result = $this->data_model->getHCWByCounty($this->session->userdata('county'));
+        $count = count($result);
+        $this->session->set_userdata(array('fCount' => $count));
         $sections = $this->data_model->getAssessmentInfo();
         // echo "<pre>"; print_r($sections);die;
         $question_codes = array('QHC28'=>'Certified', 'QHC29' => 'For Mentorship', 'QHC30' => 'For TOT');

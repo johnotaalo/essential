@@ -65,10 +65,12 @@
                 if(this.value == 'IMCI Follow-Up')
                 {
                     $('#term').prop('disabled', 'disabled');
+                    $('#district').prop('disabled', 'disabled');
                 }
                 else
                 {
                     $('#term').prop('disabled', false);
+                    $('#district').prop('disabled', false);
                 }
             });
             $('#county').change(function() {
