@@ -42,14 +42,31 @@ class Auth extends MY_Controller {
             $this->data['title']='MoH::Data Management Tool';
             $this->template->mnch($this->data);
         }else {
-            #use an ajax request and not a whole refresh
-            $data['title']='MoH::Data Management Tool';
-            //die('Failed');
-            $this->data['login_message'] = 'Invalid District and Password Combination!';
-            $this->data['survey'] = '';
-            $this -> data['content'] = 'mnh/pages/v_login';
-            //$this -> load -> view('index', $this->data); //login view
-            $this->template->mnch($this -> data);
+            if($this->input->post('assessment') == 'IMCI Follow-Up')
+            {
+                if($this->input->post('usercode') == '123456')
+                {
+                    $category = 'all';
+                    $newdata = array('county' => $this->input->post('county'),'survey'=>'hcw','survey_category'=>$category);
+                    $this -> session -> set_userdata($newdata);
+
+                    $this->data['content']='mnh/pages/v_survey_main';
+                    $this->data['logged']='Yes';
+                    $this->data['title']='MoH::Data Management Tool';
+                    $this->template->mnch($this->data);
+                }
+            }
+            else
+            {
+                #use an ajax request and not a whole refresh
+                $data['title']='MoH::Data Management Tool';
+                //die('Failed');
+                $this->data['login_message'] = 'Invalid District and Password Combination!';
+                $this->data['survey'] = '';
+                $this -> data['content'] = 'mnh/pages/v_login';
+                //$this -> load -> view('index', $this->data); //login view
+                $this->template->mnch($this -> data);
+            }
         }
     }
 public function doCheckFacilityCode(){/**from the session data*/

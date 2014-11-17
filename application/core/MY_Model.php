@@ -690,7 +690,18 @@ class MY_Model extends CI_Model
       $result = $query->result_array();
 
       return $result;
-    }
+  }
+
+  public function getHCWByCounty($cName)
+  {
+    $query = $this->db->query("SELECT h.* FROM facilities f
+      LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
+      WHERE f.fac_county = '" . $cName ."' AND  h.activity_id = 10");
+
+    $result = $query->result_array();
+
+    return $result;
+  }
 
     public function getHCWWorkProfile($hcw_id)
     {
