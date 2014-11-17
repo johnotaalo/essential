@@ -1093,7 +1093,7 @@ class Analytics extends MY_Controller
         }
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category[$option], $criteria, 'normal', 120, 'bar');
+        $this->populateGraph($resultArray, '', $category[$option], $criteria, 'normal', 120, 'bar','',$option,'case_mgmt',$statistic);
     }
     public function sortTreatment($treatment, $stack) {
         
@@ -1845,16 +1845,18 @@ class Analytics extends MY_Controller
         echo $this->export->generate($results, 'Equipment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     
-    public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic, $option, $form) {
+    public function getTreatmentRaw($criteria, $value, $survey, $survey_category, $statistic,$option, $form) {
         $results = $this->analytics_model->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
-        
+        // echo "<pre>"; print_r($results);echo "</pre>";die;
+    
         // Format Data by Treatments by Option
         foreach ($results as $key => $value) {
             $data[$value['treatment_for']][] = $value;
         }
+
         
-        $results = $this->arrays->format($data[$option], 'fac_mfl', 'treatment', 'total_treatment');
-        echo $this->export->generate($results, 'Treatment Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+        $results = $this->arrays->reset($data[$option]);
+        echo $this->export->generate($results, 'Treatment Statistics for' . ucwords($option) . '(' . $value . ')', $form);
     }
     
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -3721,7 +3723,7 @@ class Analytics extends MY_Controller
     }
     
     public function getCorrectClassification($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorComparison($criteria, $value, $survey, $survey_category, 'ch', 'classification');
+        $this->getIndicatorComparison($criteria, $value, $survey, $survey_category, 'ch');
     }
     
     /**

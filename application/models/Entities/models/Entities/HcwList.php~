@@ -567,6 +567,13 @@ class HcwList
      */
     private $policySource;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_name", type="string", length=255, nullable=true)
+     */
+    private $facName;
+
 
     /**
      * Get id
@@ -2370,5 +2377,28 @@ class HcwList
     public function getPolicySource()
     {
         return $this->policySource;
+    }
+
+    /**
+     * Set facName
+     *
+     * @param string $facName
+     * @return HcwList
+     */
+    public function setFacName($facName)
+    {
+        $this->facName = $facName;
+    
+        return $this;
+    }
+
+    /**
+     * Get facName
+     *
+     * @return string 
+     */
+    public function getFacName()
+    {
+        return $this->facName;
     }
 }

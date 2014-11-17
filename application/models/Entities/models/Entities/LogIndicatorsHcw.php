@@ -2,92 +2,92 @@
 
 namespace models\Entities;
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * LogIndicatorsHcw
  *
- * @Table(name="log_indicators_hcw")
- * @Entity
+ * @ORM\Table(name="log_indicators_hcw")
+ * @ORM\Entity
  */
 class LogIndicatorsHcw
 {
     /**
      * @var integer
      *
-     * @Column(name="li_id", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="li_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $liId;
 
     /**
      * @var string
      *
-     * @Column(name="li_response", type="string", length=6, nullable=true)
+     * @ORM\Column(name="li_response", type="string", length=6, nullable=true)
      */
     private $liResponse;
 
     /**
      * @var \DateTime
      *
-     * @Column(name="li_created", type="datetime", nullable=false)
+     * @ORM\Column(name="li_created", type="datetime", nullable=false)
      */
     private $liCreated;
 
     /**
      * @var string
      *
-     * @Column(name="indicator_code", type="string", length=8, nullable=true)
+     * @ORM\Column(name="indicator_code", type="string", length=8, nullable=true)
      */
     private $indicatorCode;
 
     /**
      * @var string
      *
-     * @Column(name="fac_mfl", type="string", length=11, nullable=false)
+     * @ORM\Column(name="fac_mfl", type="string", length=11, nullable=false)
      */
     private $facMfl;
 
     /**
      * @var integer
      *
-     * @Column(name="hcw_id", type="integer", nullable=true)
+     * @ORM\Column(name="hcw_id", type="integer", nullable=true)
      */
     private $hcwId;
 
     /**
      * @var string
      *
-     * @Column(name="li_hcwResponse", type="string", length=45, nullable=true)
+     * @ORM\Column(name="li_hcwResponse", type="string", length=45, nullable=true)
      */
     private $liHcwresponse;
 
     /**
      * @var string
      *
-     * @Column(name="li_assessorResponse", type="string", length=45, nullable=true)
+     * @ORM\Column(name="li_assessorResponse", type="string", length=45, nullable=true)
      */
     private $liAssessorresponse;
 
     /**
      * @var string
      *
-     * @Column(name="li_hcwFindings", type="string", length=45, nullable=true)
+     * @ORM\Column(name="li_hcwFindings", type="string", length=45, nullable=true)
      */
     private $liHcwfindings;
 
     /**
      * @var string
      *
-     * @Column(name="li_assessorFindings", type="string", length=45, nullable=true)
+     * @ORM\Column(name="li_assessorFindings", type="string", length=45, nullable=true)
      */
     private $liAssessorfindings;
 
     /**
      * @var string
      *
-     * @Column(name="li_treatments", type="string", length=45, nullable=true)
+     * @ORM\Column(name="li_treatments", type="string", length=45, nullable=true)
      */
     private $liTreatments;
 
