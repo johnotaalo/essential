@@ -85,6 +85,15 @@ class Data_Model extends MY_Model
     		echo "Error... ".$mfl."<br />";
     	}
     }
+
+    function getNossids()
+    {
+        $query = $this->db->query("SELECT DISTINCT(facilityCode), ast_survey FROM assessment_tracker WHERE ss_id IS NULL AND (ast_survey = 'mnh' OR ast_survey = 'ch')");
+
+        $result = $query->result_array();
+
+        return $result;
+    }
     
     
 }
