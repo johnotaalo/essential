@@ -106,13 +106,6 @@ class HcwList
     private $uploadDate;
 
     /**
-     * @var integer
-     *
-     * @Column(name="activity_id", type="integer", nullable=true)
-     */
-    private $activityId;
-
-    /**
      * @var string
      *
      * @Column(name="work_station", type="string", length=255, nullable=true)
@@ -852,29 +845,6 @@ class HcwList
     public function getUploadDate()
     {
         return $this->uploadDate;
-    }
-
-    /**
-     * Set activityId
-     *
-     * @param integer $activityId
-     * @return HcwList
-     */
-    public function setActivityId($activityId)
-    {
-        $this->activityId = $activityId;
-    
-        return $this;
-    }
-
-    /**
-     * Get activityId
-     *
-     * @return integer 
-     */
-    public function getActivityId()
-    {
-        return $this->activityId;
     }
 
     /**

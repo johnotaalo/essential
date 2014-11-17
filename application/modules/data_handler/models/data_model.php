@@ -76,7 +76,6 @@ class Data_Model extends MY_Model{
 
       case 'indicators':
       $results = $this->getIndicators();
-
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!='' && $key!='id'){
@@ -89,7 +88,18 @@ class Data_Model extends MY_Model{
 
       case 'users':
       $results = $this->getUsers();
-// print_r($results);
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'facilities':
+      $results = $this->getFacilities();
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!='' && $key!='id'){

@@ -19,7 +19,7 @@
       <div class="item">
         <i class="ion-gear-a"></i> Admin
          <div class="menu list-items" id="admin_list">
-          <a class="item" id="users" data-identifier="userId" data-form="x-datatable"><i class="icon ion-ios7-people"></i>Users</a>
+          <a class="item" id="users" data-identifier="userId" data-form="x-datatable"><i class="icon ion-person-stalker"></i>Users</a>
         </div>
       </div>
       <div class="ui dropdown item">

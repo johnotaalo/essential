@@ -80,4 +80,10 @@ class Admin extends MY_Controller{
           break;
     }
   }
+  public function login(){
+    $data['content']='admin/login';
+    $data['showheader']=1;
+    $data['showfooter']=1;
+    $this->template->mnch($data);
+  }
 }
