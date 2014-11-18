@@ -4118,7 +4118,7 @@ class Analytics extends MY_Controller
     	$this->getFacilityOwnerPerCounty($criteria,$value,$survey,$survey_category,'response_raw');
     }
     /**
-     * Get Lever Ownership
+     * Get Level Ownership
      */
 
     public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
