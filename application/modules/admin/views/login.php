@@ -38,29 +38,66 @@
 
 <script>
 $('#form_actions > .button').click(function(){
-   var formData = $('#login').serializeArray();
+
+  $('.ui.form').form({
+    username: {
+      identifier  : 'username',
+      rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter your username'
+        }
+      ]
+    },
+    password: {
+      identifier  : 'password',
+      rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter your password'
+        }
+      ]
+    }
+  },
+  {
+    onSuccess : function(event){
+      event.preventDefault();
+      post();
+  }
+  });
+
+   
+
+
+});
+function post(){
+  var formData = $('#login').serializeArray();
    $.ajax({
       url: base_url+'auth/admin',
       type: 'POST',
       data: formData,
       beforeSend: function(data) {
+        $('.message').removeClass('error');
+        $('.message').removeClass('success');
+        $('form').removeClass('error');
         $("#result").append(
           '<center><div class="ui small blue message" style = "margin-bottom: 5px;"><h4><span class = "fa fa-spinner fa-spin"></span> Please wait...</h4></div></center>'
         );
       },
       success: function(data) {
-        if(data=='error'){
-          $('form').addClass('error');
-        }
+        obj = jQuery.parseJSON(data);
+        console.log(obj);
+        $('form').addClass('error');
+
+        $('.message').addClass(obj.class);
+        $('.message').text(obj.message);
+        
         
       },
       fail: function() {
         console.log("error");
       }
     });
-
-
-});
-
+}
 
 </script>

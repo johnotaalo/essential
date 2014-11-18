@@ -38512,85 +38512,94 @@ a.paginate_button {
   width: 200px;
   display: inline-block;
   vertical-align: top;
+  font-size: 10px !important;
 }
-/* line 760, ../sass/flat.scss */
+/* line 759, ../sass/flat.scss */
+.dataTables_length label {
+  font-size: 10px !important;
+}
+/* line 761, ../sass/flat.scss */
 .dataTables_length label select {
+  font-size: 10px !important;
   display: inherit;
   width: 50px !important;
+  padding: 0 !important;
 }
 
-/* line 767, ../sass/flat.scss */
+/* line 770, ../sass/flat.scss */
 .dataTables_filter {
+  font-size: 10px !important;
   display: inline-block;
   vertical-align: top;
   float: right;
 }
-/* line 771, ../sass/flat.scss */
+/* line 775, ../sass/flat.scss */
 .dataTables_filter label {
-  padding-right: 5%;
+  font-size: 10px !important;
 }
-/* line 774, ../sass/flat.scss */
+/* line 777, ../sass/flat.scss */
 .dataTables_filter label input {
+  font-size: 10px !important;
   display: initial;
   width: 200px;
 }
 
-/* line 782, ../sass/flat.scss */
+/* line 786, ../sass/flat.scss */
 .dataTables_info, .paging_full_numbers {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 786, ../sass/flat.scss */
+/* line 790, ../sass/flat.scss */
 .dataTables_info {
-  font-size: 14px;
+  font-size: 10px;
 }
 
-/* line 790, ../sass/flat.scss */
+/* line 794, ../sass/flat.scss */
 .editable-click:hover {
   cursor: hand !important;
 }
 
-/* line 793, ../sass/flat.scss */
+/* line 797, ../sass/flat.scss */
 .modal {
   z-index: 2000000000000000000000000;
 }
 
-/* line 797, ../sass/flat.scss */
+/* line 801, ../sass/flat.scss */
 .sizer, .show-collapse {
   float: right;
   color: #ccc;
   cursor: pointer;
 }
 
-/* line 802, ../sass/flat.scss */
+/* line 806, ../sass/flat.scss */
 .sizer:hover, .show-collapse:hover {
   color: #333;
   cursor: hand;
 }
 
-/* line 807, ../sass/flat.scss */
+/* line 811, ../sass/flat.scss */
 #graph {
   height: 300px;
   overflow: auto;
 }
 
-/* line 811, ../sass/flat.scss */
+/* line 815, ../sass/flat.scss */
 h6.table-header {
   margin-bottom: 2px !important;
   padding: 5px 7.5px;
   background: #e7e7e7;
 }
-/* line 815, ../sass/flat.scss */
+/* line 819, ../sass/flat.scss */
 h6.table-header span {
   padding-left: 30%;
 }
-/* line 817, ../sass/flat.scss */
+/* line 821, ../sass/flat.scss */
 h6.table-header span button {
   margin-left: 5px;
 }
 
-/* line 826, ../sass/flat.scss */
+/* line 830, ../sass/flat.scss */
 .analytics_row {
   margin-top: 10px;
   padding-top: 10px;
@@ -38598,48 +38607,48 @@ h6.table-header span button {
   border-top: 1px solid #ddd !important;
   box-shadow: none !important;
 }
-/* line 833, ../sass/flat.scss */
+/* line 837, ../sass/flat.scss */
 .analytics_row .panel-heading {
   border-top: 1px solid #ddd;
   background-color: #fff !important;
   border: none;
 }
-/* line 837, ../sass/flat.scss */
+/* line 841, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title {
   padding-left: 0;
   margin-bottom: 5px !important;
 }
-/* line 841, ../sass/flat.scss */
+/* line 845, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title a {
   text-decoration: none !important;
 }
-/* line 844, ../sass/flat.scss */
+/* line 848, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title i {
   color: inherit;
   padding-left: 10px;
 }
-/* line 851, ../sass/flat.scss */
+/* line 855, ../sass/flat.scss */
 .analytics_row .panel-collapse .panel-body {
   border: none !important;
   box-shadow: 0;
 }
 
-/* line 859, ../sass/flat.scss */
+/* line 863, ../sass/flat.scss */
 .activity, .status {
   font-size: 10px !important;
 }
-/* line 861, ../sass/flat.scss */
+/* line 865, ../sass/flat.scss */
 .activity .activity-text, .status .activity-text {
   font-style: italic;
   font-weight: bold;
 }
 
-/* line 866, ../sass/flat.scss */
+/* line 870, ../sass/flat.scss */
 .status {
   float: right;
 }
 
-/* line 870, ../sass/flat.scss */
+/* line 874, ../sass/flat.scss */
 #district_progress {
   display: inline-block;
   vertical-align: middle;
@@ -38652,7 +38661,7 @@ h6.table-header span button {
 /**
  * Image Styles
  */
-/* line 885, ../sass/flat.scss */
+/* line 889, ../sass/flat.scss */
 img#coat_of_arms {
   width: 8%;
 }
@@ -38660,17 +38669,17 @@ img#coat_of_arms {
 /**
  * Banner Styles
  */
-/* line 892, ../sass/flat.scss */
+/* line 896, ../sass/flat.scss */
 img#coat_of_arms, #description {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 897, ../sass/flat.scss */
+/* line 901, ../sass/flat.scss */
 #description #project_name {
   margin-bottom: 0;
 }
-/* line 901, ../sass/flat.scss */
+/* line 905, ../sass/flat.scss */
 #description #ministry {
   font-weight: 800;
 }

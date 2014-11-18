@@ -755,23 +755,27 @@ a.paginate_button{
     width:200px;
     display:inline-block;
     vertical-align:top;
-    // float:left;
+    font-size:10px !important;
     label{
+        font-size:10px !important;
         select{
+            font-size:10px !important;
             display:inherit;
             width:50px !important;
+            padding:0 !important;
             @extend .form-control;
         }
     }
 }
 .dataTables_filter{
+    font-size:10px !important;
     display:inline-block;
     vertical-align:top;
     float:right;
     label{
-
-        padding-right:5%;
+        font-size:10px !important;
         input{
+            font-size:10px !important;
             display: initial;
             width:200px;
 
@@ -784,7 +788,7 @@ a.paginate_button{
   vertical-align:top;
 }
 .dataTables_info{
-    font-size:14px;
+    font-size:10px;
 }
 //X-editable
 .editable-click:hover{

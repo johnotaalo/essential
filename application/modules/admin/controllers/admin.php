@@ -17,13 +17,10 @@ class Admin extends MY_Controller{
     $this->load->module('data_handler/users');
     $this->load->module('template');
   }
-  public function index(){
+  public function home(){
     $data['content']='admin/output';
     $this->template->mnch($data);
 
-  }
-  public function test(){
-    echo 'test';
   }
 
   /**

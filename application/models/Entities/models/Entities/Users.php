@@ -151,4 +151,70 @@ class Users
     {
         return $this->utId;
     }
+    /**
+     * @var \models\Entities\ContactsList
+     *
+     * @ORM\ManyToOne(targetEntity="models\Entities\ContactsList")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cl_id", referencedColumnName="cl_id")
+     * })
+     */
+    private $cl;
+
+    /**
+     * @var \models\Entities\UserTypes
+     *
+     * @ORM\ManyToOne(targetEntity="models\Entities\UserTypes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ut_id", referencedColumnName="ut_id")
+     * })
+     */
+    private $ut;
+
+
+    /**
+     * Set cl
+     *
+     * @param \models\Entities\ContactsList $cl
+     * @return Users
+     */
+    public function setCl(\models\Entities\ContactsList $cl = null)
+    {
+        $this->cl = $cl;
+    
+        return $this;
+    }
+
+    /**
+     * Get cl
+     *
+     * @return \models\Entities\ContactsList 
+     */
+    public function getCl()
+    {
+        return $this->cl;
+    }
+
+    /**
+     * Set ut
+     *
+     * @param \models\Entities\UserTypes $ut
+     * @return Users
+     */
+    public function setUt(\models\Entities\UserTypes $ut = null)
+    {
+        $this->ut = $ut;
+    
+        return $this;
+    }
+
+    /**
+     * Get ut
+     *
+     * @return \models\Entities\UserTypes 
+     */
+    public function getUt()
+    {
+        return $this->ut;
+    }
 }

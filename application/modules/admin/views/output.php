@@ -120,10 +120,10 @@ $('.list-items > a').click(function(){
           });
         }
       });
-      $('#DataTables_Table_0_filter label').append(
-        '<div class="ui corner label"> <i class="search icon"></i> </div>'
-      );
-      $('#DataTables_Table_0_filter label').addClass('ui labeled input');
+      // $('#DataTables_Table_0_filter label').append(
+      //   '<div class="ui corner label"> <i class="search icon"></i> </div>'
+      // );
+      // $('#DataTables_Table_0_filter label').addClass('ui labeled input');
       // $('.editable').editable({
       //   url: base_url+'admin/edit/'+object,
       // });
