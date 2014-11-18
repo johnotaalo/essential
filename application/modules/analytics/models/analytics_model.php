@@ -2711,11 +2711,11 @@ ORDER BY f.fac_county ASC;";
         //     return $finalData;
         // }
 
-        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
 
-            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
 

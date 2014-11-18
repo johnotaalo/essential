@@ -4086,26 +4086,26 @@ class Analytics extends MY_Controller
     /**
      * Get Facility Ownership
      */
-    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
+    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
 
         //foreach ($allCounties as $county) {
         $category[] = $county;
-        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category);
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic);
         $resultArray = array();
         foreach ($results as $value) {
 
             //$data = array();
 
-            $name = $value['facilityOwner'];
+            $name = $value['ownership'];
 
             //echo '<pre>';print_r($results);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
             $gData[] = array('name' => $name, 'y' => (int)$value['ownership_total']);
 
-            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+            //echo '<pre>';print_r($gData);echo '</pre>';die;
 
 
         }
@@ -4114,7 +4114,9 @@ class Analytics extends MY_Controller
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 50, 'pie');
     }
-
+    public function getFacilityOwnershipRaw($criteria,$value,$survey,$survey_category,$statistic){
+    	$this->getFacilityOwnerPerCounty($criteria,$value,$survey,$survey_category,'response_raw');
+    }
     /**
      * Get Lever Ownership
      */
