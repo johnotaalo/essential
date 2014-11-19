@@ -2725,12 +2725,12 @@ ORDER BY f.fac_county ASC;";
             return $finalData;
         }
 
-        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
 
                 $myData = $this->db->query($query);
 
@@ -2751,12 +2751,12 @@ ORDER BY f.fac_county ASC;";
             }
             return $finalData;
         }
-        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','".$statistic."');";
 
                 $myData = $this->db->query($query);
 
@@ -4202,7 +4202,12 @@ ORDER BY question_code";
                         case 'location':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
-
+                        case 'hcwRetention':
+                            $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total'];
+                            break;
+                        case 'hcwTransfer':
+                        $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
+                            break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4257,6 +4262,9 @@ ORDER BY question_code";
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']]+= (int)$value_['total_response'];
+                            break;
+                        case 'hcwServiceUnit':
+                            $data[$value_['response']][$value_['serviceUnit_name']] = (int)$value_['total'];
                             break;
                     }
 
