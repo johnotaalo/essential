@@ -1748,13 +1748,13 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
             '#HCW_Profile');
           loadGraph(base_url, 'analytics/getCurrentService/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#retentiontraining');
           loadGraph(base_url, 'analytics/getTransferTraining/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#transfertraining');
 
 
@@ -1763,19 +1763,19 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
         case 'section-2':
           loadGraph(base_url, 'analytics/getCasesPresentation/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#casepresentation');
 
           loadGraph(base_url, 'analytics/getChildrenServices/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#serviceprovision');
 
           loadGraph(base_url, 'analytics/getDangerSigns/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#signsassessment');
 
-          loadGraph(base_url, 'analytics/getIndicatorFindings/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+          loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' +
+            criteria + '/' + value,
             '#signspresence');
 
 
@@ -1789,11 +1789,11 @@ function statisticsHandler(criteria, value, survey, survey_category,
         case 'section-6':
 
           loadGraph(base_url, 'analytics/getIMCIConsultation/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#consultationobserved');
 
           loadGraph(base_url, 'analytics/getIMCIInterview/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#interviewcaregiver');
 
 
@@ -1802,15 +1802,15 @@ function statisticsHandler(criteria, value, survey, survey_category,
         case 'section-7':
 
           loadGraph(base_url, 'analytics/getCertificationA/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#certificatesectionA');
 
           loadGraph(base_url, 'analytics/getCertificationB/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#certificatesectionB');
 
           loadGraph(base_url, 'analytics/getCertification/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
+            criteria + '/' + value,
             '#certification');
 
 

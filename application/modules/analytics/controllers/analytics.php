@@ -2546,8 +2546,8 @@ class Analytics extends MY_Controller
     }
 
 
-    public function getRetentionAfter($criteria, $value, $survey, $survey_category) {
-        $results = $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'wp', 'response');
+    public function getRetentionAfter($criteria, $value) {
+        $results = $this->getHCWQuestionStatistics($criteria, $value, 'wp', 'response');
 
         //echo "<pre>";print_r($results);echo "</pre>";die;
 
@@ -2555,8 +2555,8 @@ class Analytics extends MY_Controller
     }
 
 
-    public function getCurrentService($criteria, $value, $survey, $survey_category) {
-        $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'service');
+    public function getCurrentService($criteria, $value) {
+        $results = $this->getWorkProfile($criteria, $value, 'wp', 'service');
 
         //echo "<pre>";print_r($results);echo "</pre>";die;
 
@@ -2566,8 +2566,8 @@ class Analytics extends MY_Controller
 
 
 
-    public function getCasesPresentation($criteria, $value, $survey, $survey_category) {
-        $results = $this->getWorkProfile($criteria, $value, $survey, $survey_category, 'wp', 'response');
+    public function getCasesPresentation($criteria, $value) {
+        $results = $this->getWorkProfile($criteria, $value, 'wp', 'response');
     }
 
 
@@ -2580,8 +2580,8 @@ class Analytics extends MY_Controller
      * @param  [type] $for      [description]
      * @return [type]           [description]
      */
-    public function getWorkProfile($criteria, $value, $survey, $survey_category, $for, $statistics) {
-        $results = $this->analytics_model->getWorkProfile($criteria, $value, $survey, $survey_category, $for, $statistics);
+    public function getWorkProfile($criteria, $value, $for, $statistics) {
+        $results = $this->analytics_model->getWorkProfile($criteria, $value, $for, $statistics);
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
@@ -2676,7 +2676,7 @@ class Analytics extends MY_Controller
 
             }
              //$colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'question',$statistic,$color);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 130, 'bar', (int)sizeof($category),$for,'question',$statistic,$color);
 
     }
     }
@@ -2848,8 +2848,8 @@ class Analytics extends MY_Controller
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
 
-    public function getTransferTraining($criteria, $value, $survey, $survey_category) {
-        $results = $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'wp', 'transfer');
+    public function getTransferTraining($criteria, $value) {
+        $results = $this->getHCWQuestionStatistics($criteria, $value, 'wp', 'transfer');
     }
 
     /**
@@ -2918,6 +2918,98 @@ class Analytics extends MY_Controller
         }
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
+    }else{
+        $number = $resultArray = $q = $data= $gdata = $res =array();
+        $number = $resultArray = $q = $yes = $no = $null= array();
+        foreach ($results as $key => $value) {
+
+            $q[] = $key;
+            $data[]= $value;
+         }
+        foreach ($data as $k => $val) {
+            foreach ($val as $r => $value_) {
+                $gdata[$r][]=$value_;
+
+            }
+            }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gdata as $name => $value1) {
+            if($name=='No data' || $name==''){
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
+        }
+        $category = $q;
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+    }
+    }
+
+
+    /**
+     * [getHCWQuestionStatistics description]
+     * @param  [type] $criteria        [description]
+     * @param  [type] $value           [description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $for             [description]
+     * @param  [type] $statistics      [description]
+     * @return [type]                  [description]
+     */
+    public function getHCWQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
+        $results = $this->analytics_model->getHCWQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
+       //echo "<pre>";print_r($results);echo "</pre>";die;
+     if($statistics =='response' && $for == 'su'){
+           $number = $resultArray = $q = $data= $gdata = $res =array();
+        $number = $resultArray = $q = $yes = $no = $null= array();
+        foreach ($results as $key => $value) {
+             if ($count == 0):
+
+                $q[] = $key;
+            $data[]= $value;
+            endif;
+            $count++;
+
+         }
+        foreach ($data as $k => $val) {
+            foreach ($val as $r => $value_) {
+                $gdata[$r][]=$value_;
+
+            }
+            }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gdata as $name => $value1) {
+            if($name=='No data'){
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
+        }
+        $category = $q;
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+
+
+
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else if($statistics =='response' && $for == 'wp'){
            $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -3006,7 +3098,7 @@ class Analytics extends MY_Controller
         }
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -3043,6 +3135,9 @@ class Analytics extends MY_Controller
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }
     }
+
+
+
     public function getHSQuestions($criteria, $value, $survey, $survey_category, $for, $statistics) {
 
         $value = urldecode($value);
@@ -3168,20 +3263,20 @@ class Analytics extends MY_Controller
      * @param  [type] $survey_category [description]
      * @return [type]                  [description]
      */
-    public function getCertificationA($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certa', 'response');
+    public function getCertificationA($criteria, $value) {
+        $this->getHCWQuestionStatistics($criteria, $value, 'certa', 'response');
     }
 
-    public function getCertificationB($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certb', 'response');
+    public function getCertificationB($criteria, $value) {
+        $this->getHCWQuestionStatistics($criteria, $value, 'certb', 'response');
     }
 
-    public function getCertification($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
+    public function getCertification($criteria, $value) {
+        $this->getHCWQuestionStatistics($criteria, $value, 'out', 'response');
     }
 
-    // public function getWorkProfile($criteria, $value, $survey, $survey_category) {
-    //     $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'wp', 'response');
+    // public function getWorkProfile($criteria, $value) {
+    //     $this->getQuestionStatistics($criteria, $value, 'wp', 'response');
     // }
 
     /**
@@ -3455,8 +3550,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getIMCIInterview($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'int', 'response');
+    public function getIMCIInterview($criteria, $value) {
+        $this->getHCWQuestionStatistics($criteria, $value, 'int', 'response');
     }
 
     /**
@@ -3466,8 +3561,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getIMCIConsultation($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'obs', 'response');
+    public function getIMCIConsultation($criteria, $value) {
+        $this->getHCWQuestionStatistics($criteria, $value, 'obs', 'response');
     }
 
     /**
@@ -3478,7 +3573,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificate($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
+        $this->getHCWQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
     }
 
     /**
@@ -3584,6 +3679,81 @@ class Analytics extends MY_Controller
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category),'','','',$colors);
     }
     }
+
+
+      public function getHCWIndicatorStatistics($criteria, $value, $for, $statistics) {
+        $value = urldecode($value);
+        $results = $this->analytics_model->getHCWIndicatorStatistics($criteria, $value, $for, $statistics);
+        if($statistics=='response'){
+        // echo "<pre>"; print_r($results);echo "</pre>";die;
+        foreach ($results['response'] as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                //if ($name != 'NULL') {
+                    $data[$name][] = (int)$value;
+                //}
+            }
+        }
+        foreach ($data as $key => $val) {
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            $resultArray[] = array('name' => $key, 'data' => $val);
+
+            //echo "<pre>"; print_r($resultArray);echo "</pre>";die;
+
+
+        }
+        $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
+        $chart_margin = (sizeof($category > 5)) ? 70 : 70;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
+    }elseif ($statistics=='findings') {
+        foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if ($key == 'N/A') {
+                $name = 'No Data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            if($key=='No-Data'){
+                   $color='#dddddd';
+               }else if($key=='Present'){
+                    $color='#8bbc21';
+                 }else if($key=='Not-Present'){
+                     $color='#fb4347';
+                 }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category),'','','',$colors);
+    }
+    }
+
+
     public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
 
@@ -3766,8 +3936,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getChildrenServices($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc','response');
+    public function getChildrenServices($criteria, $value) {
+        $this->getHCWIndicatorStatistics($criteria, $value, 'svc','response');
     }
 
     /**
@@ -3777,8 +3947,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getDangerSigns($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','response');
+    public function getDangerSigns($criteria, $value) {
+        $this->getHCWIndicatorStatistics($criteria, $value, 'sgn','response');
     }
 
     public function getDangerFindings($criteria, $value, $survey, $survey_category) {
@@ -3972,8 +4142,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getIndicatorFindings($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
+    public function getHCWIndicatorFindings($criteria, $value) {
+        $this->getHCWIndicatorStatistics($criteria, $value, 'sgn','findings');
     }
 
     /**

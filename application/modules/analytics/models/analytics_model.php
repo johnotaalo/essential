@@ -1272,6 +1272,97 @@ WHERE
 
             return $this->dataSet;
         }
+
+
+        /**
+         * [getHCWIndicatorStatistics description]
+         * @param  [type] $criteria [description]
+         * @param  [type] $value    [description]
+         * @param  [type] $survey   [description]
+         * @param  [type] $for      [description]
+         * @return [type]           [description]
+         */
+        public function getHCWIndicatorStatistics($criteria, $value, $for, $statistic) {
+
+            /*using CI Database Active Record*/
+            $data = $data_set = $data_series = $analytic_var = $data_categories = array();
+            $data_y = array();
+            $data_n = array();
+
+            $query = "CALL get_hcw_indicator('" . $criteria . "','" . $value . "','" . $for . "','" . $statistic . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+
+                $queryData->next_result();
+
+                // Dump the extra resultset.
+                $queryData->free_result();
+
+                //echo $this->db->last_query();die;
+                if ($this->dataSet !== NULL) {
+
+                    //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    //prep data for the pie chart format
+                    $size = count($this->dataSet);
+                    $i = 0;
+
+                    // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    // foreach ($this->dataSet as $value) {
+                    //     if (array_key_exists('response', $value)) {
+                    //         $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                    //     }
+                    // }
+
+                    foreach ($this->dataSet as $value) {
+                        switch ($statistic) {
+                            case 'response':
+                                if (($value['response']) == '') {
+                                    $name = 'No data';
+                                    $value['response'] = $name;
+                                }
+                                $indicator = $value['indicator_name'];
+
+                                //echo $value['indicator'];die;
+                                $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
+
+                                $data['categories'] = array_keys($data['response']);
+                                break;
+
+                            case 'findings':
+                                if (array_key_exists('frequency', $value)) {
+                            $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                        }
+                                break;
+
+                        }
+
+                        //echo '<pre>';print_r($value);echo '</pre>';die;
+
+
+                    }
+                    $this->dataSet = $data;
+                     //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    return $this->dataSet;
+                } else {
+
+                    return $this->dataSet = null;
+                }
+
+                //die(var_dump($this->dataSet));
+            }
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());//exit;
+
+
+            }
+
+            return $this->dataSet;
+        }
+
+
         public function getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
 
             /*using CI Database Active Record*/
@@ -1731,7 +1822,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
          * @param  [type] $statistic [description]
          * @return [type]            [description]
          */
-        public function getWorkProfile($criteria, $value, $survey, $survey_category, $for, $statistics) {
+        public function getWorkProfile($criteria, $value, $for, $statistics) {
             $value = urldecode($value);
             $newData = array();
 
@@ -1740,7 +1831,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
             //data to hold the final data to relayed to the view,data_set to hold sets of data, analytic_var to hold the analytic variables to be used in the data_series,data_series to hold the title and the json encoded sets of the data_set
 
-            $query = "CALL get_work_profile('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistics . "');";
+            $query = "CALL get_work_profile('" . $criteria . "','" . $value . "','" . $for . "','" . $statistics . "');";
             try {
                 $queryData = $this->db->query($query, array($value));
                 $this->dataSet = $queryData->result_array();
@@ -4244,6 +4335,129 @@ ORDER BY question_code";
             // var_dump($data);die;
             return $data;
         }
+
+
+        public function getHCWQuestionStatistics($criteria, $value, $for, $statistics) {
+
+            /*using CI Database Active Record*/
+            $value = urldecode($value);
+            $data = array();
+            $count = 0;
+            $query = "CALL get_hcw_question('" . $criteria . "','" . $value . "','" . $for . "','" . $statistics . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+
+                // Dump the extra resultset.
+                $queryData->free_result();
+               // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                foreach ($this->dataSet as $value_) {
+                    if (array_key_exists('question_code', $value_)) {
+                        $question = $this->getQuestionName($value_['question_code']);
+                        foreach ($question as $value) {
+                             //echo '<pre>';print_r($question);echo '</pre>';die;
+                        }
+
+                    }
+
+       switch($for){
+                case 'cms':
+                    $question = substr($question, 16);
+                break;
+
+                case 'bed':
+                    $question = substr($question, 16);
+                break;
+
+                case'job':
+                    $question = substr($question, 22);
+                    $question = trim($question, 'an updated');
+                    $question = substr($question, 0,-9);
+                break;
+
+                case'imci':
+                    $question = substr($question, 0,-1);
+                break;
+
+                
+
+                case'gp':
+                $count=0;
+                    $question = substr($question, 23);
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'guide':
+                $count=0;
+                    $question = substr($question, 22);
+                    $question = trim($question, 'an updated National');
+                    $question = trim($question, 'Health');
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'ceoc':
+                    $question = substr($question, 18);
+                $question = trim($question, 'have a');
+                $question = substr($question, 0,-1);
+                break;
+
+                case'kang':
+                $question = substr($question, 0,-1);
+                break;
+
+                case'commi':
+                    $question = substr($question, 24);
+                    $question = trim($question, 'in the maternity unit');
+                    $question = substr($question, 0,-1);
+                break;
+
+                case'hiv':
+                   // $question = substr($question, 24);
+                $question = trim($question, 'Does this facility offer');
+                $question = substr($question, 0,-1);
+                break;
+
+                default:
+                     //echo 'Not Trimming';
+                break;
+
+                }
+
+
+                    switch ($statistics) {
+                        case 'response':
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+
+                        case 'reason':
+                            $question = $this->getQuestionName($value_['questions']);
+                            $data[$question][$value_['reason']] = $value_['total_response'];
+                            break;
+
+                        
+                    }
+
+
+
+              }
+            }
+
+
+            catch(exception $ex) {
+
+                //ignore
+                //die($ex->getMessage());//exit;
+
+
+            }
+            //echo '<pre>';print_r($data);echo '</pre>';die;
+            // var_dump($data);die;
+            return $data;
+        }
+
+
         public function getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, $for, $statistics) {
 
             /*using CI Database Active Record*/
