@@ -1181,6 +1181,12 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '#transfertraining');
           
           break;
+
+          case 'section-2':
+         loadGraph(base_url, 'analytics/getHcwServicesOffered/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#servicesoffered');
+         loadGraph(base_url, 'analytics/getHcwDangerSignsAssessment/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsAssessment');
+         loadGraph(base_url, 'analytics/getHcwDangerSignsPresence/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsPresence');
+          break;
       }
   }
 }

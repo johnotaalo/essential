@@ -1721,31 +1721,31 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Services Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_owner">
+                    <div class="chart" id="servicesoffered">
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_levels">
+                    <div class="chart" id="hcwdangersignsAssessment">
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Presence</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="facility_type"f>
+                    <div class="chart" id="hcwdangersignsPresence"f>
                     </div>
                 </div>
             </div>
@@ -1764,16 +1764,17 @@
     </div>
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="hcwindicator_types"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="hcwindicator_comparison">
+                        </div>
 
-                    <div class="chart" id="facility_owner">
                     </div>
                 </div>
-            </div>
             <div class="medium-graph">
                 <div class="portlet-title">
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
