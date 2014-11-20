@@ -59,6 +59,7 @@ class Auth extends MY_Controller
                     $this->template->mnch($this->data);
                 }
             } else {
+                
                 //use an ajax request and not a whole refresh
                 $data['title'] = 'MoH::Data Management Tool';
                 
@@ -73,7 +74,8 @@ class Auth extends MY_Controller
         }
     }
     public function doCheckFacilityCode() {
-         /**from the session data*/
+        
+        /**from the session data*/
         if (!$this->session->userdata('dName')) {
             redirect(base_url() . '/assessment', 'refresh');
             return true;
@@ -83,6 +85,7 @@ class Auth extends MY_Controller
         }
     }
     private function requestMFC() {
+        
         //use an ajax request and not a whole refresh
         $this->data['form'] = '<p>Facility Identification Required!<p>';
         $this->data['title'] = 'MoH Data Management Tool::Authentication';
@@ -103,14 +106,25 @@ class Auth extends MY_Controller
      * @return [type] [description]
      */
     public function admin() {
+
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'username', 'required|trim|xss_clean|unique[users.user_name]');
+        $this->form_validation->set_error_delimiters('<p class="error"><i class="icon ion-alert-circled"></i>', '</p>');
+        $this->form_validation->set_rules('username', 'username', 'required|trim|xss_clean|unique[users.user_name]|alpha');
         $this->form_validation->set_rules('password', 'password', 'required|trim|xss_clean');
         if ($this->form_validation->run() == false) {
             $errors = validation_errors();
-            echo json_encode($errors);
+            $result = array('message' => $errors, 'class' => 'error','status'=>'false');
         } else {
-            $result = $this->data_model->authorize();
+            $user = $this->data_model->authorize();
+            if ($user) {
+                // var_dump($user);die;
+                $result = array('message' => '<i class="icon ok sign"></i>User Found', 'class' => 'success','status'=>'true');
+                $this->session->set_userdata($user);
+            } else {
+                $result = array('message' => '<i class="icon ban circle"></i>Incorrect Credentials!', 'class' => 'error','status'=>'false');
+            }
         }
+         // $this->checkSession();die;
+        echo json_encode($result);
     }
-    
+}

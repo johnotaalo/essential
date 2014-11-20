@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Users extends MY_Controller{
+class Users_H extends MY_Controller{
   /**
   * Constructor Function
   */

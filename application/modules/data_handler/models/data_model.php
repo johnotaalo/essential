@@ -21,17 +21,18 @@ class Data_Model extends MY_Model{
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!=''){
+            if($key=='uploadDate'){
+              $value=date('l, d-m-Y',$value);
+            }
             $newResult[$key]=$value;
           }
         }
-
         unset($newResult['designation']);
         unset($newResult['department']);
         unset($newResult['dates']);
         unset($newResult['upload_date']);
         unset($newResult['cadre']);
         unset($newResult['activity_id']);
-        // $newResult['county']=$this->getFacilityCounty($result['mfl_code']);
         $newResults[]=$newResult;
       }
       break;

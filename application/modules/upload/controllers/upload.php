@@ -19,6 +19,9 @@ class Upload extends MY_Controller{
     $dataArr['posted'] = 0;
     $this->template->mnch($dataArr);
   }
+  function widget(){
+    $this->load->view('upload/upload_v');
+  }
 
   public function upload($activesheet = 0, $insert_table,$field,$value) {
     //convert .slk file to xlsx for upload
@@ -87,7 +90,7 @@ class Upload extends MY_Controller{
       $this->createAndSetProperties($data, $insert_table,$sheetName[$x],$field,$value);
 
       //echo $activity_id;die;
-      $data = $this->makeTable($data);
+      // $data = $this->makeTable($data);
     }
     $dataArr['uploaded'] = $data;
 
@@ -161,7 +164,7 @@ class Upload extends MY_Controller{
       $this->createAndSetProperties2($data, $insert_table,$sheetName[$x]);
 
       //echo $activity_id;die;
-      $data = $this->makeTable($data);
+      // $data = $this->makeTable($data);
     }
     $dataArr['uploaded'] = $data;
 
@@ -173,7 +176,7 @@ class Upload extends MY_Controller{
     $this->facility_upload(0,'facilities');
   }
   public function update_hcw(){
-    $this->upload(0,'hcwlist','names_of_participant','NAMES OF PARTICIPANT');
+    $this->upload(0,'hcw_list','id_number','ID Number');
   }
   /**
   * [clean description]
@@ -305,7 +308,7 @@ class Upload extends MY_Controller{
   public function createAndSetProperties($data, $insert_table, $source = '',$field,$value) {
     $dataTables = array($insert_table);
     $title = $data['title'];
-
+// echo '<pre>';print_r()
     //add to title
     $title[] = 'UPLOAD DATE';
     $rowCounter = 0;
@@ -313,11 +316,14 @@ class Upload extends MY_Controller{
     foreach ($dataTables as $table) {
 
       foreach ($data['data'] as $data1) {
+        R::ext('xdispense', function($type){
+ return R::getRedBean()->dispense( $type);
+});
         // echo $field.' '.$value;die;
         $currentTable = R::findOne($table,$field.'=?',array($data1[$value]));
         // echo '<pre>';print_r($currentTable);echo '</pre>';die;
         if(!$currentTable){
-          $currentTable = R::dispense($table);
+          $currentTable = R::xdispense($table);
         }
 
         //convert date to timestamp

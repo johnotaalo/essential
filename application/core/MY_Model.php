@@ -757,7 +757,7 @@ class MY_Model extends CI_Model
       }
       $result = $query->getArrayResult();
       // echo $this->db->last_query();die;
-      // var_dump($result);die;
+     // echo'<pre>'; print_r($result);die;
       return $result;
     }
     /**

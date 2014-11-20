@@ -1529,19 +1529,31 @@ h1, h2, h3, h4, h5, h6,
 }
 /* line 16, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 h1 small,
-h1 .small, h2 small,
-h2 .small, h3 small,
-h3 .small, h4 small,
-h4 .small, h5 small,
-h5 .small, h6 small,
+h1 .small,
+h1 table, h2 small,
+h2 .small,
+h2 table, h3 small,
+h3 .small,
+h3 table, h4 small,
+h4 .small,
+h4 table, h5 small,
+h5 .small,
+h5 table, h6 small,
 h6 .small,
+h6 table,
 .h1 small,
-.h1 .small, .h2 small,
-.h2 .small, .h3 small,
-.h3 .small, .h4 small,
-.h4 .small, .h5 small,
-.h5 .small, .h6 small,
-.h6 .small {
+.h1 .small,
+.h1 table, .h2 small,
+.h2 .small,
+.h2 table, .h3 small,
+.h3 .small,
+.h3 table, .h4 small,
+.h4 .small,
+.h4 table, .h5 small,
+.h5 .small,
+.h5 table, .h6 small,
+.h6 .small,
+.h6 table {
   font-weight: normal;
   line-height: 1;
   color: #999999;
@@ -1556,14 +1568,20 @@ h3, .h3 {
 }
 /* line 30, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 h1 small,
-h1 .small, .h1 small,
+h1 .small,
+h1 table, .h1 small,
 .h1 .small,
+.h1 table,
 h2 small,
-h2 .small, .h2 small,
+h2 .small,
+h2 table, .h2 small,
 .h2 .small,
+.h2 table,
 h3 small,
-h3 .small, .h3 small,
-.h3 .small {
+h3 .small,
+h3 table, .h3 small,
+.h3 .small,
+.h3 table {
   font-size: 65%;
 }
 
@@ -1576,14 +1594,20 @@ h6, .h6 {
 }
 /* line 41, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 h4 small,
-h4 .small, .h4 small,
+h4 .small,
+h4 table, .h4 small,
 .h4 .small,
+.h4 table,
 h5 small,
-h5 .small, .h5 small,
+h5 .small,
+h5 table, .h5 small,
 .h5 .small,
+.h5 table,
 h6 small,
-h6 .small, .h6 small,
-.h6 .small {
+h6 .small,
+h6 table, .h6 small,
+.h6 .small,
+.h6 table {
   font-size: 75%;
 }
 
@@ -1638,7 +1662,8 @@ p {
 
 /* line 78, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 small,
-.small {
+.small,
+table {
   font-size: 85%;
 }
 
@@ -1899,7 +1924,8 @@ blockquote ol:last-child {
 /* line 247, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 blockquote footer,
 blockquote small,
-blockquote .small {
+blockquote .small,
+blockquote table {
   display: block;
   font-size: 80%;
   line-height: 1.428571429;
@@ -1908,7 +1934,8 @@ blockquote .small {
 /* line 255, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 blockquote footer:before,
 blockquote small:before,
-blockquote .small:before {
+blockquote .small:before,
+blockquote table:before {
   content: '\2014 \00A0';
 }
 
@@ -1925,18 +1952,22 @@ blockquote.pull-right {
 .blockquote-reverse footer:before,
 .blockquote-reverse small:before,
 .blockquote-reverse .small:before,
+.blockquote-reverse table:before,
 blockquote.pull-right footer:before,
 blockquote.pull-right small:before,
-blockquote.pull-right .small:before {
+blockquote.pull-right .small:before,
+blockquote.pull-right table:before {
   content: '';
 }
 /* line 277, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_type.scss */
 .blockquote-reverse footer:after,
 .blockquote-reverse small:after,
 .blockquote-reverse .small:after,
+.blockquote-reverse table:after,
 blockquote.pull-right footer:after,
 blockquote.pull-right small:after,
-blockquote.pull-right .small:after {
+blockquote.pull-right .small:after,
+blockquote.pull-right table:after {
   content: '\00A0 \2014';
 }
 
@@ -11467,7 +11498,7 @@ Copyright (c) 2013 Daniel Eden
            Variations
 *******************************/
 /* line 57, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.breadcrumb, .ui.small#network, table.small#network, .small#network.paging_full_numbers, table.small.breadcrumb, .small#page-crumb, .small.breadcrumb.paging_full_numbers {
+.ui.small.breadcrumb, .ui.small#network, table#network, .small#network.paging_full_numbers, table.breadcrumb, table#page-crumb, .small#page-crumb, .small.breadcrumb.paging_full_numbers {
   font-size: 0.75em;
 }
 
@@ -13385,44 +13416,60 @@ table.form td.inline > :only-child,
 ---------------------*/
 /* Standard */
 /* line 639, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.form, table.small.form, .small.form#page-crumb, .small.form.paging_full_numbers {
+.ui.small.form, table.form, .small.form#page-crumb, table.form#page-crumb, .small.form.paging_full_numbers {
   font-size: 0.875em;
 }
 
 /* line 642, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.form textarea, table.small.form textarea, .small.form#page-crumb textarea, .small.form.paging_full_numbers textarea,
+.ui.small.form textarea, table.form textarea, .small.form#page-crumb textarea, table.form#page-crumb textarea, .small.form.paging_full_numbers textarea, table.form.paging_full_numbers textarea,
 .ui.small.form input[type="text"],
-table.small.form input[type="text"],
+table.form input[type="text"],
 .small.form#page-crumb input[type="text"],
+table.form#page-crumb input[type="text"],
 .small.form.paging_full_numbers input[type="text"],
+table.form.paging_full_numbers input[type="text"],
 .ui.small.form input[type="email"],
-table.small.form input[type="email"],
+table.form input[type="email"],
 .small.form#page-crumb input[type="email"],
+table.form#page-crumb input[type="email"],
 .small.form.paging_full_numbers input[type="email"],
+table.form.paging_full_numbers input[type="email"],
 .ui.small.form input[type="date"],
-table.small.form input[type="date"],
+table.form input[type="date"],
 .small.form#page-crumb input[type="date"],
+table.form#page-crumb input[type="date"],
 .small.form.paging_full_numbers input[type="date"],
+table.form.paging_full_numbers input[type="date"],
 .ui.small.form input[type="password"],
-table.small.form input[type="password"],
+table.form input[type="password"],
 .small.form#page-crumb input[type="password"],
+table.form#page-crumb input[type="password"],
 .small.form.paging_full_numbers input[type="password"],
+table.form.paging_full_numbers input[type="password"],
 .ui.small.form input[type="number"],
-table.small.form input[type="number"],
+table.form input[type="number"],
 .small.form#page-crumb input[type="number"],
+table.form#page-crumb input[type="number"],
 .small.form.paging_full_numbers input[type="number"],
+table.form.paging_full_numbers input[type="number"],
 .ui.small.form input[type="url"],
-table.small.form input[type="url"],
+table.form input[type="url"],
 .small.form#page-crumb input[type="url"],
+table.form#page-crumb input[type="url"],
 .small.form.paging_full_numbers input[type="url"],
+table.form.paging_full_numbers input[type="url"],
 .ui.small.form input[type="tel"],
-table.small.form input[type="tel"],
+table.form input[type="tel"],
 .small.form#page-crumb input[type="tel"],
+table.form#page-crumb input[type="tel"],
 .small.form.paging_full_numbers input[type="tel"],
+table.form.paging_full_numbers input[type="tel"],
 .ui.small.form label,
-table.small.form label,
+table.form label,
 .small.form#page-crumb label,
-.small.form.paging_full_numbers label {
+table.form#page-crumb label,
+.small.form.paging_full_numbers label,
+table.form.paging_full_numbers label {
   font-size: 1em;
 }
 
@@ -16180,7 +16227,7 @@ table.paging_full_numbers a.paginate_button > p:only-child,
 
 /* Resizes */
 /* line 1615, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.menu:not(.vertical) .item > .input input, table.small.menu:not(.vertical) .item > .input input, table.small.paging_full_numbers:not(.vertical) .item > .input input, .small.menu#page-crumb:not(.vertical) .item > .input input, .small#page-crumb.paging_full_numbers:not(.vertical) .item > .input input, .small.paging_full_numbers:not(.vertical) .item > .input input, .ui.small.menu:not(.vertical) a.paginate_button > .input input, table.small.menu:not(.vertical) a.paginate_button > .input input, table.small.paging_full_numbers:not(.vertical) a.paginate_button > .input input, .small.menu#page-crumb:not(.vertical) a.paginate_button > .input input, .small#page-crumb.paging_full_numbers:not(.vertical) a.paginate_button > .input input, .small.paging_full_numbers:not(.vertical) a.paginate_button > .input input {
+.ui.small.menu:not(.vertical) .item > .input input, table.menu:not(.vertical) .item > .input input, table.paging_full_numbers:not(.vertical) .item > .input input, .small.menu#page-crumb:not(.vertical) .item > .input input, table.menu#page-crumb:not(.vertical) .item > .input input, table#page-crumb.paging_full_numbers:not(.vertical) .item > .input input, .small#page-crumb.paging_full_numbers:not(.vertical) .item > .input input, .small.paging_full_numbers:not(.vertical) .item > .input input, .ui.small.menu:not(.vertical) a.paginate_button > .input input, table.menu:not(.vertical) a.paginate_button > .input input, table.paging_full_numbers:not(.vertical) a.paginate_button > .input input, .small.menu#page-crumb:not(.vertical) a.paginate_button > .input input, table.menu#page-crumb:not(.vertical) a.paginate_button > .input input, table#page-crumb.paging_full_numbers:not(.vertical) a.paginate_button > .input input, .small#page-crumb.paging_full_numbers:not(.vertical) a.paginate_button > .input input, .small.paging_full_numbers:not(.vertical) a.paginate_button > .input input {
   padding-top: 0.4em;
   padding-bottom: 0.4em;
 }
@@ -18843,12 +18890,12 @@ table.menu.fixed a.paginate_button:last-child,
      Sizes
 ---------------*/
 /* line 2790, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.menu .item, table.small.menu .item, table.small.paging_full_numbers .item, .small.menu#page-crumb .item, .small#page-crumb.paging_full_numbers .item, .small.paging_full_numbers .item, .ui.small.menu a.paginate_button, table.small.menu a.paginate_button, .small.menu#page-crumb a.paginate_button, .small#page-crumb.paging_full_numbers a.paginate_button, .small.paging_full_numbers a.paginate_button {
+.ui.small.menu .item, table.menu .item, table.paging_full_numbers .item, .small.menu#page-crumb .item, table.menu#page-crumb .item, table#page-crumb.paging_full_numbers .item, .small#page-crumb.paging_full_numbers .item, .small.paging_full_numbers .item, .ui.small.menu a.paginate_button, table.menu a.paginate_button, table.paging_full_numbers a.paginate_button, .small.menu#page-crumb a.paginate_button, table.menu#page-crumb a.paginate_button, table#page-crumb.paging_full_numbers a.paginate_button, .small#page-crumb.paging_full_numbers a.paginate_button, .small.paging_full_numbers a.paginate_button {
   font-size: 0.875rem;
 }
 
 /* line 2793, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.vertical.menu, table.small.vertical.menu, .small.vertical.menu#page-crumb, .small.vertical#page-crumb.paging_full_numbers, .small.vertical.paging_full_numbers {
+.ui.small.vertical.menu, table.vertical.menu, table.vertical.paging_full_numbers, .small.vertical.menu#page-crumb, table.vertical.menu#page-crumb, table.vertical#page-crumb.paging_full_numbers, .small.vertical#page-crumb.paging_full_numbers, .small.vertical.paging_full_numbers {
   width: 13rem;
 }
 
@@ -19212,7 +19259,7 @@ table.negative.message,
      Sizes
 ---------------*/
 /* line 3056, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.message, table.small.message, .small.message#page-crumb, .small.message.paging_full_numbers {
+.ui.small.message, table.message, .small.message#page-crumb, table.message#page-crumb, .small.message.paging_full_numbers {
   font-size: 0.875em;
 }
 
@@ -20226,7 +20273,7 @@ table.padded.paging_full_numbers td {
 ---------------*/
 /* Small */
 /* line 3568, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.table, table.small, .small.table#page-crumb, table.small#page-crumb, .small.table.paging_full_numbers {
+.ui.small.table, table, .small.table#page-crumb, table#page-crumb, .small.table.paging_full_numbers, table.paging_full_numbers {
   font-size: 0.875em;
 }
 
@@ -22080,14 +22127,17 @@ table.tiny.buttons .icon.button,
 }
 
 /* line 4835, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.buttons .button, table.small.buttons .button, .small.buttons#page-crumb .button, .small.buttons.paging_full_numbers .button,
+.ui.small.buttons .button, table.buttons .button, .small.buttons#page-crumb .button, table.buttons#page-crumb .button, .small.buttons.paging_full_numbers .button, table.buttons.paging_full_numbers .button,
 .ui.small.buttons .or,
-table.small.buttons .or,
+table.buttons .or,
 .small.buttons#page-crumb .or,
+table.buttons#page-crumb .or,
 .small.buttons.paging_full_numbers .or,
+table.buttons.paging_full_numbers .or,
 .ui.small.button,
-table.small.button,
+table.button,
 .small.button#page-crumb,
+table.button#page-crumb,
 .small.button.paging_full_numbers {
   font-size: 0.875rem;
 }
@@ -23369,6 +23419,10 @@ table.vertical.buttons .tiny.button:first-child,
 table.vertical.buttons .small.button:first-child,
 .vertical.buttons#page-crumb .small.button:first-child,
 .vertical.buttons.paging_full_numbers .small.button:first-child,
+.ui.vertical.buttons table.button:first-child,
+table.vertical.buttons table.button:first-child,
+.vertical.buttons#page-crumb table.button:first-child,
+.vertical.buttons.paging_full_numbers table.button:first-child,
 .ui.vertical.buttons .massive.button:first-child,
 table.vertical.buttons .massive.button:first-child,
 .vertical.buttons#page-crumb .massive.button:first-child,
@@ -23395,6 +23449,10 @@ table.vertical.buttons .tiny.button:last-child,
 table.vertical.buttons .small.button:last-child,
 .vertical.buttons#page-crumb .small.button:last-child,
 .vertical.buttons.paging_full_numbers .small.button:last-child,
+.ui.vertical.buttons table.button:last-child,
+table.vertical.buttons table.button:last-child,
+.vertical.buttons#page-crumb table.button:last-child,
+.vertical.buttons.paging_full_numbers table.button:last-child,
 .ui.vertical.buttons .massive.button:last-child,
 table.vertical.buttons .massive.button:last-child,
 .vertical.buttons#page-crumb .massive.button:last-child,
@@ -23745,7 +23803,7 @@ h5.ui.header, h5.header#page-crumb, h5.header.paging_full_numbers {
 }
 
 /* line 5802, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.header, table.small.header, .small.header#page-crumb, .small.header.paging_full_numbers {
+.ui.small.header, table.header, .small.header#page-crumb, table.header#page-crumb, .small.header.paging_full_numbers {
   font-size: 1.1em;
 }
 
@@ -26461,14 +26519,17 @@ table.mini.image,
 }
 
 /* line 7534, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.images .image, table.small.images .image, .small.images#page-crumb .image, .small.images.paging_full_numbers .image,
+.ui.small.images .image, table.images .image, .small.images#page-crumb .image, table.images#page-crumb .image, .small.images.paging_full_numbers .image, table.images.paging_full_numbers .image,
 .ui.small.images img,
-table.small.images img,
+table.images img,
 .small.images#page-crumb img,
+table.images#page-crumb img,
 .small.images.paging_full_numbers img,
+table.images.paging_full_numbers img,
 .ui.small.image,
-table.small.image,
+table.image,
 .small.image#page-crumb,
+table.image#page-crumb,
 .small.image.paging_full_numbers {
   width: 80px;
   font-size: 0.9rem;
@@ -26864,7 +26925,7 @@ table.action.input > .buttons > .button > .icon,
 }
 
 /* line 7804, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.input, table.small.input, .small.input#page-crumb, .small.input.paging_full_numbers {
+.ui.small.input, table.input, .small.input#page-crumb, table.input#page-crumb, .small.input.paging_full_numbers {
   font-size: 0.875em;
 }
 
@@ -28045,10 +28106,11 @@ table.pointing.above.label:before,
         Sizes
 --------------------*/
 /* line 8558, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.labels .label, table.small.labels .label, .small.labels#page-crumb .label, .small.labels.paging_full_numbers .label,
+.ui.small.labels .label, table.labels .label, .small.labels#page-crumb .label, table.labels#page-crumb .label, .small.labels.paging_full_numbers .label, table.labels.paging_full_numbers .label,
 .ui.small.label,
-table.small.label,
+table.label,
 .small.label#page-crumb,
+table.label#page-crumb,
 .small.label.paging_full_numbers {
   font-size: 0.75rem;
 }
@@ -28131,7 +28193,7 @@ table.huge.label,
 }
 
 /* line 8620, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.text.loader, table.small.text.loader, .small.text.loader#page-crumb, .small.text.loader.paging_full_numbers {
+.ui.small.text.loader, table.text.loader, .small.text.loader#page-crumb, table.text.loader#page-crumb, .small.text.loader.paging_full_numbers {
   min-width: 24px;
   padding-top: 2.5em;
   font-size: 0.875em;
@@ -28216,23 +28278,27 @@ table.inverted .mini.loader.paging_full_numbers,
 
 /* Small Size */
 /* line 8665, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.dimmer .small.ui.loader, table.dimmer .small.ui.loader, .dimmer#page-crumb .small.ui.loader, .dimmer.paging_full_numbers .small.ui.loader, .ui.dimmer table.small.loader, table.dimmer table.small.loader, .dimmer#page-crumb table.small.loader, .dimmer.paging_full_numbers table.small.loader, .ui.dimmer .small.loader#page-crumb, table.dimmer .small.loader#page-crumb, .dimmer#page-crumb .small.loader#page-crumb, .dimmer.paging_full_numbers .small.loader#page-crumb, .ui.dimmer .small.loader.paging_full_numbers, table.dimmer .small.loader.paging_full_numbers, .dimmer#page-crumb .small.loader.paging_full_numbers, .dimmer.paging_full_numbers .small.loader.paging_full_numbers,
+.ui.dimmer .small.ui.loader, table.dimmer .small.ui.loader, .dimmer#page-crumb .small.ui.loader, .dimmer.paging_full_numbers .small.ui.loader, .ui.dimmer table.loader, table.dimmer table.loader, .dimmer#page-crumb table.loader, .dimmer.paging_full_numbers table.loader, .ui.dimmer .small.loader#page-crumb, table.dimmer .small.loader#page-crumb, .dimmer#page-crumb .small.loader#page-crumb, .dimmer.paging_full_numbers .small.loader#page-crumb, .ui.dimmer table.loader#page-crumb, table.dimmer table.loader#page-crumb, .dimmer.paging_full_numbers table.loader#page-crumb, .ui.dimmer .small.loader.paging_full_numbers, table.dimmer .small.loader.paging_full_numbers, .dimmer#page-crumb .small.loader.paging_full_numbers, .dimmer.paging_full_numbers .small.loader.paging_full_numbers, .ui.dimmer table.loader.paging_full_numbers,
 .ui.inverted .small.ui.loader,
 table.inverted .small.ui.loader,
 .inverted#page-crumb .small.ui.loader,
 .inverted.paging_full_numbers .small.ui.loader,
-.ui.inverted table.small.loader,
-table.inverted table.small.loader,
-.inverted#page-crumb table.small.loader,
-.inverted.paging_full_numbers table.small.loader,
+.ui.inverted table.loader,
+table.inverted table.loader,
+.inverted#page-crumb table.loader,
+.inverted.paging_full_numbers table.loader,
 .ui.inverted .small.loader#page-crumb,
 table.inverted .small.loader#page-crumb,
 .inverted#page-crumb .small.loader#page-crumb,
 .inverted.paging_full_numbers .small.loader#page-crumb,
+.ui.inverted table.loader#page-crumb,
+table.inverted table.loader#page-crumb,
+.inverted.paging_full_numbers table.loader#page-crumb,
 .ui.inverted .small.loader.paging_full_numbers,
 table.inverted .small.loader.paging_full_numbers,
 .inverted#page-crumb .small.loader.paging_full_numbers,
-.inverted.paging_full_numbers .small.loader.paging_full_numbers {
+.inverted.paging_full_numbers .small.loader.paging_full_numbers,
+.ui.inverted table.loader.paging_full_numbers {
   background-image: url(../images/loader-small-inverted.gif);
 }
 
@@ -28285,10 +28351,11 @@ table.mini.loader,
 
 /* Small Size */
 /* line 8690, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.inverted.dimmer .ui.small.loader, table.inverted.dimmer .ui.small.loader, .inverted.dimmer#page-crumb .ui.small.loader, .inverted.dimmer.paging_full_numbers .ui.small.loader, .ui.inverted.dimmer table.small.loader, table.inverted.dimmer table.small.loader, .inverted.dimmer#page-crumb table.small.loader, .inverted.dimmer.paging_full_numbers table.small.loader, .ui.inverted.dimmer .small.loader#page-crumb, table.inverted.dimmer .small.loader#page-crumb, .inverted.dimmer#page-crumb .small.loader#page-crumb, .inverted.dimmer.paging_full_numbers .small.loader#page-crumb, .ui.inverted.dimmer .small.loader.paging_full_numbers, table.inverted.dimmer .small.loader.paging_full_numbers, .inverted.dimmer#page-crumb .small.loader.paging_full_numbers, .inverted.dimmer.paging_full_numbers .small.loader.paging_full_numbers,
+.ui.inverted.dimmer .ui.small.loader, table.inverted.dimmer .ui.small.loader, .inverted.dimmer#page-crumb .ui.small.loader, .inverted.dimmer.paging_full_numbers .ui.small.loader, .ui.inverted.dimmer table.loader, table.inverted.dimmer table.loader, .inverted.dimmer#page-crumb table.loader, .inverted.dimmer.paging_full_numbers table.loader, .ui.inverted.dimmer .small.loader#page-crumb, table.inverted.dimmer .small.loader#page-crumb, .inverted.dimmer#page-crumb .small.loader#page-crumb, .inverted.dimmer.paging_full_numbers .small.loader#page-crumb, .ui.inverted.dimmer table.loader#page-crumb, table.inverted.dimmer table.loader#page-crumb, .inverted.dimmer.paging_full_numbers table.loader#page-crumb, .ui.inverted.dimmer .small.loader.paging_full_numbers, table.inverted.dimmer .small.loader.paging_full_numbers, .inverted.dimmer#page-crumb .small.loader.paging_full_numbers, .inverted.dimmer.paging_full_numbers .small.loader.paging_full_numbers, .ui.inverted.dimmer table.loader.paging_full_numbers,
 .ui.small.loader,
-table.small.loader,
+table.loader,
 .small.loader#page-crumb,
+table.loader#page-crumb,
 .small.loader.paging_full_numbers {
   width: 24px;
   height: 24px;
@@ -28657,7 +28724,7 @@ table.progress.top.attached .bar,
      Sizes
 ---------------*/
 /* line 8971, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.progress .bar, table.small.progress .bar, .small.progress#page-crumb .bar, .small.progress.paging_full_numbers .bar {
+.ui.small.progress .bar, table.progress .bar, .small.progress#page-crumb .bar, table.progress#page-crumb .bar, .small.progress.paging_full_numbers .bar, table.progress.paging_full_numbers .bar {
   height: 14px;
 }
 
@@ -30130,11 +30197,13 @@ table.eight.steps,
              Sizes
 *******************************/
 /* line 9906, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.step, table.small.step, .small.step#page-crumb, .small.step.paging_full_numbers,
+.ui.small.step, table.step, .small.step#page-crumb, table.step#page-crumb, .small.step.paging_full_numbers,
 .ui.small.steps .step,
-table.small.steps .step,
+table.steps .step,
 .small.steps#page-crumb .step,
-.small.steps.paging_full_numbers .step {
+table.steps#page-crumb .step,
+.small.steps.paging_full_numbers .step,
+table.steps.paging_full_numbers .step {
   font-size: 0.8rem;
 }
 
@@ -32490,34 +32559,34 @@ table.selection.dropdown.error a.paginate_button,
 ---------------*/
 /* Small */
 /* line 11529, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.modal > .header, table.small.modal > .header, .small.modal#page-crumb > .header, .small.modal.paging_full_numbers > .header {
+.ui.small.modal > .header, table.modal > .header, .small.modal#page-crumb > .header, table.modal#page-crumb > .header, .small.modal.paging_full_numbers > .header, table.modal.paging_full_numbers > .header {
   font-size: 1.3em;
 }
 
 @media only screen and (min-width: 998px) {
   /* line 11533, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-  .ui.small.modal, table.small.modal, .small.modal#page-crumb, .small.modal.paging_full_numbers {
+  .ui.small.modal, table.modal, .small.modal#page-crumb, table.modal#page-crumb, .small.modal.paging_full_numbers {
     width: 58%;
     margin-left: -29%;
   }
 }
 @media only screen and (min-width: 1500px) {
   /* line 11539, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-  .ui.small.modal, table.small.modal, .small.modal#page-crumb, .small.modal.paging_full_numbers {
+  .ui.small.modal, table.modal, .small.modal#page-crumb, table.modal#page-crumb, .small.modal.paging_full_numbers {
     width: 40%;
     margin-left: -20%;
   }
 }
 @media only screen and (min-width: 1750px) {
   /* line 11545, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-  .ui.small.modal, table.small.modal, .small.modal#page-crumb, .small.modal.paging_full_numbers {
+  .ui.small.modal, table.modal, .small.modal#page-crumb, table.modal#page-crumb, .small.modal.paging_full_numbers {
     width: 26%;
     margin-left: -13%;
   }
 }
 @media only screen and (min-width: 2000px) {
   /* line 11551, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-  .ui.small.modal, table.small.modal, .small.modal#page-crumb, .small.modal.paging_full_numbers {
+  .ui.small.modal, table.modal, .small.modal#page-crumb, table.modal#page-crumb, .small.modal.paging_full_numbers {
     width: 20%;
     margin-left: -10%;
   }
@@ -32947,7 +33016,7 @@ table.visible.popup,
       Size
 ---------------*/
 /* line 11886, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.popup, table.small.popup, .small.popup#page-crumb, .small.popup.paging_full_numbers {
+.ui.small.popup, table.popup, .small.popup#page-crumb, table.popup#page-crumb, .small.popup.paging_full_numbers {
   font-size: 0.75rem;
 }
 
@@ -33138,7 +33207,7 @@ table.rating .icon.hover.active,
           Variations
 *******************************/
 /* line 12028, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.rating .icon, table.small.rating .icon, .small.rating#page-crumb .icon, .small.rating.paging_full_numbers .icon {
+.ui.small.rating .icon, table.rating .icon, .small.rating#page-crumb .icon, table.rating#page-crumb .icon, .small.rating.paging_full_numbers .icon, table.rating.paging_full_numbers .icon {
   font-size: 0.75rem;
 }
 
@@ -35581,7 +35650,7 @@ table.comments .comment .actions a:hover,
        Sizes
 ---------------------*/
 /* line 14104, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.comments, table.small.comments, .small.comments#page-crumb, .small.comments.paging_full_numbers {
+.ui.small.comments, table.comments, .small.comments#page-crumb, table.comments#page-crumb, .small.comments.paging_full_numbers {
   font-size: 0.875em;
 }
 
@@ -35733,17 +35802,17 @@ table.feed .extra,
             Variations
 *******************************/
 /* line 14211, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed, table.small.feed, .small.feed#page-crumb, .small.feed.paging_full_numbers {
+.ui.small.feed, table.feed, .small.feed#page-crumb, table.feed#page-crumb, .small.feed.paging_full_numbers {
   font-size: 0.875em;
 }
 
 /* line 14214, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .label img, table.small.feed .label img, .small.feed#page-crumb .label img, .small.feed.paging_full_numbers .label img {
+.ui.small.feed .label img, table.feed .label img, .small.feed#page-crumb .label img, table.feed#page-crumb .label img, .small.feed.paging_full_numbers .label img, table.feed.paging_full_numbers .label img {
   width: 2.5em;
 }
 
 /* line 14217, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .label .icon, table.small.feed .label .icon, .small.feed#page-crumb .label .icon, .small.feed.paging_full_numbers .label .icon {
+.ui.small.feed .label .icon, table.feed .label .icon, .small.feed#page-crumb .label .icon, table.feed#page-crumb .label .icon, .small.feed.paging_full_numbers .label .icon, table.feed.paging_full_numbers .label .icon {
   font-size: 1.25em;
 }
 
@@ -35753,22 +35822,22 @@ table.feed .extra,
 }
 
 /* line 14223, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .label + .content, table.small.feed .label + .content, .small.feed#page-crumb .label + .content, .small.feed.paging_full_numbers .label + .content {
+.ui.small.feed .label + .content, table.feed .label + .content, .small.feed#page-crumb .label + .content, table.feed#page-crumb .label + .content, .small.feed.paging_full_numbers .label + .content, table.feed.paging_full_numbers .label + .content {
   padding: 0.5em 0.5em 0;
 }
 
 /* line 14226, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .content .extra.images img, table.small.feed .content .extra.images img, .small.feed#page-crumb .content .extra.images img, .small.feed.paging_full_numbers .content .extra.images img {
+.ui.small.feed .content .extra.images img, table.feed .content .extra.images img, .small.feed#page-crumb .content .extra.images img, table.feed#page-crumb .content .extra.images img, .small.feed.paging_full_numbers .content .extra.images img, table.feed.paging_full_numbers .content .extra.images img {
   width: 5em;
 }
 
 /* line 14229, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .content .extra, table.small.feed .content .extra, .small.feed#page-crumb .content .extra, .small.feed.paging_full_numbers .content .extra {
+.ui.small.feed .content .extra, table.feed .content .extra, .small.feed#page-crumb .content .extra, table.feed#page-crumb .content .extra, .small.feed.paging_full_numbers .content .extra, table.feed.paging_full_numbers .content .extra {
   margin: 0.5em 0em 0em;
 }
 
 /* line 14232, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.feed .content .extra.text, table.small.feed .content .extra.text, .small.feed#page-crumb .content .extra.text, .small.feed.paging_full_numbers .content .extra.text {
+.ui.small.feed .content .extra.text, table.feed .content .extra.text, .small.feed#page-crumb .content .extra.text, table.feed#page-crumb .content .extra.text, .small.feed.paging_full_numbers .content .extra.text, table.feed.paging_full_numbers .content .extra.text {
   padding: 0.25em 0.5em;
 }
 
@@ -37707,7 +37776,7 @@ table.inverted.list.paging_full_numbers > .list {
 }
 
 /* line 15319, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.small.list .item, table.small.list .item, .small.list#page-crumb .item, .small.list.paging_full_numbers .item, .ui.small.list a.paginate_button, table.small.list a.paginate_button, .small.list#page-crumb a.paginate_button, .small.list.paging_full_numbers a.paginate_button {
+.ui.small.list .item, table.list .item, .small.list#page-crumb .item, table.list#page-crumb .item, .small.list.paging_full_numbers .item, table.list.paging_full_numbers .item, .ui.small.list a.paginate_button, table.list a.paginate_button, .small.list#page-crumb a.paginate_button, table.list#page-crumb a.paginate_button, .small.list.paging_full_numbers a.paginate_button {
   font-size: 0.875rem;
 }
 
@@ -37833,7 +37902,7 @@ body {
   font-weight: bold;
   float: right;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 1em;
 }
 /* line 85, ../sass/flat.scss */
 .tile h5 i.selected {
@@ -37938,7 +38007,7 @@ form label {
 }
 /* line 197, ../sass/flat.scss */
 #steps div {
-  font-size: 10px !important;
+  font-size: 1em !important;
   width: 100% !important;
 }
 
@@ -37973,139 +38042,139 @@ table {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-/* line 248, ../sass/flat.scss */
+/* line 249, ../sass/flat.scss */
 table td .progress {
   margin-bottom: 0;
 }
-/* line 250, ../sass/flat.scss */
+/* line 251, ../sass/flat.scss */
 table td .progress .progress-bar {
   margin-bottom: 0;
 }
-/* line 255, ../sass/flat.scss */
+/* line 256, ../sass/flat.scss */
 table td {
   max-width: 200px !important;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-/* line 256, ../sass/flat.scss */
+/* line 257, ../sass/flat.scss */
 table td .progress {
   width: 150px;
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 267, ../sass/flat.scss */
+/* line 268, ../sass/flat.scss */
 .begin:hover {
   cursor: hand;
 }
 
-/* line 270, ../sass/flat.scss */
+/* line 271, ../sass/flat.scss */
 .instruction {
   background: #ffeacc;
 }
 
-/* line 273, ../sass/flat.scss */
+/* line 274, ../sass/flat.scss */
 .message.success {
   padding: 0.5%;
   background: #ecf0f1;
 }
 
-/* line 277, ../sass/flat.scss */
+/* line 278, ../sass/flat.scss */
 #sectionNavigation {
   width: 40%;
   margin: auto;
 }
-/* line 280, ../sass/flat.scss */
+/* line 281, ../sass/flat.scss */
 #sectionNavigation input {
   width: 45%;
   display: inline-block;
 }
 
-/* line 290, ../sass/flat.scss */
+/* line 291, ../sass/flat.scss */
 .x-large-graph .portlet-body {
   height: 500px;
   overflow-y: auto;
 }
 
-/* line 298, ../sass/flat.scss */
+/* line 299, ../sass/flat.scss */
 .large-graph .portlet-body {
   height: 500px;
   overflow-y: auto;
 }
 
-/* line 306, ../sass/flat.scss */
+/* line 307, ../sass/flat.scss */
 .medium-graph .portlet-body {
   height: 300px;
   overflow-y: auto;
 }
 
-/* line 316, ../sass/flat.scss */
+/* line 317, ../sass/flat.scss */
 .small-graph .outer .inner {
   background: #428bca;
   padding: 6px 12px;
 }
-/* line 322, ../sass/flat.scss */
+/* line 323, ../sass/flat.scss */
 .small-graph .outer .inner i.main {
   color: white;
 }
-/* line 330, ../sass/flat.scss */
+/* line 331, ../sass/flat.scss */
 .small-graph .outer .inner .content {
   color: white;
   padding: 0;
   height: 13%;
 }
-/* line 335, ../sass/flat.scss */
+/* line 336, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit {
   width: 100%;
   height: 80%;
   text-align: right;
   margin-bottom: 0;
 }
-/* line 341, ../sass/flat.scss */
+/* line 342, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit span {
   cursor: pointer;
 }
-/* line 344, ../sass/flat.scss */
+/* line 345, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit span:hover {
   cursor: hand;
 }
-/* line 349, ../sass/flat.scss */
+/* line 350, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit #finished {
   color: lawngreen;
 }
-/* line 352, ../sass/flat.scss */
+/* line 353, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit #not-finished {
   color: moccasin;
 }
-/* line 355, ../sass/flat.scss */
+/* line 356, ../sass/flat.scss */
 .small-graph .outer .inner .content .digit #not-started {
   color: lightpink;
 }
-/* line 359, ../sass/flat.scss */
+/* line 360, ../sass/flat.scss */
 .small-graph .outer .inner .content .text {
   text-align: right;
 }
-/* line 364, ../sass/flat.scss */
+/* line 365, ../sass/flat.scss */
 .small-graph .outer .link {
   cursor: pointer;
   background: #e7e7e7;
   color: #333;
 }
-/* line 369, ../sass/flat.scss */
+/* line 370, ../sass/flat.scss */
 .small-graph .outer .link i {
-  padding-right: 10px;
+  padding-right: 1em;
 }
-/* line 373, ../sass/flat.scss */
+/* line 374, ../sass/flat.scss */
 .small-graph .outer .link:hover {
   cursor: hand;
 }
 
-/* line 385, ../sass/flat.scss */
+/* line 386, ../sass/flat.scss */
 .semi-large-graph .portlet-body {
   height: 300px;
 }
 
-/* line 393, ../sass/flat.scss */
+/* line 394, ../sass/flat.scss */
 .standard-graph .portlet-title h6, .x-large-graph .portlet-title h6, .large-graph .portlet-title h6, .medium-graph .portlet-title h6, .small-graph .portlet-title h6, .semi-large-graph .portlet-title h6 {
   margin-bottom: 0;
   padding: 5px 7.5px;
@@ -38113,7 +38182,7 @@ table td .progress {
   background-color: whitesmoke;
   border-color: #e7e7e7;
 }
-/* line 399, ../sass/flat.scss */
+/* line 400, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .graph-title, .x-large-graph .portlet-title h6 .graph-title, .large-graph .portlet-title h6 .graph-title, .medium-graph .portlet-title h6 .graph-title, .small-graph .portlet-title h6 .graph-title, .semi-large-graph .portlet-title h6 .graph-title {
   display: inline-block;
   max-width: 50%;
@@ -38121,125 +38190,125 @@ table td .progress {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* line 402, ../sass/flat.scss */
+/* line 403, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .statistic, .x-large-graph .portlet-title h6 .statistic, .large-graph .portlet-title h6 .statistic, .medium-graph .portlet-title h6 .statistic, .small-graph .portlet-title h6 .statistic, .semi-large-graph .portlet-title h6 .statistic {
   display: inline-block;
   font-weight: normal;
 }
-/* line 406, ../sass/flat.scss */
+/* line 407, ../sass/flat.scss */
 .standard-graph .portlet-title h6 i, .x-large-graph .portlet-title h6 i, .large-graph .portlet-title h6 i, .medium-graph .portlet-title h6 i, .small-graph .portlet-title h6 i, .semi-large-graph .portlet-title h6 i {
   padding-right: 5px;
 }
-/* line 409, ../sass/flat.scss */
+/* line 410, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .statistic-free, .x-large-graph .portlet-title h6 .statistic-free, .large-graph .portlet-title h6 .statistic-free, .medium-graph .portlet-title h6 .statistic-free, .small-graph .portlet-title h6 .statistic-free, .semi-large-graph .portlet-title h6 .statistic-free {
   font-weight: normal;
   padding-right: 2%;
 }
-/* line 413, ../sass/flat.scss */
+/* line 414, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .compare, .x-large-graph .portlet-title h6 .compare, .large-graph .portlet-title h6 .compare, .medium-graph .portlet-title h6 .compare, .small-graph .portlet-title h6 .compare, .semi-large-graph .portlet-title h6 .compare {
   width: 30%;
   float: right;
   color: #999;
   cursor: pointer;
 }
-/* line 419, ../sass/flat.scss */
+/* line 420, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .compare:hover, .x-large-graph .portlet-title h6 .compare:hover, .large-graph .portlet-title h6 .compare:hover, .medium-graph .portlet-title h6 .compare:hover, .small-graph .portlet-title h6 .compare:hover, .semi-large-graph .portlet-title h6 .compare:hover {
   color: #333333;
   cursor: hand;
 }
-/* line 426, ../sass/flat.scss */
+/* line 427, ../sass/flat.scss */
 .standard-graph .portlet-body, .x-large-graph .portlet-body, .large-graph .portlet-body, .medium-graph .portlet-body, .small-graph .portlet-body, .semi-large-graph .portlet-body {
   overflow-y: auto;
 }
 
-/* line 432, ../sass/flat.scss */
+/* line 433, ../sass/flat.scss */
 #sectionList li a {
   padding: 5px 7.5px !important;
 }
 
-/* line 437, ../sass/flat.scss */
+/* line 438, ../sass/flat.scss */
 #reporting {
   overflow-y: auto;
   height: 300px;
   width: 97%;
-  padding: 10px;
+  padding: 1em;
 }
 
-/* line 444, ../sass/flat.scss */
+/* line 445, ../sass/flat.scss */
 #countyHeader {
   width: 35%;
 }
 
-/* line 447, ../sass/flat.scss */
+/* line 448, ../sass/flat.scss */
 #countyHeader, #progressHeader {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 451, ../sass/flat.scss */
+/* line 452, ../sass/flat.scss */
 #progressHeader {
   width: 64%;
 }
 
-/* line 454, ../sass/flat.scss */
+/* line 455, ../sass/flat.scss */
 .progressRow {
-  padding-top: 10px;
+  padding-top: 1em;
   border-bottom: 1px solid #ddd;
 }
-/* line 457, ../sass/flat.scss */
+/* line 458, ../sass/flat.scss */
 .progressRow label, .progressRow div {
   display: inline-block;
   vertical-align: top;
 }
-/* line 461, ../sass/flat.scss */
+/* line 462, ../sass/flat.scss */
 .progressRow label {
   width: 40%;
-  line-height: 10px;
+  line-height: 1em;
   margin-bottom: 5px;
 }
-/* line 466, ../sass/flat.scss */
+/* line 467, ../sass/flat.scss */
 .progressRow .progress {
   margin-bottom: 0;
   width: 55%;
 }
 
-/* line 472, ../sass/flat.scss */
+/* line 473, ../sass/flat.scss */
 #reportingLabel {
   width: 30%;
   margin-bottom: 0 !important;
 }
 
-/* line 476, ../sass/flat.scss */
+/* line 477, ../sass/flat.scss */
 #reportingLabel #reportingBar {
   width: 60%;
   margin-bottom: 0 !important;
 }
 
-/* line 480, ../sass/flat.scss */
+/* line 481, ../sass/flat.scss */
 #reportingLabel #reportingBar .progressRow {
   border-bottom: none;
 }
 
-/* line 484, ../sass/flat.scss */
+/* line 485, ../sass/flat.scss */
 #county_select_label select {
   max-width: 55% !important;
   height: auto;
   margin-bottom: 0 !important;
 }
 
-/* line 490, ../sass/flat.scss */
+/* line 491, ../sass/flat.scss */
 #reportingBar {
   display: inline-block;
   max-width: 70% !important;
   margin-bottom: 0 !important;
 }
 
-/* line 496, ../sass/flat.scss */
+/* line 497, ../sass/flat.scss */
 .statistic {
   display: block;
   margin-bottom: 5px;
 }
-/* line 499, ../sass/flat.scss */
+/* line 500, ../sass/flat.scss */
 .statistic .icon {
   vertical-align: top;
   display: inline-block;
@@ -38247,7 +38316,7 @@ table td .progress {
   background: #428bca;
   color: white;
 }
-/* line 507, ../sass/flat.scss */
+/* line 508, ../sass/flat.scss */
 .statistic .icon span {
   display: table-cell;
   width: 50px;
@@ -38255,163 +38324,163 @@ table td .progress {
   vertical-align: middle;
   text-align: center;
 }
-/* line 512, ../sass/flat.scss */
+/* line 513, ../sass/flat.scss */
 .statistic .icon span i {
   font-size: 1.5em;
 }
-/* line 518, ../sass/flat.scss */
+/* line 519, ../sass/flat.scss */
 .statistic .data {
-  margin-left: 10px;
+  margin-left: 1em;
   display: inline-block;
   vertical-align: top;
 }
-/* line 521, ../sass/flat.scss */
+/* line 522, ../sass/flat.scss */
 .statistic .data .text, .statistic .data .data {
   display: block;
   text-align: center;
 }
-/* line 528, ../sass/flat.scss */
+/* line 529, ../sass/flat.scss */
 .statistic #county_name {
   margin-top: 10%;
 }
 
-/* line 534, ../sass/flat.scss */
+/* line 535, ../sass/flat.scss */
 h4.page-title {
   padding-left: 15px;
 }
 
-/* line 538, ../sass/flat.scss */
+/* line 539, ../sass/flat.scss */
 h4 {
   padding-left: 15px;
 }
 
-/* line 547, ../sass/flat.scss */
+/* line 548, ../sass/flat.scss */
 .breadcrumb, #network, #page-crumb {
   border-color: #e7e7e7 !important;
 }
-/* line 549, ../sass/flat.scss */
+/* line 550, ../sass/flat.scss */
 .breadcrumb .ui.button, #network .ui.button, #page-crumb .ui.button, .breadcrumb table.button, #network table.button, #page-crumb table.button, .breadcrumb .button#page-crumb, #network .button#page-crumb, #page-crumb .button#page-crumb, .breadcrumb .button.paging_full_numbers, #network .button.paging_full_numbers, #page-crumb .button.paging_full_numbers {
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 551, ../sass/flat.scss */
+/* line 552, ../sass/flat.scss */
 .breadcrumb .ui.button a, #network .ui.button a, #page-crumb .ui.button a, .breadcrumb table.button a, #network table.button a, #page-crumb table.button a, .breadcrumb .button#page-crumb a, #network .button#page-crumb a, #page-crumb .button#page-crumb a, .breadcrumb .button.paging_full_numbers a, #network .button.paging_full_numbers a, #page-crumb .button.paging_full_numbers a {
   color: #555 !important;
 }
-/* line 555, ../sass/flat.scss */
+/* line 556, ../sass/flat.scss */
 .breadcrumb .ui.label, #network .ui.label, #page-crumb .ui.label, .breadcrumb table.label, #network table.label, #page-crumb table.label, .breadcrumb .label#page-crumb, #network .label#page-crumb, #page-crumb .label#page-crumb, .breadcrumb .label.paging_full_numbers, #network .label.paging_full_numbers, #page-crumb .label.paging_full_numbers {
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 558, ../sass/flat.scss */
+/* line 559, ../sass/flat.scss */
 .breadcrumb .ui.dropdown, #network .ui.dropdown, #page-crumb .ui.dropdown, .breadcrumb table.dropdown, #network table.dropdown, #page-crumb table.dropdown, .breadcrumb .dropdown#page-crumb, #network .dropdown#page-crumb, #page-crumb .dropdown#page-crumb, .breadcrumb .dropdown.paging_full_numbers, #network .dropdown.paging_full_numbers, #page-crumb .dropdown.paging_full_numbers {
   font-size: 14px;
 }
-/* line 560, ../sass/flat.scss */
+/* line 561, ../sass/flat.scss */
 .breadcrumb .ui.dropdown .menu, #network .ui.dropdown .menu, #page-crumb .ui.dropdown .menu, .breadcrumb table.dropdown .menu, #network table.dropdown .menu, #page-crumb table.dropdown .menu, .breadcrumb .dropdown#page-crumb .menu, #network .dropdown#page-crumb .menu, #page-crumb .dropdown#page-crumb .menu, .breadcrumb .dropdown.paging_full_numbers .menu, #network .dropdown.paging_full_numbers .menu, #page-crumb .dropdown.paging_full_numbers .menu, .breadcrumb .ui.dropdown .paging_full_numbers, #network .ui.dropdown .paging_full_numbers, #page-crumb .ui.dropdown .paging_full_numbers, .breadcrumb table.dropdown .paging_full_numbers, #network table.dropdown .paging_full_numbers, #page-crumb table.dropdown .paging_full_numbers, .breadcrumb .dropdown#page-crumb .paging_full_numbers, #network .dropdown#page-crumb .paging_full_numbers, #page-crumb .dropdown#page-crumb .paging_full_numbers, .breadcrumb .dropdown.paging_full_numbers .paging_full_numbers, #network .dropdown.paging_full_numbers .paging_full_numbers, #page-crumb .dropdown.paging_full_numbers .paging_full_numbers {
   font-size: 12px !important;
 }
 
-/* line 565, ../sass/flat.scss */
+/* line 566, ../sass/flat.scss */
 #page_sidebar {
   border-right: 1px solid #e7e7e7;
   height: 100%;
   padding: 0;
   padding-left: 15px;
 }
-/* line 571, ../sass/flat.scss */
+/* line 572, ../sass/flat.scss */
 #page_sidebar h6 {
-  padding: 10px 15px;
+  padding: 1em 15px;
   background: #e7e7e7;
   margin-bottom: 0;
 }
 
-/* line 577, ../sass/flat.scss */
+/* line 578, ../sass/flat.scss */
 .container-fluid {
   padding: 0 !important;
 }
 
-/* line 580, ../sass/flat.scss */
+/* line 581, ../sass/flat.scss */
 h6 {
   font-size: 16px;
 }
 
-/* line 584, ../sass/flat.scss */
+/* line 585, ../sass/flat.scss */
 .panel {
   border: none !important;
 }
 
-/* line 592, ../sass/flat.scss */
+/* line 593, ../sass/flat.scss */
 ul.sub li a {
   border-radius: 0 !important;
 }
-/* line 597, ../sass/flat.scss */
+/* line 598, ../sass/flat.scss */
 ul.sub li.active a {
   background: whitesmoke !important;
   color: #333;
 }
 
-/* line 607, ../sass/flat.scss */
+/* line 608, ../sass/flat.scss */
 .panel-heading h4 a i {
   float: right;
   color: #333;
 }
 
-/* line 614, ../sass/flat.scss */
+/* line 615, ../sass/flat.scss */
 .panel-heading.active {
   background-color: #428bca;
   color: white;
 }
-/* line 617, ../sass/flat.scss */
+/* line 618, ../sass/flat.scss */
 .panel-heading.active i {
   color: white;
 }
 
-/* line 622, ../sass/flat.scss */
+/* line 623, ../sass/flat.scss */
 .panel-body {
   padding: 0 !important;
 }
-/* line 625, ../sass/flat.scss */
+/* line 626, ../sass/flat.scss */
 .panel-body li a {
   color: #428bca !important;
 }
-/* line 627, ../sass/flat.scss */
+/* line 628, ../sass/flat.scss */
 .panel-body li a i {
   float: right;
   color: #999;
 }
 
-/* line 643, ../sass/flat.scss */
+/* line 644, ../sass/flat.scss */
 .btn-primary, .map-info button, #sectionNavigation input, h6.table-header span button {
   background: #428bca !important;
   border-color: #27ae60 !important;
 }
 
-/* line 647, ../sass/flat.scss */
+/* line 648, ../sass/flat.scss */
 .select .btn .filter-option, .select .map-header .btn-group button .filter-option, .map-header .btn-group .select button .filter-option, .select .map-info button .filter-option, .map-info .select button .filter-option, .select form button .filter-option, form .select button .filter-option, .select #logout .filter-option, .select #sectionNavigation input .filter-option, #sectionNavigation .select input .filter-option, .select h6.table-header span button .filter-option, h6.table-header span .select button .filter-option {
   top: 5px !important;
 }
 
-/* line 650, ../sass/flat.scss */
+/* line 651, ../sass/flat.scss */
 .open > .dropdown-arrow {
   display: none !important;
 }
 
-/* line 654, ../sass/flat.scss */
+/* line 655, ../sass/flat.scss */
 .breadcrumb .dropdown-menu, #network .dropdown-menu, #page-crumb .dropdown-menu {
   width: 100% !important;
   top: 100% !important;
   font-size: 14px !important;
 }
-/* line 659, ../sass/flat.scss */
+/* line 660, ../sass/flat.scss */
 .breadcrumb .dropdown-toggle, #network .dropdown-toggle, #page-crumb .dropdown-toggle {
   font-size: 14px;
   width: 200px !important;
 }
-/* line 663, ../sass/flat.scss */
+/* line 664, ../sass/flat.scss */
 .breadcrumb li.selected, #network li.selected, #page-crumb li.selected {
   color: white !important;
 }
 
-/* line 668, ../sass/flat.scss */
+/* line 669, ../sass/flat.scss */
 .loader,
 .loader:before,
 .loader:after {
@@ -38422,7 +38491,7 @@ ul.sub li.active a {
   height: 4em;
 }
 
-/* line 677, ../sass/flat.scss */
+/* line 678, ../sass/flat.scss */
 .loader:before,
 .loader:after {
   position: absolute;
@@ -38430,12 +38499,12 @@ ul.sub li.active a {
   content: '';
 }
 
-/* line 683, ../sass/flat.scss */
+/* line 684, ../sass/flat.scss */
 .loader:before {
   left: -1.5em;
 }
 
-/* line 686, ../sass/flat.scss */
+/* line 687, ../sass/flat.scss */
 .loader {
   text-indent: -9999em;
   margin: 8em auto;
@@ -38445,7 +38514,7 @@ ul.sub li.active a {
   animation-delay: -0.16s;
 }
 
-/* line 694, ../sass/flat.scss */
+/* line 695, ../sass/flat.scss */
 .loader:after {
   left: 1.5em;
   -webkit-animation-delay: -0.32s;
@@ -38476,179 +38545,179 @@ ul.sub li.active a {
     height: 5em;
   }
 }
-/* line 725, ../sass/flat.scss */
+/* line 726, ../sass/flat.scss */
 .null_message {
   line-height: 200px;
   text-align: center;
   color: crimson;
 }
-/* line 729, ../sass/flat.scss */
+/* line 730, ../sass/flat.scss */
 .null_message i {
   padding-right: 5px;
 }
 
-/* line 735, ../sass/flat.scss */
+/* line 736, ../sass/flat.scss */
 .select2-container {
   width: 100%;
 }
 
-/* line 739, ../sass/flat.scss */
+/* line 740, ../sass/flat.scss */
 #DataTables_Table_0_wrapper {
   padding: 1% !important;
 }
 
-/* line 744, ../sass/flat.scss */
+/* line 745, ../sass/flat.scss */
 .paging_full_numbers {
   float: right;
 }
 
-/* line 750, ../sass/flat.scss */
+/* line 751, ../sass/flat.scss */
 a.paginate_button {
   font-size: 12px !important;
 }
 
-/* line 754, ../sass/flat.scss */
+/* line 755, ../sass/flat.scss */
 .dataTables_length {
   width: 200px;
   display: inline-block;
   vertical-align: top;
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 759, ../sass/flat.scss */
+/* line 760, ../sass/flat.scss */
 .dataTables_length label {
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 761, ../sass/flat.scss */
+/* line 762, ../sass/flat.scss */
 .dataTables_length label select {
-  font-size: 10px !important;
+  font-size: 1em !important;
   display: inherit;
   width: 50px !important;
   padding: 0 !important;
 }
 
-/* line 770, ../sass/flat.scss */
+/* line 771, ../sass/flat.scss */
 .dataTables_filter {
-  font-size: 10px !important;
+  font-size: 1em !important;
   display: inline-block;
   vertical-align: top;
   float: right;
 }
-/* line 775, ../sass/flat.scss */
+/* line 776, ../sass/flat.scss */
 .dataTables_filter label {
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 777, ../sass/flat.scss */
+/* line 778, ../sass/flat.scss */
 .dataTables_filter label input {
-  font-size: 10px !important;
+  font-size: 1em !important;
   display: initial;
   width: 200px;
 }
 
-/* line 786, ../sass/flat.scss */
+/* line 787, ../sass/flat.scss */
 .dataTables_info, .paging_full_numbers {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 790, ../sass/flat.scss */
+/* line 791, ../sass/flat.scss */
 .dataTables_info {
-  font-size: 10px;
+  font-size: 1em;
 }
 
-/* line 794, ../sass/flat.scss */
+/* line 795, ../sass/flat.scss */
 .editable-click:hover {
   cursor: hand !important;
 }
 
-/* line 797, ../sass/flat.scss */
+/* line 798, ../sass/flat.scss */
 .modal {
   z-index: 2000000000000000000000000;
 }
 
-/* line 801, ../sass/flat.scss */
+/* line 802, ../sass/flat.scss */
 .sizer, .show-collapse {
   float: right;
   color: #ccc;
   cursor: pointer;
 }
 
-/* line 806, ../sass/flat.scss */
+/* line 807, ../sass/flat.scss */
 .sizer:hover, .show-collapse:hover {
   color: #333;
   cursor: hand;
 }
 
-/* line 811, ../sass/flat.scss */
+/* line 812, ../sass/flat.scss */
 #graph {
   height: 300px;
   overflow: auto;
 }
 
-/* line 815, ../sass/flat.scss */
+/* line 816, ../sass/flat.scss */
 h6.table-header {
   margin-bottom: 2px !important;
   padding: 5px 7.5px;
   background: #e7e7e7;
 }
-/* line 819, ../sass/flat.scss */
+/* line 820, ../sass/flat.scss */
 h6.table-header span {
   padding-left: 30%;
 }
-/* line 821, ../sass/flat.scss */
+/* line 822, ../sass/flat.scss */
 h6.table-header span button {
   margin-left: 5px;
 }
 
-/* line 830, ../sass/flat.scss */
+/* line 831, ../sass/flat.scss */
 .analytics_row {
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 1em;
+  padding-top: 1em;
   margin-bottom: 0;
   border-top: 1px solid #ddd !important;
   box-shadow: none !important;
 }
-/* line 837, ../sass/flat.scss */
+/* line 838, ../sass/flat.scss */
 .analytics_row .panel-heading {
   border-top: 1px solid #ddd;
   background-color: #fff !important;
   border: none;
 }
-/* line 841, ../sass/flat.scss */
+/* line 842, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title {
   padding-left: 0;
   margin-bottom: 5px !important;
 }
-/* line 845, ../sass/flat.scss */
+/* line 846, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title a {
   text-decoration: none !important;
 }
-/* line 848, ../sass/flat.scss */
+/* line 849, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title i {
   color: inherit;
-  padding-left: 10px;
+  padding-left: 1em;
 }
-/* line 855, ../sass/flat.scss */
+/* line 856, ../sass/flat.scss */
 .analytics_row .panel-collapse .panel-body {
   border: none !important;
   box-shadow: 0;
 }
 
-/* line 863, ../sass/flat.scss */
+/* line 864, ../sass/flat.scss */
 .activity, .status {
-  font-size: 10px !important;
+  font-size: 1em !important;
 }
-/* line 865, ../sass/flat.scss */
+/* line 866, ../sass/flat.scss */
 .activity .activity-text, .status .activity-text {
   font-style: italic;
   font-weight: bold;
 }
 
-/* line 870, ../sass/flat.scss */
+/* line 871, ../sass/flat.scss */
 .status {
   float: right;
 }
 
-/* line 874, ../sass/flat.scss */
+/* line 875, ../sass/flat.scss */
 #district_progress {
   display: inline-block;
   vertical-align: middle;
@@ -38661,7 +38730,7 @@ h6.table-header span button {
 /**
  * Image Styles
  */
-/* line 889, ../sass/flat.scss */
+/* line 890, ../sass/flat.scss */
 img#coat_of_arms {
   width: 8%;
 }
@@ -38669,17 +38738,17 @@ img#coat_of_arms {
 /**
  * Banner Styles
  */
-/* line 896, ../sass/flat.scss */
+/* line 897, ../sass/flat.scss */
 img#coat_of_arms, #description {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 901, ../sass/flat.scss */
+/* line 902, ../sass/flat.scss */
 #description #project_name {
   margin-bottom: 0;
 }
-/* line 905, ../sass/flat.scss */
+/* line 906, ../sass/flat.scss */
 #description #ministry {
   font-weight: 800;
 }

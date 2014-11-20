@@ -80,7 +80,7 @@ body{
             font-weight:bold;
             float:right;
             cursor:pointer;
-            margin-left:10px;
+            margin-left:1em;
         }
         i.selected{
             color:antiquewhite;
@@ -195,7 +195,7 @@ width: 100%;
     width:20%;
     z-index:100000000 !important;
     div{
-        font-size:10px !important;
+        font-size:1em !important;
         width:100% !important;
 
     }
@@ -242,6 +242,7 @@ table{
     @extend .table;
     @extend .segment;
     @extend .celled;
+     @extend .small;
     margin-top:1em;
     margin-bottom:1em;
     td{
@@ -367,7 +368,7 @@ height:80%;
             color:#333;
              @extend .col-md-12;
              i{
-                padding-right:10px;
+                padding-right:1em;
              }
         }
     .link:hover{
@@ -438,7 +439,7 @@ height:80%;
     overflow-y: auto;
     height: 300px;
     width: 97%;
-    padding: 10px;
+    padding: 1em;
 }
 
 #countyHeader {
@@ -452,7 +453,7 @@ height:80%;
     width: 64%;
 }
 .progressRow {
-    padding-top:10px;
+    padding-top:1em;
     border-bottom: 1px solid #ddd;
     label,div{
         display:inline-block;
@@ -460,7 +461,7 @@ height:80%;
     }
     label{
         width:40%;
-        line-height: 10px;
+        line-height: 1em;
         margin-bottom: 5px;
     }
     .progress{
@@ -517,7 +518,7 @@ height:80%;
     }
     .data{
 
-        margin-left:10px;
+        margin-left:1em;
         .text,.data{
             display:block;
             text-align: center;
@@ -547,13 +548,13 @@ h4{
 .breadcrumb{
     border-color: $my-grey !important;
     .ui.button{
-        font-size:10px !important;
+        font-size:1em !important;
         a{
             color:#555 !important;
         }
     }
 .ui.label{
-        font-size:10px !important;
+        font-size:1em !important;
     }
     .ui.dropdown{
         font-size:14px;
@@ -569,7 +570,7 @@ h4{
     padding:0;
     padding-left:15px;
     h6{
-        padding:10px 15px;
+        padding:1em 15px;
         background: $my-grey;
         margin-bottom:0;
     }
@@ -755,11 +756,11 @@ a.paginate_button{
     width:200px;
     display:inline-block;
     vertical-align:top;
-    font-size:10px !important;
+    font-size:1em !important;
     label{
-        font-size:10px !important;
+        font-size:1em !important;
         select{
-            font-size:10px !important;
+            font-size:1em !important;
             display:inherit;
             width:50px !important;
             padding:0 !important;
@@ -768,14 +769,14 @@ a.paginate_button{
     }
 }
 .dataTables_filter{
-    font-size:10px !important;
+    font-size:1em !important;
     display:inline-block;
     vertical-align:top;
     float:right;
     label{
-        font-size:10px !important;
+        font-size:1em !important;
         input{
-            font-size:10px !important;
+            font-size:1em !important;
             display: initial;
             width:200px;
 
@@ -788,7 +789,7 @@ a.paginate_button{
   vertical-align:top;
 }
 .dataTables_info{
-    font-size:10px;
+    font-size:1em;
 }
 //X-editable
 .editable-click:hover{
@@ -828,8 +829,8 @@ h6.table-header{
 }
 //Hijacking Panels
 .analytics_row{
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 1em;
+  padding-top: 1em;
   @extend .col-md-12;
   margin-bottom:0;
     border-top: 1px solid #ddd !important;
@@ -847,7 +848,7 @@ h6.table-header{
             }
             i{
                 color:inherit;
-                padding-left:10px;
+                padding-left:1em;
             }
         }
     }
@@ -861,7 +862,7 @@ h6.table-header{
 }
 //Activity
 .activity{
-    font-size:10px !important;
+    font-size:1em !important;
     .activity-text{
         font-style: italic;
         font-weight: bold;

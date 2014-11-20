@@ -2,13 +2,14 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Supplies extends MY_Controller{
+class HCW_H extends MY_Controller{
   /**
   * Constructor Function
   */
   public function __construct() {
     parent::__construct();
     $this->load->model('data_model');
+    $this->load->module('export');
   }
   /**
   * [create description]
@@ -22,24 +23,33 @@ class Supplies extends MY_Controller{
   * @param  [type] $form [description]
   * @return [type]       [description]
   */
-  public function read($form){
-    $data = $this->data_model->get('supplies');
+  public function read($form,$identifier=''){
+    // echo $identifier;die;
+    $data = $this->data_model->get('hcw');
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'Supplies List',$form);
-    // var_dump($raw['data']);
-    if($form=='datatable' || $form=='x-datatable' ){
+    $raw['data']=$this->export->generate($data,'HCW List',$form,$identifier);
+
+    if($form=='datatable' || $form=='x-datatable'){
+      $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
     }
   }
   /**
   * [update description]
-  * @param  [type] $id [description]
-  * @return [type]     [description]
+  * @return [type] [description]
   */
-  public function update($id){
-    $data = $this->data_model->get('supplies',$id);
+  public function update(){
+    $data = $this->input->post();
+    $table ='models\Entities\HcwList';
+    $field = $this->input->post('name');
+    $value = $this->input->post('value');
+    $primary_key = 'id';
+    $primary_value = $this->input->post('pk');
+    // echo $table.' '.$field.' '.$value.' '.$primary_key.' '.$primary_value;die;
+    $this->data_model->updateField($table,$field,$value,$primary_key,$primary_value);
+    // $data = $this->data_model->get('hcw',$id);
 
   }
   /**
@@ -48,7 +58,7 @@ class Supplies extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('supplies',$id);
+    $data = $this->data_model->get('hcw',$id);
 
   }
   /**

@@ -10,11 +10,11 @@ class Admin extends MY_Controller{
     parent::__construct();
 
     $this->load->module('data_handler/indicators_h');
-    $this->load->module('data_handler/hcw');
-    $this->load->module('data_handler/equipment');
-    $this->load->module('data_handler/supplies');
+    $this->load->module('data_handler/hcw_h');
+    $this->load->module('data_handler/equipment_h');
+    $this->load->module('data_handler/supplies_h');
     $this->load->module('data_handler/questions_h');
-    $this->load->module('data_handler/users');
+    $this->load->module('data_handler/users_h');
     $this->load->module('template');
   }
   public function home(){
@@ -32,13 +32,13 @@ class Admin extends MY_Controller{
   public function get($object,$form,$identifier=''){
     switch($object){
       case 'hcw':
-        $this->hcw->read($form,$identifier);
+        $this->hcw_h->read($form,$identifier);
           break;
       case 'equipment':
-        $this->equipment->read($form,$identifier);
+        $this->equipment_h->read($form,$identifier);
           break;
       case 'supplies':
-        $this->supplies->read($form,$identifier);
+        $this->supplies_h->read($form,$identifier);
           break;
       case 'questions':
         $this->questions_h->read($form,$identifier);
@@ -47,7 +47,7 @@ class Admin extends MY_Controller{
         $this->indicators_h->read($form,$identifier);
           break;
       case 'users':
-        $this->users->read($form,$identifier);
+        $this->users_h->read($form,$identifier);
           break;
     }
   }
@@ -61,19 +61,19 @@ class Admin extends MY_Controller{
   public function edit($object){
     switch($object){
       case 'hcw':
-        $this->hcw->update();
+        $this->hcw_h->update();
           break;
       case 'equipment':
-        $this->equipment->update();
+        $this->equipment_h->update();
           break;
       case 'supplies':
-        $this->supplies->update();
+        $this->supplies_h->update();
           break;
       case 'questions':
-        $this->questions->update();
+        $this->questions_h->update();
           break;
       case 'indicators':
-        $this->indicators->update();
+        $this->indicators_h->update();
           break;
     }
   }

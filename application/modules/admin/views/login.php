@@ -86,11 +86,14 @@ function post(){
       },
       success: function(data) {
         obj = jQuery.parseJSON(data);
-        console.log(obj);
         $('form').addClass('error');
 
         $('.message').addClass(obj.class);
-        $('.message').text(obj.message);
+        $('.message').html(obj.message);
+
+        if(obj.status=='true'){
+          window.location.href=base_url+'admin/home'
+        }
         
         
       },

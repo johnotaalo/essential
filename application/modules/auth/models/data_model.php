@@ -37,13 +37,7 @@ class Data_Model extends MY_Model
          * @var array
          */
         $user = $query->getArrayResult();
-        $this->session->set_userdata($user);
         
-        if ($user) {
-            $result = array('message' => 'User Found', 'class' => 'success');
-        } else {
-            $result = array('message' => 'User Not Found!', 'class' => 'error');
-        }
-        echo json_encode($result);
+        return $user;
     }
 }

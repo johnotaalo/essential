@@ -49,7 +49,7 @@
                             <a href="http://www.health-cmp.or.ke"><i class="icon ion-ios7-box"></i>HCMP</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('admin/login'); ?>" id="upload"><i class="icon ion-gear-a"></i>Admin</a>
+                            <a href="<?php echo base_url('admin/login'); ?>"><i class="icon ion-gear-a"></i>Admin</a>
                         </li>
                     </ul>
 
