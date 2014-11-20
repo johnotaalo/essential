@@ -1214,7 +1214,7 @@ WHERE
                     $size = count($this->dataSet);
                     $i = 0;
 
-                    // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                     
                     // foreach ($this->dataSet as $value) {
                     //     if (array_key_exists('response', $value)) {
                     //         $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1222,6 +1222,7 @@ WHERE
                     // }
 
                     foreach ($this->dataSet as $value) {
+                        //echo '<pre>';print_r($value);echo '</pre>';die;
                         switch ($statistic) {
                             case 'response':
                                 if (($value['response']) == '') {
@@ -1244,6 +1245,13 @@ WHERE
                                 if (array_key_exists('frequency', $value)) {
                             $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
                         }
+                                break;
+                            case 'hcwservice':
+                            $data[$value['indicator_name']][$value['li_hcwResponse']] = (int)$value['total'];
+                        
+                                break;
+                            case 'hcwdangersigns':
+                            $data[$value['indicator_name']][$value['li_hcwFindings']] = (int)$value['total'];
                                 break;
 
                         }
@@ -1401,6 +1409,10 @@ WHERE
                             case 'assessment':
                             $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
                             break;
+
+                            case 'hcwcorrectness':
+                              $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                                break;
 
                         }
                         

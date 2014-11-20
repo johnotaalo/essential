@@ -3605,11 +3605,12 @@ class Analytics extends MY_Controller
      * @param  [type] $for      [description]
      * @return [type]           [description]
      */
-    public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
+    public function getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $value = urldecode($value);
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-        if($statistics=='response'){
-        // echo "<pre>"; print_r($results);echo "</pre>";die;
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
+       //echo "<pre>"; print_r($results);echo "</pre>";die;
+        if($statistic=='response'){
+         //echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
 
             $key = str_replace('_', ' ', $key);
@@ -3648,7 +3649,89 @@ class Analytics extends MY_Controller
         $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
         $chart_margin = (sizeof($category > 5)) ? 70 : 70;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
-    }elseif ($statistics=='findings') {
+    }elseif ($statistic=='findings') {
+        //echo "<pre>"; print_r($results);echo "</pre>";die;
+        foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if (($key == 'N/A')) {
+                $name = 'No Data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            if(($key=='No-Data')){
+                   $color='#dddddd';
+               }else if($key=='Present'){
+                    $color='#8bbc21';
+                 }else if($key=='Not-Present'){
+                     $color='#fb4347';
+                 }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category),'','','',$colors);
+    }elseif (($statistic=='hcwservice' && $for == 'svc') || ($statistic=='hcwservice' && $for == 'sgn')) {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, '', '', $for, $statistic);
+        //echo "<pre>"; print_r($results);echo "</pre>";die;
+        foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if (($key == 'N/A')) {
+                $name = 'No Data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            if(($key=='No-Data')){
+                   $color='#dddddd';
+               }else if($key=='Yes'){
+                    $color='#8bbc21';
+                 }else if($key=='No'){
+                     $color='#fb4347';
+                 }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category),'','','',$colors);
+    }elseif (($statistic=='hcwdangersigns' && $for == 'sgn')) {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, '', '', $for, $statistic);
         //echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results as $key => $result) {
 
@@ -3772,6 +3855,15 @@ class Analytics extends MY_Controller
         // echo "<pre>";print_r($results);echo "</pre>";die;
         echo $this->generateData($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
+    public function getHcwServicesOffered($criteria, $value, $survey, $survey_category, $for ,$statistic){
+    	$this->getIndicatorStatistics($criteria,$value,'','','svc','hcwservice');
+    }
+    public function getHcwDangerSignsAssessment($criteria, $value, $survey, $survey_category, $for ,$statistic){
+        $this->getIndicatorStatistics($criteria,$value,'','','sgn','hcwservice');
+    }
+    public function getHcwDangerSignsPresence($criteria, $value, $survey, $survey_category, $for ,$statistic){
+        $this->getIndicatorStatistics($criteria,$value,'','','sgn','hcwdangersigns');
+    }
     /**
      * [getIndicatorComparison description]
      * @param  [type] $criteria        [description]
@@ -3843,7 +3935,31 @@ class Analytics extends MY_Controller
        // echo '<pre>';print_r($resultArray);echo '</pre>';die;
 
          $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
-    }  
+    }elseif($statistic == 'hcwcorrectness'){
+       // echo '<pre>';print_r($results);echo '</pre>';die;
+        foreach ($results as $indicator => $values) {
+            $category[] = $indicator;
+            foreach ($values as $verdict => $answer) {
+                $gData[$verdict][] = $answer;
+            }
+        }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gData as $name => $data) {
+            if($name == 'correct'){ 
+                  $color='#8bbc21';
+                }else if($name=='incorrect'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => $name, 'data' => $data, 'color' => $color);
+        }
+
+       // echo '<pre>';print_r($resultArray);echo '</pre>';die;
+         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+    }   
     }
     public function getAssessmentComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
         $value = urldecode($value);
@@ -3888,6 +4004,18 @@ class Analytics extends MY_Controller
                         $value['il_full_name']= 'Malnutrition';
                     }
                 $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+     public function getHCWIndicatorTypes() {
+        $results = $this->analytics_model->getIndicatorTypes();
+
+       //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+           if (($value['il_for'] == 'pne') ||($value['il_for'] == 'dgn') || ($value['il_for'] == 'fev') || ($value['il_for'] == 'ear')) {
+                 $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
             }
         }
         echo $options;

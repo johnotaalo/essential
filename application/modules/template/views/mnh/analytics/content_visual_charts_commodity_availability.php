@@ -1709,6 +1709,7 @@
         <div class="panel-body">
             <div class="medium-graph" >
                 <div class="portlet-title">
+<<<<<<< HEAD
 
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Cases Presentation</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
@@ -1726,30 +1727,51 @@
 
                     <div class="chart" id="serviceprovision">
 
+=======
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Services Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="servicesoffered">
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
+<<<<<<< HEAD
                     <div class="chart" id="signsassessment"f>
 
+=======
+                    <div class="chart" id="hcwdangersignsAssessment">
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
                     </div>
                 </div>
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Presence</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
+<<<<<<< HEAD
                     <div class="chart" id="signspresence"f>
 
+=======
+                    <div class="chart" id="hcwdangersignsPresence"f>
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
                     </div>
                 </div>
             </div>
@@ -1768,6 +1790,7 @@
     </div>
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
+<<<<<<< HEAD
 
 
            <div class="semi-large-graph">
@@ -1779,6 +1802,24 @@
                         <p>Please Select main symptom/condition above to load the graph</p>
                         <div class="chart" id="assessment_comparison1">
                         </div>
+=======
+            <div class="semi-large-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="hcwindicator_types"></select></span></h6>
+                    </div>
+                    <div class="portlet-body">
+                        <p>Please Select main symptom/condition above to load the graph</p>
+                        <div class="chart" id="hcwindicator_comparison">
+                        </div>
+
+                    </div>
+                </div>
+            <div class="medium-graph">
+                <div class="portlet-title">
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">..</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+>>>>>>> 3e00607d2bc18ed5313a6a06d4f016eac724e2aa
 
                     </div>
                 </div>
