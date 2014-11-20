@@ -24,6 +24,10 @@ class Data_Model extends MY_Model{
             if($key=='uploadDate'){
               $value=date('l, d-m-Y',$value);
             }
+            if($key=='mflCode'){
+                $newResult['county']=$this->getFacilityCounty($value);
+            }
+          
             $newResult[$key]=$value;
           }
         }
@@ -34,7 +38,9 @@ class Data_Model extends MY_Model{
         unset($newResult['cadre']);
         unset($newResult['activity_id']);
         $newResults[]=$newResult;
+
       }
+       // print_r($newResults);die;
       break;
 
       case 'equipment':
