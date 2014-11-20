@@ -4309,15 +4309,14 @@ ORDER BY question_code";
 
                         case 'location':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
-<<<<<<< HEAD
-=======
+
                             break;
                         case 'hcwRetention':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total'];
                             break;
                         case 'hcwTransfer':
                         $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
->>>>>>> b9c95ac58ef61472fbee3193b00b03bc67cea815
+
                             break;
                         case 'reason_raw':
                         case 'response_raw':

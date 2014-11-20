@@ -1747,13 +1747,10 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/profile_raw/table',
 
             '#HCW_Profile');
-<<<<<<< HEAD
-          loadGraph(base_url, 'analytics/getCurrentService/' +
-            criteria + '/' + value,
-=======
+
           loadGraph(base_url, 'analytics/getServiceUnit/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
->>>>>>> b9c95ac58ef61472fbee3193b00b03bc67cea815
+
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
             criteria + '/' + value,
