@@ -428,7 +428,7 @@ ORDER BY lq.lq_response ASC";
                           break;
                         case 'treatment_raw':
                           $treatments=explode(',',$value['lt_treatments']);
-                          foreach($treatments as $treatment){
+                          foreach($treatments as $treatment){                                                                                                                          
                             /**
                              * Initialize Array to be formatted
                              * @var array
@@ -1761,9 +1761,9 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('fully_functional', $value)) {
-                            $data[$value['equipment_name']]['functional']+= (int)$value['fully_functional'];
-                            $data[$value['equipment_name']]['nonfunctional']+= (int)$value['non_functional'];
+                        } else if (array_key_exists('functional', $value)) {
+                            $data[$value['equipment_name']]['functional']+= (int)$value['functional'];
+                            $data[$value['equipment_name']]['non_functional']+= (int)$value['non_functional'];
                         }
                     }
                 }
@@ -1985,7 +1985,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
 
                         }
                         else{
-                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -2817,11 +2817,11 @@ ORDER BY f.fac_county ASC;";
         //     return $finalData;
         // }
 
-        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
 
-            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
 
@@ -2831,12 +2831,12 @@ ORDER BY f.fac_county ASC;";
             return $finalData;
         }
 
-        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
 
                 $myData = $this->db->query($query);
 
@@ -2857,12 +2857,12 @@ ORDER BY f.fac_county ASC;";
             }
             return $finalData;
         }
-        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
+        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','".$statistic."');";
 
                 $myData = $this->db->query($query);
 
@@ -4195,7 +4195,7 @@ ORDER BY question_code";
 
                 // Dump the extra resultset.
                 $queryData->free_result();
-               // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
@@ -4309,8 +4309,16 @@ ORDER BY question_code";
 
                         case 'location':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
+<<<<<<< HEAD
+=======
                             break;
-
+                        case 'hcwRetention':
+                            $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total'];
+                            break;
+                        case 'hcwTransfer':
+                        $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
+>>>>>>> b9c95ac58ef61472fbee3193b00b03bc67cea815
+                            break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4488,6 +4496,9 @@ ORDER BY question_code";
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']]+= (int)$value_['total_response'];
+                            break;
+                        case 'hcwServiceUnit':
+                            $data[$value_['response']][$value_['serviceUnit_name']] = (int)$value_['total'];
                             break;
                     }
 

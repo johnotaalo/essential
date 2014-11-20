@@ -1544,13 +1544,13 @@ function statisticsHandler(criteria, value, survey, survey_category,
     case 'ch':
       switch (section) {
         case 'section-1':
-          loadGraph(base_url, 'analytics/getFacilityOwnerPerCounty/' +
+          loadGraph(base_url, 'analytics/getFacilityOwnership/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#facility_owner');
-          loadGraph(base_url, 'analytics/getFacilityLevelPerCounty/' +
+          loadGraph(base_url, 'analytics/getFacilityLevel/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#facility_levels');
-          loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
+          loadGraph(base_url, 'analytics/getFacilitytype/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#facility_type');
           loadGraph(base_url, 'analytics/getTrainedStaff/' + criteria + '/' +
@@ -1747,8 +1747,13 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/profile_raw/table',
 
             '#HCW_Profile');
+<<<<<<< HEAD
           loadGraph(base_url, 'analytics/getCurrentService/' +
             criteria + '/' + value,
+=======
+          loadGraph(base_url, 'analytics/getServiceUnit/' +
+            criteria + '/' + value + '/' + survey + '/' + survey_category,
+>>>>>>> b9c95ac58ef61472fbee3193b00b03bc67cea815
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
             criteria + '/' + value,
