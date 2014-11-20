@@ -3260,16 +3260,16 @@ class Analytics extends MY_Controller
      * @param  [type] $survey_category [description]
      * @return [type]                  [description]
      */
-    public function getCertificationA($criteria, $value) {
-        $this->getHCWQuestionStatistics($criteria, $value, 'certa', 'response');
+    public function getCertificationA($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certa', 'response');
     }
 
-    public function getCertificationB($criteria, $value) {
-        $this->getHCWQuestionStatistics($criteria, $value, 'certb', 'response');
+    public function getCertificationB($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certb', 'response');
     }
 
-    public function getCertification($criteria, $value) {
-        $this->getHCWQuestionStatistics($criteria, $value, 'out', 'response');
+    public function getCertification($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, '', '', 'out', 'response');
     }
 
     // public function getWorkProfile($criteria, $value) {
@@ -3558,8 +3558,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getIMCIConsultation($criteria, $value) {
-        $this->getHCWQuestionStatistics($criteria, $value, 'obs', 'response');
+    public function getIMCIConsultation($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, '', '', 'obs', 'response');
     }
 
     /**
@@ -3570,7 +3570,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificate($criteria, $value, $survey, $survey_category) {
-        $this->getHCWQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'out', 'response');
     }
 
     /**
