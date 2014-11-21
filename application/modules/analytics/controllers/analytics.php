@@ -3094,6 +3094,41 @@ class Analytics extends MY_Controller
         $category = $q;
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar', '', $for, 'question', $statistics,$colors);
+    }elseif ($statistics=='hcwresponse') {
+        $results = $this->analytics_model->getQuestionStatistics($criteria, $value, '', '', $for, $statistics);
+        $number = $resultArray = $q = $data= $gdata = $res =array();
+        $number = $resultArray = $q = $yes = $no = $null= array();
+        foreach ($results as $key => $value) {
+
+            $q[] = $key;
+            $data[]= $value;
+         }
+        foreach ($data as $k => $val) {
+            foreach ($val as $r => $value_) {
+                $gdata[$r][]=$value_;
+
+            }
+            }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gdata as $name => $value1) {
+            if($name=='No data' || $name==''){
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
+        }
+        $category = $q;
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics,$colors);
     }else{
         $number = $resultArray = $q = $data= $gdata = $res =array();
         $number = $resultArray = $q = $yes = $no = $null= array();
@@ -3547,8 +3582,8 @@ class Analytics extends MY_Controller
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-    public function getIMCIInterview($criteria, $value) {
-        $this->getHCWQuestionStatistics($criteria, $value, 'int', 'response');
+    public function getIMCIInterview($criteria, $value,$survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value,'', '', 'int', 'response');
     }
 
     /**
@@ -3595,6 +3630,10 @@ class Analytics extends MY_Controller
         $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certb', 'response');
     }
 
+
+    public function getHCWIndicatorFindings($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, '', '', $for, 'hcwresponse');
+    }
 
 
     /**
@@ -3651,6 +3690,46 @@ class Analytics extends MY_Controller
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type,'',$for,'indicator','','');
     }elseif ($statistic=='findings') {
         //echo "<pre>"; print_r($results);echo "</pre>";die;
+        foreach ($results as $key => $result) {
+
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $category[] = $key;
+            foreach ($result as $name => $value) {
+                if ($name != '') {
+                    $data[$name][] = (int)$value;
+                }
+            }
+        }
+         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($data as $key => $val) {
+            if (($key == 'N/A')) {
+                $name = 'No Data';
+                $key = $name;
+            }
+            $key = str_replace('_', ' ', $key);
+            $key = ucwords($key);
+            $key = str_replace(' ', '-', $key);
+            if(($key=='No-Data')){
+                   $color='#dddddd';
+               }else if($key=='Present'){
+                    $color='#8bbc21';
+                 }else if($key=='Not-Present'){
+                     $color='#fb4347';
+                 }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val,'color'=>$color);
+
+            }
+             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category),'','','',$colors);
+    }elseif ($statistic=='hcwfindings') {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, '', '', $for, $statistic);
         foreach ($results as $key => $result) {
 
             $key = str_replace('_', ' ', $key);
@@ -3944,7 +4023,7 @@ class Analytics extends MY_Controller
 
          $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
     }elseif($statistic == 'hcwcorrectness'){
-       // echo '<pre>';print_r($results);echo '</pre>';die;
+       $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for,$statistic);
         foreach ($results as $indicator => $values) {
             $category[] = $indicator;
             foreach ($values as $verdict => $answer) {
@@ -4315,16 +4394,7 @@ class Analytics extends MY_Controller
         $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'cert','response');
     }
 
-    /**
-     * [getIndicatorFindings description]
-     * @param  [type] $criteria [description]
-     * @param  [type] $value    [description]
-     * @param  [type] $survey   [description]
-     * @return [type]           [description]
-     */
-    public function getHCWIndicatorFindings($criteria, $value) {
-        $this->getHCWIndicatorStatistics($criteria, $value, 'sgn','findings');
-    }
+    
 
     /**
      * [getIMCIConsultation description]

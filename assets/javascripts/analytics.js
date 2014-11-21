@@ -1057,7 +1057,7 @@ function indicatorHandler6(criteria, value, survey, survey_category,
 
 function indicatorHandler8(criteria, value, survey, survey_category,
   finding_types,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence');
  
@@ -1065,7 +1065,7 @@ function indicatorHandler8(criteria, value, survey, survey_category,
 
 function indicatorHandler9(criteria, value, survey, survey_category,
   finding_types,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence1');
  
@@ -1073,7 +1073,7 @@ function indicatorHandler9(criteria, value, survey, survey_category,
 
 function indicatorHandler10(criteria, value, survey, survey_category,
   finding_types,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence2');
  
