@@ -4224,7 +4224,7 @@ class Analytics extends MY_Controller
 
         //foreach ($allCounties as $county) {
         $category[] = $county;
-        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,'response');
         $resultArray = array();
         foreach ($results as $value) {
 
@@ -4260,7 +4260,7 @@ class Analytics extends MY_Controller
         //foreach ($allCounties as $county) {
 
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,'response');
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
@@ -4298,7 +4298,7 @@ class Analytics extends MY_Controller
 
         //foreach ($allCounties as $county) {
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,'response');
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
@@ -4872,21 +4872,28 @@ class Analytics extends MY_Controller
     public function getBemONCQuestion($criteria, $value, $survey, $survey_category) {
         $results = $this->analytics_model->getBemONCQuestion($criteria, $value, $survey, $survey_category);
 
-        // echo "<pre>";print_r($results);echo "</pre>";die;
+        //echo "<pre>";print_r($results);echo "</pre>";die;
         $number = $resultArray = $q = array();
-        $number = $resultArray = $q = $yes = $no = array();
+        $number = $resultArray = $q = $gData = array();
         foreach ($results as $key => $value) {
             $q[] = $key;
-            $yes[] = (int)$value['yes'];
-            $no[] = (int)$value['no'];
-        }
-
-        $resultArray = array(array('name' => 'Yes', 'data' => $yes), array('name' => 'No', 'data' => $no));
+            foreach ($value as $k => $val) {
+               /// echo "<pre>";print_r($val);echo "</pre>";die;
+                
+                
+            }
+            $gData[]=$val;
+            //echo "<pre>";print_r($gData);echo "</pre>";die;
+           }
+           $resultArray[] = array('name' => $k,'data' => $gData);
+            //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        
         $category = $q;
-        $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
-        $chart_margin = (sizeof($category > 5)) ? 150 : 70;
+        // $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
+        // $chart_margin = (sizeof($category > 5)) ? 150 : 70;
 
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', $chart_margin, $chart_type);
+       $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 110, 'bar');
+       
     }
 
     public function getBemONCReason($criteria, $value, $survey, $survey_category) {
