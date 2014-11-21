@@ -1007,7 +1007,7 @@ function indicatorHandler1(criteria, value, survey, survey_category,
 function indicatorHandler2(criteria, value, survey, survey_category,
 
   indicator_type,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison1');
 
@@ -1015,7 +1015,7 @@ function indicatorHandler2(criteria, value, survey, survey_category,
 
 function indicatorHandler3(criteria, value, survey, survey_category,
   assessment_types,statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison1');
  
@@ -1024,7 +1024,7 @@ function indicatorHandler3(criteria, value, survey, survey_category,
 function indicatorHandler4(criteria, value, survey, survey_category,
 
   indicator_type,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison2');
 
@@ -1032,7 +1032,7 @@ function indicatorHandler4(criteria, value, survey, survey_category,
 
   function indicatorHandler5(criteria, value, survey, survey_category,
   assessment_types,statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison2');
  
@@ -1041,7 +1041,7 @@ function indicatorHandler4(criteria, value, survey, survey_category,
 function indicatorHandler6(criteria, value, survey, survey_category,
 
   indicator_type,statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison3');
 
@@ -1049,7 +1049,7 @@ function indicatorHandler6(criteria, value, survey, survey_category,
 
   function indicatorHandler7(criteria, value, survey, survey_category,
   assessment_types,statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
     value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison3');
  
@@ -1762,26 +1762,32 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
           break;
 
-
-        case 'section-2':
-          loadGraph(base_url, 'analytics/getCasesPresentation/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#casepresentation');
-
-          loadGraph(base_url, 'analytics/getChildrenServices/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#serviceprovision');
-
-          loadGraph(base_url, 'analytics/getDangerSigns/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#signsassessment');
-
-          loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#signspresence');
-
-
+           case 'section-2':
+         loadGraph(base_url, 'analytics/getHcwServicesOffered/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#servicesoffered');
+         loadGraph(base_url, 'analytics/getHcwDangerSignsAssessment/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsAssessment');
+         loadGraph(base_url, 'analytics/getHcwDangerSignsPresence/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsPresence');
           break;
+
+          
+        // case 'section-2':
+        //   loadGraph(base_url, 'analytics/getCasesPresentation/' +
+        //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+        //     '#casepresentation');
+
+        //   loadGraph(base_url, 'analytics/getChildrenServices/' +
+        //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+        //     '#serviceprovision');
+
+        //   loadGraph(base_url, 'analytics/getDangerSigns/' +
+        //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+        //     '#signsassessment');
+
+        //   loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' +
+        //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+        //     '#signspresence');
+
+
+        //   break;
 
 
         case 'section-3':
@@ -1818,11 +1824,7 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
           break;
 
-          case 'section-2':
-         loadGraph(base_url, 'analytics/getHcwServicesOffered/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#servicesoffered');
-         loadGraph(base_url, 'analytics/getHcwDangerSignsAssessment/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsAssessment');
-         loadGraph(base_url, 'analytics/getHcwDangerSignsPresence/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#hcwdangersignsPresence');
-          break;
+          
       }
   }
 }

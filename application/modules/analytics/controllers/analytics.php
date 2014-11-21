@@ -3864,6 +3864,14 @@ class Analytics extends MY_Controller
     public function getHcwDangerSignsPresence($criteria, $value, $survey, $survey_category, $for ,$statistic){
         $this->getIndicatorStatistics($criteria,$value,'','','sgn','hcwdangersigns');
     }
+
+    public function getHcwCorrectness($criteria, $value, $survey, $survey_category, $for ,$statistic){
+        $this->getIndicatorComparison($criteria,$value,'','', $for ,'hcwcorrectness');
+    }
+
+    public function getHcwAssessment($criteria, $value, $survey, $survey_category, $for ,$statistic){
+        $this->getAssessmentComparison($criteria,$value,'','', $for ,'hcwassessment');
+    }
     /**
      * [getIndicatorComparison description]
      * @param  [type] $criteria        [description]
@@ -3962,7 +3970,34 @@ class Analytics extends MY_Controller
     }   
     }
     public function getAssessmentComparison($criteria, $value, $survey, $survey_category, $for,$statistic) {
-        $value = urldecode($value);
+        
+    $value = urldecode($value);
+    if($statistic=='hcwassessment'){
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for,$statistic);
+       foreach ($results as $indicator => $values) {
+            $category[] = $indicator;
+            foreach ($values as $verdict => $answer) {
+                $gData[$verdict][] = $answer;
+            }
+        }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gData as $name => $data) {
+            if($name == 'assessment done'){
+                  $color='#8bbc21';
+                }else if($name=='assessment not done'){
+                    $color='#fb4347';
+                }else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
+        }
+
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
+    }else{
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for,$statistic);
        foreach ($results as $indicator => $values) {
             $category[] = $indicator;
@@ -3987,6 +4022,8 @@ class Analytics extends MY_Controller
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
 
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');   
+    
+    }
     }
 
     public function getIndicatorTypes() {
@@ -4095,7 +4132,7 @@ class Analytics extends MY_Controller
     }
 
     public function getDangerFindings($criteria, $value, $survey, $survey_category) {
-        $this->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'sgn','findings');
+        $this->getIndicatorStatistics($criteria, $value, '', '', 'sgn','findings');
     }
 
     public function getCorrectClassification($criteria,$value,$survey,$survey_category){
@@ -4517,14 +4554,14 @@ class Analytics extends MY_Controller
     /**
      * Get Facility Ownership
      */
-    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
 
         //foreach ($allCounties as $county) {
         $category[] = $county;
-        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category);
         $resultArray = array();
         foreach ($results as $value) {
 
@@ -4552,7 +4589,7 @@ class Analytics extends MY_Controller
      * Get Level Ownership
      */
 
-    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
@@ -4560,7 +4597,7 @@ class Analytics extends MY_Controller
         //foreach ($allCounties as $county) {
 
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category);
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
@@ -4591,14 +4628,14 @@ class Analytics extends MY_Controller
     public function getFacilityLevel($criteria,$value,$survey,$survey_category,$statistic){
         $this->getFacilityLevelPerCounty($criteria,$value,$survey,$survey_category,'response');
     }
-    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
 
         //foreach ($allCounties as $county) {
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic);
+        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category);
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
