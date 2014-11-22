@@ -1237,7 +1237,7 @@ class Analytics extends MY_Controller
                 $key = str_replace(' ', '-', $key);
                 if($key=='No-Data'){
                    $color='#dddddd';
-                }else if($key=='Available'){
+                }else if(($key=='Available')|| $key == 'Ordered but not yet Received'){
                     $color='#8bbc21';
                 }else if($key=='Not-Available' || $key=='Expired'){
                     $color='#f66c6f';
