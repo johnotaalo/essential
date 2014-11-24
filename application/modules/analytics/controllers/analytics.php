@@ -76,14 +76,69 @@ class Analytics extends MY_Controller
     }
 
     /**
-     * [getFacilityProgress description]
+     * Generate List of Facilities (Reported & Otherwise)
+     * @param  string $survey          [description]
+     * @param  string $survey_category [description]
+     * @return mixed                  [description]
+     */
+    public function getSurveyInfo($survey, $survey_category, $criteria, $value, $form) {
+        
+        /**
+         * Data from Facilities Reported
+         * @var array
+         */
+        $results = $this->analytics_model->getSurveyInfo($survey, $survey_category, $criteria, $value);
+        
+        /**
+         * Data from Facility List
+         * @var array
+         */
+        $facilities = $this->analytics_model->getAllFacilities($criteria, $value);
+        
+        foreach ($facilities as $facility) {
+            if (array_key_exists($facility['fac_mfl'], $results)) {
+                
+                /**
+                 * Final Array
+                 * @var array
+                 */
+                $data[] = $results[$facility['fac_mfl']];
+            } else {
+                
+                /**
+                 * Set Extra KEYS to Blank
+                 */
+                $facility['max_section'] = '';
+                $facility['last_activity'] = '';
+                $facility['status'] = 'not-started';
+                
+                /**
+                 * Final Array
+                 * @var array
+                 */
+                $data[] = $facility;
+            }
+        }
+        foreach ($data[0] as $key => $value) {
+            $raw['title'][] = $key;
+        }
+        $raw['data'] = $this->export->generate($data, 'Survey Reporting Progress (' . $value . ')', $form);
+        
+        /**
+         * Generate / Export Data-Set
+         */
+        echo json_encode($raw);
+    }
+    
+    /**
+     * Graph showing Counties Reported
      * @param  [type] $survey          [description]
      * @param  [type] $survey_category [description]
      * @return [type]                  [description]
      */
     public function getCountyProgress($survey, $survey_category) {
         $results = $this->analytics_model->getCountyProgress($survey, $survey_category);
-
+        
         // echo '<pre>';print_r($results);die;
         foreach ($results as $county => $value) {
             $data[] = (int)sizeof($value);

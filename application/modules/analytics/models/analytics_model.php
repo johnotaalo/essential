@@ -1587,6 +1587,54 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
             return $data;
         }
 
+        public function getSurveyInfo($survey, $survey_category, $criteria, $value) {
+            
+            $query = "CALL get_survey_info('" . $survey . "','" . $survey_category . "','" . $criteria . "','" . $value . "');";
+            try {
+                $queryData = $this->db->query($query);
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+                
+                // Dump the extra resultset.
+                $queryData->free_result();
+                
+                //echo $this->db->last_query();
+                if ($this->dataSet !== NULL) {
+                    foreach ($this->dataSet as $value) {
+                        $data[$value['fac_mfl']] = $value;
+                    }
+                    $this->dataSet = $data;
+                    return $this->dataSet;
+                } else {
+                    return $this->dataSet = null;
+                }
+            }
+            catch(exception $ex) {
+                die($ex->getMessage());
+            }
+            return $data;
+        }
+        
+        public function getAllFacilities($criteria,$value) {
+             $query = "CALL get_facility_list('" . $criteria . "','" . $value . "');";
+            $this->dataSet = $this->db->query($query);
+            $this->dataSet = $this->dataSet->result_array();
+            
+            if ($this->dataSet !== NULL) {
+                foreach ($this->dataSet as $value) {
+                    if($value['fac_mfl']!=''){
+                         $data[$value['fac_mfl']] = $value;
+                    }
+                }
+                $this->dataSet = $data;
+                return $this->dataSet;
+            } else {
+                return $this->dataSet = null;
+            }
+            
+            return $data;
+        }
+
         public function getReasonStatistics($criteria, $value, $survey, $survey_category, $for) {
             $value = urldecode($value);
             $newData = array();
