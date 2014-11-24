@@ -1244,7 +1244,7 @@ WHERE
                             case 'findings':
                                 if (array_key_exists('frequency', $value)) {
                             $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
-                        }
+                                 }
                                 break;
                             case 'hcwservice':
                             $data[$value['indicator_name']][$value['li_hcwResponse']] = (int)$value['total'];
@@ -1253,6 +1253,11 @@ WHERE
                             case 'hcwdangersigns':
                             $data[$value['indicator_name']][$value['li_hcwFindings']] = (int)$value['total'];
                                 break;
+
+                            case 'hcwfindings':
+                                if (array_key_exists('frequency', $value)) {
+                            $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                                 }
 
                         }
 
@@ -1413,6 +1418,14 @@ WHERE
                             case 'hcwcorrectness':
                               $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
                                 break;
+
+                            case 'hcwclassification':
+                               $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
+                                break;
+
+                            case 'hcwassessment':
+                            $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
+                            break;
 
                         }
                         
@@ -2829,11 +2842,11 @@ ORDER BY f.fac_county ASC;";
         //     return $finalData;
         // }
 
-        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+        function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
 
             /*using DQL*/
 
-            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
+            $query = "CALL get_ownership_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
 
@@ -2843,12 +2856,12 @@ ORDER BY f.fac_county ASC;";
             return $finalData;
         }
 
-        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+        function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $statistic. "');";
+                $query = "CALL get_facility_level('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
 
                 $myData = $this->db->query($query);
 
@@ -2869,12 +2882,12 @@ ORDER BY f.fac_county ASC;";
             }
             return $finalData;
         }
-        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
+        function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
 
             /*using DQL*/
             try {
 
-                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','".$statistic."');";
+                $query = "CALL get_facility_type('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
 
                 $myData = $this->db->query($query);
 
@@ -4330,6 +4343,13 @@ ORDER BY question_code";
                         $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
 
                             break;
+
+
+                            case 'hcwresponse':
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
