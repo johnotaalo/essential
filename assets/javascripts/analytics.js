@@ -147,6 +147,37 @@ function startAnalytics(base_url, county, survey, survey_category) {
     }
     // variableHandler('national', county, district, facility, survey, survey_category, indicator_type);
   });
+
+//Modal Link
+$('.modal-link').click(function(){
+  if (district != '') {
+      district = encodeURIComponent(district);
+      scope = 'district';
+      value = district;
+    } else {
+      district = '';
+      if (county != '' && county != 'Unselected') {
+        scope = 'county';
+        value = county;
+      } else {
+        scope = 'national';
+        value = 'Aggregated';
+      }
+    }
+  data = $(this).attr('data-modal');
+  switch(data){
+    case 'facility_reporting':
+      url = 'analytics/getSurveyInfo/'+ survey + '/' + survey_category +'/'+scope +'/' + value;
+      title = 'Facility Reporting';
+    break;
+  }
+
+  form = 'datatable';
+// alert(base_url+url+'/'+form);
+  showList(base_url,url+'/'+form,title)
+});
+
+
   $('.ui.selection.dropdown').find('input').change(function() {
     // alert($(this).val());
     if ($(this).parent().find('.text').text() != 'Choose a Sub County' &&
@@ -1214,7 +1245,7 @@ function loadCounties() {
           '<div class="item" data-value="All Counties Selected">All Counties Selected</div>';
         $.each(obj, function(k, v) {
           countyList += '<div class="item" data-value="' + v.text +
-            '">' + v.text + '</div>';
+            '"><input type="checkbox">' + v.text + '</div>';
         });
         // alert(countyList);
         $('#county_select').parent().find('.menu').html(countyList);
@@ -1306,8 +1337,7 @@ function getDistrictData(base_url, survey_type, survey_category, district) {
    * @param  {[type]} survey_category [description]
    * @return {[type]}                 [description]
    */
-function getFacilityCount(base_url, national, county, district, survey,
-  survey_category) {
+function getFacilityCount(base_url, national, county, district, survey,survey_category) {
   if (national != '') {
     data = getNationalData(base_url, survey, survey_category);
   } else if (county != '') {

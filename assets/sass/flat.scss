@@ -31,6 +31,7 @@ $my-grey:#e7e7e7;
 body{
     font-family:Lato !important;
     height:auto !important;
+    font-size:12px;
     // @extend .zeta;
 }
 #menu{
@@ -195,7 +196,7 @@ width: 100%;
     width:20%;
     z-index:100000000 !important;
     div{
-        font-size:1em !important;
+        font-size:12px !important;
         width:100% !important;
 
     }
@@ -362,7 +363,7 @@ height:80%;
             }
         }
     }
-    .link{
+    .modal-link{
         cursor:pointer;
             background:$my-grey;
             color:#333;
@@ -371,7 +372,7 @@ height:80%;
                 padding-right:1em;
              }
         }
-    .link:hover{
+    .modal-link:hover{
         cursor:hand;
         @extend .animated;
         @extend .flash;
