@@ -362,7 +362,7 @@ height:80%;
             }
         }
     }
-    .link{
+    .modal-link{
         cursor:pointer;
             background:$my-grey;
             color:#333;
@@ -371,7 +371,7 @@ height:80%;
                 padding-right:1em;
              }
         }
-    .link:hover{
+    .modal-link:hover{
         cursor:hand;
         @extend .animated;
         @extend .flash;

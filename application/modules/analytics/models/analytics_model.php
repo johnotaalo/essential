@@ -131,6 +131,7 @@ class Analytics_Model extends MY_Model
                 
                 //echo "<pre>";print_r($question);echo "</pre>";die;
                 
+                
             }
         }
         catch(Exception $ex) {
@@ -1271,6 +1272,7 @@ ea.fac_mfl IN (SELECT
                 
                 //die(var_dump($this->dataSet));
                 
+                
             }
             catch(exception $ex) {
                 
@@ -1585,6 +1587,54 @@ ea.fac_mfl IN (SELECT
                 
                 
             }
+            return $data;
+        }
+        
+        public function getSurveyInfo($survey, $survey_category, $criteria, $value) {
+            
+            $query = "CALL get_survey_info('" . $survey . "','" . $survey_category . "','" . $criteria . "','" . $value . "');";
+            try {
+                $queryData = $this->db->query($query);
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+                
+                // Dump the extra resultset.
+                $queryData->free_result();
+                
+                //echo $this->db->last_query();
+                if ($this->dataSet !== NULL) {
+                    foreach ($this->dataSet as $value) {
+                        $data[$value['fac_mfl']] = $value;
+                    }
+                    $this->dataSet = $data;
+                    return $this->dataSet;
+                } else {
+                    return $this->dataSet = null;
+                }
+            }
+            catch(exception $ex) {
+                die($ex->getMessage());
+            }
+            return $data;
+        }
+        
+        public function getAllFacilities($criteria,$value) {
+             $query = "CALL get_facility_list('" . $criteria . "','" . $value . "');";
+            $this->dataSet = $this->db->query($query);
+            $this->dataSet = $this->dataSet->result_array();
+            
+            if ($this->dataSet !== NULL) {
+                foreach ($this->dataSet as $value) {
+                    if($value['fac_mfl']!=''){
+                         $data[$value['fac_mfl']] = $value;
+                    }
+                }
+                $this->dataSet = $data;
+                return $this->dataSet;
+            } else {
+                return $this->dataSet = null;
+            }
+            
             return $data;
         }
         
@@ -2723,6 +2773,7 @@ ea.fac_mfl IN (SELECT
         //     }
         //     return $finalData;
         // }
+        
         
         
         /**
@@ -4093,6 +4144,7 @@ ea.fac_mfl IN (SELECT
                         foreach ($question as $value) {
                             
                             //echo '<pre>';print_r($question);echo '</pre>';die;
+                            
                             
                         }
                     }

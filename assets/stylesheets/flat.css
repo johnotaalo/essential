@@ -2109,7 +2109,7 @@ pre code {
 }
 
 /* line 14, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/mixins/_grid-framework.scss */
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .tile.link, .small-graph, .small-graph .outer .inner i.main, #page_sidebar, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .medium-graph, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .login-container #form-description, .login-container #form-login, .tile.map, .tile.map-info, .semi-large-graph, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .large-graph, .small-graph .outer .inner .content, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .x-large-graph, .small-graph .outer .link, .analytics_row, .col-lg-12 {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .tile.link, .small-graph, .small-graph .outer .inner i.main, #page_sidebar, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .medium-graph, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .login-container #form-description, .login-container #form-login, .tile.map, .tile.map-info, .semi-large-graph, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .large-graph, .small-graph .outer .inner .content, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .x-large-graph, .small-graph .outer .modal-link, .analytics_row, .col-lg-12 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -2639,7 +2639,7 @@ pre code {
 }
 @media (min-width: 992px) {
   /* line 33, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/mixins/_grid-framework.scss */
-  .col-md-1, .col-md-2, .col-md-3, .tile.link, .small-graph, .small-graph .outer .inner i.main, #page_sidebar, .col-md-4, .medium-graph, .col-md-5, .col-md-6, .login-container #form-description, .login-container #form-login, .tile.map, .tile.map-info, .semi-large-graph, .col-md-7, .col-md-8, .large-graph, .small-graph .outer .inner .content, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .x-large-graph, .small-graph .outer .link, .analytics_row {
+  .col-md-1, .col-md-2, .col-md-3, .tile.link, .small-graph, .small-graph .outer .inner i.main, #page_sidebar, .col-md-4, .medium-graph, .col-md-5, .col-md-6, .login-container #form-description, .login-container #form-login, .tile.map, .tile.map-info, .semi-large-graph, .col-md-7, .col-md-8, .large-graph, .small-graph .outer .inner .content, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .x-large-graph, .small-graph .outer .modal-link, .analytics_row {
     float: left;
   }
 
@@ -2699,7 +2699,7 @@ pre code {
   }
 
   /* line 41, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/mixins/_grid-framework.scss */
-  .col-md-12, .x-large-graph, .small-graph .outer .link, .analytics_row {
+  .col-md-12, .x-large-graph, .small-graph .outer .modal-link, .analytics_row {
     width: 100%;
   }
 
@@ -8628,7 +8628,7 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 Copyright (c) 2013 Daniel Eden
 */
 /* line 10, ../bower_components/animate.css/animate.css */
-.animated, .small-graph .outer .link:hover {
+.animated, .small-graph .outer .modal-link:hover {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
@@ -8636,13 +8636,13 @@ Copyright (c) 2013 Daniel Eden
 }
 
 /* line 17, ../bower_components/animate.css/animate.css */
-.animated.infinite, .small-graph .outer .infinite.link:hover {
+.animated.infinite, .small-graph .outer .infinite.modal-link:hover {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
 
 /* line 22, ../bower_components/animate.css/animate.css */
-.animated.hinge, .small-graph .outer .hinge.link:hover {
+.animated.hinge, .small-graph .outer .hinge.modal-link:hover {
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
 }
@@ -8725,7 +8725,7 @@ Copyright (c) 2013 Daniel Eden
   }
 }
 /* line 115, ../bower_components/animate.css/animate.css */
-.flash, .small-graph .outer .link:hover {
+.flash, .small-graph .outer .modal-link:hover {
   -webkit-animation-name: flash;
   animation-name: flash;
 }
@@ -10188,7 +10188,7 @@ Copyright (c) 2013 Daniel Eden
   }
 }
 /* line 1775, ../bower_components/animate.css/animate.css */
-.animated.flip, .small-graph .outer .flip.link:hover {
+.animated.flip, .small-graph .outer .flip.modal-link:hover {
   -webkit-backface-visibility: visible;
   -ms-backface-visibility: visible;
   backface-visibility: visible;
@@ -21608,31 +21608,31 @@ table.disabled.button.active,
        Animated
 --------------------*/
 /* line 4516, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button, table.animated.button, .small-graph .outer table.button.link:hover, .small-graph .outer .ui.button.link:hover, .small-graph .outer .button.link#page-crumb:hover, .small-graph .outer .button.link.paging_full_numbers:hover, .animated.button#page-crumb, .animated.button.paging_full_numbers {
+.ui.animated.button, table.animated.button, .small-graph .outer table.button.modal-link:hover, .small-graph .outer .ui.button.modal-link:hover, .small-graph .outer .button.modal-link#page-crumb:hover, .small-graph .outer .button.modal-link.paging_full_numbers:hover, .animated.button#page-crumb, .animated.button.paging_full_numbers {
   position: relative;
   overflow: hidden;
 }
 
 /* line 4520, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.link:hover .visible.content, .small-graph .outer .ui.button.link:hover .visible.content, .small-graph .outer .button.link#page-crumb:hover .visible.content, .small-graph .outer .button.link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content {
+.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.modal-link:hover .visible.content, .small-graph .outer .ui.button.modal-link:hover .visible.content, .small-graph .outer .button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content {
   position: relative;
 }
 
 /* line 4523, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button .hidden.content, table.animated.button .hidden.content, .small-graph .outer table.button.link:hover .hidden.content, .small-graph .outer .ui.button.link:hover .hidden.content, .small-graph .outer .button.link#page-crumb:hover .hidden.content, .small-graph .outer .button.link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb .hidden.content, .animated.button.paging_full_numbers .hidden.content {
+.ui.animated.button .hidden.content, table.animated.button .hidden.content, .small-graph .outer table.button.modal-link:hover .hidden.content, .small-graph .outer .ui.button.modal-link:hover .hidden.content, .small-graph .outer .button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb .hidden.content, .animated.button.paging_full_numbers .hidden.content {
   position: absolute;
   width: 100%;
 }
 
 /* Horizontal */
 /* line 4528, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.link:hover .visible.content, .small-graph .outer .ui.button.link:hover .visible.content, .small-graph .outer .button.link#page-crumb:hover .visible.content, .small-graph .outer .button.link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content,
+.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.modal-link:hover .visible.content, .small-graph .outer .ui.button.modal-link:hover .visible.content, .small-graph .outer .button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content,
 .ui.animated.button .hidden.content,
 table.animated.button .hidden.content,
-.small-graph .outer table.button.link:hover .hidden.content,
-.small-graph .outer .ui.button.link:hover .hidden.content,
-.small-graph .outer .button.link#page-crumb:hover .hidden.content,
-.small-graph .outer .button.link.paging_full_numbers:hover .hidden.content,
+.small-graph .outer table.button.modal-link:hover .hidden.content,
+.small-graph .outer .ui.button.modal-link:hover .hidden.content,
+.small-graph .outer .button.modal-link#page-crumb:hover .hidden.content,
+.small-graph .outer .button.modal-link.paging_full_numbers:hover .hidden.content,
 .animated.button#page-crumb .hidden.content,
 .animated.button.paging_full_numbers .hidden.content {
   -webkit-transition: right 0.3s ease 0s;
@@ -21641,13 +21641,13 @@ table.animated.button .hidden.content,
 }
 
 /* line 4534, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.link:hover .visible.content, .small-graph .outer .ui.button.link:hover .visible.content, .small-graph .outer .button.link#page-crumb:hover .visible.content, .small-graph .outer .button.link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content {
+.ui.animated.button .visible.content, table.animated.button .visible.content, .small-graph .outer table.button.modal-link:hover .visible.content, .small-graph .outer .ui.button.modal-link:hover .visible.content, .small-graph .outer .button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb .visible.content, .animated.button.paging_full_numbers .visible.content {
   left: auto;
   right: 0%;
 }
 
 /* line 4538, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button .hidden.content, table.animated.button .hidden.content, .small-graph .outer table.button.link:hover .hidden.content, .small-graph .outer .ui.button.link:hover .hidden.content, .small-graph .outer .button.link#page-crumb:hover .hidden.content, .small-graph .outer .button.link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb .hidden.content, .animated.button.paging_full_numbers .hidden.content {
+.ui.animated.button .hidden.content, table.animated.button .hidden.content, .small-graph .outer table.button.modal-link:hover .hidden.content, .small-graph .outer .ui.button.modal-link:hover .hidden.content, .small-graph .outer .button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb .hidden.content, .animated.button.paging_full_numbers .hidden.content {
   top: 50%;
   left: auto;
   right: -100%;
@@ -21655,26 +21655,26 @@ table.animated.button .hidden.content,
 }
 
 /* line 4544, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button:hover .visible.content, table.animated.button:hover .visible.content, .small-graph .outer table.button.link:hover .visible.content, .small-graph .outer .ui.button.link:hover .visible.content, .small-graph .outer .button.link#page-crumb:hover .visible.content, .small-graph .outer .button.link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb:hover .visible.content, .animated.button.paging_full_numbers:hover .visible.content {
+.ui.animated.button:hover .visible.content, table.animated.button:hover .visible.content, .small-graph .outer table.button.modal-link:hover .visible.content, .small-graph .outer .ui.button.modal-link:hover .visible.content, .small-graph .outer .button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .visible.content, .animated.button#page-crumb:hover .visible.content, .animated.button.paging_full_numbers:hover .visible.content {
   left: auto;
   right: 200%;
 }
 
 /* line 4548, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.button:hover .hidden.content, table.animated.button:hover .hidden.content, .small-graph .outer table.button.link:hover .hidden.content, .small-graph .outer .ui.button.link:hover .hidden.content, .small-graph .outer .button.link#page-crumb:hover .hidden.content, .small-graph .outer .button.link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb:hover .hidden.content, .animated.button.paging_full_numbers:hover .hidden.content {
+.ui.animated.button:hover .hidden.content, table.animated.button:hover .hidden.content, .small-graph .outer table.button.modal-link:hover .hidden.content, .small-graph .outer .ui.button.modal-link:hover .hidden.content, .small-graph .outer .button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .button.modal-link.paging_full_numbers:hover .hidden.content, .animated.button#page-crumb:hover .hidden.content, .animated.button.paging_full_numbers:hover .hidden.content {
   left: auto;
   right: 0%;
 }
 
 /* Vertical */
 /* line 4553, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.vertical.animated.button .visible.content, table.vertical.animated.button .visible.content, .small-graph .outer table.vertical.button.link:hover .visible.content, .small-graph .outer .ui.vertical.button.link:hover .visible.content, .small-graph .outer .vertical.button.link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb .visible.content, .vertical.animated.button.paging_full_numbers .visible.content,
+.ui.vertical.animated.button .visible.content, table.vertical.animated.button .visible.content, .small-graph .outer table.vertical.button.modal-link:hover .visible.content, .small-graph .outer .ui.vertical.button.modal-link:hover .visible.content, .small-graph .outer .vertical.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb .visible.content, .vertical.animated.button.paging_full_numbers .visible.content,
 .ui.vertical.animated.button .hidden.content,
 table.vertical.animated.button .hidden.content,
-.small-graph .outer table.vertical.button.link:hover .hidden.content,
-.small-graph .outer .ui.vertical.button.link:hover .hidden.content,
-.small-graph .outer .vertical.button.link#page-crumb:hover .hidden.content,
-.small-graph .outer .vertical.button.link.paging_full_numbers:hover .hidden.content,
+.small-graph .outer table.vertical.button.modal-link:hover .hidden.content,
+.small-graph .outer .ui.vertical.button.modal-link:hover .hidden.content,
+.small-graph .outer .vertical.button.modal-link#page-crumb:hover .hidden.content,
+.small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .hidden.content,
 .vertical.animated.button#page-crumb .hidden.content,
 .vertical.animated.button.paging_full_numbers .hidden.content {
   -webkit-transition: top 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
@@ -21683,7 +21683,7 @@ table.vertical.animated.button .hidden.content,
 }
 
 /* line 4559, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.vertical.animated.button .visible.content, table.vertical.animated.button .visible.content, .small-graph .outer table.vertical.button.link:hover .visible.content, .small-graph .outer .ui.vertical.button.link:hover .visible.content, .small-graph .outer .vertical.button.link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb .visible.content, .vertical.animated.button.paging_full_numbers .visible.content {
+.ui.vertical.animated.button .visible.content, table.vertical.animated.button .visible.content, .small-graph .outer table.vertical.button.modal-link:hover .visible.content, .small-graph .outer .ui.vertical.button.modal-link:hover .visible.content, .small-graph .outer .vertical.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb .visible.content, .vertical.animated.button.paging_full_numbers .visible.content {
   -webkit-transform: translateY(0%);
   -moz-transform: translateY(0%);
   -ms-transform: translateY(0%);
@@ -21692,14 +21692,14 @@ table.vertical.animated.button .hidden.content,
 }
 
 /* line 4566, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.vertical.animated.button .hidden.content, table.vertical.animated.button .hidden.content, .small-graph .outer table.vertical.button.link:hover .hidden.content, .small-graph .outer .ui.vertical.button.link:hover .hidden.content, .small-graph .outer .vertical.button.link#page-crumb:hover .hidden.content, .small-graph .outer .vertical.button.link.paging_full_numbers:hover .hidden.content, .vertical.animated.button#page-crumb .hidden.content, .vertical.animated.button.paging_full_numbers .hidden.content {
+.ui.vertical.animated.button .hidden.content, table.vertical.animated.button .hidden.content, .small-graph .outer table.vertical.button.modal-link:hover .hidden.content, .small-graph .outer .ui.vertical.button.modal-link:hover .hidden.content, .small-graph .outer .vertical.button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .hidden.content, .vertical.animated.button#page-crumb .hidden.content, .vertical.animated.button.paging_full_numbers .hidden.content {
   top: -100%;
   left: 0%;
   right: auto;
 }
 
 /* line 4571, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.vertical.animated.button:hover .visible.content, table.vertical.animated.button:hover .visible.content, .small-graph .outer table.vertical.button.link:hover .visible.content, .small-graph .outer .ui.vertical.button.link:hover .visible.content, .small-graph .outer .vertical.button.link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb:hover .visible.content, .vertical.animated.button.paging_full_numbers:hover .visible.content {
+.ui.vertical.animated.button:hover .visible.content, table.vertical.animated.button:hover .visible.content, .small-graph .outer table.vertical.button.modal-link:hover .visible.content, .small-graph .outer .ui.vertical.button.modal-link:hover .visible.content, .small-graph .outer .vertical.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .visible.content, .vertical.animated.button#page-crumb:hover .visible.content, .vertical.animated.button.paging_full_numbers:hover .visible.content {
   -webkit-transform: translateY(200%);
   -moz-transform: translateY(200%);
   -ms-transform: translateY(200%);
@@ -21708,20 +21708,20 @@ table.vertical.animated.button .hidden.content,
 }
 
 /* line 4578, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.vertical.animated.button:hover .hidden.content, table.vertical.animated.button:hover .hidden.content, .small-graph .outer table.vertical.button.link:hover .hidden.content, .small-graph .outer .ui.vertical.button.link:hover .hidden.content, .small-graph .outer .vertical.button.link#page-crumb:hover .hidden.content, .small-graph .outer .vertical.button.link.paging_full_numbers:hover .hidden.content, .vertical.animated.button#page-crumb:hover .hidden.content, .vertical.animated.button.paging_full_numbers:hover .hidden.content {
+.ui.vertical.animated.button:hover .hidden.content, table.vertical.animated.button:hover .hidden.content, .small-graph .outer table.vertical.button.modal-link:hover .hidden.content, .small-graph .outer .ui.vertical.button.modal-link:hover .hidden.content, .small-graph .outer .vertical.button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .vertical.button.modal-link.paging_full_numbers:hover .hidden.content, .vertical.animated.button#page-crumb:hover .hidden.content, .vertical.animated.button.paging_full_numbers:hover .hidden.content {
   top: 50%;
   right: auto;
 }
 
 /* Fade */
 /* line 4583, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.fade.animated.button .visible.content, table.fade.animated.button .visible.content, .small-graph .outer table.fade.button.link:hover .visible.content, .small-graph .outer .ui.fade.button.link:hover .visible.content, .small-graph .outer .fade.button.link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb .visible.content, .fade.animated.button.paging_full_numbers .visible.content,
+.ui.fade.animated.button .visible.content, table.fade.animated.button .visible.content, .small-graph .outer table.fade.button.modal-link:hover .visible.content, .small-graph .outer .ui.fade.button.modal-link:hover .visible.content, .small-graph .outer .fade.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb .visible.content, .fade.animated.button.paging_full_numbers .visible.content,
 .ui.fade.animated.button .hidden.content,
 table.fade.animated.button .hidden.content,
-.small-graph .outer table.fade.button.link:hover .hidden.content,
-.small-graph .outer .ui.fade.button.link:hover .hidden.content,
-.small-graph .outer .fade.button.link#page-crumb:hover .hidden.content,
-.small-graph .outer .fade.button.link.paging_full_numbers:hover .hidden.content,
+.small-graph .outer table.fade.button.modal-link:hover .hidden.content,
+.small-graph .outer .ui.fade.button.modal-link:hover .hidden.content,
+.small-graph .outer .fade.button.modal-link#page-crumb:hover .hidden.content,
+.small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .hidden.content,
 .fade.animated.button#page-crumb .hidden.content,
 .fade.animated.button.paging_full_numbers .hidden.content {
   -webkit-transition: opacity 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
@@ -21730,7 +21730,7 @@ table.fade.animated.button .hidden.content,
 }
 
 /* line 4589, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.fade.animated.button .visible.content, table.fade.animated.button .visible.content, .small-graph .outer table.fade.button.link:hover .visible.content, .small-graph .outer .ui.fade.button.link:hover .visible.content, .small-graph .outer .fade.button.link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb .visible.content, .fade.animated.button.paging_full_numbers .visible.content {
+.ui.fade.animated.button .visible.content, table.fade.animated.button .visible.content, .small-graph .outer table.fade.button.modal-link:hover .visible.content, .small-graph .outer .ui.fade.button.modal-link:hover .visible.content, .small-graph .outer .fade.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb .visible.content, .fade.animated.button.paging_full_numbers .visible.content {
   left: auto;
   right: auto;
   opacity: 1;
@@ -21741,7 +21741,7 @@ table.fade.animated.button .hidden.content,
 }
 
 /* line 4598, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.fade.animated.button .hidden.content, table.fade.animated.button .hidden.content, .small-graph .outer table.fade.button.link:hover .hidden.content, .small-graph .outer .ui.fade.button.link:hover .hidden.content, .small-graph .outer .fade.button.link#page-crumb:hover .hidden.content, .small-graph .outer .fade.button.link.paging_full_numbers:hover .hidden.content, .fade.animated.button#page-crumb .hidden.content, .fade.animated.button.paging_full_numbers .hidden.content {
+.ui.fade.animated.button .hidden.content, table.fade.animated.button .hidden.content, .small-graph .outer table.fade.button.modal-link:hover .hidden.content, .small-graph .outer .ui.fade.button.modal-link:hover .hidden.content, .small-graph .outer .fade.button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .hidden.content, .fade.animated.button#page-crumb .hidden.content, .fade.animated.button.paging_full_numbers .hidden.content {
   opacity: 0;
   left: 0%;
   right: auto;
@@ -21752,7 +21752,7 @@ table.fade.animated.button .hidden.content,
 }
 
 /* line 4607, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.fade.animated.button:hover .visible.content, table.fade.animated.button:hover .visible.content, .small-graph .outer table.fade.button.link:hover .visible.content, .small-graph .outer .ui.fade.button.link:hover .visible.content, .small-graph .outer .fade.button.link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb:hover .visible.content, .fade.animated.button.paging_full_numbers:hover .visible.content {
+.ui.fade.animated.button:hover .visible.content, table.fade.animated.button:hover .visible.content, .small-graph .outer table.fade.button.modal-link:hover .visible.content, .small-graph .outer .ui.fade.button.modal-link:hover .visible.content, .small-graph .outer .fade.button.modal-link#page-crumb:hover .visible.content, .small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .visible.content, .fade.animated.button#page-crumb:hover .visible.content, .fade.animated.button.paging_full_numbers:hover .visible.content {
   left: auto;
   right: auto;
   opacity: 0;
@@ -21763,7 +21763,7 @@ table.fade.animated.button .hidden.content,
 }
 
 /* line 4616, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.fade.animated.button:hover .hidden.content, table.fade.animated.button:hover .hidden.content, .small-graph .outer table.fade.button.link:hover .hidden.content, .small-graph .outer .ui.fade.button.link:hover .hidden.content, .small-graph .outer .fade.button.link#page-crumb:hover .hidden.content, .small-graph .outer .fade.button.link.paging_full_numbers:hover .hidden.content, .fade.animated.button#page-crumb:hover .hidden.content, .fade.animated.button.paging_full_numbers:hover .hidden.content {
+.ui.fade.animated.button:hover .hidden.content, table.fade.animated.button:hover .hidden.content, .small-graph .outer table.fade.button.modal-link:hover .hidden.content, .small-graph .outer .ui.fade.button.modal-link:hover .hidden.content, .small-graph .outer .fade.button.modal-link#page-crumb:hover .hidden.content, .small-graph .outer .fade.button.modal-link.paging_full_numbers:hover .hidden.content, .fade.animated.button#page-crumb:hover .hidden.content, .fade.animated.button.paging_full_numbers:hover .hidden.content {
   left: 0%;
   right: auto;
   opacity: 1;
@@ -34111,7 +34111,7 @@ table.tab.open,
     Emphasis
 ---------------*/
 /* line 12705, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.flash.transition, table.flash.transition, .small-graph .outer table.transition.link:hover, .small-graph .outer .ui.transition.link:hover, .small-graph .outer .transition.link#page-crumb:hover, .small-graph .outer .transition.link.paging_full_numbers:hover, .flash.transition#page-crumb, .flash.transition.paging_full_numbers {
+.ui.flash.transition, table.flash.transition, .small-graph .outer table.transition.modal-link:hover, .small-graph .outer .ui.transition.modal-link:hover, .small-graph .outer .transition.modal-link#page-crumb:hover, .small-graph .outer .transition.modal-link.paging_full_numbers:hover, .flash.transition#page-crumb, .flash.transition.paging_full_numbers {
   -webkit-animation-name: flash;
   -moz-animation-name: flash;
   animation-name: flash;
@@ -37245,19 +37245,19 @@ table.inverted.link.list a.active.paginate_button a,
 }
 
 /* line 15024, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.list .item, table.animated.list .item, .small-graph .outer table.list.link:hover .item, .small-graph .outer .ui.list.link:hover .item, .small-graph .outer .list.link#page-crumb:hover .item, .small-graph .outer .list.link.paging_full_numbers:hover .item, .animated.list#page-crumb .item, .animated.list.paging_full_numbers .item, .ui.animated.list a.paginate_button, table.animated.list a.paginate_button, .small-graph .outer table.list.link:hover a.paginate_button, .small-graph .outer .ui.list.link:hover a.paginate_button, .small-graph .outer .list.link#page-crumb:hover a.paginate_button, .small-graph .outer .list.link.paging_full_numbers:hover a.paginate_button, .animated.list#page-crumb a.paginate_button, .animated.list.paging_full_numbers a.paginate_button {
+.ui.animated.list .item, table.animated.list .item, .small-graph .outer table.list.modal-link:hover .item, .small-graph .outer .ui.list.modal-link:hover .item, .small-graph .outer .list.modal-link#page-crumb:hover .item, .small-graph .outer .list.modal-link.paging_full_numbers:hover .item, .animated.list#page-crumb .item, .animated.list.paging_full_numbers .item, .ui.animated.list a.paginate_button, table.animated.list a.paginate_button, .small-graph .outer table.list.modal-link:hover a.paginate_button, .small-graph .outer .ui.list.modal-link:hover a.paginate_button, .small-graph .outer .list.modal-link#page-crumb:hover a.paginate_button, .small-graph .outer .list.modal-link.paging_full_numbers:hover a.paginate_button, .animated.list#page-crumb a.paginate_button, .animated.list.paging_full_numbers a.paginate_button {
   -webkit-transition: 0.2s color ease, 0.2s padding-left ease, 0.2s background-color ease;
   -moz-transition: 0.2s color ease, 0.2s padding-left ease, 0.2s background-color ease;
   transition: 0.2s color ease, 0.2s padding-left ease, 0.2s background-color ease;
 }
 
 /* line 15029, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.list:not(.horizontal) .item:hover, table.animated.list:not(.horizontal) .item:hover, .small-graph .outer table.list.link:not(.horizontal):hover .item:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover .item:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover .item:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover .item:hover, .animated.list#page-crumb:not(.horizontal) .item:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover, table.animated.list:not(.horizontal) a.paginate_button:hover, .small-graph .outer table.list.link:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover {
+.ui.animated.list:not(.horizontal) .item:hover, table.animated.list:not(.horizontal) .item:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover .item:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover .item:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover .item:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover .item:hover, .animated.list#page-crumb:not(.horizontal) .item:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover, table.animated.list:not(.horizontal) a.paginate_button:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover a.paginate_button:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover {
   padding-left: 1em;
 }
 
 /* line 15032, ../bower_components/semantic-ui/build/packaged/css/semantic.css */
-.ui.animated.list:not(.horizontal) .item:hover .item:hover, table.animated.list:not(.horizontal) .item:hover .item:hover, .small-graph .outer table.list.link:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover .item:hover .item:hover, .animated.list#page-crumb:not(.horizontal) .item:hover .item:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover .item:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover .item:hover, table.animated.list:not(.horizontal) a.paginate_button:hover .item:hover, .small-graph .outer table.list.link:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover .item:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover .item:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover .item:hover, .ui.animated.list:not(.horizontal) .item:hover a.paginate_button:hover, table.animated.list:not(.horizontal) .item:hover a.paginate_button:hover, .small-graph .outer table.list.link:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover .item:hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) .item:hover a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover a.paginate_button:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, table.animated.list:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, .small-graph .outer table.list.link:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .ui.list.link:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .list.link#page-crumb:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .list.link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover a.paginate_button:hover {
+.ui.animated.list:not(.horizontal) .item:hover .item:hover, table.animated.list:not(.horizontal) .item:hover .item:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover .item:hover .item:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover .item:hover .item:hover, .animated.list#page-crumb:not(.horizontal) .item:hover .item:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover .item:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover .item:hover, table.animated.list:not(.horizontal) a.paginate_button:hover .item:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover a.paginate_button:hover .item:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover .item:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover .item:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover .item:hover, .ui.animated.list:not(.horizontal) .item:hover a.paginate_button:hover, table.animated.list:not(.horizontal) .item:hover a.paginate_button:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover .item:hover a.paginate_button:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover .item:hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) .item:hover a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) .item:hover a.paginate_button:hover, .ui.animated.list:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, table.animated.list:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, .small-graph .outer table.list.modal-link:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .ui.list.modal-link:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .list.modal-link#page-crumb:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .small-graph .outer .list.modal-link.paging_full_numbers:not(.horizontal):hover a.paginate_button:hover a.paginate_button:hover, .animated.list#page-crumb:not(.horizontal) a.paginate_button:hover a.paginate_button:hover, .animated.list.paging_full_numbers:not(.horizontal) a.paginate_button:hover a.paginate_button:hover {
   padding-left: 0.5em;
 }
 
@@ -38155,17 +38155,17 @@ table td .progress {
   text-align: right;
 }
 /* line 365, ../sass/flat.scss */
-.small-graph .outer .link {
+.small-graph .outer .modal-link {
   cursor: pointer;
   background: #e7e7e7;
   color: #333;
 }
 /* line 370, ../sass/flat.scss */
-.small-graph .outer .link i {
+.small-graph .outer .modal-link i {
   padding-right: 1em;
 }
 /* line 374, ../sass/flat.scss */
-.small-graph .outer .link:hover {
+.small-graph .outer .modal-link:hover {
   cursor: hand;
 }
 
