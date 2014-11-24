@@ -702,7 +702,7 @@ class MY_Model extends CI_Model
   {
     $query = $this->db->query("SELECT h.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_district = '" . $dName ."' AND  h.activity_id = 10");
+      WHERE f.fac_district = '" . $dName ."' ");
       $result = $query->result_array();
 
       return $result;
@@ -712,7 +712,7 @@ class MY_Model extends CI_Model
   {
     $query = $this->db->query("SELECT h.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_county = '" . $cName ."' AND  h.activity_id = 10");
+      WHERE f.fac_county = '" . $cName ."' ");
 
     $result = $query->result_array();
 
