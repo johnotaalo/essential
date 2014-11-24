@@ -15,11 +15,11 @@ class Facilities
     /**
      * @var integer
      *
-     * @ORM\Column(name="fac_id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $facId;
+    private $id;
 
     /**
      * @var string
@@ -48,6 +48,13 @@ class Facilities
      * @ORM\Column(name="fac_level", type="string", length=45, nullable=true)
      */
     private $facLevel;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fac_tier", type="integer", nullable=true)
+     */
+    private $facTier;
 
     /**
      * @var string
@@ -154,15 +161,22 @@ class Facilities
      */
     private $facUpdated;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fac_id", type="integer", nullable=true)
+     */
+    private $facId;
+
 
     /**
-     * Get facId
+     * Get id
      *
      * @return integer 
      */
-    public function getFacId()
+    public function getId()
     {
-        return $this->facId;
+        return $this->id;
     }
 
     /**
@@ -255,6 +269,29 @@ class Facilities
     public function getFacLevel()
     {
         return $this->facLevel;
+    }
+
+    /**
+     * Set facTier
+     *
+     * @param integer $facTier
+     * @return Facilities
+     */
+    public function setFacTier($facTier)
+    {
+        $this->facTier = $facTier;
+    
+        return $this;
+    }
+
+    /**
+     * Get facTier
+     *
+     * @return integer 
+     */
+    public function getFacTier()
+    {
+        return $this->facTier;
     }
 
     /**
@@ -601,124 +638,27 @@ class Facilities
     {
         return $this->facUpdated;
     }
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fac_division", type="string", length=255, nullable=true)
-     */
-    private $facDivision;
 
     /**
-     * @var string
+     * Set facId
      *
-     * @ORM\Column(name="fac_owner", type="string", length=255, nullable=true)
-     */
-    private $facOwner;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fac_location", type="string", length=255, nullable=true)
-     */
-    private $facLocation;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fac_sub_location", type="string", length=255, nullable=true)
-     */
-    private $facSubLocation;
-
-
-    /**
-     * Set facDivision
-     *
-     * @param string $facDivision
+     * @param integer $facId
      * @return Facilities
      */
-    public function setFacDivision($facDivision)
+    public function setFacId($facId)
     {
-        $this->facDivision = $facDivision;
+        $this->facId = $facId;
     
         return $this;
     }
 
     /**
-     * Get facDivision
+     * Get facId
      *
-     * @return string 
+     * @return integer 
      */
-    public function getFacDivision()
+    public function getFacId()
     {
-        return $this->facDivision;
-    }
-
-    /**
-     * Set facOwner
-     *
-     * @param string $facOwner
-     * @return Facilities
-     */
-    public function setFacOwner($facOwner)
-    {
-        $this->facOwner = $facOwner;
-    
-        return $this;
-    }
-
-    /**
-     * Get facOwner
-     *
-     * @return string 
-     */
-    public function getFacOwner()
-    {
-        return $this->facOwner;
-    }
-
-    /**
-     * Set facLocation
-     *
-     * @param string $facLocation
-     * @return Facilities
-     */
-    public function setFacLocation($facLocation)
-    {
-        $this->facLocation = $facLocation;
-    
-        return $this;
-    }
-
-    /**
-     * Get facLocation
-     *
-     * @return string 
-     */
-    public function getFacLocation()
-    {
-        return $this->facLocation;
-    }
-
-    /**
-     * Set facSubLocation
-     *
-     * @param string $facSubLocation
-     * @return Facilities
-     */
-    public function setFacSubLocation($facSubLocation)
-    {
-        $this->facSubLocation = $facSubLocation;
-    
-        return $this;
-    }
-
-    /**
-     * Get facSubLocation
-     *
-     * @return string 
-     */
-    public function getFacSubLocation()
-    {
-        return $this->facSubLocation;
+        return $this->facId;
     }
 }

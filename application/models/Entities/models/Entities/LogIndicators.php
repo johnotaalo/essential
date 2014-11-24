@@ -38,7 +38,7 @@ class LogIndicators
     /**
      * @var string
      *
-     * @ORM\Column(name="indicator_code", type="string", length=8, nullable=false)
+     * @ORM\Column(name="indicator_code", type="string", length=8, nullable=true)
      */
     private $indicatorCode;
 
