@@ -10,12 +10,15 @@ function startSurvey(base_url, survey, survey_category, district) {
   var fac_county = '';
   var fac_district = '';
 
-  if (survey != 'hcw') {
+  if(survey != 'hcw')
+  {
     getDistrictData(base_url, district, survey, survey_category);
-  } else {
-    $('#current_survey').text(survey.toUpperCase() + ' SURVEY');
   }
-  // alert(survey);
+
+  else
+  {
+     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
+  }
   // Bound Events
 
 
@@ -51,8 +54,11 @@ function startSurvey(base_url, survey, survey_category, district) {
       url: the_url,
       type: 'POST',
       data: formData,
+      beforeSend: function(data)
+      {
+        $("#result").append('<center><div class="ui small blue message" style = "margin-bottom: 5px;"><h4><span class = "fa fa-spinner fa-spin"></span> Please wait...</h4></div></center>');
+      },
       success: function(data) {
-
         console.log(data);
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
@@ -218,6 +224,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#click_form').fadeOut();
             $('select').select2();
             // $('actual-form .step').hide();
+            $('.bs-date').datepicker();
+            $('.bs-month').datepicker({
+              minViewMode : 1
+            });
 
           });
 
@@ -230,7 +240,7 @@ function startSurvey(base_url, survey, survey_category, district) {
       }); /*end of which link was clicked*/
 
       /*hcw-action clicked*/
-      $('.hcw-action').live('click', function() {
+      $('.hcw-action').live('click', function(){
         hcwid = $(this).attr('data-hcwid');
         section = $(this).attr('data-section');
         action = $(this).attr('data-action');
@@ -246,7 +256,7 @@ function startSurvey(base_url, survey, survey_category, district) {
               '<div class="loader" >Loading...</div>');
 
           },
-          success: function(data) {
+          success:function(data) {
             console.log("assessing hcw: " + data);
           }
         });
@@ -266,6 +276,11 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#form_post').addClass('active');
             $('#click_form').fadeOut();
             $('select').select2();
+            $('.bs-date').datepicker();
+          $('.bs-month').datepicker({
+            minViewMode : 1
+          });
+            $('.ui.checkbox').checkbox();
             // $('actual-form .step').hide();
 
           });

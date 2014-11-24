@@ -82,12 +82,7 @@
     <button style="display:none;font-size:0.8em !important" id="form-submit" class="ui mini right labeled icon green button" form="modal-form">
       <i class="right icon save"></i>Submit
     </button>
-    <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="pdf">
-      <i class="icon basic doc"></i>Download PDF
-    </div>
-    <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon  download" id="excel">
-      <i class="icon basic doc"></i>Download Excel
-    </div>
+    
      <button style="font-size:0.8em !important" class="mini ui button  labeled icon red ">
       <i class="icon close"></i>Close
     </button>

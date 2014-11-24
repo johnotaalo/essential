@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection, $hcwassessorsection;
 
     public function __construct() {
         parent::__construct();
@@ -85,6 +85,7 @@ class Form_Handler extends MY_Controller
         $this->facilitysection = $this->generate->createFacilityDetailsSection();
         $this->cadre = $this->generate->createCadre();
         $this->hcwworkprofilesection = $this->generate->createHCWWorkerProfile();
+        $this->hcwassessorsection = $this->generate->createassessorsection();
         // $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
 
     }
@@ -156,10 +157,11 @@ class Form_Handler extends MY_Controller
 				</tr>
 			</tbody>
 		</table>
+
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >PROVISION OF Nurses</th>
+					<th colspan="2" >PROVISION OF Deliveries</th>
 				</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -167,7 +169,7 @@ class Form_Handler extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->questions['nur'] . '
+			' . $this->questions['del'] . '
 
 		</table>
 		<table>
@@ -212,7 +214,7 @@ class Form_Handler extends MY_Controller
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2" >Provision OF Deliveries</th>
+					<th colspan="2" >Provision OF NURSES</th>
 			</tr>
 				<tr>
 					<th >QUESTION</th>
@@ -220,7 +222,7 @@ class Form_Handler extends MY_Controller
 
 				</tr>
 			</thead>
-			' . $this->questions['del'] . '
+			' . $this->questions['nur'] . '
 		</table>
 		<table>
 			<thead>
@@ -661,7 +663,7 @@ class Form_Handler extends MY_Controller
 		<table >
 			<thead>
 				<tr>
-					<th colspan="11"> IN THE LAST 3 MONTHS INDICATE THE USAGE, NUMBER OF TIMES THE COMMODITY WAS NOT AVAILABLE.</br>
+					<th colspan="9"> IN THE LAST 3 MONTHS INDICATE THE USAGE, NUMBER OF TIMES THE COMMODITY WAS NOT AVAILABLE.</br>
 					WHEN THE COMMODITY WAS NOT AVAILABLE WHAT HAPPENED? </th>
 				</tr>
 				<tr >
@@ -1999,6 +2001,7 @@ class Form_Handler extends MY_Controller
         $this->combined_form = '
         <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
         	<div class="step" id="section-1" style = "padding-bottom: 150px;">
+        	<div id = "result"></div>
         	<input type = "hidden" name = "step_name" value = "section-1"/>
 			<p class="message success">SECTION 1 : FACILITY,HCW and WORK STATION INFORMATION</p>
 			<table>
@@ -2062,6 +2065,7 @@ class Form_Handler extends MY_Controller
 				</td>
 				<td>
 				<input type="text" id="facilityMaternityemail" name="facilityMaternityemail" class="cloned mail" />
+				<input type = "hidden" name = "facilityopdemail" />
 				</td>
 				</tr>
 
@@ -2080,7 +2084,7 @@ class Form_Handler extends MY_Controller
 				<input type="text" name = "assesorname_1">
 				</td>
 				<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-				<select name = "asesordesignation_1">'.$this->cadre.'</select>
+				'.$this->hcwassessorsection.'
 				</td>
 				<td>Email </td>
 				<td>
@@ -2861,10 +2865,6 @@ class Form_Handler extends MY_Controller
 				<tr>
 				<td><textarea name="hcwConclusionActionSupervisor_1" style="width:400px;height:100px"></textarea></td>
 				<td><textarea name="hcwConclusionActionSupervisee_1" style="width:400px;height:100px"></textarea></td>
-				</tr>
-				<tr>
-				<td>Supervisor Name<input name="hcwConclusionSignatureSupervisor_1" type="text" style="width:500px;padding:10px"></td>
-				<td>Supervisee Name<input name="hcwConclusionSignatureSupervisee_1" type="text" style="width:500px;padding:10px"></td>
 				</tr>
 				<tr>
 				<td>Date	<input name="hcwConclusionDateSupervisor_1" type="text" style="width:500px;padding:10px" class = "bs-date"></td>

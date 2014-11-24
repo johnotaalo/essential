@@ -9,7 +9,8 @@ class Export extends MY_Controller{
      */
     $this->load->module('export/excel_handler');
     $this->load->module('export/pdf_handler');
-    $this->load->module('export/table_handler');
+  $this->load->module('export/table_handler');
+  $this->load->module('export/datatable_handler');
   }
 
   public function index()
@@ -23,7 +24,8 @@ class Export extends MY_Controller{
    * @param  [type] $form     [description]
    * @return [type]           [description]
    */
-  public function generate($data, $filename, $form) {
+  public function generate($data, $filename, $form,$identifier='') {
+    // var_dump($identifier);
       switch ($form) {
           case 'table':
               $result = $this->table_handler->normal($data);
@@ -54,6 +56,12 @@ class Export extends MY_Controller{
           case 'dynamic_pdf':
               $this->pdf_handler->normal($data, $filename,'dynamic');
               $result = '';
+              break;
+          case 'datatable':
+            $result = $this->datatable_handler->normal($data);
+              break;
+          case 'x-datatable':
+              $result = $this->datatable_handler->editable($data,$identifier);
               break;
       }
       return $result;
