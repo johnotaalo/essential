@@ -3907,7 +3907,7 @@ ORDER BY question_code";
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
 
-                  //echo "<pre>";print_r($this->dataSet);echo "</pre>";
+                 // echo "<pre>";print_r($this->dataSet);echo "</pre>";
 
                 foreach ($this->dataSet as $value_) {
                         //echo "<pre>";print_r($value_);echo "</pre>";
@@ -3942,7 +3942,7 @@ ORDER BY question_code";
 
             }
 
-            // var_dump($data);die;
+            //var_dump($data);die;
             return $data;
         }
 
