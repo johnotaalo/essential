@@ -1710,21 +1710,11 @@
             <div class="medium-graph" >
                 <div class="portlet-title">
 
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Cases Presentation</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Services Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="casepresentation">
-                    </div>
-                </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Service Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="serviceprovision">
+                    <div class="chart" id="servicesoffered">
 
                     </div>
                 </div>
@@ -1736,7 +1726,8 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="signsassessment"f>
+
+                    <div class="chart" id="hcwdangersignsAssessment">
 
                     </div>
                 </div>
@@ -1748,7 +1739,8 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="signspresence"f>
+
+                    <div class="chart" id="hcwdangersignsPresence"f>
 
                     </div>
                 </div>
@@ -1769,11 +1761,9 @@
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
 
-
-           <div class="semi-large-graph">
+            <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
-
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="assessment_types1"></select></span></h6>
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
@@ -1782,7 +1772,7 @@
 
                     </div>
                 </div>
-
+           
            <div class="semi-large-graph">
                     <div class="portlet-title">
 
