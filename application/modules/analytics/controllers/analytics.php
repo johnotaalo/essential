@@ -2984,7 +2984,7 @@ class Analytics extends MY_Controller
         $value = urldecode($value);
         $category[] = array();
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-        echo '<pre>'; print_r($results); echo '</pre>';die;
+        //echo '<pre>'; print_r($results); echo '</pre>';die;
         $result = $q = $resultArray = array();
 
         $count = 0;
@@ -4872,30 +4872,40 @@ class Analytics extends MY_Controller
      */
 
     public function getBemONCQuestion($criteria, $value, $survey, $survey_category) {
+            $number = $resultArray = $q = array();
+             $number = $resultArray = $q = $gData = array();
         $results = $this->analytics_model->getBemONCQuestion($criteria, $value, $survey, $survey_category);
-
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-        $number = $resultArray = $q = array();
-        $number = $resultArray = $q = $gData = array();
+           $number = $resultArray = $q = $data= $gdata = $res =array();
+        $number = $resultArray = $q = $yes = $no = $null= array();
         foreach ($results as $key => $value) {
             $q[] = $key;
-            foreach ($value as $k => $val) {
-               /// echo "<pre>";print_r($val);echo "</pre>";die;
-                
-                
-            }
-            $gData[]=$val;
-            //echo "<pre>";print_r($gData);echo "</pre>";die;
-           }
-           $resultArray[] = array('name' => $k,'data' => $gData);
-            //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        
-        $category = $q;
-        // $chart_type = (sizeof($category > 5)) ? 'bar' : 'column';
-        // $chart_margin = (sizeof($category > 5)) ? 150 : 70;
+            $data[]= $value;
+         }
+        foreach ($data as $k => $val) {
+            foreach ($val as $r => $value_) {
+                $gdata[$r][]=$value_;
 
-       $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 110, 'bar');
-       
+            }
+            }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+           $colorCounter=0;
+        foreach ($gdata as $name => $value1) {
+            if($name=='No data'){
+                   $color='#dddddd';
+                }else if($name=='Yes'){
+                    $color='#8bbc21';
+                }else if($name=='No'){
+                    $color='#fb4347';
+                }
+
+                else{
+                     $color = $colors[$colorCounter];
+                     $colorCounter++;
+                }
+            $resultArray[]=array('name'=> $name, 'data'=> $value1,'color'=>$color);
+        }
+        $category = $q;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar');
     }
 
     public function getBemONCReason($criteria, $value, $survey, $survey_category) {
