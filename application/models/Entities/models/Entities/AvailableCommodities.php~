@@ -52,7 +52,7 @@ class AvailableCommodities
     /**
      * @var string
      *
-     * @ORM\Column(name="ac_expiry_date", type="string", length=10, nullable=false)
+     * @ORM\Column(name="ac_expiry_date", type="text", nullable=true)
      */
     private $acExpiryDate;
 

@@ -31,42 +31,42 @@ class LogQuestions
     /**
      * @var string
      *
-     * @ORM\Column(name="lq_reason", type="string", length=200, nullable=false)
+     * @ORM\Column(name="lq_reason", type="string", length=200, nullable=true)
      */
     private $lqReason;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lq_specified_or_follow_up", type="string", length=255, nullable=false)
+     * @ORM\Column(name="lq_specified_or_follow_up", type="string", length=255, nullable=true)
      */
     private $lqSpecifiedOrFollowUp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lq_created", type="datetime", nullable=false)
+     * @ORM\Column(name="lq_created", type="datetime", nullable=true)
      */
     private $lqCreated;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="lq_response_count", type="integer", nullable=false)
+     * @ORM\Column(name="lq_response_count", type="integer", nullable=true)
      */
     private $lqResponseCount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="question_code", type="string", length=8, nullable=false)
+     * @ORM\Column(name="question_code", type="string", length=8, nullable=true)
      */
     private $questionCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fac_mfl", type="string", length=11, nullable=false)
+     * @ORM\Column(name="fac_mfl", type="string", length=11, nullable=true)
      */
     private $facMfl;
 
