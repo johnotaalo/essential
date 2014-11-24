@@ -312,7 +312,7 @@ class Generate extends MY_Controller
             {
                 $retrieved = $this->data_model->retrieveDataHCW('log_questions_hcw', 'question_code');
             }
-
+            // print_r($retrieved);die;
             /**
              * [$counter description]
              * @var integer
@@ -372,7 +372,7 @@ class Generate extends MY_Controller
                             }
                             else if($value['questionCode'] == 'QUC34')
                             {
-                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"></div></tr>';
+                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"><input type = "text" name = "wpfacilitycounty_1"></div></tr>';
                             }
                             $data[$section][] = '<tr>
                             <td><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
@@ -448,7 +448,7 @@ class Generate extends MY_Controller
                         else if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
-                <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                <td colspan = "1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
@@ -639,7 +639,7 @@ class Generate extends MY_Controller
                         if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
-                <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                <td colspan = "1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
@@ -1196,11 +1196,11 @@ class Generate extends MY_Controller
                                 $unit = '';
                             }
                             $commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
-            <td colspan="2" style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
+            <td style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
             <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>
             </td>
-            <td colspan="2">
+            <td>
                 a. 1 week<input type="checkbox">
                 b. 2 weeks <input type="checkbox">
                 c. 1 month<input type="checkbox">
@@ -1529,13 +1529,16 @@ class Generate extends MY_Controller
                                         }
                                     }
 
-                                    // if ($fully_functioning != '') {
+                                    if ($fully_functioning != '') {
+                                      $fullyFunctioningRow = '<td style ="text-align:center;">
+                                          <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                          </td>';
 
-                                    // } else {
-                                    //     $fullyFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                    //         </td>';
-                                    // }
+                                    } else {
+                                        $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                                    }
                                     if ($value['eqFor'] == 'ort') {
                                         if (($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38')) {
                                             $nonFunctioningRow = '<td style ="text-align:center;">
@@ -1546,15 +1549,15 @@ class Generate extends MY_Controller
                                         }
                                     }
 
-                                    // if ($non_functioning != '') {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // } else {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // }
+                                    if ($non_functioning != '') {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    } else {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    }
 
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
@@ -1985,27 +1988,44 @@ class Generate extends MY_Controller
                 $sub_counties = $this->data_model->getDistricts();
                 $facMFL = $this->session->userdata('facilityMFL');
                 $fac_county = $this->data_model->getFacilityCounty($facMFL);
+                switch ($this->survey_form)
+                {
+                    case 'online':
+                    foreach ($facilities as $key => $value) {
+                        if($value['facMfl'] == $facMFL)
+                        {
+                            $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+                            $facilitysection .= "<td>".$value['facLevel']."</td>";
+                            $facilitysection .= '<td>'.$fac_county.'</td>';
+                            $facilitysection .= '</tr>';
+                            $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= '<td>'.$value['facType'].'</td>';
+                            $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
+                            $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+                            $facilitysection .= '</tr>';
 
+                        }
+                    }
+                    break;
 
-                foreach ($facilities as $key => $value) {
-                    if($value['facMfl'] == $facMFL)
-                    {
+                    case 'offline':
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
-                        $facilitysection .= "<td>".$value['facLevel']."</td>";
-                        $facilitysection .= '<td>'.$fac_county.'</td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
                         $facilitysection .= '</tr>';
                         $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= '<td>'.$value['facType'].'</td>';
-                        $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
-                        $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
                         $facilitysection .= '</tr>';
-
-                    }
+                        break;
                 }
-
                 return $facilitysection;
             }
 
@@ -2014,32 +2034,53 @@ class Generate extends MY_Controller
                 $workprofilesection = '';
                 $hcwwork = $this->data_model->getHCWWorkProfile($this->session->userdata('hcw_id'));
                 $counter = 0;
+                switch($this->survey_form)
+                {
+                    case 'online':
+                        foreach ($hcwwork as $key => $value) {
 
-                foreach ($hcwwork as $key => $value) {
+                                $names = explode(" ", $value['names_of_participant']);
+                                $namecount = count($names);
+                                $firstname = $names[0];
+                                $lastname = $names[$namecount - 1];
 
-                        $names = explode(" ", $value['names_of_participant']);
-                        $namecount = count($names);
-                        $firstname = $names[0];
-                        $lastname = $names[$namecount - 1];
-
-                    $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
-                    $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
-                    $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
-                    $workprofilesection .= '<tr>
-                <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
-                <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
-                <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
-                </td>
-                </tr>';
-                $workprofilesection .= '<tr>
-                <td colspan="1"><label for="">Designation</label></td>
-                <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
-                </tr>';
+                            $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
+                        </tr>';
+                        }
+                        break;
+                    case 'offline':
+                         $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1"  /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" ></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" ></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><input type = "text" /></td>
+                        </tr>';
+                        break;
                 }
-
                 return $workprofilesection;
 
             }
@@ -2121,5 +2162,23 @@ class Generate extends MY_Controller
                 //echo $this->mchTrainingGuidelineSection;die;
                 return $this->trainingGuidelineSection;
             }
+
+            public function createassessorsection()
+            {
+                $assessor_section = '';
+
+                switch ($this->survey_form) {
+                    case 'online':
+                        $assessor_section = '<select name = "asesordesignation_1">'.$this->createCadre().'</select>';
+                        break;
+                    case 'offline':
+                        $assessor_section = '<input type = "text" />';
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+
+                return $assessor_section;
+            }
         }
-        
