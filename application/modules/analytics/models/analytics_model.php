@@ -1204,7 +1204,7 @@ WHERE
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
 
-                    echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     //prep data for the pie chart format
                     $size = count($this->dataSet);
                     $i = 0;
@@ -3656,13 +3656,13 @@ ORDER BY question_code";
                 $this->dataSet = $this->dataSet->result_array();
                 foreach ($this->dataSet as $value_) {
 
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                   // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
-                    $question = $this->sName($value_['question_code']);
-                    $response = $value_['total_response'];
+                    //$question = $this->sName($value_['question_code']);
+                   // $response = $value_['total_response'];
 
                     //1. collect the categories
-                    $data[$question][] = $response;
+                    $data[$value_['question_name']][] = (int)$value_['total_response'];
                 }
 
                 //die(var_dump($this->dataSet));
@@ -3676,7 +3676,7 @@ ORDER BY question_code";
 
 
             }
-
+            //die(var_dump($data));
             return $data;
         }
 
@@ -3973,7 +3973,7 @@ ORDER BY question_code";
                     }
                 }
 
-                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+               // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
 
 
             }
@@ -4101,7 +4101,7 @@ ORDER BY question_code";
 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+               // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
@@ -4199,10 +4199,6 @@ ORDER BY question_code";
 
                             break;
 
-                        case 'mainsource':
-                            $data[$question][$value_['reason']] = (int)$value_['total_response'];
-                            break;
-
                         case 'availability':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
@@ -4210,7 +4206,9 @@ ORDER BY question_code";
                         case 'functionality':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
-
+                        case 'mainsource':
+                            $data[$question][$value_['reason']] = (int)$value_['total_response'];
+                            break;
                         case 'location':
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;

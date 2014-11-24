@@ -1212,7 +1212,7 @@ class Analytics extends MY_Controller
                 $key = ucwords($key);
                 $category[] = $key;
                 foreach ($result as $name => $value) {
-                    if ($name != 'Sometimes Available') {
+                    if ($name != 'Sometimes Available' && $name != '') {
 
                         //if ($name != 'Sometimes Available') {
                         $data[$name][] = (int)$value;
@@ -1230,6 +1230,7 @@ class Analytics extends MY_Controller
                     $color='#2f7ed8';
                 } else if (($key == 'N/A')|| ($key == '')) {
                     $name = 'No Data';
+
                     $key = $name;
                 }
                 $key = str_replace('_', ' ', $key);
@@ -1250,7 +1251,7 @@ class Analytics extends MY_Controller
 
             }
              $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,'supplies',$statistic,$colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),$for,$statistic,$colors);
         } else if(($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')||($statistic == 'supplier' && $for == 'mh')){
             foreach ($results as $key => $result) {
                 //echo '<pre>';print_r($results);echo '</pre>';die;
@@ -2983,7 +2984,7 @@ class Analytics extends MY_Controller
         $value = urldecode($value);
         $category[] = array();
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-
+        echo '<pre>'; print_r($results); echo '</pre>';die;
         $result = $q = $resultArray = array();
 
         $count = 0;
@@ -3072,9 +3073,9 @@ class Analytics extends MY_Controller
      * @param  [type] $statistics      [description]
      * @return [type]                  [description]
      */
-    public function getBedStatistics($criteria, $value, $survey, $survey_category, $statistics) {
+    public function getBedStatistics($criteria, $value, $survey, $survey_category, $for) {
          //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', $statistics);
-        $data = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'bed', $statistics);
+        $data = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, 'bed');
         //$data = $nurse + $beds;
 
         foreach ($data as $key => $value) {
@@ -4835,6 +4836,7 @@ class Analytics extends MY_Controller
      */
     public function getBeds($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, $for);
+        //echo "</pre>";print_r($results);echo "</pre>";die;
         $number = $resultArray = array();
         foreach ($results as $key => $value) {
             $number[] = (int)$value[0];
@@ -4904,8 +4906,14 @@ class Analytics extends MY_Controller
 
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
-            $category[] = 'Level' . $key;
-            foreach ($result as $name => $value) {
+            if($key == ''){
+                $key = 'No specified Tier';
+                $category[] = $key;
+            }else{
+                 $category[] = 'Tier' . $key;
+            
+            }
+           foreach ($result as $name => $value) {
                 if ($name != 'n/a' && $name != '') {
                     $data[$name][] = (int)$value;
                 }
