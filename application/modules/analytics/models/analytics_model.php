@@ -1209,7 +1209,7 @@ WHERE
                 //echo $this->db->last_query();die;
                 if ($this->dataSet !== NULL) {
 
-                    //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                    echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
                     //prep data for the pie chart format
                     $size = count($this->dataSet);
                     $i = 0;
@@ -4029,7 +4029,7 @@ ORDER BY question_code";
                   //echo "<pre>";print_r($this->dataSet);echo "</pre>";
 
                 foreach ($this->dataSet as $value_) {
-
+                        //echo "<pre>";print_r($value_);echo "</pre>";
                     //print_r($this->dataSet);die;
                     $question = $this->getSignalName($value_['sf_code']);
                     $code = $value_['sf_code'];
@@ -4039,17 +4039,17 @@ ORDER BY question_code";
                         $question = substr($question, 18);
                  endif;
                  $count++;
-
+                 $data[$question][$value_['response']]= (int)$value_['total'];
 
                     //echo "<pre>";print_r($question);echo "</pre>";
                     // var_dump($value_['sf_code']);die;
 
-                    $yes = $value_['yes_values'];
-                    $no = $value_['no_values'];
+                    // $yes = $value_['yes_values'];
+                    // $no = $value_['no_values'];
 
-                    //1. collect the categories
-                    $data[$question]['yes'] = $yes;
-                    $data[$question]['no'] = $no;
+                    // //1. collect the categories
+                    // $data[$question]['yes'] = $yes;
+                    // $data[$question]['no'] = $no;
                 }
             }
 
