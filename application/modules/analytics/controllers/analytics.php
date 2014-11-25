@@ -725,7 +725,7 @@ class Analytics extends MY_Controller
         $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar','',$for, 'staff_retention', 'total', $colors);
     }
     
-    public function getStaffRetentionRAW($criteria, $value, $survey, $survey_category, $for) {
+    public function getStaffRetentionRAW($criteria, $value, $survey, $survey_category, $for,$form) {
         $results = $this->analytics_model->getStaffRetention($criteria, $value, $survey, $survey_category, $for, 'total_raw');
         
         $results = $this->arrays->reset($results);
@@ -733,7 +733,7 @@ class Analytics extends MY_Controller
         echo $this->export->generate($results, 'Staff Retention Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     
-    public function getStaffAvailabilityRAW($criteria, $value, $survey, $survey_category, $for) {
+    public function getStaffAvailabilityRAW($criteria, $value, $survey, $survey_category, $for,$form) {
         $results = $this->analytics_model->getStaffAvailability($criteria, $value, $survey, $survey_category, $for, 'total_raw');
         
         $results = $this->arrays->reset($results);
@@ -741,7 +741,7 @@ class Analytics extends MY_Controller
         echo $this->export->generate($results, 'Staff Availability Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
 
-    public function getTrainedStaffRAW($criteria, $value, $survey, $survey_category, $for) {
+    public function getTrainedStaffRAW($criteria, $value, $survey, $survey_category, $for,$form) {
         $results = $this->analytics_model->getTrainedStaff($criteria, $value, $survey, $survey_category, $for, 'total_raw');
         
         $results = $this->arrays->reset($results);
