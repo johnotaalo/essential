@@ -3413,7 +3413,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCIInterview($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'int', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'int', 'response');
     }
     
     /**
@@ -3424,7 +3424,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCIConsultation($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'obs', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'obs', 'response');
     }
     
     /**
@@ -3435,7 +3435,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificate($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'out', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'out', 'response');
     }
     
     /**
@@ -3446,7 +3446,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificateA($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certa', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certa', 'response');
     }
     
     /**
@@ -3457,7 +3457,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificateB($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'certb', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certb', 'response');
     }
     
     /**
