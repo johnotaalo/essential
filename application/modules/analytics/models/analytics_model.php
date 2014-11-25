@@ -4165,6 +4165,10 @@ ORDER BY question_code";
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
                             break;
 
+                        case 'hcwresponse':
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
                         case 'total':
                             
                             //echo $question;

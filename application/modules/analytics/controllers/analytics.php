@@ -2922,6 +2922,7 @@ class Analytics extends MY_Controller
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics, $colors);
         } else if (($statistics == 'hcwRetention' && $for == 'wp') || ($statistics == 'hcwTransfer' && $for == 'wp')) {
+            $results = $this->analytics_model->getQuestionStatistics($criteria, $value, '', '', $for, $statistics);
             $number = $resultArray = $q = $data = $gdata = $res = array();
             $number = $resultArray = $q = $yes = $no = $null = array();
             foreach ($results as $key => $value) {
@@ -2962,7 +2963,39 @@ class Analytics extends MY_Controller
             $category = $q;
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics, $colors);
-        } else {
+        } elseif($statistics=='hcwresponse') {
+            $results = $this->analytics_model->getQuestionStatistics($criteria, $value, '', '', $for, $statistics);
+            $number = $resultArray = $q = $data = $gdata = $res = array();
+            $number = $resultArray = $q = $yes = $no = $null = array();
+            foreach ($results as $key => $value) {
+                $q[] = $key;
+                $data[] = $value;
+            }
+            foreach ($data as $k => $val) {
+                foreach ($val as $r => $value_) {
+                    $gdata[$r][] = $value_;
+                }
+            }
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $colorCounter = 0;
+            foreach ($gdata as $name => $value1) {
+                if ($name == 'No data') {
+                    $color = '#dddddd';
+                } else if ($name == 'Yes') {
+                    $color = '#8bbc21';
+                } else if ($name == 'No') {
+                    $color = '#fb4347';
+                } else {
+                    $color = $colors[$colorCounter];
+                    $colorCounter++;
+                }
+                $resultArray[] = array('name' => $name, 'data' => $value1, 'color' => $color);
+            }
+            $category = $q;
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
+           // $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics, $colors);
+        }else {
             $number = $resultArray = $q = $data = $gdata = $res = array();
             $number = $resultArray = $q = $yes = $no = $null = array();
             foreach ($results as $key => $value) {
@@ -3413,7 +3446,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCIInterview($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, '', '', 'int', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'int', 'hcwresponse');
     }
     
     /**
@@ -3424,7 +3457,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCIConsultation($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, '', '', 'obs', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'obs', 'hcwresponse');
     }
     
     /**
@@ -3435,7 +3468,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificate($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, '', '', 'out', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'out', 'hcwresponse');
     }
     
     /**
@@ -3446,7 +3479,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificateA($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, '', '', 'certa', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certa', 'hcwresponse');
     }
     
     /**
@@ -3457,7 +3490,7 @@ class Analytics extends MY_Controller
      * @return [type]           [description]
      */
     public function getIMCICertificateB($criteria, $value, $survey, $survey_category) {
-        $this->getQuestionStatistics($criteria, $value, '', '', 'certb', 'response');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'certb', 'hcwresponse');
     }
 
     public function getHCWIndicatorFindings($criteria, $value, $survey, $survey_category, $for, $statistic) {
