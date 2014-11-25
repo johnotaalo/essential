@@ -1165,6 +1165,12 @@ WHERE
                                 }
                                 break;
 
+                            case 'hcwfindings':
+                                if (array_key_exists('frequency', $value)) {
+                                    $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                                }
+                                break;
+
                             case 'hcwservice':
                                 $data[$value['indicator_name']][$value['li_hcwResponse']] = (int)$value['total'];
                                 
@@ -1243,6 +1249,14 @@ WHERE
 
                             case 'hcwcorrectness':
                                 $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                                break;
+
+                                case 'hcwclassification':
+                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
+                                break;
+
+                            case 'hcwassessment':
+                                $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
                                 break;
                         }
                     }

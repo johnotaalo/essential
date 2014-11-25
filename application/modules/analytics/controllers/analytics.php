@@ -3459,6 +3459,11 @@ class Analytics extends MY_Controller
     public function getIMCICertificateB($criteria, $value, $survey, $survey_category) {
         $this->getQuestionStatistics($criteria, $value, '', '', 'certb', 'response');
     }
+
+    public function getHCWIndicatorFindings($criteria, $value, $survey, $survey_category, $for, $statistic) {
+        $this->getIndicatorStatistics($criteria, $value, '', '', $for, 'hcwfindings');
+    }
+
     
     /**
      * [getIndicatorStatistics description]
@@ -3551,6 +3556,46 @@ class Analytics extends MY_Controller
                 }
                 $resultArray[] = array('name' => $key, 'data' => $val, 'color' => $color);
             }
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
+        }elseif ($statistic == 'hcwfindings') {
+            $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, '', '', $for, $statistic);
+            
+            //echo "<pre>"; print_r($results);echo "</pre>";die;
+            foreach ($results as $key => $result) {
+                
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                    if ($name != '') {
+                        $data[$name][] = (int)$value;
+                    }
+                }
+            }
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $colorCounter = 0;
+            foreach ($data as $key => $val) {
+                if (($key == 'N/A')) {
+                    $name = 'No Data';
+                    $key = $name;
+                }
+                $key = str_replace('_', ' ', $key);
+                $key = ucwords($key);
+                $key = str_replace(' ', '-', $key);
+                if (($key == 'No-Data')) {
+                    $color = '#dddddd';
+                } else if ($key == 'Present') {
+                    $color = '#8bbc21';
+                } else if ($key == 'Not-Present') {
+                    $color = '#fb4347';
+                } else {
+                    $color = $colors[$colorCounter];
+                    $colorCounter++;
+                }
+                $resultArray[] = array('name' => $key, 'data' => $val, 'color' => $color);
+            }
+             //echo "<pre>"; print_r($resultArray);echo "</pre>";die;
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
         } elseif (($statistic == 'hcwservice' && $for == 'svc') || ($statistic == 'hcwservice' && $for == 'sgn')) {
@@ -3648,6 +3693,16 @@ class Analytics extends MY_Controller
     public function getHcwDangerSignsPresence($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $this->getIndicatorStatistics($criteria, $value, '', '', 'sgn', 'hcwdangersigns');
     }
+
+    public function getHcwCorrectness($criteria, $value, $survey, $survey_category, $for, $statistic) {
+        $this->getIndicatorComparison($criteria, $value, '', '', $for, 'hcwcorrectness');
+    }
+
+    public function getHcwAssessment($criteria, $value, $survey, $survey_category, $for, $statistic) {
+        $this->getAssessmentComparison($criteria, $value, '', '', $for, 'hcwassessment');
+    }
+
+   
     
     /**
      * [getIndicatorComparison description]
@@ -3664,6 +3719,34 @@ class Analytics extends MY_Controller
         
         //echo '<pre>';print_r($results);echo '</pre>';die;
         if ($statistic = 'classification' && $for = 'ch') {
+            foreach ($results as $indicator => $values) {
+                $category[] = $indicator;
+                foreach ($values as $verdict => $answer) {
+                    $gData[$verdict][] = $answer;
+                }
+            }
+            $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+            $colorCounter = 0;
+            foreach ($gData as $name => $data) {
+                if ($name == 'N/A') {
+                    $name = 'No data';
+                    $color = '#dddddd';
+                } elseif ($name == 'Yes') {
+                    $color = '#8bbc21';
+                } else if ($name == 'No') {
+                    $color = '#fb4347';
+                } else {
+                    $color = $colors[$colorCounter];
+                    $colorCounter++;
+                }
+                $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
+            }
+            
+            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+            
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+        }elseif ($statistic = 'hcwclassification') {
+            $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for, $statistic);
             foreach ($results as $indicator => $values) {
                 $category[] = $indicator;
                 foreach ($values as $verdict => $answer) {
@@ -3716,7 +3799,7 @@ class Analytics extends MY_Controller
             // echo '<pre>';print_r($resultArray);echo '</pre>';die;
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
         } elseif ($statistic == 'hcwcorrectness') {
-            
+            $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for, $statistic);
             // echo '<pre>';print_r($results);echo '</pre>';die;
             foreach ($results as $indicator => $values) {
                 $category[] = $indicator;
@@ -3744,6 +3827,32 @@ class Analytics extends MY_Controller
     }
     public function getAssessmentComparison($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $value = urldecode($value);
+        if($statistics=='hcwassessment'){
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for, $statistic);
+        foreach ($results as $indicator => $values) {
+            $category[] = $indicator;
+            foreach ($values as $verdict => $answer) {
+                $gData[$verdict][] = $answer;
+            }
+        }
+        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
+        $colorCounter = 0;
+        foreach ($gData as $name => $data) {
+            if ($name == 'assessment done') {
+                $color = '#8bbc21';
+            } else if ($name == 'assessment not done') {
+                $color = '#fb4347';
+            } else {
+                $color = $colors[$colorCounter];
+                $colorCounter++;
+            }
+            $resultArray[] = array('name' => ucwords($name), 'data' => $data, 'color' => $color);
+        }
+        
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+        
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+        }else{
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for, $statistic);
         foreach ($results as $indicator => $values) {
             $category[] = $indicator;
@@ -3768,6 +3877,7 @@ class Analytics extends MY_Controller
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+       }
     }
     
     public function getIndicatorTypes() {
@@ -3787,6 +3897,53 @@ class Analytics extends MY_Controller
         }
         echo $options;
     }
+
+    public function getIndicatorTypes2A() {
+        $results = $this->analytics_model->getIndicatorTypes();
+        
+        //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+            if (($value['il_for'] == 'ear') || ($value['il_for'] == 'dgn') || ($value['il_for'] == 'fev') || ($value['il_for'] == 'pne')) {
+                
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
+    public function getIndicatorTypes2B() {
+        $results = $this->analytics_model->getIndicatorTypes();
+        
+        //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+            if (($value['il_for'] == 'svd') || ($value['il_for'] == 'jau') || ($value['il_for'] == 'eye') || ($value['il_for'] == 'brf')) {
+               
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
+    public function getIndicatorTypes3() {
+        $results = $this->analytics_model->getIndicatorTypes();
+        
+        //echo '<pre>';print_r($results);echo '</pre>';die;
+        $options = '<option>Select Main Symptom/Condition</option>';
+        foreach ($results as $value) {
+            if (($value['il_for'] == 'anm') || ($value['il_for'] == 'con') || ($value['il_for'] == 'mal') || ($value['il_for'] == 'cnl')) {
+                if (($value['il_for']) == 'cnl') {
+                    $value['il_full_name'] = 'Treatment and Counselling';
+                } elseif (($value['il_for']) == 'con') {
+                    $value['il_full_name'] = 'Condition';
+                }
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+        }
+        echo $options;
+    }
+
     public function getHCWIndicatorTypes() {
         $results = $this->analytics_model->getIndicatorTypes();
         
@@ -4242,117 +4399,136 @@ class Analytics extends MY_Controller
     /**
      * Get Facility Ownership
      */
-    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, $statistic) {
-        
+    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
+
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
-        
+
         //foreach ($allCounties as $county) {
         $category[] = $county;
-        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, 'response');
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category);
         $resultArray = array();
         foreach ($results as $value) {
-            
+
             //$data = array();
-            
+
             $name = $value['ownership'];
-            
+
             //echo '<pre>';print_r($results);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
             $gData[] = array('name' => $name, 'y' => (int)$value['ownership_total']);
-            
+
             //echo '<pre>';print_r($gData);echo '</pre>';die;
-            
-            
+
+
         }
         $resultArray[] = array('name' => 'Facility Ownership', 'data' => $gData);
-        
-        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 50, 'pie');
-    }
-    public function getFacilityOwnership($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, 'response');
-    }
-    
-    /**
-     * Get Level Ownership
-     */
-    
-    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, $statistic) {
-        
-        //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
-        $value = urldecode($value);
-        
-        //foreach ($allCounties as $county) {
-        
-        $category[] = $value;
-        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, 'response');
-        
-        //echo '<pre>';print_r($results);echo '</pre>';die;
-        $resultArray = array();
-        foreach ($results as $value) {
-            
-            // echo '<pre>';print_r($value);echo '</pre>';die;
-            //$data = array();
-            
-            $name = $value['facilityLevel'];
-            if ($name == '') {
-                $name = 'No tier specified';
-                $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
-                
-                //echo '<pre>';print_r($name);echo '</pre>';die;
-                
-            } else {
-                $gData[] = array('name' => 'Tier' . $name, 'y' => (int)$value['level_total']);
-            }
-            
-            //$gData[] = (int)$value['level_total'];
-            
-            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-            
-            
-        }
-        $resultArray[] = array('name' => 'Facility Levels', 'data' => $gData);
-        
-        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 30, 'pie');
-    }
-    public function getFacilityLevel($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, 'response');
-    }
-    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, $statistic) {
-        
-        //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
-        $value = urldecode($value);
-        
-        //foreach ($allCounties as $county) {
-        $category[] = $value;
-        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, 'response');
-        
-        //echo '<pre>';print_r($results);echo '</pre>';die;
-        $resultArray = array();
-        foreach ($results as $value) {
-            
-            //$data = array();
-            
-            $name = $value['facilityType'];
-            
-            //echo '<pre>';print_r($name);echo '</pre>';die;
-            //$gData[] = (int)$value['level_total'];
-            $gData[] = array('name' => $name, 'y' => (int)$value['type_total']);
-            
-            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-            
-            
-        }
-        $resultArray[] = array('name' => 'Facility Types', 'data' => $gData);
-        
+
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
-    public function getFacilitytype($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, 'response');
+    public function getFacilityOwnership($criteria,$value,$survey,$survey_category,$statistic){
+        $this->getFacilityOwnerPerCounty($criteria,$value,$survey,$survey_category,'response');
     }
+    /**
+     * Get Level Ownership
+     */
+
+    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
+
+        //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
+        $value = urldecode($value);
+
+        //foreach ($allCounties as $county) {
+
+        $category[] = $value;
+        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category);
+
+        //echo '<pre>';print_r($results);echo '</pre>';die;
+        $resultArray = array();
+        foreach ($results as $value) {
+           // echo '<pre>';print_r($value);echo '</pre>';die;
+            //$data = array();
+            
+             $name =  $value['facilityLevel'];   
+            if($name == ''){
+                $name = 'No tier specified';
+                $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
+             //echo '<pre>';print_r($name);echo '</pre>';die;
+            }else{
+              $gData[] = array('name' => 'Tier'.$name, 'y' => (int)$value['level_total']);  
+            }
+            //$gData[] = (int)$value['level_total'];
+            
+
+            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+
+
+        }
+        $resultArray[] = array('name' => 'Facility Levels', 'data' => $gData);
+
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 30, 'pie');
+    }
+    public function getFacilityLevel($criteria,$value,$survey,$survey_category,$statistic){
+        $this->getFacilityLevelPerCounty($criteria,$value,$survey,$survey_category,'response');
+    }
+    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
+
+        //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
+        $value = urldecode($value);
+
+        //foreach ($allCounties as $county) {
+        $category[] = $value;
+        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category);
+
+        //echo '<pre>';print_r($results);echo '</pre>';die;
+        $resultArray = array();
+        foreach ($results as $value) {
+
+            //$data = array();
+
+            $name = $value['facilityType'];
+
+            //echo '<pre>';print_r($name);echo '</pre>';die;
+            //$gData[] = (int)$value['level_total'];
+            $gData[] = array('name' => $name, 'y' => (int)$value['type_total']);
+
+            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+
+
+        }
+        $resultArray[] = array('name' => 'Facility Types', 'data' => $gData);
+
+        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+    }
+    public function getFacilitytype($criteria,$value,$survey,$survey_category,$statistic){
+        $this->getFacilityTypePerCounty($criteria,$value,$survey,$survey_category,'response');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getFacilityLevelAll($survey) {
         $counties = $this->analytics_model->getReportingCounties($survey);
         foreach ($counties as $county) {
