@@ -6,23 +6,23 @@ class Generate extends MY_Controller
         parent::__construct();
         $this->load->model('data_model');
         $this->survey_form = $this->session->userdata('survey_form');
-        
+
         // echo $this->survey_form;
-        
-        
-        
+
+
+
         /**
          * Call Sections Creators
          */
-        
+
         // $mode = $this->survey_form;
         // echo $mode;die;
         // $this->createIndicatorSection();
         // $this->createQuestionSection();
-        
-        
+
+
     }
-    
+
     /**
      * [getRepositoryByFormName description]
      * @param  [type] $form [description]
@@ -32,19 +32,19 @@ class Generate extends MY_Controller
         $this->the_form = $this->em->getRepository($form);
         return $this->theForm;
     }
-    
+
     /**
      * [createIndicatorSection description]
      * @return [type] [description]
      */
     public function createIndicatorSection() {
-        
+
             $data_found = $this->data_model->getIndicators();
         // var_dump($data_found);die;
         if($this->session->userdata('survey') != 'hcw')
         {
             $retrieved = $this->data_model->retrieveData('log_indicators', 'indicator_code');
-        }   
+        }
         else
         {
             $retrieved = $this->data_model->retrieveDataHCW('log_indicators_hcw', 'indicator_code');
@@ -66,11 +66,11 @@ class Generate extends MY_Controller
                     $current = ($base == 0) ? $section : $current;
                     $base = ($current != $section) ? 0 : $base;
                     $current = ($base == 0) ? $section : $current;
-                    
+
                     if (array_key_exists($value['indicatorCode'], $retrieved)) {
                         $indicatorHCWResponse = ($retrieved[$value['indicatorCode']]['li_hcwResponse'] != 'N/A') ? $retrieved[$value['indicatorCode']]['li_hcwResponse'] : '';
                         $indicatorAssessorResponse = ($retrieved[$value['indicatorCode']]['li_assessorResponse'] != 'N/A') ? $retrieved[$value['indicatorCode']]['li_assessorResponse'] : '';
-                        
+
                         $indicatorHCWFindings = ($retrieved[$value['indicatorCode']]['li_hcwFindings'] != 'N/A') ? $retrieved[$value['indicatorCode']]['li_hcwFindings'] : '';
                         $indicatorAssessorFindings = ($retrieved[$value['indicatorCode']]['li_assessorFindings'] != 'N/A') ? $retrieved[$value['indicatorCode']]['li_assessorFindings'] : '';
                     }
@@ -81,7 +81,7 @@ class Generate extends MY_Controller
                     } else {
                         $responseHCWRow = '<td>Yes <input id="indicatorhcwResponse_' . $counter . '" name="indicatorhcwResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" id="indicatorhcwResponse_' . $counter . '" name="indicatorhcwResponse_' . $counter . '"  type="radio">';
                     }
-                    
+
                     if ($indicatorAssessorResponse == 'Yes') {
                         $responseAssessorRow = '<td>Yes <input checked="checked" name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" type="radio">';
                     } else if ($indicatorAssessorResponse == 'No') {
@@ -89,10 +89,10 @@ class Generate extends MY_Controller
                     } else {
                         $responseAssessorRow = '<td>Yes <input name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="indicatorassessorResponse_' . $counter . '" id="indicatorassessorResponse_' . $counter . '" type="radio">';
                     }
-                    
+
                     $base++;
                     $findingRow = '';
-                    
+
                     $findingHCWRow = $findingAssessorRow = "";
                     if ($value['indicatorFindings'] != NULL) {
                         $findings = explode(';', $value['indicatorFindings']);
@@ -104,7 +104,7 @@ class Generate extends MY_Controller
                         } else {
                             $findingHCWRow = $findingAssessorRow = '';
                             foreach ($findings as $finding) {
-                                
+
                                 if ($finding == 'other (specify)') {
                                     if ($indicatorHCWFindings == $finding) {
                                         $findingHCWRow.= $finding . ' <input name="indicatorhcwFindings_' . $counter . '" checked="checked" id="indicatorhcwFindings_' . $counter . '"  type="radio"><input type="text" style="display:none" name="indicatorhcwOtherFindings_' . $counter . '" id="indicatorhcwOtherFindings_' . $counter . '" />';
@@ -196,12 +196,12 @@ class Generate extends MY_Controller
                     $current = ($base == 0) ? $section : $current;
                     $base = ($current != $section) ? 0 : $base;
                     $current = ($base == 0) ? $section : $current;
-                    
+
                     $base++;
-                    
+
                     $findingRow = '';
                     if ($section != 'sgn' && $section != 'svc' && $section != 'ror' && $section != 'tl') {
-                        
+
                         $findings = explode(';', $value['indicatorFindings']);
                         if (sizeof($findings) == 1) {
                             foreach ($findings as $finding) {
@@ -273,18 +273,18 @@ class Generate extends MY_Controller
                 }
                 break;
             }
-            
+
             foreach ($data as $key => $value) {
                 $this->indicators[$key] = '';
                 foreach ($value as $val) {
                     $this->indicators[$key].= $val;
                 }
             }
-            
+
             // echo $this->indicators['ear'];die;
             return $this->indicators;
         }
-        
+
         /**
          * [createQuestionSection description]
          * @return [type] [description]
@@ -293,13 +293,13 @@ class Generate extends MY_Controller
             $fac_county = $this->data_model->getFacilityCounty($this->session->userdata('facilityMFL'));
             // echo $this->survey_form;die;
             $data_found = $this->data_model->getQuestions();
-            
+
             /**
              * [$data description]
              * @var array
              */
             $data = array();
-            
+
             /**
              * [$retrieved description]
              * @var [type]
@@ -318,25 +318,25 @@ class Generate extends MY_Controller
              * @var integer
              */
             $counter = 0;
-            
+
             /**
              * [$section description]
              * @var string
              */
             $section = '';
-            
+
             /**
              * [$numbering description]
              * @var array
              */
             $numbering = array_merge(range('A', 'Z'), range('a', 'z'));
-            
+
             /**
              * [$base description]
              * @var integer
              */
             $base = 0;
-            
+
             /**
              * [$current description]
              * @var string
@@ -346,7 +346,7 @@ class Generate extends MY_Controller
                 case 'online':
                     foreach ($data_found as $value) {
                         $counter++;
-                        
+
                         $section = $value['questionFor'];
                         $current = ($base == 0) ? $section : $current;
                         $base = ($current != $section) ? 0 : $base;
@@ -372,7 +372,7 @@ class Generate extends MY_Controller
                             }
                             else if($value['questionCode'] == 'QUC34')
                             {
-                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"></div></tr>';
+                                $additionalinfo = '<tr><td colspan = "3">If  Yes, indicate the name of the county '.$this->createCounties().' and facility <div id = "facility-container"><input type = "text" name = "wpfacilitycounty_1"></div></tr>';
                             }
                             $data[$section][] = '<tr>
                             <td><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
@@ -448,7 +448,7 @@ class Generate extends MY_Controller
                         else if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
-                <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                <td colspan = "1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
@@ -493,7 +493,7 @@ class Generate extends MY_Controller
         </tr>';
                             $data[$section][] = $guidelinequestions;
                         }
-                        
+
                         /**
                          * If Section is Water Resource
                          * @var [type]
@@ -501,7 +501,7 @@ class Generate extends MY_Controller
                         else if ($section == 'mnhw') {
                             $supplierOptions = $this->createSupplierOptions();
                             $aspect_response_on_yes = '';
-                            
+
                             if ($value['questionCode'] == 'QMNH01') {
                                 $aspect_response_on_yes = '<label>Water Storage Point</label><br/>
             <input type="text"  name="questionSpecify_' . $counter . '" id="mnhwStoragePoint_' . $counter . '" value="" size="45" placeholder="specify"/>';
@@ -519,7 +519,7 @@ class Generate extends MY_Controller
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         }
-                        
+
                         /**
                          * If Section is Community Strategy
                          * @var [type]
@@ -537,9 +537,9 @@ class Generate extends MY_Controller
         </tr>';
                         } else if ($section == 'ort') {
                             if ($value['questionCode'] == 'QUC01') {
-                                
+
                                 //set follow up question if qn on designated ort location is yes
-                                
+
                                 $aspect = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
@@ -549,7 +549,7 @@ class Generate extends MY_Controller
         </tr>';
                                 $data[$section][] = $aspect;
                             } else {
-                                
+
                                 if ($value['questionCode'] == 'QUC02b') {
                                     $ort_location = '<tr id="ort_location" style="display:true">
             <td colspan="1">' . $value['questionName'] . '</td>
@@ -577,7 +577,7 @@ class Generate extends MY_Controller
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
-                                    
+
                                     $data[$section][] = $ort_location;
                                 } elseif ($value['questionCode'] == 'QUC02a') {
                                     $ort_functional = $this->getORTFunctionality();
@@ -585,7 +585,7 @@ class Generate extends MY_Controller
             <td colspan="2"><b>' . $value['questionName'] . '</b></td>
            </tr>' . $ort_functional;
                                 } else {
-                                    
+
                                     $data[$section][] = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
@@ -595,7 +595,7 @@ class Generate extends MY_Controller
                                 }
                             }
                         } else {
-                            
+
                             /**
                              * Yes/No Choice
                              * @var string
@@ -618,7 +618,7 @@ class Generate extends MY_Controller
                             $data[$section][] = '
                                 <tr>
                                     <td colspan="1"><strong>(' . $base . ')</strong> ' . $value['questionName'] . '</td>
-                                    <td>' . $responseRow . '   
+                                    <td>' . $responseRow . '
                                     </td>
                                     <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                                 </tr>';
@@ -633,13 +633,13 @@ class Generate extends MY_Controller
                         $current = ($base == 0) ? $section : $current;
                         $base = ($current != $section) ? 0 : $base;
                         $current = ($base == 0) ? $section : $current;
-                        
+
                         $base++;
 
                         if ($section == 'nur' || $section == 'bed') {
                             $data[$section][] = '
                 <tr>
-                <td colspan = "1"<strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
+                <td colspan = "1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['questionName'] . '</td>
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
@@ -684,7 +684,7 @@ class Generate extends MY_Controller
     </td>
 </tr>';
                             }
-                            
+
                             $data[$section][] = '<tr>
         <td ><strong>(' . ($base) . ').</strong> ' . $value['questionName'] . '</td>
         <td >
@@ -708,7 +708,7 @@ class Generate extends MY_Controller
         <input type="hidden"  name="wastedisposalAspectCode_' . $counter . '" id="wastedisposalAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
     </tr>';
                         }
-                        
+
                         /**
                          * If Section is Job Aids, Guidelines MNH or Guidelines MCH
                          * @var [type]
@@ -722,7 +722,7 @@ class Generate extends MY_Controller
             <input type="hidden"  name="questionCode' . $counter . '" id="questionCode' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         }
-                        
+
                         /**
                          * If Section is Water Resource
                          * @var [type]
@@ -730,7 +730,7 @@ class Generate extends MY_Controller
                         else if ($section == 'mnhw') {
                             $supplierOptions = $this->createSupplierOptions();
                             $aspect_response_on_yes = '';
-                            
+
                             if ($value['questionCode'] == 'QMNH01') {
                                 $aspect_response_on_yes = '<label>Water Storage Point</label><br/>
             <input type="text"  name="mnhwAspectWaterSpecify_' . $counter . '" id="mnhwStoragePoint_' . $counter . '" value="" size="45" placeholder="specify"/>';
@@ -748,7 +748,7 @@ class Generate extends MY_Controller
             <input type="hidden"  name="mnhwAspectCode_' . $counter . '" id="mnhwAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         }
-                        
+
                         /**
                          * If Section is Community Strategy
                          * @var [type]
@@ -766,9 +766,9 @@ class Generate extends MY_Controller
         </tr>';
                         } else if ($section == 'ort') {
                             if ($value['questionCode'] == 'QUC01') {
-                                
+
                                 //set follow up question if qn on designated ort location is yes
-                                
+
                                 $aspect = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
@@ -778,7 +778,7 @@ class Generate extends MY_Controller
         </tr>';
                                 $data[$section][] = $aspect;
                             } else {
-                                
+
                                 if ($value['questionCode'] == 'QUC02b') {
                                     $ort_location = '<tr id="ort_location" style="display:true">
             <td colspan="1">' . $value['questionName'] . '</td>
@@ -806,7 +806,7 @@ class Generate extends MY_Controller
             </td>
             <input type="hidden"  name="ortcAspectCode_' . $counter . '" id="ortcAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
-                                    
+
                                     $data[$section][] = $ort_location;
                                 } elseif ($value['questionCode'] == 'QUC02a') {
                                     $ort_functional = $this->getORTFunctionality();
@@ -814,7 +814,7 @@ class Generate extends MY_Controller
             <td colspan="2"><b>' . $value['questionName'] . '</b></td>
            </tr>' . $ort_functional;
                                 } else {
-                                    
+
                                     $data[$section][] = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
@@ -832,10 +832,10 @@ class Generate extends MY_Controller
         </tr>';
                         }
                     }
-                    
+
                     break;
                 }
-                
+
                 // echo '<pre>'; print_r( $data);echo '</pre>';die;
                 foreach ($data as $key => $value) {
                     $this->questions[$key] = '';
@@ -843,7 +843,7 @@ class Generate extends MY_Controller
                         $this->questions[$key].= $val;
                     }
                 }
-                
+
                 // var_dump($this->questions['cms']);die;
                 return $this->questions;
             }
@@ -851,11 +851,11 @@ class Generate extends MY_Controller
                 $data_found = $this->data_model->getQuestions();
                 $numbering = array_merge(range('A', 'Z'), range('a', 'z'));
                 $counter = 0;
-                
+
                 foreach ($data_found as $value) {
                     if ($value['questionFor'] == 'ortf') {
                         if ($value['questionCode'] == 'QUC29') {
-                            
+
                             $result.= '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
@@ -878,7 +878,7 @@ class Generate extends MY_Controller
             public function createCommoditySection() {
                 $data_found = $this->data_model->getCommodities();
                 $retrieved = $this->data_model->retrieveData('available_commodities', 'comm_code');
-                
+
                 // echo"<pre>";print_r($data_found);die;
                 $counter = 0;
                 $survey = $this->session->userdata('survey');
@@ -888,67 +888,67 @@ class Generate extends MY_Controller
                         break;
 
                     case 'ch':
-                        
+
                         $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Pharmacy', 'Store', 'Other', 'Not Applicable');
                         break;
                 }
-                
+
                 /**
                  * [$availabilities description]
                  * @var array
                  */
                 $availabilities = array('Available', 'Never Available');
-                
+
                 /**
                  * [$reasons description]
                  * @var array
                  */
                 $reasons = array('Select One', '1. Not Ordered', '2. Ordered but not yet Received', '3. Expired');
-                
+
                 /**
                  * [$reasonUnavailable description]
                  * @var string
                  */
                 $reasonUnavailable = '';
-                
+
                 switch ($this->survey_form) {
                     case 'online':
                         foreach ($data_found as $value) {
                             $counter++;
                             $availabilityRow = $locationRow = $expiryRow = $quantityRow = $reasonUnavailableRow = '';
                             if (array_key_exists($value['commCode'], $retrieved)) {
-                                
+
                                 /**
                                  * [$availability description]
                                  * @var [type]
                                  */
                                 $availability = ($retrieved[$value['commCode']]['ac_availability'] != 'N/A') ? $retrieved[$value['commCode']]['ac_availability'] : '';
-                                
+
                                 /**
                                  * [$location description]
                                  * @var [type]
                                  */
                                 $location = ($retrieved[$value['commCode']]['ac_location'] != 'N/A') ? $retrieved[$value['commCode']]['ac_location'] : '';
-                                
+
                                 /**
                                  * [$expiryDate description]
                                  * @var [type]
                                  */
                                 $expiryDate = ($retrieved[$value['commCode']]['ac_expiry_date'] != 'N/A') ? $retrieved[$value['commCode']]['ac_expiry_date'] : '';
-                                
+
                                 /**
                                  * [$reasonUnavailable description]
                                  * @var [type]
                                  */
                                 $reasonUnavailable = $retrieved[$value['commCode']]['ac_reason_unavailable'];
-                                
+
                                 /**
                                  * [$quantity description]
                                  * @var [type]
                                  */
                                 $quantity = ($retrieved[$value['commCode']]['ac_quantity'] != 'N/A') ? $retrieved[$value['commCode']]['ac_quantity'] : '';
                             }
-                            
+
                             /**
                              * [$location description]
                              * @var [type]
@@ -994,15 +994,15 @@ class Generate extends MY_Controller
             <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text"  class="cloned numbers"/>
             </td>';
                             }
-                            
+
                             // echo '<li>' . $reasonUnavailable .'</li>';
                             foreach ($reasons as $reason) {
                                 if ($reasonUnavailable == $reason) {
-                                    
+
                                     // echo 'Found: ' . $reason;
                                     $reasonUnavailableRow.= '<option selected="selected" value="' . $reason . '">' . $reason . '</option>';
                                 } else {
-                                    
+
                                     // echo 'Could not Find: ' . $reason . '<br/>';
                                     $reasonUnavailableRow.= '<option value="' . $reason . '">' . $reason . '</option>';
                                 }
@@ -1021,7 +1021,7 @@ class Generate extends MY_Controller
                     case 'offline':
                         foreach ($data_found as $value) {
                             $counter++;
-                            
+
                             /**
                              * [$section description]
                              * @var string
@@ -1123,9 +1123,9 @@ class Generate extends MY_Controller
                         }
                         break;
                 }
-                
+
                 // echo '<pre>';print_r($this->commodities);die;
-                
+
                 return $this->commodities;
             }
             public function createCommodityUsageandOutageSection() {
@@ -1133,9 +1133,9 @@ class Generate extends MY_Controller
                 $retrieved = $this->data_model->retrieveData('log_commodity_stock_outs', 'comm_id');
                 $OutageOptions = array('1', '2', '3', '4', '5');
                 $UnavailabilityTimes = array('' => 'Select One', 'Once' => 'a. 1 Week', '2-3' => 'b. 2 weeks', '5-5' => 'c. 1 month', 'more than 5' => 'd. more than 1 month');
-                
+
                 // echo "<pre>";print_r($retrieved);die;
-                
+
                 // var_dump($this->data_model_found);die;
                 $unit = "";
                 $counter = 0;
@@ -1148,10 +1148,10 @@ class Generate extends MY_Controller
                                 $commodityUsage = $retrieved[$value['commCode']]['lcso_usage'];
                                 $unavailableTimes = $retrieved[$value['commCode']]['lcso_unavailable_times'];
                                 $optionsOnOutage = $retrieved[$value['commCode']]['lcso_option_on_outage'];
-                                
+
                                 // echo $unavailableTimes;
-                                
-                                
+
+
                             }
                             if ($value['commUnit'] != null) {
                                 $unit = $value['commUnit'];
@@ -1189,18 +1189,18 @@ class Generate extends MY_Controller
                     case 'offline':
                         foreach ($data_found as $value) {
                             $counter++;
-                            
+
                             if ($value['commUnit'] != null) {
                                 $unit = $value['commUnit'];
                             } else {
                                 $unit = '';
                             }
                             $commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
-            <td colspan="2" style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
+            <td style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
             <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>
             </td>
-            <td colspan="2">
+            <td>
                 a. 1 week<input type="checkbox">
                 b. 2 weeks <input type="checkbox">
                 c. 1 month<input type="checkbox">
@@ -1226,11 +1226,11 @@ class Generate extends MY_Controller
                         }
                         break;
                 }
-                
+
                 // echo $this->commodityUsageAndOutageSection['mnh'];die;
                 return $commodityUsageAndOutageSection;
             }
-            
+
             /**
              * [createEquipmentSection description]
              * @return [type] [description]
@@ -1238,14 +1238,14 @@ class Generate extends MY_Controller
             public function createEquipmentSection() {
                 $data_found = $this->data_model->getEquipments();
                 $retrieved = $this->data_model->retrieveData('available_equipments', 'eq_code');
-                
+
                 // echo"<pre>";print_r($retrieved);die;
-                
+
                 // var_dump($this->data_model_found);die;
                 $unit = "";
                 $counter = 0;
                 $survey = $this->session->userdata('survey');
-                
+
                 switch ($survey) {
                     case 'mnh':
                         $locations = array('Delivery room', 'Pharmacy', 'Store', 'Other');
@@ -1260,7 +1260,7 @@ class Generate extends MY_Controller
                 switch ($this->survey_form) {
                     case 'online':
                         foreach ($data_found as $value) {
-                            
+
                             $counter++;
                             $section = $value['eqFor'];
                             if ($section == 'mhw') {
@@ -1291,7 +1291,7 @@ class Generate extends MY_Controller
                                     $fully_functioning = ($retrieved[$value['eqCode']]['ae_fully_functional'] != 'N/A') ? $retrieved[$value['eqCode']]['ae_fully_functional'] : '';
                                     $non_functioning = ($retrieved[$value['eqCode']]['ae_non_functional'] != 'N/A') ? $retrieved[$value['eqCode']]['ae_non_functional'] : '';
                                 }
-                                
+
                                 foreach ($availabilities as $aval) {
                                     if ($availability == $aval) {
                                         $availabilityRow.= '<td style="vertical-align: middle; margin: 0px;text-align:center;">
@@ -1305,23 +1305,23 @@ class Generate extends MY_Controller
                                 }
                                 if ($section == 'hwr') {
                                     $hwr_locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
-                                    
+
                                     // print_r($locations);die;
-                                    
-                                    
+
+
                                 }
                                 if ($value['eqFor'] == 'hwr') {
                                     unset($locations[4]);
                                     unset($locations[5]);
-                                    
+
                                     $locationRowTemp = array();
-                                    
+
                                     //Loop through preset locations
                                     foreach ($hwr_locations as $loc) {
-                                        
+
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
-                                            
+
                                             //Check whether the values from the locations array exist in the location array
                                             if (in_array($loc, $location)) {
                                                 $locationRowTemp[$loc] = '<td style ="text-align:center;">
@@ -1343,13 +1343,13 @@ class Generate extends MY_Controller
                                     }
                                 } else {
                                     $locationRowTemp = array();
-                                    
+
                                     //Loop through preset locations
                                     foreach ($locations as $loc) {
-                                        
+
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
-                                            
+
                                             //Check whether the values from the locations array exist in the location array
                                             if (in_array($loc, $location)) {
                                                 $locationRowTemp[$loc] = '<td style ="text-align:center;">
@@ -1370,14 +1370,14 @@ class Generate extends MY_Controller
                                         $locationRow.= $temp;
                                     }
                                 }
-                                
+
                                 if ($value['eqFor'] == 'hwr') {
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
                                     } else {
                                         $unit = '';
                                     }
-                                    
+
                                     $equipment[$value['eqFor']].= '<tr>
             <td >' . $value['eqName'] . ' ' . $unit . ' </td>
             ' . $availabilityRow . '
@@ -1404,13 +1404,13 @@ class Generate extends MY_Controller
                                             <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
                                             </td>';
                                     }
-                                    
+
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
                                     } else {
                                         $unit = '';
                                     }
-                                    
+
                                     $equipment[$value['eqFor']].= '<tr>
             <td >' . $value['eqName'] . ' ' . $unit . ' </td>
             ' . $availabilityRow . '
@@ -1427,7 +1427,7 @@ class Generate extends MY_Controller
 
                     case 'offline':
                         foreach ($data_found as $value) {
-                            
+
                             switch ($survey) {
                                 case 'mnh':
                                     $locations = array('Delivery room', 'Pharmacy', 'Store', 'Other');
@@ -1467,7 +1467,7 @@ class Generate extends MY_Controller
                                     $fully_functioning = ($retrieved[$value['eqCode']]['ae_fully_functional'] != 'N/A') ? $retrieved[$value['eqCode']]['ae_fully_functional'] : '';
                                     $non_functioning = ($retrieved[$value['eqCode']]['ae_non_functional'] != 'N/A') ? $retrieved[$value['eqCode']]['ae_non_functional'] : '';
                                 }
-                                
+
                                 foreach ($availabilities as $aval) {
                                     $availabilityRow.= '<td style="vertical-align: middle; margin: 0px;text-align:center;">
             <input name="eqAvailability_' . $counter . '" type="radio" style="vertical-align: middle; margin: 0px;" class="cloned"/>
@@ -1476,9 +1476,9 @@ class Generate extends MY_Controller
                                 if ($value['eqFor'] == 'hwr') {
                                     unset($locations[4]);
                                     unset($locations[5]);
-                                    
+
                                     $locationRowTemp = array();
-                                    
+
                                     //Loop through preset locations
                                     foreach ($locations as $loc) {
                                         $locationRowTemp[$loc] = '<td style ="text-align:center;">
@@ -1491,7 +1491,7 @@ class Generate extends MY_Controller
                                     }
                                 } else {
                                     $locationRowTemp = array();
-                                    
+
                                     //Loop through preset locations
                                     foreach ($locations as $loc) {
                                         $locationRowTemp[$loc] = '<td style ="text-align:center;">
@@ -1503,14 +1503,14 @@ class Generate extends MY_Controller
                                         $locationRow.= $temp;
                                     }
                                 }
-                                
+
                                 if ($value['eqFor'] == 'hwr') {
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
                                     } else {
                                         $unit = '';
                                     }
-                                    
+
                                     $equipment[$value['eqFor']].= '<tr>
             <td >' . $value['eqName'] . ' ' . $unit . ' </td>
             ' . $availabilityRow . '
@@ -1528,14 +1528,17 @@ class Generate extends MY_Controller
                                             $fullyFunctioningRow = '<td style ="text-align:center;"></td>';
                                         }
                                     }
-                                    
-                                    // if ($fully_functioning != '') {
-                                    
-                                    // } else {
-                                    //     $fullyFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
-                                    //         </td>';
-                                    // }
+
+                                    if ($fully_functioning != '') {
+                                      $fullyFunctioningRow = '<td style ="text-align:center;">
+                                          <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                          </td>';
+
+                                    } else {
+                                        $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                                    }
                                     if ($value['eqFor'] == 'ort') {
                                         if (($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38')) {
                                             $nonFunctioningRow = '<td style ="text-align:center;">
@@ -1545,23 +1548,23 @@ class Generate extends MY_Controller
                                             $nonFunctioningRow = '<td style ="text-align:center;"></td>';
                                         }
                                     }
-                                    
-                                    // if ($non_functioning != '') {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // } else {
-                                    //     $nonFunctioningRow = '<td style ="text-align:center;">
-                                    //         <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
-                                    //         </td>';
-                                    // }
-                                    
+
+                                    if ($non_functioning != '') {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '"  type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    } else {
+                                        $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                            </td>';
+                                    }
+
                                     if ($value['eqUnit'] != null) {
                                         $unit = '(' . $value['eqUnit'] . ')';
                                     } else {
                                         $unit = '';
                                     }
-                                    
+
                                     $equipment[$value['eqFor']].= '<tr>
             <td >' . $value['eqName'] . ' ' . $unit . ' </td>
             ' . $availabilityRow . '
@@ -1578,7 +1581,7 @@ class Generate extends MY_Controller
                 }
                 return $equipment;
             }
-            
+
             /**
              * [createSuppliesSection description]
              * @return [type] [description]
@@ -1587,13 +1590,13 @@ class Generate extends MY_Controller
                 $data_found = $this->data_model->getSupplies();
                 $retrieved = $this->data_model->retrieveData('available_supplies', 'supply_code');
                 $survey = $this->session->userdata('survey');
-                
+
                 // echo $survey;die;
-                
+
                 //echo '<pre>';print_r($this->data_model_found);echo '</pre>';die;
                 $counter = 0;
                 $section = '';
-                
+
                 $base = 0;
                 $current = "";
                 foreach ($data_found as $value) {
@@ -1619,7 +1622,7 @@ class Generate extends MY_Controller
                         $supplyAvailability = $retrieved[$value['supplyCode']]['as_availability'];
                     }
                     if ($section != 'tst' && $section != 'ch' && $section != 'tes') {
-                        
+
                         $quantity = '<td style ="text-align:center;">
             <input name="sqNumberOfUnits_' . $counter . '" type="text" size="10" class="cloned numbers"/>
             </td>';
@@ -1737,7 +1740,7 @@ class Generate extends MY_Controller
                 <td style ="text-align:center;"><input name="sqAvailability_' . $counter . '" type="radio" value="Never Available"/></td>';
                         }
                         $supplyLocation = explode(',', $supplyLocation);
-                        
+
                         // echo "<pre>";print_r($supplyLocation);
                         foreach ($locations as $locs) {
                             if (in_array($locs, $supplyLocation)) {
@@ -1756,25 +1759,25 @@ class Generate extends MY_Controller
                         }
                         $suppliesRow.= $quantity . '<input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" /></tr>';
                         $data[$section][] = $suppliesRow;
-                        
+
                         //     ' . $quantity . '
                         //     <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
                         // </tr>';
-                        
-                        
+
+
                     }
                 }
-                
+
                 foreach ($data as $key => $value) {
                     foreach ($value as $val) {
                         $supplies[$key].= $val;
                     }
                 }
-                
+
                 // var_dump($this->mchSupplies['mnh']);die;
                 return $supplies;
             }
-            
+
             /**
              * [createSupplierOptions description]
              * @return [type] [description]
@@ -1786,7 +1789,7 @@ class Generate extends MY_Controller
                 }
                 return $supplierOptions;
             }
-            
+
             /**
              * [createMonthlyDeliveriesSection description]
              * @return [type] [description]
@@ -1798,7 +1801,7 @@ class Generate extends MY_Controller
                         $months = array('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december');
                         foreach ($months as $month) {
                             $monthldnumber = $retrieved[$month]['ld_number'];
-                            
+
                             if ($month != 'july' && $month != 'august' && $month != 'september' && $month != 'october' && $month != 'november' && $month != 'december') {
                                 $upperrow.= '<td style ="text-align:center;">
             <input type="text" id="' . $month . '" name="dnmonth[' . $month . ']"  size="8" class="cloned numbers" value = "' . $monthldnumber . '"/>
@@ -1809,19 +1812,19 @@ class Generate extends MY_Controller
             </td>';
                             }
                         }
-                        
+
                         $monthlydeliveries.= '<tr>
         <th> YEAR</th><th><div style="width: 50px"> JAN</div></th> <th>FEB</th><th>MAR</th><th> APR</th><th> MAY</th><th>JUN</th>
         <th> JUL</th><th> AUG</th><th> SEP</th><th> OCT</th><th> NOV</th><th> DEC</th>
         <tr>
-            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . ' 
+            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . '
             </tr>';
                         break;
 
                     case 'offline':
                         $months = array('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december');
                         foreach ($months as $month) {
-                            
+
                             if ($month != 'july' && $month != 'august' && $month != 'september' && $month != 'october' && $month != 'november' && $month != 'december') {
                                 $upperrow.= '<td style ="text-align:center;">
             <input type="text" id="' . $month . '" name="dnmonth[' . $month . ']"   class="cloned numbers"/>
@@ -1832,19 +1835,19 @@ class Generate extends MY_Controller
             </td>';
                             }
                         }
-                        
+
                         $monthlydeliveries.= '<tr>
         <th> YEAR</th><th><div style="width: 50px"> JAN</div></th> <th>FEB</th><th>MAR</th><th> APR</th><th> MAY</th><th>JUN</th>
         <th> JUL</th><th> AUG</th><th> SEP</th><th> OCT</th><th> NOV</th><th> DEC</th>
         <tr>
-            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . ' 
+            <td><input type="text" name="delivery_year"></td>' . $upperrow . $lowerrow . '
             </tr>';
-                        
+
                         break;
                 }
                 return $monthlydeliveries;
             }
-            
+
             /**
              * [createBemoncSection description]
              * @return [type] [description]
@@ -1854,19 +1857,19 @@ class Generate extends MY_Controller
                 $retrieved = $this->data_model->retrieveData('bemonc_functions', 'sf_code');
                 $challenges = array('Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented');
                 $responses = array('Yes', 'No');
-                
+
                 /**
                  * [$counter description]
                  * @var integer
                  */
                 $counter = 0;
-                
+
                 /**
                  * Looping Through Each Row
                  */
                 foreach ($this->data_found as $value) {
                     $counter++;
-                    
+
                     /**
                      * Retrieve Data
                      */
@@ -1874,24 +1877,24 @@ class Generate extends MY_Controller
                         $bemoncResponse = ($retrieved[$value['sfCode']]['bem_conducted'] != 'n/a') ? $retrieved[$value['sfCode']]['bem_conducted'] : '';
                         $bemoncChallenge = ($retrieved[$value['sfCode']]['challenge_code'] != 'n/a') ? $retrieved[$value['sfCode']]['challenge_code'] : '';
                     }
-                    
+
                     /**
                      * [$challengeCounter description]
                      * @var integer
                      */
                     $challengeCounter = 0;
-                    
+
                     /**
                      * Response Radio Buttons
                      * @var string
                      */
                     $responseRow = '';
-                    
+
                     /**
                      * Handling Yes/No Response
                      * @var [type]
                      */
-                    
+
                     foreach ($responses as $response) {
                         $responseCounter++;
                         if ($response == $bemoncResponse) {
@@ -1900,13 +1903,13 @@ class Generate extends MY_Controller
                             $responseRow.= '<input name="bmsfResponse_' . $counter . '" id="bmsfResponse_' . $counter . '"  type="radio" value="' . $response . '">' . $response;
                         }
                     }
-                    
+
                     /**
                      * Challenge Radio Buttons
                      * @var string
                      */
                     $challengeRow = '';
-                    
+
                     /**
                      * Handling Challenge
                      * @var [type]
@@ -1935,18 +1938,18 @@ class Generate extends MY_Controller
             }
             public function createTreatmentSection() {
                 $this->data_found = $this->data_model->getTreatments();
-                
+
                 $counter = 0;
-                
+
                 foreach ($this->data_found as $value) {
                     $counter++;
                     $treatments[$value['treatmentFor']].= '<tr><td><input type = "checkbox" ></td><td>' . $value['treatmentName'] . '</td><td><input type="text" style="margin-left:20px" size="8"></td></tr>';
                 }
-                
+
                 //echo '<pre>'; print_r( $this->treatments);echo '</pre>';die;
                 return $treatments;
             }
-            
+
             public function createAccessChallenges() {
                 $this->data_found = $this->data_model->getAccessChallenges();
                 $retrieved = $this->data_model->retrieveData('log_challenges', 'ach_code');
@@ -1966,7 +1969,7 @@ class Generate extends MY_Controller
                     case 'offline':
                         foreach ($this->data_found as $value) {
                             $counter++;
-                            
+
                             $selectAccessChallenges.= '<tr><td><input style="margin-right:20px"value="' . $value['achCode'] . '" name="achResponse_1" id= "" type="radio">' . $value['achName'] . '</td></tr>';
                         }
                         break;
@@ -1985,27 +1988,44 @@ class Generate extends MY_Controller
                 $sub_counties = $this->data_model->getDistricts();
                 $facMFL = $this->session->userdata('facilityMFL');
                 $fac_county = $this->data_model->getFacilityCounty($facMFL);
-                
+                switch ($this->survey_form)
+                {
+                    case 'online':
+                    foreach ($facilities as $key => $value) {
+                        if($value['facMfl'] == $facMFL)
+                        {
+                            $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
+                            $facilitysection .= "<td>".$value['facLevel']."</td>";
+                            $facilitysection .= '<td>'.$fac_county.'</td>';
+                            $facilitysection .= '</tr>';
+                            $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
+                            $facilitysection .= '<tr>';
+                            $facilitysection .= '<td>'.$value['facType'].'</td>';
+                            $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
+                            $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+                            $facilitysection .= '</tr>';
 
-                foreach ($facilities as $key => $value) {
-                    if($value['facMfl'] == $facMFL)
-                    {
+                        }
+                    }
+                    break;
+
+                    case 'offline':
                         $facilitysection .= '<tr><td>Facility Name</td><td>Facility Tier</td><td>County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= "<td><input type = 'text' value = '".$value['facName']."' class = 'form-control' readonly = 'readonly'/></td>";
-                        $facilitysection .= "<td>".$value['facLevel']."</td>";
-                        $facilitysection .= '<td>'.$fac_county.'</td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
                         $facilitysection .= '</tr>';
                         $facilitysection .= '<tr><td>Facility Type</td><td>Facility Owner</td><td>Sub County</td></tr>';
                         $facilitysection .= '<tr>';
-                        $facilitysection .= '<td>'.$value['facType'].'</td>';
-                        $facilitysection .= '<td>'.$value['facOwnership'].'</td>';
-                        $facilitysection .= '<td>'.$value['facDistrict'].'</td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
+                        $facilitysection .= '<td><input type = "text" size = "100"/></td>';
                         $facilitysection .= '</tr>';
-                        
-                    }
+                        break;
                 }
-
                 return $facilitysection;
             }
 
@@ -2014,32 +2034,53 @@ class Generate extends MY_Controller
                 $workprofilesection = '';
                 $hcwwork = $this->data_model->getHCWWorkProfile($this->session->userdata('hcw_id'));
                 $counter = 0;
+                switch($this->survey_form)
+                {
+                    case 'online':
+                        foreach ($hcwwork as $key => $value) {
 
-                foreach ($hcwwork as $key => $value) {
-                    
-                        $names = explode(" ", $value['names_of_participant']);
-                        $namecount = count($names);
-                        $firstname = $names[0];
-                        $lastname = $names[$namecount - 1];
-                    
-                    $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
-                    $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
-                    $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
-                    $workprofilesection .= '<tr>
-                <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
-                <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
-                <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
-                <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
-                </td>
-                </tr>';
-                $workprofilesection .= '<tr>
-                <td colspan="1"><label for="">Designation</label></td>
-                <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
-                </tr>';
+                                $names = explode(" ", $value['names_of_participant']);
+                                $namecount = count($names);
+                                $firstname = $names[0];
+                                $lastname = $names[$namecount - 1];
+
+                            $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" value = "'.$firstname.'" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1" value = "'.$lastname.'" /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" value = "'.$value['id_number'].'" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" value = "'.$value['mobile_number'].'"></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" value = "'.$value['p_mobile_number_'].'"></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><select name = "hpdesignation_1">'.$this->createCadre().'</select></td>
+                        </tr>';
+                        }
+                        break;
+                    case 'offline':
+                         $workprofilesection .= '<tr><td>First Name</td><td><input type = "text" name = "hpfirstname_1" /></td><td>Last Name</td><td><input type = "text" name = "hpsurname_1"  /></td></tr>';
+                            $workprofilesection .= '<tr><td>National ID</td><td><input type = "text" name = "hpnationalid_1" /></td><td>Phone Number</td><td><input type="text" name = "hpphonephonenumber_1" ></td></tr>';
+                            $workprofilesection .= '<tr><td>Personal Number</td><td colspan="3"><input type="text" ></td></tr>';
+                            $workprofilesection .= '<tr>
+                        <td colspan="1">Year, Month when trained in IMCI <input type="text" name = "hpyear_1" class = "bs-month"></td>
+                        <td colspan="3"><p><b>Key coordinator of the training(Select one)</b></p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH/KPA/CHAI">MOH/KPA/CHAI</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "MOH only">MOH only</p>
+                        <p><input type="radio" name = "hpcoordinator_1" value = "Other">Other</p>
+                        <p>(If other, indicate the name of the coordinator/partner)<input type="text"></p>
+                        </td>
+                        </tr>';
+                        $workprofilesection .= '<tr>
+                        <td colspan="1"><label for="">Designation</label></td>
+                        <td colspan="3"><input type = "text" /></td>
+                        </tr>';
+                        break;
                 }
-
                 return $workprofilesection;
 
             }
@@ -2121,5 +2162,23 @@ class Generate extends MY_Controller
                 //echo $this->mchTrainingGuidelineSection;die;
                 return $this->trainingGuidelineSection;
             }
+
+            public function createassessorsection()
+            {
+                $assessor_section = '';
+
+                switch ($this->survey_form) {
+                    case 'online':
+                        $assessor_section = '<select name = "asesordesignation_1">'.$this->createCadre().'</select>';
+                        break;
+                    case 'offline':
+                        $assessor_section = '<input type = "text" />';
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+
+                return $assessor_section;
+            }
         }
-        

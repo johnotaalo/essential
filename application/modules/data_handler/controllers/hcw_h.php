@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class HCW extends MY_Controller{
+class HCW_H extends MY_Controller{
   /**
   * Constructor Function
   */
@@ -19,39 +19,37 @@ class HCW extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-<<<<<<< HEAD
   * [read description]
-  * @return [type] [description]
+  * @param  [type] $form [description]
+  * @return [type]       [description]
   */
-  public function read($form){
-    $data = $this->data_model->get('hcw');
-    $data=$this->export->generate($data,'HCW List',$form);
-    echo ($data);
-=======
-   * [read description]
-   * @param  [type] $form [description]
-   * @return [type]       [description]
-   */
-  public function read($form){
+  public function read($form,$identifier=''){
+    // echo $identifier;die;
     $data = $this->data_model->get('hcw');
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'HCW List',$form);
+    $raw['data']=$this->export->generate($data,'HCW List',$form,$identifier);
 
-    if($form=='datatable'){
+    if($form=='datatable' || $form=='x-datatable'){
       $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
     }
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
   }
   /**
   * [update description]
-  * @param  [type] $id [description]
-  * @return [type]     [description]
+  * @return [type] [description]
   */
-  public function update($id){
-    $data = $this->data_model->get('hcw',$id);
+  public function update(){
+    $data = $this->input->post();
+    $table ='models\Entities\HcwList';
+    $field = $this->input->post('name');
+    $value = $this->input->post('value');
+    $primary_key = 'id';
+    $primary_value = $this->input->post('pk');
+    // echo $table.' '.$field.' '.$value.' '.$primary_key.' '.$primary_value;die;
+    $this->data_model->updateField($table,$field,$value,$primary_key,$primary_value);
+    // $data = $this->data_model->get('hcw',$id);
 
   }
   /**

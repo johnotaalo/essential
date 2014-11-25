@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Indicators extends MY_Controller{
+class Resources_H extends MY_Controller{
   /**
   * Constructor Function
   */
@@ -18,29 +18,11 @@ class Indicators extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-<<<<<<< HEAD
   * [read description]
   * @return [type] [description]
   */
   public function read(){
-    $data = $this->data_model->get('indicators');
-=======
-   * [read description]
-   * @param  [type] $form [description]
-   * @return [type]       [description]
-   */
-  public function read($form){
-    $data = $this->data_model->get('indicators');
-    foreach($data[0] as $key=>$value){
-      $raw['title'][]=$key;
-    }
-    $raw['data']=$this->export->generate($data,'Indicators List',$form);
-
-    if($form=='datatable'){
-      $recordSize = sizeof($raw['data']);
-      echo json_encode($raw);
-    }
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
+    $data = $this->data_model->get('resources');
   }
   /**
   * [update description]
@@ -48,7 +30,7 @@ class Indicators extends MY_Controller{
   * @return [type]     [description]
   */
   public function update($id){
-    $data = $this->data_model->get('indicators',$id);
+    $data = $this->data_model->get('resources',$id);
 
   }
   /**
@@ -57,7 +39,7 @@ class Indicators extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('indicators',$id);
+    $data = $this->data_model->get('resources',$id);
 
   }
   /**

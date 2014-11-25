@@ -54,6 +54,10 @@ function startSurvey(base_url, survey, survey_category, district) {
       url: the_url,
       type: 'POST',
       data: formData,
+      beforeSend: function(data)
+      {
+        $("#result").append('<center><div class="ui small blue message" style = "margin-bottom: 5px;"><h4><span class = "fa fa-spinner fa-spin"></span> Please wait...</h4></div></center>');
+      },
       success: function(data) {
         console.log(data);
         nextsection = curr_section += 1;

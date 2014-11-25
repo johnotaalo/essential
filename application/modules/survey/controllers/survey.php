@@ -218,6 +218,8 @@ class Survey extends MY_Controller
      */
     public function startSurvey($survey_type, $survey_category, $fac_mfl, $survey_year) {
 
+        
+
         $result = $this->db->get_where('survey_types', array('st_name' => $survey_type));
         $result = $result->result_array();
         $survey_type = $result[0]['st_id'];
@@ -312,14 +314,12 @@ class Survey extends MY_Controller
     public function createHCWListSection ()
     {
         $hcwlist = '';
-        $result = $this->data_model->getHCWByDistrict($this->session->userdata('dName'));
+        $result = $this->data_model->getHCWByCounty($this->session->userdata('county'));
+        $count = count($result);
+        $this->session->set_userdata(array('fCount' => $count));
         $sections = $this->data_model->getAssessmentInfo();
         // echo "<pre>"; print_r($sections);die;
-<<<<<<< HEAD
-        $question_codes = array('QHC28'=>'blue', 'QHC29'=>'green', 'QHC30'=>'brown');
-=======
-        $question_codes = array('QHC28', 'QHC29', 'QHC30');
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
+        $question_codes = array('QHC28'=>'Certified', 'QHC29' => 'For Mentorship', 'QHC30' => 'For TOT');
         //print_r($result);die;
         $checkbox_options = $this->data_model->getCheckOptions();
         $counter = 0;
@@ -333,47 +333,30 @@ class Survey extends MY_Controller
             }
             // echo $value['id'];die;
             $counter++;
-            $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td>';
+            $hcwlist .= '<tr><td>'.$counter.'</td><td>'.$value['mfl_code'].'</td><td>'.$value['facility_name'].'</td><td>'.$value['names_of_participant'].'</td><td>'.$value['id_number'].'</td><td>'.$value['mobile_number'].'</td><td>'.$value['email_address'].'</td><td>';
             if (array_key_exists( $value['id'], $checkbox_options)) {
-<<<<<<< HEAD
-                foreach ($question_codes as $code => $color) {
+                foreach ($question_codes as $code => $v) {
                     $response = $checkbox_options[$value['id']][$code];
                     if($response == 'Yes')
                     {
-                        $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" checked disabled = "disabled"></div></div></center></div></td>';
+                         $hcwlist .= '<input type = "checkbox" disabled = "disabled" checked>'.$v.' <br>';
                     }
                     else
                     {
-                         $hcwlist .= '<td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>';
-=======
-                foreach ($question_codes as $code) {
-                    $response = $checkbox_options[$value['id']][$code];
-                    if($response == 'Yes')
-                    {
-                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" checked></center></td>';
-                    }
-                    else
-                    {
-                         $hcwlist .= '<td><center><input type = "checkbox" disabled = "disabled" ></center></td>';
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
+                         $hcwlist .= '<input type = "checkbox" disabled = "disabled">'.$v.'<br>';
                     }
                 }
+                $hcwlist .= '</td>';
             }
             else
             {
                  $hcwlist .= '
-<<<<<<< HEAD
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
-            <td><div class="ui form"><center><div class="inline field"><div class = "ui slider checkbox"><input type = "checkbox" disabled = "disabled"></div></div></center></div></td>
-=======
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
-            <td><center><input type = "checkbox" disabled = "disabled" ></center></td>
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
+            <input type = "checkbox" disabled = "disabled" > Certified <br>
+            <input type = "checkbox" disabled = "disabled" > For Mentorship <br>
+            <input type = "checkbox" disabled = "disabled" > For TOT</td>
             ';
             }
-            
+
             if(array_key_exists($value['id'], $sections))
             {
                 $hcw_section = $sections[$value['id']]['sections'];
@@ -384,27 +367,27 @@ class Survey extends MY_Controller
                 $hcw_section = 0;
             }
 
+            $percentage = ($hcw_section/5)*100;
             if($hcw_section < 5 && $hcw_section > 0)
             {
-                $percentage = ($hcw_section/5)*100;
                 $hcw_section = $hcw_section - 1;
-                $hcwlist .= '<td><center><div class="ui successful progress"><div class="bar" style="width:'.$percentage.'%"></div></div></center></td>';
-                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a></center></td>';
+                $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar progress-bar-warning" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><center><h4 class="label label-warning" style = "">Pending</h4></center></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a></td>';
             }
             else if($hcw_section == 5)
             {
-                $hcwlist .= '<td><center></center></td>';
-                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Reassess</a></center></td>';
+                $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar progress-bar-success" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><span class="label label-success">Assessed</span></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Reassess</a></td>';
             }
             else if($hcw_section == 0)
             {
-                $hcwlist .= '<td><center></center></td>';
-                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Start Assessment</a></center></td>';
+                $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><span class="label label-danger">Not Started</span></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Start Assessment</a></td>';
             }
             else
             {
                 $hcwlist .= '';
-                $hcwlist .= '<td><center><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Could not be traced</a></center></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Could not be traced</a><span class="label label-success">Success</span></td>';
             }
 
             $hcwlist .= '</tr>';
@@ -564,17 +547,11 @@ class Survey extends MY_Controller
                     <th>National ID No</th>
                     <th>Phone No</th>
                     <th>Email Address</th>
-                    <th>Certified</th>
-                    <th>For Mentorship</th>
-                    <th>For TOT</th>
-                    <th style = "width: 20px;">Status</th>
+                    <th>certification</th>
+                    <th style = "width: 15%;">Status</th>
                     <th>Link</th>
                 </thead>
-<<<<<<< HEAD
-                <tbody style = "font-size: 80%;">'.$hcwListSection.'</tbody>
-=======
                 <tbody>'.$hcwListSection.'</tbody>
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
             </table>';
         }
 

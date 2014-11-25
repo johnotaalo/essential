@@ -8,7 +8,7 @@
 
 
 <div id="statistic_summary" style="display:none">
-    <h4>Stats</h4>
+    <h4><i class="icon ion-arrow-graph-up-right"></i>Statistics</h4>
     <div id="survey_stat" class="small-graph" style="display:none">
         <div class="outer">
             <div class="inner">
@@ -18,7 +18,7 @@
                     <div class='text'>Facilities Reported</div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="facility_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
     <div id="county_stat" class="small-graph" style="display:none">
@@ -30,7 +30,7 @@
                     <div class='text'>Counties Reported</div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="county_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
     <div id="district_stat" class="small-graph" style="display:none">
@@ -42,10 +42,10 @@
                     <div class='text'>Sub-Counties in <span id="county"></span></div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="district_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
-    <div id="reporting_stat" class="small-graph" style="display:none">
+    <!-- <div id="reporting_stat" class="small-graph" style="display:none">
         <div class="outer">
             <div class="inner">
              <i class='main icon pencil'></i>
@@ -56,7 +56,7 @@
             </div>
             <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
-    </div>
+    </div> -->
     <div class="small-graph" style="display:none">
         <div class="title">Last Entry</div>
         <div class="outer">

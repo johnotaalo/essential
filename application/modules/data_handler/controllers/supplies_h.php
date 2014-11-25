@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Supplies extends MY_Controller{
+class Supplies_H extends MY_Controller{
   /**
   * Constructor Function
   */
@@ -18,17 +18,10 @@ class Supplies extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-<<<<<<< HEAD
   * [read description]
-  * @return [type] [description]
+  * @param  [type] $form [description]
+  * @return [type]       [description]
   */
-  public function read(){
-    $data = $this->data_model->get('supplies');
-=======
-   * [read description]
-   * @param  [type] $form [description]
-   * @return [type]       [description]
-   */
   public function read($form){
     $data = $this->data_model->get('supplies');
     foreach($data[0] as $key=>$value){
@@ -36,10 +29,9 @@ class Supplies extends MY_Controller{
     }
     $raw['data']=$this->export->generate($data,'Supplies List',$form);
     // var_dump($raw['data']);
-    if($form=='datatable'){
+    if($form=='datatable' || $form=='x-datatable' ){
       echo json_encode($raw);
     }
->>>>>>> 620c6d83b2ade2cf5ec13e70e9068595b16c23d6
   }
   /**
   * [update description]

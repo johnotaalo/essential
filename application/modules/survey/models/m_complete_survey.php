@@ -5009,7 +5009,7 @@ return true;
 
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    return true;
+                    //return true;
                 }
             }
 
@@ -5017,8 +5017,8 @@ return true;
 
 
         }
-
         //end of innner loop
+        return true;
     }
     /**
      * [store_data description]
@@ -5164,7 +5164,6 @@ return true;
                             break;
 
                         case 'section-3':
-
                             //check if entry exists
                             $this->section = $this->sectionEntryExists($this->session->userdata('facilityMFL'), $this->input->post('step_name', TRUE), $this->session->userdata('survey'));
 

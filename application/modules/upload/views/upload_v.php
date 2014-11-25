@@ -1,4 +1,4 @@
-<div id="upload" class="ui stacked segment" style="width:80%;margin:auto">
+<div>
 	<h3>Upload File</h3>
 <div class="inner">
 	<?php
@@ -10,9 +10,12 @@
 	echo form_close();
 	?>
 	</div>
+	
 </div>
 <script charset="utf-8">
+$('form').append('<div class="ui error message" style="display:none">Test Message</div>');
+
 	$('#upload_button').change(function(){
 		$('#upload_form').submit();
-	})
+	});
 </script>

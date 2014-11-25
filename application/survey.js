@@ -10,14 +10,10 @@ function startSurvey(base_url, survey, survey_category, district) {
   var fac_county = '';
   var fac_district = '';
 
-  if(survey != 'hcw')
-  {
+  if (survey != 'hcw') {
     getDistrictData(base_url, district, survey, survey_category);
-  }
-
-  else
-  {
-     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
+  } else {
+    $('#current_survey').text(survey.toUpperCase() + ' SURVEY');
   }
   // Bound Events
 
@@ -54,6 +50,11 @@ function startSurvey(base_url, survey, survey_category, district) {
       url: the_url,
       type: 'POST',
       data: formData,
+      beforeSend: function(data) {
+        $("#result").append(
+          '<center><div class="ui small blue message" style = "margin-bottom: 5px;"><h4><span class = "fa fa-spinner fa-spin"></span> Please wait...</h4></div></center>'
+        );
+      },
       success: function(data) {
         console.log(data);
         nextsection = curr_section += 1;
@@ -222,7 +223,7 @@ function startSurvey(base_url, survey, survey_category, district) {
             // $('actual-form .step').hide();
             $('.bs-date').datepicker();
             $('.bs-month').datepicker({
-              minViewMode : 1
+              minViewMode: 1
             });
 
           });
@@ -236,7 +237,7 @@ function startSurvey(base_url, survey, survey_category, district) {
       }); /*end of which link was clicked*/
 
       /*hcw-action clicked*/
-      $('.hcw-action').live('click', function(){
+      $('.hcw-action').live('click', function() {
         hcwid = $(this).attr('data-hcwid');
         section = $(this).attr('data-section');
         action = $(this).attr('data-action');
@@ -252,7 +253,7 @@ function startSurvey(base_url, survey, survey_category, district) {
               '<div class="loader" >Loading...</div>');
 
           },
-          success:function(data) {
+          success: function(data) {
             console.log("assessing hcw: " + data);
           }
         });
@@ -273,9 +274,10 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('#click_form').fadeOut();
             $('select').select2();
             $('.bs-date').datepicker();
-          $('.bs-month').datepicker({
-            minViewMode : 1
-          });
+            $('.bs-month').datepicker({
+              minViewMode: 1
+            });
+            $('.ui.checkbox').checkbox();
             // $('actual-form .step').hide();
 
           });
@@ -289,11 +291,9 @@ function startSurvey(base_url, survey, survey_category, district) {
     }); /*close form-container LOAD FN() */
 
   // $('#m_county_choose').live(function(){
-
   // 	console.log('changed');
   // 	county = this.value;
   // 	createFacilityDropDown(county);
-
   // });
   /*----------------------------------------------------------------------------------------------------------------*/
   /**
@@ -502,9 +502,7 @@ function startSurvey(base_url, survey, survey_category, district) {
           $('#label_reason_other_2').hide();
         }
 
-
         //	}//close if class is ceoc
-
       });
 
       $(form_id).find(':radio').on('change', function() {
@@ -1313,7 +1311,6 @@ function startSurvey(base_url, survey, survey_category, district) {
      * @return {[type]}         [description]
      */
     /*function loadSection(survey_type,survey_category,$facility){
-
 		$('.actual-form .step').hide();
 		$.ajax({
 			url: base_url + 'survey/getFacilitySection/' + survey_type + '/' + survey_category + '/' + facility,
@@ -1332,9 +1329,6 @@ function startSurvey(base_url, survey, survey_category, district) {
 	}*/
 
 
-
 }
 
-
 /*---------------------end form wizard functions----------------------------------------------------------------*/
-

@@ -2,570 +2,577 @@
 
 namespace models\Entities;
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HcwList
  *
- * @Table(name="hcw_list")
- * @Entity
+ * @ORM\Table(name="hcw_list")
+ * @ORM\Entity
  */
 class HcwList
 {
     /**
      * @var integer
      *
-     * @Column(name="id", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Column(name="names_of_participant", type="string", length=255, nullable=true)
+     * @ORM\Column(name="names_of_participant", type="string", length=255, nullable=true)
      */
     private $namesOfParticipant;
 
     /**
      * @var string
      *
-     * @Column(name="facility_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facility_name", type="string", length=255, nullable=true)
      */
     private $facilityName;
 
     /**
      * @var string
      *
-     * @Column(name="mfl_code", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mfl_code", type="string", length=255, nullable=true)
      */
     private $mflCode;
 
     /**
      * @var string
      *
-     * @Column(name="designation", type="string", length=45, nullable=true)
+     * @ORM\Column(name="designation", type="string", length=45, nullable=true)
      */
     private $designation;
 
     /**
      * @var integer
      *
-     * @Column(name="department", type="integer", nullable=true)
+     * @ORM\Column(name="department", type="integer", nullable=true)
      */
     private $department;
 
     /**
      * @var string
      *
-     * @Column(name="training_location", type="string", length=45, nullable=true)
+     * @ORM\Column(name="training_location", type="string", length=45, nullable=true)
      */
     private $trainingLocation;
 
     /**
      * @var string
      *
-     * @Column(name="job_title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="job_title", type="string", length=255, nullable=true)
      */
     private $jobTitle;
 
     /**
      * @var string
      *
-     * @Column(name="id_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="id_number", type="string", length=255, nullable=true)
      */
     private $idNumber;
 
     /**
      * @var string
      *
-     * @Column(name="mobile_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mobile_number", type="string", length=255, nullable=true)
      */
     private $mobileNumber;
 
     /**
      * @var string
      *
-     * @Column(name="email_address", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email_address", type="string", length=255, nullable=true)
      */
     private $emailAddress;
 
     /**
      * @var string
      *
-     * @Column(name="dates", type="string", length=255, nullable=true)
+     * @ORM\Column(name="dates", type="string", length=255, nullable=true)
      */
     private $dates;
 
     /**
      * @var integer
      *
-     * @Column(name="upload_date", type="integer", nullable=true)
+     * @ORM\Column(name="upload_date", type="integer", nullable=true)
      */
     private $uploadDate;
 
     /**
      * @var integer
      *
-     * @Column(name="activity_id", type="integer", nullable=true)
+     * @ORM\Column(name="activity_id", type="integer", nullable=true)
      */
     private $activityId;
 
     /**
      * @var string
      *
-     * @Column(name="work_station", type="string", length=255, nullable=true)
+     * @ORM\Column(name="work_station", type="string", length=255, nullable=true)
      */
     private $workStation;
 
     /**
      * @var string
      *
-     * @Column(name="sub_county_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="sub_county_name", type="string", length=255, nullable=true)
      */
     private $subCountyName;
 
     /**
      * @var string
      *
-     * @Column(name="disrtict", type="string", length=255, nullable=true)
+     * @ORM\Column(name="disrtict", type="string", length=255, nullable=true)
      */
     private $disrtict;
 
     /**
      * @var string
      *
-     * @Column(name="training_site", type="string", length=255, nullable=true)
+     * @ORM\Column(name="training_site", type="string", length=255, nullable=true)
      */
     private $trainingSite;
 
     /**
      * @var string
      *
-     * @Column(name="date", type="string", length=255, nullable=true)
+     * @ORM\Column(name="date", type="string", length=255, nullable=true)
      */
     private $date;
 
     /**
      * @var string
      *
-     * @Column(name="district", type="string", length=255, nullable=true)
+     * @ORM\Column(name="district", type="string", length=255, nullable=true)
      */
     private $district;
 
     /**
      * @var string
      *
-     * @Column(name="po_box", type="string", length=255, nullable=true)
+     * @ORM\Column(name="po_box", type="string", length=255, nullable=true)
      */
     private $poBox;
 
     /**
      * @var string
      *
-     * @Column(name="county", type="string", length=255, nullable=true)
+     * @ORM\Column(name="county", type="string", length=255, nullable=true)
      */
     private $county;
 
     /**
      * @var boolean
      *
-     * @Column(name="cadre", type="boolean", nullable=true)
+     * @ORM\Column(name="cadre", type="boolean", nullable=true)
      */
     private $cadre;
 
     /**
      * @var string
      *
-     * @Column(name="public_or_private", type="string", length=255, nullable=true)
+     * @ORM\Column(name="public_or_private", type="string", length=255, nullable=true)
      */
     private $publicOrPrivate;
 
     /**
      * @var string
      *
-     * @Column(name="organisation_unit", type="string", length=255, nullable=true)
+     * @ORM\Column(name="organisation_unit", type="string", length=255, nullable=true)
      */
     private $organisationUnit;
 
     /**
      * @var integer
      *
-     * @Column(name="clinical_malaria_", type="integer", nullable=true)
+     * @ORM\Column(name="clinical_malaria_", type="integer", nullable=true)
      */
     private $clinicalMalaria;
 
     /**
      * @var integer
      *
-     * @Column(name="confirmed_malaria_", type="integer", nullable=true)
+     * @ORM\Column(name="confirmed_malaria_", type="integer", nullable=true)
      */
     private $confirmedMalaria;
 
     /**
      * @var integer
      *
-     * @Column(name="diarrhoea_", type="integer", nullable=true)
+     * @ORM\Column(name="diarrhoea_", type="integer", nullable=true)
      */
     private $diarrhoea;
 
     /**
      * @var integer
      *
-     * @Column(name="dysentery_", type="integer", nullable=true)
+     * @ORM\Column(name="dysentery_", type="integer", nullable=true)
      */
     private $dysentery;
 
     /**
      * @var integer
      *
-     * @Column(name="pneumonia_", type="integer", nullable=true)
+     * @ORM\Column(name="pneumonia_", type="integer", nullable=true)
      */
     private $pneumonia;
 
     /**
      * @var boolean
      *
-     * @Column(name="cholera_", type="boolean", nullable=true)
+     * @ORM\Column(name="cholera_", type="boolean", nullable=true)
      */
     private $cholera;
 
     /**
      * @var string
      *
-     * @Column(name="p_mobile_number_", type="string", length=255, nullable=true)
+     * @ORM\Column(name="p_mobile_number_", type="string", length=255, nullable=true)
      */
     private $pMobileNumber;
 
     /**
      * @var integer
      *
-     * @Column(name="facility_code", type="integer", nullable=true)
+     * @ORM\Column(name="facility_code", type="integer", nullable=true)
      */
     private $facilityCode;
 
     /**
      * @var string
      *
-     * @Column(name="province", type="string", length=255, nullable=true)
+     * @ORM\Column(name="province", type="string", length=255, nullable=true)
      */
     private $province;
 
     /**
      * @var string
      *
-     * @Column(name="division", type="string", length=255, nullable=true)
+     * @ORM\Column(name="division", type="string", length=255, nullable=true)
      */
     private $division;
 
     /**
      * @var string
      *
-     * @Column(name="type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
 
     /**
      * @var string
      *
-     * @Column(name="owner", type="string", length=255, nullable=true)
+     * @ORM\Column(name="owner", type="string", length=255, nullable=true)
      */
     private $owner;
 
     /**
      * @var string
      *
-     * @Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
 
     /**
      * @var string
      *
-     * @Column(name="sub_location", type="string", length=255, nullable=true)
+     * @ORM\Column(name="sub_location", type="string", length=255, nullable=true)
      */
     private $subLocation;
 
     /**
      * @var string
      *
-     * @Column(name="constituency", type="string", length=255, nullable=true)
+     * @ORM\Column(name="constituency", type="string", length=255, nullable=true)
      */
     private $constituency;
 
     /**
      * @var string
      *
-     * @Column(name="nearest_town", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nearest_town", type="string", length=255, nullable=true)
      */
     private $nearestTown;
 
     /**
      * @var string
      *
-     * @Column(name="open_24_hours", type="string", length=255, nullable=true)
+     * @ORM\Column(name="open_24_hours", type="string", length=255, nullable=true)
      */
     private $open24Hours;
 
     /**
      * @var string
      *
-     * @Column(name="open_weekends", type="string", length=255, nullable=true)
+     * @ORM\Column(name="open_weekends", type="string", length=255, nullable=true)
      */
     private $openWeekends;
 
     /**
      * @var string
      *
-     * @Column(name="operational_status", type="string", length=255, nullable=true)
+     * @ORM\Column(name="operational_status", type="string", length=255, nullable=true)
      */
     private $operationalStatus;
 
     /**
      * @var string
      *
-     * @Column(name="description_of_location", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description_of_location", type="string", length=255, nullable=true)
      */
     private $descriptionOfLocation;
 
     /**
      * @var string
      *
-     * @Column(name="town", type="string", length=255, nullable=true)
+     * @ORM\Column(name="town", type="string", length=255, nullable=true)
      */
     private $town;
 
     /**
      * @var string
      *
-     * @Column(name="official_address", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_address", type="string", length=255, nullable=true)
      */
     private $officialAddress;
 
     /**
      * @var string
      *
-     * @Column(name="post_code", type="string", length=255, nullable=true)
+     * @ORM\Column(name="post_code", type="string", length=255, nullable=true)
      */
     private $postCode;
 
     /**
      * @var boolean
      *
-     * @Column(name="allocations", type="boolean", nullable=true)
+     * @ORM\Column(name="allocations", type="boolean", nullable=true)
      */
     private $allocations;
 
     /**
      * @var string
      *
-     * @Column(name="official_landline", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_landline", type="string", length=255, nullable=true)
      */
     private $officialLandline;
 
     /**
      * @var string
      *
-     * @Column(name="official_mobile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_mobile", type="string", length=255, nullable=true)
      */
     private $officialMobile;
 
     /**
      * @var string
      *
-     * @Column(name="in_charge", type="string", length=255, nullable=true)
+     * @ORM\Column(name="in_charge", type="string", length=255, nullable=true)
      */
     private $inCharge;
 
     /**
      * @var string
      *
-     * @Column(name="job_title_of_in_charge", type="string", length=255, nullable=true)
+     * @ORM\Column(name="job_title_of_in_charge", type="string", length=255, nullable=true)
      */
     private $jobTitleOfInCharge;
 
     /**
      * @var string
      *
-     * @Column(name="anc", type="string", length=255, nullable=true)
+     * @ORM\Column(name="anc", type="string", length=255, nullable=true)
      */
     private $anc;
 
     /**
      * @var string
      *
-     * @Column(name="beoc", type="string", length=255, nullable=true)
+     * @ORM\Column(name="beoc", type="string", length=255, nullable=true)
      */
     private $beoc;
 
     /**
      * @var string
      *
-     * @Column(name="epi", type="string", length=255, nullable=true)
+     * @ORM\Column(name="epi", type="string", length=255, nullable=true)
      */
     private $epi;
 
     /**
      * @var string
      *
-     * @Column(name="fp", type="string", length=255, nullable=true)
+     * @ORM\Column(name="fp", type="string", length=255, nullable=true)
      */
     private $fp;
 
     /**
      * @var string
      *
-     * @Column(name="growm", type="string", length=255, nullable=true)
+     * @ORM\Column(name="growm", type="string", length=255, nullable=true)
      */
     private $growm;
 
     /**
      * @var string
      *
-     * @Column(name="hbc", type="string", length=255, nullable=true)
+     * @ORM\Column(name="hbc", type="string", length=255, nullable=true)
      */
     private $hbc;
 
     /**
      * @var string
      *
-     * @Column(name="ipd", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ipd", type="string", length=255, nullable=true)
      */
     private $ipd;
 
     /**
      * @var string
      *
-     * @Column(name="pmtct", type="string", length=255, nullable=true)
+     * @ORM\Column(name="pmtct", type="string", length=255, nullable=true)
      */
     private $pmtct;
 
     /**
      * @var integer
      *
-     * @Column(name="beds", type="integer", nullable=true)
+     * @ORM\Column(name="beds", type="integer", nullable=true)
      */
     private $beds;
 
     /**
      * @var integer
      *
-     * @Column(name="cots", type="integer", nullable=true)
+     * @ORM\Column(name="cots", type="integer", nullable=true)
      */
     private $cots;
 
     /**
      * @var string
      *
-     * @Column(name="tb_diag", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tb_diag", type="string", length=255, nullable=true)
      */
     private $tbDiag;
 
     /**
      * @var string
      *
-     * @Column(name="tb_treat", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tb_treat", type="string", length=255, nullable=true)
      */
     private $tbTreat;
 
     /**
      * @var string
      *
-     * @Column(name="opd", type="string", length=255, nullable=true)
+     * @ORM\Column(name="opd", type="string", length=255, nullable=true)
      */
     private $opd;
 
     /**
      * @var string
      *
-     * @Column(name="official_fax", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_fax", type="string", length=255, nullable=true)
      */
     private $officialFax;
 
     /**
      * @var string
      *
-     * @Column(name="official_email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_email", type="string", length=255, nullable=true)
      */
     private $officialEmail;
 
     /**
      * @var string
      *
-     * @Column(name="official_alternate_no", type="string", length=255, nullable=true)
+     * @ORM\Column(name="official_alternate_no", type="string", length=255, nullable=true)
      */
     private $officialAlternateNo;
 
     /**
      * @var string
      *
-     * @Column(name="art", type="string", length=255, nullable=true)
+     * @ORM\Column(name="art", type="string", length=255, nullable=true)
      */
     private $art;
 
     /**
      * @var string
      *
-     * @Column(name="tb_labs", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tb_labs", type="string", length=255, nullable=true)
      */
     private $tbLabs;
 
     /**
      * @var string
      *
-     * @Column(name="rhtc_rhdc", type="string", length=255, nullable=true)
+     * @ORM\Column(name="rhtc_rhdc", type="string", length=255, nullable=true)
      */
     private $rhtcRhdc;
 
     /**
      * @var string
      *
-     * @Column(name="youth", type="string", length=255, nullable=true)
+     * @ORM\Column(name="youth", type="string", length=255, nullable=true)
      */
     private $youth;
 
     /**
      * @var string
      *
-     * @Column(name="c_imci", type="string", length=255, nullable=true)
+     * @ORM\Column(name="c_imci", type="string", length=255, nullable=true)
      */
     private $cImci;
 
     /**
      * @var string
      *
-     * @Column(name="hct", type="string", length=255, nullable=true)
+     * @ORM\Column(name="hct", type="string", length=255, nullable=true)
      */
     private $hct;
 
     /**
      * @var string
      *
-     * @Column(name="rad_xray", type="string", length=255, nullable=true)
+     * @ORM\Column(name="rad_xray", type="string", length=255, nullable=true)
      */
     private $radXray;
 
     /**
      * @var string
      *
-     * @Column(name="ceoc", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ceoc", type="string", length=255, nullable=true)
      */
     private $ceoc;
 
     /**
      * @var string
      *
-     * @Column(name="caes_sec", type="string", length=255, nullable=true)
+     * @ORM\Column(name="caes_sec", type="string", length=255, nullable=true)
      */
     private $caesSec;
 
     /**
      * @var string
      *
-     * @Column(name="policy_source", type="string", length=255, nullable=true)
+     * @ORM\Column(name="policy_source", type="string", length=255, nullable=true)
      */
     private $policySource;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fac_name", type="string", length=255, nullable=true)
+     */
+    private $facName;
 
 
     /**
@@ -2370,5 +2377,28 @@ class HcwList
     public function getPolicySource()
     {
         return $this->policySource;
+    }
+
+    /**
+     * Set facName
+     *
+     * @param string $facName
+     * @return HcwList
+     */
+    public function setFacName($facName)
+    {
+        $this->facName = $facName;
+    
+        return $this;
+    }
+
+    /**
+     * Get facName
+     *
+     * @return string 
+     */
+    public function getFacName()
+    {
+        return $this->facName;
     }
 }

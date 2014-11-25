@@ -389,6 +389,15 @@ function loadSimpleGraph(base_url, function_url, graph_section) {
    * @return {[type]}              [description]
    */
 function loadRawDownload(base_url, function_url) {
+  $('#pdf').remove();
+  $('#excel').remove();
+  pdf = ' <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="pdf">'+
+      '<i class="icon basic doc"></i>Download PDF'+
+    '</div>';
+  excel = ' <div style="font-size:0.8em !important" class="mini ui button disabled labeled icon download" id="excel">'+
+      '<i class="icon basic doc"></i>Download Excel'+
+    '</div>';
+  $('.actions').prepend(pdf+excel);
     $('#pdf').attr('data-url', base_url + function_url + '/dynamic_pdf');
     $('#excel').attr('data-url', base_url + function_url + '/dynamic_excel');
     $('.download').click(function() {
@@ -408,7 +417,7 @@ function loadRawDownload(base_url, function_url) {
    */
 function loadFacilityRawData(base_url, function_url, container) {
   $.ajax({
-    url: base_url + function_url + '/dynamic_table',
+    url: base_url + function_url + '/datatable',
     beforeSend: function(xhr) {
       $(container).empty();
       $(container).append('<div class="loader" >Loading...</div>');
@@ -416,13 +425,11 @@ function loadFacilityRawData(base_url, function_url, container) {
     success: function(data) {
       $(container).empty();
       $(container).append(data);
-      $(document).trigger('datatable_loaded');
+      // $(document).trigger('datatable_loaded');
 
     }
 
   });
-
-
 }
 
 /**
@@ -861,6 +868,20 @@ function showEnlargedGraph(base_url, function_url, title, raw_url) {
     });
   }
   /**
+   * [showList description]
+   * @param  {[type]} base_url     [description]
+   * @param  {[type]} function_url [description]
+   * @param  {[type]} container    [description]
+   * @return {[type]}              [description]
+   */
+function showList(base_url, function_url,title) {
+    $('#universalModal').modal('setting', 'closable', false).modal('show');
+    $('#universalModal').delay(1000, function(nxt) {
+      loadDatatable(base_url, function_url,title, '#universalModal > .content');
+      nxt();
+    });
+  }
+  /**
    * [showAnalytics description]
    * @param  {[type]} base_url [description]
    * @return {[type]}          [description]
@@ -900,6 +921,49 @@ function startIntro() {
     });
 
     intro.start();
+  }
+
+
+  function loadDatatable(base_url,function_url,title,container){
+    $.ajax({
+    url:base_url+function_url,
+    beforeSend: function(xhr) {
+      $(container).empty();
+      $(container).append('<div class="loader" >Loading...</div>');
+    },
+    success: function(data) {
+      $(container).parent().find('.header').text(title);
+      obj = jQuery.parseJSON(data);
+      $(container).empty();
+      console.log(obj);
+      table = '<table style="font-size:10px !important">';
+      tr='';
+      th='';
+      thead='';
+      tfoot='';
+      counter=0;
+
+      thead+='<thead><tr>';
+      tfoot+='<tfoot><tr>';
+      column_count=0;
+      $.each(obj.title, function(k, v) {
+        thead+='<th>'+v+'</th>';
+        tfoot+='<th>'+v+'</th>';
+        column_count++;
+      });
+
+      tfoot+='</tr></tfoot>';
+      thead+='</tr></thead>';
+
+      table+=thead+tfoot+'</table>';
+
+      $(container).append(table);
+      $(container+' table').dataTable( {
+        "sPaginationType": "full_numbers",
+        "aaData": obj.data
+      });    
+    }
+  });
   }
   /**
    * [trim description]

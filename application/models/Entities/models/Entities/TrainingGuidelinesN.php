@@ -64,6 +64,13 @@ class TrainingGuidelinesN
     private $tgAfter;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="tg_created", type="datetime", nullable=true)
+     */
+    private $tgCreated;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="guide_code", type="string", length=45, nullable=true)
@@ -234,6 +241,29 @@ class TrainingGuidelinesN
     }
 
     /**
+     * Set tgCreated
+     *
+     * @param \DateTime $tgCreated
+     * @return TrainingGuidelinesN
+     */
+    public function setTgCreated($tgCreated)
+    {
+        $this->tgCreated = $tgCreated;
+    
+        return $this;
+    }
+
+    /**
+     * Get tgCreated
+     *
+     * @return \DateTime 
+     */
+    public function getTgCreated()
+    {
+        return $this->tgCreated;
+    }
+
+    /**
      * Set guideCode
      *
      * @param string $guideCode
@@ -300,35 +330,5 @@ class TrainingGuidelinesN
     public function getSsId()
     {
         return $this->ssId;
-    }
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="tg_created", type="datetime", nullable=true)
-     */
-    private $tgCreated;
-
-
-    /**
-     * Set tgCreated
-     *
-     * @param \DateTime $tgCreated
-     * @return TrainingGuidelinesN
-     */
-    public function setTgCreated($tgCreated)
-    {
-        $this->tgCreated = $tgCreated;
-    
-        return $this;
-    }
-
-    /**
-     * Get tgCreated
-     *
-     * @return \DateTime 
-     */
-    public function getTgCreated()
-    {
-        return $this->tgCreated;
     }
 }

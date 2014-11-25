@@ -259,6 +259,22 @@ class MY_Model extends CI_Model
   }
 
   /**
+   * [getUsers description]
+   * @return [type] [description]
+   */
+  public function getUsers() {
+    try {
+      $result = $this->em->createQuery('SELECT u FROM models\Entities\Users u');
+      $result = $result->getArrayResult();
+      // var_dump($result);
+    }
+    catch(exception $ex) {
+      // var_dump($ex);
+    }
+    return $result;
+  }
+
+  /**
   * [getReasonNoDeliveries description]
   * @return [type] [description]
   */
@@ -536,7 +552,7 @@ class MY_Model extends CI_Model
   * @return [type]                  [description]
   */
   public function getSurveyInfo($survey_type, $survey_category, $statistic, $facMFL) {
-    $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic . '",' . $facMFL . ');';
+    $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic . '","' . $facMFL . '");';
 
     try {
       $myData = $this->db->query($query);
@@ -686,11 +702,22 @@ class MY_Model extends CI_Model
   {
     $query = $this->db->query("SELECT h.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_district = '" . $dName ."' AND  h.activity_id = 10");
+      WHERE f.fac_district = '" . $dName ."' ");
       $result = $query->result_array();
 
       return $result;
-    }
+  }
+
+  public function getHCWByCounty($cName)
+  {
+    $query = $this->db->query("SELECT h.* FROM facilities f
+      LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
+      WHERE f.fac_county = '" . $cName ."' ");
+
+    $result = $query->result_array();
+
+    return $result;
+  }
 
     public function getHCWWorkProfile($hcw_id)
     {
@@ -723,14 +750,30 @@ class MY_Model extends CI_Model
       */
       $result=array();
       if($district!=''){
-        $query = $this->db->query("SELECT * FROM hcwlist WHERE district = '" . $district ."' ");
+        $query = $this->em->createQuery("SELECT h FROM models\Entities\HcwList h ON h.district = '" . $district ."' ");
       }
       else{
-        $query = $this->db->query("SELECT * FROM hcwlist");
+      $query = $this->em->createQuery("SELECT h FROM models\Entities\HcwList h");
       }
-      $result = $query->result_array();
+      $result = $query->getArrayResult();
       // echo $this->db->last_query();die;
-      // var_dump($result);die;
+     // echo'<pre>'; print_r($result);die;
+      return $result;
+    }
+    /**
+    * Get LIST
+    * @param string $district [description]
+    */
+    public function updateField($table,$field,$value,$primary_key,$primary_value){
+      /**
+      * [$result description]
+      * @var array
+      */
+      $result=array();
+      $qb = $this->em->createQueryBuilder();
+      $q = $qb->update($table,'t')->set('t.'.$field,"'".$value."'")->where('t.'.$primary_key."= '".$primary_value."' ")->getQuery();
+  // print_r ($q);die;
+      $result = $q->execute();
       return $result;
     }
 
