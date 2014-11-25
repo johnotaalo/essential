@@ -1150,8 +1150,24 @@ function setRawUrl(criteria, county, district, facility, survey,
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
       case 'supplies':
-        raw_url = 'analytics/getSupliesRaw/' + criteria + '/' + value + '/' +
+        raw_url = 'analytics/getSuppliesRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'treatment':
+        raw_url = 'analytics/getTreatmentRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
+        break;
+      case 'staff_availability':
+        raw_url = 'analytics/getStaffAvailabilityRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
+        break;
+      case 'staff_retention':
+        raw_url = 'analytics/getStaffRetentionRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
+        break;
+      case 'staff_trained':
+        raw_url = 'analytics/getTrainedStaffRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
         break;
     }
     return raw_url;
