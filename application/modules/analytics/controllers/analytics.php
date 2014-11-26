@@ -541,7 +541,7 @@ class Analytics extends MY_Controller
      */
     
     public function getCommunityStrategyCH($criteria, $value, $survey, $survey_category, $option) {
-        $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms');
+        $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms','response');
         ksort($results);
         
         //echo "<pre>";print_r($results);echo "</pre>";die;
@@ -2181,14 +2181,15 @@ class Analytics extends MY_Controller
         $county = urldecode($county);
         $results = $this->analytics_model->getCountyReportingSummary($county, $survey, $survey_category);
         
-        //echo "<pre>"; print_r($value);echo "</pre>";die;
-        $this->generateData($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
     }
     public function getReportingList($survey, $survey_category) {
         $result = $this->analytics_model->getReportingList($survey, $survey_category);
         
-        //echo "<pre>";print_r($result);echo "</pre>";die;
-        $this->generateData($result, 'Reporting List for' . ' ' . strtoupper($survey) . ':' . strtoupper($survey_category) . $value, 'excel');
+      $results = $this->arrays->reset($results);
+        echo $this->export->generate($result, 'Reporting List for' . ' ' . strtoupper($survey) . ':' . strtoupper($survey_category) . $value, 'excel');
     }
     
     /**
@@ -3637,7 +3638,9 @@ class Analytics extends MY_Controller
         $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'response_raw');
         
         // echo "<pre>";print_r($results);echo "</pre>";die;
-        echo $this->generateData($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     public function getHcwServicesOffered($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $this->getIndicatorStatistics($criteria, $value, '', '', 'svc', 'hcwservice');
@@ -4238,11 +4241,10 @@ class Analytics extends MY_Controller
         $pdf.= '</table>';
         $this->loadPDF($pdf);
     }
-    
     /**
      * Get Facility Ownership
      */
-    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, $statistic) {
+    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
         
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
@@ -4261,24 +4263,40 @@ class Analytics extends MY_Controller
             //$gData[] = (int)$value['level_total'];
             $gData[] = array('name' => $name, 'y' => (int)$value['ownership_total']);
             
-            //echo '<pre>';print_r($gData);echo '</pre>';die;
+            //echo '<pre>';print_r($resultArray);echo '</pre>';die;
             
             
         }
         $resultArray[] = array('name' => 'Facility Ownership', 'data' => $gData);
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 50, 'pie');
-    }
-    public function getFacilityOwnership($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, 'response');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', '', 'ownership', '', '');
     }
     
     /**
-     * Get Level Ownership
+     * [getOwnershipRaw description]
+     * @param [type] $criteria        [description]
+     * @param [type] $value           [description]
+     * @param [type] $survey          [description]
+     * @param [type] $survey_category [description]
+     * @param [type] $form            [description]
+     */
+    public function getOwnershipRaw($criteria, $value, $survey, $survey_category, $form) {
+        
+        $value = urldecode($value);
+        $category[] = $county;
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category, 'response_raw');
+        // print_r($results);
+        // die;
+        $results = $this->arrays->reset($results);
+        echo $this->export->generate($results, 'Ownership Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+    }
+    
+    /**
+     * Get Lever Ownership
      */
     
-    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, $statistic) {
+    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
         
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
@@ -4292,37 +4310,39 @@ class Analytics extends MY_Controller
         $resultArray = array();
         foreach ($results as $value) {
             
-            // echo '<pre>';print_r($value);echo '</pre>';die;
             //$data = array();
             
-            $name = $value['facilityLevel'];
-            if ($name == '') {
-                $name = 'No tier specified';
-                $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
-                
-                //echo '<pre>';print_r($name);echo '</pre>';die;
-                
-            } else {
-                $gData[] = array('name' => 'Tier' . $name, 'y' => (int)$value['level_total']);
-            }
+            $name = 'Tier ' . $value['facilityLevel'];
             
+            //echo '<pre>';print_r($name);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
+            $gData[] = array('name' => $name, 'y' => (int)$value['level_total']);
             
             //echo '<pre>';print_r($resultArray);echo '</pre>';die;
             
             
         }
         $resultArray[] = array('name' => 'Facility Levels', 'data' => $gData);
-        
-        //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 30, 'pie');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', '', 'level', '', '');
     }
-    public function getFacilityLevel($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, 'response');
-    }
-    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, $statistic) {
+    
+    /**
+     * [getTypeRaw description]
+     * @param [type] $criteria        [description]
+     * @param [type] $value           [description]
+     * @param [type] $survey          [description]
+     * @param [type] $survey_category [description]
+     * @param [type] $form            [description]
+     */
+    public function getTypeRaw($criteria, $value, $survey, $survey_category, $form) {
         
-        //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
+        $value = urldecode($value);
+        $category[] = $county;
+        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, 'response_raw');
+        $results = $this->arrays->reset($results);
+        echo $this->export->generate($results, 'Facility Type for' . ucwords($for) . '(' . $value . ')', $form);
+    }
+    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
         $value = urldecode($value);
         
         //foreach ($allCounties as $county) {
@@ -4348,11 +4368,26 @@ class Analytics extends MY_Controller
         $resultArray[] = array('name' => 'Facility Types', 'data' => $gData);
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie', '', '', 'type', '', '');
     }
-    public function getFacilitytype($criteria, $value, $survey, $survey_category, $statistic) {
-        $this->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category, 'response');
+    
+    /**
+     * [getTypeRaw description]
+     * @param [type] $criteria        [description]
+     * @param [type] $value           [description]
+     * @param [type] $survey          [description]
+     * @param [type] $survey_category [description]
+     * @param [type] $form            [description]
+     */
+    public function getLevelRaw($criteria, $value, $survey, $survey_category, $form) {
+        
+        $value = urldecode($value);
+        $category[] = $county;
+        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category, 'response_raw');
+        $results = $this->arrays->reset($results);
+        echo $this->export->generate($results, 'Facility Level for' . ucwords($for) . '(' . $value . ')', $form);
     }
+    
     public function getFacilityLevelAll($survey) {
         $counties = $this->analytics_model->getReportingCounties($survey);
         foreach ($counties as $county) {
@@ -4390,26 +4425,7 @@ class Analytics extends MY_Controller
         foreach ($data as $key => $value) {
             $resultArray[] = array('name' => $key, 'data' => $value);
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 0, 'pie');
-        
-        // $counties = $this->analytics_model->getReportingCounties($criteria, $value,$survey);
-        // foreach ($counties as $county) {
-        // $results[$county['county']] = $this->analytics_model->getFacilityOwnerPerCounty($county['county'], $survey);
-        // $categories[] = $county['county'];
-        // }
-        // $resultArray = array();
-        // foreach ($results as $county) {
-        // foreach ($county as $level) {
-        // $data[$level['facilityOwner']][] = (int)$level['ownership_total'];
-        // }
-        // }
-        // foreach ($data as $key => $val) {
-        // $resultArray[] = array('name' => $key, 'data' => $val);
-        // }
-        //
-        // $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
-        
-        
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 0, 'pie');    
     }
     
     /**
@@ -4548,13 +4564,10 @@ class Analytics extends MY_Controller
         $this->db->select('fac_id,fac_name,fac_level,fac_ownership,fac_county,fac_district')->from('facilities')->order_by('fac_county ASC')->order_by('fac_district ASC');
         
         $results = $this->db->get();
-        
-        $data = $this->generateData($results->result_array(), 'Master List', $form);
-        
+        $results = $results->result_array();
+        $results = $this->arrays->reset($results);
+        $data = $this->export->generate($results->result_array(), 'Master List', $form);
         echo $data;
-        
-        //die;
-        
         
     }
     
@@ -5181,8 +5194,24 @@ class Analytics extends MY_Controller
     //     echo "</pre>";
     //     die;
     // }
-    
-    
+    /**
+     * [getCommunityStrategyRaw description]
+     * @param  [type] $criteria        [description]
+     * @param  [type] $value           [description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $form            [description]
+     * @return [type]                  [description]
+     */
+    public function getCommunityStrategyRaw($criteria, $value, $survey, $survey_category, $form) {
+        $results = $this->analytics_model->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms', 'response_raw');
+        
+       // echo '<pre>'; print_r($results);die;
+        $results = $this->arrays->reset($results);
+        
+        // print_r($results);die;
+        echo $this->export->generate($results, 'Community Strategy for' . ucwords($for) . '(' . $value . ')', $form);
+    }
     
     /**
      * [getCommunityStrategyMNH description]

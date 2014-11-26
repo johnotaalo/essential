@@ -95,34 +95,41 @@ class Analytics_Model extends MY_Model
     /**
      * Community Strategy
      */
-    public function getCommunityStrategy($criteria, $value, $survey, $survey_category, $for) {
+    public function getCommunityStrategy($criteria, $value, $survey, $survey_category, $for, $statistic) {
         
         /*using CI Database Active Record*/
         
         //$data=array();
         $data = '';
-        $query = "CALL get_community_strategy('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+        $query = "CALL get_community_strategy('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','" . $statistic . "');";
         
         try {
             $this->dataSet = $this->db->query($query, array($value));
             $this->dataSet = $this->dataSet->result_array();
             if ($this->dataSet !== NULL) {
+                
+                // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 foreach ($this->dataSet as $value) {
-                    
-                    //$question = $value['question_name'];
-                    $question = $value['question_name'];
-                    $question = substr($question, 12);
-                    $question = trim($question, ' of');
-                    
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
-                    if (array_key_exists('strategy', $value)) {
+                    if ($statistic == 'response_raw') {
                         
-                        $data[$question][$value['strategy']] = (int)$value['strategy_number'];
+                        // var_dump($value);
+                        $data[] = $value;
+                    } else {
+                        
+                        //$question = $value['question_name'];
+                        $question = $value['question_name'];
+                        $question = substr($question, 12);
+                        $question = trim($question, ' of');
+                        
+                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        if (array_key_exists('strategy', $value)) {
+                            
+                            $data[$question][$value['strategy']] = (int)$value['strategy_number'];
+                        }
                     }
                 }
                 
                 //echo "<pre>";print_r($question);echo "</pre>";die;
-                
                 
             }
         }
