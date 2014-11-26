@@ -501,7 +501,19 @@ class Generate extends MY_Controller
         </td>' . $follow_up_question . '
         <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
     </tr>';
-                        }else if ($section == 'hs') {
+                        }
+                        /**
+                         * IF HIV
+                         * @var [type]
+                         */
+else if ($section == 'hiv') {
+                            $data[$section][] = '
+                <tr>
+            <td colspan="1"> <strong>(' . $base . ')</strong>' . $value['questionName'] . '</td>
+         <td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio">If NO, give MAIN reason <input name="questionReason_' . $counter . '" type="text" ></td>
+            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';}
+                        else if ($section == 'hs') {
                             $data[$section][] = '<tr>
                     <td >' . $value['questionName'] . '</td>
                     <td >
