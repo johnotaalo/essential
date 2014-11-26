@@ -580,6 +580,19 @@ else if ($section == 'hiv') {
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         }
+                        /**
+                         * IF Waste
+                         * @var [type]
+                         */
+else if ($section == 'waste') {
+                            $data[$section][] = '<tr>
+        <td colspan="1"><strong>(' . $base . ').</strong> ' . $value['questionName'] . '</td>
+        <td colspan="1">
+        Waste Pit<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Waste Pit" type="radio">Placenta Pit<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Placenta Pit" type="radio">Incinerator<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Incinerator" type="radio">Burning<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Burning" type="radio">Other<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Other" type="radio">
+        </td>' . '
+        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+    </tr>';
+                        }
 
                         /**
                          * If Section is Community Strategy
