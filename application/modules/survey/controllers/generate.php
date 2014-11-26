@@ -452,7 +452,56 @@ class Generate extends MY_Controller
                 <td><input type = "text" name = "questionCount_' . $counter . '" value = "' . $questionCount . '"></td>
                 <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
-                        } else if ($section == 'hs') {
+                        } else if ($section == 'ceoc') {
+                            if ($value['questionCode'] == 'QMNH03') {
+                                $follow_up_question = '
+            <tr id="transfusion_y">
+    <td><b>(A)</b> If blood transfusion is performed, indicate <strong>main source</strong> of blood</td>
+    <td>
+        1. Blood bank available <input name="questionSpecified_'.$counter.'" value="Blood bank available" type="radio">2. Transfusions done but no blood bank<input name="questionSpecified_'.$counter.'" value="Transfusions done but no blood bank" type="radio">3. Other<input name="questionSpecified_'.$counter.'" value="Other" class="other" type="radio">
+
+    <br/>
+    <label id="label_followup_other_' . $counter . '">Provide Other</label>
+    <br/>
+    <input type="text"  name="questionSpecifiedOther_' . $counter . '" id="questionSpecifiedOther_' . $counter . '" value="" size="64" class="cloned other" />
+    </td>
+</tr>
+<tr id="transfusion_n">
+    <td><b>(B)</b>Give a reason why blood transfusion is <strong>not</strong> performed</td>
+    <td>
+    1. Blood not available<input type="radio" value="Blood not available" name="questionReason_'.$counter.'">2. Supplies and equipment not available<input value="Supplies and equipment not available" type="radio" name="questionReason_'.$counter.'">Other<input value="3. Other(specify)" class="other" type="radio" name="questionReason_'.$counter.'">
+    <br/>
+    <label id="label_reason_other_' . $counter . '">Other Reason</label>
+    <br/>
+    <input type="text"  name="questionReasonOther_' . $counter . '" id="questionReasonOther_' . $counter . '" value="" size="64" class="cloned other" />
+    </td>
+</tr>';
+                            } elseif ($value['questionCode'] == 'QMNH06a' || $value['questionCode'] == 'QMNH06b') {
+                                $follow_up_question = '';
+                            } else {
+                                $follow_up_question = '<tr id="csdone_n">
+    <td><b>(A)</b>If NO, Give the MAIN reason for <strong>not</strong> conducting Caeserian Section</td>
+    <td>
+    1. Supplies and equipment not available<input value="Supplies and equipment not available" name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    2. Theatre space not available<input  value="Theatre space not available" name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    3. Human Resource not available<input value="Human Resource not available"  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    4. Other(specify)<input value="Other"  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    <br/>
+    <label id="label_reason_other_' . $counter . '">Other Reason</label>
+    <br/>
+    <input type="text"  name="questionReasonOther_' . $counter . '" id="questionReasonOther_' . $counter . '" value="" size="64" class="cloned other" />
+    </td>
+</tr>';
+                            }
+
+                            $data[$section][] = '<tr>
+        <td ><strong>(' . ($base) . ').</strong> ' . $value['questionName'] . '</td>
+        <td >
+        Yes<input value="Yes" type="radio" name="questionResponse_' . $counter . '">No<input value="No" type="radio" name="questionResponse_' . $counter . '">
+        </td>' . $follow_up_question . '
+        <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+    </tr>';
+                        }else if ($section == 'hs') {
                             $data[$section][] = '<tr>
                     <td >' . $value['questionName'] . '</td>
                     <td >
@@ -649,22 +698,22 @@ class Generate extends MY_Controller
             <tr id="transfusion_y">
     <td><b>(A)</b> If blood transfusion is performed, indicate <strong>main source</strong> of blood</td>
     <td>
-        1. Blood bank available<input type="checkbox">2. Transfusions done but no blood bank<input type="checkbox">3. Other(specify)<input type="checkbox">
+        1. Blood bank available <input name="questionResponseOther_'.$counter.'" value="Blood bank available" type="radio">2. Transfusions done but no blood bank<input name="questionResponseOther_'.$counter.'" value="Transfusions done but no blood bank" type="radio">3. Other(specify)<input name="questionResponseOther_'.$counter.'" value="Other" type="radio">
 
     <br/>
     <label id="label_followup_other_' . $counter . '">Provide Other</label>
     <br/>
-    <input type="text"  name="mnhceocFollowUpOther_' . $counter . '" id="mnhceocFollowUpOther_' . $counter . '" value="" size="64" class="cloned" />
+    <input type="text"  name="questionSpecified_' . $counter . '" id="questionSpecified_' . $counter . '" value="" size="64" class="cloned" />
     </td>
 </tr>
 <tr id="transfusion_n">
     <td><b>(B)</b>Give a reason why blood transfusion is <strong>not</strong> performed</td>
     <td>
-    1. Blood not available<input type="checkbox">2. Supplies and equipment not available<input type="checkbox">3. Other(specify)<input type="checkbox">
+    1. Blood not available<input type="radio">2. Supplies and equipment not available<input type="radio">3. Other(specify)<input type="radio">
     <br/>
     <label id="label_reason_other_' . $counter . '">Other Reason</label>
     <br/>
-    <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
+    <input type="text"  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" value="" size="64" class="cloned" />
     </td>
 </tr>';
                             } elseif ($value['questionCode'] == 'QMNH06a' || $value['questionCode'] == 'QMNH06b') {
@@ -673,14 +722,14 @@ class Generate extends MY_Controller
                                 $follow_up_question = '<tr id="csdone_n">
     <td><b>(A)</b>If NO, Give the MAIN reason for <strong>not</strong> conducting Caeserian Section</td>
     <td>
-    1. Supplies and equipment not available<input type="checkbox">
-    2. Theatre space not available<input type="checkbox">
-    3. Human Resource not available<input type="checkbox">
-    4. Other(specify)<input type="checkbox">
+    1. Supplies and equipment not available<input name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    2. Theatre space not available<input  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    3. Human Resource not available<input  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
+    4. Other(specify)<input  name="questionReason_' . $counter . '" id="questionReason_' . $counter . '" type="radio">
     <br/>
     <label id="label_reason_other_' . $counter . '">Other Reason</label>
     <br/>
-    <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
+    <input type="text"  name="questionReasonOther_' . $counter . '" id="questionReasonOther_' . $counter . '" value="" size="64" class="cloned" />
     </td>
 </tr>';
                             }
