@@ -35,20 +35,6 @@ class Data_Model extends MY_Model
 	    }
     }
 
-    function getAssessmentInfo()
-    {
-    	$sections = array();
-    	$query = $this->db->query("SELECT COUNT(DISTINCT(ast_section)) as sections, hcw_id FROM hcw_assessment_tracker GROUP BY hcw_id");
-
-    	$result = $query->result_array();
-
-    	foreach ($result as $value) {
-    		$sections[$value['hcw_id']] = $value['sections'];
-    	}
-
-    	return $sections;
-    }
-
     function getNoMfls()
     {
     	$query = $this->db->query("SELECT * FROM `hcw_list` WHERE `mfl_code` LIKE 'NMFL' GROUP BY facility_name");
