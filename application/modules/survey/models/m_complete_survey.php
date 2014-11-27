@@ -145,11 +145,11 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    // echo 'true';
+                    // return true;
                 }
                 catch(Exception $ex) {
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -164,17 +164,17 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    // echo 'true';
+                    // return true;
                 }
                 catch(Exception $ex) {
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
@@ -186,7 +186,7 @@ class M_complete_survey extends MY_Model
             //end of batch condition
             
         }
-        echo 'true';
+        return true;
         //end of innner loop
         
     }
@@ -299,22 +299,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -332,22 +332,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -471,14 +471,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -495,26 +495,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -641,22 +641,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -674,22 +674,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -824,22 +824,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex -> getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -857,22 +857,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -997,12 +997,12 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1019,26 +1019,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -1253,12 +1253,12 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1275,24 +1275,24 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -1303,7 +1303,7 @@ class M_complete_survey extends MY_Model
         
         //end of innner loop
         
-        // echo 'true';
+        // return true;
         
     }
     
@@ -1410,22 +1410,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1443,22 +1443,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1586,14 +1586,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1610,26 +1610,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -1742,14 +1742,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1766,26 +1766,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -1795,7 +1795,7 @@ class M_complete_survey extends MY_Model
         }
         
         //end of innner loopurn ntr
-        echo 'true';
+        return true;
     }
     
     //close addhcwWorkProfile
@@ -1908,14 +1908,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -1932,26 +1932,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -2075,14 +2075,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2099,26 +2099,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -2235,14 +2235,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2259,26 +2259,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -2391,22 +2391,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex -> getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2424,22 +2424,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2770,22 +2770,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2803,22 +2803,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2936,22 +2936,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -2969,22 +2969,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3131,18 +3131,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3160,18 +3160,18 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3317,18 +3317,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3346,17 +3346,17 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3484,14 +3484,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3508,26 +3508,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -3537,7 +3537,7 @@ class M_complete_survey extends MY_Model
         }
         
         //end of innner loop
-        echo 'true';
+        return true;
     }
     
     //close addMCHIndicatorInfo
@@ -3622,14 +3622,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3646,24 +3646,24 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -3782,22 +3782,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3815,22 +3815,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3960,14 +3960,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -3984,26 +3984,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -4134,18 +4134,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4163,18 +4163,18 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4296,7 +4296,6 @@ class M_complete_survey extends MY_Model
             
             //check if that key exists, else set it to some default value
             //(isset($this->elements[$i]['sqNumberOfUnits']))?$this -> theForm -> setQuantityAvailable($this->elements[$i]['sqNumberOfUnits']):$this -> theForm -> setQuantityAvailable(-1);
-            (isset($this->elements[$i]['sqSupplier']) || $this->elements[$i]['sqSupplier'] == '') ? $this->theForm->setSupplierCode($this->elements[$i]['sqSupplier']) : $this->theForm->setSupplierCode("Other");
             
             //(isset($this->elements[$i]['sqReason']) || $this->elements[$i]['sqReason']=='')?$this -> theForm -> setReason4Unavailability($this->elements[$i]['sqReason']):$this -> theForm -> setReason4Unavailability("N/A");
             (isset($this->elements[$i]['sqAvailability'])) ? $this->theForm->setAsAvailability($this->elements[$i]['sqAvailability']) : $this->theForm->setAsAvailability("N/A");
@@ -4317,18 +4316,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4346,18 +4345,18 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4382,7 +4381,7 @@ class M_complete_survey extends MY_Model
     private function addResourceAvailabilityInfo() {
         $count = $finalCount = 1;
         foreach ($this->input->post() as $key => $val) {
-            
+            $suppliername= $this->input->post('supplierName');
             //For every posted values
             if (strpos($key, 'hw') !== FALSE) {
                 
@@ -4473,7 +4472,7 @@ class M_complete_survey extends MY_Model
             //check if that key exists, else set it to some default value
             (isset($this->elements[$i]['hwNumberOfUnits'])) ? $this->theForm->setArQuantity($this->elements[$i]['hwNumberOfUnits']) : $this->theForm->setArQuantity(-1);
             
-            //(isset($this->elements[$i]['hwSupplier']) || $this->elements[$i]['hwSupplier'] != '') ? $this->theForm->setSupplierCode($this->elements[$i]['hwSupplier']) : $this->theForm->setSupplierCode("Other");
+            (isset($suppliername)) ? $this->theForm->setSupplierCode($suppliername) : $this->theForm->setSupplierCode("Other");
             (isset($this->elements[$i]['hwReason'])) ? $this->theForm->setArReasonUnavailable($this->elements[$i]['hwReason']) : $this->theForm->setArReasonUnavailable("N/A");
             (isset($this->elements[$i]['hwAvailability'])) ? $this->theForm->setArAvailability($this->elements[$i]['hwAvailability']) : $this->theForm->setArAvailability("N/A");
             (isset($this->elements[$i]['hwLocation'])) ? $this->theForm->setArLocation($this->elements[$i]['hwLocation']) : $this->theForm->setArLocation("N/A");
@@ -4493,18 +4492,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4522,18 +4521,18 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4671,22 +4670,22 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex -> getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4704,22 +4703,22 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print 'Limit: '.$this->noOfInsertsBatch);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                     
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     //die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4858,18 +4857,18 @@ class M_complete_survey extends MY_Model
                     
                     //detaches all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print $i);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4887,18 +4886,18 @@ class M_complete_survey extends MY_Model
                     
                     //detactes all objects from doctrine
                     
-                    //on the last record to be inserted, log the process and echo 'true';
+                    //on the last record to be inserted, log the process and return true;
                     if ($i == $this->noOfInsertsBatch) {
                         
                         //die(print $i);
                         //$this->writeAssessmentTrackerLog();
-                        echo 'true';
+                        return true;
                     }
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -4997,12 +4996,12 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -5020,26 +5019,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    echo 'true';
+                    return true;
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print . $i);
                     // $this->writeAssessmentTrackerLog();
                     echo "true";
                     die;
-                    echo 'true';
+                    return true;
                 }
             }
             
@@ -5246,7 +5245,7 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    // echo 'true';
+                    // return true;
                     
                     
                 }
@@ -5254,7 +5253,7 @@ class M_complete_survey extends MY_Model
                     
                     die($ex->getMessage());
                     
-                    // echo 'false';
+                    // return false;
                     
                     /*display user friendly message*/
                 }
@@ -5271,7 +5270,7 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    // echo 'true';
+                    // return true;
                     
                     
                 }
@@ -5279,19 +5278,19 @@ class M_complete_survey extends MY_Model
                     
                     die($ex->getMessage());
                     
-                    // echo 'false';
+                    // return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    // echo 'true';
+                    // return true;
                     
                 }
             }
@@ -5302,7 +5301,7 @@ class M_complete_survey extends MY_Model
         }
         
         //end of innner loop
-        echo 'true';
+        return true;
     }
     
     //close addHCWQuestionInfo
@@ -5412,14 +5411,14 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detaches all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
@@ -5436,26 +5435,26 @@ class M_complete_survey extends MY_Model
                     $this->em->clear();
                     
                     //detactes all objects from doctrine
-                    //echo 'true';
+                    //return true;
                     
                     
                 }
                 catch(Exception $ex) {
                     
                     die($ex->getMessage());
-                    echo 'false';
+                    return false;
                     
                     /*display user friendly message*/
                 }
                 
                 //end of catch
                 
-                //on the last record to be inserted, log the process and echo 'true';
+                //on the last record to be inserted, log the process and return true;
                 if ($i == $this->noOfInsertsBatch) {
                     
                     //die(print $i);
                     // $this->writeAssessmentTrackerLog();
-                    //echo 'true';
+                    //return true;
                     
                 }
             }
@@ -5466,7 +5465,7 @@ class M_complete_survey extends MY_Model
         }
         
         //end of innner loop
-        echo 'true';
+        return true;
     }
     
     /**

@@ -543,14 +543,14 @@ class Generate extends MY_Controller
                             
                             if ($value['questionCode'] == 'QMNH01') {
                                 $aspect_response_on_yes = '<label>Water Storage Point</label><br/>
-            <input type="text"  name="questionSpecify_' . $counter . '" id="mnhwStoragePoint_' . $counter . '" value="" size="45" placeholder="specify"/>';
+            <input type="text"  name="questionSpecified_' . $counter . '" id="questionSpecified_' . $counter . '" value="" size="45" placeholder="specify"/>';
                             } else {
-                                $aspect_response_on_yes = '<label style="font-weight:bold">Main Source</label><br/>' . $supplierOptions['mh'];
+                                $aspect_response_on_yes = '<label style="font-weight:bold">Main Source</label><br/><select name="questionSpecified_'. $counter . '">"' . $supplierOptions['mh'].'</select>';
                             }
                             $data[$section][] = '<tr>
             <td>' . $value['questionName'] . '</td>
             <td>
-            Yes<input type="radio">No<input type="radio">
+            Yes<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="Yes" type="radio">No<input name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" value="No" type="radio">
             </td>
             <td >
             ' . $aspect_response_on_yes . '
@@ -1331,7 +1331,7 @@ class Generate extends MY_Controller
             ' . $supplierOptions['mch'] . '
             </td>
             <td>
-            ' . $supplierOptions['sou'] . '
+            <select name="hwLocation_' . $counter . '" ' . $supplierOptions['sou'] . '</select>
             </td>
 
             <input type="hidden"  name="hweqCode_' . $counter . '" id="hweqCode_' . $counter . '" value="' . $value['eqCode'] . '" />
@@ -1837,8 +1837,13 @@ class Generate extends MY_Controller
             public function createSupplierOptions() {
                 $suppliers = $this->data_model->getSuppliers();
                 foreach ($suppliers as $supplier) {
-                    $supplierOptions[$supplier['supplierFor']].= '<input type="radio" name="supplierName" value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'];
-                }
+                    if($supplier['supplierFor']=='mh' || $supplier['supplierFor']=='sou'){
+                        $supplierOptions[$supplier['supplierFor']].= '<option value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'].'</option>';
+              
+                    }else{
+                        $supplierOptions[$supplier['supplierFor']].= '<input type="radio" name="supplierName" value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'];
+                    }
+                      }
                 return $supplierOptions;
             }
             
