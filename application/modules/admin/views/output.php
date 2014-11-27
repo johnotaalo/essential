@@ -153,7 +153,6 @@ table.row.add( new_row ).draw();
 function loadExport(base_url,criteria) {
     $('#pdf').attr('data-url', base_url+'admin/get/'+criteria+'/dynamic_pdf');
     $('#excel').attr('data-url', base_url+'admin/get/'+criteria+'/dynamic_excel');
-    
     $('.download').click(function() {
       url = $(this).attr('data-url');
       if (url != '') {

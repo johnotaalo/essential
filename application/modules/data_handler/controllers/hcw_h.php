@@ -35,8 +35,8 @@ class HCW_H extends MY_Controller{
       $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
     }else{
-      $data = $this->arrays->reset($data);
-      // echo '<pre>';print_r($data);die;
+      // $data = $this->arrays->reset($data);
+      echo '<pre>';print_r($data);die;
       $this->export->generate($data,'HCW List',$form);
     }
   }

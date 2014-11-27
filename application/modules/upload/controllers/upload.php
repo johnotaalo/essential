@@ -176,7 +176,7 @@ class Upload extends MY_Controller{
     $this->facility_upload(0,'facilities');
   }
   public function update_hcw(){
-    $this->upload(0,'hcw_list','id_number','ID Number');
+    $this->upload(0,'hcwlist','id_number','id_number');
   }
   /**
   * [clean description]
@@ -319,13 +319,12 @@ class Upload extends MY_Controller{
         R::ext('xdispense', function($type){
  return R::getRedBean()->dispense( $type);
 });
+       // echo '<pre>';print_r($data1);echo '</pre>';die;
         // echo $field.' '.$value;die;
         $currentTable = R::findOne($table,$field.'=?',array($data1[$value]));
-        // echo '<pre>';print_r($currentTable);echo '</pre>';die;
         if(!$currentTable){
           $currentTable = R::xdispense($table);
         }
-
         //convert date to timestamp
         $data1 = $this->formatDate($data1, 'DATES');
 
