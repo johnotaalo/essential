@@ -888,31 +888,31 @@ class Form_Handler extends MY_Controller
 		* For Owned By (Public/Private/FBO/MOH/NGO)
 </p>
 <table>
-	<thead>
-		<tr>
-		<th colspan="8">ASSESSOR INFORMATION </th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Name </td>
-			<td>
-			<input size="50"  type="text" >
-			</td>
-			<td>Designation </td><td><!--input type="text" id="designation" name="designation" class="cloned"  /-->
-			<input size="50"  type="text"  >
-			</td>
-			<td>Email </td>
-			<td>
-			<input size="50"  type="text"  >
-			</td>
-			</td><td>Phone Number </td>
-			<td>
-			<input size="50"  type="text"  >
-			</td>
-		</tr>
-	</tbody>
-</table>
+				<thead>
+				<tr>
+				<th colspan="8">ASSESSOR INFORMATION </th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>Name </td>
+				<td>
+				<input type="text" name = "assesorname_1">
+				</td>
+				<td>Designation </td><td>
+				<input type="text" id="asesordesignation_1" name="asesordesignation_1">
+				</td>
+				<td>Email </td>
+				<td>
+				<input type="email" name = "assesoremail_1">
+				</td>
+				</td><td>Phone Number </td>
+				<td>
+				<input type="text" name = "assesorphoneNumber_1">
+				</td>
+				</tr>
+				</tbody>
+				</table>
 <table>
 	<thead>
 		<tr>
@@ -1004,44 +1004,15 @@ class Form_Handler extends MY_Controller
 		'.$this->staffTraining.'
 
 	</table>
-	<pagebreak />
+	<pagebreak/>
+
 <table>
   <thead>
   <tr>
 	<th colspan = "9">HEALTH SERVICES</th>
 	</tr>
 	</thead>
-	<tbody>
-	<tr><td colspan = "9">Where are sick children seen?</td>
-	</tr>
-	<tr>
-		<td>General OPD</td>
-		<td><input type="radio" name="children_seen" value="opd", ></td>
-		<td>Paediatric OPD</td>
-		<td><input type="radio" name="children_seen" value="usclinic",></td>
-		<td>MCH</td>
-		<td><input type="radio" name="children_seen" value="mch",></td>
-		<td>Other</td>
-		<td><input type="radio" name="children_seen" value="other",></td>
-		<td>If Other, Specify</td>
-		<input type="text" size="50" name="specify" colspan="2">
-		</tr>
-
-	<tr><td colspan = "9">Where are Early Infant Diagnosis(EID) samples collected in the facility?</td>
-	</tr>
-	<tr>
-		<td>LAB</td>
-		<td><input type="radio" name="children_seen" value="opd", ></td>
-		<td>MCH</td>
-		<td><input type="radio" name="children_seen" value="usclinic",></td>
-		<td>Ward</td>
-		<td><input type="radio" name="children_seen" value="mch",></td>
-		<td>CCC</td>
-		<td><input type="radio" name="children_seen" value="other",></td>
-		<td>If Other, Specify</td>
-		<input type="text" size="50" name="specify" colspan="2">
-		</tr>
-	</tbody>
+	'.$this->questions['hs'].'
 </table>
 
 <table>
@@ -1062,7 +1033,7 @@ class Form_Handler extends MY_Controller
 <pagebreak />
 <div id="section-2" class="step">
 	<input type="hidden" name="step_name" value="section-2"/>
-	<p style="display:true;margin-top:100px" class="message success">
+	<p style="display:true;" class="message success">
 		SECTION 2 of 9: GUIDELINES, JOB AIDS AND TOOLS
 	</p>
 
@@ -1631,7 +1602,7 @@ class Form_Handler extends MY_Controller
 	</div><!--\.section 4-->
 	<div id="section-5" class="step">
 		<input type="hidden" name="step_name" value="section-5"/>
-		<p style="display:true;margin-top:200px" class="message success">
+		<p style="display:true" class="message success">
 			SECTION 5 of 9: REVIEW OF RECORDS
 		</p>
 

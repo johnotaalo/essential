@@ -49,8 +49,8 @@
       <div class="right menu">
         <a class="item" id="add_row"><i class="icon ion-plus-round"></i> Add</a>
         <a class="item" id="upload"><i class="icon ion-upload"></i> Upload</a>
-        <a class="item"><i class="icon ion-document-text"></i> PDF</a>
-        <a class="item"><i class="icon ion-document-text"></i> Excel</a>
+        <a class="item download" id="pdf"><i class="icon ion-document-text"></i> PDF</a>
+        <a class="item download" id="excel"><i class="icon ion-document-text"></i> Excel</a>
       </div>
     </div>
     <div id="display">
@@ -127,7 +127,9 @@ $('.list-items > a').click(function(){
             url: base_url+'admin/edit/'+object,
           });
         }
-      });    }
+      });    
+      loadExport(base_url,object);
+    }
   });
 });
 
@@ -142,6 +144,23 @@ new_row.push('<a class="editable">New Column</a>');
 table.row.add( new_row ).draw();
 });
 
+/**
+ * [loadExport description]
+ * @param  {[type]} base_url     [description]
+ * @param  {[type]} function_url [description]
+ * @return {[type]}              [description]
+ */
+function loadExport(base_url,criteria) {
+    $('#pdf').attr('data-url', base_url+'admin/get/'+criteria+'/dynamic_pdf');
+    $('#excel').attr('data-url', base_url+'admin/get/'+criteria+'/dynamic_excel');
+    $('.download').click(function() {
+      url = $(this).attr('data-url');
+      if (url != '') {
+        window.open(url);
+      }
+    });
+
+  }
 
 
 </script>
