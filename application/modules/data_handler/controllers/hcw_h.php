@@ -24,8 +24,9 @@ class HCW_H extends MY_Controller{
   * @return [type]       [description]
   */
   public function read($form,$identifier=''){
-    // echo $identifier;die;
+     
     $data = $this->data_model->get('hcw');
+    //echo '<pre>';print_r($data);die;
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }

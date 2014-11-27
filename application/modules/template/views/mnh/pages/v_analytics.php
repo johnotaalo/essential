@@ -5,7 +5,7 @@
 
 <script>
     $('#survey_type').change(function(){
-        alert('changed');
+       // alert('changed');
     });
 </script>
 
@@ -49,10 +49,14 @@
                                     <div class="menu">
                                       <div class="item" data-value="mnh">MNH</div>
                                       <div class="item" data-value="ch">CH</div>
-                                      <div class="item" data-value="hcw">IMCI Follow Up</div>
+                                      <div class="item" data-value="hcw" id = "imci">IMCI Follow Up</div>
                                     </div>
                                 </div>
-                                <div class="ui selection dropdown">
+                                <?php
+                                    $class = "ui selection dropdown disabled"
+                                ?>
+
+                                <div class="<?php echo $class; ?>" id = "x">
                                 <i class="icon time"></i>
                                     <input id="survey_category" type="hidden">
                                     <div class="default text">Choose a Survey Category</div>
@@ -60,7 +64,7 @@
                                     <div class="menu">
                                       <div class="item" data-value="baseline">Baseline</div>
                                       <div class="item" data-value="mid-term">Mid-Term</div>
-                                      <div class="item" data-value="end-term">End-Term</div>
+                                      <div class="item" data-value="end-term" >End-Term</div>
                                     </div>
                                 </div>
                                <div class="ui selection dropdown">
@@ -111,12 +115,20 @@
     <!-- BEGIN JAVASCRIPTS -->
     <?php //$this->load->view('segments/analytics_js'); ?>
     <script src="<?php echo base_url();?>assets/javascripts/analytics.js"></script>
+
+    <script type="text/javascript" src = "<?php echo base_url(); ?>assets/bower_components/semantic-ui/build/packaged/javascript/semantic.min.js"></script>
     <script>
         var base_url = "<?php echo base_url();?>";
         var county   = "<?php echo $this->session->userdata('county_analytics');?>";
         var survey   = "<?php echo $this->session->userdata('survey')?>";
         var survey_category   = "<?php echo $this->session->userdata('survey_category')?>";
         $(document).ready(startAnalytics(base_url,county,survey,survey_category));
+        $('#survey_type').change(function(){
+            if($('#survey_type').val() == 'hcw')
+            {
+                $('#x').dropdown('destroy');
+            }
+        });
     </script>
     <!-- END JAVASCRIPTS -->
     <?php //$this->load->view($modals)?>

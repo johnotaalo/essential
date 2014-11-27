@@ -9,6 +9,8 @@ class Analytics extends MY_Controller
         $this->load->module('mnch_data');
         $this->load->module('template');
         $this->load->model('analytics_model');
+        $this->load->model('data_model');
+        $this->load->module('data_handler/hcw_h');
         
         // $this->load->library('PHPExcel');
         
@@ -17,6 +19,7 @@ class Analytics extends MY_Controller
         
     }
     
+  
     /**
      * [index description]
      * @return [type] [description]
@@ -54,6 +57,30 @@ class Analytics extends MY_Controller
         
         redirect('mnch/analytics');
     }
+
+
+    public function read($form,$identifier=''){
+     
+    $data = $this->analytics_model->get('hcw');
+    //echo '<pre>';print_r($data);die;
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'HCW List',$form,$identifier);
+
+    if($form=='datatable' || $form=='x-datatable'){
+      $recordSize = sizeof($raw['data']);
+      echo json_encode($raw);
+    }
+  }
+
+    public function getHCWProfile($object,$form,$identifier=''){
+    switch($object){
+      case 'hcw':
+        $this->read($form,$identifier);
+          break;
+    }
+  }
     
     /**
      * [getFacilityProgress description]
@@ -307,6 +334,8 @@ class Analytics extends MY_Controller
         
         
     }
+
+      
     
     /**
      * [getReportedCounty description]
@@ -482,6 +511,15 @@ class Analytics extends MY_Controller
             
         }
     }
+
+    public function get($object,$form,$identifier=''){
+    switch($object){
+      case 'hcw':
+        $this->hcw_h->read($form,$identifier);
+          break;
+      
+    }
+  }
     
     /**
      * [getCommunityStrategyMNH description]
@@ -2860,6 +2898,17 @@ class Analytics extends MY_Controller
             }
             $category = $q;
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 110, 'bar', '', $for, 'question', $statistics);
+        }elseif ($statistic == 'hcwServiceUnit' && $for == 'su') {
+            $results = $this->analytics_model->getQuestionStatistics($criteria, $value, '', '', $for, $statistics);
+            foreach ($results as $key => $result) {
+                $category[] = $key;
+                foreach ($result as $name => $value) {
+                    
+                    $gData[] = array('name' => $name, 'y' => (int)$value);
+                }
+            }
+            $resultArray[] = array('name' => 'Response', 'data' => $gData);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'pie', '', $for, 'question', $statistics);
         } else if (($statistics == 'location' && $for == 'ort') || ($statistics == 'availability' && $for == 'ort')) {
             $number = $resultArray = $q = $data = $gdata = array();
             foreach ($results as $key => $value) {
@@ -3082,7 +3131,7 @@ class Analytics extends MY_Controller
         $this->getHSQuestions($criteria, $value, $survey, $survey_category, 'ceoc', 'mainsource');
     }
     public function getServiceUnit($criteria, $value, $survey, $survey_category, $for, $statistics) {
-        $this->getQuestionStatisticsSingle($criteria, $value, '', '', 'su', 'hcwServiceUnit');
+        $this->getQuestionStatistics($criteria, $value, '', '', 'su', 'hcwServiceUnit');
     }
     
     /**
@@ -5365,7 +5414,8 @@ class Analytics extends MY_Controller
                 }
             }
             $resultArray[] = array('name' => 'Response', 'data' => $gData);
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 0, 'pie', '', $for, 'question', $statistics);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'pie', '', $for, 'question', $statistics);
+            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 120, 'bar');
         }
     }
     

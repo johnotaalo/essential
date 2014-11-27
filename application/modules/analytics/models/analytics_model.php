@@ -4226,6 +4226,10 @@ ORDER BY question_code";
                         $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
+                        case 'hcwServiceUnit':
+                            $data[$value_['response']][$value_['serviceUnit_name']] = (int)$value_['total'];
+                            break;
+
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4264,6 +4268,7 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                if($this->dataSet != NULL){
                 foreach ($this->dataSet as $value_) {
                     
                     switch ($statistics) {
@@ -4288,6 +4293,9 @@ ORDER BY question_code";
                     
                     unset($data[$question]['question_code']);
                 }
+            }else{
+                $data[$question][$value_['response']] = 0;
+            }
                 
                 //echo '<pre>';print_r($data);echo '</pre>';die;
                 
@@ -4498,6 +4506,8 @@ ORDER BY question_code";
                         
                         
                     }
+                }else{
+                    $data['question_code'][$value_] = 0;
                 }
             }
             catch(exception $ex) {
@@ -5157,6 +5167,80 @@ ORDER BY f.fac_district,f.fac_name , sa.eq_code;";
             
             return $data;
         }
+
+
+        public function get($object,$identifier=''){
+    switch($object){
+      case 'hcw':
+      $results = $this->getHCW($identifier);
+     //echo '<pre>';print_r($results);die;
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!=''){
+            if($key=='uploadDate'){
+              $value=date('l, d-m-Y',$value);
+            }
+            if($key=='mflCode'){
+                $newResult['county']=$this->getFacilityCounty($value);
+            }
+          
+            $newResult[$key]=$value;
+          }
+        }
+        unset($newResult['designation']);
+        unset($newResult['department']);
+        unset($newResult['dates']);
+        unset($newResult['upload_date']);
+        unset($newResult['cadre']);
+        unset($newResult['activity_id']);
+        $newResults[]=$newResult;
+
+      }
+       // print_r($newResults);die;
+      break;
+
+      case 'equipment':
+      $results = $this->getEquipments();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'supplies':
+      $results = $this->getSupplies();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'questions':
+      $results = $this->getQuestions();
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      
+    }
+    return $newResults;
+  }
         
         public function getFacilityListForNoMNH($criteria, $value, $survey, $survey_category, $question) {
             urldecode($value);

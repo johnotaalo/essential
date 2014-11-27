@@ -1611,7 +1611,9 @@
     </div>
     <div id="collapseThirty" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="medium-graph" >
+
+
+            <!-- <div class="medium-graph" >
                 <div class="portlet-title">
                     <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Ownership</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
@@ -1640,22 +1642,24 @@
                     <div class="chart" id="HCWfacility_type">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-            <div class="ui horizontal icon divider">
-<i class="icon circular bar chart"></i>
-</div>
-            </div>
+            </div> -->
+  
+
+  <h5><span class="graph-title">HCW Profile</span><span class="sizer">Click to Enlarge</span></h5>
+            <div id="HCW_Profile">
+                      </div>
+            
             <div class="x-large-graph">
-                <h5><span class="graph-title">HCW Profile</span><span class="sizer">Click to Enlarge</span></h5>
+                
+                 <div class="x-large-graph">
+                  
 
-              <!-- <h5>HCW Profile</h5> -->
-              <table>
-
-
-
-              </table>
-            </div>
+                      <div class="chart" id="HCW_Profile">
+                      </div>
+                 
+              </div>
+          </div>
+              
             <div class="col-md-12">
 <div class="ui horizontal icon divider">
 <i class="icon circular bar chart"></i>
@@ -1753,6 +1757,7 @@
 <div class="panel panel-default analytics_row section" data-survey='hcw' id="hcw-section-3">
     <div class="panel-heading">
         <h4 class="panel-title">
+
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyTwo">
                  Section 2A : Assessment of the Sick Child Age 2 months up to 5 Years <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
             </a>
@@ -1763,7 +1768,8 @@
 
             <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="assessment_types1"></select></span></h6>
+
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="assessment_types1"></select></span><span class="sizer">Click to Enlarge</span></h6></h6>
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
@@ -1772,11 +1778,12 @@
 
                     </div>
                 </div>
+
            
            <div class="semi-large-graph">
                     <div class="portlet-title">
-
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed correctly ?<span><select id="indicator_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
+                        
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Was the symptom assessed correctly ?</span><span><select id="indicator_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
 
                     </div>
                     <div class="portlet-body">
@@ -2008,3 +2015,75 @@
 
 
 </div>
+<script>
+var column_count;
+
+$('.list-items > a').click(function(){
+  /**
+  * Primary Key
+  */
+  identifier = $(this).attr('data-identifier');
+  /**
+  * Export Form / Type
+  */
+  form = $(this).attr('data-form');
+  /**
+   * Get Icon
+   */
+  icon = $(this).find('i').attr('class');
+
+  $('.list-items a').removeClass('active');
+
+  $(this).addClass('active');
+  title = $(this).text();
+  object = $(this).attr('id');
+  $('#title').html('<i></i>'+title);
+  $('#title i').addClass(icon);
+  $.ajax({
+    url:base_url+'analytics/getHCWProfile/hcw/datatable/'+identifier,
+    beforeSend: function(xhr) {
+      $('#HCW_Profile').empty();
+      $('#HCW_Profile').append('<div class="loader" >Loading...</div>');
+    },
+    success: function(data) {
+      obj = jQuery.parseJSON(data);
+      $('#HCW_Profile').empty();
+      // console.log(obj);
+      table = '<table style="font-size:10px !important">';
+      tr='';
+      th='';
+      thead='';
+      tfoot='';
+      counter=0;
+
+      thead+='<thead><tr>';
+      tfoot+='<tfoot><tr>';
+      column_count=0;
+      $.each(obj.title, function(k, v) {
+        thead+='<th>'+v+'</th>';
+        tfoot+='<th>'+v+'</th>';
+        column_count++;
+      });
+
+      tfoot+='</tr></tfoot>';
+      thead+='</tr></thead>';
+
+      table+=thead+tfoot+'</table>';
+
+      // console.log(table);
+      $('#HCW_Profile').append(table);
+      $('#HCW_Profile table').dataTable( {
+        "sPaginationType": "full_numbers",
+        "aaData": obj.data,
+        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+          $('td a', nRow).editable({
+            url: base_url+'analytics/edit/'+object,
+          });
+        }
+      });    }
+  });
+});
+
+
+
+</script>

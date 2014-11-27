@@ -66,15 +66,23 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $('#sectionList').find('li').removeClass('active');
     $(this).addClass('active');
   });
+
   $('#survey_type').change(function() {
     survey_type = $('#survey_type').val();
 
+   
+     
     if (survey_type == 'hcw') {
       //alert(survey_type);
-      $('#survey_category').addClass('disabled');
+      $('#x').addClass('disabled');
     } else {
-      $('#survey_category').removeClass('disabled');
+      $('#x').removeClass('disabled');
     }
+  
+
+
+
+   
     district_select = $('#sub_county_select').val();
     //alert(district_select)
     if (district_select !== 'Please Select a District' && district_select !==
@@ -90,12 +98,16 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '/' + survey_category,
         '#reporting_stat .outer .inner .content .inner-graph');
     }
-
+     
     loadSurvey(survey);
   });
+
+
+
   $('#survey_category').change(function() {
     district = $("#sub_county_select").val();
     // alert(district);
+    
     survey = $('#survey_type').val();
     survey_category = $('#survey_category').val();
     // alert(survey_category);
@@ -1802,12 +1814,7 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_type');
-          loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
-
-            criteria + '/' + value + '/' + survey + '/' + survey_category +
-            '/profile_raw/table',
-
-            '#HCW_Profile');
+          // loadGraph(base_url, 'analytics/getHCWProfile/hcw/datatable//','#HCW_Profile');
 
           loadGraph(base_url, 'analytics/getServiceUnit/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,

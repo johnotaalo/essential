@@ -77,6 +77,7 @@ Offline.options={
             // $('a').removeAttr('onclick');
         });
 
+
     });
 </script>
 <?php $this->load->view($application_js); ?>
