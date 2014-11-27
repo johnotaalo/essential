@@ -1172,6 +1172,12 @@ WHERE
                                 }
                                 break;
 
+                            case 'hcwfindings':
+                                if (array_key_exists('frequency', $value)) {
+                                    $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
+                                }
+                                break;
+
                             case 'hcwservice':
                                 $data[$value['indicator_name']][$value['li_hcwResponse']] = (int)$value['total'];
                                 
@@ -1250,6 +1256,14 @@ WHERE
 
                             case 'hcwcorrectness':
                                 $data[$value['indicator_name']][$value['verdict']] = (int)$value['total'];
+                                break;
+
+                                case 'hcwclassification':
+                                $data[$value['il_full_name']][$value['li_assessorResponse']] = (int)$value['total'];
+                                break;
+
+                            case 'hcwassessment':
+                                $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
                                 break;
                         }
                     }
@@ -3621,22 +3635,24 @@ ORDER BY question_code";
         /**
          * Beds in facility
          */
-        public function getBeds($criteria, $value, $survey, $survey_category, $for) {
+        public function getBeds($criteria, $value, $survey, $survey_category, $for,$statistic) {
             
-            $query = "CALL get_beds_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_beds_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','".$statistic."');";
             
             try {
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
                 foreach ($this->dataSet as $value_) {
                     
-                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     
                     //$question = $this->sName($value_['question_code']);
                     // $response = $value_['total_response'];
                     
                     //1. collect the categories
-                    $data[$value_['question_name']][] = (int)$value_['total_response'];
+
+                    $data[$value_['question_name']][] = (int)$value_['total_response'];  
+                    
                 }
                 
                 //die(var_dump($this->dataSet));
@@ -4155,6 +4171,10 @@ ORDER BY question_code";
                     
                     switch ($statistics) {
                         case 'response':
+                            $data[$question][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+                        case 'hcwresponse':
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
                             break;
 

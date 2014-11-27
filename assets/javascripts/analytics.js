@@ -1870,15 +1870,15 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
         case 'section-7':
 
-          loadGraph(base_url, 'analytics/getCertificationA/' +
+          loadGraph(base_url, 'analytics/getIMCICertificateA/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certificatesectionA');
 
-          loadGraph(base_url, 'analytics/getCertificationB/' +
+          loadGraph(base_url, 'analytics/getIMCICertificateB/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certificatesectionB');
 
-          loadGraph(base_url, 'analytics/getCertification/' +
+          loadGraph(base_url, 'analytics/getIMCICertificate/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certification');
 
