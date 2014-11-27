@@ -3902,6 +3902,7 @@ ORDER BY question_code";
                         $question = substr($question, 18);
                     endif;
                     $count++;
+                    
                     $data[$question][$value_['response']] = (int)$value_['total'];
                     
                     //echo "<pre>";print_r($question);echo "</pre>";
@@ -3925,7 +3926,7 @@ ORDER BY question_code";
                 
                 
             }
-            
+            //echo "<pre>";print_r($data);echo "</pre>";
             //var_dump($data);die;
             return $data;
         }

@@ -4541,27 +4541,6 @@ class Analytics extends MY_Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function getFacilityLevelAll($survey) {
         $counties = $this->analytics_model->getReportingCounties($survey);
         foreach ($counties as $county) {
@@ -5328,6 +5307,7 @@ class Analytics extends MY_Controller
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $number = $q = $resultArray = array();
         if ($statistic == 'hcwServiceUnit' && $for == 'su') {
+            $results = $this->analytics_model->getQuestionStatisticsSingle($criteria, $value, '', '', $for, $statistics);
             foreach ($results as $key => $result) {
                 $category[] = $key;
                 foreach ($result as $name => $value) {

@@ -1796,7 +1796,6 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
           loadGraph(base_url, 'analytics/getServiceUnit/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
-
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
