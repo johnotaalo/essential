@@ -222,12 +222,15 @@ class MY_Model extends CI_Model
   */
   public function getGuidelines() {
     try {
-      $result = $this->em->createQuery('SELECT g FROM models\Entities\Guidelines g');
+      $result = $this->em->createQuery('SELECT g FROM models\Entities\Guidelines g ORDER BY g.guideFor');
       $result = $result->getArrayResult();
+      foreach($result as $guide){
+        $data[$guide['guideFor']][]=$guide;
+      }
     }
     catch(exception $ex) {
     }
-    return $result;
+    return $data;
   }
 
   /**

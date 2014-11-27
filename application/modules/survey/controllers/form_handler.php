@@ -3,7 +3,7 @@
 //include ('c_load.php');
 class Form_Handler extends MY_Controller
 {
-    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $staffTraining, $hcwworkprofilesection, $hcwassessorsection;
+    var $rows, $cadre, $servicepoint,$facilitysection, $combined_form, $message, $indicators, $questions, $commodities, $commodityOutageOptions, $equipment, $supplies, $monthlyDeliveries, $signalFunctionsSection, $treatments, $accessChallenges, $hcwworkprofilesection, $hcwassessorsection, $staffTraining;
 
     public function __construct() {
         parent::__construct();
@@ -86,7 +86,12 @@ class Form_Handler extends MY_Controller
         $this->cadre = $this->generate->createCadre();
         $this->hcwworkprofilesection = $this->generate->createHCWWorkerProfile();
         $this->hcwassessorsection = $this->generate->createassessorsection();
-        // $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
+
+        /**
+         * [$this->staffTraining description]
+         * @var [type]
+         */
+        $this->staffTraining = $this->generate->createStaffTrainingGuidelinesSection();
 
     }
 
@@ -474,48 +479,7 @@ class Form_Handler extends MY_Controller
 				<th style="text-align:left">AFTER 2010</th>
 			</tr>
 		</thead>
-		<tr>
-			<td>Doctor</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
+		'.$this->staffTraining[1].'
 	</table>
 
 	<table class="centre">
@@ -547,48 +511,7 @@ class Form_Handler extends MY_Controller
 				<th style="text-align:left">AFTER 2010</th>
 			</tr>
 		</thead>
-		<tr>
-			<td>Doctor</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
+		'.$this->staffTraining[2].'
 	</table>
 	</div><!--\.section 4-->
 <pagebreak />
@@ -1078,86 +1001,7 @@ class Form_Handler extends MY_Controller
 				<th style="text-align:left">AFTER 2010</th>
 			</tr>
 		</thead>
-		<tr>
-			<td>Doctor</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>Nurse</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>R.C.O.</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>Pharmaceutical Staff</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
-		<tr>
-			<td>Lab Staff</td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-			<td><input type="text" size = "5"></td>
-		</tr>
+		'.$this->staffTraining.'
 
 	</table>
 	<pagebreak />
