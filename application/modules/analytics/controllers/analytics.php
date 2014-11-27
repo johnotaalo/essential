@@ -2841,6 +2841,7 @@ class Analytics extends MY_Controller
                     $gdata[$r][] = $value_;
                 }
             }
+        }
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
             $colorCounter = 0;
             foreach ($gdata as $name => $value1) {
