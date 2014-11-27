@@ -4086,8 +4086,9 @@ ORDER BY question_code";
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                
-                // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
@@ -4212,6 +4213,10 @@ ORDER BY question_code";
 
                         case 'hcwTransfer':
                             $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
+                            break;
+
+                        case 'supplier':
+                        $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
                             break;
 
                         case 'reason_raw':

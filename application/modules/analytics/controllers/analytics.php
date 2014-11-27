@@ -2099,7 +2099,7 @@ class Analytics extends MY_Controller
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mh', 'availability');
     }
     public function getMNHresourcesSupplier($criteria, $value, $survey, $survey_category) {
-        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mh', 'supplier');
+        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'mnhw', 'supplier');
     }
     public function getCommodityUsage($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->analytics_model->getCommodityUsageOptions($criteria, $value, $survey, $survey_category, $for, $statistic);
@@ -2817,19 +2817,24 @@ class Analytics extends MY_Controller
      */
     public function getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics) {
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-        
-        // echo "<pre>";print_r($results);echo "</pre>";die;
-        if (($statistics == 'functionality' && $for == 'ortf')) {
-            $number = $resultArray = $q = $data = $gdata = array();
-            foreach ($results as $key => $value) {
-                if ($key == '') {
-                    $name = 'Not specified Tier';
-                    $key = $name;
-                    $q[] = $key;
-                } else {
-                    $q[] = 'Tier' . '' . $key;
-                }
-                $data[] = $value;
+
+      // echo "<pre>";print_r($results);echo "</pre>";die;
+        if(($statistics == 'functionality' && $for == 'ortf') || ($statistics == 'supplier' && $for == 'mnhw')){
+            $number = $resultArray = $q = $data= $gdata =array();
+        foreach ($results as $key => $value) {
+            if($key == ''){
+            $name = 'Not specified Tier';
+                $key = $name;
+                $q[]=$key;
+            }else{
+            $q[] = 'Tier'.''.$key;
+            }
+            $data[]= $value;
+         }
+        foreach ($data as $k => $val) {
+            foreach ($val as $r => $value_) {
+                $gdata[$r][]=$value_;
+
             }
             foreach ($data as $k => $val) {
                 foreach ($val as $r => $value_) {
