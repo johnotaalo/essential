@@ -4411,7 +4411,7 @@ class M_complete_survey extends MY_Model
                 //print 'ids: '.$this->id.'<br />';
                 
                 //mark the end of 1 row...for record count
-                if ($this->attr == "hwEqCode") {
+                if ($this->attr == "hweqCode") {
                     
                     //print 'count at:'.$count.'<br />';
                     
@@ -4445,7 +4445,7 @@ class M_complete_survey extends MY_Model
         }
         
         //close foreach ($this -> input -> post() as $key => $val)
-        //print var_dump($this->elements);
+        // print var_dump($this->elements);die;
         
         //exit;
         
@@ -4457,18 +4457,18 @@ class M_complete_survey extends MY_Model
         for ($i = 1; $i <= $this->noOfInsertsBatch + 1; ++$i) {
             
             //go ahead and persist data posted
-            $this->theForm = $this->getStoredData('models\Entities\AvailableResources', array('ssId' => $this->session->userdata('survey_status'), 'eqCode' => $this->elements[$i]['hwEqCode']));
+            $this->theForm = $this->getStoredData('models\Entities\AvailableResources', array('ssId' => $this->session->userdata('survey_status'), 'equipmentCode' => $this->elements[$i]['hweqCode']));
             
             if ($this->theForm == NULL) {
                 $this->theForm = new \models\Entities\AvailableResources();
             }
-            
+            // echo '<pre>';print_r($this->theForm);die;
             //create an object of the model
             
             //die(print 'Code: '.$this -> session -> userdata('facilityMFL'));
             
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
-            $this->theForm->setEquipmentCode($this->elements[$i]['hwEqCode']);
+            $this->theForm->setEquipmentCode($this->elements[$i]['hweqCode']);
             
             //check if that key exists, else set it to some default value
             (isset($this->elements[$i]['hwNumberOfUnits'])) ? $this->theForm->setArQuantity($this->elements[$i]['hwNumberOfUnits']) : $this->theForm->setArQuantity(-1);
@@ -5547,7 +5547,8 @@ class M_complete_survey extends MY_Model
                             break;
 
                         case 'section-7':
-                            if ($this->addResourceAvailabilityInfo() == true && $this->addEquipmentQuantityAvailabilityInfo() == true && $this->addSuppliesQuantityAvailabilityInfo() == true && $this->addQuestionsInfo() == true) {
+                            if ($this->addQuestionsInfo() == true && $this->addEquipmentQuantityAvailabilityInfo() == true 
+                                && $this->addSuppliesQuantityAvailabilityInfo() == true && $this->addResourceAvailabilityInfo() == true ) {
                                 
                                 //defined in this model
                                 $this->writeAssessmentTrackerLog();
