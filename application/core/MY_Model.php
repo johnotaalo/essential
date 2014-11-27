@@ -222,12 +222,15 @@ class MY_Model extends CI_Model
   */
   public function getGuidelines() {
     try {
-      $result = $this->em->createQuery('SELECT g FROM models\Entities\Guidelines g');
+      $result = $this->em->createQuery('SELECT g FROM models\Entities\Guidelines g ORDER BY g.guideFor');
       $result = $result->getArrayResult();
+      foreach($result as $guide){
+        $data[$guide['guideFor']][]=$guide;
+      }
     }
     catch(exception $ex) {
     }
-    return $result;
+    return $data;
   }
 
   /**
@@ -702,7 +705,7 @@ class MY_Model extends CI_Model
   {
     $query = $this->db->query("SELECT h.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_district = '" . $dName ."' AND  h.activity_id = 10");
+      WHERE f.fac_district = '" . $dName ."' ");
       $result = $query->result_array();
 
       return $result;
@@ -712,7 +715,7 @@ class MY_Model extends CI_Model
   {
     $query = $this->db->query("SELECT h.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_county = '" . $cName ."' AND  h.activity_id = 10");
+      WHERE f.fac_county = '" . $cName ."' ");
 
     $result = $query->result_array();
 
@@ -757,7 +760,7 @@ class MY_Model extends CI_Model
       }
       $result = $query->getArrayResult();
       // echo $this->db->last_query();die;
-      // var_dump($result);die;
+     // echo'<pre>'; print_r($result);die;
       return $result;
     }
     /**

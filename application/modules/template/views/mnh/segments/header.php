@@ -1,6 +1,6 @@
 		
 	<?php 
-	
+	if(!$showheader){
 	if(isset($logged)){
 		$this->load->view('mnh/segments/top-logged-in'); 
 		$this->load->view('mnh/segments/nav-logged-in'); 
@@ -9,5 +9,9 @@
 		$this->load->view('mnh/segments/top-public'); 
 		$this->load->view('mnh/segments/nav-public'); 
 	}
+}
+else{
+	
+}
 	?>
 	

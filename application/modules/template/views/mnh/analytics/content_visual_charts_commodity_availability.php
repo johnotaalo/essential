@@ -8,7 +8,7 @@
 
 
 <div id="statistic_summary" style="display:none">
-    <h4>Stats</h4>
+    <h4><i class="icon ion-arrow-graph-up-right"></i>Statistics</h4>
     <div id="survey_stat" class="small-graph" style="display:none">
         <div class="outer">
             <div class="inner">
@@ -18,7 +18,7 @@
                     <div class='text'>Facilities Reported</div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="facility_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
     <div id="county_stat" class="small-graph" style="display:none">
@@ -30,7 +30,7 @@
                     <div class='text'>Counties Reported</div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="county_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
     <div id="district_stat" class="small-graph" style="display:none">
@@ -42,10 +42,10 @@
                     <div class='text'>Sub-Counties in <span id="county"></span></div>
                 </div>
             </div>
-            <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
+            <div data-modal="district_reporting" class="modal-link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
     </div>
-    <div id="reporting_stat" class="small-graph" style="display:none">
+    <!-- <div id="reporting_stat" class="small-graph" style="display:none">
         <div class="outer">
             <div class="inner">
              <i class='main icon pencil'></i>
@@ -56,7 +56,7 @@
             </div>
             <div class="link"><i class="fa fa-chevron-circle-left"></i>View More</div>
         </div>
-    </div>
+    </div> -->
     <div class="small-graph" style="display:none">
         <div class="title">Last Entry</div>
         <div class="outer">
@@ -1710,21 +1710,11 @@
             <div class="medium-graph" >
                 <div class="portlet-title">
 
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Cases Presentation</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Services Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="casepresentation">
-                    </div>
-                </div>
-            </div>
-            <div class="medium-graph">
-                <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Service Provision to child</span><span class="sizer">Click to Enlarge</span></h6>
-                </div>
-                <div class="portlet-body">
-
-                    <div class="chart" id="serviceprovision">
+                    <div class="chart" id="servicesoffered">
 
                     </div>
                 </div>
@@ -1736,7 +1726,8 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="signsassessment"f>
+
+                    <div class="chart" id="hcwdangersignsAssessment">
 
                     </div>
                 </div>
@@ -1748,7 +1739,8 @@
                 </div>
                 <div class="portlet-body">
 
-                    <div class="chart" id="signspresence"f>
+
+                    <div class="chart" id="hcwdangersignsPresence"f>
 
                     </div>
                 </div>
@@ -1769,11 +1761,9 @@
     <div id="collapseThirtyTwo" class="panel-collapse collapse">
         <div class="panel-body">
 
-
-           <div class="semi-large-graph">
+            <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i>Was the symptom assessed ?<span><select id="assessment_types1"></select></span><span class="sizer">Click to Enlarge</span></h6>
-
+                        <h6><i class="fa fa-bar-chart-o"></i>Correct Classifications<span><select id="assessment_types1"></select></span></h6>
                     </div>
                     <div class="portlet-body">
                         <p>Please Select main symptom/condition above to load the graph</p>
@@ -1782,7 +1772,7 @@
 
                     </div>
                 </div>
-
+           
            <div class="semi-large-graph">
                     <div class="portlet-title">
 

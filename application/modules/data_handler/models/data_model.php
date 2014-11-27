@@ -21,19 +21,26 @@ class Data_Model extends MY_Model{
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!=''){
+            if($key=='uploadDate'){
+              $value=date('l, d-m-Y',$value);
+            }
+            if($key=='mflCode'){
+                $newResult['county']=$this->getFacilityCounty($value);
+            }
+          
             $newResult[$key]=$value;
           }
         }
-
         unset($newResult['designation']);
         unset($newResult['department']);
         unset($newResult['dates']);
         unset($newResult['upload_date']);
         unset($newResult['cadre']);
         unset($newResult['activity_id']);
-        // $newResult['county']=$this->getFacilityCounty($result['mfl_code']);
         $newResults[]=$newResult;
+
       }
+       // print_r($newResults);die;
       break;
 
       case 'equipment':
@@ -76,7 +83,6 @@ class Data_Model extends MY_Model{
 
       case 'indicators':
       $results = $this->getIndicators();
-
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!='' && $key!='id'){
@@ -89,7 +95,18 @@ class Data_Model extends MY_Model{
 
       case 'users':
       $results = $this->getUsers();
-// print_r($results);
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'facilities':
+      $results = $this->getFacilities();
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!='' && $key!='id'){

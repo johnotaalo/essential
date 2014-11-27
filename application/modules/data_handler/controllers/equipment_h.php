@@ -2,14 +2,13 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class HCW extends MY_Controller{
+class Equipment_H extends MY_Controller{
   /**
   * Constructor Function
   */
   public function __construct() {
     parent::__construct();
     $this->load->model('data_model');
-    $this->load->module('export');
   }
   /**
   * [create description]
@@ -19,20 +18,18 @@ class HCW extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-  * [read description]
-  * @param  [type] $form [description]
-  * @return [type]       [description]
-  */
+   * [read description]
+   * @param  [type] $form [description]
+   * @return [type]       [description]
+   */
   public function read($form,$identifier=''){
-    // echo $identifier;die;
-    $data = $this->data_model->get('hcw');
+    $data = $this->data_model->get('equipment');
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'HCW List',$form,$identifier);
-
-    if($form=='datatable' || $form=='x-datatable'){
-      $recordSize = sizeof($raw['data']);
+    $raw['data']=$this->export->generate($data,'Equipment List',$form,$identifier);
+    // var_dump($raw['data']);
+    if($form=='datatable' || $form=='x-datatable' ){
       echo json_encode($raw);
     }
   }
@@ -42,10 +39,10 @@ class HCW extends MY_Controller{
   */
   public function update(){
     $data = $this->input->post();
-    $table ='models\Entities\HcwList';
+    $table ='models\Entities\Equipments';
     $field = $this->input->post('name');
     $value = $this->input->post('value');
-    $primary_key = 'id';
+    $primary_key = 'eqCode';
     $primary_value = $this->input->post('pk');
     // echo $table.' '.$field.' '.$value.' '.$primary_key.' '.$primary_value;die;
     $this->data_model->updateField($table,$field,$value,$primary_key,$primary_value);
@@ -58,7 +55,7 @@ class HCW extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('hcw',$id);
+    $data = $this->data_model->get('equipment',$id);
 
   }
   /**

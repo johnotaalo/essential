@@ -19,7 +19,7 @@
       <div class="item">
         <i class="ion-gear-a"></i> Admin
          <div class="menu list-items" id="admin_list">
-          <a class="item" id="users" data-identifier="userId" data-form="x-datatable"><i class="icon ion-ios7-people"></i>Users</a>
+          <a class="item" id="users" data-identifier="userId" data-form="x-datatable"><i class="icon ion-person-stalker"></i>Users</a>
         </div>
       </div>
       <div class="ui dropdown item">
@@ -41,22 +41,30 @@
 
     <div class="ui segment stacked"  style="min-height:60%">
      
-      <div class="ui menu" style="font-size:10px !important">
-  <a id="title" class="item disabled" style="color:#aaa !important;"></a>
-  <div class="right menu">
-   <a class="item" id="add_row"><i class="icon ion-plus-round"></i> Add</a>
-     <a class="item"><i class="icon ion-document-text"></i> PDF</a>
-          <a class="item"><i class="icon ion-document-text"></i> Excel</a>
-  </div>
-</div>
-      <div id="display">
-
+      <div class="ui menu">
+      <div class="left menu">
+        <a id="title" class="item disabled" style="color:#aaa !important;"></a>
+        <a class="item" id="stats"><i class="icon ion-arrow-graph-up-left"></i> Stats</a>
+      </div>
+      <div class="right menu">
+        <a class="item" id="add_row"><i class="icon ion-plus-round"></i> Add</a>
+        <a class="item" id="upload"><i class="icon ion-upload"></i> Upload</a>
+        <a class="item"><i class="icon ion-document-text"></i> PDF</a>
+        <a class="item"><i class="icon ion-document-text"></i> Excel</a>
       </div>
     </div>
+    <div id="display">
+  </div>
+</div>
   </div>
 </div>
 <script>
 var column_count;
+$('#upload').click(function(){
+  console.log('uploaded');
+  $('#display').load(base_url+'upload/widget');
+});
+
 $('.list-items > a').click(function(){
   /**
   * Primary Key
@@ -70,9 +78,9 @@ $('.list-items > a').click(function(){
    * Get Icon
    */
   icon = $(this).find('i').attr('class');
-  console.log(identifier);
 
   $('.list-items a').removeClass('active');
+
   $(this).addClass('active');
   title = $(this).text();
   object = $(this).attr('id');
@@ -119,16 +127,7 @@ $('.list-items > a').click(function(){
             url: base_url+'admin/edit/'+object,
           });
         }
-      });
-      $('#DataTables_Table_0_filter label').append(
-        '<div class="ui corner label"> <i class="search icon"></i> </div>'
-      );
-      $('#DataTables_Table_0_filter label').addClass('ui labeled input');
-      // $('.editable').editable({
-      //   url: base_url+'admin/edit/'+object,
-      // });
-      // $(document).trigger('datatable_loaded');
-    }
+      });    }
   });
 });
 
@@ -142,4 +141,7 @@ new_row.push('<a class="editable">New Column</a>');
 
 table.row.add( new_row ).draw();
 });
+
+
+
 </script>

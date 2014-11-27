@@ -17,19 +17,19 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo base_url('mnch/analytics'); ?>">Home</a>
+                            <a href="<?php echo base_url('mnch/analytics'); ?>"><i class="icon home"></i>Home</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('mnch/takesurvey'); ?>">Take Survey</a>
+                            <a href="<?php echo base_url('mnch/takesurvey'); ?>"><i class="icon ion-compose"></i>Take Survey</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('mnch/analytics'); ?>">View Analytics</a>
+                            <a href="<?php echo base_url('mnch/analytics'); ?>"><i class="icon ion-pie-graph"></i>View Analytics</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('mnch/home'); ?>">Reporting Progress</a>
+                            <a href="<?php echo base_url('mnch/home'); ?>"><i class="icon ion-arrow-graph-up-right"></i>Reporting Progress</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Offline Forms <b class="caret"></b> </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon ion-document-text"></i> Offline Forms <b class="caret"></b> </a>
                             <ul class="dropdown-menu">
                                 <li id="mnh-form">
                                     <a href="#"> 1. Maternal Neonatal Health - Emergency Obstetric Care  </a>
@@ -42,34 +42,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#" id="master_list">Master Facility List</a></li>
-                        <!--li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> MNH Reporting Facilities (Baseline) <b class="caret"></b> </a>
-                            <ul class="dropdown-menu">
-                                <li id="mnh-completed">
-                                    <a href="#"> 1. List of Completed facilities </a>
-                                </li>
-                                <li id="mnh-partially">
-                                    <a href="#"> 2. List of Partially Completed facilities </a>
-                                </li>
-                            </ul>
-                        </li-->
-<!--
                         <li>
-                            <a href="<?php echo $this -> config -> item('legacy_url'); ?>">Old System</a>
-                        </li>
--->
-                        <li>
-                            <a href="<?php echo $this -> config -> item('project_url'); ?>">Program Monitoring Tool</a>
+                            <a href="<?php echo $this -> config -> item('project_url'); ?>"><i class="icon ion-speedometer"></i>Program Monitoring Tool</a>
                         </li>
                         <li>
-                            <a href="http://www.health-cmp.or.ke">HCMP</a>
+                            <a href="http://www.health-cmp.or.ke"><i class="icon ion-ios7-box"></i>HCMP</a>
                         </li>
                         <li>
-                            <a href="#" id="upload">Upload</a>
-                        </li>
-                        <li>
-                            <a href="#" id="upload">Upload</a>
+                            <a href="<?php echo base_url('admin/login'); ?>"><i class="icon ion-gear-a"></i>Admin</a>
                         </li>
                     </ul>
 

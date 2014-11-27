@@ -2,7 +2,7 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Resources extends MY_Controller{
+class Supplies_H extends MY_Controller{
   /**
   * Constructor Function
   */
@@ -19,10 +19,19 @@ class Resources extends MY_Controller{
   }
   /**
   * [read description]
-  * @return [type] [description]
+  * @param  [type] $form [description]
+  * @return [type]       [description]
   */
-  public function read(){
-    $data = $this->data_model->get('resources');
+  public function read($form){
+    $data = $this->data_model->get('supplies');
+    foreach($data[0] as $key=>$value){
+      $raw['title'][]=$key;
+    }
+    $raw['data']=$this->export->generate($data,'Supplies List',$form);
+    // var_dump($raw['data']);
+    if($form=='datatable' || $form=='x-datatable' ){
+      echo json_encode($raw);
+    }
   }
   /**
   * [update description]
@@ -30,7 +39,7 @@ class Resources extends MY_Controller{
   * @return [type]     [description]
   */
   public function update($id){
-    $data = $this->data_model->get('resources',$id);
+    $data = $this->data_model->get('supplies',$id);
 
   }
   /**
@@ -39,7 +48,7 @@ class Resources extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('resources',$id);
+    $data = $this->data_model->get('supplies',$id);
 
   }
   /**

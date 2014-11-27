@@ -146,6 +146,37 @@ function startAnalytics(base_url, county, survey, survey_category) {
     }
     // variableHandler('national', county, district, facility, survey, survey_category, indicator_type);
   });
+
+  //Modal Link
+  $('.modal-link').click(function() {
+    if (district != '') {
+      district = encodeURIComponent(district);
+      scope = 'district';
+      value = district;
+    } else {
+      district = '';
+      if (county != '' && county != 'Unselected') {
+        scope = 'county';
+        value = county;
+      } else {
+        scope = 'national';
+        value = 'Aggregated';
+      }
+    }
+    data = $(this).attr('data-modal');
+    switch (data) {
+      case 'facility_reporting':
+        url = 'analytics/getSurveyInfo/' + survey + '/' + survey_category + '/' + scope + '/' + value;
+        title = 'Facility Reporting';
+        break;
+    }
+
+    form = 'datatable';
+    // alert(base_url+url+'/'+form);
+    showList(base_url, url + '/' + form, title)
+  });
+
+
   $('.ui.selection.dropdown').find('input').change(function() {
     // alert($(this).val());
     if ($(this).parent().find('.text').text() != 'Choose a Sub County' &&
@@ -501,16 +532,16 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $('.chart div').width($('.chart div').parent().width());
     variableHandler(scope, county, district, facility, survey,
       survey_category, indicator_type, section);
-    // $('.panel-collapse collapse in').collapse('hide');
-    // $(this).collapse('show');
+    //$('.panel-collapse collapse in').collapse('hide');
+    //$(this).collapse('show');
   })
   $('.panel-collapse').on('hide.bs.collapse', function() {
     $(this).parent().find('.panel-heading h4 a i.fa').attr('class',
       'fa fa-chevron-right');
     $(this).parent().find('.panel-heading h4 a span .txt').text(
       'Click to Expand');
-    // $('.panel-collapse collapse in').collapse('hide');
-    // $(this).collapse('show');
+    //$('.panel-collapse collapse in').collapse('hide');
+    //$(this).collapse('show');
   });
 
 }
@@ -985,8 +1016,7 @@ function indicatorHandler(criteria, value, survey, survey_category,
 
   indicator_type, statistic) {
   loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + indicator_type +
-    '/' + statistic,
+    value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison');
 
 }
@@ -996,8 +1026,7 @@ function indicatorHandler(criteria, value, survey, survey_category,
 function indicatorHandler1(criteria, value, survey, survey_category,
   assessment_types, statistic) {
   loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + assessment_types +
-    '/' + statistic,
+    value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison');
 
 
@@ -1007,18 +1036,16 @@ function indicatorHandler1(criteria, value, survey, survey_category,
 function indicatorHandler2(criteria, value, survey, survey_category,
 
   indicator_type, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + indicator_type +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison1');
 
 }
 
 function indicatorHandler3(criteria, value, survey, survey_category,
   assessment_types, statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + assessment_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison1');
 
 }
@@ -1026,18 +1053,16 @@ function indicatorHandler3(criteria, value, survey, survey_category,
 function indicatorHandler4(criteria, value, survey, survey_category,
 
   indicator_type, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + indicator_type +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison2');
 
 }
 
 function indicatorHandler5(criteria, value, survey, survey_category,
   assessment_types, statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + assessment_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison2');
 
 }
@@ -1045,45 +1070,40 @@ function indicatorHandler5(criteria, value, survey, survey_category,
 function indicatorHandler6(criteria, value, survey, survey_category,
 
   indicator_type, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + indicator_type +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwCorrectness/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + indicator_type + '/' + statistic,
     '#indicator_comparison3');
 
 }
 
 function indicatorHandler7(criteria, value, survey, survey_category,
   assessment_types, statistic) {
-  loadGraph(base_url, 'analytics/getAssessmentComparison/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + assessment_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHcwAssessment/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + assessment_types + '/' + statistic,
     '#assessment_comparison3');
 
 }
 
 function indicatorHandler8(criteria, value, survey, survey_category,
   finding_types, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + finding_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence');
 
 }
 
 function indicatorHandler9(criteria, value, survey, survey_category,
   finding_types, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + finding_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence1');
 
 }
 
 function indicatorHandler10(criteria, value, survey, survey_category,
   finding_types, statistic) {
-  loadGraph(base_url, 'analytics/getIndicatorStatistics/' + criteria + '/' +
-    value + '/' + survey + '/' + survey_category + '/' + finding_types +
-    '/' + statistic,
+  loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' + criteria + '/' +
+    value + '/' + survey + '/' + survey_category + '/' + finding_types + '/' + statistic,
     '#symptompresence2');
 
 }
@@ -1128,7 +1148,7 @@ function setRawUrl(criteria, county, district, facility, survey,
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
       case 'supplies':
-        raw_url = 'analytics/getSupliesRaw/' + criteria + '/' + value + '/' +
+        raw_url = 'analytics/getSuppliesRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
       case 'ownership':
@@ -1148,12 +1168,22 @@ function setRawUrl(criteria, county, district, facility, survey,
           '/' +
           survey + '/' + survey_category;
         break;
-      case 'case_mgmt':
-        raw_url = 'analytics/getTreatmentRaw/' + criteria + '/' + value +
-          '/' +
-          survey + '/' + survey_category+'/' + statistic+ '/' + data_for ;
+      case 'treatment':
+        raw_url = 'analytics/getTreatmentRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
-
+      case 'staff_availability':
+        raw_url = 'analytics/getStaffAvailabilityRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
+        break;
+      case 'staff_retention':
+        raw_url = 'analytics/getStaffRetentionRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
+        break;
+      case 'staff_trained':
+        raw_url = 'analytics/getTrainedStaffRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for;
+        break;
     }
     return raw_url;
   }
@@ -1170,15 +1200,15 @@ function loadEnlargedGraph(base_url, graph_url, title, raw_url) {
     loadModalForm(base_url, '', title, '90%', contents);
     loadGraph(base_url, graph_url, '#graph');
     loadRawDownload(base_url, raw_url);
-    // $('#show_data').show();
+    $('#show_data').show();
     $('#pdf').removeClass('disabled');
     $('#excel').removeClass('disabled');
-    // $('#show_data').click(function() {
-    //   $('#graph').hide();
-    //   $('#show_data').hide();
-    //   $('#show_graph').show();
-    //   loadFacilityRawData(base_url, raw_url, '#facility_data');
-    // });
+    $('#show_data').click(function() {
+      $('#graph').hide();
+      $('#show_data').hide();
+      $('#show_graph').show();
+      loadFacilityRawData(base_url, raw_url, '#facility_data');
+    });
     $('#show_graph').click(function() {
       $('#graph').show();
       $('#facility_data').empty();
@@ -1246,7 +1276,7 @@ function loadCounties() {
           '<div class="item" data-value="All Counties Selected">All Counties Selected</div>';
         $.each(obj, function(k, v) {
           countyList += '<div class="item" data-value="' + v.text +
-            '">' + v.text + '</div>';
+            '"><input type="checkbox">' + v.text + '</div>';
         });
         // alert(countyList);
         $('#county_select').parent().find('.menu').html(countyList);
@@ -1338,8 +1368,7 @@ function getDistrictData(base_url, survey_type, survey_category, district) {
    * @param  {[type]} survey_category [description]
    * @return {[type]}                 [description]
    */
-function getFacilityCount(base_url, national, county, district, survey,
-  survey_category) {
+function getFacilityCount(base_url, national, county, district, survey, survey_category) {
   if (national != '') {
     data = getNationalData(base_url, survey, survey_category);
   } else if (county != '') {
@@ -1779,8 +1808,10 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/profile_raw/table',
 
             '#HCW_Profile');
-          loadGraph(base_url, 'analytics/getCurrentService/' +
+
+          loadGraph(base_url, 'analytics/getServiceUnit/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
+
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
@@ -1792,26 +1823,32 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
           break;
 
-
         case 'section-2':
-          loadGraph(base_url, 'analytics/getCasesPresentation/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#casepresentation');
-
-          loadGraph(base_url, 'analytics/getChildrenServices/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#serviceprovision');
-
-          loadGraph(base_url, 'analytics/getDangerSigns/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#signsassessment');
-
-          loadGraph(base_url, 'analytics/getIndicatorFindings/' +
-            criteria + '/' + value + '/' + survey + '/' + survey_category,
-            '#signspresence');
-
-
+          loadGraph(base_url, 'analytics/getHcwServicesOffered/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#servicesoffered');
+          loadGraph(base_url, 'analytics/getHcwDangerSignsAssessment/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#hcwdangersignsAssessment');
+          loadGraph(base_url, 'analytics/getHcwDangerSignsPresence/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#hcwdangersignsPresence');
           break;
+
+
+          // case 'section-2':
+          //   loadGraph(base_url, 'analytics/getCasesPresentation/' +
+          //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //     '#casepresentation');
+
+          //   loadGraph(base_url, 'analytics/getChildrenServices/' +
+          //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //     '#serviceprovision');
+
+          //   loadGraph(base_url, 'analytics/getDangerSigns/' +
+          //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //     '#signsassessment');
+
+          //   loadGraph(base_url, 'analytics/getHCWIndicatorFindings/' +
+          //     criteria + '/' + value + '/' + survey + '/' + survey_category,
+          //     '#signspresence');
+
+
+          //   break;
 
 
         case 'section-3':
@@ -1847,6 +1884,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
 
           break;
+
+
       }
   }
 }

@@ -2,13 +2,14 @@
 /**
 * Handles All CRUD + A & V Functions
 */
-class Equipment extends MY_Controller{
+class Facilities_H extends MY_Controller{
   /**
   * Constructor Function
   */
   public function __construct() {
     parent::__construct();
     $this->load->model('data_model');
+    $this->load->module('export');
   }
   /**
   * [create description]
@@ -18,19 +19,20 @@ class Equipment extends MY_Controller{
     $data = $this->input->post();
   }
   /**
-
-   * [read description]
-   * @param  [type] $form [description]
-   * @return [type]       [description]
-   */
+  * [read description]
+  * @param  [type] $form [description]
+  * @return [type]       [description]
+  */
   public function read($form,$identifier=''){
-    $data = $this->data_model->get('equipment');
+    // echo $identifier;die;
+    $data = $this->data_model->get('facilities');
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
-    $raw['data']=$this->export->generate($data,'Equipment List',$form,$identifier);
-    // var_dump($raw['data']);
-    if($form=='datatable' || $form=='x-datatable' ){
+    $raw['data']=$this->export->generate($data,'Facility List',$form,$identifier);
+
+    if($form=='datatable' || $form=='x-datatable'){
+      $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
     }
   }
@@ -40,11 +42,11 @@ class Equipment extends MY_Controller{
   */
   public function update(){
     $data = $this->input->post();
-    $table ='models\Entities\Equipments';
+    $table ='models\Entities\Facilities';
     $field = $this->input->post('name');
     $value = $this->input->post('value');
-    $primary_key = 'eqCode';
-    $primary_value = $this->input->post('pk');
+    $primary_key = 'id';
+    $primary_value = $this->input->post('fac_mfl');
     // echo $table.' '.$field.' '.$value.' '.$primary_key.' '.$primary_value;die;
     $this->data_model->updateField($table,$field,$value,$primary_key,$primary_value);
     // $data = $this->data_model->get('hcw',$id);
@@ -56,7 +58,7 @@ class Equipment extends MY_Controller{
   * @return [type]     [description]
   */
   public function disable($id){
-    $data = $this->data_model->get('equipment',$id);
+    $data = $this->data_model->get('facilities',$id);
 
   }
   /**

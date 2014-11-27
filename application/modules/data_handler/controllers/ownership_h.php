@@ -2,7 +2,7 @@
 /**
 * Handles R & V - CUD Functions
 */
-class Ownership extends MY_Controller{
+class Ownership_H extends MY_Controller{
   /**
   * Constructor Function
   */
