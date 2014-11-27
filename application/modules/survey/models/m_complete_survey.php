@@ -2458,7 +2458,219 @@ class M_complete_survey extends MY_Model
         
         
     }
-    
+    private function addMchStaffTrainingInfo() {
+        
+        // echo "<pre>";print_r($this->input->post());echo "</pre>";die;
+        $this->elements = array();
+        $count = $finalCount = 1;
+        foreach ($this->input->post() as $key => $val) {
+            
+            //For every posted values
+            if (strpos($key, 'mchTraining') !== FALSE) {
+                
+                //select data for mch community strategy
+                //we separate the attribute name from the number
+                
+                $this->frags = explode("_", $key);
+                
+                //$this->id = $this->frags[1];  // the id
+                
+                $this->id = $count;
+                
+                // the id
+                
+                $this->attr = $this->frags[0];
+                
+                //the attribute name
+                
+                //print $key.' ='.$val.' <br />';
+                //print 'ids: '.$this->id.'<br />';
+                
+                //mark the end of 1 row...for record count
+                if ($this->attr == "mchTrainingTotalStaffMembersStillWorking") {
+                    
+                    // print 'count at:'.$count.'<br />';
+                    
+                    $finalCount = $count;
+                    $count++;
+                    
+                    // print 'count at:'.$count.'<br />';
+                    //print 'final count at:'.$finalCount.'<br />';
+                    //print 'DOM: '.$key.' Attr: '.$this->attr.' val='.$val.' id='.$this->id.' <br />';
+                    
+                    
+                }
+                if ($this->attr == "mchTrainingStaff") {
+                    
+                    // print 'count at:'.$count.'<br />';
+                    
+                    $staff = $val;
+                    
+                    // print 'count at:'.$count.'<br />';
+                    //print 'final count at:'.$finalCount.'<br />';
+                    //print 'DOM: '.$key.' Attr: '.$this->attr.' val='.$val.' id='.$this->id.' <br />';
+                    
+                    
+                }
+                
+                if (is_array($val)) {
+                    
+                    //var_dump($val);die;
+                    foreach ($val as $guide => $trained) {
+                        
+                        $data[$staff][$this->attr][$guide] = $trained;
+                    }
+                } else {
+                    $data[$staff][$this->attr] = $val;
+                }
+                
+                // die;
+                
+                //collect key and value to an array
+                /* if (!empty($val)) {
+                    
+                    //We then store the value of this attribute for this element.
+                    $this->elements[$this->id][$this->attr] = htmlentities($val);
+                    
+                    //$this->elements[$this->attr]=htmlentities($val);
+                    
+                } else {
+                    $this->elements[$this->id][$this->attr] = '';
+                    
+                    //$this->element=array('id'=>$this->id,'name'=>$this->attr,'value'=>'');
+                    
+                }*/
+            }
+        }
+        
+        //echo "<pre>";print_r($data);echo "</pre>";die;
+        $counter = 0;
+        foreach ($data as $value) {
+            foreach ($value['mchTrainingBefore'] as $key => $training) {
+                $counter++;
+                $newData[$counter]['mchTrainingStaff'] = $value['mchTrainingStaff'];
+                $newData[$counter]['mchTrainingTotalinFacility'] = $value['mchTrainingTotalinFacility'];
+                $newData[$counter]['mchTrainingTotalAvailableOnDuty'] = $value['mchTrainingTotalAvailableOnDuty'];
+                $newData[$counter]['mchTrainingTotalStaffMembersStillWorking'] = $value['mchTrainingTotalStaffMembersStillWorking'];
+                $newData[$counter]['mchGuideline'] = $key;
+                $newData[$counter]['mchBefore'] = $training;
+                $newData[$counter]['mchAfter'] = $value['mchTrainingAfter'][$key];
+            }
+        }
+        
+        $this->elements = $newData;
+        
+        //echo "<pre>";print_r( $this->elements);echo "</pre>";die;
+        //get the highest value of the array that will control the number of inserts to be done
+        $this->noOfInsertsBatch = $counter;
+        
+        for ($i = 1; $i <= $this->noOfInsertsBatch + 1; ++$i) {
+            
+            $this->theForm = $this->getStoredData('models\Entities\TrainingGuidelinesN', array('ssId' => $this->session->userdata('survey_status'), 'tgStaff' => $this->elements[$i]['mchTrainingStaff'],'guideCode' => $this->elements[$i]['mchGuideline']));
+            
+            // print_r($this->theForm);die;
+            if ($this->theForm == NULL) {
+                
+                //go ahead and persist data posted
+                 $this->theForm = new \models\Entities\TrainingGuidelinesN();
+            }
+             // print_r($this->theForm);die;
+            
+            //create an object of the model
+            
+            //$this -> elements[$i]['mchCommunityStrategyQCode']);
+            $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
+            
+            //check if that key exists, else set it to some default value
+            (isset($this->elements[$i]['mchTrainingStaff']) && $this->elements[$i]['mchTrainingStaff'] != '') ? $this->theForm->setTgStaff($this->elements[$i]['mchTrainingStaff']) : $this->theForm->setTgStaff(-1);
+            (isset($this->elements[$i]['mchTrainingTotalinFacility']) && $this->elements[$i]['mchTrainingTotalinFacility'] != '') ? $this->theForm->setTgTotalFacility($this->elements[$i]['mchTrainingTotalinFacility']) : $this->theForm->setTgTotalFacility(-1);
+            (isset($this->elements[$i]['mchTrainingTotalAvailableOnDuty']) && $this->elements[$i]['mchTrainingTotalAvailableOnDuty'] != '') ? $this->theForm->setTgTotalDuty($this->elements[$i]['mchTrainingTotalAvailableOnDuty']) : $this->theForm->setTgTotalDuty(-1);
+            (isset($this->elements[$i]['mchTrainingTotalStaffMembersStillWorking']) && $this->elements[$i]['mchTrainingTotalStaffMembersStillWorking'] != '') ? $this->theForm->setTgWorking($this->elements[$i]['mchTrainingTotalStaffMembersStillWorking']) : $this->theForm->setTgWorking(-1);
+            (isset($this->elements[$i]['mchGuideline']) && $this->elements[$i]['mchGuideline'] != '') ? $this->theForm->setGuideCode($this->elements[$i]['mchGuideline']) : $this->theForm->setGuideCode(-1);
+            (isset($this->elements[$i]['mchBefore']) && $this->elements[$i]['mchBefore'] != '') ? $this->theForm->setTgBefore($this->elements[$i]['mchBefore']) : $this->theForm->setTgBefore(-1);
+            (isset($this->elements[$i]['mchAfter']) && $this->elements[$i]['mchAfter'] != '') ? $this->theForm->setTgAfter($this->elements[$i]['mchAfter']) : $this->theForm->setTgAfter(-1);
+            // $this->theForm->setTgCreated(new DateTime());
+            $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+            
+            /*timestamp option*/
+            $this->em->persist($this->theForm);
+            
+            //now do a batched insert, default at 5
+            $this->batchSize = 5;
+            if ($i % $this->batchSize == 0) {
+                try {
+                    
+                    $this->em->flush();
+                    $this->em->clear();
+                    
+                    //detaches all objects from doctrine
+                    
+                    //on the last record to be inserted, log the process and return true;
+                    if ($i == $this->noOfInsertsBatch) {
+                        
+                        //die(print 'Limit: '.$this->noOfInsertsBatch);
+                        //$this->writeAssessmentTrackerLog();
+                        return true;
+                    }
+                    
+                    //return true;
+                    
+                    
+                }
+                catch(Exception $ex) {
+                    
+                    die($ex->getMessage());
+                    return false;
+                    
+                    /*display user friendly message*/
+                }
+                
+                //end of catch
+                
+                
+            } else if ($i < $this->batchSize || $i > $this->batchSize || $i == $this->noOfInsertsBatch && $this->noOfInsertsBatch - $i < $this->batchSize) {
+                
+                //total records less than a batch, insert all of them
+                try {
+                    
+                    $this->em->flush();
+                    $this->em->clear();
+                    
+                    //detactes all objects from doctrine
+                    
+                    //on the last record to be inserted, log the process and return true;
+                    if ($i == $this->noOfInsertsBatch) {
+                        
+                        //die(print 'Limit: '.$this->noOfInsertsBatch);
+                        //$this->writeAssessmentTrackerLog();
+                        return true;
+                    }
+                    
+                    //return true;
+                    
+                    
+                }
+                catch(Exception $ex) {
+                    
+                    die($ex->getMessage());
+                    return false;
+                    
+                    /*display user friendly message*/
+                }
+                
+                //end of catch
+                
+                
+            }
+            
+            //end of batch condition
+            
+            
+        }
+        //end of innner loop
+        
+        
+    }
     //close addMchCommunityStrategyInfo()
     
     private function addGuidelinesStaffInfo() {
@@ -5302,14 +5514,14 @@ class M_complete_survey extends MY_Model
 
                         case 'section-4':
                             
-                            // if ($this->addMchStaffTrainingInfo() == true) {
+                            if ($this->addMchStaffTrainingInfo() == true) {
                             
-                            //     //defined in this model
-                            //     $this->writeAssessmentTrackerLog();
-                            //     return $this->response = 'true';
-                            // } else {
-                            //     return $this->response = 'false';
-                            // }
+                                //defined in this model
+                                $this->writeAssessmentTrackerLog();
+                                return $this->response = 'true';
+                            } else {
+                                return $this->response = 'false';
+                            }
                             break;
 
                         case 'section-5':
