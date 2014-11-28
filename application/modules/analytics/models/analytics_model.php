@@ -1173,19 +1173,36 @@ WHERE
                                 }
                                 break;
 
+                            case 'findings_raw':
+                                $data[] = $value;
+                                break;
+
                             case 'hcwfindings':
                                 if (array_key_exists('frequency', $value)) {
                                     $data[$value['indicator_name']][$value['frequency']] = (int)$value['total_response'];
                                 }
                                 break;
 
+                            case 'hcwfindings_raw':
+                                $data[] = $value;
+                                break;
+
                             case 'hcwservice':
                                 $data[$value['indicator_name']][$value['li_hcwResponse']] = (int)$value['total'];
                                 
                                 break;
+                            
+                            case 'hcwservice_raw':
+                                $data[] = $value;
+                                break;
+
 
                             case 'hcwdangersigns':
                                 $data[$value['indicator_name']][$value['li_hcwFindings']] = (int)$value['total'];
+                                break;
+
+                            case 'hcwdangersigns_raw':
+                                $data[] = $value;
                                 break;
                         }
                         
