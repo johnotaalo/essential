@@ -414,7 +414,7 @@ ORDER BY lq.lq_response ASC";
             
             $queryData->free_result();
             $result = $category = array();
-            
+            //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
             if ($this->dataSet !== NULL) {
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
@@ -428,6 +428,7 @@ ORDER BY lq.lq_response ASC";
                             break;
                     }
                 }
+             //echo "<pre>";print_r($data);echo "</pre>";die;
             }
         }
         catch(exception $ex) {
@@ -1800,11 +1801,15 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
+                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         switch ($statistic) {
                             case 'reason':
                                 $foundOptions = explode(',', $value['lcso_option_on_outage']);
+                                //echo "<pre>";print_r($foundOptions);echo "</pre>";die;
                                 foreach ($foundOptions as $option) {
-                                    $data['data'][$this->getCommodityOutageOptionName($option) ]+= $value['total'];
+
+                                    $data['data'][$this->getCommodityOutageOptionName($option) ]+= $value['lcso_option_on_outage'];
+                                    //echo "<pre>";print_r($data);echo "</pre>";die;
                                 }
                                 break;
 
@@ -1812,6 +1817,7 @@ GROUP BY tl.treatmentID ORDER BY tl.treatmentID ASC";
                                 $data['data'][] = $value;
                                 break;
                         }
+                       // echo "<pre>";print_r($data);echo "</pre>";die;
                     }
                     $commodities = $this->getCommodities();
                     foreach ($commodities as $commodity) {
@@ -2252,7 +2258,7 @@ LIMIT 0 , 1000
                                 $data[$value['equipment_name']][$place]+= (int)$value['total_response'];
                             }
                         }
-                        if (array_key_exists('fac_tier', $value)) {
+                        if (array_key_exists('fac_level', $value)) {
                             $data[$value['fac_tier']][$value['suppliers']] = (int)$value['total_response'];
                         }
                         if (array_key_exists('mainsource', $value)) {
@@ -4234,6 +4240,18 @@ ORDER BY question_code";
                         case 'response_raw':
                         case 'total_raw':
                         case 'functionality_raw':
+                            $data[] = $value_;
+                            break;
+
+                        case 'hcwRetention_raw':
+                            $data[] = $value_;
+                            break;
+
+                        case 'hcwTransfer_raw':
+                            $data[] = $value_;
+                            break;
+
+                        case 'hcwServiceUnit_raw':
                             $data[] = $value_;
                             break;
                     }

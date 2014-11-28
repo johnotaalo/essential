@@ -1185,6 +1185,10 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getTrainedStaffRAW/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for;
         break;
+      case 'beds':
+        raw_url = 'analytics/getBedRAW/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for + '/' + statistics;
+        break;
     }
     return raw_url;
   }
@@ -1618,9 +1622,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getTrainedStaff/' + criteria + '/' +
             value + '/' + survey + '/' + survey_category + '/' + survey,
             '#staff_training');
-          loadGraph(base_url, 'analytics/getStaffAvailability/' + criteria +
-            '/' + value + '/' + survey + '/' + survey_category + '/' +
-            survey, '#staff_availability');
+          loadGraph(base_url, 'analytics/getStaffAvailabilityCH/' + criteria +
+            '/' + value + '/' + survey + '/' + survey_category, '#staff_availability');
           //loadGraph(base_url, 'analytics/getStaffRetention/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#staff_retention');
           loadGraph(base_url, 'analytics/getIMCI/' + criteria + '/' + value +
             '/' + survey + '/' + survey_category, '#imci');
@@ -1783,8 +1786,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/' + value + '/' + survey + '/' + survey_category +
             '/referral', '#chCases');
           loadGraph(base_url, 'analytics/getCommunityStrategyCH/' + criteria +
-            '/' + value + '/' + survey + '/' + survey_category + '/trained',
-            '#chIMCITraining');
+            '/' + value + '/' + survey + '/' + survey_category +
+             '/trained', '#chIMCITraining');
           break;
       }
       break;
