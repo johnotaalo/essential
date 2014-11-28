@@ -3044,7 +3044,7 @@ class Analytics extends MY_Controller
             $colorCounter = 0;
             foreach ($gdata as $name => $value1) {
                 if (($name == '') || ($name == 'n/a')) {
-                    $name = 'No dating';
+                    $name = 'No data';
                     $color = '#dddddd';
                 } else if ($name == 'Yes') {
                     $color = '#8bbc21';
@@ -3091,8 +3091,8 @@ class Analytics extends MY_Controller
             }
             $category = $q;
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
-           // $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics, $colors);
+            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
+           $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 90, 'bar', '', $for, 'question', $statistics, $colors);
         }else {
             $number = $resultArray = $q = $data = $gdata = $res = array();
             $number = $resultArray = $q = $yes = $no = $null = array();
@@ -3216,6 +3216,33 @@ class Analytics extends MY_Controller
         
         echo $this->export->generate($results, 'HCW Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
+
+    public function getIndicatorCorrectnessRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for, 'hcwcorrectness_raw');
+        
+        //echo "<pre>";print_r($results);echo "</pre>";die;
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Indicator Comparison for' . ucwords($for) . '(' . $value . ')', $form);
+    }
+
+    public function getIndicatorClassificationRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for, 'hcwclassification_raw');
+        
+        //echo "<pre>";print_r($results);echo "</pre>";die;
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Indicator Comparison for' . ucwords($for) . '(' . $value . ')', $form);
+    }
+
+    public function getIndicatorAssessmentRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
+        $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for, 'hcwassessment_raw');
+        
+        //echo "<pre>";print_r($results);echo "</pre>";die;
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Indicator Comparison for' . ucwords($for) . '(' . $value . ')', $form);
+    }
     
     /**
      * [getBedStatistics description]
@@ -3243,8 +3270,10 @@ class Analytics extends MY_Controller
 
      public function getBedRaw($criteria, $value, $survey, $survey_category,$for, $statistics, $form) {
            $results = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, $for,$statistics);
-        
+          //echo "<pre>";print_r($results);echo "</pre>";die;
         $results = $this->arrays->reset($results);
+      
+
         
         echo $this->export->generate($results, 'Beds Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
@@ -3910,6 +3939,7 @@ class Analytics extends MY_Controller
             //echo '<pre>';print_r($resultArray);echo '</pre>';die;
             
             $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+            
         }elseif ($statistic = 'hcwclassification') {
             $results = $this->analytics_model->getIndicatorComparison($criteria, $value, '', '', $for, $statistic);
             foreach ($results as $indicator => $values) {
@@ -3936,8 +3966,8 @@ class Analytics extends MY_Controller
             }
             
             //echo '<pre>';print_r($resultArray);echo '</pre>';die;
-            
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'classification', $statistics, $colors);
+            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
         } elseif ($statistic == 'correctness') {
             
             // echo '<pre>';print_r($results);echo '</pre>';die;
@@ -3987,7 +4017,8 @@ class Analytics extends MY_Controller
             }
             
             // echo '<pre>';print_r($resultArray);echo '</pre>';die;
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'correctness', $statistics, $colors);
+            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
         }
     }
     public function getAssessmentComparison($criteria, $value, $survey, $survey_category, $for, $statistic) {
@@ -4016,7 +4047,8 @@ class Analytics extends MY_Controller
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+        //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar');
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'assessment', $statistics, $colors);
         }else{
         $results = $this->analytics_model->getIndicatorComparison($criteria, $value, $survey, $survey_category, $for, $statistic);
         foreach ($results as $indicator => $values) {

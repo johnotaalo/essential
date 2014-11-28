@@ -1283,6 +1283,18 @@ WHERE
                             case 'hcwassessment':
                                 $data[$value['indicator_name']][$value['response']] = (int)$value['total'];
                                 break;
+
+                            case 'hcwcorrectness_raw':
+                                $data[] = $value_;
+                                break;
+
+                            case 'hcwclassification_raw':
+                                $data[] = $value_;
+                                break;
+
+                            case 'hcwassessment_raw':
+                                $data[] = $value_;
+                                break;
                         }
                     }
                     $this->dataSet = $data;
@@ -1293,7 +1305,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -4204,6 +4216,10 @@ ORDER BY question_code";
                             $data[$question][$value_['response']] = (int)$value_['total_response'];
                             break;
 
+                        case 'hcwresponse_raw':
+                            $data[] = $value_;
+                            break;
+
                         case 'total':
                             
                             //echo $question;
@@ -4244,8 +4260,16 @@ ORDER BY question_code";
                             $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total'];
                             break;
 
+                         case 'hcwRetention_raw':
+                            $data[] = $value_;
+                            break;
+
                         case 'hcwTransfer':
                             $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
+                            break;
+
+                        case 'hcwTransfer_raw':
+                            $data[] = $value_;
                             break;
 
                         case 'supplier':
@@ -4256,24 +4280,17 @@ ORDER BY question_code";
                             $data[$value_['response']][$value_['serviceUnit_name']] = (int)$value_['total'];
                             break;
 
+                        case 'hcwServiceUnit_raw':
+                            $data[] = $value_;
+                            break;
+
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
                         case 'functionality_raw':
                             $data[] = $value_;
                             break;
-
-                        case 'hcwRetention_raw':
-                            $data[] = $value_;
-                            break;
-
-                        case 'hcwTransfer_raw':
-                            $data[] = $value_;
-                            break;
-
-                        case 'hcwServiceUnit_raw':
-                            $data[] = $value_;
-                            break;
+     
                     }
                 }
             }
