@@ -3641,22 +3641,25 @@ ORDER BY question_code";
         /**
          * Beds in facility
          */
-        public function getBeds($criteria, $value, $survey, $survey_category, $for) {
+        public function getBeds($criteria, $value, $survey, $survey_category, $for,$statistic) {
             
-            $query = "CALL get_beds_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "');";
+            $query = "CALL get_beds_statistics('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "','" . $for . "','".$statistic."');";
             
             try {
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
                 foreach ($this->dataSet as $value_) {
+                        switch ($statistic) {
+                            case 'response':
+                                $data[$value_['question_name']][] = (int)$value_['total_response'];  
+                                break;
+                            
+                            case 'response_raw':
+                                $data[]=$value_;
+                                break;
+                        }
+                   
                     
-                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
-                    
-                    //$question = $this->sName($value_['question_code']);
-                    // $response = $value_['total_response'];
-                    
-                    //1. collect the categories
-                    $data[$value_['question_name']][] = (int)$value_['total_response'];
                 }
                 
                 //die(var_dump($this->dataSet));

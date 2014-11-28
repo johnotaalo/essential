@@ -558,7 +558,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-ORDER BY q.question_code;
+ORDER BY f.fac_county,f.fac_district, f.fac_name;
 
 WHEN 'county' THEN
 
@@ -584,7 +584,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-ORDER BY q.question_code;
+ORDER BY f.fac_county,f.fac_district, f.fac_name;
 
 WHEN 'district' THEN
 
@@ -610,7 +610,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-ORDER BY q.question_code;
+ORDER BY f.fac_county,f.fac_district, f.fac_name;
 
 WHEN 'facility' THEN
 
@@ -636,7 +636,7 @@ FROM
         JOIN
     survey_categories sc ON sc.sc_id = ss.sc_id
         AND sc.sc_name = survey_category
-ORDER BY q.question_code;
+ORDER BY f.fac_county,f.fac_district, f.fac_name;
 
 END CASE;
 
@@ -1045,7 +1045,7 @@ WHEN 'total' THEN
 CASE criteria
 WHEN 'national' THEN
 SELECT 
-    count(distinct f.fac_mfl) as total,q.question_code
+    sum(lq.lq_response_count) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1065,7 +1065,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'county' THEN
 SELECT 
-    count(distinct f.fac_mfl) as total,q.question_code
+    sum(lq.lq_response_count) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1085,7 +1085,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'district' THEN
 SELECT 
-    count(distinct f.fac_mfl) as total,q.question_code
+    sum(lq.lq_response_count) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1105,7 +1105,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'facility' THEN
 SELECT 
-    count(distinct f.fac_mfl) as total,q.question_code
+    sum(lq.lq_response_count) as total,q.question_code
 FROM
     log_questions lq
         JOIN

@@ -3226,10 +3226,10 @@ class Analytics extends MY_Controller
      * @param  [type] $statistics      [description]
      * @return [type]                  [description]
      */
-    public function getBedStatistics($criteria, $value, $survey, $survey_category, $for) {
+    public function getBedStatistics($criteria, $value, $survey, $survey_category, $for,$statistic) {
         
         //$nurse = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'nur', $statistics);
-        $data = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, 'bed');
+        $data = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, 'bed','response');
         
         //$data = $nurse + $beds;
         
@@ -3238,7 +3238,15 @@ class Analytics extends MY_Controller
             $gData[] = $value;
         }
         $resultArray[] = array('name' => 'Numbers', 'data' => $gData);
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar','', 'bed', 'beds', 'response');
+    }
+
+     public function getBedRaw($criteria, $value, $survey, $survey_category,$for, $statistics, $form) {
+           $results = $this->analytics_model->getBeds($criteria, $value, $survey, $survey_category, $for,$statistics);
+        
+        $results = $this->arrays->reset($results);
+        
+        echo $this->export->generate($results, 'Beds Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }
     
     /**
