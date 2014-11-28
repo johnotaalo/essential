@@ -3841,7 +3841,7 @@ class Analytics extends MY_Controller
     }
 
     public function getIndicatorDangerRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'hcwservice_raw');
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'hcwdangersigns_raw');
         
         // echo "<pre>";print_r($results);echo "</pre>";die;
         $results = $this->arrays->reset($results);
