@@ -80,6 +80,54 @@ class Data_Model extends MY_Model
 
         return $result;
     }
+
+    function getNulls()
+    {
+        $query = $this->db->query("SELECT t.tg_id, t.fac_mfl,t.guide_code, s.ss_id, s.st_id, g.guide_for FROM training_guidelines_n t 
+            JOIN survey_status s ON t.fac_mfl = s.fac_id
+            JOIN guidelines g ON g.guide_code = t.guide_code
+            JOIN survey_types st ON st.st_id = s.st_id
+            WHERE t.ss_id IS NULL ");
+
+        $result = $query->result_array();
+
+       return $result;
+    }
+
+    function getGuidelines()
+    {
+        $guidelines = array();
+        $query = $this->db->query("SELECT guide_code, guide_for FROM guidelines");
+
+        $result = $query->result_array();
+
+        foreach ($result as $guide) {
+            if($guide['guide_for'] == 'mnh')
+            {
+                $guidelines['mnh'][] = $guide['guide_code'];
+            }
+            else if($guide['guide_for'] == 'ch')
+            {
+                $guidelines['ch'][] = $guide['guide_code'];
+            }
+        }
+
+        return $guidelines;
+    }
+
+    function updatessid($tg_id, $ss_id)
+    {
+        $query = $this->db->query("UPDATE training_guidelines_n SET ss_id = " .$ss_id." WHERE tg_id = " .$tg_id );
+
+        if($query)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
     
 }
