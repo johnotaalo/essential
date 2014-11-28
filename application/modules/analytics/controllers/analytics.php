@@ -4489,14 +4489,14 @@ class Analytics extends MY_Controller
     /**
      * Get Facility Ownership
      */
-    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category) {
+    public function getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
         $value = urldecode($value);
 
         //foreach ($allCounties as $county) {
         $category[] = $county;
-        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category);
+        $results = $this->analytics_model->getFacilityOwnerPerCounty($criteria, $value, $survey, $survey_category,'response');
         $resultArray = array();
         foreach ($results as $value) {
 
@@ -4545,7 +4545,7 @@ class Analytics extends MY_Controller
      */
 
     
-    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category) {
+    public function getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,$statistic) {
         
 
         //$allCounties = $this -> analytics_model -> getReportingCounties('ch','mid-term');
@@ -4554,7 +4554,7 @@ class Analytics extends MY_Controller
         //foreach ($allCounties as $county) {
 
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category);
+        $results = $this->analytics_model->getFacilityLevelPerCounty($criteria, $value, $survey, $survey_category,'response');
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
@@ -4596,13 +4596,13 @@ class Analytics extends MY_Controller
         $results = $this->arrays->reset($results);
         echo $this->export->generate($results, 'Facility Type for' . ucwords($for) . '(' . $value . ')', $form);
     }
-    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category) {
+    public function getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,$statistic) {
 
         $value = urldecode($value);
 
         //foreach ($allCounties as $county) {
         $category[] = $value;
-        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category);
+        $results = $this->analytics_model->getFacilityTypePerCounty($criteria, $value, $survey, $survey_category,'response');
 
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $resultArray = array();
