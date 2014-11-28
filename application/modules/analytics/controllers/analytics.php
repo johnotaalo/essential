@@ -3779,7 +3779,7 @@ class Analytics extends MY_Controller
             }
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
              $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'service', $statistics, $colors);
-            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
+            
         } elseif (($statistic == 'hcwdangersigns' && $for == 'sgn')) {
             $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, '', '', $for, $statistic);
             
@@ -3818,7 +3818,8 @@ class Analytics extends MY_Controller
                 $resultArray[] = array('name' => $key, 'data' => $val, 'color' => $color);
             }
             $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#dddddd');
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
+            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'danger', $statistics, $colors);
+            //$this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', (int)sizeof($category), '', '', '', $colors);
         }
     }
     public function getIndicatorRaw($criteria, $value, $survey, $survey_category, $for, $form) {
@@ -3831,7 +3832,16 @@ class Analytics extends MY_Controller
     }
 
     public function getIndicatorServiceRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
-        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, 'svc', 'hcwservice_raw');
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'hcwservice_raw');
+        
+        // echo "<pre>";print_r($results);echo "</pre>";die;
+        $results = $this->arrays->reset($results);
+
+        echo $this->export->generate($results, 'Indicator Statistics for' . ucwords($for) . '(' . $value . ')', $form);
+    }
+
+    public function getIndicatorDangerRaw($criteria, $value, $survey, $survey_category, $for, $statistics, $form) {
+        $results = $this->analytics_model->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for, 'hcwservice_raw');
         
         // echo "<pre>";print_r($results);echo "</pre>";die;
         $results = $this->arrays->reset($results);
