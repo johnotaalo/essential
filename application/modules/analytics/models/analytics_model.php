@@ -3643,15 +3643,16 @@ ORDER BY question_code";
                 $this->dataSet = $this->db->query($query, array($value));
                 $this->dataSet = $this->dataSet->result_array();
                 foreach ($this->dataSet as $value_) {
-                    
-                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
-                    
-                    //$question = $this->sName($value_['question_code']);
-                    // $response = $value_['total_response'];
-                    
-                    //1. collect the categories
-
-                    $data[$value_['question_name']][] = (int)$value_['total_response'];  
+                        switch ($statistic) {
+                            case 'response':
+                                $data[$value_['question_name']][] = (int)$value_['total_response'];  
+                                break;
+                            
+                            case 'response_raw':
+                                $data[]=$value_;
+                                break;
+                        }
+                   
                     
                 }
                 
@@ -3911,6 +3912,7 @@ ORDER BY question_code";
                         $question = substr($question, 18);
                     endif;
                     $count++;
+                    
                     $data[$question][$value_['response']] = (int)$value_['total'];
                     
                     //echo "<pre>";print_r($question);echo "</pre>";
@@ -3934,7 +3936,7 @@ ORDER BY question_code";
                 
                 
             }
-            
+            //echo "<pre>";print_r($data);echo "</pre>";
             //var_dump($data);die;
             return $data;
         }
@@ -4094,8 +4096,9 @@ ORDER BY question_code";
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                
-                // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+
+                //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+
                 foreach ($this->dataSet as $value_) {
                     if (array_key_exists('question_code', $value_)) {
                         $question = $this->getQuestionName($value_['question_code']);
@@ -4222,6 +4225,14 @@ ORDER BY question_code";
                             $data[$value_['question_name']][$value_['response']] = (int)$value_['total'];
                             break;
 
+                        case 'supplier':
+                        $data[$value_['fac_tier']][$value_['response']] = (int)$value_['total_response'];
+                            break;
+
+                        case 'hcwServiceUnit':
+                            $data[$value_['response']][$value_['serviceUnit_name']] = (int)$value_['total'];
+                            break;
+
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4260,6 +4271,7 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 //echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
+                if($this->dataSet != NULL){
                 foreach ($this->dataSet as $value_) {
                     
                     switch ($statistics) {
@@ -4284,6 +4296,9 @@ ORDER BY question_code";
                     
                     unset($data[$question]['question_code']);
                 }
+            }else{
+                $data[$question][$value_['response']] = 0;
+            }
                 
                 //echo '<pre>';print_r($data);echo '</pre>';die;
                 
@@ -4494,6 +4509,8 @@ ORDER BY question_code";
                         
                         
                     }
+                }else{
+                    $data['question_code'][$value_] = 0;
                 }
             }
             catch(exception $ex) {
@@ -5153,6 +5170,80 @@ ORDER BY f.fac_district,f.fac_name , sa.eq_code;";
             
             return $data;
         }
+
+
+        public function get($object,$identifier=''){
+    switch($object){
+      case 'hcw':
+      $results = $this->getHCW($identifier);
+     //echo '<pre>';print_r($results);die;
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!=''){
+            if($key=='uploadDate'){
+              $value=date('l, d-m-Y',$value);
+            }
+            if($key=='mflCode'){
+                $newResult['county']=$this->getFacilityCounty($value);
+            }
+          
+            $newResult[$key]=$value;
+          }
+        }
+        unset($newResult['designation']);
+        unset($newResult['department']);
+        unset($newResult['dates']);
+        unset($newResult['upload_date']);
+        unset($newResult['cadre']);
+        unset($newResult['activity_id']);
+        $newResults[]=$newResult;
+
+      }
+       // print_r($newResults);die;
+      break;
+
+      case 'equipment':
+      $results = $this->getEquipments();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'supplies':
+      $results = $this->getSupplies();
+
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      case 'questions':
+      $results = $this->getQuestions();
+      foreach($results as $result){
+        foreach($result as $key=>$value){
+          if($value!='' && $key!='id'){
+            $newResult[$key]=$value;
+          }
+        }
+        $newResults[]=$newResult;
+      }
+      break;
+
+      
+    }
+    return $newResults;
+  }
         
         public function getFacilityListForNoMNH($criteria, $value, $survey, $survey_category, $question) {
             urldecode($value);
