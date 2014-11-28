@@ -49,14 +49,10 @@
                                     <div class="menu">
                                       <div class="item" data-value="mnh">MNH</div>
                                       <div class="item" data-value="ch">CH</div>
-                                      <div class="item" data-value="hcw" id = "imci">IMCI Follow Up</div>
+                                      <div class="item" data-value="hcw">IMCI Follow Up</div>
                                     </div>
                                 </div>
-                                <?php
-                                    $class = "ui selection dropdown disabled"
-                                ?>
-
-                                <div class="<?php echo $class; ?>" id = "x">
+                                <div class="ui selection dropdown disabled" >
                                 <i class="icon time"></i>
                                     <input id="survey_category" type="hidden">
                                     <div class="default text">Choose a Survey Category</div>

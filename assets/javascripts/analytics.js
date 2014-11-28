@@ -70,17 +70,6 @@ function startAnalytics(base_url, county, survey, survey_category) {
   $('#survey_type').change(function() {
     survey_type = $('#survey_type').val();
 
-   
-     
-    if (survey_type == 'hcw') {
-      //alert(survey_type);
-      $('#x').addClass('disabled');
-    } else {
-      $('#x').removeClass('disabled');
-    }
-  
-
-
 
    
     district_select = $('#sub_county_select').val();

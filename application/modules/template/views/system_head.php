@@ -65,6 +65,7 @@ Offline.options={
             $('.ui.dropdown').addClass('error');
             $('.ui.button').addClass('disabled');
             // $('a').attr('onclick','return false;');
+
         });
 
         Offline.on('confirmed-up', function () {
