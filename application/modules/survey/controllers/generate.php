@@ -492,21 +492,42 @@ class Generate extends MY_Controller
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         } else if ($section == 'hs') {
-                            $data[$section][] = '<tr>
+                            if ($value['questionCode'] == 'QUC30') {
+                                
+                                $data[$section][] = '<tr>
                     <td >' . $value['questionName'] . '</td>
                     <td >
-                    <label for="General_OPD" style="font-weight:normal">General OPD</label>
-                    <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_GeneralOPD' . $counter . '" class="cloned"/>
-                    <label for="Paediatric_OPD" style="font-weight:normal">Paediatric OPD</label>
-                    <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_PaediatricOPD' . $counter . '" class="cloned"/>
-                    <label for="MCH" style="font-weight:normal">MCH</label>
-                    <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_MCH' . $counter . '" class="cloned"/>
-                    <label for="Other" style="font-weight:normal">Other</label>
-                    <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_Other' . $counter . '" class="cloned"/>
-                    <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" class="cloned"/>
+                    General OPD
+                    <input type="radio" value= "General OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    Paediatric OPD
+                    <input type="radio" value= "Paediatric OPD" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    MCH
+                    <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    Other
+                    <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" />
                     </td>
                     <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
+                            } else if ($value['questionCode'] == 'QUC31') {
+                                $data[$section][] = '<tr>
+                    <td >' . $value['questionName'] . '</td>
+                    <td >
+                    LAB
+                    <input type="radio" value= "LAB" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    MCH
+                    <input type="radio" value= "MCH" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    Ward
+                    <input type="radio" value= "Ward" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    CCC
+                    <input type="radio" value= "CCC" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    Other
+                    <input type="radio" value= "Other" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '" />
+                    <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '" />
+                    </td>
+                    <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+                </tr>';
+                            }
                         } else if ($section == 'guide' || $section == 'job' || $section == 'gp') {
                             $guidelinequestions = '<tr>
             <td>' . $value['questionName'] . '</td>
@@ -545,7 +566,7 @@ class Generate extends MY_Controller
                                 $aspect_response_on_yes = '<label>Water Storage Point</label><br/>
             <input type="text"  name="questionSpecified_' . $counter . '" id="questionSpecified_' . $counter . '" value="" size="45" placeholder="specify"/>';
                             } else {
-                                $aspect_response_on_yes = '<label style="font-weight:bold">Main Source</label><br/><select name="questionSpecified_'. $counter . '">"' . $supplierOptions['mh'].'</select>';
+                                $aspect_response_on_yes = '<label style="font-weight:bold">Main Source</label><br/><select name="questionSpecified_' . $counter . '">"' . $supplierOptions['mh'] . '</select>';
                             }
                             $data[$section][] = '<tr>
             <td>' . $value['questionName'] . '</td>
@@ -596,7 +617,7 @@ class Generate extends MY_Controller
                                 $aspect = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            Yes <input type="radio"> No <input type="radio">
+            Yes <input value="Yes" name="questionResponse_' . $counter . '" type="radio"> No <input value="No" name="questionResponse_' . $counter . '" type="radio">
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
@@ -608,23 +629,22 @@ class Generate extends MY_Controller
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="2">
             <label>Multiple Selections Allowed</label><br/>
-            <input type="radio" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="MCH"/>
-            <label for="" style="font-weight:normal">MCH</label><br/>
+            <input type="checkbox" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '[]"  value="MCH"/>
+            MCH
 
-            <input type="radio" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="U5 Clinic"/>
-            <label for="" style="font-weight:normal">U5 Clinic</label><br/>
+            <input type="checkbox" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '[]"  value="U5 Clinic"/>
+            U5 Clinic
 
-            <input type="radio" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="OPD"/>
-            <label for="" style="font-weight:normal">OPD</label><br/>
-
-
-            <input type="radio" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="WARD"/>
-            <label for="" style="font-weight:normal">WARD</label><br/>
+            <input type="checkbox" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '[]"  value="OPD"/>
+            OPD
 
 
-            <input type="radio" name="ortLocationOther_' . $counter . '[]" id="ortLocationOther_' . $counter . '"  value=""/>
-            <label for="" style="font-weight:normal">Other</label><br/>
-            <input type="text" name="questionLocResponse_' . $counter . '[]" id="questionLocResponse_' . $counter . '"  value="" maxlength="45" size="45" placeholder="please specify"/>
+            <input type="checkbox" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '[]"  value="WARD"/>
+           WARD
+
+            <input type="checkbox" name="questionResponse_' . $counter . '[]" id="questionResponse_' . $counter . '[]"  value="Other"/>
+            Other
+            <input type="text" name="questionResponseOther_' . $counter . '[]" id="questionResponseOther_' . $counter . '[]"  value="" maxlength="45" size="45" placeholder="please specify"/>
 
 
             </td>
@@ -642,7 +662,7 @@ class Generate extends MY_Controller
                                     $data[$section][] = '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            Yes <input type="radio"> No <input type="radio">
+            Yes <input value="Yes" name="questionResponse_' . $counter . '" type="radio"> No <input value="No" name="questionResponse_' . $counter . '" type="radio">
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                                 }
@@ -912,15 +932,15 @@ class Generate extends MY_Controller
                             $result.= '
                 <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
-         <td>MONTH: <input type="text" class = "bs-date"> CASES: <input name="questionResponse_' . $counter . '"  type="text"><br/>  MONTH <input type="text" class = "bs-date">  CASES:  <input name="questionResponse_' . $counter . '"  type="text"><br/>
-           MONTH <input type="text" class = "bs-date">  CASES: <input name="questionResponse_' . $counter . '"  type="text"></td><br/>
-            <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+         <td>MONTH: <input type="text" name="questionResponse_' . $counter . '[]" class = "bs-month"> CASES: <input name="questionResponse_' . $counter . '[]"  id="questionResponse_' . $counter . '[]"  type="text"><br/>  MONTH: <input name="questionResponse_' . $counter . '[]" type="text" class = "bs-month">  CASES:  <input name="questionResponse_' . $counter . '[]"  type="text"><br/>
+           MONTH: <input name="questionResponse_' . $counter . '[]"  type="text" class = "bs-month">  CASES: <input name="questionResponse_' . $counter . '[]"  type="text"></td><br/>
+            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                         } else {
                             $result.= '  <tr>
             <td colspan="1"><strong>(' . $numbering[$counter] . ')</strong> ' . $value['questionName'] . '</td>
-         <td>Yes <input name="indicator_' . $counter . '" value="Yes" type="checkbox"> No <input value="No" name="indicator_' . $counter . '"  type="checkbox"></td>
-            <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+         <td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>
+            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
                             $counter++;
                         }
@@ -1308,6 +1328,7 @@ class Generate extends MY_Controller
                         $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Pharmacy', 'Store', 'Other');
                         break;
                 }
+                
                 $availabilities = array('Available', 'Never Available');
                 $reasons = array('Select One', '1. Not Ordered', '2. Ordered but not yet Received', '3. Expired');
                 switch ($this->survey_form) {
@@ -1357,20 +1378,14 @@ class Generate extends MY_Controller
                                     }
                                 }
                                 if ($section == 'hwr') {
-                                    $hwr_locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
-                                    
-                                    // print_r($locations);die;
-                                    
-                                    
-                                }
-                                if ($value['eqFor'] == 'hwr') {
-                                    unset($locations[4]);
-                                    unset($locations[5]);
+                                    $hwLocation = $locations;
+                                    unset($hwLocation[5]);
+                                    unset($hwLocation[6]);
                                     
                                     $locationRowTemp = array();
                                     
                                     //Loop through preset locations
-                                    foreach ($hwr_locations as $loc) {
+                                    foreach ($hwLocation as $loc) {
                                         
                                         //Check if value retrieved is NOT NULL
                                         if ($location != '') {
@@ -1397,6 +1412,7 @@ class Generate extends MY_Controller
                                 } else {
                                     $locationRowTemp = array();
                                     
+                                    // print_r($locations);die;
                                     //Loop through preset locations
                                     foreach ($locations as $loc) {
                                         
@@ -1422,6 +1438,9 @@ class Generate extends MY_Controller
                                     foreach ($locationRowTemp as $temp) {
                                         $locationRow.= $temp;
                                     }
+                                    
+                                    // echo $locationRow;die;
+                                    
                                 }
                                 
                                 if ($value['eqFor'] == 'hwr') {
@@ -1439,23 +1458,44 @@ class Generate extends MY_Controller
         </tr>';
                                     $this->global_counter = $counter;
                                 } else {
+                                    
                                     if ($fully_functioning != '') {
                                         $fullyFunctioningRow = '<td style ="text-align:center;">
                                             <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  value="' . $fully_functioning . '" size="8" class="numbers" />
                                             </td>';
                                     } else {
-                                        $fullyFunctioningRow = '<td style ="text-align:center;">
+                                        if ($value['eqFor'] == 'ort') {
+                                            if (($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38')) {
+                                                $fullyFunctioningRow = '<td style ="text-align:center;">
                                             <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
                                             </td>';
+                                            } else {
+                                                $fullyFunctioningRow = '<td style ="text-align:center;"></td>';
+                                            }
+                                        } else {
+                                            $fullyFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyFullyFunctional_' . $counter . '" id="eqQtyFullyFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                                        }
                                     }
                                     if ($non_functioning != '') {
                                         $nonFunctioningRow = '<td style ="text-align:center;">
                                             <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" value="' . $non_functioning . '" type="text"  size="8" class="numbers"/>
                                             </td>';
                                     } else {
-                                        $nonFunctioningRow = '<td style ="text-align:center;">
-                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers"/>
+                                        if ($value['eqFor'] == 'ort') {
+                                            if (($value['eqCode'] == 'EQP37') || ($value['eqCode'] == 'EQP34') || ($value['eqCode'] == 'EQP28') || ($value['eqCode'] == 'EQP38')) {
+                                                $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
                                             </td>';
+                                            } else {
+                                                $nonFunctioningRow = '<td style ="text-align:center;"></td>';
+                                            }
+                                        } else {
+                                            $nonFunctioningRow = '<td style ="text-align:center;">
+                                            <input name="eqQtyNonFunctional_' . $counter . '" id="eqQtyNonFunctional_' . $counter . '" type="text"  size="8" class="numbers" />
+                                            </td>';
+                                        }
                                     }
                                     
                                     if ($value['eqUnit'] != null) {
@@ -1631,6 +1671,8 @@ class Generate extends MY_Controller
                         }
                         break;
                 }
+                
+                // echo '<pre>';print_r($equipment['ort']);die;
                 return $equipment;
             }
             
@@ -1837,13 +1879,12 @@ class Generate extends MY_Controller
             public function createSupplierOptions() {
                 $suppliers = $this->data_model->getSuppliers();
                 foreach ($suppliers as $supplier) {
-                    if($supplier['supplierFor']=='mh' || $supplier['supplierFor']=='sou'){
-                        $supplierOptions[$supplier['supplierFor']].= '<option value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'].'</option>';
-              
-                    }else{
+                    if ($supplier['supplierFor'] == 'mh' || $supplier['supplierFor'] == 'sou') {
+                        $supplierOptions[$supplier['supplierFor']].= '<option value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'] . '</option>';
+                    } else {
                         $supplierOptions[$supplier['supplierFor']].= '<input type="radio" name="supplierName" value="' . $supplier['supplierCode'] . '">' . $supplier['supplierName'];
                     }
-                      }
+                }
                 return $supplierOptions;
             }
             

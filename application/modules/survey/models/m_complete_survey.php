@@ -2354,7 +2354,7 @@ class M_complete_survey extends MY_Model
         }
         
         //close foreach ($this -> input -> post() as $key => $val)
-        //print var_dump($this->elements);
+        // echo '<pre>';print_r($this->elements);die;
         
         //exit;
         
@@ -5687,7 +5687,7 @@ class M_complete_survey extends MY_Model
                 case 'ch':
                     switch ($step) {
                         case 'section-1':
-                            if ($this->addMchAssessorInfo() == true && $this->addMchHRInfo() == true && $this->addMchStaffTrainingInfo() == true && $this->addQuestionsInfo() == true) {
+                            if ($this->addHCWAssessorInfo() == true && $this->addMchHRInfo() == true && $this->addMchStaffTrainingInfo() == true && $this->addQuestionsInfo() == true) {
                                 $this->writeAssessmentTrackerLog();
                                 
                                 return $this->response = 'true';
@@ -5774,8 +5774,7 @@ class M_complete_survey extends MY_Model
                             break;
 
                         case 'section-9':
-                            if ($this->addMchCommunityStrategyInfo() == true) {
-                                
+                            if ($this->addQuestionsInfo() == true) {
                                 //defined in this model
                                 $this->writeAssessmentTrackerLog();
                                 
