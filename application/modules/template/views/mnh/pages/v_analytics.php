@@ -117,6 +117,13 @@
         var survey   = "<?php echo $this->session->userdata('survey')?>";
         var survey_category   = "<?php echo $this->session->userdata('survey_category')?>";
         $(document).ready(startAnalytics(base_url,county,survey,survey_category));
+
+        $('#survey_type').change(function(){
+            if($(this).val() == 'hcw')
+            {
+                $('.ui.selection.dropdown').addClass('disabled');
+            }
+        });
     </script>
     <!-- END JAVASCRIPTS -->
     <?php //$this->load->view($modals)?>

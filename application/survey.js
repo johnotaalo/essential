@@ -1283,6 +1283,27 @@ function startSurvey(base_url, survey, survey_category, district) {
         }
       });
     }
+
+    function getCountyData(base_url)
+    {
+
+      $.ajax({
+        url: base_url + 'survey/getCountyCountData',
+        beforeSend: function(xhr) {
+          xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        },
+        success: function(data)
+        {
+          alert(data);
+          obj = jQuery.parseJSON(data);
+          console.log(obj);
+        },
+        fail: function()
+        {
+          alert("failed");
+        }
+      });
+    }
     /**
      * [check description]
      * @param  {[type]} el [description]

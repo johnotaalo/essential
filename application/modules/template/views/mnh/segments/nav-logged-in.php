@@ -37,6 +37,40 @@
 <div class="ui blue active progress" id="district_progress">
   <div class="bar" ></div>
 </div>
-<?php }?>
+<?php } else {?>
+
+<div class="ui button mini teal">
+  <i class="icon hospital link"></i>Total HCWs
+  <a class="detail"><span id="hcws">0</span></a>
+</div>
+<div class="ui button mini green link">
+  <i class="icon hospital"></i> Total Assessed
+  <a class="detail"><span id="assessed">0</span></a>
+</div>
+<div class="ui button mini orange">
+  <i class="icon hospital link"></i> Total Certified
+  <a class="detail orange"><span id="certified">0</span></a>
+</div>
+<div class="ui button mini red">
+  <i class="icon hospital link"></i>Total for ToT
+  <a class="detail"><span id="tot">0</span></a>
+</div>
+
+<div class="ui button mini red">
+  <i class="icon hospital link"></i>Total for Mentorship
+  <a class="detail"><span id="mentorship">0</span></a>
+</div>
+
+<div class="ui button mini red">
+  <i class="icon hospital link"></i>Total for Declined
+  <a class="detail"><span id="declined">0</span></a>
+</div>
+
+<div class="ui button mini red">
+  <i class="icon hospital link"></i>Total Cannot be Traced
+  <a class="detail"><span id="cannottrace">0</span></a>
+</div>
+
+<?php } ?>
 </div>
 </div>

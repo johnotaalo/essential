@@ -95,4 +95,32 @@ class Facilities extends MY_Controller
         $count = $this->db->count_all_results();
         return (int)$count;
     }
+
+    public function returnSurveyStatus()
+    {
+    	$completed = array();
+    	$mfls = $this->data_model->getNulls();
+    	//print_r($mfls);die;
+    	$guidelines = $this->data_model->getGuidelines();
+
+    	$tables = array('training_guidelines_n');
+
+    	foreach ($mfls as $mfl) {
+    		$tg_id = $mfl['tg_id'];
+    		$ssid = $mfl['ss_id'];
+
+    		$result = $this->data_model->updatessid($tg_id, $ssid);
+    		if ($result) {
+    			$completed['done'][] = $tg_id;
+    		}
+    		else
+    		{
+    			$completed['failed'][] = $tg_id;
+    		}
+
+
+    	}
+
+    	echo "<pre>";print_r($completed);die;
+    }
 }
