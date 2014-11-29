@@ -605,4 +605,12 @@ class Survey extends MY_Controller
         $data = array('hcw_id' => $hcwid, 'facilityMFL' => $facilityMFL);
         $this->session->set_userdata($data);
     }
+
+    public function getCountyCountData()
+    {
+        $county = $this->session->userdata('county');
+        $result = $this->data_model->getCountyData($county);
+
+        echo json_encode($result);
+    }
 }

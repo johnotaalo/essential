@@ -17,7 +17,7 @@ class Data_Model extends MY_Model{
     switch($object){
       case 'hcw':
       $results = $this->getHCW($identifier);
-
+     //echo '<pre>';print_r($results);die;
       foreach($results as $result){
         foreach($result as $key=>$value){
           if($value!=''){

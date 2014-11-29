@@ -6,7 +6,7 @@
 <meta name="keywords" content="<?php echo implode(', ', $application_keywords); ?>">
 <meta name="author" content="<?php echo $application_authors; ?>">
 
-<link rel="shortcut icon"  href="<?php echo base_url(); ?>/images/favicon.ico">
+<link rel="shortcut icon"  href="<?php echo base_url(); ?>assets/images/favicon.ico">
 
 <title><?php echo $application_title; ?></title>
 
@@ -65,6 +65,7 @@ Offline.options={
             $('.ui.dropdown').addClass('error');
             $('.ui.button').addClass('disabled');
             // $('a').attr('onclick','return false;');
+
         });
 
         Offline.on('confirmed-up', function () {
@@ -76,6 +77,7 @@ Offline.options={
             $('.ui.button').removeClass('disabled');
             // $('a').removeAttr('onclick');
         });
+
 
     });
 </script>

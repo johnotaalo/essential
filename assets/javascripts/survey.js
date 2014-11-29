@@ -17,7 +17,8 @@ function startSurvey(base_url, survey, survey_category, district) {
 
   else
   {
-     $('#current_survey').text(survey.toUpperCase() +' SURVEY');
+    getCountyData(base_url);
+    $('#current_survey').text(survey.toUpperCase() +' SURVEY');
   }
   // Bound Events
 
@@ -1279,6 +1280,32 @@ function startSurvey(base_url, survey, survey_category, district) {
           $('#percentage_completed').text(percentage + '%')
             // $('#district_progress').attr('aria-valuenow', percentage);
           $('#district_progress .bar').css('width', percentage + '%');
+        }
+      });
+    }
+
+    function getCountyData(base_url)
+    {
+
+      $.ajax({
+        url: base_url + 'survey/getCountyCountData',
+        beforeSend: function(xhr) {
+          xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        },
+        success: function(data)
+        {
+          console.log(data);
+          obj = jQuery.parseJSON(data);
+          console.log(obj);
+          $('#hcws').text(obj.hcws);
+          $('#assessed').text(obj.assessed);
+          $('#certified').text(obj.Certified);
+          $('#tot').text(obj.TOT);
+          $('#mentorship').text(obj.Mentorship);
+        },
+        fail: function()
+        {
+          alert("failed");
         }
       });
     }

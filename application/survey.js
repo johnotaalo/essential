@@ -56,7 +56,7 @@ function startSurvey(base_url, survey, survey_category, district) {
         );
       },
       success: function(data) {
-        console.log(data);
+        console.log('Response is  :' + data);
         nextsection = curr_section += 1;
         thethat = $('.step[data-section="' + nextsection + '"]');
         changeSection(curr_section, thethat);
@@ -225,6 +225,9 @@ function startSurvey(base_url, survey, survey_category, district) {
             $('.bs-month').datepicker({
               minViewMode: 1
             });
+            // $('radio.other').change(function() {
+            //   alert('changed');
+            // });
 
           });
 
@@ -232,6 +235,7 @@ function startSurvey(base_url, survey, survey_category, district) {
         $('.ui.step').click(function() {
           section = $(this).attr('data-section');
           changeSection(section, this);
+
         });
 
       }); /*end of which link was clicked*/
@@ -1276,6 +1280,27 @@ function startSurvey(base_url, survey, survey_category, district) {
           $('#percentage_completed').text(percentage + '%')
             // $('#district_progress').attr('aria-valuenow', percentage);
           $('#district_progress .bar').css('width', percentage + '%');
+        }
+      });
+    }
+
+    function getCountyData(base_url)
+    {
+
+      $.ajax({
+        url: base_url + 'survey/getCountyCountData',
+        beforeSend: function(xhr) {
+          xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        },
+        success: function(data)
+        {
+          alert(data);
+          obj = jQuery.parseJSON(data);
+          console.log(obj);
+        },
+        fail: function()
+        {
+          alert("failed");
         }
       });
     }
