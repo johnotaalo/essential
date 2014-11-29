@@ -66,15 +66,12 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $('#sectionList').find('li').removeClass('active');
     $(this).addClass('active');
   });
+
   $('#survey_type').change(function() {
     survey_type = $('#survey_type').val();
 
-    if (survey_type == 'hcw') {
-      //alert(survey_type);
-      $('#survey_category').addClass('disabled');
-    } else {
-      $('#survey_category').removeClass('disabled');
-    }
+
+   
     district_select = $('#sub_county_select').val();
     //alert(district_select)
     if (district_select !== 'Please Select a District' && district_select !==
@@ -90,12 +87,16 @@ function startAnalytics(base_url, county, survey, survey_category) {
         '/' + survey_category,
         '#reporting_stat .outer .inner .content .inner-graph');
     }
-
+     
     loadSurvey(survey);
   });
+
+
+
   $('#survey_category').change(function() {
     district = $("#sub_county_select").val();
     // alert(district);
+    
     survey = $('#survey_type').val();
     survey_category = $('#survey_category').val();
     // alert(survey_category);
@@ -1131,10 +1132,31 @@ function setRawUrl(criteria, county, district, facility, survey,
         raw_url = 'analytics/getQuestionRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
         break;
+      case 'service':
+        raw_url = 'analytics/getIndicatorServiceRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for  + '/' + statistic;
+        break;
+      case 'danger':
+        raw_url = 'analytics/getIndicatorDangerRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for  + '/' + statistic;
+        break;
+      case 'correctness':
+        raw_url = 'analytics/getIndicatorCorrectnessRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for  + '/' + statistic;
+        break;
+      case 'classification':
+        raw_url = 'analytics/getIndicatorClassificationRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for  + '/' + statistic;
+        break;
+      case 'assessment':
+        raw_url = 'analytics/getIndicatorAssessmentRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for  + '/' + statistic;
+        break;
       case 'indicator':
         raw_url = 'analytics/getIndicatorRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for;
         break;
+
       case 'commodity':
         raw_url = 'analytics/getCommodityRaw/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for + '/' + statistic;
@@ -1183,6 +1205,12 @@ function setRawUrl(criteria, county, district, facility, survey,
       case 'staff_trained':
         raw_url = 'analytics/getTrainedStaffRAW/' + criteria + '/' + value + '/' +
           survey + '/' + survey_category + '/' + data_for;
+        break;
+
+         case 'beds':
+        raw_url = 'analytics/getBedRaw/' + criteria + '/' + value + '/' +
+          survey + '/' + survey_category + '/' + data_for+ '/' + statistic;
+
         break;
     }
     return raw_url;
@@ -1617,9 +1645,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getTrainedStaff/' + criteria + '/' +
             value + '/' + survey + '/' + survey_category + '/' + survey,
             '#staff_training');
-          loadGraph(base_url, 'analytics/getStaffAvailability/' + criteria +
-            '/' + value + '/' + survey + '/' + survey_category + '/' +
-            survey, '#staff_availability');
+          loadGraph(base_url, 'analytics/getStaffAvailabilityCH/' + criteria +
+            '/' + value + '/' + survey + '/' + survey_category, '#staff_availability');
           //loadGraph(base_url, 'analytics/getStaffRetention/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#staff_retention');
           loadGraph(base_url, 'analytics/getIMCI/' + criteria + '/' + value +
             '/' + survey + '/' + survey_category, '#imci');
@@ -1782,8 +1809,8 @@ function statisticsHandler(criteria, value, survey, survey_category,
             '/' + value + '/' + survey + '/' + survey_category +
             '/referral', '#chCases');
           loadGraph(base_url, 'analytics/getCommunityStrategyCH/' + criteria +
-            '/' + value + '/' + survey + '/' + survey_category + '/trained',
-            '#chIMCITraining');
+            '/' + value + '/' + survey + '/' + survey_category +
+             '/trained', '#chIMCITraining');
           break;
       }
       break;
@@ -1802,16 +1829,10 @@ function statisticsHandler(criteria, value, survey, survey_category,
           loadGraph(base_url, 'analytics/getFacilityTypePerCounty/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#HCWfacility_type');
-          loadGraph(base_url, 'analytics/getHCWProfileRaw/' +
-
-            criteria + '/' + value + '/' + survey + '/' + survey_category +
-            '/profile_raw/table',
-
-            '#HCW_Profile');
+          // loadGraph(base_url, 'analytics/getHCWProfile/hcw/datatable//','#HCW_Profile');
 
           loadGraph(base_url, 'analytics/getServiceUnit/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
-
             '#current_service');
           loadGraph(base_url, 'analytics/getRetentionAfter/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
@@ -1870,15 +1891,15 @@ function statisticsHandler(criteria, value, survey, survey_category,
 
         case 'section-7':
 
-          loadGraph(base_url, 'analytics/getCertificationA/' +
+          loadGraph(base_url, 'analytics/getIMCICertificateA/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certificatesectionA');
 
-          loadGraph(base_url, 'analytics/getCertificationB/' +
+          loadGraph(base_url, 'analytics/getIMCICertificateB/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certificatesectionB');
 
-          loadGraph(base_url, 'analytics/getCertification/' +
+          loadGraph(base_url, 'analytics/getIMCICertificate/' +
             criteria + '/' + value + '/' + survey + '/' + survey_category,
             '#certification');
 
