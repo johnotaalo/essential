@@ -24,8 +24,9 @@ class HCW_H extends MY_Controller{
   * @return [type]       [description]
   */
   public function read($form,$identifier=''){
-    // echo $identifier;die;
+     
     $data = $this->data_model->get('hcw');
+    //echo '<pre>';print_r($data);die;
     foreach($data[0] as $key=>$value){
       $raw['title'][]=$key;
     }
@@ -34,8 +35,14 @@ class HCW_H extends MY_Controller{
     if($form=='datatable' || $form=='x-datatable'){
       $recordSize = sizeof($raw['data']);
       echo json_encode($raw);
+    }else{
+      // $data = $this->arrays->reset($data);
+      echo '<pre>';print_r($data);die;
+      $this->export->generate($data,'HCW List',$form);
     }
   }
+
+
   /**
   * [update description]
   * @return [type] [description]

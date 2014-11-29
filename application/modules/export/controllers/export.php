@@ -58,7 +58,7 @@ class Export extends MY_Controller{
               $result = '';
               break;
           case 'datatable':
-            $result = $this->datatable_handler->normal($data);
+              $result = $this->datatable_handler->normal($data);
               break;
           case 'x-datatable':
               $result = $this->datatable_handler->editable($data,$identifier);

@@ -1045,7 +1045,7 @@ WHEN 'total' THEN
 CASE criteria
 WHEN 'national' THEN
 SELECT 
-    sum(lq.lq_response_count) as total,q.question_code
+    count(distinct f.fac_mfl) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1065,7 +1065,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'county' THEN
 SELECT 
-    sum(lq.lq_response_count) as total,q.question_code
+    count(distinct f.fac_mfl) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1085,7 +1085,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'district' THEN
 SELECT 
-    sum(lq.lq_response_count) as total,q.question_code
+    count(distinct f.fac_mfl) as total,q.question_code
 FROM
     log_questions lq
         JOIN
@@ -1105,7 +1105,7 @@ GROUP BY q.question_code
 ORDER BY q.question_code;
 WHEN 'facility' THEN
 SELECT 
-    sum(lq.lq_response_count) as total,q.question_code
+    count(distinct f.fac_mfl) as total,q.question_code
 FROM
     log_questions lq
         JOIN
