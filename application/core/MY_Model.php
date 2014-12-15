@@ -703,7 +703,7 @@ class MY_Model extends CI_Model
 
   public function getHCWByDistrict($dName)
   {
-    $query = $this->db->query("SELECT h.* FROM facilities f
+    $query = $this->db->query("SELECT h.*, f.* FROM facilities f
       LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
       WHERE f.fac_district = '" . $dName ."' ");
       $result = $query->result_array();
@@ -713,9 +713,10 @@ class MY_Model extends CI_Model
 
   public function getHCWByCounty($cName)
   {
-    $query = $this->db->query("SELECT h.* FROM facilities f
-      LEFT JOIN hcw_list h ON h.mfl_code = f.fac_mfl
-      WHERE f.fac_county = '" . $cName ."' ");
+    $query = $this->db->query("SELECT h.*, f.* FROM hcw_list h
+      LEFT JOIN facilities f ON h.mfl_code = f.fac_mfl
+      WHERE f.fac_county = '" . $cName ."' 
+      AND h.activity_id = 10");
 
     $result = $query->result_array();
 
@@ -797,25 +798,89 @@ class MY_Model extends CI_Model
     public function getCountyData($county)
     {
       $data = array();
-      $query = $this->db->query("SELECT count(h.id) as hcws FROM hcw_list h
-        JOIN facilities f ON h.mfl_code = f.fac_mfl
+      if($county != 'national')
+      {
+        $query = $this->db->query("SELECT count(h.id) as hcws FROM hcw_list h
+        LEFT JOIN facilities f ON h.mfl_code = f.fac_mfl
         WHERE f.fac_county = '".$county."' AND h.activity_id = 10
         ");
 
+         $sections_query = $this->db->query("SELECT COUNT(DISTINCT(t.ast_section)) as sections, t.hcw_id FROM hcw_assessment_tracker t 
+        JOIN hcw_list h ON t.hcw_id = h.id
+        JOIN facilities f ON f.fac_mfl = h.mfl_code
+        WHERE f.fac_county = '".$county."'
+        GROUP BY t.hcw_id");
+
+         $tracable = $this->db->query("SELECT COUNT(h.id) as declined, (SELECT COUNT(h.id) FROM hcw_list h JOIN facilities f ON f.fac_mfl = h.mfl_code WHERE cannot_be_traced = 'Yes' AND f.fac_county = '".$county."') as cannotbetraced FROM hcw_list h
+        JOIN facilities f ON f.fac_mfl = h.mfl_code
+         WHERE declined_assessment = 'Yes' 
+         AND f.fac_county = '".$county."'");
+      }
+      else
+      {
+        $query = $this->db->query("SELECT count(h.id) as hcws FROM hcw_list h
+           LEFT JOIN facilities f ON h.mfl_code = f.fac_mfl
+          WHERE h.activity_id = 10
+        ");
+
+         $sections_query = $this->db->query("SELECT COUNT(DISTINCT(t.ast_section)) as sections, t.hcw_id FROM hcw_assessment_tracker t 
+        JOIN hcw_list h ON t.hcw_id = h.id
+        JOIN facilities f ON f.fac_mfl = h.mfl_code
+        GROUP BY t.hcw_id");
+
+         $tracable = $this->db->query("SELECT COUNT(h.id) as declined, (SELECT COUNT(id) FROM hcw_list WHERE cannot_be_traced = 'Yes') as cannotbetraced FROM hcw_list h
+        JOIN facilities f ON f.fac_mfl = h.mfl_code
+         WHERE declined_assessment = 'Yes'");
+      }
+      $traced_result = $tracable->result_array();
+      $data['cannotbetraced'] = $traced_result[0]['cannotbetraced'];
+      $data['declined'] = $traced_result[0]['declined'];
+
+      // print_r($traced_result);die;
+
       $result = $query->result_array();
       $data['hcws'] = $result[0]['hcws'];
-      //$data['assessed'] = $result->counts;
+      
+     
+      $section_result = $sections_query->result_array();
+
+      $assessed_counter = 0;
+      foreach ($section_result as $key => $value) {
+        if($value['sections'] == 5)
+        {
+          $assessed_counter++;
+        }
+      }
+      $data['assessed'] = $assessed_counter;
       $options = array('QHC28'=>'Certified', 'QHC29' => 'Mentorship', 'QHC30' => 'TOT');
 
       foreach ($options as $key => $value) {
-        $query = $this->db->query("SELECT count('q.lq_id') as counter FROM log_questions_hcw q 
-          JOIN facilities f ON f.fac_mfl = q.fac_mfl
-          WHERE q.question_code = '" . $key ."' AND f.fac_county = '".$county."' AND q.lq_response = 'Yes'");
+         if($county != 'national')
+          {
+            $query = $this->db->query("SELECT count('q.lq_id') as counter FROM log_questions_hcw q 
+              JOIN facilities f ON f.fac_mfl = q.fac_mfl
+              WHERE q.question_code = '" . $key ."' AND f.fac_county = '".$county."' AND q.lq_response = 'Yes'");
+          }
+          else
+          {
+             $query = $this->db->query("SELECT count('q.lq_id') as counter FROM log_questions_hcw q 
+              JOIN facilities f ON f.fac_mfl = q.fac_mfl
+              WHERE q.question_code = '" . $key ."' AND q.lq_response = 'Yes'");
+          }
         $result = $query->result_array();
 
         $data[$value] = $result[0]['counter'];
       }
+      // echo "<pre>";print_r($data);die;
       return $data;
+    }
+
+    public function getHCWByID($hcw_id)
+    {
+      $query = mysql_query('SELECT * FROM hcw_list WHERE id = ' . $hcw_id);
+      $result = $query->result_array();
+
+      return $result;
     }
 
   }

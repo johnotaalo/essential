@@ -3061,6 +3061,7 @@ class Analytics extends MY_Controller
         $results = $this->analytics_model->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
         
         $results = $this->arrays->reset($results);
+        // print_r($results);die;
         
         echo $this->export->generate($results, 'Question Statistics for' . ucwords($for) . '(' . $value . ')', $form);
     }

@@ -69,6 +69,7 @@ function startSurvey(base_url, survey, survey_category, district) {
   });
 
 
+
   /*start of loadGlobalJS*/
   var onload_queue = [];
   var dom_loaded = false;
@@ -291,6 +292,9 @@ function startSurvey(base_url, survey, survey_category, district) {
           section = $(this).attr('data-section');
           changeSection(section, this);
         });
+
+
+        
       }); /*end of hcw action*/
     }); /*close form-container LOAD FN() */
 

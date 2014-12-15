@@ -470,6 +470,14 @@ $.ajax({
         margin: .5em .5em 0 0;
     }
 
+    .trace, .declined
+    {
+        cursor: pointer;
+    }
+    .trace:hover, .declined:hover
+    {
+        text-decoration: none;
+    }
 </style>
 
 </head>

@@ -14,6 +14,7 @@ class Survey extends MY_Controller
         $this->combined_form;
         $this->load->model('data_model');
         $this->load->module('template');
+        $this->load->module('export/generate');
     }
 
     public function index() {
@@ -77,6 +78,29 @@ class Survey extends MY_Controller
         echo json_encode($sectionList);
     }
 
+    function returnnosections($survey)
+    {
+        switch ($survey) {
+            case 'mnh':
+
+                //$sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
+                $sections = 8;
+                break;
+
+            case 'ch':
+                $sections = 9;
+                break;
+
+            case 'hcw':
+                $sections = 5;
+                break;
+
+            default:
+                break;
+        }
+
+        echo $sections;
+    }
     /**
      * [inventory description]
      * @return [type] [description]
@@ -314,6 +338,8 @@ class Survey extends MY_Controller
     public function createHCWListSection ()
     {
         $hcwlist = '';
+        $cannotbetraced = '';
+        $declined = '';
         $result = $this->data_model->getHCWByCounty($this->session->userdata('county'));
         $count = count($result);
         $this->session->set_userdata(array('fCount' => $count));
@@ -368,21 +394,39 @@ class Survey extends MY_Controller
             }
 
             $percentage = ($hcw_section/5)*100;
+            if($value['declined_assessment'] == 'Yes')
+            {
+                $declined = '<a data-response = "No" class = "trace " data-id = "'.$value['id'].'" data-column = "declined_assessment"><span class="label label-danger">Declined Assessment</span></a>';
+            }
+            else
+            {
+                $declined = '<a data-response = "Yes" class = "trace" data-id = "'.$value['id'].'" data-column = "declined_assessment"><span class="label label-success">Decline Assessment</span></a>';
+            }
+            if ($value['cannot_be_traced'] == 'Yes') {
+                $cannotbetraced = '<a data-response = "No" class = "trace" data-id = "'.$value['id'].'" data-column = "cannot_be_traced"><span class="label label-danger">Could not be Traced</span></a>';
+            }
+            else
+            {
+                $cannotbetraced = '<a data-response = "Yes" class = "trace" data-id = "'.$value['id'].'" data-column = "cannot_be_traced"><span class="label label-success">Can not be Traced</span></a>';
+            }
             if($hcw_section < 5 && $hcw_section > 0)
             {
                 $hcw_section = $hcw_section - 1;
                 $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar progress-bar-warning" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><center><h4 class="label label-warning" style = "">Pending</h4></center></td>';
-                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Continue Assessment</a>';
+                $hcwlist .= '<br/>'.$declined . '<br/>'.$cannotbetraced.'</td>';
             }
             else if($hcw_section == 5)
             {
                 $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar progress-bar-success" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><span class="label label-success">Assessed</span></td>';
-                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Reassess</a></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Reassess</a>';
+                $hcwlist .= '<br/>'.$declined . '<br/>'.$cannotbetraced.'</td>';
             }
             else if($hcw_section == 0)
             {
                 $hcwlist .= '<td><div class="progress" style = "padding: 0;"><div class="progress-bar" role = "progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentage.'%;">'.$percentage.'%</div></div><span class="label label-danger">Not Started</span></td>';
-                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Start Assessment</a></td>';
+                $hcwlist .= '<td><a class="hcw-action" data-hcwid ="' . $value['id'] . '" data-action = "begin" data-section ="0">Start Assessment</a>';
+                $hcwlist .= '<br/>'.$declined . '<br/>'.$cannotbetraced.'</td>';
             }
             else
             {
@@ -609,8 +653,101 @@ class Survey extends MY_Controller
     public function getCountyCountData()
     {
         $county = $this->session->userdata('county');
+        if(!$county)
+        {
+            $county = 'national';
+        }
         $result = $this->data_model->getCountyData($county);
 
         echo json_encode($result);
+    }
+
+    public function updatehcw($col, $response, $hcw_id)
+    {
+        $data = array($col => $response);
+        $where = "id = " . $hcw_id;
+
+        $update = $this->db->update_string('hcw_list', $data, $where);
+        $update_query = $this->db->query($update);
+
+        if($update_query){
+            echo 'True';
+        }
+        else
+        {
+            echo 'False';
+        }
+    }
+
+    public function getexceldata($data_type)
+    {
+        $county = $this->session->userdata('county');
+        $print_data = '';
+        $excel_data['columns'] = array('Name of Participant', 'Facility', 'Facility MFL', 'District', 'ID Number', 'Phone Number', 'Email Address');
+        if($data_type == 'all')
+        {
+            $print_data = 'TOTAL HCWs';
+            $hcws = $this->data_model->getHCWByCounty($county);
+        }
+        else if($data_type == 'assessed')
+        {
+            $print_data = 'ASSESSED HCWs';
+            $hcws = $this->data_model->getHCWAssessed($county);
+
+            foreach ($hcws as $key => $value) {
+            if ($value['sections'] == 5) {
+                $hcws[] = $value;
+            }
+        }
+        }
+
+        else if($data_type == 'certified')
+        {
+            $print_data = 'CERTIFIED HCWs';
+            $type = 'Certified';
+            $hcws = $this->data_model->getHCWRecommendation($county, $type);
+        }
+
+        else if($data_type == 'tot')
+        {
+            $print_data = 'HCWs RECOMMEDED FOR TOT';
+            $type = 'TOT';
+            $hcws = $this->data_model->getHCWRecommendation($county, $type);
+        }
+
+        else if($data_type == 'mentorship')
+        {
+            $print_data = 'HCWs RECOMMEDED FOR MENTORSHIP';
+            $type = 'Mentorship';
+            $hcws = $this->data_model->getHCWRecommendation($county, $type);
+        }
+
+        else if($data_type == 'declined')
+        {
+            $print_data = 'DECLINED ASSESSMENTS';
+            $hcws = $this->data_model->gettraceresults($county, $data_type);
+        }
+
+        else if($data_type == 'not_traced')
+        {
+            $print_data = 'UNTRACED HCWs';
+            $hcws = $this->data_model->gettraceresults($county, $data_type);
+        }
+
+        else
+        {
+            echo "No Data Found";die;
+        }
+        foreach ($hcws as $key => $value) {
+            $excel_data['data'][] = array('Name of Participant' => $value['names_of_participant'], 'Facility' => $value['facility_name'], 'Facility MFL' => $value['mfl_code'], 'District' => $value['fac_district'], 'ID Number' => $value['id_number'], 'Phone Number' => $value['mobile_number'], 'Email Address' => $value['email_address']);
+        }
+        // echo "<pre>";print_r($excel_data);die;
+        $this->generate->generate($excel_data, 'HCW LIST FOR ' . $print_data . ' IN ' . strtoupper($county) . ' COUNTY ', 'dynamic_excel');
+    }
+
+    public function getHCWs()
+    {
+        $hcws = $this->data_model->getHCWByCounty($this->session->userdata('county'));
+
     }
 }

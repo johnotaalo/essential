@@ -6,6 +6,7 @@ class Facilities extends MY_Controller
 	function __construct()
 	{
 		$this->load->model('data_model');
+		$this->load->module('export/generate');
 	}
 
 	function recreatefacilities()
@@ -122,5 +123,59 @@ class Facilities extends MY_Controller
     	}
 
     	echo "<pre>";print_r($completed);die;
+    }
+
+    public function generatequestionraw($question_for)
+    {
+    	$for = 'Certification';
+    	switch ($question_for) {
+    		case 'certa':
+    			$columns = array('Health Care Worker Name', 'Criteria for Certification', 'Response');
+    			$datacol =  array('Health Care Worker Name' => 'names_of_participant', 'Criteria for Certification' => 'question_name', 'Response' => 'lq_response');
+    			break;
+    		case 'certb':
+    			$columns = array('Health Care Worker Name', 'Condition Checked', 'Response');
+    			$datacol =  array('Health Care Worker Name' => 'names_of_participant', 'Condition Checked' => 'question_name', 'Response' => 'lq_response');
+    			break;
+    		default:
+    			echo "No Data";die;
+    			break;
+    	}
+
+    	$data['columns'] = $columns;
+    	
+
+    	$qCodes = $this->data_model->getQuestionCodes($question_for);
+
+    	foreach ($qCodes as $codes) {
+    		$hcws[$codes] = $this->data_model->getHCWs($codes);
+    	}
+
+    	$hcw_data = array();
+    	$new_array = array();
+    	foreach ($hcws as $key => $value) {
+    		foreach ($value as $k => $v) {
+    			foreach ($datacol as $col => $col_val) {
+    				foreach ($v as $var=>$val) {
+    					if($var== $col_val)
+    					{
+    						$new_array[$col] = $val;
+    					}
+    				}
+    			}
+    			$hcw_data[] = $new_array;
+    		}
+    	}
+
+    	$data['data'] = $hcw_data;
+
+    	//$this->generate->generate($data, 'Question Statistics for ' . ucwords($for) . '(' . $question_for . ')', 'dynamic_excel');
+    	$hcw_certification = $this->data_model->getSheet();
+
+
+    	$certification = array('Health Care Worker Name', 'Phone Number', 'Personal Number', 'National ID', 'Year-Month Trained', 'Training Coordinator', 'County Orginal Facility Trained in', 'Current Service Unit', 'Still Working at Original Facility Where Trained', 'Transferred within Same County', 'Transferred to Another County', 'Certification', 'Assessment Outcome');
+    	$mydata['columns'] = $certification;
+    	$mydata['data'] = $hcw_certification;
+    	$this->generate->generate($mydata, 'HCW Certification', 'dynamic_excel');
     }
 }

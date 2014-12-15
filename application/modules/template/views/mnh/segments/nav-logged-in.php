@@ -24,7 +24,7 @@
 </div>
 <div class="ui button mini orange">
   <i class="icon hospital link"></i>Facilities Not Completed
-  <a class="detail orange"><span id="not-finished">0</span></a>
+  <a class="detail"><span id="not-finished">0</span></a>
 </div>
 <div class="ui button mini red">
   <i class="icon hospital link"></i>Facilities Not Started
@@ -39,34 +39,34 @@
 </div>
 <?php } else {?>
 
-<div class="ui button mini teal">
+<div class="ui button mini teal data_download" data-download = "all">
   <i class="icon hospital link"></i>Total HCWs
   <a class="detail"><span id="hcws">0</span></a>
 </div>
-<div class="ui button mini green link">
+<div class="ui button mini green link data_download" data-download = "assessed">
   <i class="icon hospital"></i> Total Assessed
   <a class="detail"><span id="assessed">0</span></a>
 </div>
-<div class="ui button mini orange">
+<div class="ui button mini orange data_download" data-download = "certified">
   <i class="icon hospital link"></i> Total Certified
   <a class="detail orange"><span id="certified">0</span></a>
 </div>
-<div class="ui button mini red">
+<div class="ui button mini red data_download" data-download = "tot">
   <i class="icon hospital link"></i>Total for ToT
   <a class="detail"><span id="tot">0</span></a>
 </div>
 
-<div class="ui button mini red">
+<div class="ui button mini red data_download" data-download = "mentorship">
   <i class="icon hospital link"></i>Total for Mentorship
   <a class="detail"><span id="mentorship">0</span></a>
 </div>
 
-<div class="ui button mini red">
+<div class="ui button mini red data_download" data-download = "declined">
   <i class="icon hospital link"></i>Total for Declined
   <a class="detail"><span id="declined">0</span></a>
 </div>
 
-<div class="ui button mini red">
+<div class="ui button mini red data_download" data-download = "not_traced">
   <i class="icon hospital link"></i>Total Cannot be Traced
   <a class="detail"><span id="cannottrace">0</span></a>
 </div>
@@ -74,3 +74,12 @@
 <?php } ?>
 </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.data_download').click(function(){
+      data_type = $(this).attr('data-download');
+       window.location = base_url + 'survey/survey/getexceldata/'+data_type;
+    });
+  });
+</script>

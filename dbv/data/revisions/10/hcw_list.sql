@@ -1,0 +1,1 @@
+ALTER TABLE `hcw_list` ADD `declined_assessment` VARCHAR(255) NOT NULL DEFAULT 'No' , ADD `cannot_be_traced` VARCHAR(255) NOT NULL DEFAULT 'No' ;

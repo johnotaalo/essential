@@ -241,6 +241,29 @@ function startSurvey(base_url, survey, survey_category, district) {
       }); /*end of which link was clicked*/
 
       /*hcw-action clicked*/
+      $('.trace').click(function(){
+        column = $(this).attr('data-column');
+        // alert(column);
+        hcw_id = $(this).attr('data-id');
+        response = $(this).attr('data-response');
+
+        url = base_url + 'survey/updatehcw/'+column+'/'+response+'/'+hcw_id;
+        // alert(url);
+         $.ajax({
+          type: 'POST',
+          data: '',
+          async: false,
+          url: url, 
+          beforeSend: function(){
+
+          },
+          success:function(data)
+          {
+            console.log(data);
+            getCountyData(base_url);
+          }
+        });
+      });
       $('.hcw-action').live('click', function(){
         hcwid = $(this).attr('data-hcwid');
         section = $(this).attr('data-section');
@@ -333,14 +356,31 @@ function startSurvey(base_url, survey, survey_category, district) {
      */
   function changeSection(section, that) {
       $('.ui.step').removeClass('active');
+      last_section = $('.ui.step').last().attr('data-section');
       $(that).addClass('active');
+
+      if(section === last_section)
+      {
+        $('#btn_text').text('Save and Finish Survey');
+      }
+      else
+      {
+        $('#btn_text').text('Save Section');
+      }
       if ($('#section-' + section).length > 0) {
         $('.actual-form .step').hide();
         $('#section-' + section).show();
       } else {
         $('.actual-form .step').hide();
+        $('#steps').hide();
+        $('#click_form').fadeIn();
+        $('#form_post').removeClass('active');
+         $(".form-container .actual-form").load(base_url + 'survey/createFacilityTable',
+        function() {
+          $(document).trigger('datatable_loaded');
+    });
         // Go back to Facility List
-        window.location = base_url + 'mnch/takesurvey';
+        // window.location = base_url + 'mnch/session/new';
       }
       disableFields(section);
     }
@@ -1294,14 +1334,14 @@ function startSurvey(base_url, survey, survey_category, district) {
         },
         success: function(data)
         {
-          console.log(data);
           obj = jQuery.parseJSON(data);
-          console.log(obj);
           $('#hcws').text(obj.hcws);
           $('#assessed').text(obj.assessed);
           $('#certified').text(obj.Certified);
           $('#tot').text(obj.TOT);
           $('#mentorship').text(obj.Mentorship);
+          $('#declined').text(obj.declined);
+          $('#cannottrace').text(obj.cannotbetraced);
         },
         fail: function()
         {
